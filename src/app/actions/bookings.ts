@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import type { MyMembership } from "@/types/database";
 
 const ALLOWED_DURATIONS = [60, 90, 120];
 
@@ -33,25 +34,22 @@ export async function createBooking(
   // Price comes from the database, never from the browser.
   const { data: court } = await supabase
     .from("courts")
-    .select("price_per_hour")
+    .select("price_per_hour, club_id")
     .eq("id", input.court_id)
     .single();
   if (!court) return { error: "Court not found" };
 
-  // ▼▼▼ NEW: member discount ▼▼▼
-  // Same lookup the form does, but on the server where it can't be tampered with.
-  const { data: member } = await supabase
-    .from("members")
-    .select("plan:membership_plans(discount_pct)")
-    .eq("email", user.email!)
-    .eq("status", "active")
-    .maybeSingle();
-  const discount =
-    (member?.plan as { discount_pct: number } | null)?.discount_pct ?? 0;
+  // Member discount, only for an active membership at the court's own club.
+  // The database works out the final price again when the booking is saved
+  // (see supabase/migrations), so this value can never be tampered with.
+  const { data: memberships } = await supabase.rpc("my_memberships");
+  const membership = ((memberships ?? []) as unknown as MyMembership[]).find(
+    (m) => m.club_id === court.club_id && m.status === "active",
+  );
+  const discount = membership?.plan?.discount_pct ?? 0;
 
   const basePrice = (court.price_per_hour * input.duration_min) / 60;
   const total_price = Math.round(basePrice * (1 - discount / 100) * 100) / 100;
-  // ▲▲▲ NEW ▲▲▲
 
   const { error } = await supabase.from("bookings").insert({
     player_id: user.id,
@@ -59,7 +57,7 @@ export async function createBooking(
     starts_at: start.toISOString(),
     ends_at: end.toISOString(),
     duration_min: input.duration_min,
-    total_price, // ← was: (court.price_per_hour * input.duration_min) / 60
+    total_price,
     status: "confirmed",
     coach_id: null,
     notes: null,

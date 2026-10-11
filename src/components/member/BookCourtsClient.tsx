@@ -5,7 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import type { Court } from "@/types/database";
+import type { Court, MyMembership } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import { MapPin, Wifi, WifiOff } from "lucide-react";
 import { createBooking } from "@/app/actions/bookings";
@@ -76,21 +76,19 @@ export default function BookCourtsClient({
   // Fetch member discount when modal opens
   useEffect(() => {
     if (!selected) return;
+    let cancelled = false;
     (async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user?.email) return;
-      const { data } = (await supabase
-        .from("members")
-        .select("plan:membership_plans(discount_pct)")
-        .eq("email", user.email)
-        .eq("status", "active")
-        .maybeSingle()) as {
-        data: { plan: { discount_pct: number } | null } | null;
-      };
-      setDiscount(data?.plan?.discount_pct ?? 0);
+      // Only a membership at this court's club gives a discount.
+      const { data } = await supabase.rpc("my_memberships");
+      if (cancelled) return;
+      const membership = ((data ?? []) as unknown as MyMembership[]).find(
+        (m) => m.club_id === selected.club_id && m.status === "active",
+      );
+      setDiscount(membership?.plan?.discount_pct ?? 0);
     })();
+    return () => {
+      cancelled = true;
+    };
   }, [selected, supabase]);
 
   const onSubmit = async (values: FormValues) => {

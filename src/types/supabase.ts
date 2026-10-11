@@ -470,6 +470,7 @@ export type Database = {
           id: string
         }[]
       }
+      my_memberships: { Args: never; Returns: Json }
       get_busy_slots: {
         Args: { p_court_id: string; p_day: string }
         Returns: {

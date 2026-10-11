@@ -1,9 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { format } from "date-fns";
-import type { Member, MembershipPlan } from "@/types/database";
-
-type MemberWithPlan = Member & { plan?: MembershipPlan | null };
+import type { MembershipPlan, MyMembership } from "@/types/database";
 
 export default async function MembershipPage() {
   const supabase = await createClient();
@@ -12,18 +10,20 @@ export default async function MembershipPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: memberData }, { data: plansData }] = await Promise.all([
-    user.email
-      ? supabase
-          .from("members")
-          .select("*, plan:membership_plans(*)")
-          .eq("email", user.email)
-          .maybeSingle()
-      : Promise.resolve({ data: null }),
-    supabase.from("membership_plans").select("*").order("price"),
-  ]);
+  // The player's own membership comes from a database function; the members
+  // table itself is only readable by the club. Active memberships come first.
+  const { data: membershipData } = await supabase.rpc("my_memberships");
+  const member =
+    ((membershipData ?? []) as unknown as MyMembership[])[0] ?? null;
 
-  const member = memberData as MemberWithPlan | null;
+  // Only the plans of the club the player belongs to.
+  const { data: plansData } = member
+    ? await supabase
+        .from("membership_plans")
+        .select("*")
+        .eq("club_id", member.club_id)
+        .order("price")
+    : { data: [] };
   const plans = (plansData ?? []) as MembershipPlan[];
 
   const STATUS_STYLE: Record<string, string> = {

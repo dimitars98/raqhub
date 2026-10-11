@@ -3,8 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { format } from "date-fns";
 import type {
   Profile,
-  Member,
-  MembershipPlan,
+  MyMembership,
   Booking,
   Court,
   Coach,
@@ -14,7 +13,6 @@ import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { User, CreditCard, Calendar, Clock, Trophy } from "lucide-react";
 import SignOutButton from "@/components/profile/SignOutButton";
 
-type MemberWithPlan = Member & { plan?: MembershipPlan | null };
 type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
   coach?: { profile?: Pick<Profile, "full_name"> | null } | null;
@@ -45,14 +43,8 @@ export default async function ProfilePage() {
   const [{ data: profileData }, { data: memberData }, { data: bookingsData }] =
     await Promise.all([
       supabase.from("profiles").select("*").eq("id", user.id).single(),
-      user.email
-        ? supabase
-            .from("members")
-            .select("*, plan:membership_plans(*)")
-            .eq("email", user.email)
-            .eq("status", "active")
-            .maybeSingle()
-        : Promise.resolve({ data: null }),
+      // The player's own memberships (the members table is club-only).
+      supabase.rpc("my_memberships"),
       supabase
         .from("bookings")
         .select(
@@ -63,7 +55,10 @@ export default async function ProfilePage() {
     ]);
 
   const profile = profileData as Profile | null;
-  const member = memberData as MemberWithPlan | null;
+  const member =
+    ((memberData ?? []) as unknown as MyMembership[]).find(
+      (m) => m.status === "active",
+    ) ?? null;
   const bookings = (bookingsData ?? []) as BookingWithJoins[];
 
   // Stats

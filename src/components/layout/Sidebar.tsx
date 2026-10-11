@@ -358,6 +358,7 @@ export default function Sidebar({ role, userName, clubName }: SidebarProps) {
       group: t("manage"),
       items: [
         { label: t("members"), href: "/admin/members", icon: Users },
+        { label: t("plans"), href: "/admin/plans", icon: CreditCard },
         { label: t("coaches"), href: "/admin/coaches", icon: Star },
         { label: t("courts"), href: "/admin/courts", icon: Grid3x3 },
       ],

@@ -52,6 +52,13 @@ export interface Member {
   plan?: MembershipPlan | null;
 }
 
+// One row of the my_memberships() database function: the signed-in player's
+// own membership, without the club's private notes.
+export type MyMembership = Omit<Member, "notes" | "plan"> & {
+  club: Pick<Club, "id" | "name">;
+  plan: MembershipPlan | null;
+};
+
 export interface Profile {
   id: string;
   full_name: string | null;
