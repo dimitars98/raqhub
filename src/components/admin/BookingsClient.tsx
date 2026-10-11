@@ -1,0 +1,513 @@
+"use client";
+
+import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useRouter, useSearchParams } from "next/navigation";
+import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
+import { createClient } from "@/lib/supabase/client";
+import { useTranslations, useLocale } from "next-intl";
+import type {
+  Booking,
+  BookingStatus,
+  Court,
+  Profile,
+  Member,
+} from "@/types/database";
+import Modal from "@/components/ui/Modal";
+
+type BookingWithJoins = Booking & {
+  court?: Pick<Court, "name"> | null;
+  member?: Pick<Member, "full_name"> | null;
+  player?: (Pick<Profile, "full_name"> & { email?: string | null }) | null;
+};
+
+type FormValues = {
+  court_id: string;
+  player_type: "member" | "walkin";
+  member_id: string;
+  walk_in_name: string;
+  date: string;
+  hour: number;
+  duration: number;
+  notes: string;
+};
+
+// At the top, replace STATUS_STYLE with new palette colors too:
+const STATUS_STYLE: Record<BookingStatus, string> = {
+  confirmed:
+    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f3fbde] text-[#7aad12]",
+  pending:
+    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#fdfae0] text-[#8a7800]",
+  cancelled:
+    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f4f4f4] text-[#6e7f65]",
+  completed:
+    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#e8f4fd] text-[#1a5ea8]",
+  no_show:
+    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700",
+};
+
+const STATUS_OPTIONS: BookingStatus[] = [
+  "confirmed",
+  "pending",
+  "cancelled",
+  "completed",
+  "no_show",
+];
+const HOURS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+const DURATIONS = [60, 90, 120];
+
+interface Props {
+  bookings: BookingWithJoins[];
+  courts: Pick<Court, "id" | "name" | "price_per_hour">[];
+  members: Pick<Member, "id" | "full_name">[];
+}
+
+export default function BookingsClient({
+  bookings: initial,
+  courts,
+  members,
+}: Props) {
+  const [bookings, setBookings] = useState(initial);
+  const [showModal, setShowModal] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const supabase = createClient();
+  const t = useTranslations("adminBookings");
+  const locale = useLocale();
+
+  const filter = (searchParams.get("status") ?? "all") as BookingStatus | "all";
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    control,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<FormValues>({
+    defaultValues: {
+      court_id: "",
+      player_type: "member",
+      member_id: "",
+      walk_in_name: "",
+      date: format(new Date(), "yyyy-MM-dd"),
+      hour: 9,
+      duration: 60,
+      notes: "",
+    },
+  });
+
+  const watchedCourt = watch("court_id");
+  const watchedDuration = watch("duration");
+  const watchedType = watch("player_type");
+  const selectedCourt = courts.find((c) => c.id === watchedCourt);
+  const total = selectedCourt
+    ? (selectedCourt.price_per_hour * watchedDuration) / 60
+    : 0;
+  const days = Array.from({ length: 14 }, (_, i) =>
+    addDays(startOfDay(new Date()), i),
+  );
+
+  const setFilter = (status: BookingStatus | "all") => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (status === "all") params.delete("status");
+    else params.set("status", status);
+    router.push(`/${locale}/admin/bookings?${params.toString()}`);
+  };
+
+  const onSubmit = async (values: FormValues) => {
+    const startsAt = setMinutes(
+      setHours(new Date(values.date), values.hour),
+      0,
+    );
+    const endsAt = new Date(startsAt.getTime() + values.duration * 60 * 1000);
+
+    const payload = {
+      court_id: values.court_id,
+      member_id:
+        values.player_type === "member" && values.member_id
+          ? values.member_id
+          : null,
+      walk_in_name:
+        values.player_type === "walkin" && values.walk_in_name
+          ? values.walk_in_name
+          : null,
+      player_id: null,
+      starts_at: startsAt.toISOString(),
+      ends_at: endsAt.toISOString(),
+      duration_min: values.duration,
+      total_price: total,
+      status: "confirmed",
+      notes: values.notes || null,
+    } as unknown as never;
+
+    setSubmitError(null);
+
+    const { data, error } = (await supabase
+      .from("bookings")
+      .insert(payload)
+      .select("*, court:courts(name), member:members(full_name)")
+      .single()) as {
+      data: BookingWithJoins | null;
+      error: { code?: string } | null;
+    };
+
+    if (error || !data) {
+      // 23P01 is the database's code for "overlaps an existing booking"
+      setSubmitError(error?.code === "23P01" ? t("slotTaken") : t("saveError"));
+      return;
+    }
+
+    setBookings((prev) => [data, ...prev]);
+    setShowModal(false);
+    reset();
+  };
+
+  const handleStatus = async (id: string, status: BookingStatus) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (supabase.from("bookings") as any).update({ status }).eq("id", id);
+    setBookings((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, status } : b)),
+    );
+  };
+
+  const filtered = bookings
+    .filter((b) => filter === "all" || b.status === filter)
+    .filter((b) => {
+      const name =
+        b.member?.full_name ?? b.player?.full_name ?? b.walk_in_name ?? "";
+      return (
+        name.toLowerCase().includes(search.toLowerCase()) ||
+        b.reference.toLowerCase().includes(search.toLowerCase()) ||
+        b.court?.name?.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-display font-bold text-[#111c0a]">
+            {t("title")}
+          </h1>
+          <p className="text-sm text-[#6e7f65] mt-1">
+            {bookings.length} {t("total")}
+          </p>
+        </div>
+        <button
+          onClick={() => {
+            reset();
+            setShowModal(true);
+          }}
+          className="btn-primary"
+        >
+          {t("addBooking")}
+        </button>
+      </div>
+
+      <div className="flex gap-3 mb-6 flex-wrap">
+        <input
+          type="text"
+          placeholder={t("searchPlaceholder")}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="input max-w-xs"
+        />
+        <div className="flex gap-2 flex-wrap">
+          {(["all", ...STATUS_OPTIONS] as const).map((s) => (
+            <button
+              key={s}
+              onClick={() => setFilter(s)}
+              className={`text-xs px-4 py-2 rounded-full border transition-colors ${
+                filter === s
+                  ? "bg-[#111c0a] text-white border-[#111c0a]"
+                  : "border-[#e8ede4] text-[#6e7f65] hover:bg-[#f8f9f7]"
+              }`}
+            >
+              {t(`statusLabels.${s}`)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white border border-[#e8ede4] rounded-2xl overflow-hidden">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[#e8ede4] bg-[#f8f9f7]">
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("ref")}
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("player")}
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("court")}
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("dateTime")}
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("duration")}
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("total")}
+              </th>
+              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+                {t("status")}
+              </th>
+              <th className="px-5 py-3" />
+            </tr>
+          </thead>
+          <tbody>
+            {!filtered.length ? (
+              <tr>
+                <td colSpan={8} className="px-6 py-16 text-center">
+                  <p className="text-sm text-[#6e7f65]">{t("noBookings")}</p>
+                  {bookings.length === 0 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        reset();
+                        setShowModal(true);
+                      }}
+                      className="btn-primary mt-4"
+                    >
+                      {t("addBooking")}
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ) : (
+              filtered.map((b, i) => (
+                <tr
+                  key={b.id}
+                  className={`border-b border-[#e8ede4] hover:bg-[#f8f9f7] transition-colors ${i === filtered.length - 1 ? "border-0" : ""}`}
+                >
+                  <td className="px-5 py-3.5">
+                    <span className="text-xs font-medium text-[#7aad12] font-mono">
+                      {b.reference}
+                    </span>
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <div className="font-medium text-[#111c0a]">
+                      {b.member?.full_name ??
+                        b.player?.full_name ??
+                        b.walk_in_name ??
+                        "—"}
+                    </div>
+                    {b.walk_in_name && (
+                      <div className="text-xs text-[#6e7f65]">
+                        {t("walkIn")}
+                      </div>
+                    )}
+                  </td>
+                  <td className="px-5 py-3.5 text-[#3d4f35]">
+                    {b.court?.name ?? "—"}
+                  </td>
+                  <td className="px-5 py-3.5 text-[#3d4f35]">
+                    {format(new Date(b.starts_at), "EEE d MMM, HH:mm")}
+                  </td>
+                  <td className="px-5 py-3.5 text-[#3d4f35]">
+                    {b.duration_min} {t("min")}
+                  </td>
+                  <td className="px-5 py-3.5 font-medium text-[#111c0a]">
+                    €{b.total_price.toFixed(2)}
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <span className={STATUS_STYLE[b.status]}>
+                      {t(`statusLabels.${b.status}`)}
+                    </span>
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <select
+                      value={b.status}
+                      onChange={(e) =>
+                        handleStatus(b.id, e.target.value as BookingStatus)
+                      }
+                      className="text-xs border border-[#e8ede4] rounded-lg px-2 py-1 text-[#3d4f35] bg-white focus:outline-none focus:ring-1 focus:ring-[#d6f09a]"
+                    >
+                      {STATUS_OPTIONS.map((s) => (
+                        <option key={s} value={s}>
+                          {t(`statusLabels.${s}`)}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <Modal open={showModal} onClose={() => setShowModal(false)}>
+        <Modal.Content className="max-w-lg">
+          <Modal.Header>{t("addBooking")}</Modal.Header>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Modal.Body>
+              <Modal.Field label={t("court")} required>
+                <select
+                  className="input"
+                  {...register("court_id", { required: true })}
+                >
+                  <option value="">{t("selectCourt")}</option>
+                  {courts.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} — €{c.price_per_hour}/hr
+                    </option>
+                  ))}
+                </select>
+              </Modal.Field>
+
+              <div>
+                <p className="text-xs text-ink-400 mb-2">{t("player")}</p>
+                <div className="flex gap-2 mb-3">
+                  {(["member", "walkin"] as const).map((type) => (
+                    <Controller
+                      key={type}
+                      name="player_type"
+                      control={control}
+                      render={({ field }) => (
+                        <button
+                          type="button"
+                          onClick={() => field.onChange(type)}
+                          className={`text-xs px-4 py-1.5 rounded-full border transition-colors ${
+                            field.value === type
+                              ? "bg-[#111c0a] text-white border-[#111c0a]"
+                              : "border-[#e8ede4] text-[#6e7f65] hover:bg-[#f8f9f7]"
+                          }`}
+                        >
+                          {type === "member" ? t("member") : t("walkIn")}
+                        </button>
+                      )}
+                    />
+                  ))}
+                </div>
+                {watchedType === "member" ? (
+                  <select className="input" {...register("member_id")}>
+                    <option value="">{t("selectMember")}</option>
+                    {members.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {m.full_name}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    className="input"
+                    placeholder={t("fullName")}
+                    {...register("walk_in_name")}
+                  />
+                )}
+              </div>
+
+              <Modal.Field label={t("date")}>
+                <Controller
+                  name="date"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="flex gap-2 overflow-x-auto pb-1">
+                      {days.map((day) => {
+                        const val = format(day, "yyyy-MM-dd");
+                        return (
+                          <button
+                            key={val}
+                            type="button"
+                            onClick={() => field.onChange(val)}
+                            className={`flex-shrink-0 text-center px-3 py-2 rounded-xl border text-xs transition-colors ${
+                              field.value === val
+                                ? "bg-[#111c0a] text-white border-[#111c0a]"
+                                : "border-[#e8ede4] text-[#6e7f65] hover:bg-[#f8f9f7]"
+                            }`}
+                          >
+                            <div className="font-medium">
+                              {format(day, "EEE")}
+                            </div>
+                            <div className="opacity-80">{format(day, "d")}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                />
+              </Modal.Field>
+
+              <Modal.Grid>
+                <Modal.Field label={t("startTime")}>
+                  <select
+                    className="input"
+                    {...register("hour", { valueAsNumber: true })}
+                  >
+                    {HOURS.map((h) => (
+                      <option key={h} value={h}>
+                        {String(h).padStart(2, "0")}:00
+                      </option>
+                    ))}
+                  </select>
+                </Modal.Field>
+                <Modal.Field label={t("duration")}>
+                  <select
+                    className="input"
+                    {...register("duration", { valueAsNumber: true })}
+                  >
+                    {DURATIONS.map((d) => (
+                      <option key={d} value={d}>
+                        {d} {t("min")}
+                      </option>
+                    ))}
+                  </select>
+                </Modal.Field>
+              </Modal.Grid>
+
+              <Modal.Field label={t("notes")}>
+                <textarea
+                  className="input resize-none"
+                  rows={2}
+                  placeholder={t("notesPlaceholder")}
+                  {...register("notes")}
+                />
+              </Modal.Field>
+
+              {selectedCourt && (
+                <div className="bg-[#f8f9f7] border border-[#e8ede4] rounded-xl px-4 py-3 flex justify-between items-center">
+                  <span className="text-sm text-[#6e7f65]">
+                    {watchedDuration} {t("min")} · {selectedCourt.name}
+                  </span>
+                  <span className="text-sm font-medium text-[#111c0a]">
+                    €{total.toFixed(2)}
+                  </span>
+                </div>
+              )}
+              {submitError && (
+                <p
+                  role="alert"
+                  className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700"
+                >
+                  {submitError}
+                </p>
+              )}
+            </Modal.Body>
+            <Modal.Footer>
+              <button
+                type="button"
+                onClick={() => setShowModal(false)}
+                className="btn-secondary flex-1"
+              >
+                {t("cancel")}
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary flex-1 disabled:opacity-40"
+              >
+                {isSubmitting ? t("saving") : t("confirmBooking")}
+              </button>
+            </Modal.Footer>
+          </form>
+        </Modal.Content>
+      </Modal>
+    </div>
+  );
+}

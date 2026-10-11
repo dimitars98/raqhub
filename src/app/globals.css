@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* @import url("https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
+
+@theme {
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Syne", sans-serif;
+
+  /* Lime green — primary brand */
+  --color-brand-50: #f3fbde;
+  --color-brand-100: #e4f7b8;
+  --color-brand-200: #d6f09a;
+  --color-brand-400: #a8d832;
+  --color-brand-600: #7aad12;
+  --color-brand-800: #4d7a08;
+  --color-brand-900: #2e4d03;
+
+  /* Ink — dark text & dark sections */
+  --color-ink-50: #f4f6f2;
+  --color-ink-100: #e8ede4;
+  --color-ink-200: #d0d9c9;
+  --color-ink-400: #6e7f65;
+  --color-ink-600: #3d4f35;
+  --color-ink-800: #1e3010;
+  --color-ink-900: #111c0a;
+
+  /* Yellow — accent (stars, badges) */
+  --color-accent-100: #fdfae0;
+  --color-accent-400: #d6c832;
+  --color-accent-800: #8a7800;
+
+  /* Blue — court/coach info states */
+  --color-court-50: #e8f4fd;
+  --color-court-100: #c0ddf7;
+  --color-court-400: #378add;
+  --color-court-600: #1a5ea8;
+  --color-court-800: #0c4478;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-ink-900 bg-white antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ink-900 text-white rounded-full px-5 py-2.5 text-sm font-medium
+           hover:bg-ink-800 active:scale-95 transition-all duration-150 cursor-pointer border-0
+           inline-flex items-center gap-2;
+  }
+  .btn-secondary {
+    @apply bg-white text-ink-900 border border-ink-200 rounded-full px-5 py-2.5
+           text-sm font-medium hover:border-brand-600 hover:bg-brand-50
+           active:scale-95 transition-all duration-150 cursor-pointer;
+  }
+  .btn-ghost {
+    @apply text-ink-600 px-4 py-2 text-sm rounded-full
+           hover:bg-ink-50 transition-colors duration-150 cursor-pointer border-0 bg-transparent;
+  }
+  .btn-lg {
+    @apply px-6 py-3;
+  }
+  .link {
+    @apply text-ink-600 px-4 py-2 text-sm
+           hover:text-brand-800 transition-colors duration-150 cursor-pointer border-0;
+  }
+  .card {
+    @apply bg-white border border-ink-100 rounded-2xl;
+  }
+  .input {
+    @apply w-full border border-ink-200 rounded-xl px-4 py-2.5 text-sm
+           bg-white placeholder:text-ink-400 focus:outline-none
+           focus:ring-2 focus:ring-brand-400 focus:border-brand-400 transition-all;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium;
+  }
+  .badge-brand {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-600;
+  }
+  .badge-yellow {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium bg-accent-100 text-accent-800;
+  }
+  .badge-blue {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium bg-court-50 text-court-600;
+  }
+  .badge-red {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-medium bg-red-100 text-red-800;
+  }
+}
+
+.tennis-section {
+  position: relative;
+  width: 100%;
+  min-height: 500px; /* Adjust based on your design */
+
+  /* 2. Link your SVG file */
+  background-image: url("/tennis-court.svg");
+
+  /* 3. Center and scale it nicely */
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: contain; /* or 'cover' depending on how cropped you want it */
+}

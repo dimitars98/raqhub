@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 600" width="100%" height="100%">
+  <style>
+    .court-line {
+      stroke: #63636355;
+      stroke-width: 3;
+      stroke-linecap: square;
+      fill: none;
+      opacity: 0.15; /* Adjust this value to make lines more or less subtle */
+    }
+    .net-line {
+      stroke: #636363;
+      stroke-width: 2;
+      stroke-dasharray: 4 6;
+      fill: none;
+      opacity: 0.1;
+    }
+  </style>
+
+  <g class="court-line">
+    <rect x="180" y="120" width="780" height="360" />
+
+    <line x1="180" y1="165" x2="960" y2="165" />
+    <line x1="180" y1="435" x2="960" y2="435" />
+
+    <line x1="360" y1="165" x2="360" y2="435" />
+    <line x1="780" y1="165" x2="780" y2="435" />
+
+    <line x1="360" y1="300" x2="780" y2="300" />
+
+    <line x1="180" y1="300" x2="210" y2="300" />
+    <line x1="930" y1="300" x2="960" y2="300" />
+  </g>
+
+  <line x1="570" y1="120" x2="570" y2="480" class="net-line" />
+</svg>
