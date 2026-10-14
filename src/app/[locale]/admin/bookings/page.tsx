@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import type { Booking, Club, Profile, Court, Member } from "@/types/database";
 import BookingsClient from "@/components/admin/BookingsClient";
 import Spinner from "@/components/ui/Spinner";
+import { noShowCutoff, normalizeRules } from "@/lib/bookingRules";
+import type { NoShow } from "@/components/admin/BookingsClient";
 
 type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
@@ -24,11 +26,11 @@ export default async function AdminBookingsPage() {
   // The club owned by the signed-in admin
   const { data: clubData } = await supabase
     .from("clubs")
-    .select("id")
+    .select("id, booking_rules")
     .eq("owner_id", user.id)
     .limit(1)
     .maybeSingle();
-  const club = clubData as Pick<Club, "id"> | null;
+  const club = clubData as Pick<Club, "id" | "booking_rules"> | null;
   if (!club) redirect("/admin/setup");
 
   // All of the club's courts, so bookings on a deactivated court still show
@@ -40,14 +42,28 @@ export default async function AdminBookingsPage() {
   const allCourts = (courtsData ?? []) as CourtRow[];
   const courtIds = allCourts.map((c) => c.id);
 
-  const [bookingsResult, membersResult] = await Promise.all([
-    courtIds.length > 0
+  // Lessons with the club's coaches have no court, so they are found by coach.
+  const { data: coachData } = await supabase
+    .from("coaches")
+    .select("id")
+    .eq("club_id", club.id);
+  const coachIds = (coachData ?? []).map((c) => c.id);
+
+  const filters = [
+    courtIds.length ? `court_id.in.(${courtIds.join(",")})` : null,
+    coachIds.length ? `coach_id.in.(${coachIds.join(",")})` : null,
+  ].filter(Boolean);
+
+  const since = noShowCutoff().toISOString();
+
+  const [bookingsResult, membersResult, noShowsResult] = await Promise.all([
+    filters.length > 0
       ? supabase
           .from("bookings")
           .select(
-            "*, court:courts(name), member:members(full_name), player:profiles(full_name)",
+            "*, court:courts(name), member:members(full_name), player:profiles(full_name), coach:coaches(profile:profiles(full_name))",
           )
-          .in("court_id", courtIds)
+          .or(filters.join(","))
           .order("starts_at", { ascending: false })
           .limit(100)
       : Promise.resolve({ data: [] }),
@@ -57,6 +73,15 @@ export default async function AdminBookingsPage() {
       .eq("club_id", club.id)
       .eq("status", "active")
       .order("full_name"),
+    // No-shows of the last 90 days, to count them per player.
+    filters.length > 0
+      ? supabase
+          .from("bookings")
+          .select("id, player_id, member_id")
+          .or(filters.join(","))
+          .eq("status", "no_show")
+          .gte("starts_at", since)
+      : Promise.resolve({ data: [] }),
   ]);
 
   const bookings = (bookingsResult.data ?? []) as BookingWithJoins[];
@@ -69,7 +94,13 @@ export default async function AdminBookingsPage() {
 
   return (
     <Suspense fallback={<Spinner />}>
-      <BookingsClient bookings={bookings} courts={courts} members={members} />
+      <BookingsClient
+        bookings={bookings}
+        courts={courts}
+        members={members}
+        noShows={(noShowsResult.data ?? []) as NoShow[]}
+        maxNoShows={normalizeRules(club.booking_rules).max_no_shows}
+      />
     </Suspense>
   );
 }

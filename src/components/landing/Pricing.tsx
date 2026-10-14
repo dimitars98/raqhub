@@ -1,57 +1,33 @@
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { PLANS as PLAN_LIMITS } from "@/lib/plans";
 
-const PLANS = [
-  {
-    name: "Starter",
-    tagline: "For a single court, or to try it out.",
-    price: "€0",
-    period: "Free forever",
-    featured: false,
-    cta: "Get started free",
-    href: "/signup?role=admin",
-    features: [
-      "1 court",
-      "Up to 20 members",
-      "Basic bookings",
-      "Email support",
-    ],
-  },
-  {
-    name: "Club",
-    tagline: "For clubs taking bookings every day.",
-    price: "€29",
-    period: "Billed monthly",
-    featured: true,
-    cta: "Start 14-day trial",
-    href: "/signup?role=admin",
-    features: [
-      "Unlimited courts",
-      "Unlimited members",
-      "Membership plans",
-      "Email notifications",
-      "Stripe payments",
-    ],
-  },
-  {
-    name: "Academy",
-    tagline: "For academies with coaches and staff.",
-    price: "€79",
-    period: "Billed monthly",
-    featured: false,
-    cta: "Contact us",
-    href: "/signup?role=admin",
-    features: [
-      "Everything in Club",
-      "Multiple admins",
-      "Coach management",
-      "Advanced analytics",
-      "Priority support",
-    ],
-  },
-];
+// Prices and court limits come from src/lib/plans.ts, so the page and the app
+// never disagree. Texts are in the "pricing" messages.
+const PLAN_ORDER = ["starter", "club", "academy"] as const;
+const FEATURED = "club";
 
 export default function Pricing() {
+  const t = useTranslations("pricing");
+  const PLANS = PLAN_ORDER.map((id) => {
+    const limits = PLAN_LIMITS[id];
+    return {
+      name: t(`plans.${id}.name`),
+      tagline: t(`plans.${id}.tagline`),
+      price: `€${limits.priceMonthly}`,
+      period: t("yearly", {
+        price: limits.priceYearly,
+        save: limits.priceMonthly * 12 - limits.priceYearly,
+      }),
+      featured: id === FEATURED,
+      cta: t("cta"),
+      href: "/signup?role=admin",
+      features: (t.raw(`plans.${id}.features`) as string[]).map((line) =>
+        line.replace("{courts}", String(limits.maxCourts)),
+      ),
+    };
+  });
   return (
     <section
       id="pricing"
@@ -61,16 +37,16 @@ export default function Pricing() {
         <div className="mb-12 text-center lg:mb-16">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-100 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-900">
             <span className="size-1.5 rounded-full bg-brand-600" />
-            Simple pricing
+            {t("label")}
           </div>
           <h2 className="font-display mb-3 text-[28px] font-extrabold leading-[1.1] tracking-tight text-ink-900 sm:text-[34px] lg:text-[44px]">
-            No surprises.{" "}
+            {t("title1")}{" "}
             <span className="underline decoration-brand-400 decoration-[6px] underline-offset-[6px]">
-              No hidden fees.
+              {t("title2")}
             </span>
           </h2>
           <p className="text-base text-ink-600">
-            Start free, upgrade when you grow. Cancel anytime.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -113,7 +89,7 @@ export default function Pricing() {
                 </h3>
                 {p.featured && (
                   <span className="whitespace-nowrap rounded-full bg-brand-400 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink-900">
-                    Most popular
+                    {t("mostPopular")}
                   </span>
                 )}
               </div>
@@ -137,7 +113,7 @@ export default function Pricing() {
                   }`}
                 >
                   {" "}
-                  /mo
+                  {t("perMonth")}
                 </span>
               </div>
               <div

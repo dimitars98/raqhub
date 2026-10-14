@@ -1,5 +1,6 @@
 "use client";
 
+import { dateLocale } from "@/lib/dateLocale";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,11 +15,13 @@ import type {
   Member,
 } from "@/types/database";
 import Modal from "@/components/ui/Modal";
+import { noShowCutoff } from "@/lib/bookingRules";
 
 type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
   member?: Pick<Member, "full_name"> | null;
   player?: (Pick<Profile, "full_name"> & { email?: string | null }) | null;
+  coach?: { profile?: Pick<Profile, "full_name"> | null } | null;
 };
 
 type FormValues = {
@@ -56,16 +59,28 @@ const STATUS_OPTIONS: BookingStatus[] = [
 const HOURS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 const DURATIONS = [60, 90, 120];
 
+/** A no-show from the last 90 days, used to count them per player. */
+export type NoShow = Pick<Booking, "id" | "player_id" | "member_id">;
+
 interface Props {
   bookings: BookingWithJoins[];
   courts: Pick<Court, "id" | "name" | "price_per_hour">[];
   members: Pick<Member, "id" | "full_name">[];
+  noShows: NoShow[];
+  /** Online booking pauses at this many no-shows. 0 = never. */
+  maxNoShows: number;
 }
+
+/** Who a booking belongs to: a player account or a club member. */
+const personKey = (b: Pick<Booking, "player_id" | "member_id">) =>
+  b.player_id ? `p:${b.player_id}` : b.member_id ? `m:${b.member_id}` : null;
 
 export default function BookingsClient({
   bookings: initial,
   courts,
   members,
+  noShows,
+  maxNoShows,
 }: Props) {
   const [bookings, setBookings] = useState(initial);
   const [showModal, setShowModal] = useState(false);
@@ -76,6 +91,7 @@ export default function BookingsClient({
   const supabase = createClient();
   const t = useTranslations("adminBookings");
   const locale = useLocale();
+  const dfLocale = dateLocale(locale);
 
   const filter = (searchParams.get("status") ?? "all") as BookingStatus | "all";
 
@@ -167,11 +183,30 @@ export default function BookingsClient({
 
   const handleStatus = async (id: string, status: BookingStatus) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase.from("bookings") as any).update({ status }).eq("id", id);
+    const { error } = await (supabase.from("bookings") as any)
+      .update({ status })
+      .eq("id", id);
+    // Only show the change if it was really saved.
+    if (error) return;
     setBookings((prev) =>
       prev.map((b) => (b.id === id ? { ...b, status } : b)),
     );
   };
+
+  // No-shows per player in the last 90 days. Bookings on screen use their
+  // current status, so marking or un-marking one updates the count at once.
+  const since = noShowCutoff().getTime();
+  const onScreen = new Set(bookings.map((b) => b.id));
+  const noShowCount = new Map<string, number>();
+  for (const b of [
+    ...noShows.filter((n) => !onScreen.has(n.id)),
+    ...bookings.filter(
+      (b) => b.status === "no_show" && new Date(b.starts_at).getTime() >= since,
+    ),
+  ]) {
+    const key = personKey(b);
+    if (key) noShowCount.set(key, (noShowCount.get(key) ?? 0) + 1);
+  }
 
   const filtered = bookings
     .filter((b) => filter === "all" || b.status === filter)
@@ -302,12 +337,23 @@ export default function BookingsClient({
                         {t("walkIn")}
                       </div>
                     )}
+                    <NoShowBadge
+                      count={noShowCount.get(personKey(b) ?? "") ?? 0}
+                      paused={
+                        maxNoShows > 0 &&
+                        !!b.player_id &&
+                        (noShowCount.get(personKey(b) ?? "") ?? 0) >= maxNoShows
+                      }
+                    />
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
-                    {b.court?.name ?? "—"}
+                    {b.court?.name ??
+                      (b.coach
+                        ? `${t("lesson")} · ${b.coach.profile?.full_name ?? ""}`
+                        : "—")}
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
-                    {format(new Date(b.starts_at), "EEE d MMM, HH:mm")}
+                    {format(new Date(b.starts_at), "EEE d MMM, HH:mm", { locale: dfLocale })}
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
                     {b.duration_min} {t("min")}
@@ -423,7 +469,7 @@ export default function BookingsClient({
                             }`}
                           >
                             <div className="font-medium">
-                              {format(day, "EEE")}
+                              {format(day, "EEE", { locale: dfLocale })}
                             </div>
                             <div className="opacity-80">{format(day, "d")}</div>
                           </button>
@@ -508,6 +554,23 @@ export default function BookingsClient({
           </form>
         </Modal.Content>
       </Modal>
+    </div>
+  );
+}
+
+/** "2 no-shows" under a player's name; red once online booking is paused. */
+function NoShowBadge({ count, paused }: { count: number; paused: boolean }) {
+  const t = useTranslations("adminBookings");
+  if (count === 0) return null;
+  return (
+    <div
+      className={`mt-1 inline-flex items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-medium ${
+        paused ? "bg-red-50 text-red-700" : "bg-amber-50 text-amber-800"
+      }`}
+      title={paused ? t("pausedHint") : undefined}
+    >
+      {t("noShowCount", { n: count })}
+      {paused && <> · {t("paused")}</>}
     </div>
   );
 }

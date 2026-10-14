@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { TONES } from "@/types/tones";
@@ -14,13 +15,15 @@ const LEVELS = [
 ] as const;
 
 export default function CoachFilters() {
+  const t = useTranslations("coachesList");
+  const tLevel = useTranslations("clubPage.levels");
   const searchParams = useSearchParams();
   const level = searchParams.get("level") ?? "all";
   // This page is only shown to players, so it always uses the player tone.
   const tone = TONES.member;
 
   return (
-    <nav aria-label="Filter by level" className="mb-7 flex flex-wrap gap-2">
+    <nav aria-label={t("filterByLevel")} className="mb-7 flex flex-wrap gap-2">
       {LEVELS.map((l) => {
         const active = level === l;
         return (
@@ -34,7 +37,7 @@ export default function CoachFilters() {
                 : "border-ink-200 text-ink-600 hover:border-ink-900 hover:text-ink-900"
             }`}
           >
-            {l === "all" ? "All levels" : l}
+            {l === "all" ? t("allLevels") : tLevel(l)}
           </Link>
         );
       })}

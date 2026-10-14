@@ -1,36 +1,23 @@
 "use client";
 
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
+import { useLocale, useTranslations } from "next-intl";
 import { Building2 } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 type CreateClubValues = {
   name: string;
-  description: string;
-  address: string;
   city: string;
   country: string;
-  phone: string;
-  email: string;
-  website: string;
 };
 
 // Stored as the two-letter code, like the column's default ('MK').
-const COUNTRIES = [
-  ["AL", "Albania"],
-  ["AT", "Austria"],
-  ["BA", "Bosnia and Herzegovina"],
-  ["BG", "Bulgaria"],
-  ["HR", "Croatia"],
-  ["DE", "Germany"],
-  ["GR", "Greece"],
-  ["XK", "Kosovo"],
-  ["ME", "Montenegro"],
-  ["MK", "North Macedonia"],
-  ["RS", "Serbia"],
-  ["SI", "Slovenia"],
-  ["CH", "Switzerland"],
+// Names are shown in the visitor's language by the browser (Intl.DisplayNames).
+const COUNTRY_CODES = [
+  "AL", "AT", "BA", "BG", "HR", "FR", "DE", "GR", "IT", "XK",
+  "ME", "MK", "RS", "SI", "CH",
 ] as const;
 
 /**
@@ -43,7 +30,7 @@ function makeSlug(name: string) {
     name
       .toLowerCase()
       .normalize("NFKD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[̀-ͯ]/g, "")
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
       .slice(0, 40) || "club";
@@ -51,20 +38,14 @@ function makeSlug(name: string) {
   return `${base}-${suffix}`;
 }
 
-/** Empty text becomes null so the database doesn't store blank strings. */
-const orNull = (value: string) => value.trim() || null;
-
-/** Accepts "myclub.mk" as well as a full address. */
-function normalizeWebsite(value: string) {
-  const v = value.trim();
-  if (!v) return null;
-  return /^https?:\/\//i.test(v) ? v : `https://${v}`;
-}
-
 const labelClass = "text-[13px] font-medium text-[#3d4f35]";
-const optionalClass = "font-normal text-[#6e7f65]";
 const errorClass = "text-xs text-red-600";
 
+/**
+ * First thing a new club owner sees. Kept to three questions on purpose:
+ * everything else (address, phone, logo, hours) can wait for Settings, and
+ * the getting-started checklist on the dashboard walks them through it.
+ */
 export default function CreateClubForm({
   ownerId,
   defaultEmail = "",
@@ -72,6 +53,8 @@ export default function CreateClubForm({
   ownerId: string;
   defaultEmail?: string;
 }) {
+  const t = useTranslations("setup");
+  const locale = useLocale();
   const router = useRouter();
   const {
     register,
@@ -79,8 +62,20 @@ export default function CreateClubForm({
     setError,
     formState: { errors, isSubmitting },
   } = useForm<CreateClubValues>({
-    defaultValues: { country: "MK", email: defaultEmail },
+    defaultValues: { country: "MK" },
   });
+
+  const countries = useMemo(() => {
+    let names: Intl.DisplayNames | null = null;
+    try {
+      names = new Intl.DisplayNames([locale], { type: "region" });
+    } catch {
+      // Very old browsers: fall back to the codes.
+    }
+    return COUNTRY_CODES.map((code) => [code, names?.of(code) ?? code] as const).sort(
+      (a, b) => a[1].localeCompare(b[1], locale),
+    );
+  }, [locale]);
 
   const onSubmit = async (values: CreateClubValues) => {
     const supabase = createClient();
@@ -89,231 +84,121 @@ export default function CreateClubForm({
     const { error } = await supabase.from("clubs").insert({
       name,
       slug: makeSlug(name),
-      description: orNull(values.description),
-      address: orNull(values.address),
-      city: orNull(values.city),
+      city: values.city.trim(),
       country: values.country,
-      phone: orNull(values.phone),
-      email: orNull(values.email),
-      website: normalizeWebsite(values.website),
+      // Players' replies to booking emails go here; changeable in Settings.
+      email: defaultEmail.trim() || null,
       owner_id: ownerId,
     });
 
     if (error) {
-      setError("root", {
-        message: "We couldn't create your club. Please try again.",
-      });
+      setError("root", { message: t("error") });
       return;
     }
 
-    router.push("/admin/courts");
+    router.push("/admin/dashboard");
     // Reloads server data so the sidebar and pages pick up the new club.
     router.refresh();
   };
 
   return (
-    <div className="mx-auto w-full max-w-2xl py-8">
+    <div className="mx-auto w-full max-w-lg py-8">
       <div className="mb-4 grid size-12 place-items-center rounded-xl bg-[#f3fbde] text-[#4d7a08]">
         <Building2 size={22} aria-hidden="true" />
       </div>
       <h1 className="text-2xl font-bold tracking-tight text-[#111c0a]">
-        Set up your club
+        {t("title")}
       </h1>
-      <p className="mt-1 mb-6 text-sm text-[#6e7f65]">
-        Players see these details when they book. You can change any of them
-        later.
-      </p>
+      <p className="mt-1 mb-6 text-sm text-[#6e7f65]">{t("subtitle")}</p>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="card divide-y divide-[#e8ede4]"
+        className="card flex flex-col gap-5 p-6"
       >
-        {/* About */}
-        <fieldset className="flex flex-col gap-5 p-6">
-          <legend className="float-left mb-1 w-full text-base font-semibold text-[#111c0a]">
-            About the club
-          </legend>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="club-name" className={labelClass}>
+            {t("name")}
+          </label>
+          <input
+            id="club-name"
+            type="text"
+            autoComplete="organization"
+            autoFocus
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "club-name-error" : undefined}
+            className={`input ${errors.name ? "border-red-500" : ""}`}
+            {...register("name", {
+              validate: (value) => value.trim().length >= 2 || t("nameError"),
+            })}
+          />
+          {errors.name && (
+            <p id="club-name-error" className={errorClass}>
+              {errors.name.message}
+            </p>
+          )}
+        </div>
 
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="club-name" className={labelClass}>
-              Club name
+            <label htmlFor="club-city" className={labelClass}>
+              {t("city")}
             </label>
             <input
-              id="club-name"
+              id="club-city"
               type="text"
-              autoComplete="organization"
-              aria-invalid={!!errors.name}
-              aria-describedby={errors.name ? "club-name-error" : undefined}
-              className={`input ${errors.name ? "border-red-500" : ""}`}
-              {...register("name", {
-                validate: (value) =>
-                  value.trim().length >= 2 || "Enter your club's name.",
+              autoComplete="address-level2"
+              aria-invalid={!!errors.city}
+              aria-describedby={errors.city ? "club-city-error" : undefined}
+              className={`input ${errors.city ? "border-red-500" : ""}`}
+              {...register("city", {
+                validate: (value) => value.trim().length > 0 || t("cityError"),
               })}
             />
-            {errors.name && (
-              <p id="club-name-error" className={errorClass}>
-                {errors.name.message}
+            {errors.city && (
+              <p id="club-city-error" className={errorClass}>
+                {errors.city.message}
               </p>
             )}
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="club-description" className={labelClass}>
-              Short description{" "}
-              <span className={optionalClass}>(optional)</span>
+            <label htmlFor="club-country" className={labelClass}>
+              {t("country")}
             </label>
-            <textarea
-              id="club-description"
-              rows={3}
-              maxLength={400}
-              className="input resize-y"
-              {...register("description")}
-            />
-          </div>
-        </fieldset>
-
-        {/* Location */}
-        <fieldset className="flex flex-col gap-5 p-6">
-          <legend className="float-left mb-1 w-full text-base font-semibold text-[#111c0a]">
-            Location
-          </legend>
-
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="club-address" className={labelClass}>
-              Street address <span className={optionalClass}>(optional)</span>
-            </label>
-            <input
-              id="club-address"
-              type="text"
-              autoComplete="street-address"
+            <select
+              id="club-country"
+              autoComplete="country"
               className="input"
-              {...register("address")}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="club-city" className={labelClass}>
-                City
-              </label>
-              <input
-                id="club-city"
-                type="text"
-                autoComplete="address-level2"
-                aria-invalid={!!errors.city}
-                aria-describedby={errors.city ? "club-city-error" : undefined}
-                className={`input ${errors.city ? "border-red-500" : ""}`}
-                {...register("city", {
-                  validate: (value) =>
-                    value.trim().length > 0 || "Enter the city.",
-                })}
-              />
-              {errors.city && (
-                <p id="club-city-error" className={errorClass}>
-                  {errors.city.message}
-                </p>
-              )}
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="club-country" className={labelClass}>
-                Country
-              </label>
-              <select
-                id="club-country"
-                autoComplete="country"
-                className="input"
-                {...register("country")}
-              >
-                {COUNTRIES.map(([code, label]) => (
-                  <option key={code} value={code}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </fieldset>
-
-        {/* Contact */}
-        <fieldset className="flex flex-col gap-5 p-6">
-          <legend className="float-left mb-1 w-full text-base font-semibold text-[#111c0a]">
-            Contact
-          </legend>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="club-phone" className={labelClass}>
-                Phone <span className={optionalClass}>(optional)</span>
-              </label>
-              <input
-                id="club-phone"
-                type="tel"
-                autoComplete="tel"
-                className="input"
-                {...register("phone")}
-              />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="club-email" className={labelClass}>
-                Contact email <span className={optionalClass}>(optional)</span>
-              </label>
-              <input
-                id="club-email"
-                type="email"
-                autoComplete="email"
-                aria-invalid={!!errors.email}
-                aria-describedby={errors.email ? "club-email-error" : undefined}
-                className={`input ${errors.email ? "border-red-500" : ""}`}
-                {...register("email", {
-                  validate: (value) =>
-                    !value.trim() ||
-                    /^\S+@\S+\.\S+$/.test(value.trim()) ||
-                    "Enter a valid email address.",
-                })}
-              />
-              {errors.email && (
-                <p id="club-email-error" className={errorClass}>
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="club-website" className={labelClass}>
-              Website <span className={optionalClass}>(optional)</span>
-            </label>
-            <input
-              id="club-website"
-              type="text"
-              inputMode="url"
-              autoComplete="url"
-              placeholder="yourclub.mk"
-              className="input"
-              {...register("website")}
-            />
-          </div>
-        </fieldset>
-
-        {/* Submit */}
-        <div className="flex flex-col gap-4 p-6">
-          {errors.root && (
-            <p
-              role="alert"
-              className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700"
+              {...register("country")}
             >
-              {errors.root.message}
-            </p>
-          )}
+              {countries.map(([code, label]) => (
+                // Server and browser may word a country slightly differently.
+                <option key={code} value={code} suppressHydrationWarning>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {errors.root && (
+          <p
+            role="alert"
+            className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700"
+          >
+            {errors.root.message}
+          </p>
+        )}
+
+        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-[#6e7f65]">{t("trialNote")}</p>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn-primary justify-center sm:self-end sm:px-8 disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-primary justify-center whitespace-nowrap sm:px-8 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {isSubmitting ? "Creating…" : "Create club"}
+            {isSubmitting ? t("creating") : t("create")}
           </button>
         </div>
       </form>

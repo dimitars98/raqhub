@@ -40,11 +40,12 @@ export default async function HomePage() {
       .single();
     const role = (data as { role: string } | null)?.role;
     if (role === "club_admin" || role === "super_admin")
-      redirect(`/${locale}/admin/members`);
+      redirect(`/${locale}/admin/dashboard`);
     else redirect(`/${locale}/book`);
   }
 
   const t = await getTranslations();
+  const ta = await getTranslations("announcement");
 
   // Real quotes only, added with the person's permission.
 
@@ -53,14 +54,14 @@ export default async function HomePage() {
       {/* ANNOUNCEMENT BAR */}
       <div className="bg-[#111c0a] text-white text-[13px] text-center py-2.5 px-4 flex items-center justify-center gap-2">
         <span className="bg-[#a8d832] text-[#111c0a] text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">
-          New
+          {ta("new")}
         </span>
-        <span className="text-white/75">Public Booking is live —</span>
+        <span className="text-white/75">{ta("live")}</span>
         <strong className="text-white">
-          Create a link. Accept players anywhere.
+          {ta("createLink")}
         </strong>
         <span className="text-[#a8d832] font-medium cursor-pointer ml-1">
-          Learn more →
+          {ta("learnMore")}
         </span>
       </div>
 

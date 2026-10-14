@@ -2,7 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import type { Booking } from "@/types/database";
 
-const ALLOWED_DURATIONS = [60, 90, 120];
+// Which of these a club allows is checked by the database (booking rules).
+const ALLOWED_DURATIONS = [30, 60, 90, 120];
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -63,6 +64,11 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "This slot is already booked" },
       { status: 409 },
+    );
+  if (error?.message?.startsWith("Booking rule:"))
+    return NextResponse.json(
+      { error: error.message.slice("Booking rule:".length).trim() },
+      { status: 400 },
     );
   if (error) {
     console.error("[bookings]", error);

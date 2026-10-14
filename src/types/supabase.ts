@@ -68,10 +68,12 @@ export type Database = {
           duration_min: number
           ends_at: string
           id: string
+          locale: string | null
           member_id: string | null
           notes: string | null
           player_id: string | null
           reference: string
+          reminder_sent_at: string | null
           starts_at: string
           status: string
           stripe_payment_intent_id: string | null
@@ -87,10 +89,12 @@ export type Database = {
           duration_min?: number
           ends_at: string
           id?: string
+          locale?: string | null
           member_id?: string | null
           notes?: string | null
           player_id?: string | null
           reference?: string
+          reminder_sent_at?: string | null
           starts_at: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -106,10 +110,12 @@ export type Database = {
           duration_min?: number
           ends_at?: string
           id?: string
+          locale?: string | null
           member_id?: string | null
           notes?: string | null
           player_id?: string | null
           reference?: string
+          reminder_sent_at?: string | null
           starts_at?: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -148,9 +154,36 @@ export type Database = {
           },
         ]
       }
+      club_weekly_reports: {
+        Row: {
+          club_id: string
+          sent_at: string
+          week_start: string
+        }
+        Insert: {
+          club_id: string
+          sent_at?: string
+          week_start: string
+        }
+        Update: {
+          club_id?: string
+          sent_at?: string
+          week_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "club_weekly_reports_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "clubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clubs: {
         Row: {
           address: string | null
+          booking_rules: Json | null
           city: string | null
           country: string | null
           cover_url: string | null
@@ -163,14 +196,19 @@ export type Database = {
           lng: number | null
           logo_url: string | null
           name: string
+          opening_hours: Json | null
           owner_id: string | null
+          paid_until: string | null
+          plan: string
           phone: string | null
           slug: string
+          trial_ends_at: string | null
           updated_at: string | null
           website: string | null
         }
         Insert: {
           address?: string | null
+          booking_rules?: Json | null
           city?: string | null
           country?: string | null
           cover_url?: string | null
@@ -183,14 +221,19 @@ export type Database = {
           lng?: number | null
           logo_url?: string | null
           name: string
+          opening_hours?: Json | null
           owner_id?: string | null
+          paid_until?: string | null
+          plan?: string
           phone?: string | null
           slug: string
+          trial_ends_at?: string | null
           updated_at?: string | null
           website?: string | null
         }
         Update: {
           address?: string | null
+          booking_rules?: Json | null
           city?: string | null
           country?: string | null
           cover_url?: string | null
@@ -203,9 +246,13 @@ export type Database = {
           lng?: number | null
           logo_url?: string | null
           name?: string
+          opening_hours?: Json | null
           owner_id?: string | null
+          paid_until?: string | null
+          plan?: string
           phone?: string | null
           slug?: string
+          trial_ends_at?: string | null
           updated_at?: string | null
           website?: string | null
         }
@@ -334,6 +381,7 @@ export type Database = {
           notes: string | null
           phone: string | null
           plan_id: string | null
+          renewal_reminder_sent_at: string | null
           starts_at: string
           status: string
           updated_at: string | null
@@ -348,6 +396,7 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           plan_id?: string | null
+          renewal_reminder_sent_at?: string | null
           starts_at?: string
           status?: string
           updated_at?: string | null
@@ -362,6 +411,7 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           plan_id?: string | null
+          renewal_reminder_sent_at?: string | null
           starts_at?: string
           status?: string
           updated_at?: string | null
@@ -463,6 +513,7 @@ export type Database = {
     }
     Functions: {
       claim_club_admin_role: { Args: never; Returns: undefined }
+      club_max_courts: { Args: { p_club_id: string }; Returns: number | null }
       find_profile_by_email: {
         Args: { lookup_email: string }
         Returns: {
@@ -471,6 +522,16 @@ export type Database = {
         }[]
       }
       my_memberships: { Args: never; Returns: Json }
+      complete_finished_bookings: { Args: never; Returns: number }
+      expire_memberships: { Args: never; Returns: number }
+      my_member_ids: { Args: never; Returns: string[] }
+      get_coach_busy_slots: {
+        Args: { p_coach_id: string; p_day: string }
+        Returns: {
+          ends_at: string
+          starts_at: string
+        }[]
+      }
       get_busy_slots: {
         Args: { p_court_id: string; p_day: string }
         Returns: {

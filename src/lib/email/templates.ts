@@ -1,0 +1,268 @@
+import { createTranslator } from "next-intl";
+import en from "@/messages/en.json";
+import mk from "@/messages/mk.json";
+import sq from "@/messages/sq.json";
+import de from "@/messages/de.json";
+import fr from "@/messages/fr.json";
+import it from "@/messages/it.json";
+import type { Locale } from "./locale";
+
+const MESSAGES = { en, mk, sq, de, fr, it } as const;
+const TIME_ZONE = "Europe/Skopje";
+
+type Rendered = { subject: string; html: string; text: string };
+
+function translator(locale: Locale) {
+  return createTranslator({
+    locale,
+    messages: MESSAGES[locale] as typeof en,
+    namespace: "emails",
+  });
+}
+
+const esc = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+function formatters(locale: Locale) {
+  const date = new Intl.DateTimeFormat(locale, {
+    timeZone: TIME_ZONE,
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+  const time = new Intl.DateTimeFormat(locale, {
+    timeZone: TIME_ZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const day = new Intl.DateTimeFormat(locale, {
+    timeZone: TIME_ZONE,
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  return {
+    date: (d: string | Date) => date.format(new Date(d)),
+    time: (d: string | Date) => time.format(new Date(d)),
+    day: (d: string | Date) => day.format(new Date(d)),
+    money: (n: number) => `€${n.toFixed(2)}`,
+  };
+}
+
+/** The shared frame every email sits in: logo, card, footer. Plain tables for email apps. */
+function layout(opts: {
+  heading: string;
+  intro: string;
+  rows?: [string, string][];
+  extraHtml?: string;
+  button?: { label: string; url: string };
+  footer: string;
+}) {
+  const rows = (opts.rows ?? [])
+    .map(
+      ([label, value]) => `
+        <tr>
+          <td style="padding:8px 0;color:#6e7f65;font-size:14px;width:40%;vertical-align:top">${esc(label)}</td>
+          <td style="padding:8px 0;color:#111c0a;font-size:14px;font-weight:600">${esc(value)}</td>
+        </tr>`,
+    )
+    .join("");
+
+  const button = opts.button
+    ? `<p style="margin:28px 0 4px">
+        <a href="${esc(opts.button.url)}" style="display:inline-block;background:#111c0a;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:999px">${esc(opts.button.label)}</a>
+      </p>`
+    : "";
+
+  return `<!doctype html>
+<html>
+<body style="margin:0;padding:0;background:#f4f6f2;font-family:Arial,Helvetica,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f2;padding:24px 12px">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px">
+        <tr><td style="padding:0 4px 16px;font-size:20px;font-weight:700;color:#111c0a">Serve<span style="color:#7aad12">Time</span></td></tr>
+        <tr><td style="background:#ffffff;border:1px solid #e8ede4;border-radius:16px;padding:28px">
+          <h1 style="margin:0 0 10px;font-size:20px;line-height:1.3;color:#111c0a">${esc(opts.heading)}</h1>
+          <p style="margin:0 0 18px;font-size:15px;line-height:1.55;color:#3d4f35">${esc(opts.intro)}</p>
+          ${rows ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e8ede4">${rows}</table>` : ""}
+          ${opts.extraHtml ?? ""}
+          ${button}
+        </td></tr>
+        <tr><td style="padding:16px 4px;font-size:12px;line-height:1.5;color:#6e7f65">${esc(opts.footer)}</td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+function plainText(heading: string, intro: string, rows: [string, string][] = [], link?: string, footer?: string) {
+  return [
+    heading,
+    "",
+    intro,
+    "",
+    ...rows.map(([l, v]) => `${l}: ${v}`),
+    link ? `\n${link}` : "",
+    footer ? `\n--\n${footer}` : "",
+  ]
+    .join("\n")
+    .trim();
+}
+
+// ---------------------------------------------------------------------------
+// Bookings
+// ---------------------------------------------------------------------------
+
+export type BookingEmailData = {
+  locale: Locale;
+  name: string | null;
+  /** Court name, or null for a lesson. */
+  courtName: string | null;
+  coachName: string | null;
+  clubName: string;
+  startsAt: string;
+  endsAt: string;
+  durationMin: number;
+  totalPrice: number;
+  reference: string;
+  appUrl: string;
+};
+
+function bookingParts(kind: "confirmed" | "cancelled" | "reminder", b: BookingEmailData): Rendered {
+  const t = translator(b.locale);
+  const f = formatters(b.locale);
+  // A lesson names the coach, and the court when it has one.
+  const what = b.coachName
+    ? [t("lessonWith", { name: b.coachName }), b.courtName].filter(Boolean).join(" · ")
+    : (b.courtName ?? "");
+  const when = `${f.date(b.startsAt)}, ${f.time(b.startsAt)}–${f.time(b.endsAt)}`;
+
+  const subject = t(`${kind}.subject`, { what, date: f.date(b.startsAt), time: f.time(b.startsAt) });
+  const heading = b.name ? t("greeting", { name: b.name }) : t("greetingNoName");
+  const intro = t(`${kind}.intro`);
+  const rows: [string, string][] = [
+    [t("labels.what"), what],
+    [t("labels.club"), b.clubName],
+    [t("labels.when"), when],
+    [t("labels.duration"), t("minutes", { n: b.durationMin })],
+    [t("labels.price"), f.money(b.totalPrice)],
+    [t("labels.reference"), b.reference],
+  ];
+  const url = `${b.appUrl}/${b.locale}/my-bookings`;
+  const footer = t("footerPlayer", { club: b.clubName });
+
+  return {
+    subject,
+    html: layout({ heading, intro, rows, button: { label: t("viewBookings"), url }, footer }),
+    text: plainText(heading, intro, rows, url, footer),
+  };
+}
+
+export const bookingConfirmedEmail = (b: BookingEmailData) => bookingParts("confirmed", b);
+export const bookingCancelledEmail = (b: BookingEmailData) => bookingParts("cancelled", b);
+export const bookingReminderEmail = (b: BookingEmailData) => bookingParts("reminder", b);
+
+// ---------------------------------------------------------------------------
+// Membership renewal
+// ---------------------------------------------------------------------------
+
+export type RenewalEmailData = {
+  locale: Locale;
+  name: string;
+  clubName: string;
+  planName: string | null;
+  endsAt: string;
+  clubEmail: string | null;
+  clubPhone: string | null;
+};
+
+export function membershipRenewalEmail(m: RenewalEmailData): Rendered {
+  const t = translator(m.locale);
+  const f = formatters(m.locale);
+  const heading = t("greeting", { name: m.name });
+  const intro = t("renewal.intro", { club: m.clubName, date: f.day(m.endsAt) });
+  const rows: [string, string][] = [];
+  if (m.planName) rows.push([t("labels.plan"), m.planName]);
+  rows.push([t("labels.ends"), f.day(m.endsAt)]);
+  if (m.clubPhone) rows.push([t("labels.phone"), m.clubPhone]);
+  if (m.clubEmail) rows.push([t("labels.email"), m.clubEmail]);
+  const footer = t("footerPlayer", { club: m.clubName });
+
+  return {
+    subject: t("renewal.subject", { club: m.clubName, date: f.day(m.endsAt) }),
+    html: layout({
+      heading,
+      intro,
+      rows,
+      button: m.clubEmail ? { label: t("renewal.contact"), url: `mailto:${m.clubEmail}` } : undefined,
+      footer,
+    }),
+    text: plainText(heading, intro, rows, undefined, footer),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Weekly report for the club owner
+// ---------------------------------------------------------------------------
+
+export type WeeklyReportData = {
+  locale: Locale;
+  ownerName: string | null;
+  clubName: string;
+  weekStart: string; // yyyy-mm-dd, Monday
+  bookings: number;
+  revenue: number;
+  /** 0–100, or null when it can't be worked out (no courts). */
+  occupancy: number | null;
+  cancellations: number;
+  noShows: number;
+  newMembers: number;
+  expiring: { name: string; endsAt: string }[];
+  appUrl: string;
+};
+
+export function weeklyReportEmail(r: WeeklyReportData): Rendered {
+  const t = translator(r.locale);
+  const f = formatters(r.locale);
+  const start = new Date(`${r.weekStart}T12:00:00Z`);
+  const end = new Date(start.getTime() + 6 * 86_400_000);
+  const week = `${f.day(start)} – ${f.day(end)}`;
+
+  const heading = r.ownerName ? t("greeting", { name: r.ownerName }) : t("greetingNoName");
+  const intro = t("report.intro", { club: r.clubName, week });
+  const rows: [string, string][] = [
+    [t("report.bookings"), String(r.bookings)],
+    [t("report.revenue"), f.money(r.revenue)],
+    [t("report.occupancy"), r.occupancy === null ? "–" : `${r.occupancy}%`],
+    [t("report.cancellations"), String(r.cancellations)],
+    [t("report.noShows"), String(r.noShows)],
+    [t("report.newMembers"), String(r.newMembers)],
+  ];
+
+  const expiringList = r.expiring.length
+    ? r.expiring.map((m) => `${m.name} (${f.day(m.endsAt)})`)
+    : [t("report.noneExpiring")];
+  const extraHtml = `
+    <p style="margin:22px 0 6px;font-size:14px;font-weight:600;color:#111c0a">${esc(t("report.expiring"))}</p>
+    <p style="margin:0;font-size:14px;line-height:1.6;color:#3d4f35">${expiringList.map(esc).join("<br>")}</p>`;
+
+  const url = `${r.appUrl}/${r.locale}/admin/dashboard`;
+  const footer = t("footerOwner");
+
+  return {
+    subject: t("report.subject", { club: r.clubName, week }),
+    html: layout({ heading, intro, rows, extraHtml, button: { label: t("report.openDashboard"), url }, footer }),
+    text: plainText(
+      heading,
+      intro,
+      [...rows, [t("report.expiring"), expiringList.join(", ")]],
+      url,
+      footer,
+    ),
+  };
+}

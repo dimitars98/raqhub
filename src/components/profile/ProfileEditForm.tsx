@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type FormValues = {
   full_name: string;
@@ -17,6 +18,7 @@ export default function ProfileEditForm({
   userId: string;
   defaultValues: FormValues;
 }) {
+  const t = useTranslations("profilePage");
   const [form, setForm] = useState<FormValues>(defaultValues);
   const [saved, setSaved] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -43,7 +45,7 @@ export default function ProfileEditForm({
     <div className="flex flex-col gap-4">
       <div>
         <label className="block text-xs font-medium text-brand-600 mb-1.5">
-          Full name
+          {t("fullName")}
         </label>
         <input
           className="input w-full"
@@ -51,18 +53,18 @@ export default function ProfileEditForm({
           onChange={(e) =>
             setForm((f) => ({ ...f, full_name: e.target.value }))
           }
-          placeholder="Your name"
+          placeholder={t("yourName")}
         />
       </div>
       <div>
         <label className="block text-xs font-medium text-brand-600 mb-1.5">
-          Phone
+          {t("phone")}
         </label>
         <input
           className="input w-full"
           value={form.phone}
           onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-          placeholder="+1 555 000 0000"
+          placeholder="+389 70 000 000"
           type="tel"
         />
       </div>
@@ -70,7 +72,7 @@ export default function ProfileEditForm({
         {saved && (
           <span className="flex items-center gap-1 text-xs text-brand-600">
             <Check size={12} strokeWidth={2.5} />
-            Saved
+            {t("saved")}
           </span>
         )}
         <button
@@ -78,7 +80,7 @@ export default function ProfileEditForm({
           disabled={isPending}
           className="btn-primary text-sm disabled:opacity-40"
         >
-          {isPending ? "Saving…" : "Save changes"}
+          {isPending ? t("saving") : t("saveChanges")}
         </button>
       </div>
     </div>

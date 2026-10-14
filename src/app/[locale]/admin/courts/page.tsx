@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Court, Club } from "@/types/database";
 import CourtsClient from "@/components/admin/CourtsClient";
 import { redirect } from "next/navigation";
+import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 
 type CourtWithClub = Court & { club?: Pick<Club, "id" | "name"> | null };
 
@@ -16,11 +17,11 @@ export default async function AdminCourtsPage() {
   // The club owned by the signed-in admin
   const { data: clubData } = await supabase
     .from("clubs")
-    .select("id, name")
+    .select(`id, name, ${BILLING_COLUMNS}`)
     .eq("owner_id", user.id)
     .limit(1)
     .maybeSingle();
-  const club = clubData as Pick<Club, "id" | "name"> | null;
+  const club = clubData as (Pick<Club, "id" | "name"> & ClubBilling) | null;
   if (!club) redirect("/admin/setup");
 
   const { data: courtsData } = await supabase
@@ -31,5 +32,11 @@ export default async function AdminCourtsPage() {
 
   const courts = (courtsData ?? []) as Court[];
 
-  return <CourtsClient courts={courts} clubId={club.id} />;
+  return (
+    <CourtsClient
+      courts={courts}
+      clubId={club.id}
+      maxCourts={clubAccess(club).maxCourts}
+    />
+  );
 }

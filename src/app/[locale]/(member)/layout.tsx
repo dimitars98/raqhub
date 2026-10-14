@@ -30,7 +30,7 @@ export default async function MemberLayout({
   if (!profile) redirect(`/${locale}/login`);
 
   if (profile.role === "club_admin" || profile.role === "super_admin") {
-    redirect(`/${locale}/admin/members`);
+    redirect(`/${locale}/admin/dashboard`);
   }
 
   return (

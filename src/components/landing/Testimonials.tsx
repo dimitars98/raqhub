@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 const testimonials: {
   q: string;
   name: string;
@@ -7,16 +9,17 @@ const testimonials: {
 }[] = [];
 
 export default function Testimonials() {
+  const t = useTranslations("testimonials");
   if (testimonials.length === 0) return null;
 
   return (
     <section className="max-w-[1180px] mx-auto px-6 py-16 lg:px-10 lg:py-24">
       <div className="text-center mb-10 lg:mb-14">
         <div className="text-[11px] font-semibold text-[#7aad12] uppercase tracking-widest mb-3">
-          What clubs say
+          {t("label")}
         </div>
         <h2 className="font-display text-[28px] sm:text-[34px] lg:text-[40px] font-extrabold text-[#111c0a] tracking-tight leading-[1.1]">
-          From the clubs using ServeTime
+          {t("title")}
         </h2>
       </div>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">

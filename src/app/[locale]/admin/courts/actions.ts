@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import type { Court, Sport, Surface } from "@/types/database";
+import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
 
 // club_id is deliberately not accepted from the browser. The server works out
 // which club the signed-in user owns, so nobody can write to another club.
@@ -15,7 +16,14 @@ export type CourtInput = {
   is_active: boolean;
 };
 
-export type ActionResult<T> = { ok: true; data: T } | { ok: false };
+// reason "limit": the club's plan doesn't allow another active court.
+export type ActionResult<T> =
+  | { ok: true; data: T }
+  | { ok: false; reason?: "limit" };
+
+/** The database refuses a court over the plan's limit (see migrations). */
+const isCourtLimit = (error: { message?: string } | null) =>
+  !!error?.message?.includes("court limit");
 
 type Supabase = Awaited<ReturnType<typeof createClient>>;
 
@@ -52,25 +60,34 @@ function cleanInput(input: CourtInput): CourtInput | null {
   };
 }
 
-export async function createCourt(
+/**
+ * Adds one court, or several identical ones named "<name> 1", "<name> 2", ...
+ * All or nothing: if the plan's court limit would be passed, none are added.
+ */
+export async function createCourts(
   input: CourtInput,
-): Promise<ActionResult<Court>> {
+  count: number,
+): Promise<ActionResult<Court[]>> {
   const supabase = await createClient();
   const clubId = await getOwnedClubId(supabase);
   const fields = cleanInput(input);
-  if (!clubId || !fields) return { ok: false };
+  const n = Math.floor(Number(count));
+  if (!clubId || !fields || !(n >= 1 && n <= MAX_COURTS_AT_ONCE)) return { ok: false };
 
-  const { data, error } = await supabase
-    .from("courts")
-    .insert({ ...fields, club_id: clubId })
-    .select()
-    .single();
+  const rows = Array.from({ length: n }, (_, i) => ({
+    ...fields,
+    name: n === 1 ? fields.name : `${fields.name} ${i + 1}`,
+    club_id: clubId,
+  }));
+
+  const { data, error } = await supabase.from("courts").insert(rows).select();
 
   if (error || !data) {
-    console.error("createCourt failed:", error);
+    if (isCourtLimit(error)) return { ok: false, reason: "limit" };
+    console.error("createCourts failed:", error);
     return { ok: false };
   }
-  return { ok: true, data: data as unknown as Court };
+  return { ok: true, data: data as unknown as Court[] };
 }
 
 export async function updateCourt(
@@ -92,6 +109,7 @@ export async function updateCourt(
     .maybeSingle();
 
   if (error || !data) {
+    if (isCourtLimit(error)) return { ok: false, reason: "limit" };
     console.error("updateCourt failed:", error);
     return { ok: false };
   }
@@ -115,6 +133,7 @@ export async function toggleCourt(
     .maybeSingle();
 
   if (error || !data) {
+    if (isCourtLimit(error)) return { ok: false, reason: "limit" };
     console.error("toggleCourt failed:", error);
     return { ok: false };
   }

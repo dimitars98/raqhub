@@ -1,5 +1,7 @@
 "use client";
 
+import { dateLocale } from "@/lib/dateLocale";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useMemo } from "react";
 import { subDays, format, eachDayOfInterval } from "date-fns";
 import {
@@ -75,7 +77,6 @@ const PLAN_COLORS = [
   "#6e7f65",
 ];
 
-const DAYS_SHORT = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const HOURS = Array.from({ length: 15 }, (_, i) => `${i + 7}h`);
 
 const TOOLTIP_STYLE = {
@@ -151,6 +152,7 @@ function SectionCard({
 }
 
 function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
+  const t = useTranslations("analytics");
   const maxVal = Math.max(...peakHours.flat(), 1);
   return (
     <div className="overflow-x-auto">
@@ -165,7 +167,7 @@ function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
             </div>
           ))}
         </div>
-        {DAYS_SHORT.map((day, di) => (
+        {(t.raw("daysShort") as string[]).map((day, di) => (
           <div key={di} className="flex items-center mb-0.5">
             <div className="w-10 text-[10px] text-[#6e7f65] flex-shrink-0">
               {day}
@@ -181,7 +183,7 @@ function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
                   key={hi}
                   className="flex-1 h-6 rounded-sm mx-[1px] flex items-center justify-center"
                   style={{ background: bg }}
-                  title={`${day} ${hi + 7}:00 — ${val} bookings`}
+                  title={t("heatmapCell", { day, hour: hi + 7, n: val })}
                 >
                   {val > 0 && intensity > 0.5 && (
                     <span className="text-[8px] text-white font-bold">
@@ -194,7 +196,7 @@ function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
           </div>
         ))}
         <div className="flex items-center gap-2 mt-3 ml-10">
-          <span className="text-[9px] text-[#6e7f65]">Low</span>
+          <span className="text-[9px] text-[#6e7f65]">{t("low")}</span>
           {[0.1, 0.3, 0.5, 0.7, 0.9].map((o) => (
             <div
               key={o}
@@ -202,7 +204,7 @@ function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
               style={{ background: `rgba(122, 173, 18, ${o})` }}
             />
           ))}
-          <span className="text-[9px] text-[#6e7f65]">High</span>
+          <span className="text-[9px] text-[#6e7f65]">{t("high")}</span>
         </div>
       </div>
     </div>
@@ -212,6 +214,9 @@ function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
 // ── Main component ─────────────────────────────────────────────────────────
 
 export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
+  const t = useTranslations("analytics");
+  const dfLocale = dateLocale(useLocale());
+  const tStatus = useTranslations("myBookings.status");
   const [range, setRange] = useState<Range>("30");
 
   const {
@@ -238,10 +243,10 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
     return days
       .filter((_, i) => i % step === 0)
       .map((d) => ({
-        date: format(d, "d MMM"),
+        date: format(d, "d MMM", { locale: dfLocale }),
         revenue: revenueByDay[format(d, "yyyy-MM-dd")] ?? 0,
       }));
-  }, [range, revenueByDay]);
+  }, [range, revenueByDay, dfLocale]);
 
   const statusData = useMemo(
     () =>
@@ -257,12 +262,12 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
     () =>
       Object.entries(revenueBySport)
         .map(([name, revenue]) => ({
-          name: `${SPORT_EMOJI[name] ?? ""} ${name}`,
+          name: `${SPORT_EMOJI[name] ?? ""} ${t(`sports.${name}` as "sports.tennis")}`,
           revenue,
           color: SPORT_COLORS[name] ?? "#7aad12",
         }))
         .sort((a, b) => b.revenue - a.revenue),
-    [revenueBySport],
+    [revenueBySport, t],
   );
 
   const courtData = useMemo(
@@ -294,10 +299,10 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-[22px] font-semibold text-[#111c0a]">
-            Analytics
+            {t("analytics")}
           </h1>
           <p className="text-sm text-[#6e7f65] mt-1">
-            Performance overview for your club
+            {t("performanceOverviewForYourClub")}
           </p>
         </div>
         <div className="flex gap-1 bg-[#f4f6f2] p-1 rounded-xl">
@@ -311,7 +316,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                   : "text-[#6e7f65] hover:text-[#111c0a]"
               }`}
             >
-              {r === "365" ? "1 year" : `${r} days`}
+              {r === "365" ? t("oneYear") : t("days", { n: r })}
             </button>
           ))}
         </div>
@@ -320,24 +325,24 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
       {/* KPI row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <KpiCard
-          label="Total revenue"
+          label={t("totalRevenue")}
           value={`€${totalRevenue.toFixed(0)}`}
           sub={
             revenueChange === null ? (
-              "vs previous period"
+              t("vsPrevious")
             ) : revenueChange > 0 ? (
               <span className="text-[#7aad12] flex items-center gap-1">
-                <TrendingUp size={11} /> +{revenueChange.toFixed(1)}% vs prev
-                30d
+                <TrendingUp size={11} />{" "}
+                {t("changeUp", { pct: revenueChange.toFixed(1), days: range })}
               </span>
             ) : revenueChange < 0 ? (
               <span className="text-red-500 flex items-center gap-1">
-                <TrendingDown size={11} /> {revenueChange.toFixed(1)}% vs prev
-                30d
+                <TrendingDown size={11} />{" "}
+                {t("changeDown", { pct: revenueChange.toFixed(1), days: range })}
               </span>
             ) : (
               <span className="flex items-center gap-1">
-                <Minus size={11} /> Same as prev 30d
+                <Minus size={11} /> {t("same", { days: range })}
               </span>
             )
           }
@@ -345,23 +350,23 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
           accent="bg-[#f3fbde] text-[#7aad12]"
         />
         <KpiCard
-          label="Total bookings"
+          label={t("totalBookings")}
           value={String(totalBookings)}
-          sub="Last 12 months"
+          sub={t("last12Months")}
           icon={CalendarDays}
           accent="bg-[#e8f4fd] text-[#1a5ea8]"
         />
         <KpiCard
-          label="Active members"
+          label={t("activeMembers")}
           value={String(activeMembers)}
-          sub="All time"
+          sub={t("allTime")}
           icon={Users}
           accent="bg-[#f3fbde] text-[#7aad12]"
         />
         <KpiCard
-          label="Expiring soon"
+          label={t("expiringSoon")}
           value={String(expiringSoon)}
-          sub="Next 30 days"
+          sub={t("next30Days")}
           icon={AlertCircle}
           accent={
             expiringSoon > 0
@@ -372,7 +377,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
       </div>
 
       {/* Revenue chart */}
-      <SectionCard title="Revenue over time" sub={`Last ${range} days`}>
+      <SectionCard title={t("revenueOverTime")} sub={t("lastDays", { n: range })}>
         <ResponsiveContainer width="100%" height={180}>
           <AreaChart
             data={revenueChartData}
@@ -406,7 +411,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
             <Tooltip
               formatter={(v, name) => {
                 const num = Number(v ?? 0);
-                return [`€${num.toFixed(2)}`, "Revenue"] as [string, string];
+                return [`€${num.toFixed(2)}`, t("revenue")] as [string, string];
               }}
               contentStyle={TOOLTIP_STYLE}
               cursor={{ stroke: "#e8ede4", strokeWidth: 1 }}
@@ -431,9 +436,9 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
 
       {/* Bookings by status + Revenue by sport */}
       <div className="grid lg:grid-cols-2 gap-4 mt-4">
-        <SectionCard title="Bookings by status" sub="All time">
+        <SectionCard title={t("bookingsByStatus")} sub={t("allTime")}>
           {statusData.length === 0 ? (
-            <div className="text-sm text-[#6e7f65] py-4">No data yet</div>
+            <div className="text-sm text-[#6e7f65] py-4">{t("noDataYet")}</div>
           ) : (
             <div className="flex items-center gap-4">
               <ResponsiveContainer width="50%" height={160}>
@@ -456,7 +461,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                       const num = Number(v ?? 0);
                       return [
                         `${num} (${pct(num, totalBookingsCount)}%)`,
-                        String(name).replace("_", " "),
+                        tStatus(String(name) as "confirmed"),
                       ] as [string, string];
                     }}
                     contentStyle={TOOLTIP_STYLE}
@@ -471,7 +476,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                       style={{ background: s.color }}
                     />
                     <span className="text-[#3d4f35] capitalize flex-1">
-                      {s.name.replace("_", " ")}
+                      {tStatus(s.name as "confirmed")}
                     </span>
                     <span className="font-medium text-[#111c0a]">
                       {s.value}
@@ -486,9 +491,9 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
           )}
         </SectionCard>
 
-        <SectionCard title="Revenue by sport" sub="All time">
+        <SectionCard title={t("revenueBySport")} sub={t("allTime")}>
           {sportData.length === 0 ? (
-            <div className="text-sm text-[#6e7f65] py-4">No data yet</div>
+            <div className="text-sm text-[#6e7f65] py-4">{t("noDataYet")}</div>
           ) : (
             <ResponsiveContainer width="100%" height={160}>
               <BarChart
@@ -514,7 +519,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                 <Tooltip
                   formatter={(v, name) => {
                     const num = Number(v ?? 0);
-                    return [`€${num.toFixed(2)}`, "Revenue"] as [
+                    return [`€${num.toFixed(2)}`, t("revenue")] as [
                       string,
                       string,
                     ];
@@ -534,7 +539,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
 
       {/* Peak hours heatmap */}
       <div className="mt-4">
-        <SectionCard title="Peak hours" sub="Booking frequency by day and hour">
+        <SectionCard title={t("peakHours")} sub={t("bookingFrequencyByDayAnd")}>
           <PeakHeatmap peakHours={peakHours} />
         </SectionCard>
       </div>
@@ -542,11 +547,11 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
       {/* Court utilization + Members */}
       <div className="grid lg:grid-cols-2 gap-4 mt-4">
         <SectionCard
-          title="Court utilization"
-          sub="Bookings per court (all time)"
+          title={t("courtUtilization")}
+          sub={t("bookingsPerCourtAllTime")}
         >
           {courtData.length === 0 ? (
-            <div className="text-sm text-[#6e7f65]">No court data</div>
+            <div className="text-sm text-[#6e7f65]">{t("noCourtData")}</div>
           ) : (
             <ResponsiveContainer
               width="100%"
@@ -575,8 +580,8 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                   formatter={(v, name) => {
                     const num = Number(v ?? 0);
                     return name === "revenue"
-                      ? ([`€${num.toFixed(2)}`, "Revenue"] as [string, string])
-                      : ([String(num), "Bookings"] as [string, string]);
+                      ? ([`€${num.toFixed(2)}`, t("revenue")] as [string, string])
+                      : ([String(num), t("bookings")] as [string, string]);
                   }}
                   contentStyle={TOOLTIP_STYLE}
                 />
@@ -588,9 +593,9 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
 
         <div className="flex flex-col gap-4">
           {/* Members by plan */}
-          <SectionCard title="Members by plan" sub="Current distribution">
+          <SectionCard title={t("membersByPlan")} sub={t("currentDistribution")}>
             {planData.length === 0 ? (
-              <div className="text-sm text-[#6e7f65]">No members</div>
+              <div className="text-sm text-[#6e7f65]">{t("noMembers")}</div>
             ) : (
               <div className="flex items-center gap-4">
                 <ResponsiveContainer width="50%" height={140}>
@@ -649,8 +654,8 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
 
           {/* Member growth */}
           <SectionCard
-            title="Member growth"
-            sub="Cumulative members over 12 months"
+            title={t("memberGrowth")}
+            sub={t("cumulativeMembersOver12Months")}
           >
             <ResponsiveContainer width="100%" height={120}>
               <AreaChart
@@ -683,7 +688,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                 />
                 <Tooltip
                   formatter={(v, name) => {
-                    return [String(Number(v ?? 0)), "Members"] as [
+                    return [String(Number(v ?? 0)), t("members")] as [
                       string,
                       string,
                     ];

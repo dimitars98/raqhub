@@ -7,10 +7,11 @@ import type { Court, Surface, Sport } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import { useRouter } from "@/i18n/navigation";
 import {
-  createCourt,
+  createCourts,
   toggleCourt,
   updateCourt,
 } from "@/app/[locale]/admin/courts/actions";
+import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
 
 const SURFACES_BY_SPORT: Record<Sport, Surface[]> = {
   tennis: ["clay", "hard", "grass", "artificial_grass", "carpet"],
@@ -26,18 +27,25 @@ const EMPTY_FORM = {
   price_per_hour: "",
   description: "",
   is_active: true,
+  /** How many identical courts to add (new courts only). */
+  count: "1",
 };
 
 interface Props {
   courts: Court[];
   clubId: string;
+  /** Active courts the club's plan allows. Null = no limit. */
+  maxCourts: number | null;
 }
 
-export default function CourtsClient({ courts: initial, clubId }: Props) {
+export default function CourtsClient({ courts: initial, clubId, maxCourts }: Props) {
   const t = useTranslations("adminCourts");
+  const tb = useTranslations("billing");
+  const tc = useTranslations("common");
   const [courts, setCourts] = useState(initial);
   const [sportFilter, setSportFilter] = useState<Sport | "all">("all");
   const [saveError, setSaveError] = useState(false);
+  const [limitError, setLimitError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<Court | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
@@ -60,6 +68,17 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
     acrylic: t("acrylic"),
   };
 
+  const activeCount = courts.filter((c) => c.is_active).length;
+  const atLimit = maxCourts !== null && activeCount >= maxCourts;
+  // How many new courts can be added in one go.
+  const maxAtOnce = Math.max(
+    1,
+    maxCourts === null || !form.is_active
+      ? MAX_COURTS_AT_ONCE
+      : Math.min(MAX_COURTS_AT_ONCE, maxCourts - activeCount),
+  );
+  const count = Math.min(Math.max(parseInt(form.count, 10) || 1, 1), maxAtOnce);
+
   const filtered =
     sportFilter === "all"
       ? courts
@@ -81,6 +100,7 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
       price_per_hour: String(c.price_per_hour),
       description: c.description ?? "",
       is_active: c.is_active,
+      count: "1",
     });
     setShowModal(true);
   };
@@ -97,6 +117,7 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
   const handleSave = async () => {
     setLoading(true);
     setSaveError(false);
+    setLimitError(false);
 
     const payload = {
       name: form.name,
@@ -110,21 +131,25 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
 
     try {
       const current = editing;
-      const result = current
-        ? await updateCourt(current.id, payload)
-        : await createCourt(payload);
-
-      if (!result.ok) {
-        setSaveError(true);
-        return;
+      if (current) {
+        const result = await updateCourt(current.id, payload);
+        if (!result.ok) {
+          if (result.reason === "limit") setLimitError(true);
+          else setSaveError(true);
+          return;
+        }
+        const saved = result.data;
+        setCourts((prev) => prev.map((c) => (c.id === current.id ? saved : c)));
+      } else {
+        const result = await createCourts(payload, count);
+        if (!result.ok) {
+          if (result.reason === "limit") setLimitError(true);
+          else setSaveError(true);
+          return;
+        }
+        const saved = result.data;
+        setCourts((prev) => [...saved, ...prev]);
       }
-
-      const saved = result.data;
-      setCourts((prev) =>
-        current
-          ? prev.map((c) => (c.id === current.id ? saved : c))
-          : [saved, ...prev],
-      );
       setShowModal(false);
     } catch {
       setSaveError(true);
@@ -135,9 +160,13 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
 
   const handleToggle = async (court: Court) => {
     const next = !court.is_active;
+    setLimitError(false);
     const result = await toggleCourt(court.id, next);
     // Only update the list if the change was really saved.
-    if (!result.ok) return;
+    if (!result.ok) {
+      if (result.reason === "limit") setLimitError(true);
+      return;
+    }
     setCourts((prev) =>
       prev.map((c) => (c.id === court.id ? { ...c, is_active: next } : c)),
     );
@@ -151,12 +180,35 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
           <h1 className="text-2xl font-medium text-ink-900">{t("title")}</h1>
           <p className="text-sm text-brand-600 mt-1">
             {courts.length} {t("total")}
+            {maxCourts !== null && (
+              <span className="text-ink-400">
+                {" · "}
+                {tb("courtsUsed", { used: activeCount, max: maxCourts })}
+              </span>
+            )}
           </p>
         </div>
-        <button onClick={openAdd} className="btn-primary">
+        <button
+          onClick={openAdd}
+          disabled={atLimit}
+          title={atLimit ? tb("courtLimit", { max: maxCourts! }) : undefined}
+          className="btn-primary disabled:cursor-not-allowed disabled:opacity-50"
+        >
           {t("addCourt")}
         </button>
       </div>
+
+      {(limitError || atLimit) && maxCourts !== null && (
+        <p
+          className={`mb-4 rounded-xl border px-4 py-3 text-sm ${
+            limitError
+              ? "border-amber-200 bg-amber-50 text-amber-900"
+              : "border-ink-100 bg-white text-ink-600"
+          }`}
+        >
+          {tb("courtLimit", { max: maxCourts })}
+        </p>
+      )}
 
       {/* Sport filter tabs */}
       <div className="flex gap-2 mb-4">
@@ -186,7 +238,7 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
                 {t("name")}
               </th>
               <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                Sport
+                {tc("sport")}
               </th>
               <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
                 {t("surface")}
@@ -293,19 +345,45 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
             {editing ? t("editCourt") : t("addCourt")}
           </Modal.Header>
           <Modal.Body>
-            <Modal.Field label={t("name")} required>
-              <input
-                className="input"
-                placeholder="Court 1"
-                value={form.name}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, name: e.target.value }))
-                }
-              />
-            </Modal.Field>
+            <Modal.Grid>
+              <Modal.Field label={t("name")} required>
+                <input
+                  className="input"
+                  placeholder={count > 1 ? t("namePlaceholderMany") : "Court 1"}
+                  value={form.name}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, name: e.target.value }))
+                  }
+                />
+              </Modal.Field>
+              {!editing && (
+                <Modal.Field label={t("howMany")}>
+                  <input
+                    className="input"
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    max={maxAtOnce}
+                    value={form.count}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, count: e.target.value }))
+                    }
+                    onBlur={() => setForm((f) => ({ ...f, count: String(count) }))}
+                  />
+                </Modal.Field>
+              )}
+            </Modal.Grid>
+            {!editing && count > 1 && form.name.trim() && (
+              <p className="-mt-2 text-xs text-ink-600">
+                {t("howManyHint", {
+                  first: `${form.name.trim()} 1`,
+                  last: `${form.name.trim()} ${count}`,
+                })}
+              </p>
+            )}
             <Modal.Grid>
               {/* Sport selector */}
-              <Modal.Field label="Sport">
+              <Modal.Field label={tc("sport")}>
                 <select
                   className="input"
                   value={form.sport}
@@ -402,6 +480,14 @@ export default function CourtsClient({ courts: initial, clubId }: Props) {
                 className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700"
               >
                 {t("saveError")}
+              </p>
+            )}
+            {limitError && maxCourts !== null && (
+              <p
+                role="alert"
+                className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900"
+              >
+                {tb("courtLimit", { max: maxCourts })}
               </p>
             )}
           </Modal.Body>

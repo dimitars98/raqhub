@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
+// Every language in src/messages, each named in its own language.
 const LOCALES = [
   { code: "en", label: "EN", name: "English" },
-  { code: "de", label: "DE", name: "Deutsch" },
   { code: "mk", label: "МК", name: "Македонски" },
-  // { code: "sq", label: "SQ", name: "Shqip" },
+  { code: "sq", label: "SQ", name: "Shqip" },
+  { code: "de", label: "DE", name: "Deutsch" },
+  { code: "fr", label: "FR", name: "Français" },
+  { code: "it", label: "IT", name: "Italiano" },
 ];
 
 type LocaleSwitcherProps = {
@@ -25,6 +28,7 @@ export default function LocaleSwitcher({
   size = "md",
 }: LocaleSwitcherProps) {
   const locale = useLocale();
+  const tc = useTranslations("common");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -136,7 +140,7 @@ export default function LocaleSwitcher({
       {/* Menu */}
       <div
         role="menu"
-        aria-label="Select language"
+        aria-label={tc("selectLanguage")}
         className={`absolute z-50 mt-2 min-w-44 rounded-2xl border border-ink-100 bg-white p-1.5 shadow-lg shadow-black/10 transition-[opacity,transform] duration-150 ease-out ${
           align === "left"
             ? "left-0 origin-top-left"

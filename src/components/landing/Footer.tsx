@@ -1,8 +1,9 @@
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export default async function Footer() {
   const locale = await getLocale();
+  const t = await getTranslations("footer");
 
   return (
     <footer className="bg-ink-900 text-white overflow-hidden">
@@ -11,43 +12,43 @@ export default async function Footer() {
           {/* Statement + main action */}
           <div className="max-w-sm">
             <p className="text-2xl font-semibold leading-snug tracking-tight">
-              Booking software for tennis, padel and pickleball clubs.
+              {t("statement")}
             </p>
             <Link
               href={`/${locale}/signup?role=admin`}
               className="mt-6 inline-flex h-12 items-center rounded-full bg-brand-400 px-6 text-sm font-semibold text-ink-900 transition-colors hover:bg-white"
             >
-              Set up your club
+              {t("setUp")}
             </Link>
           </div>
 
           {/* Links */}
           <nav
-            aria-label="Footer"
+            aria-label={t("navLabel")}
             className="grid grid-cols-2 gap-x-10 gap-y-10 sm:grid-cols-3 lg:gap-x-16"
           >
             {[
               {
-                title: "Product",
+                title: t("groups.product"),
                 links: [
-                  ["Features", `/${locale}#features`],
-                  ["How it works", `/${locale}#how`],
-                  ["Pricing", `/${locale}#pricing`],
+                  [t("links.features"), `/${locale}#features`],
+                  [t("links.how"), `/${locale}#how`],
+                  [t("links.pricing"), `/${locale}#pricing`],
                 ],
               },
               {
-                title: "Account",
+                title: t("groups.account"),
                 links: [
-                  ["Sign in", `/${locale}/login`],
-                  ["For clubs", `/${locale}/signup?role=admin`],
-                  ["For players", `/${locale}/signup?role=player`],
+                  [t("links.signIn"), `/${locale}/login`],
+                  [t("links.forClubs"), `/${locale}/signup?role=admin`],
+                  [t("links.forPlayers"), `/${locale}/signup?role=player`],
                 ],
               },
               {
-                title: "Legal",
+                title: t("groups.legal"),
                 links: [
-                  ["Privacy policy", `/${locale}/privacy`],
-                  ["Terms of service", `/${locale}/terms`],
+                  [t("links.privacy"), `/${locale}/privacy`],
+                  [t("links.terms"), `/${locale}/terms`],
                 ],
               },
             ].map((group) => (

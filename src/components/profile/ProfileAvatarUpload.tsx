@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRef, useState, useTransition } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,7 @@ export default function ProfileAvatarUpload({
   avatarUrl: string | null;
   initials: string;
 }) {
+  const tc = useTranslations("common");
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(avatarUrl);
   const [isPending, startTransition] = useTransition();
@@ -57,7 +59,7 @@ export default function ProfileAvatarUpload({
       {preview ? (
         <img
           src={preview}
-          alt="Avatar"
+          alt={tc("avatar")}
           className="w-14 h-14 rounded-full object-cover"
         />
       ) : (
@@ -70,7 +72,7 @@ export default function ProfileAvatarUpload({
         onClick={() => inputRef.current?.click()}
         disabled={isPending}
         className="absolute -bottom-0.5 -right-0.5 w-6 h-6 rounded-full bg-brand-600 flex items-center justify-center border-2 border-white hover:bg-brand-700 transition-colors disabled:opacity-50"
-        aria-label="Change avatar"
+        aria-label={tc("changeAvatar")}
       >
         <Camera size={11} color="white" />
       </button>

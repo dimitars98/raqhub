@@ -9,6 +9,8 @@ import {
   CalendarDays,
   CalendarRange,
   CreditCard,
+  Globe,
+  Share2,
   Grid3x3,
   LayoutDashboard,
   LogOut,
@@ -27,6 +29,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import { useSidebar } from "./SidebarContext";
 import { TONES, type Role } from "@/types/tones";
+import { LogoMark } from "@/components/ui/Logo";
 
 interface NavItem {
   label: string;
@@ -81,6 +84,7 @@ function SidebarContent({
   collapsed = false,
   layoutGroupId,
 }: SidebarContentProps) {
+  const tc = useTranslations("common");
   const tone = TONES[role];
   const initials = userName
     .split(" ")
@@ -112,16 +116,13 @@ function SidebarContent({
             href={homeHref}
             onClick={onNavClick}
             aria-label="ServeTime"
-            className="font-display text-[17px] font-extrabold tracking-tight text-[#111c0a]"
+            className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-[#111c0a]"
           >
-            {collapsed ? (
-              <>
-                S<span className="text-[#7aad12]">T</span>
-              </>
-            ) : (
-              <>
+            <LogoMark className="size-7" />
+            {!collapsed && (
+              <span>
                 Serve<span className="text-[#7aad12]">Time</span>
-              </>
+              </span>
             )}
           </Link>
           {!collapsed && (
@@ -137,7 +138,7 @@ function SidebarContent({
             type="button"
             onClick={onClose}
             data-drawer-close
-            aria-label="Close menu" // TODO: move to your translation files
+            aria-label={tc("closeMenu")}
             className="grid size-9 place-items-center rounded-lg text-[#6e7f65] transition-colors hover:bg-[#f8f9f7] hover:text-[#111c0a] lg:hidden"
           >
             <X size={18} aria-hidden="true" />
@@ -147,7 +148,7 @@ function SidebarContent({
 
       {/* Nav */}
       <nav
-        aria-label="Main"
+        aria-label={tc("mainNav")}
         className="flex-1 overflow-x-hidden overflow-y-auto px-2 py-3"
       >
         <LayoutGroup id={layoutGroupId}>
@@ -250,6 +251,7 @@ function MobileDrawer({
   onClose: () => void;
   children: React.ReactNode;
 }) {
+  const tc = useTranslations("common");
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -298,7 +300,7 @@ function MobileDrawer({
           className="fixed inset-0 z-50 flex lg:hidden"
           role="dialog"
           aria-modal="true"
-          aria-label="Menu"
+          aria-label={tc("menu")}
         >
           <motion.div
             className="absolute inset-0 bg-black/40"
@@ -328,9 +330,16 @@ interface SidebarProps {
   role: Role;
   userName: string;
   clubName?: string;
+  /** Used for the link to the club's public page. */
+  clubSlug?: string;
 }
 
-export default function Sidebar({ role, userName, clubName }: SidebarProps) {
+export default function Sidebar({
+  role,
+  userName,
+  clubName,
+  clubSlug,
+}: SidebarProps) {
   const { collapsed, mobileOpen, setMobileOpen } = useSidebar();
   const pathname = usePathname();
   const router = useRouter();
@@ -368,6 +377,17 @@ export default function Sidebar({ role, userName, clubName }: SidebarProps) {
       items: [
         { label: t("analytics"), href: "/admin/analytics", icon: BarChart3 },
         { label: t("settings"), href: "/admin/settings", icon: Settings },
+        { label: t("share"), href: "/admin/share", icon: Share2 },
+        // What visitors see before they have an account.
+        ...(clubSlug
+          ? [
+              {
+                label: t("publicPage"),
+                href: `/clubs/${clubSlug}`,
+                icon: Globe,
+              },
+            ]
+          : []),
       ],
     },
   ];

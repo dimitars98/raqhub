@@ -6,19 +6,22 @@ import { scrollToTop } from "@/helpers/scrollToTop";
 
 import { Link } from "@/i18n/navigation";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import LocaleSwitcher from "@/components/ui/LocaleSwitcher";
+import { LogoMark } from "@/components/ui/Logo";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   const t = useTranslations("nav");
+  const tc = useTranslations("common");
+  const locale = useLocale();
 
   const links = [
-    { label: t("features"), href: "#features" },
-    { label: t("pricing"), href: "#pricing" },
+    { label: t("features"), href: `/${locale}#features` },
+    { label: t("pricing"), href: `/${locale}#pricing` },
   ];
 
   return (
@@ -28,20 +31,22 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={() => scrollToTop()}
-          className="text-lg font-semibold text-brand-900 tracking-tight cursor-pointer"
+          className="inline-flex shrink-0 items-center gap-2 text-lg font-semibold text-brand-900 tracking-tight cursor-pointer"
         >
+          <LogoMark className="size-7" />
           ServeTime
         </Link>
 
-        {/* Center links — absolutely centered */}
-        <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+        {/* Center links — share the row with logo and buttons, so longer
+            translations push things apart instead of overlapping */}
+        <div className="hidden lg:flex flex-1 justify-center items-center gap-1 px-4">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onMouseEnter={() => setHoveredLink(link.label)}
               onMouseLeave={() => setHoveredLink(null)}
-              className="relative px-3 py-2 text-base font-medium transition-colors duration-200"
+              className="relative whitespace-nowrap px-3 py-2 text-base font-medium transition-colors duration-200"
               style={{
                 color:
                   hoveredLink === null
@@ -65,7 +70,7 @@ export default function Navbar() {
         </div>
 
         {/* Right actions */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex shrink-0 items-center gap-2 whitespace-nowrap">
           <LocaleSwitcher />
 
           <Link
@@ -94,7 +99,7 @@ export default function Navbar() {
         <button
           onClick={() => setOpen((o) => !o)}
           className="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-brand-100 transition-colors"
-          aria-label="Toggle menu"
+          aria-label={tc("toggleMenu")}
         >
           <span
             className={`block w-5 h-0.5 bg-brand-800 transition-transform duration-200 ${
@@ -120,7 +125,7 @@ export default function Navbar() {
       {open && (
         <div className="lg:hidden border-t border-brand-200 bg-brand-50 px-6 py-4 flex flex-col gap-2">
           <Link
-            href="#features"
+            href="/#features"
             onClick={() => setOpen(false)}
             className="text-sm text-brand-800 py-2 hover:text-brand-900 transition-colors"
           >
@@ -128,7 +133,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="#pricing"
+            href="/#pricing"
             onClick={() => setOpen(false)}
             className="text-sm text-brand-800 py-2 hover:text-brand-900 transition-colors"
           >

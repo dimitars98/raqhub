@@ -1,5 +1,7 @@
 "use client";
 
+import { dateLocale } from "@/lib/dateLocale";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import { format, addDays, startOfDay } from "date-fns";
 import type { Booking, Court, Member, Profile } from "@/types/database";
@@ -10,6 +12,8 @@ type BookingWithJoins = Booking & {
   court?: Pick<Court, "id" | "name"> | null;
   member?: Pick<Member, "full_name"> | null;
   player?: Pick<Profile, "full_name"> | null;
+  /** Set for a lesson: it holds the court too. */
+  coach?: { profile?: Pick<Profile, "full_name"> | null } | null;
 };
 
 type CourtRow = Pick<Court, "id" | "name" | "surface" | "is_indoor" | "sport">;
@@ -24,20 +28,15 @@ const SLOT_H = 64;
 const TIME_W = 90;
 const DAY_START_MIN = 7 * 60;
 
-const SURFACE_LABEL: Record<string, string> = {
-  clay: "Clay",
-  hard: "Hard",
-  grass: "Grass",
-  artificial_grass: "Art. Grass",
-  carpet: "Carpet",
-  concrete: "Concrete",
-  acrylic: "Acrylic",
-};
-
-const SPORT_LABEL: Record<string, string> = {
-  tennis: "Tennis",
-  padel: "Padel",
-  pickleball: "Pickleball",
+// Translation keys in "adminCourts" for each surface.
+const SURFACE_KEY: Record<string, string> = {
+  clay: "clay",
+  hard: "hard",
+  grass: "grass",
+  artificial_grass: "artificialGrass",
+  carpet: "carpet",
+  concrete: "concrete",
+  acrylic: "acrylic",
 };
 
 const STATUS_STYLES: Record<
@@ -78,10 +77,8 @@ const HALF_SLOTS = HOURS.flatMap((h) => [
   { hour: h, half: 1, label: `${String(h).padStart(2, "0")}:30` },
 ]);
 
-function getBookingName(b: BookingWithJoins) {
-  return (
-    b.member?.full_name ?? b.player?.full_name ?? b.walk_in_name ?? "Walk-in"
-  );
+function getBookingName(b: BookingWithJoins, walkIn: string) {
+  return b.member?.full_name ?? b.player?.full_name ?? b.walk_in_name ?? walkIn;
 }
 
 function getBookingsForCourt(
@@ -102,6 +99,11 @@ function timeToMinutes(date: Date) {
 }
 
 export default function TimetableClient({ courts, bookings }: Props) {
+  const t = useTranslations("timetable");
+  const dfLocale = dateLocale(useLocale());
+  const tCommon = useTranslations("common");
+  const tCourts = useTranslations("adminCourts");
+  const tStatus = useTranslations("myBookings.status");
   const [wrapWidth, setWrapWidth] = useState(600);
   const [offset, setOffset] = useState(0);
   const [nowMin, setNowMin] = useState<number | null>(null);
@@ -164,21 +166,20 @@ export default function TimetableClient({ courts, bookings }: Props) {
     return (
       <div>
         <h1 className="text-[22px] font-semibold text-[#111c0a] m-0">
-          Timetable
+          {t("title")}
         </h1>
         <div className="mt-6 flex flex-col items-center rounded-2xl border border-dashed border-[#d0d9c9] bg-white px-6 py-16 text-center">
           <div className="mb-4 grid size-12 place-items-center rounded-xl bg-[#f3fbde] text-[#4d7a08]">
             <CalendarRange size={22} aria-hidden="true" />
           </div>
           <h2 className="text-lg font-semibold text-[#111c0a]">
-            No courts yet
+            {t("noCourts")}
           </h2>
           <p className="mt-1 max-w-sm text-sm text-[#6e7f65]">
-            Add your first court and it will appear here as a column, ready for
-            bookings.
+            {t("noCourtsHint")}
           </p>
           <Link href="/admin/courts" className="btn-primary mt-6">
-            Add a court
+            {t("addCourt")}
           </Link>
         </div>
       </div>
@@ -197,10 +198,10 @@ export default function TimetableClient({ courts, bookings }: Props) {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-[22px] font-semibold text-[#111c0a] m-0">
-            Timetable
+            {t("title")}
           </h1>
           <p className="text-sm text-[#6e7f65] mt-1">
-            {format(date, "EEEE, MMMM d, yyyy")}
+            {format(date, "EEEE, d MMMM yyyy", { locale: dfLocale })}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -212,7 +213,7 @@ export default function TimetableClient({ courts, bookings }: Props) {
                 : "bg-white border-[#d0d9c9] text-[#3d4f35] hover:bg-[#f4f6f2]"
             }`}
           >
-            Today
+            {t("today")}
           </button>
           <button
             onClick={() => setOffset((o) => o - 1)}
@@ -239,14 +240,14 @@ export default function TimetableClient({ courts, bookings }: Props) {
             <div
               className={`w-2.5 h-2.5 rounded-[3px] border-2 ${s.dot} opacity-80`}
             />
-            <span className="capitalize">{status}</span>
+            <span>{tStatus(status as "confirmed")}</span>
           </div>
         ))}
       </div>
 
       {!dayHasBookings && (
         <p className="mb-4 rounded-lg bg-[#f4f6f2] px-4 py-2.5 text-sm text-[#3d4f35]">
-          No bookings on this day yet.
+          {t("noBookings")}
         </p>
       )}
 
@@ -273,8 +274,8 @@ export default function TimetableClient({ courts, bookings }: Props) {
                 {c.name}
               </div>
               <div className="text-xs text-[#6e7f65] mt-[3px]">
-                {SPORT_LABEL[c.sport]} · {SURFACE_LABEL[c.surface]} ·{" "}
-                {c.is_indoor ? "Indoor" : "Outdoor"}
+                {tCourts(c.sport)} · {tCourts(SURFACE_KEY[c.surface] ?? "clay")} ·{" "}
+                {c.is_indoor ? tCourts("indoor") : tCourts("outdoor")}
               </div>
             </div>
           ))}
@@ -361,12 +362,17 @@ export default function TimetableClient({ courts, bookings }: Props) {
                         <div
                           className={`text-[13px] font-semibold truncate ${tc.name}`}
                         >
-                          {getBookingName(b)}
+                          {getBookingName(b, tCommon("walkIn"))}
                         </div>
-                        {heightPx > 36 && (
+                        {b.coach && heightPx > 36 && (
+                          <div className={`text-[11px] font-medium truncate ${tc.time}`}>
+                            {t("lessonWith", { coach: b.coach.profile?.full_name ?? "" })}
+                          </div>
+                        )}
+                        {heightPx > (b.coach ? 56 : 36) && (
                           <div className={`text-[11px] mt-[3px] ${tc.time}`}>
-                            {format(new Date(b.starts_at), "hh:mm a")} –{" "}
-                            {format(new Date(b.ends_at), "hh:mm a")}
+                            {format(new Date(b.starts_at), "HH:mm")} –{" "}
+                            {format(new Date(b.ends_at), "HH:mm")}
                           </div>
                         )}
                       </div>
@@ -389,13 +395,20 @@ export default function TimetableClient({ courts, bookings }: Props) {
           }}
         >
           <div className="text-sm font-semibold text-[#111c0a] mb-2">
-            {getBookingName(tooltip.booking)}
+            {getBookingName(tooltip.booking, tCommon("walkIn"))}
           </div>
           <div className="text-xs text-[#3d4f35] flex flex-col gap-1">
             <span>{tooltip.booking.court?.name ?? "—"}</span>
+            {tooltip.booking.coach && (
+              <span>
+                {t("lessonWith", {
+                  coach: tooltip.booking.coach.profile?.full_name ?? "",
+                })}
+              </span>
+            )}
             <span>
-              {format(new Date(tooltip.booking.starts_at), "hh:mm a")} –{" "}
-              {format(new Date(tooltip.booking.ends_at), "hh:mm a")} ·{" "}
+              {format(new Date(tooltip.booking.starts_at), "HH:mm")} –{" "}
+              {format(new Date(tooltip.booking.ends_at), "HH:mm")} ·{" "}
               {tooltip.booking.duration_min} min
             </span>
             <span className="flex items-center gap-1.5 capitalize">

@@ -69,6 +69,10 @@ export interface Profile {
   created_at: string;
   updated_at: string;
 }
+/** One weekday's opening hours, times as "HH:MM". */
+export type DayHours = { open: boolean; from: string; to: string };
+export type OpeningHours = DayHours[];
+
 export interface Club {
   id: string;
   name: string;
@@ -84,8 +88,18 @@ export interface Club {
   website: string | null;
   logo_url: string | null;
   cover_url: string | null;
+  /** Seven days, Monday first. Null = not set (07:00 to 22:00 every day). */
+  opening_hours: OpeningHours | null;
+  /** Booking rules (see src/lib/bookingRules.ts). Null = defaults. */
+  booking_rules: unknown;
   is_active: boolean;
   owner_id: string | null;
+  /** ServeTime plan: starter / club / academy. Only changed by you. */
+  plan: "starter" | "club" | "academy";
+  /** End of the free trial. */
+  trial_ends_at: string | null;
+  /** Last day the club has paid for (null = not paid yet). */
+  paid_until: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -133,6 +147,10 @@ export interface Booking {
   reference: string;
   stripe_payment_intent_id: string | null;
   checked_in_at: string | null;
+  /** When the 24-hour reminder email went out. */
+  reminder_sent_at?: string | null;
+  /** Language the player booked in, used for their emails. */
+  locale?: string | null;
   created_at: string;
   updated_at: string;
   player?: Profile;

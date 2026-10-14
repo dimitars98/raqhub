@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import { LogoMark } from "@/components/ui/Logo";
 
 type AuthShellProps = {
   /** Colour of the court panel: lime with dark lines, or dark with lime lines */
@@ -19,8 +20,9 @@ export default function AuthShell({ tone = "lime", children }: AuthShellProps) {
       <div className="flex min-h-dvh flex-col px-6 py-8 sm:px-10 lg:px-16">
         <Link
           href={`/${locale}`}
-          className="w-fit text-xl font-semibold tracking-tight text-brand-900"
+          className="inline-flex w-fit items-center gap-2 text-xl font-semibold tracking-tight text-brand-900"
         >
+          <LogoMark className="size-8" />
           ServeTime
         </Link>
 

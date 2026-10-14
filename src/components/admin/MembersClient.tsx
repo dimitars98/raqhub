@@ -1,8 +1,9 @@
 "use client";
 
+import { dateLocale } from "@/lib/dateLocale";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { format } from "date-fns";
 import { createClient } from "@/lib/supabase/client";
 import type { Member, MembershipPlan, MemberStatus } from "@/types/database";
@@ -41,6 +42,7 @@ export default function MembersClient({
   plans,
   clubId,
 }: Props) {
+  const dfLocale = dateLocale(useLocale());
   const [members, setMembers] = useState(initial);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<MemberWithPlan | null>(null);
@@ -263,7 +265,7 @@ export default function MembersClient({
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
                     {m.ends_at
-                      ? format(new Date(m.ends_at), "d MMM yyyy")
+                      ? format(new Date(m.ends_at), "d MMM yyyy", { locale: dfLocale })
                       : "—"}
                   </td>
                   <td className="px-5 py-3.5">

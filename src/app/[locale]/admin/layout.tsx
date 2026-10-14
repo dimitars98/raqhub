@@ -2,9 +2,11 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
+import { PlanBanner } from "@/components/admin/PlanNotices";
+import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 
 type Profile = { full_name: string | null; role: string };
-type Club = { name: string };
+type Club = { name: string; slug: string } & ClubBilling;
 
 export default async function AdminLayout({
   children,
@@ -29,7 +31,12 @@ export default async function AdminLayout({
       .select("full_name, role")
       .eq("id", user.id)
       .single(),
-    supabase.from("clubs").select("name").eq("owner_id", user.id).single(),
+    supabase
+      .from("clubs")
+      .select(`name, slug, ${BILLING_COLUMNS}`)
+      .eq("owner_id", user.id)
+      .limit(1)
+      .maybeSingle(),
   ]);
 
   const profile = profileRes.data as Profile | null;
@@ -47,6 +54,8 @@ export default async function AdminLayout({
       role="admin"
       userName={profile.full_name ?? "Admin"}
       clubName={club?.name}
+      clubSlug={club?.slug}
+      notice={club ? <PlanBanner access={clubAccess(club)} /> : undefined}
     >
       {children}
     </DashboardShell>

@@ -1,8 +1,15 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import type { ReactNode } from "react";
+
+// Description for search engines and link previews, in the page's language.
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("meta");
+  return { description: t("description") };
+}
 
 export default async function LocaleLayout({
   children,

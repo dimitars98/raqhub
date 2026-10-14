@@ -5,13 +5,16 @@ import { routing } from "./i18n/routing";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+// "/de/admin" -> ["/de", "de"]; built from routing so new languages are covered.
+const LOCALE_PREFIX = new RegExp(`^/(${routing.locales.join("|")})(?=/|$)`);
+
 const ADMIN_ROUTES = ["/admin"];
 const MEMBER_ROUTES = ["/book", "/my-bookings", "/membership"];
 const AUTH_ROUTES = ["/login", "/signup"];
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const pathnameWithoutLocale = pathname.replace(/^\/(mk|en|sq)/, "") || "/";
+  const pathnameWithoutLocale = pathname.replace(LOCALE_PREFIX, "") || "/";
 
   // 1. Run Intl Middleware first to get the response object
   const response = intlMiddleware(request);
@@ -41,8 +44,8 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const localeMatch = pathname.match(/^\/(mk|en|sq)/);
-  const locale = localeMatch ? localeMatch[1] : "mk";
+  const localeMatch = pathname.match(LOCALE_PREFIX);
+  const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
 
   // Redirect if not logged in
   const isProtected =

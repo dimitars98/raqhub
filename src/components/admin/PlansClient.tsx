@@ -5,12 +5,8 @@ import { useForm } from "react-hook-form";
 import { createClient } from "@/lib/supabase/client";
 import type { MembershipPlan, BillingPeriod } from "@/types/database";
 import Modal from "@/components/ui/Modal";
+import { useTranslations } from "next-intl";
 
-const BILLING_LABEL: Record<BillingPeriod, string> = {
-  monthly: "Monthly",
-  annual: "Annual",
-  one_time: "One time",
-};
 
 type FormValues = {
   name: string;
@@ -27,6 +23,12 @@ export default function PlansClient({
   plans: MembershipPlan[];
   clubId: string;
 }) {
+  const t = useTranslations("plansAdmin");
+  const BILLING_LABEL: Record<BillingPeriod, string> = {
+    monthly: t("billing.monthly"),
+    annual: t("billing.annual"),
+    one_time: t("billing.one_time"),
+  };
   const [plans, setPlans] = useState(initial);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<MembershipPlan | null>(null);
@@ -101,7 +103,7 @@ export default function PlansClient({
 
   const handleDelete = async (id: string) => {
     if (
-      !confirm("Delete this plan? Members assigned to it will lose their plan.")
+      !confirm(t("confirmDelete"))
     )
       return;
     setDeleting(id);
@@ -115,23 +117,23 @@ export default function PlansClient({
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-medium text-orange-900">
-            Membership plans
+          <h1 className="text-2xl font-medium text-ink-900">
+            {t("title")}
           </h1>
-          <p className="text-sm text-orange-500 mt-1">{plans.length} plans</p>
+          <p className="text-sm text-brand-600 mt-1">{t("count", { n: plans.length })}</p>
         </div>
         <button onClick={openAdd} className="btn-primary">
-          Add plan
+          {t("addPlan")}
         </button>
       </div>
 
       {!plans.length ? (
         <div className="card p-12 text-center">
-          <p className="text-sm text-orange-400 mb-4">
-            No plans yet. Create one to assign to members.
+          <p className="text-sm text-ink-400 mb-4">
+            {t("empty")}
           </p>
           <button onClick={openAdd} className="btn-primary">
-            Add your first plan
+            {t("addFirst")}
           </button>
         </div>
       ) : (
@@ -140,38 +142,38 @@ export default function PlansClient({
             <div key={p.id} className="card p-5">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <div className="text-sm font-medium text-orange-900">
+                  <div className="text-sm font-medium text-ink-900">
                     {p.name}
                   </div>
-                  <div className="text-xs text-orange-400 mt-0.5">
+                  <div className="text-xs text-ink-400 mt-0.5">
                     {BILLING_LABEL[p.billing_period]}
                   </div>
                 </div>
-                <div className="text-lg font-medium text-orange-900">
+                <div className="text-lg font-medium text-ink-900">
                   €{p.price}
                 </div>
               </div>
               {p.description && (
-                <p className="text-xs text-orange-600 mb-3">{p.description}</p>
+                <p className="text-xs text-ink-600 mb-3">{p.description}</p>
               )}
               {p.discount_pct > 0 && (
-                <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mb-3">
-                  {p.discount_pct}% discount on bookings
+                <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800 mb-3">
+                  {t("discount", { pct: p.discount_pct })}
                 </div>
               )}
-              <div className="flex gap-3 mt-4 pt-4 border-t border-orange-50">
+              <div className="flex gap-3 mt-4 pt-4 border-t border-ink-100">
                 <button
                   onClick={() => openEdit(p)}
-                  className="text-xs text-orange-600 hover:text-orange-900 transition-colors"
+                  className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
                 >
-                  Edit
+                  {t("edit")}
                 </button>
                 <button
                   onClick={() => handleDelete(p.id)}
                   disabled={deleting === p.id}
                   className="text-xs text-red-400 hover:text-red-600 transition-colors disabled:opacity-40"
                 >
-                  {deleting === p.id ? "Deleting…" : "Delete"}
+                  {deleting === p.id ? t("deleting") : t("delete")}
                 </button>
               </div>
             </div>
@@ -181,14 +183,14 @@ export default function PlansClient({
 
       <Modal open={showModal} onClose={() => setShowModal(false)}>
         <Modal.Content>
-          <Modal.Header>{editing ? "Edit plan" : "Add plan"}</Modal.Header>
+          <Modal.Header>{editing ? t("editPlan") : t("addPlan")}</Modal.Header>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
-              <Modal.Field label="Plan name" required>
+              <Modal.Field label={t("name")} required>
                 <input
                   className="input"
-                  placeholder="Monthly membership"
-                  {...register("name", { required: "Name is required" })}
+                  placeholder={t("namePlaceholder")}
+                  {...register("name", { required: t("nameRequired") })}
                 />
                 {errors.name && (
                   <p className="text-xs text-red-500 mt-1">
@@ -197,7 +199,7 @@ export default function PlansClient({
                 )}
               </Modal.Field>
               <Modal.Grid>
-                <Modal.Field label="Price (€)" required>
+                <Modal.Field label={t("price")} required>
                   <input
                     className="input"
                     type="number"
@@ -211,15 +213,15 @@ export default function PlansClient({
                     })}
                   />
                 </Modal.Field>
-                <Modal.Field label="Billing period">
+                <Modal.Field label={t("billingPeriod")}>
                   <select className="input" {...register("billing_period")}>
-                    <option value="monthly">Monthly</option>
-                    <option value="annual">Annual</option>
-                    <option value="one_time">One time</option>
+                    <option value="monthly">{BILLING_LABEL.monthly}</option>
+                    <option value="annual">{BILLING_LABEL.annual}</option>
+                    <option value="one_time">{BILLING_LABEL.one_time}</option>
                   </select>
                 </Modal.Field>
               </Modal.Grid>
-              <Modal.Field label="Booking discount (%)">
+              <Modal.Field label={t("discountField")}>
                 <input
                   className="input"
                   type="number"
@@ -233,11 +235,11 @@ export default function PlansClient({
                   })}
                 />
               </Modal.Field>
-              <Modal.Field label="Description">
+              <Modal.Field label={t("description")}>
                 <textarea
                   className="input resize-none"
                   rows={2}
-                  placeholder="What's included in this plan..."
+                  placeholder={t("descriptionPlaceholder")}
                   {...register("description")}
                 />
               </Modal.Field>
@@ -248,7 +250,7 @@ export default function PlansClient({
                 onClick={() => setShowModal(false)}
                 className="btn-secondary flex-1"
               >
-                Cancel
+                {t("cancel")}
               </button>
               <button
                 type="submit"
@@ -256,10 +258,10 @@ export default function PlansClient({
                 className="btn-primary flex-1 disabled:opacity-40"
               >
                 {isSubmitting
-                  ? "Saving…"
+                  ? t("saving")
                   : editing
-                    ? "Save changes"
-                    : "Add plan"}
+                    ? t("saveChanges")
+                    : t("addPlan")}
               </button>
             </Modal.Footer>
           </form>

@@ -1,6 +1,8 @@
 import CoachesClient from "@/components/admin/CoachesClient";
 import { createClient } from "@/lib/supabase/server";
 import { Coach } from "@/types/database";
+import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
+import { UpgradeNotice } from "@/components/admin/PlanNotices";
 
 export default async function CoachesPage() {
   const supabase = await createClient();
@@ -11,9 +13,12 @@ export default async function CoachesPage() {
 
   const { data: club } = (await supabase
     .from("clubs")
-    .select("id")
+    .select(`id, ${BILLING_COLUMNS}`)
     .eq("owner_id", user?.id ?? "")
-    .single()) as { data: { id: string } | null };
+    .single()) as { data: ({ id: string } & ClubBilling) | null };
+
+  if (club && !clubAccess(club).has("coaches"))
+    return <UpgradeNotice feature="coaches" />;
 
   const { data: coaches } = await supabase
     .from("coaches")

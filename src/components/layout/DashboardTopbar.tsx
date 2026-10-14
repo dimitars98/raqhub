@@ -11,10 +11,12 @@ type TitleKey =
   | "timetable"
   | "bookings"
   | "members"
+  | "plans"
   | "coaches"
   | "courts"
   | "analytics"
   | "settings"
+  | "share"
   | "book"
   | "myBookings"
   | "profile"
@@ -26,10 +28,12 @@ const TITLE_KEYS: Record<string, TitleKey> = {
   timetable: "timetable",
   bookings: "bookings",
   members: "members",
+  plans: "plans",
   coaches: "coaches",
   courts: "courts",
   analytics: "analytics",
   settings: "settings",
+  share: "share",
   book: "book",
   "my-bookings": "myBookings",
   profile: "profile",
@@ -42,6 +46,7 @@ const iconButton =
 export default function DashboardTopbar() {
   const pathname = usePathname();
   const t = useTranslations("dashboard.titles");
+  const tc = useTranslations("common");
   const { toggle } = useSidebar();
 
   const segment = pathname.split("/").filter(Boolean).pop() ?? "";
@@ -54,8 +59,8 @@ export default function DashboardTopbar() {
         <button
           type="button"
           onClick={toggle}
-          aria-label="Toggle sidebar"
-          title="Toggle sidebar (Ctrl+B)"
+          aria-label={tc("toggleSidebar")}
+          title={tc("toggleSidebarHint")}
           className={iconButton}
         >
           <PanelLeft className="size-5" strokeWidth={1.75} aria-hidden="true" />
@@ -67,7 +72,7 @@ export default function DashboardTopbar() {
 
       <div className="flex items-center gap-2">
         <LocaleSwitcher size="sm" />
-        <button type="button" aria-label="Notifications" className={iconButton}>
+        <button type="button" aria-label={tc("notifications")} className={iconButton}>
           <Bell className="size-[18px]" strokeWidth={1.75} aria-hidden="true" />
         </button>
       </div>

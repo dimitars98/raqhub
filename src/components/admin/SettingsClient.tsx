@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRef, useState, useTransition } from "react";
 import {
   Building2,
   Clock,
@@ -11,58 +12,121 @@ import {
   ChevronRight,
   Save,
   Upload,
+  User,
+  Check,
 } from "lucide-react";
-import type { Club } from "@/types/database";
+import type { Club, OpeningHours } from "@/types/database";
+import {
+  CANCEL_HOUR_CHOICES,
+  DURATION_CHOICES,
+  MAX_DAYS_AHEAD,
+  NO_SHOW_CHOICES,
+  NO_SHOW_DAYS,
+  PER_DAY_CHOICES,
+  type BookingRules,
+} from "@/lib/bookingRules";
+import {
+  saveClubInfo,
+  saveClubLogo,
+  saveOpeningHours,
+  saveBookingRules,
+  type SaveResult,
+} from "@/app/[locale]/admin/settings/actions";
+import ProfileAvatarUpload from "@/components/profile/ProfileAvatarUpload";
+import ProfileEditForm from "@/components/profile/ProfileEditForm";
 
-type ClubProp = Pick<
+export type SettingsClub = Pick<
   Club,
   | "id"
   | "name"
+  | "slug"
   | "email"
   | "phone"
   | "address"
   | "city"
   | "country"
+  | "website"
   | "description"
   | "logo_url"
->;
+> & { opening_hours: OpeningHours; booking_rules: BookingRules };
+
+type SettingsProfile = {
+  userId: string;
+  full_name: string;
+  phone: string;
+  avatar_url: string | null;
+};
 
 interface Props {
-  club: ClubProp;
+  club: SettingsClub;
+  profile: SettingsProfile;
+  /** Section to open first, e.g. "hours". */
+  initialTab?: string;
 }
 
-const DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
 
-const SPORTS = ["Tennis", "Padel", "Pickleball"];
-
+// Sections marked "soon" are a preview: nothing in them is saved yet.
 const SECTIONS = [
-  { id: "club", label: "Club Info", icon: Building2 },
-  { id: "hours", label: "Opening Hours", icon: Clock },
-  { id: "booking", label: "Booking Rules", icon: CalendarOff },
-  { id: "payments", label: "Payments", icon: CreditCard },
-  { id: "notifications", label: "Notifications", icon: Bell },
-  { id: "danger", label: "Danger Zone", icon: Shield },
+  { id: "club", icon: Building2, soon: false },
+  { id: "hours", icon: Clock, soon: false },
+  { id: "profile", icon: User, soon: false },
+  { id: "booking", icon: CalendarOff, soon: false },
+  { id: "payments", icon: CreditCard, soon: true },
+  { id: "notifications", icon: Bell, soon: true },
+  { id: "danger", icon: Shield, soon: true },
 ];
 
-export default function SettingsClient({ club }: Props) {
-  const [active, setActive] = useState("club");
-  const [sports, setSports] = useState(["Tennis"]);
-  const [hours, setHours] = useState(
-    DAYS.map((day) => ({ day, open: true, from: "07:00", to: "22:00" })),
-  );
+const initialsOf = (name: string) =>
+  (name || "A")
+    .split(" ")
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
-  const toggleSport = (sport: string) => {
-    setSports((prev) =>
-      prev.includes(sport) ? prev.filter((s) => s !== sport) : [...prev, sport],
-    );
+export default function SettingsClient({ club, profile, initialTab }: Props) {
+  const t = useTranslations("settingsPage");
+  const dayNames = t.raw("days") as string[];
+  // ?tab=hours (from the getting-started checklist) opens that section.
+  const [active, setActive] = useState(
+    SECTIONS.some((s) => s.id === initialTab) ? initialTab! : "club",
+  );
+  const [rules, setRules] = useState<BookingRules>(club.booking_rules);
+  const [hours, setHours] = useState(
+    club.opening_hours.map((h, i) => ({ day: dayNames[i], ...h })),
+  );
+  const [info, setInfo] = useState({
+    name: club.name,
+    email: club.email ?? "",
+    phone: club.phone ?? "",
+    address: club.address ?? "",
+    city: club.city ?? "",
+    country: club.country ?? "",
+    website: club.website ?? "",
+    description: club.description ?? "",
+  });
+  const [logoUrl, setLogoUrl] = useState(club.logo_url);
+  const [logoStatus, setLogoStatus] = useState<SaveResult | null>(null);
+  const [logoPending, startLogo] = useTransition();
+  const logoInput = useRef<HTMLInputElement>(null);
+
+  const setField =
+    (key: keyof typeof info) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setInfo((prev) => ({ ...prev, [key]: e.target.value }));
+
+  const uploadLogo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const form = new FormData();
+    form.append("logo", file);
+    startLogo(async () => {
+      const result = await saveClubLogo(form);
+      setLogoStatus(result);
+      if (result.ok && result.url) setLogoUrl(result.url);
+    });
+    e.target.value = "";
   };
 
   const toggleDay = (i: number) => {
@@ -76,9 +140,9 @@ export default function SettingsClient({ club }: Props) {
       {/* Sidebar nav */}
       <div className="w-[200px] flex-shrink-0 bg-white border border-[#e8ede4] rounded-2xl p-2 sticky top-6">
         <p className="text-[11px] font-medium text-[#6e7f65] px-3 pt-2 pb-1 uppercase tracking-[0.06em]">
-          Settings
+          {t("settings")}
         </p>
-        {SECTIONS.map(({ id, label, icon: Icon }) => (
+        {SECTIONS.map(({ id, icon: Icon, soon }) => (
           <button
             key={id}
             onClick={() => setActive(id)}
@@ -90,8 +154,13 @@ export default function SettingsClient({ club }: Props) {
                   : "text-[#3d4f35] hover:bg-[#f4f6f2]"
             }`}
           >
-            <Icon size={14} strokeWidth={2} />
-            <span className="flex-1 text-left">{label}</span>
+            <Icon size={14} strokeWidth={2} className="shrink-0" />
+            <span className="flex-1 text-left">{t(`sections.${id}`)}</span>
+            {soon && (
+              <span className="rounded bg-[#f4f6f2] px-1.5 py-0.5 text-[10px] font-medium text-[#6e7f65]">
+                {t("soon")}
+              </span>
+            )}
             {active === id && (
               <ChevronRight size={13} className="text-[#7aad12]" />
             )}
@@ -104,81 +173,95 @@ export default function SettingsClient({ club }: Props) {
         {/* Club Info */}
         {active === "club" && (
           <Section
-            title="Club Info"
-            description="Basic information about your club visible to members."
+            title={t("clubInfo")}
+            description={t("basicInformationAboutYourClub")}
           >
-            <Field label="Club Logo">
+            <Field label={t("clubLogo")}>
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-xl bg-[#f4f6f2] border border-[#e8ede4] flex items-center justify-center flex-shrink-0">
-                  <Building2 size={24} className="text-[#6e7f65]" />
-                </div>
-                <button className="btn-secondary flex items-center gap-1.5 text-[13px]">
-                  <Upload size={13} /> Upload Logo
+                {logoUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={logoUrl}
+                    alt=""
+                    className="w-16 h-16 rounded-xl border border-[#e8ede4] object-cover flex-shrink-0"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-xl bg-[#f4f6f2] border border-[#e8ede4] flex items-center justify-center flex-shrink-0">
+                    <Building2 size={24} className="text-[#6e7f65]" />
+                  </div>
+                )}
+                <button
+                  type="button"
+                  onClick={() => logoInput.current?.click()}
+                  disabled={logoPending}
+                  className="btn-secondary flex items-center gap-1.5 text-[13px] disabled:opacity-50"
+                >
+                  <Upload size={13} /> {logoPending ? t("uploading") : t("uploadLogo")}
                 </button>
+                <input
+                  ref={logoInput}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={uploadLogo}
+                />
               </div>
+              <StatusLine result={logoStatus} />
             </Field>
 
-            <Field label="Club Name">
-              <input className="input" defaultValue={club.name} />
+            <Field label={t("clubName")}>
+              <input className="input" value={info.name} onChange={setField("name")} />
             </Field>
 
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Email">
-                <input className="input" defaultValue={club.email ?? ""} />
+              <Field label={t("email")}>
+                <input className="input" type="email" value={info.email} onChange={setField("email")} />
               </Field>
-              <Field label="Phone">
-                <input className="input" defaultValue={club.phone ?? ""} />
+              <Field label={t("phone")}>
+                <input className="input" value={info.phone} onChange={setField("phone")} />
               </Field>
             </div>
 
-            <Field label="Address">
-              <input className="input" defaultValue={club.address ?? ""} />
+            <Field label={t("address")}>
+              <input className="input" value={info.address} onChange={setField("address")} />
             </Field>
 
             <div className="grid grid-cols-2 gap-3">
-              <Field label="City">
-                <input className="input" defaultValue={club.city ?? ""} />
+              <Field label={t("city")}>
+                <input className="input" value={info.city} onChange={setField("city")} />
               </Field>
-              <Field label="Country">
-                <input className="input" defaultValue={club.country ?? ""} />
+              <Field label={t("country")}>
+                <input className="input" value={info.country} onChange={setField("country")} />
               </Field>
             </div>
 
-            <Field label="Sports Offered">
-              <div className="flex gap-2 flex-wrap">
-                {SPORTS.map((sport) => (
-                  <button
-                    key={sport}
-                    onClick={() => toggleSport(sport)}
-                    className={`px-4 py-1.5 rounded-full text-[13px] border transition-all ${
-                      sports.includes(sport)
-                        ? "bg-[#e4f7b8] border-[#7aad12] text-[#2e4d03] font-medium"
-                        : "bg-white border-[#d0d9c9] text-[#6e7f65] hover:border-[#7aad12]"
-                    }`}
-                  >
-                    {sport}
-                  </button>
-                ))}
-              </div>
-            </Field>
-
-            <Field label="Description">
-              <textarea
-                className="input resize-y"
-                rows={3}
-                defaultValue={club.description ?? ""}
+            <Field label={t("website")}>
+              <input
+                className="input"
+                placeholder="myclub.mk"
+                value={info.website}
+                onChange={setField("website")}
               />
             </Field>
 
-            <SaveButton />
+            <Field label={t("description")}>
+              <textarea
+                className="input resize-y"
+                rows={3}
+                value={info.description}
+                onChange={setField("description")}
+              />
+            </Field>
+
+            <SaveButton onSave={() => saveClubInfo(info)} />
           </Section>
         )}
 
         {/* Opening Hours */}
         {active === "hours" && (
           <Section
-            title="Opening Hours"
-            description="Set your club's operating hours for each day of the week."
+            title={t("openingHours")}
+            description={t("setYourClubsOperatingHours")}
           >
             <div className="flex flex-col gap-2">
               {hours.map((h, i) => (
@@ -213,7 +296,7 @@ export default function SettingsClient({ club }: Props) {
                         }
                         style={{ width: 110 }}
                       />
-                      <span className="text-[13px] text-[#6e7f65]">to</span>
+                      <span className="text-[13px] text-[#6e7f65]">{t("to")}</span>
                       <input
                         type="time"
                         className="input"
@@ -229,91 +312,166 @@ export default function SettingsClient({ club }: Props) {
                       />
                     </div>
                   ) : (
-                    <span className="text-[13px] text-[#6e7f65]">Closed</span>
+                    <span className="text-[13px] text-[#6e7f65]">{t("closed")}</span>
                   )}
                 </div>
               ))}
             </div>
-            <SaveButton />
+            <SaveButton
+              onSave={() =>
+                saveOpeningHours(hours.map(({ open, from, to }) => ({ open, from, to })))
+              }
+            />
+          </Section>
+        )}
+
+        {/* Your profile */}
+        {active === "profile" && (
+          <Section
+            title={t("yourProfile")}
+            description={t("yourOwnNamePhoneAnd")}
+          >
+            <div className="flex items-center gap-4">
+              <ProfileAvatarUpload
+                userId={profile.userId}
+                avatarUrl={profile.avatar_url}
+                initials={initialsOf(profile.full_name)}
+              />
+              <p className="text-[13px] text-[#6e7f65]">
+                {t("clickTheCameraToUpload")}
+              </p>
+            </div>
+            <ProfileEditForm
+              userId={profile.userId}
+              defaultValues={{ full_name: profile.full_name, phone: profile.phone }}
+            />
           </Section>
         )}
 
         {/* Booking Rules */}
         {active === "booking" && (
           <Section
-            title="Booking Rules"
-            description="Control how and when members can book courts."
+            title={t("bookingRules")}
+            description={t("whatPlayersCanBookOnline")}
           >
-            <div className="grid grid-cols-2 gap-3">
-              <Field label="Max advance booking (days)">
-                <input className="input" type="number" defaultValue={14} />
-              </Field>
-              <Field label="Min booking duration (min)">
-                <input className="input" type="number" defaultValue={60} />
-              </Field>
-              <Field label="Max booking duration (min)">
-                <input className="input" type="number" defaultValue={120} />
-              </Field>
-              <Field label="Cancellation window (hours)">
-                <input className="input" type="number" defaultValue={24} />
-              </Field>
-              <Field label="Max bookings per member per day">
-                <input className="input" type="number" defaultValue={2} />
-              </Field>
-              <Field label="Slot interval (min)">
-                <select className="input">
-                  <option>30</option>
-                  <option>60</option>
-                  <option>90</option>
-                </select>
-              </Field>
-            </div>
-
-            <Field label="Booking requires approval">
-              <div className="flex flex-col gap-2">
-                {[
-                  "Never — instant confirmation",
-                  "Always — admin must approve",
-                  "Only for guests",
-                ].map((opt) => (
-                  <label
-                    key={opt}
-                    className="flex items-center gap-2.5 cursor-pointer text-[13px] text-[#3d4f35]"
-                  >
-                    <input
-                      type="radio"
-                      name="approval"
-                      defaultChecked={opt.startsWith("Never")}
-                    />
-                    {opt}
-                  </label>
-                ))}
+            <Field label={t("bookingLengthsPlayersCanChoose")}>
+              <div className="flex flex-wrap gap-2">
+                {DURATION_CHOICES.map((d) => {
+                  const on = rules.durations.includes(d);
+                  return (
+                    <label
+                      key={d}
+                      className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-[13px] transition-colors ${
+                        on
+                          ? "border-[#7aad12] bg-[#f3fbde] text-[#111c0a]"
+                          : "border-[#e8ede4] text-[#3d4f35] hover:bg-[#f4f6f2]"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={on}
+                        onChange={() =>
+                          setRules((r) => ({
+                            ...r,
+                            durations: on
+                              ? r.durations.filter((x) => x !== d)
+                              : [...r.durations, d].sort((a, b) => a - b),
+                          }))
+                        }
+                      />
+                      {t("minutes", { n: d })}
+                    </label>
+                  );
+                })}
               </div>
             </Field>
 
-            <Field label="Walk-in bookings">
-              <Toggle
-                label="Allow walk-in bookings without an account"
-                defaultChecked
-              />
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <Field label={t("bookUpToDaysAhead")}>
+                <input
+                  className="input"
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={MAX_DAYS_AHEAD}
+                  value={rules.max_days_ahead}
+                  onChange={(e) =>
+                    setRules((r) => ({ ...r, max_days_ahead: Number(e.target.value) }))
+                  }
+                />
+              </Field>
+              <Field label={t("bookingsPerPlayerPerDay")}>
+                <select
+                  className="input"
+                  value={rules.max_per_day}
+                  onChange={(e) =>
+                    setRules((r) => ({ ...r, max_per_day: Number(e.target.value) }))
+                  }
+                >
+                  {PER_DAY_CHOICES.map((n) => (
+                    <option key={n} value={n}>
+                      {n === 0 ? t("noLimit") : n}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              <div className="sm:col-span-2">
+                <Field label={t("cancellingOnline")}>
+                  <select
+                    className="input"
+                    value={rules.cancel_hours}
+                    onChange={(e) =>
+                      setRules((r) => ({ ...r, cancel_hours: Number(e.target.value) }))
+                    }
+                  >
+                    {CANCEL_HOUR_CHOICES.map((h) => (
+                      <option key={h} value={h}>
+                        {h === 0 ? t("cancelAnyTime") : t("cancelUntil", { h })}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              </div>
+            </div>
+
+            <Field label={t("repeatNoShows")}>
+              <select
+                className="input"
+                value={rules.max_no_shows}
+                onChange={(e) =>
+                  setRules((r) => ({ ...r, max_no_shows: Number(e.target.value) }))
+                }
+              >
+                {NO_SHOW_CHOICES.map((n) => (
+                  <option key={n} value={n}>
+                    {n === 0
+                      ? t("neverPause")
+                      : t("pauseAfter", { n })}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1.5 text-[12px] text-[#6e7f65]">
+                {t("noShowHelp", { days: NO_SHOW_DAYS })}
+              </p>
             </Field>
 
-            <Field label="Guest bookings">
-              <Toggle label="Allow members to bring guests" defaultChecked />
-            </Field>
+            <p className="text-[12px] text-[#6e7f65]">
+              {t("playersSeeOnly")}
+            </p>
 
-            <SaveButton />
+            <SaveButton onSave={() => saveBookingRules(rules)} />
           </Section>
         )}
 
         {/* Payments */}
         {active === "payments" && (
           <Section
-            title="Payments"
-            description="Configure pricing, currency and payment methods."
+            title={t("payments")}
+            soon
+            description={t("configurePricingCurrencyAndPayment")}
           >
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Currency">
+              <Field label={t("currency")}>
                 <select className="input">
                   <option>EUR — €</option>
                   <option>USD — $</option>
@@ -321,76 +479,77 @@ export default function SettingsClient({ club }: Props) {
                   <option>GBP — £</option>
                 </select>
               </Field>
-              <Field label="Tax rate (%)">
+              <Field label={t("taxRate")}>
                 <input className="input" type="number" defaultValue={18} />
               </Field>
             </div>
 
-            <Field label="Stripe Integration">
+            <Field label={t("stripeIntegration")}>
               <div className="flex items-center justify-between p-4 bg-[#f4f6f2] border border-[#e8ede4] rounded-xl">
                 <div>
                   <p className="text-[13px] font-medium text-[#111c0a]">
-                    Stripe
+                    {t("stripe")}
                   </p>
                   <p className="text-[12px] text-[#6e7f65] mt-0.5">
-                    Not connected
+                    {t("notConnected")}
                   </p>
                 </div>
                 <button className="btn-primary text-[13px]">
-                  Connect Stripe
+                  {t("connectStripe")}
                 </button>
               </div>
             </Field>
 
-            <Field label="Online payments">
+            <Field label={t("onlinePayments")}>
               <Toggle
-                label="Require payment at time of booking"
+                label={t("requirePaymentAtTimeOf")}
                 defaultChecked
               />
             </Field>
 
-            <Field label="Refunds">
+            <Field label={t("refunds")}>
               <Toggle
-                label="Allow automatic refunds on cancellation within window"
+                label={t("allowAutomaticRefundsOnCancellation")}
                 defaultChecked
               />
             </Field>
 
-            <SaveButton />
+            <SaveButton soon />
           </Section>
         )}
 
         {/* Notifications */}
         {active === "notifications" && (
           <Section
-            title="Notifications"
-            description="Choose which email notifications are sent automatically."
+            title={t("notifications")}
+            soon
+            description={t("chooseWhichEmailNotificationsAre")}
           >
             <div className="flex flex-col divide-y divide-[#e8ede4]">
               {[
                 {
-                  label: "Booking confirmed",
-                  sub: "Sent to member when a booking is confirmed",
+                  label: t("bookingConfirmed"),
+                  sub: t("sentToMemberWhenA"),
                 },
                 {
-                  label: "Booking cancelled",
-                  sub: "Sent when a booking is cancelled by either party",
+                  label: t("bookingCancelled"),
+                  sub: t("sentWhenABookingIs"),
                 },
                 {
-                  label: "Booking reminder",
-                  sub: "Sent 24h before the booking starts",
+                  label: t("bookingReminder"),
+                  sub: t("sent24hBeforeTheBooking"),
                 },
                 {
-                  label: "New member joined",
-                  sub: "Sent to admin when a new member registers",
+                  label: t("newMemberJoined"),
+                  sub: t("sentToAdminWhenA"),
                 },
                 {
-                  label: "Payment received",
-                  sub: "Sent to member after successful payment",
+                  label: t("paymentReceived"),
+                  sub: t("sentToMemberAfterSuccessful"),
                 },
                 {
-                  label: "Cancellation refund issued",
-                  sub: "Sent when a refund is processed",
+                  label: t("cancellationRefundIssued"),
+                  sub: t("sentWhenARefundIs"),
                 },
               ].map(({ label, sub }) => (
                 <div
@@ -407,35 +566,36 @@ export default function SettingsClient({ club }: Props) {
                 </div>
               ))}
             </div>
-            <Field label="Reply-to email">
+            <Field label={t("replyToEmail")}>
               <input className="input" defaultValue={club.email ?? ""} />
             </Field>
-            <SaveButton />
+            <SaveButton soon />
           </Section>
         )}
 
         {/* Danger Zone */}
         {active === "danger" && (
           <Section
-            title="Danger Zone"
-            description="Irreversible actions. Proceed with caution."
+            title={t("dangerZone")}
+            soon
+            description={t("irreversibleActionsProceedWithCaution")}
           >
             <DangerCard
-              title="Export all data"
-              description="Download a full export of your club data including bookings, members, and payments."
-              action="Export Data"
+              title={t("exportAllData")}
+              description={t("downloadAFullExportOf")}
+              action={t("exportData")}
               variant="default"
             />
             <DangerCard
-              title="Clear all bookings"
-              description="Permanently delete all booking history. This cannot be undone."
-              action="Clear Bookings"
+              title={t("clearAllBookings")}
+              description={t("permanentlyDeleteAllBookingHistory")}
+              action={t("clearBookings")}
               variant="warning"
             />
             <DangerCard
-              title="Delete club"
-              description="Permanently delete your club and all associated data. This action is irreversible."
-              action="Delete Club"
+              title={t("deleteClub")}
+              description={t("permanentlyDeleteYourClubAnd")}
+              action={t("deleteClub2")}
               variant="danger"
             />
           </Section>
@@ -450,17 +610,26 @@ export default function SettingsClient({ club }: Props) {
 function Section({
   title,
   description,
+  soon = false,
   children,
 }: {
   title: string;
   description: string;
+  /** A preview of a setting that isn't saved yet. */
+  soon?: boolean;
   children: React.ReactNode;
 }) {
+  const t = useTranslations("settingsPage");
   return (
     <div className="bg-white border border-[#e8ede4] rounded-2xl p-7">
       <div className="mb-6 pb-5 border-b border-[#e8ede4]">
         <h2 className="text-[18px] font-semibold text-[#111c0a]">{title}</h2>
         <p className="text-[13px] text-[#6e7f65] mt-1">{description}</p>
+        {soon && (
+          <p className="mt-3 rounded-lg bg-[#fdfae0] px-3 py-2 text-[12px] text-[#8a7800]">
+            {t("comingSoonTheseSettingsAre")}
+          </p>
+        )}
       </div>
       <div className="flex flex-col gap-5">{children}</div>
     </div>
@@ -529,13 +698,49 @@ function ToggleSwitch({
   );
 }
 
-function SaveButton() {
+function SaveButton({
+  onSave,
+  soon = false,
+}: {
+  onSave?: () => Promise<SaveResult>;
+  soon?: boolean;
+}) {
+  const t = useTranslations("settingsPage");
+  const [result, setResult] = useState<SaveResult | null>(null);
+  const [pending, start] = useTransition();
+
+  const click = () => {
+    if (!onSave) return;
+    setResult(null);
+    start(async () => setResult(await onSave()));
+  };
+
   return (
-    <div className="pt-2">
-      <button className="btn-primary flex items-center gap-1.5 text-[13px]">
-        <Save size={13} /> Save Changes
+    <div className="pt-2 flex items-center gap-3">
+      <button
+        type="button"
+        onClick={click}
+        disabled={soon || pending}
+        className="btn-primary flex items-center gap-1.5 text-[13px] disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        <Save size={13} /> {pending ? t("saving") : t("saveChanges")}
       </button>
+      <StatusLine result={result} />
     </div>
+  );
+}
+
+function StatusLine({ result }: { result: SaveResult | null }) {
+  const t = useTranslations("settingsPage");
+  if (!result) return null;
+  return result.ok ? (
+    <span className="flex items-center gap-1 text-[12px] text-[#4d7a08]">
+      <Check size={13} /> {t("saved")}
+    </span>
+  ) : (
+    <span role="alert" className="text-[12px] text-red-600">
+      {result.error}
+    </span>
   );
 }
 

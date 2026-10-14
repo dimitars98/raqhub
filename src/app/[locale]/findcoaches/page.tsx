@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { getTranslations } from "next-intl/server";
 import { MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import Navbar from "@/components/layout/Navbar";
@@ -47,6 +48,8 @@ export default async function CoachesPage({
 }: {
   searchParams: Promise<{ level?: string }>;
 }) {
+  const t = await getTranslations("coachesList");
+  const tLevel = await getTranslations("clubPage.levels");
   const { level = "all" } = await searchParams;
   const supabase = await createClient();
 
@@ -70,7 +73,7 @@ export default async function CoachesPage({
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-900 mb-2">
-            Coaches
+            {t("title")}
           </h1>
           <p className="text-base text-ink-600">
             {coaches.length} coach{coaches.length !== 1 ? "es" : ""} available
@@ -86,16 +89,16 @@ export default async function CoachesPage({
         {!coaches.length ? (
           <div className="card px-6 py-20 text-center">
             <p className="text-lg font-semibold text-ink-900 mb-1">
-              No coaches match your filters
+              {t("empty")}
             </p>
             <p className="text-sm text-ink-600">
-              Try a different level to see more coaches.
+              {t("emptyHint")}
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {coaches.map((coach) => {
-              const name = coach.profile?.full_name ?? "Coach";
+              const name = coach.profile?.full_name ?? t("coach");
 
               return (
                 <Link
@@ -132,7 +135,7 @@ export default async function CoachesPage({
                           />
                         )}
                         <span className="truncate">
-                          {coach.club?.name ?? "Independent"}
+                          {coach.club?.name ?? t("independent")}
                           {coach.club?.city ? ` · ${coach.club.city}` : ""}
                         </span>
                       </div>
@@ -156,7 +159,7 @@ export default async function CoachesPage({
                             LEVEL_STYLE[l] ?? "bg-ink-50 text-ink-800"
                           }`}
                         >
-                          {l}
+                          {tLevel(l as "beginner")}
                         </span>
                       ))}
                     </div>
@@ -172,7 +175,7 @@ export default async function CoachesPage({
                       </span>
                     </span>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-ink-900">
-                      View profile
+                      {t("viewProfile")}
                       <span
                         aria-hidden="true"
                         className="transition-transform duration-150 group-hover:translate-x-1"

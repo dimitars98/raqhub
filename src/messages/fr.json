@@ -27,7 +27,16 @@
     "creatingAccount": "Création du compte…",
     "createAccount": "Créer un compte",
     "alreadyAccount": "Déjà un compte ?",
-    "signUpHere": "S'inscrire ici"
+    "signUpHere": "S'inscrire ici",
+    "emailInvalid": "Saisissez une adresse e-mail valide.",
+    "emailRequired": "L’e-mail est obligatoire.",
+    "emailTaken": "Un compte existe déjà avec cet e-mail.",
+    "fullNameRequired": "Le nom complet est obligatoire.",
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères.",
+    "passwordRequired": "Le mot de passe est obligatoire.",
+    "genericError": "Une erreur s’est produite. Veuillez réessayer.",
+    "invalidCredentials": "E-mail ou mot de passe incorrect.",
+    "agreeToTerms": "En créant un compte, vous acceptez les <terms>Conditions d’utilisation</terms> et la <privacy>Politique de confidentialité</privacy>."
   },
   "landing": {
     "badge": "Conçu pour les clubs de tennis",
@@ -53,7 +62,110 @@
     "multiCourt": "Multi-courts",
     "multiCourtDesc": "Gérez des courts en terre battue, dur, gazon et couverts — chacun avec sa propre tarification.",
     "adminDashboard": "Tableau de bord admin",
-    "adminDashboardDesc": "Un seul endroit pour tout votre club. Pas de tableurs, pas de papier, pas de chaos."
+    "adminDashboardDesc": "Un seul endroit pour tout votre club. Pas de tableurs, pas de papier, pas de chaos.",
+    "rows": {
+      "bookings": {
+        "label": "Réservation de terrains",
+        "pre": "Réservez ",
+        "mark": "à votre façon",
+        "post": "",
+        "body": "Disponibilités en temps réel, confirmations instantanées et zéro double réservation. Une expérience que vos membres adoreront sur tous leurs appareils.",
+        "cta": "Voir les fonctions de réservation",
+        "points": [
+          "Planning en glisser-déposer",
+          "Réservations récurrentes et blocs",
+          "Liste d’attente automatique",
+          "Fenêtres de réservation par formule"
+        ]
+      },
+      "membership": {
+        "label": "Adhésions",
+        "pre": "Gestion complète ",
+        "mark": "des membres",
+        "post": "",
+        "body": "Tous vos contacts au même endroit. Suivez statut d’adhésion, paiements, activité et niveau de jeu – avec des outils pour rester en contact et fidéliser.",
+        "cta": "Voir les outils membres",
+        "points": [
+          "Formules d’adhésion flexibles",
+          "Rappels de renouvellement automatiques",
+          "Profils avec niveau de jeu",
+          "E-mails et SMS groupés"
+        ]
+      },
+      "coaching": {
+        "label": "Cours",
+        "pre": "Remplissez l’agenda de ",
+        "mark": "vos entraîneurs",
+        "post": "",
+        "body": "Les joueurs trouvent et réservent leurs cours directement. Gérez disponibilités, types de cours, groupes et stages – et remplissez chaque heure automatiquement.",
+        "cta": "Voir les fonctions cours",
+        "points": [
+          "Cours individuels et collectifs",
+          "Pages et avis des entraîneurs",
+          "Suivi automatique des paiements entraîneurs",
+          "Confirmations et rappels de cours"
+        ]
+      },
+      "analytics": {
+        "label": "Statistiques",
+        "pre": "Des décisions ",
+        "mark": "basées sur les données",
+        "post": "",
+        "body": "Sachez exactement comment se porte votre club. Revenus par terrain, entraîneur ou formule. Repérez les heures de pointe et agissez sur des chiffres réels.",
+        "cta": "Voir les statistiques",
+        "points": [
+          "Revenus par terrain, entraîneur et période",
+          "Cartes d’occupation des terrains",
+          "Suivi des départs de membres",
+          "Rapports financiers exportables"
+        ]
+      }
+    },
+    "mock": {
+      "weekTitle": "Tous les terrains – cette semaine",
+      "saveSchedule": "Enregistrer",
+      "available": "Libre",
+      "booked": "Réservé",
+      "closed": "Fermé",
+      "members": "Membres (342)",
+      "invite": "+ Inviter",
+      "activeMembers": "Membres actifs",
+      "monthlyRevenue": "Revenu mensuel",
+      "clubPlan": "Formule Club",
+      "academyPlan": "Formule Academy",
+      "starterPlan": "Formule Starter",
+      "active": "Actif",
+      "pending": "En attente",
+      "coachTeam": "Notre équipe d’entraîneurs",
+      "headCoach": "Entraîneur principal · ITF niveau 3",
+      "juniorCoach": "Spécialiste jeunes · ITF niveau 2",
+      "performanceCoach": "Performance · ITF niveau 3",
+      "open": "{n} libres",
+      "revenueTitle": "Revenus – 6 derniers mois",
+      "vsLastYear": "↑ 23 % vs l’an dernier",
+      "totalRevenue": "Revenu total",
+      "activeMembersShort": "Membres actifs",
+      "avgMonth": "Moy. / mois",
+      "split": "Terrains vs revenus des cours",
+      "export": "Exporter en CSV →",
+      "days": [
+        "LUN",
+        "MAR",
+        "MER",
+        "JEU",
+        "VEN",
+        "SAM",
+        "DIM"
+      ],
+      "months": {
+        "nov": "nov.",
+        "dec": "déc.",
+        "jan": "janv.",
+        "feb": "févr.",
+        "mar": "mars",
+        "apr": "avr."
+      }
+    }
   },
   "plans": {
     "starter": "Starter",
@@ -143,7 +255,13 @@
       "completed": "Terminée",
       "no_show": "Absent",
       "all": "Toutes"
-    }
+    },
+    "slotTaken": "Ce court est déjà réservé à cette heure.",
+    "saveError": "Impossible d’enregistrer la réservation. Veuillez réessayer.",
+    "lesson": "Cours",
+    "noShowCount": "{n, plural, one {# absence} other {# absences}}",
+    "paused": "suspendu",
+    "pausedHint": "Ne peut plus réserver en ligne tant que vous ne modifiez pas une de ces absences ou qu’elles n’ont pas plus de 90 jours. Vous pouvez toujours réserver pour cette personne."
   },
   "booking": {
     "bookThisCourt": "Réserver ce court",
@@ -187,7 +305,13 @@
     "allSports": "Tous les sports",
     "tennis": "Tennis",
     "padel": "Padel",
-    "pickleball": "Pickleball"
+    "pickleball": "Pickleball",
+    "concrete": "Béton",
+    "acrylic": "Acrylique",
+    "saveError": "Impossible d’enregistrer le court. Veuillez réessayer.",
+    "howMany": "Combien",
+    "howManyHint": "Ajoute {first} à {last}.",
+    "namePlaceholderMany": "Terre battue"
   },
   "dashboard": {
     "dashboard": "Tableau de bord",
@@ -197,6 +321,7 @@
     "manage": "Gérer",
     "members": "Membres",
     "plans": "Formules",
+    "publicPage": "Page publique",
     "coaches": "Coachs",
     "courts": "Courts",
     "club": "Club",
@@ -256,6 +381,7 @@
       "live": "En cours"
     },
     "titles": {
+      "plans": "Formules",
       "dashboard": "Tableau de bord",
       "bookings": "Réservations",
       "members": "Membres",
@@ -263,10 +389,14 @@
       "courts": "Courts",
       "analytics": "Analytique",
       "settings": "Paramètres",
-      "book": "Mes réservations",
+      "book": "Réserver un court",
       "profile": "Profil",
-      "membership": "Adhésion"
-    }
+      "membership": "Adhésion",
+      "timetable": "Planning",
+      "myBookings": "Mes réservations",
+      "share": "Partager avec les joueurs"
+    },
+    "share": "Partager"
   },
   "members": {
     "title": "Membres",
@@ -328,7 +458,7 @@
     "bioPlaceholder": "Courte description du coach...",
     "profileId": "ID de profil",
     "profileIdPlaceholder": "Coller l'ID de profil de l'utilisateur",
-    "profileNotFound": "Aucun profil trouvé avec cet ID. Assurez-vous que l'utilisateur s'est d'abord inscrit.",
+    "profileNotFound": "Aucun compte joueur trouvé avec cet e-mail. L’entraîneur doit d’abord s’inscrire.",
     "active": "Actif",
     "inactive": "Inactif",
     "activate": "Activer",
@@ -343,6 +473,1053 @@
     "intermediate": "Intermédiaire",
     "advanced": "Avancé",
     "junior": "Junior",
-    "adult": "Adulte"
+    "adult": "Adulte",
+    "coach": "Entraîneur",
+    "selectProfile": "Sélectionnez un utilisateur",
+    "alreadyCoach": "Cette personne est déjà entraîneur dans votre club.",
+    "coachEmail": "E-mail de l’entraîneur",
+    "coachEmailHint": "L’entraîneur doit avoir un compte ServeTime avec cet e-mail.",
+    "coachEmailPlaceholder": "entraineur@exemple.fr"
+  },
+  "clubPage": {
+    "signIn": "Se connecter",
+    "signUpToBook": "S’inscrire pour réserver",
+    "bookCourt": "Réserver un court",
+    "backToDashboard": "Retour au tableau de bord",
+    "courtsTitle": "Courts",
+    "courtsEmpty": "Ce club n’a pas encore publié de courts.",
+    "coachesTitle": "Entraîneurs",
+    "coach": "Entraîneur",
+    "plansTitle": "Adhésions",
+    "plansNote": "Pour devenir membre, contactez le club.",
+    "perHour": "/ h",
+    "discount": "{pct} % de réduction sur les réservations",
+    "website": "Site web",
+    "ctaTitle": "Envie de jouer à {club} ?",
+    "ctaText": "Créez un compte gratuit, consultez les créneaux libres et réservez en quelques secondes.",
+    "metaDescription": "Courts, entraîneurs et adhésions à {club}. Réservez en ligne avec ServeTime.",
+    "billing": {
+      "monthly": "/ mois",
+      "annual": "/ an",
+      "one_time": "paiement unique"
+    },
+    "indoor": "Couvert",
+    "outdoor": "Extérieur",
+    "sports": {
+      "tennis": "Tennis",
+      "padel": "Padel",
+      "pickleball": "Pickleball"
+    },
+    "surfaces": {
+      "clay": "Terre battue",
+      "hard": "Dur",
+      "grass": "Gazon",
+      "artificial_grass": "Gazon synthétique",
+      "carpet": "Moquette",
+      "concrete": "Béton",
+      "acrylic": "Acrylique"
+    },
+    "levels": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé",
+      "junior": "Junior",
+      "adult": "Adulte"
+    }
+  },
+  "myBookings": {
+    "title": "Mes réservations",
+    "bookCourt": "Réserver un court",
+    "bookedTitle": "Réservation confirmée !",
+    "bookedText": "À bientôt sur le court.",
+    "sessions": "Séances",
+    "hoursPlayed": "Heures jouées",
+    "totalSpent": "Total dépensé",
+    "thisWeek": "Cette semaine",
+    "nextUp": "À venir",
+    "noUpcoming": "Aucune réservation à venir",
+    "upcoming": "Prochaines",
+    "past": "Passées",
+    "ref": "Réf.",
+    "addToCalendar": "Ajouter au calendrier",
+    "cancelBooking": "Annuler la réservation",
+    "cancel": "Annuler",
+    "bookAgain": "Réserver à nouveau",
+    "inMinutes": "Dans {n} min",
+    "inHours": "Dans {n} h",
+    "tomorrow": "Demain",
+    "madeByClub": "Réservé par le club",
+    "lesson": "Cours avec {name}",
+    "booking": "Réservation",
+    "status": {
+      "confirmed": "Confirmée",
+      "pending": "En attente",
+      "cancelled": "Annulée",
+      "completed": "Terminée",
+      "no_show": "Absent"
+    },
+    "minutes": "{n} min",
+    "cancelClosed": "Trop tard pour annuler en ligne. Veuillez appeler le club."
+  },
+  "coachBooking": {
+    "allCoaches": "Tous les entraîneurs",
+    "coach": "Entraîneur",
+    "perHour": "/ h",
+    "bookTitle": "Réserver un cours",
+    "date": "Date",
+    "duration": "Durée",
+    "minutes": "{n} min",
+    "startTime": "Heure de début",
+    "closed": "Le club est fermé ce jour-là. Choisissez un autre jour.",
+    "loading": "Chargement des créneaux libres…",
+    "memberDiscount": "{pct} % de réduction membre",
+    "confirm": "Confirmer la réservation",
+    "booking": "Réservation…",
+    "selectTime": "Choisissez un horaire",
+    "cancelNote": "Annulation en ligne possible jusqu’à {hours} heures avant le début."
+  },
+  "profilePage": {
+    "title": "Mon profil",
+    "yourName": "Votre nom",
+    "sessions": "Séances",
+    "played": "Joué",
+    "upcoming": "À venir",
+    "spent": "Dépensé",
+    "membership": "Adhésion",
+    "member": "Membre",
+    "discount": "{pct} % de réduction sur les réservations",
+    "memberSince": "Membre depuis",
+    "renews": "Renouvellement le",
+    "noMembership": "Aucune adhésion active",
+    "noMembershipHint": "Contactez votre club pour être ajouté à une formule.",
+    "personalDetails": "Informations personnelles",
+    "account": "Compte",
+    "email": "E-mail",
+    "accountSince": "Compte créé en",
+    "fullName": "Nom complet",
+    "phone": "Téléphone",
+    "saved": "Enregistré",
+    "saving": "Enregistrement…",
+    "saveChanges": "Enregistrer les modifications",
+    "signOut": "Se déconnecter",
+    "billing": {
+      "monthly": "/ mois",
+      "annual": "/ an",
+      "one_time": "paiement unique"
+    },
+    "memberStatus": {
+      "active": "Active",
+      "cancelled": "Annulée",
+      "expired": "Expirée"
+    }
+  },
+  "membershipPage": {
+    "title": "Adhésion",
+    "subtitle": "Votre formule et les autres formules de votre club",
+    "yourPlan": "Votre formule",
+    "notMember": "Vous n’êtes pas encore membre",
+    "notMemberHint": "Contactez votre club pour être ajouté comme membre.",
+    "noPlan": "Aucune formule attribuée",
+    "noPlanHint": "Parlez à l’administrateur de votre club",
+    "discountEvery": "{pct} % de réduction sur chaque réservation",
+    "expires": "Expire le {date}",
+    "availablePlans": "Formules de {club}",
+    "current": "Actuelle",
+    "discountBookings": "{pct} % de réduction sur les réservations",
+    "changePlan": "Pour changer de formule, contactez l’administrateur du club.",
+    "billing": {
+      "monthly": "mensuel",
+      "annual": "annuel",
+      "one_time": "paiement unique"
+    },
+    "status": {
+      "active": "Active",
+      "cancelled": "Annulée",
+      "expired": "Expirée"
+    }
+  },
+  "plansAdmin": {
+    "title": "Formules d’adhésion",
+    "count": "{n, plural, one {# formule} other {# formules}}",
+    "addPlan": "Ajouter une formule",
+    "empty": "Aucune formule pour l’instant. Créez-en une pour l’attribuer aux membres.",
+    "addFirst": "Ajouter votre première formule",
+    "discount": "{pct} % de réduction sur les réservations",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "deleting": "Suppression…",
+    "confirmDelete": "Supprimer cette formule ? Les membres qui l’ont la perdront.",
+    "editPlan": "Modifier la formule",
+    "name": "Nom de la formule",
+    "namePlaceholder": "Adhésion mensuelle",
+    "nameRequired": "Le nom est obligatoire",
+    "price": "Prix (€)",
+    "billingPeriod": "Période de facturation",
+    "discountField": "Réduction sur les réservations (%)",
+    "description": "Description",
+    "descriptionPlaceholder": "Ce que comprend cette formule…",
+    "cancel": "Annuler",
+    "saving": "Enregistrement…",
+    "saveChanges": "Enregistrer les modifications",
+    "billing": {
+      "monthly": "Mensuel",
+      "annual": "Annuel",
+      "one_time": "Paiement unique"
+    }
+  },
+  "courtDetail": {
+    "courts": "Courts",
+    "details": "Détails",
+    "upcoming": "Réservations à venir",
+    "noUpcoming": "Aucune réservation à venir.",
+    "unknown": "Inconnu"
+  },
+  "emails": {
+    "greeting": "Bonjour {name},",
+    "greetingNoName": "Bonjour,",
+    "lessonWith": "Cours avec {name}",
+    "minutes": "{n} min",
+    "viewBookings": "Voir mes réservations",
+    "labels": {
+      "what": "Réservation",
+      "club": "Club",
+      "when": "Quand",
+      "duration": "Durée",
+      "price": "Prix",
+      "reference": "Référence",
+      "plan": "Formule",
+      "ends": "Se termine le",
+      "phone": "Téléphone",
+      "email": "E-mail"
+    },
+    "confirmed": {
+      "subject": "Réservation confirmée : {what}, {date} à {time}",
+      "intro": "Votre réservation est confirmée. À bientôt sur le court !"
+    },
+    "cancelled": {
+      "subject": "Réservation annulée : {what}, {date}",
+      "intro": "Votre réservation a été annulée. Si ce n’est pas vous, contactez le club."
+    },
+    "reminder": {
+      "subject": "Rappel : {what}, {date} à {time}",
+      "intro": "Un petit rappel de votre réservation à venir. Vous ne pouvez pas venir ? Annulez dans l’application pour que quelqu’un d’autre puisse jouer."
+    },
+    "renewal": {
+      "subject": "Votre adhésion à {club} se termine le {date}",
+      "intro": "Votre adhésion à {club} se termine le {date}. Pour garder vos avantages membre, contactez le club pour la renouveler.",
+      "contact": "Écrire au club"
+    },
+    "report": {
+      "subject": "{club} : votre semaine en chiffres ({week})",
+      "intro": "Voici le bilan de la semaine {week} à {club}.",
+      "bookings": "Réservations",
+      "revenue": "Chiffre d’affaires",
+      "occupancy": "Occupation des courts",
+      "cancellations": "Annulations",
+      "noShows": "Absences",
+      "newMembers": "Nouveaux membres",
+      "expiring": "Adhésions qui se terminent dans les 14 prochains jours",
+      "noneExpiring": "Aucune",
+      "openDashboard": "Ouvrir le tableau de bord"
+    },
+    "footerPlayer": "Envoyé par ServeTime pour le compte de {club}.",
+    "footerOwner": "Vous recevez ce résumé hebdomadaire parce que vous gérez un club sur ServeTime."
+  },
+  "billing": {
+    "trialBanner": "Essai gratuit : encore {days, plural, one {# jour} other {# jours}}. Tout est débloqué.",
+    "unpaidBanner": "Votre essai gratuit est terminé. Écrivez-nous pour continuer avec votre formule.",
+    "seePlan": "Voir votre formule",
+    "contact": "Nous contacter",
+    "lockedTitle": "{feature} — disponible avec la formule {plan}",
+    "lockedBody": "Écrivez-nous et nous passerons votre club à la formule {plan}.",
+    "courtsUsed": "{used} sur {max} terrains actifs",
+    "courtLimit": "Votre formule permet {max} terrains actifs. Désactivez-en un ou changez de formule.",
+    "cardTitle": "Votre formule ServeTime",
+    "trialUntil": "Essai gratuit jusqu'au {date}",
+    "paidUntil": "Payé jusqu'au {date}",
+    "unpaid": "Pas encore payé",
+    "courts": "Terrains",
+    "unlimited": "Illimité",
+    "perMonth": "{price} € / mois",
+    "trialNote": "Pendant l'essai, tout est débloqué, sans limite de terrains.",
+    "changePlan": "Pour changer de formule ou payer, écrivez à {email}.",
+    "features": {
+      "membershipPlans": "Abonnements",
+      "coaches": "Entraîneurs",
+      "reminders": "E-mails de rappel",
+      "weeklyReport": "Rapport hebdomadaire",
+      "analytics": "Statistiques"
+    },
+    "planNames": {
+      "starter": "Starter",
+      "club": "Club",
+      "academy": "Academy"
+    }
+  },
+  "setup": {
+    "title": "Créez votre club",
+    "subtitle": "Seulement l’essentiel pour l’instant. Vous pourrez ajouter adresse, téléphone et logo plus tard dans les Paramètres.",
+    "name": "Nom du club",
+    "nameError": "Saisissez le nom de votre club.",
+    "city": "Ville",
+    "cityError": "Saisissez la ville.",
+    "country": "Pays",
+    "create": "Créer le club",
+    "creating": "Création…",
+    "error": "Impossible de créer votre club. Veuillez réessayer.",
+    "trialNote": "Votre mois gratuit commence aujourd’hui. Aucune carte requise."
+  },
+  "onboarding": {
+    "title": "Préparez votre club",
+    "subtitle": "Quelques étapes et les joueurs pourront réserver en ligne.",
+    "progress": "{done} sur {total} terminées",
+    "done": "terminé",
+    "todo": "à faire",
+    "steps": {
+      "courts": {
+        "title": "Ajoutez vos terrains",
+        "body": "Ajoutez chaque terrain avec son sport, sa surface et son prix horaire. Vous pouvez en ajouter plusieurs à la fois.",
+        "cta": "Ajouter des terrains"
+      },
+      "hours": {
+        "title": "Vérifiez vos horaires",
+        "body": "Les joueurs ne peuvent réserver que pendant vos horaires. Par défaut : 07:00–22:00 tous les jours.",
+        "cta": "Définir les horaires"
+      },
+      "plans": {
+        "title": "Créez un abonnement",
+        "body": "Abonnements mensuels ou annuels, avec une réduction sur chaque réservation.",
+        "cta": "Créer un abonnement"
+      },
+      "members": {
+        "title": "Ajoutez vos membres",
+        "body": "Ajoutez vos membres actuels pour que leur réduction s’applique quand ils réservent.",
+        "cta": "Ajouter des membres"
+      },
+      "shared": {
+        "title": "Partagez votre lien de réservation",
+        "body": "Envoyez le lien à vos joueurs ou imprimez l’affiche QR. Cette étape se coche toute seule à la première réservation en ligne.",
+        "cta": "Partager"
+      }
+    }
+  },
+  "share": {
+    "title": "Partagez avec vos joueurs",
+    "subtitle": "Les joueurs réservent depuis la page de votre club. Voici tout ce qu’il faut pour les y amener.",
+    "linkTitle": "Votre lien de réservation",
+    "linkBody": "Mettez-le sur votre site, votre page Instagram ou Facebook.",
+    "copyLink": "Copier le lien",
+    "copied": "Copié",
+    "messageTitle": "Message pour vos joueurs",
+    "messageBody": "Envoyez-le au groupe WhatsApp ou Viber de votre club.",
+    "copyMessage": "Copier le message",
+    "message": "🎾 Vous pouvez maintenant réserver un terrain chez {club} en ligne !\nChoisissez un créneau libre et réservez en moins d’une minute :\n{link}",
+    "qrTitle": "Code QR",
+    "qrBody": "Imprimez l’affiche et accrochez-la au club, près des terrains ou à l’accueil.",
+    "qrAlt": "Code QR qui ouvre la page de réservation du club",
+    "printPoster": "Ouvrir l’affiche à imprimer",
+    "downloadQr": "Télécharger le code QR",
+    "poster": {
+      "title": "Réservez votre terrain en ligne",
+      "body": "Scannez le code avec l’appareil photo de votre téléphone, choisissez un créneau libre et c’est réservé. Aucune appli nécessaire.",
+      "step1": "Scannez le code",
+      "step2": "Choisissez terrain et horaire",
+      "step3": "Jouez !",
+      "orVisit": "Ou ouvrez ce lien :",
+      "print": "Imprimer l’affiche",
+      "qrAlt": "Code QR qui ouvre la page de réservation"
+    }
+  },
+  "hero": {
+    "stats": {
+      "clubs": "Clubs utilisent ServeTime",
+      "bookings": "Réservations traitées",
+      "satisfaction": "Satisfaction client",
+      "setup": "Temps moyen de mise en place"
+    },
+    "title1": "Remplissez vos terrains.",
+    "title2": "Faites grandir votre club.",
+    "subtitle": "ServeTime donne aux clubs de tennis et aux entraîneurs les outils pour gérer terrains, plannings et réservations – au même endroit. Moins d’administratif, plus de temps sur le court.",
+    "getStarted": "Commencer",
+    "seeHow": "Voir comment ça marche"
+  },
+  "announcement": {
+    "new": "Nouveau",
+    "live": "La réservation publique est en ligne –",
+    "createLink": "Créez un lien. Accueillez des joueurs partout.",
+    "learnMore": "En savoir plus →"
+  },
+  "cta": {
+    "title1": "Vos terrains méritent",
+    "title2": "un meilleur logiciel.",
+    "trial": "Essayez tout gratuitement pendant un mois.",
+    "noCard": "Aucune carte bancaire requise.",
+    "start": "Commencer le mois gratuit",
+    "player": "Je suis joueur →"
+  },
+  "footer": {
+    "statement": "Logiciel de réservation pour clubs de tennis, padel et pickleball.",
+    "setUp": "Créer votre club",
+    "navLabel": "Pied de page",
+    "groups": {
+      "product": "Produit",
+      "account": "Compte",
+      "legal": "Mentions légales"
+    },
+    "links": {
+      "features": "Fonctionnalités",
+      "how": "Comment ça marche",
+      "pricing": "Tarifs",
+      "signIn": "Se connecter",
+      "forClubs": "Pour les clubs",
+      "forPlayers": "Pour les joueurs",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions d’utilisation"
+    }
+  },
+  "testimonials": {
+    "label": "Ce que disent les clubs",
+    "title": "Les clubs qui utilisent ServeTime"
+  },
+  "howItWorks": {
+    "label": "Mise en place simple",
+    "title": "Opérationnel en 30 minutes",
+    "subtitle": "Pas besoin d’équipe informatique. La prise en main prend quelques minutes, pas des jours.",
+    "steps": {
+      "create": {
+        "title": "Créez votre club",
+        "body": "Ajoutez vos terrains, définissez vos horaires et vos tarifs. La page de votre club est en ligne immédiatement – sans développement."
+      },
+      "invite": {
+        "title": "Invitez vos membres",
+        "body": "Partagez un seul lien. Les membres s’inscrivent, créent leur profil et réservent seuls – sans assistance."
+      },
+      "run": {
+        "title": "Et tout tourne tout seul",
+        "body": "Réservations, paiements, rappels, listes d’attente – tout est automatisé. Concentrez-vous sur votre communauté, pas sur des tableurs."
+      }
+    }
+  },
+  "sports": {
+    "padel": {
+      "title": "Padel",
+      "description": "Le sport de raquette qui grandit le plus vite en Europe. Donnez à vos terrains de padel leurs propres plannings, durées et tarifs."
+    },
+    "tennis": {
+      "title": "Tennis",
+      "description": "Terre battue, dur ou couvert. Simples, doubles et cours réservés en quelques secondes sur chacun de vos terrains."
+    },
+    "pickleball": {
+      "title": "Pickleball",
+      "description": "Parties courtes et rotation rapide. Proposez des créneaux plus courts pour que plus de joueurs jouent chaque heure."
+    },
+    "coaching": {
+      "title": "Cours",
+      "description": "Cours particuliers, stages collectifs et programmes jeunes, réservés directement dans l’agenda de vos entraîneurs."
+    },
+    "learnMore": "En savoir plus",
+    "eyebrow": "Tous les terrains",
+    "intro": "Tennis, padel ou pickleball – ServeTime gère tout. Configurez chaque terrain comme votre club le joue et gérez réservations, membres et cours depuis un seul tableau de bord."
+  },
+  "featureCards": {
+    "label": "Pensé pour chaque rôle",
+    "title1": "Tout ce dont votre club a besoin,",
+    "title2": "rien de superflu",
+    "subtitle": "Un ensemble d’outils ciblés qui fonctionnent vraiment ensemble – pas une suite surchargée que personne n’utilise.",
+    "scheduling": {
+      "title": "Planning intelligent, zéro conflit",
+      "body": "Détection automatique des conflits, temps tampon, jours bloqués et fenêtres de réservation glissantes – le calendrier tourne tout seul.",
+      "today": "Aujourd’hui",
+      "available": "Libre",
+      "blocked": "Bloqué"
+    },
+    "reminders": {
+      "title": "Rappels automatiques",
+      "body": "Des rappels par SMS et e-mail partent automatiquement avant chaque réservation. Moins d’absences, sans lever le petit doigt.",
+      "court": "Terrain 3 · demain 10:00",
+      "lesson": "Cours avec Sara F. · aujourd’hui",
+      "before24": "24 h avant",
+      "before2": "2 h avant",
+      "sent": "Rappel envoyé"
+    },
+    "payments": {
+      "title": "Chaque paiement enregistré",
+      "body": "Les joueurs paient au club, comme aujourd’hui. ServeTime enregistre le prix de chaque réservation pour que vous sachiez ce que rapporte chaque terrain. Sans commission.",
+      "last7": "7 derniers jours"
+    },
+    "utilisation": {
+      "title": "L’occupation des terrains en un coup d’œil",
+      "body": "Voyez quels terrains se remplissent et lesquels restent vides. Fixez vos prix avec de vraies données.",
+      "c1": "Terrain 1 – Terre battue",
+      "c2": "Terrain 2 – Dur",
+      "c3": "Terrain 3 – Couvert"
+    },
+    "team": {
+      "title": "Toute votre équipe, un seul tableau de bord",
+      "body": "Invitez plusieurs administrateurs et entraîneurs. Avec des droits par rôle, chacun voit exactement ce dont il a besoin – et rien d’autre.",
+      "headAdmin": "Administrateur principal",
+      "fullAccess": "Accès complet",
+      "coach": "Entraîneur",
+      "coachingOnly": "Cours uniquement",
+      "receptionist": "Accueil",
+      "bookingsOnly": "Réservations uniquement"
+    }
+  },
+  "pricing": {
+    "label": "Tarifs simples",
+    "title1": "Pas de surprise.",
+    "title2": "Pas de frais cachés.",
+    "subtitle": "Essayez tout gratuitement pendant un mois. Sans carte, sans commission sur les réservations, résiliable à tout moment.",
+    "mostPopular": "Le plus choisi",
+    "perMonth": "/mois",
+    "yearly": "ou {price} € par an (économisez {save} €)",
+    "cta": "Commencer le mois gratuit",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "tagline": "Pour les petits clubs avec quelques terrains.",
+        "features": [
+          "Jusqu’à {courts} terrains",
+          "Membres illimités",
+          "Réservation en ligne",
+          "E-mails de confirmation"
+        ]
+      },
+      "club": {
+        "name": "Club",
+        "tagline": "Pour les clubs qui réservent tous les jours.",
+        "features": [
+          "Jusqu’à {courts} terrains",
+          "Tout Starter",
+          "Abonnements avec réductions",
+          "Entraîneurs et cours",
+          "E-mails de rappel",
+          "Rapport hebdomadaire"
+        ]
+      },
+      "academy": {
+        "name": "Academy",
+        "tagline": "Pour les académies avec entraîneurs et personnel.",
+        "features": [
+          "Terrains illimités",
+          "Tout Club",
+          "Statistiques",
+          "Plusieurs administrateurs (bientôt)",
+          "Support prioritaire"
+        ]
+      }
+    }
+  },
+  "faq": {
+    "items": {
+      "setup": {
+        "q": "Combien de temps faut-il pour démarrer ?",
+        "a": "Créez votre club, ajoutez vos terrains avec leurs prix, et vous pouvez prendre votre première réservation le jour même. Rien à installer, aucune formation. Si vous bloquez, écrivez-nous et nous vous aiderons."
+      },
+      "cost": {
+        "q": "Combien ça coûte ?",
+        "a": "Chaque club a le premier mois gratuit, tout débloqué et sans carte. Ensuite, Starter coûte {starter} € par mois jusqu’à {starterCourts} terrains, Club {club} € par mois jusqu’à {clubCourts} terrains, et Academy {academy} € par mois sans limite de terrains. Payer à l’année revient à 10 mois. Toutes les formules incluent des membres illimités, sans frais d’installation ni commission sur les réservations, et vous pouvez résilier à tout moment."
+      },
+      "app": {
+        "q": "Mes joueurs doivent-ils télécharger une appli ?",
+        "a": "Non. ServeTime fonctionne dans le navigateur sur téléphone, tablette ou ordinateur. Les joueurs ouvrent le lien de réservation du club, s’inscrivent avec leur e-mail ou leur compte Google et réservent un terrain."
+      },
+      "phone": {
+        "q": "Puis-je encore prendre des réservations par téléphone ou sur place ?",
+        "a": "Oui. Vous pouvez ajouter vous-même une réservation pour un membre ou un client de passage, pour que tout soit dans un seul planning, quel que soit le canal."
+      },
+      "sports": {
+        "q": "Quels sports et terrains sont pris en charge ?",
+        "a": "Tennis, padel et pickleball. Chaque terrain a son sport, sa surface, son statut couvert ou extérieur et son prix horaire : un club avec des terrains variés gère tout au même endroit."
+      },
+      "payOnline": {
+        "q": "Les joueurs peuvent-ils payer en ligne ?",
+        "a": "Pas encore. Le paiement en ligne est en développement. Pour l’instant, les joueurs paient au club comme d’habitude, et ServeTime enregistre le prix de chaque réservation pour que vous voyiez ce que rapporte chaque terrain."
+      },
+      "languages": {
+        "q": "Dans quelles langues est-il disponible ?",
+        "a": "Anglais, macédonien, albanais, allemand, français et italien. Chacun choisit sa langue : le personnel et les joueurs peuvent en utiliser des différentes."
+      },
+      "data": {
+        "q": "Que deviennent nos données si nous arrêtons ServeTime ?",
+        "a": "Les données de votre club vous appartiennent. Si vous partez, dites-le-nous et nous supprimerons votre club, vos membres et vos réservations."
+      }
+    },
+    "stillQuestions": "Encore des questions ?",
+    "writeUs": "Écrivez-nous, nous vous répondrons.",
+    "contact": "Contacter le support",
+    "label": "FAQ",
+    "title": "Des questions ?",
+    "weveGot": "Nous avons",
+    "answers": "les réponses.",
+    "subtitle": "Ce que les dirigeants de clubs nous demandent le plus avant de commencer."
+  },
+  "settingsPage": {
+    "sections": {
+      "club": "Infos du club",
+      "hours": "Horaires",
+      "profile": "Votre profil",
+      "booking": "Règles de réservation",
+      "payments": "Paiements",
+      "notifications": "Notifications",
+      "danger": "Zone de danger"
+    },
+    "days": [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+    ],
+    "uploading": "Envoi…",
+    "uploadLogo": "Téléverser le logo",
+    "minutes": "{n} min",
+    "cancelAnyTime": "À tout moment",
+    "cancelUntil": "Jusqu’à {h} h avant le début",
+    "noLimit": "Sans limite",
+    "neverPause": "Ne jamais suspendre la réservation en ligne",
+    "pauseAfter": "Suspendre la réservation en ligne après {n} absences",
+    "noShowHelp": "Compte les {days} derniers jours. Marquez les absences dans Réservations ; en modifier une lève la suspension. Vous pouvez toujours réserver vous-même pour le joueur.",
+    "saving": "Enregistrement…",
+    "saveChanges": "Enregistrer",
+    "clubInfo": "Infos du club",
+    "basicInformationAboutYourClub": "Informations de base sur votre club, visibles par les membres.",
+    "clubLogo": "Logo du club",
+    "clubName": "Nom du club",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "city": "Ville",
+    "country": "Pays",
+    "website": "Site web",
+    "description": "Description",
+    "openingHours": "Horaires",
+    "setYourClubsOperatingHours": "Définissez les horaires de votre club pour chaque jour de la semaine.",
+    "yourProfile": "Votre profil",
+    "yourOwnNamePhoneAnd": "Votre nom, téléphone et photo, visibles par votre équipe et vos joueurs.",
+    "bookingRules": "Règles de réservation",
+    "whatPlayersCanBookOnline": "Ce que les joueurs peuvent réserver en ligne. Vous pouvez toujours tout réserver vous-même depuis le planning.",
+    "bookingLengthsPlayersCanChoose": "Durées proposées aux joueurs",
+    "bookUpToDaysAhead": "Réservable jusqu’à (jours à l’avance)",
+    "cancellingOnline": "Annulation en ligne",
+    "bookingsPerPlayerPerDay": "Réservations par joueur et par jour",
+    "repeatNoShows": "Absences répétées",
+    "payments": "Paiements",
+    "configurePricingCurrencyAndPayment": "Configurez tarifs, devise et moyens de paiement.",
+    "currency": "Devise",
+    "taxRate": "Taux de TVA (%)",
+    "stripeIntegration": "Intégration Stripe",
+    "onlinePayments": "Paiements en ligne",
+    "requirePaymentAtTimeOf": "Exiger le paiement à la réservation",
+    "refunds": "Remboursements",
+    "allowAutomaticRefundsOnCancellation": "Autoriser les remboursements automatiques en cas d’annulation dans les délais",
+    "notifications": "Notifications",
+    "chooseWhichEmailNotificationsAre": "Choisissez les e-mails envoyés automatiquement.",
+    "replyToEmail": "E-mail de réponse",
+    "dangerZone": "Zone de danger",
+    "irreversibleActionsProceedWithCaution": "Actions irréversibles. Procédez avec prudence.",
+    "exportAllData": "Exporter toutes les données",
+    "downloadAFullExportOf": "Téléchargez un export complet des données de votre club, y compris réservations, membres et paiements.",
+    "exportData": "Exporter",
+    "clearAllBookings": "Effacer toutes les réservations",
+    "permanentlyDeleteAllBookingHistory": "Supprime définitivement tout l’historique des réservations. Action irréversible.",
+    "clearBookings": "Effacer les réservations",
+    "deleteClub": "Supprimer le club",
+    "permanentlyDeleteYourClubAnd": "Supprime définitivement votre club et toutes ses données. Cette action est irréversible.",
+    "deleteClub2": "Supprimer le club",
+    "bookingConfirmed": "Réservation confirmée",
+    "sentToMemberWhenA": "Envoyé au membre quand une réservation est confirmée",
+    "bookingCancelled": "Réservation annulée",
+    "sentWhenABookingIs": "Envoyé quand une réservation est annulée par l’une des parties",
+    "bookingReminder": "Rappel de réservation",
+    "sent24hBeforeTheBooking": "Envoyé 24 h avant le début de la réservation",
+    "newMemberJoined": "Nouveau membre",
+    "sentToAdminWhenA": "Envoyé à l’administrateur quand un nouveau membre s’inscrit",
+    "paymentReceived": "Paiement reçu",
+    "sentToMemberAfterSuccessful": "Envoyé au membre après un paiement réussi",
+    "cancellationRefundIssued": "Remboursement effectué",
+    "sentWhenARefundIs": "Envoyé quand un remboursement est traité",
+    "settings": "Paramètres",
+    "soon": "Bientôt",
+    "to": "à",
+    "closed": "Fermé",
+    "clickTheCameraToUpload": "Cliquez sur l’appareil photo pour ajouter une image.",
+    "stripe": "Stripe",
+    "notConnected": "Non connecté",
+    "connectStripe": "Connecter Stripe",
+    "comingSoonTheseSettingsAre": "Bientôt disponible. Ces paramètres sont un aperçu et ne sont pas encore enregistrés.",
+    "saved": "Enregistré",
+    "playersSeeOnly": "Les joueurs ne voient que les durées et les jours que vous autorisez. Quand il est trop tard pour annuler en ligne, on leur demande d’appeler le club."
+  },
+  "analytics": {
+    "daysShort": [
+      "Lun",
+      "Mar",
+      "Mer",
+      "Jeu",
+      "Ven",
+      "Sam",
+      "Dim"
+    ],
+    "heatmapCell": "{day} {hour}:00 – {n, plural, one {# réservation} other {# réservations}}",
+    "oneYear": "1 an",
+    "days": "{n} jours",
+    "vsPrevious": "vs période précédente",
+    "changeUp": "+{pct} % vs les {days} jours précédents",
+    "changeDown": "{pct} % vs les {days} jours précédents",
+    "same": "Identique aux {days} jours précédents",
+    "lastDays": "{n} derniers jours",
+    "revenue": "Revenus",
+    "bookings": "Réservations",
+    "members": "Membres",
+    "sports": {
+      "tennis": "Tennis",
+      "padel": "Padel",
+      "pickleball": "Pickleball"
+    },
+    "totalRevenue": "Revenu total",
+    "totalBookings": "Total des réservations",
+    "last12Months": "12 derniers mois",
+    "activeMembers": "Membres actifs",
+    "allTime": "Depuis le début",
+    "expiringSoon": "Expirent bientôt",
+    "next30Days": "30 prochains jours",
+    "revenueOverTime": "Revenus dans le temps",
+    "bookingsByStatus": "Réservations par statut",
+    "revenueBySport": "Revenus par sport",
+    "peakHours": "Heures de pointe",
+    "bookingFrequencyByDayAnd": "Fréquence des réservations par jour et heure",
+    "courtUtilization": "Occupation des terrains",
+    "bookingsPerCourtAllTime": "Réservations par terrain (depuis le début)",
+    "membersByPlan": "Membres par formule",
+    "currentDistribution": "Répartition actuelle",
+    "memberGrowth": "Croissance des membres",
+    "cumulativeMembersOver12Months": "Membres cumulés sur 12 mois",
+    "low": "Faible",
+    "high": "Élevé",
+    "analytics": "Statistiques",
+    "performanceOverviewForYourClub": "Vue d’ensemble des performances de votre club",
+    "noDataYet": "Pas encore de données",
+    "noCourtData": "Aucune donnée de terrain",
+    "noMembers": "Aucun membre"
+  },
+  "timetable": {
+    "title": "Planning",
+    "noCourts": "Pas encore de terrain",
+    "addCourt": "Ajouter un terrain",
+    "today": "Aujourd’hui",
+    "noBookings": "Aucune réservation ce jour-là.",
+    "noCourtsHint": "Ajoutez votre premier terrain : il apparaîtra ici en colonne, prêt pour les réservations.",
+    "lessonWith": "Cours avec {coach}"
+  },
+  "common": {
+    "closeMenu": "Fermer le menu",
+    "mainNav": "Menu principal",
+    "menu": "Menu",
+    "toggleMenu": "Afficher le menu",
+    "toggleSidebar": "Afficher/masquer la barre latérale",
+    "toggleSidebarHint": "Afficher/masquer la barre latérale (Ctrl+B)",
+    "notifications": "Notifications",
+    "selectLanguage": "Choisir la langue",
+    "avatar": "Photo de profil",
+    "changeAvatar": "Changer la photo",
+    "walkIn": "Client de passage",
+    "sport": "Sport",
+    "noPlan": "Sans formule"
+  },
+  "bookCourts": {
+    "titleAtClub": "Réserver un terrain chez {club}",
+    "title": "Réserver un terrain",
+    "available": "{n, plural, one {# terrain disponible} other {# terrains disponibles}}",
+    "bookCourt": "Réserver le terrain",
+    "date": "Date",
+    "startTime": "Heure de début",
+    "duration": "Durée",
+    "closed": "Fermé",
+    "minutes": "{n} min",
+    "memberDiscount": "Réduction membre {pct} %",
+    "booking": "Réservation…",
+    "confirm": "Confirmer · {price} €",
+    "showAll": "Voir tous les clubs",
+    "closedDay": "Le club est fermé ce jour-là. Choisissez un autre jour.",
+    "cancel": "Annuler",
+    "book": "Réserver"
+  },
+  "coachesList": {
+    "title": "Entraîneurs",
+    "empty": "Aucun entraîneur ne correspond à vos filtres",
+    "emptyHint": "Essayez un autre niveau pour voir plus d’entraîneurs.",
+    "viewProfile": "Voir le profil",
+    "coach": "Entraîneur",
+    "independent": "Indépendant",
+    "filterByLevel": "Filtrer par niveau",
+    "allLevels": "Tous les niveaux"
+  },
+  "bookingErrors": {
+    "coachTaken": "Cet entraîneur est déjà réservé à cette heure",
+    "slotTaken": "Ce créneau est déjà réservé",
+    "closedDay": "Le club est fermé ce jour-là",
+    "outsideHours": "Cette heure est en dehors des horaires du club",
+    "passed": "Cette heure est déjà passée",
+    "notAvailable": "Ce terrain ou cet entraîneur n’est pas disponible",
+    "failed": "La réservation a échoué",
+    "notSignedIn": "Connectez-vous pour réserver",
+    "courtNotFound": "Terrain introuvable",
+    "coachNotAvailable": "Cet entraîneur n’est pas disponible",
+    "invalid": "Données de réservation invalides",
+    "ruleLength": "Ce club ne propose pas de réservations de {n} minutes.",
+    "ruleDaysAhead": "Ce club accepte les réservations jusqu’à {n} jours à l’avance.",
+    "rulePerDay": "Vous pouvez faire jusqu’à {n} réservations par jour dans ce club.",
+    "ruleCancel": "Ce club n’autorise l’annulation que jusqu’à {n} heures avant le début. Veuillez appeler le club.",
+    "ruleNoShows": "La réservation en ligne est suspendue après {n} absences. Veuillez contacter le club.",
+    "noCourtFree": "Tous les terrains sont pris à cette heure. Choisissez une autre heure."
+  },
+  "settingsErrors": {
+    "sevenDays": "Sept jours sont nécessaires",
+    "timeFormat": "Utilisez des heures comme 08:00",
+    "closeAfterOpen": "L’heure de fermeture doit être après l’ouverture",
+    "durations": "Choisissez au moins une durée de réservation.",
+    "lengthUnavailable": "Cette durée n’est pas disponible.",
+    "daysAhead": "Les joueurs peuvent réserver de 1 à {max} jours à l’avance.",
+    "cancelDeadline": "Choisissez un délai d’annulation dans la liste.",
+    "perDay": "Choisissez une limite journalière dans la liste.",
+    "noShows": "Choisissez une limite d’absences dans la liste.",
+    "notAllowed": "Non autorisé",
+    "needName": "Le club doit avoir un nom",
+    "badWebsite": "Cette adresse de site web ne semble pas correcte",
+    "saveFailed": "Échec de l’enregistrement. Veuillez réessayer.",
+    "chooseImage": "Choisissez une image",
+    "notImage": "Le logo doit être une image",
+    "tooBig": "L’image doit faire moins de 2 Mo",
+    "uploadFailed": "Échec de l’envoi. Veuillez réessayer."
+  },
+  "meta": {
+    "description": "Réservez des terrains de tennis et des entraîneurs près de chez vous."
+  },
+  "legal": {
+    "label": "Mentions légales",
+    "updated": "Dernière mise à jour : {date}",
+    "contents": "Sommaire",
+    "contactTitle": "Contact",
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "intro": "Cette politique explique quelles données personnelles ServeTime collecte, pourquoi nous les collectons et ce que vous pouvez faire à ce sujet. ServeTime est un système de réservation en ligne pour les clubs sportifs : les clubs l’utilisent pour gérer leurs terrains, leurs membres et leurs entraîneurs, et les joueurs pour réserver.",
+      "sections": [
+        {
+          "title": "Qui est responsable",
+          "body": [
+            "Pour votre compte ServeTime et votre utilisation du site, ServeTime décide de l’usage de vos données et en est responsable (le « responsable du traitement »). Nos coordonnées figurent à la fin de cette page.",
+            "Lorsqu’un club enregistre des informations sur ses membres, ses joueurs de passage ou ses réservations, c’est le club qui décide de ce qu’il enregistre et qui est responsable de ces données. ServeTime les stocke et les traite pour le compte du club (en tant que « sous-traitant »). Pour toute question sur ces données, contactez le club ; nous l’aiderons à vous répondre."
+          ]
+        },
+        {
+          "title": "Les données que nous collectons",
+          "body": [
+            [
+              "<b>Données de compte :</b> votre nom, votre adresse e-mail, votre mot de passe (stocké uniquement sous forme chiffrée) et votre rôle (joueur, entraîneur ou administrateur de club). Si vous vous connectez avec Google, Google nous transmet votre nom, votre adresse e-mail et votre photo de profil.",
+              "<b>Informations de profil</b> que vous choisissez d’ajouter, comme un numéro de téléphone et une photo de profil.",
+              "<b>Réservations :</b> le terrain ou l’entraîneur, la date et l’heure, le prix, le statut, et si la réservation a été annulée ou marquée comme absence.",
+              "<b>Informations sur le club</b> saisies par les administrateurs : nom du club, adresse, coordonnées, logo, horaires d’ouverture, terrains, prix et règles de réservation.",
+              "<b>Profils d’entraîneurs :</b> le nom et la photo de l’entraîneur, les niveaux et spécialités qu’il enseigne, son tarif et une courte description. Les profils d’entraîneurs sont publics.",
+              "<b>Données des membres</b> saisies par les clubs : nom, adresse e-mail, numéro de téléphone, formule et statut d’adhésion, ainsi que des notes privées visibles uniquement par le club.",
+              "<b>Données techniques :</b> les cookies décrits ci-dessous et les journaux de serveur (adresse IP, type de navigateur, etc.) conservés par nos hébergeurs pour la sécurité et le dépannage."
+            ],
+            "Nous n’utilisons pas de cookies publicitaires, de suivi ou de mesure d’audience, et nous ne vendons pas vos données."
+          ]
+        },
+        {
+          "title": "Pourquoi nous les utilisons",
+          "body": [
+            [
+              "<b>Pour fournir le service :</b> créer votre compte, prendre les réservations, afficher le planning des clubs et envoyer les confirmations et rappels de réservation. Base légale : l’exécution de notre contrat avec vous.",
+              "<b>Pour que le service reste sûr et fonctionne :</b> prévenir les abus, corriger les erreurs et appliquer les règles de réservation de chaque club. Base légale : notre intérêt légitime à exploiter un service sûr et fiable.",
+              "<b>Pour la facturation des clubs :</b> facturer la formule du club et tenir la comptabilité. Base légale : notre contrat avec le club et nos obligations légales.",
+              "<b>Pour vous répondre</b> lorsque vous nous écrivez."
+            ],
+            "Nous envoyons des e-mails uniquement au sujet de votre compte et de vos réservations (et, aux administrateurs de club, au sujet de la formule du club et des rapports hebdomadaires). Nous ne vous enverrons pas d’e-mails marketing sans votre accord préalable."
+          ]
+        },
+        {
+          "title": "Qui peut voir vos données",
+          "body": [
+            [
+              "<b>Le club où vous réservez</b> voit votre nom, vos coordonnées et vos réservations dans ce club, y compris les absences.",
+              "<b>Tout le monde</b> peut voir les pages des clubs, les terrains, les horaires d’ouverture et les profils d’entraîneurs.",
+              "<b>Les prestataires</b> qui font fonctionner une partie de ServeTime pour nous : Supabase (base de données, connexion et stockage de fichiers), notre prestataire d’e-mail (Resend ou un service de messagerie standard) et notre hébergeur web. Ils ne peuvent utiliser les données que pour nous fournir leur service.",
+              "<b>Les autorités</b>, lorsque la loi nous y oblige."
+            ],
+            "Certains de ces prestataires sont établis dans d’autres pays ou y utilisent des serveurs, notamment aux États-Unis. Lorsque des données quittent la Macédoine du Nord ou l’Union européenne, nous nous appuyons sur les garanties prévues par la loi, comme les clauses contractuelles types de la Commission européenne."
+          ]
+        },
+        {
+          "title": "Durée de conservation",
+          "body": [
+            [
+              "<b>Données de compte et de profil :</b> tant que votre compte existe. Lorsque vous demandez la suppression de votre compte, nous supprimons ou anonymisons vos données dans un délai de 30 jours.",
+              "<b>Réservations :</b> tant que le compte du club existe, car le club a besoin de son historique. Les absences ne comptent dans les limites d’un club que pendant 90 jours.",
+              "<b>Données du club :</b> tant que le club utilise ServeTime, puis 90 jours après son départ, pour qu’il puisse revenir sans rien perdre. Les factures et pièces comptables sont conservées aussi longtemps que l’exige la loi fiscale.",
+              "<b>Journaux de serveur :</b> pendant une courte durée, selon les réglages de nos hébergeurs."
+            ]
+          ]
+        },
+        {
+          "title": "Cookies",
+          "body": [
+            "ServeTime n’utilise que les cookies nécessaires au fonctionnement du site :",
+            [
+              "<b>Des cookies de connexion</b> définis par Supabase, qui vous gardent connecté.",
+              "<b>Un cookie de langue</b> (NEXT_LOCALE), qui mémorise la langue que vous avez choisie."
+            ],
+            "Ces cookies étant strictement nécessaires, nous ne demandons pas votre consentement pour les utiliser. Si vous les bloquez, vous ne pourrez pas vous connecter."
+          ]
+        },
+        {
+          "title": "Vos droits",
+          "body": [
+            "Vous pouvez à tout moment nous demander de :",
+            [
+              "vous montrer les données personnelles que nous détenons sur vous et vous en remettre une copie ;",
+              "corriger les données inexactes ou incomplètes ;",
+              "supprimer vos données et votre compte ;",
+              "limiter l’utilisation de vos données, ou vous y opposer ;",
+              "vous fournir vos données dans un format courant et lisible par machine pour les emporter ailleurs ;",
+              "et vous pouvez retirer à tout moment un consentement donné."
+            ],
+            "Écrivez à {email} depuis l’adresse e-mail de votre compte. Nous répondons dans un délai d’un mois. Si votre demande concerne des données enregistrées par un club, nous la transmettrons au club.",
+            "Si vous estimez que nous avons mal traité vos données, vous pouvez saisir l’Agence pour la protection des données personnelles de Macédoine du Nord (azlp.mk) ou l’autorité de protection des données du pays de l’UE où vous résidez."
+          ]
+        },
+        {
+          "title": "Sécurité",
+          "body": [
+            "Toutes les données circulent par des connexions chiffrées (HTTPS). Les mots de passe sont stockés sous forme chiffrée et ni nous ni les clubs ne pouvons les voir. Des règles d’accès à la base de données garantissent que chaque club ne voit que ses propres données et chaque joueur que ses propres réservations."
+          ]
+        },
+        {
+          "title": "Enfants",
+          "body": [
+            "ServeTime n’est pas destiné à être utilisé seul par des enfants de moins de 14 ans. Un parent ou tuteur peut créer un compte et réserver pour un enfant."
+          ]
+        },
+        {
+          "title": "Modifications de cette politique",
+          "body": [
+            "Nous pouvons mettre à jour cette politique lorsque le service évolue. La date en haut de page indique la dernière modification. En cas de changement important, nous en informerons les utilisateurs par e-mail ou dans l’application avant son entrée en vigueur."
+          ]
+        }
+      ],
+      "contact": "Pour toute question sur cette politique ou vos données, écrivez à {email}."
+    },
+    "terms": {
+      "title": "Conditions d’utilisation",
+      "intro": "Ces conditions s’appliquent à toute personne qui utilise ServeTime : les clubs qui gèrent leurs terrains avec, et les joueurs qui réservent par son intermédiaire. En créant un compte ou en utilisant le site, vous acceptez ces conditions.",
+      "sections": [
+        {
+          "title": "Le service",
+          "body": [
+            "ServeTime est un logiciel en ligne pour les clubs sportifs. Les clubs publient leurs terrains, horaires, prix, entraîneurs et formules d’adhésion, et les joueurs réservent des terrains et des cours en ligne. ServeTime fournit uniquement le logiciel : nous ne gérons pas de clubs, ne possédons pas de terrains et n’employons pas d’entraîneurs."
+          ]
+        },
+        {
+          "title": "Votre compte",
+          "body": [
+            [
+              "Donnez des informations exactes lors de l’inscription et tenez-les à jour.",
+              "Gardez votre mot de passe pour vous et ne partagez pas votre compte. Vous êtes responsable de ce qui est fait avec.",
+              "Si vous pensez que quelqu’un d’autre a utilisé votre compte, prévenez-nous immédiatement à {email}."
+            ]
+          ]
+        },
+        {
+          "title": "Réservations",
+          "body": [
+            [
+              "Une réservation est un accord entre vous et le club. Le club fixe les prix, les horaires et les règles de réservation, et il est responsable du terrain, du cours et de tout paiement qu’il encaisse.",
+              "Vous payez vos réservations au club, selon les modalités qu’il prévoit. ServeTime n’encaisse aucun paiement pour les réservations.",
+              "Chaque club peut fixer des règles, par exemple la durée maximale d’une réservation, combien de jours à l’avance vous pouvez réserver, combien de réservations par jour et jusqu’à quand vous pouvez annuler en ligne. Passé ce délai, contactez le club pour annuler.",
+              "Si vous ne venez pas à une réservation, le club peut la marquer comme absence. Un club peut suspendre la réservation en ligne pour les joueurs ayant trop d’absences au cours des 90 derniers jours. Le club peut toujours réserver directement pour vous.",
+              "Les questions concernant une réservation, un remboursement ou une séance annulée se règlent entre vous et le club, mais nous aidons volontiers lorsque c’est possible."
+            ]
+          ]
+        },
+        {
+          "title": "Formules pour les clubs",
+          "body": [
+            [
+              "Les nouveaux clubs bénéficient d’un essai gratuit de {trialDays} jours avec toutes les fonctionnalités. Aucune carte n’est demandée.",
+              "Après l’essai, le club continue avec une formule payante (Starter, Club ou Academy), facturée au mois ou à l’année. Les prix actuels figurent sur la page des tarifs.",
+              "Nous facturons les clubs à l’avance pour chaque période. Les formules ne se renouvellent pas automatiquement : un club conserve sa formule en payant la facture suivante.",
+              "Si une facture n’est pas payée, nous pouvons, après en avoir informé le club, limiter ses fonctionnalités ou suspendre son compte. Les données du club restent disponibles pendant 90 jours.",
+              "Un club peut arrêter à tout moment en ne renouvelant pas sa formule. Les sommes déjà payées ne sont pas remboursées, sauf si la loi l’exige.",
+              "Nous pouvons modifier les prix avec un préavis d’au moins 30 jours. Les nouveaux prix s’appliquent à partir de la période de facturation suivante."
+            ]
+          ]
+        },
+        {
+          "title": "Responsabilités des clubs",
+          "body": [
+            [
+              "Les clubs sont responsables des informations qu’ils publient et des données qu’ils saisissent sur leurs membres et joueurs. Ils doivent disposer d’une base légale pour les enregistrer et informer leurs membres qu’ils utilisent ServeTime.",
+              "Pour ces données, le club est responsable du traitement et ServeTime son sous-traitant, comme décrit dans la Politique de confidentialité. Nous les traitons uniquement pour fournir le service au club.",
+              "Les clubs doivent honorer les réservations faites via ServeTime selon les règles qu’ils ont fixées, ou contacter le joueur si une réservation ne peut pas avoir lieu."
+            ]
+          ]
+        },
+        {
+          "title": "Utilisation autorisée",
+          "body": [
+            "N’utilisez pas ServeTime pour :",
+            [
+              "faire quoi que ce soit d’illégal ;",
+              "faire de fausses réservations ou bloquer des terrains que vous n’avez pas l’intention d’utiliser ;",
+              "mettre en ligne des contenus que vous n’avez pas le droit d’utiliser ou qui sont offensants ;",
+              "tenter d’accéder aux données d’autres personnes ou de contourner la sécurité du site ;",
+              "surcharger le service avec des requêtes automatisées."
+            ]
+          ]
+        },
+        {
+          "title": "Vos contenus",
+          "body": [
+            "Vous conservez les droits sur ce que vous mettez en ligne, comme les logos, photos et descriptions. Vous nous autorisez à les stocker et à les afficher dans la mesure nécessaire au fonctionnement du service, par exemple le logo d’un club sur sa page publique. Le nom ServeTime, le logiciel et le design nous appartiennent."
+          ]
+        },
+        {
+          "title": "Disponibilité et responsabilité",
+          "body": [
+            [
+              "Nous faisons en sorte que ServeTime soit disponible et exact, mais nous ne pouvons pas garantir qu’il fonctionnera toujours sans interruption ni erreur. Nous pouvons l’interrompre brièvement pour maintenance.",
+              "ServeTime n’est pas responsable de ce qui se passe au club, des décisions du club ni des pertes causées par un problème de réservation que nous ne pouvions raisonnablement pas empêcher.",
+              "Dans la mesure permise par la loi, notre responsabilité totale envers un club est limitée aux sommes que le club nous a versées au cours des 12 mois précédant la réclamation.",
+              "Rien dans ces conditions ne limite une responsabilité que la loi interdit de limiter, ni vos droits en tant que consommateur."
+            ]
+          ]
+        },
+        {
+          "title": "Fin de l’utilisation",
+          "body": [
+            [
+              "Vous pouvez cesser d’utiliser ServeTime et demander la suppression de votre compte à tout moment.",
+              "Nous pouvons suspendre ou fermer un compte qui enfreint ces conditions, après un avertissement lorsque cela est raisonnable."
+            ]
+          ]
+        },
+        {
+          "title": "Modifications de ces conditions",
+          "body": [
+            "Nous pouvons modifier ces conditions. La date en haut de page indique la dernière modification, et nous informerons les utilisateurs des changements importants avant leur entrée en vigueur. Si vous continuez à utiliser ServeTime ensuite, les nouvelles conditions s’appliquent."
+          ]
+        },
+        {
+          "title": "Droit applicable",
+          "body": [
+            "Ces conditions sont régies par le droit de la Macédoine du Nord. Les litiges relèvent du tribunal compétent de Skopje, sauf si le droit de la consommation vous permet de saisir un tribunal de votre lieu de résidence."
+          ]
+        }
+      ],
+      "contact": "Pour toute question sur ces conditions, écrivez à {email}."
+    }
   }
 }

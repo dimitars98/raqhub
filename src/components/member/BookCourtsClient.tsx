@@ -1,5 +1,7 @@
 "use client";
 
+import { dateLocale } from "@/lib/dateLocale";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
@@ -9,9 +11,17 @@ import type { Court, MyMembership } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import { MapPin, Wifi, WifiOff } from "lucide-react";
 import { createBooking } from "@/app/actions/bookings";
+import { normalizeHours, startHoursFor } from "@/lib/openingHours";
+import { normalizeRules } from "@/lib/bookingRules";
+import { Link } from "@/i18n/navigation";
 
 type CourtWithClub = Court & {
-  club?: { name: string; city: string | null } | null;
+  club?: {
+    name: string;
+    city: string | null;
+    opening_hours?: unknown;
+    booking_rules?: unknown;
+  } | null;
 };
 
 type FormValues = {
@@ -20,12 +30,15 @@ type FormValues = {
   duration: number;
 };
 
-const SURFACE_LABEL: Record<string, string> = {
-  clay: "Clay",
-  hard: "Hard",
-  grass: "Grass",
-  artificial_grass: "Artificial grass",
-  carpet: "Carpet",
+// Translation keys in "adminCourts" for each surface.
+const SURFACE_KEY: Record<string, string> = {
+  clay: "clay",
+  hard: "hard",
+  grass: "grass",
+  artificial_grass: "artificialGrass",
+  carpet: "carpet",
+  concrete: "concrete",
+  acrylic: "acrylic",
 };
 
 const SURFACE_COLOR: Record<string, string> = {
@@ -36,20 +49,26 @@ const SURFACE_COLOR: Record<string, string> = {
   carpet: "bg-stone-100 text-stone-700",
 };
 
-const HOURS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-const DURATIONS = [60, 90, 120];
-
 export default function BookCourtsClient({
   courts,
+  clubName,
 }: {
   courts: CourtWithClub[];
+  /** Set when the list is filtered to one club (from its public page). */
+  clubName?: string;
 }) {
+  const t = useTranslations("bookCourts");
+  const dfLocale = dateLocale(useLocale());
+  const tCourts = useTranslations("adminCourts");
+  const tCoach = useTranslations("coachBooking");
   const [selected, setSelected] = useState<CourtWithClub | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
   const router = useRouter();
   const supabase = createClient();
-  const days = Array.from({ length: 14 }, (_, i) =>
+  // The selected court's club decides lengths, how far ahead, and cancelling.
+  const rules = normalizeRules(selected?.club?.booking_rules);
+  const days = Array.from({ length: rules.max_days_ahead }, (_, i) =>
     addDays(startOfDay(new Date()), i),
   );
 
@@ -57,6 +76,7 @@ export default function BookCourtsClient({
     register,
     handleSubmit,
     watch,
+    setValue,
     control,
     formState: { isSubmitting },
   } = useForm<FormValues>({
@@ -68,6 +88,34 @@ export default function BookCourtsClient({
   });
 
   const watchedDuration = watch("duration");
+  const watchedDate = watch("date");
+  const watchedHour = watch("hour");
+
+  // Start times that fit inside the selected club's opening hours that day.
+  const hourOptions = selected
+    ? startHoursFor(
+        normalizeHours(selected.club?.opening_hours),
+        new Date(`${watchedDate}T00:00`),
+        watchedDuration,
+      )
+    : [];
+  const isClosed = !!selected && hourOptions.length === 0;
+
+  // Keep the picked length and day allowed by the selected club's rules.
+  const lastDay = format(days[days.length - 1], "yyyy-MM-dd");
+  useEffect(() => {
+    if (!rules.durations.includes(watchedDuration)) {
+      setValue("duration", rules.durations[0]);
+    }
+    if (watchedDate > lastDay) setValue("date", format(new Date(), "yyyy-MM-dd"));
+  }, [rules.durations, watchedDuration, watchedDate, lastDay, setValue]);
+
+  // Keep the picked hour valid when the day, duration or court changes.
+  useEffect(() => {
+    if (hourOptions.length && !hourOptions.includes(watchedHour)) {
+      setValue("hour", hourOptions[0]);
+    }
+  }, [hourOptions, watchedHour, setValue]);
   const baseTotal = selected
     ? (selected.price_per_hour * watchedDuration) / 60
     : 0;
@@ -115,10 +163,18 @@ export default function BookCourtsClient({
       {/* Header */}
       <div className="mb-7">
         <h1 className="text-2xl font-medium text-brand-900 mb-1">
-          Book a court
+          {clubName ? t("titleAtClub", { club: clubName }) : t("title")}
         </h1>
         <p className="text-sm text-brand-400">
-          {courts.length} court{courts.length !== 1 ? "s" : ""} available
+          {t("available", { n: courts.length })}
+          {clubName && (
+            <>
+              {" · "}
+              <Link href="/book" className="underline hover:text-brand-600">
+                {t("showAll")}
+              </Link>
+            </>
+          )}
         </p>
       </div>
 
@@ -143,7 +199,7 @@ export default function BookCourtsClient({
                     SURFACE_COLOR[court.surface] ?? "bg-brand-50 text-brand-600"
                   }`}
                 >
-                  {SURFACE_LABEL[court.surface]}
+                  {tCourts(SURFACE_KEY[court.surface] ?? "clay")}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-brand-400">
@@ -156,7 +212,7 @@ export default function BookCourtsClient({
                 )}
                 <span>{court.club?.name}</span>
                 <span>·</span>
-                <span>{court.is_indoor ? "Indoor" : "Outdoor"}</span>
+                <span>{court.is_indoor ? tCourts("indoor") : tCourts("outdoor")}</span>
               </div>
             </div>
 
@@ -173,7 +229,7 @@ export default function BookCourtsClient({
                 }}
                 className="btn-primary text-xs py-1.5 px-4"
               >
-                Book
+                {t("book")}
               </button>
             </div>
           </div>
@@ -189,7 +245,7 @@ export default function BookCourtsClient({
         }}
       >
         <Modal.Content>
-          <Modal.Header>{selected?.name ?? "Book court"}</Modal.Header>
+          <Modal.Header>{selected?.name ?? t("bookCourt")}</Modal.Header>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
@@ -202,7 +258,7 @@ export default function BookCourtsClient({
                       "bg-brand-50 text-brand-600"
                     }`}
                   >
-                    {SURFACE_LABEL[selected.surface]}
+                    {tCourts(SURFACE_KEY[selected.surface] ?? "clay")}
                   </span>
                 )}
                 <span className="text-xs text-brand-400">
@@ -211,12 +267,12 @@ export default function BookCourtsClient({
                 </span>
                 <span className="text-xs text-brand-400">·</span>
                 <span className="text-xs text-brand-400">
-                  {selected?.is_indoor ? "Indoor" : "Outdoor"}
+                  {selected?.is_indoor ? tCourts("indoor") : tCourts("outdoor")}
                 </span>
               </div>
 
               {/* Date picker */}
-              <Modal.Field label="Date">
+              <Modal.Field label={t("date")}>
                 <Controller
                   name="date"
                   control={control}
@@ -237,7 +293,7 @@ export default function BookCourtsClient({
                             }`}
                           >
                             <div className="font-medium">
-                              {format(day, "EEE")}
+                              {format(day, "EEE", { locale: dfLocale })}
                             </div>
                             <div
                               className={
@@ -256,26 +312,28 @@ export default function BookCourtsClient({
 
               {/* Time + duration */}
               <Modal.Grid>
-                <Modal.Field label="Start time">
+                <Modal.Field label={t("startTime")}>
                   <select
                     className="input"
+                    disabled={isClosed}
                     {...register("hour", { valueAsNumber: true })}
                   >
-                    {HOURS.map((h) => (
+                    {isClosed && <option>{t("closed")}</option>}
+                    {hourOptions.map((h) => (
                       <option key={h} value={h}>
                         {String(h).padStart(2, "0")}:00
                       </option>
                     ))}
                   </select>
                 </Modal.Field>
-                <Modal.Field label="Duration">
+                <Modal.Field label={t("duration")}>
                   <select
                     className="input"
                     {...register("duration", { valueAsNumber: true })}
                   >
-                    {DURATIONS.map((d) => (
+                    {rules.durations.map((d) => (
                       <option key={d} value={d}>
-                        {d} min
+                        {t("minutes", { n: d })}
                       </option>
                     ))}
                   </select>
@@ -287,7 +345,7 @@ export default function BookCourtsClient({
                 <div className="bg-brand-50 border border-brand-100 rounded-xl px-4 py-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-brand-600">
-                      {watchedDuration} min · {selected.name}
+                      {t("minutes", { n: watchedDuration })} · {selected.name}
                     </span>
                     <span
                       className={
@@ -302,7 +360,7 @@ export default function BookCourtsClient({
                   {discount > 0 && (
                     <div className="flex justify-between items-center mt-2 pt-2 border-t border-brand-100">
                       <span className="text-xs text-brand-600 font-medium">
-                        Member discount {discount}%
+                        {t("memberDiscount", { pct: discount })}
                       </span>
                       <span className="text-sm font-medium text-brand-900">
                         €{finalTotal.toFixed(2)}
@@ -312,6 +370,16 @@ export default function BookCourtsClient({
                 </div>
               )}
 
+              {selected && rules.cancel_hours > 0 && (
+                <p className="text-xs text-brand-600 mt-1">
+                  {tCoach("cancelNote", { hours: rules.cancel_hours })}
+                </p>
+              )}
+              {isClosed && (
+                <p className="text-xs text-brand-600 mt-1">
+                  {t("closedDay")}
+                </p>
+              )}
               {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
             </Modal.Body>
 
@@ -321,16 +389,16 @@ export default function BookCourtsClient({
                 onClick={() => setSelected(null)}
                 className="btn-secondary flex-1"
               >
-                Cancel
+                {t("cancel")}
               </button>
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isClosed}
                 className="btn-primary flex-1 disabled:opacity-40"
               >
                 {isSubmitting
-                  ? "Booking…"
-                  : `Confirm · €${finalTotal.toFixed(2)}`}
+                  ? t("booking")
+                  : t("confirm", { price: finalTotal.toFixed(2) })}
               </button>
             </Modal.Footer>
           </form>

@@ -9,6 +9,8 @@ import {
   format,
 } from "date-fns";
 import DashboardClient from "./DashboardClient";
+import GettingStarted from "@/components/admin/GettingStarted";
+import { BILLING_COLUMNS, clubAccess } from "@/lib/plans";
 
 export type TodayBooking = {
   id: string;
@@ -70,11 +72,12 @@ export default async function AdminDashboardPage() {
 
   const { data: club } = await supabase
     .from("clubs")
-    .select("id, name")
+    .select(`id, name, opening_hours, ${BILLING_COLUMNS}`)
     .eq("owner_id", user.id)
     .limit(1)
     .maybeSingle();
   if (!club) redirect("/admin/setup");
+  const access = clubAccess(club);
 
   const now = new Date();
   const todayStart = startOfDay(now).toISOString();
@@ -95,6 +98,10 @@ export default async function AdminDashboardPage() {
     { data: activeMembers },
     { data: courts },
     { data: recentBookings },
+    { count: courtCount },
+    { count: planCount },
+    { count: memberCount },
+    { count: onlineBookingCount },
   ] = await Promise.all([
     cast<TodayBooking[]>(
       supabase
@@ -156,6 +163,26 @@ export default async function AdminDashboardPage() {
         .order("created_at", { ascending: false })
         .limit(8),
     ),
+
+    // For the getting-started checklist
+    supabase
+      .from("courts")
+      .select("id", { count: "exact", head: true })
+      .eq("club_id", club.id),
+    supabase
+      .from("membership_plans")
+      .select("id", { count: "exact", head: true })
+      .eq("club_id", club.id),
+    supabase
+      .from("members")
+      .select("id", { count: "exact", head: true })
+      .eq("club_id", club.id),
+    // A booking made by a player's own account means the link reached players.
+    supabase
+      .from("bookings")
+      .select("id, court:courts!inner(club_id)", { count: "exact", head: true })
+      .eq("court.club_id", club.id)
+      .not("player_id", "is", null),
   ]);
 
   const revByDay: Record<string, number> = {};
@@ -179,6 +206,17 @@ export default async function AdminDashboardPage() {
 
   return (
     <DashboardClient
+      checklist={
+        <GettingStarted
+          progress={{
+            courts: (courtCount ?? 0) > 0,
+            hours: club.opening_hours !== null,
+            plans: access.has("membershipPlans") ? (planCount ?? 0) > 0 : undefined,
+            members: (memberCount ?? 0) > 0,
+            shared: (onlineBookingCount ?? 0) > 0,
+          }}
+        />
+      }
       clubName={club.name}
       todayBookings={todayBookings ?? []}
       thisWeekRevenue={thisWeekRevenue}

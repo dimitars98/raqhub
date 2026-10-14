@@ -17,7 +17,7 @@ export default async function DashboardPage() {
   const role = (data as Pick<Profile, "role"> | null)?.role;
 
   if (role === "club_admin" || role === "super_admin") {
-    redirect("/admin/members");
+    redirect("/admin/dashboard");
   } else {
     redirect("/my-bookings");
   }

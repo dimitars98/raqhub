@@ -47,7 +47,7 @@ export async function GET(request: Request) {
 
         if (next) return NextResponse.redirect(`${origin}${next}`);
         if (role === "club_admin" || role === "super_admin") {
-          return NextResponse.redirect(`${origin}${prefix}/admin/members`);
+          return NextResponse.redirect(`${origin}${prefix}/admin/dashboard`);
         }
         return NextResponse.redirect(`${origin}${prefix}/book`);
       }

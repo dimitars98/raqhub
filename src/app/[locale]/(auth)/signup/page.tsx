@@ -272,6 +272,29 @@ export default function SignupPage() {
         >
           {isSubmitting ? t("creatingAccount") : t("createAccount")}
         </button>
+
+        <p className="text-center text-sm leading-relaxed text-ink-400">
+          {t.rich("agreeToTerms", {
+            terms: (chunks) => (
+              <Link
+                href={`/${locale}/terms`}
+                target="_blank"
+                className="font-medium text-ink-600 underline underline-offset-2 hover:text-ink-900"
+              >
+                {chunks}
+              </Link>
+            ),
+            privacy: (chunks) => (
+              <Link
+                href={`/${locale}/privacy`}
+                target="_blank"
+                className="font-medium text-ink-600 underline underline-offset-2 hover:text-ink-900"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
       </form>
 
       <p className="mt-8 text-base text-ink-600">

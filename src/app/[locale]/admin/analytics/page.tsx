@@ -1,7 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
+import { dateLocale } from "@/lib/dateLocale";
 import { subDays, subMonths, subYears, format, startOfDay } from "date-fns";
 import AnalyticsClient, { type AnalyticsData } from "./AnalyticsClient";
+import { BILLING_COLUMNS, clubAccess } from "@/lib/plans";
+import { UpgradeNotice } from "@/components/admin/PlanNotices";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function cast<T>(q: any): Promise<{ data: T | null; error: unknown }> {
@@ -28,6 +32,8 @@ type RawMember = {
 
 export default async function AnalyticsPage() {
   const supabase = await createClient();
+  const tc = await getTranslations("common");
+  const dfLocale = dateLocale(await getLocale());
 
   const {
     data: { user },
@@ -36,10 +42,12 @@ export default async function AnalyticsPage() {
 
   const { data: club } = await supabase
     .from("clubs")
-    .select("id, name")
+    .select(`id, name, ${BILLING_COLUMNS}`)
     .eq("owner_id", user.id)
     .single();
   if (!club) redirect("/login");
+  if (!clubAccess(club).has("analytics"))
+    return <UpgradeNotice feature="analytics" />;
 
   // Fetch 1 year of bookings + all members
   const yearAgo = subYears(new Date(), 1).toISOString();
@@ -121,7 +129,7 @@ export default async function AnalyticsPage() {
   // ── Members by plan ───────────────────────────────────────────────────
   const membersByPlan: Record<string, number> = {};
   for (const m of allMembers) {
-    const plan = m.plan?.name ?? "No plan";
+    const plan = m.plan?.name ?? tc("noPlan");
     membersByPlan[plan] = (membersByPlan[plan] ?? 0) + 1;
   }
 
@@ -130,7 +138,7 @@ export default async function AnalyticsPage() {
   const memberGrowth: { month: string; count: number }[] = [];
   for (let i = 11; i >= 0; i--) {
     const monthStart = startOfDay(subMonths(now, i));
-    const label = format(monthStart, "MMM");
+    const label = format(monthStart, "MMM", { locale: dfLocale });
     const count = allMembers.filter(
       (m) => m.created_at && new Date(m.created_at) <= monthStart,
     ).length;

@@ -1,8 +1,9 @@
 "use client";
 
+import { dateLocale } from "@/lib/dateLocale";
 import { format, isAfter, isBefore } from "date-fns";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   CalendarDays,
   TrendingUp,
@@ -30,6 +31,8 @@ interface Props {
   activeMembers: ActiveMember[];
   courts: CourtRow[];
   recentBookings: RecentBooking[];
+  /** Getting-started checklist, shown under the greeting. */
+  checklist?: React.ReactNode;
 }
 
 // ── Constants ──────────────────────────────────────────────────────────────
@@ -60,11 +63,11 @@ const STATUS_BADGE: Record<string, string> = {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-function getGuestName(b: {
+function getGuestName(walkIn: string, b: {
   walk_in_name?: string | null;
   member?: { full_name: string } | null;
 }) {
-  return b.member?.full_name ?? b.walk_in_name ?? "Walk-in";
+  return b.member?.full_name ?? b.walk_in_name ?? walkIn;
 }
 
 function isNowBetween(starts_at: string, ends_at: string) {
@@ -123,9 +126,10 @@ function RevenueBar({
   revByDay: Record<string, number>;
   max: number;
 }) {
+  const dayLabels = useTranslations("analytics").raw("daysShort") as string[];
   return (
     <div className="flex items-end gap-1.5 h-16">
-      {DAYS.map((d) => {
+      {DAYS.map((d, di) => {
         const val = revByDay[d] ?? 0;
         const pct = max === 0 ? 0 : (val / max) * 100;
         return (
@@ -144,7 +148,7 @@ function RevenueBar({
                 />
               </div>
             </div>
-            <span className="text-[9px] text-[#6e7f65]">{d}</span>
+            <span className="text-[9px] text-[#6e7f65]">{dayLabels[di]}</span>
           </div>
         );
       })}
@@ -156,6 +160,7 @@ function RevenueBar({
 
 export default function DashboardClient({
   clubName,
+  checklist,
   todayBookings,
   thisWeekRevenue,
   revenueChange,
@@ -165,6 +170,8 @@ export default function DashboardClient({
   recentBookings,
 }: Props) {
   const t = useTranslations("dashboard");
+  const tc = useTranslations("common");
+  const dfLocale = dateLocale(useLocale());
   const now = new Date();
   const maxRev = Math.max(...DAYS.map((d) => revByDay[d] ?? 0), 1);
 
@@ -194,9 +201,11 @@ export default function DashboardClient({
           {greeting} 👋
         </h1>
         <p className="text-sm text-[#6e7f65] mt-1">
-          {clubName} · {format(now, "EEEE, MMMM d, yyyy")}
+          {clubName} · {format(now, "EEEE, d MMMM yyyy", { locale: dfLocale })}
         </p>
       </div>
+      {checklist}
+
 
       {/* Stat cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -327,7 +336,7 @@ export default function DashboardClient({
                     <div className="w-px h-8 bg-[#e8ede4] flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="text-[13px] font-medium text-[#111c0a] truncate">
-                        {getGuestName(b)}
+                        {getGuestName(tc("walkIn"), b)}
                       </div>
                       <div className="text-[11px] text-[#6e7f65] truncate">
                         {b.court?.name} · {b.duration_min} min
@@ -386,11 +395,11 @@ export default function DashboardClient({
                     />
                     <div className="flex-1 min-w-0">
                       <div className="text-[13px] font-medium text-[#111c0a] truncate">
-                        {getGuestName(b)}
+                        {getGuestName(tc("walkIn"), b)}
                       </div>
                       <div className="text-[11px] text-[#6e7f65]">
                         {b.court?.name} ·{" "}
-                        {format(new Date(b.starts_at), "d MMM, HH:mm")}
+                        {format(new Date(b.starts_at), "d MMM, HH:mm", { locale: dfLocale })}
                       </div>
                     </div>
                     <div className="text-right flex-shrink-0">

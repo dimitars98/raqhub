@@ -1,4 +1,7 @@
+import { useTranslations } from "next-intl";
+
 export default function HowItWorks() {
+  const t = useTranslations("howItWorks");
   return (
     <section
       id="how"
@@ -7,33 +10,33 @@ export default function HowItWorks() {
       <div className="max-w-[1180px] mx-auto">
         <div className="text-center mb-10 lg:mb-14">
           <div className="text-[11px] font-semibold text-[#7aad12] uppercase tracking-widest mb-3">
-            Simple setup
+            {t("label")}
           </div>
           <h2 className="font-display text-[28px] sm:text-[34px] lg:text-[40px] font-extrabold text-[#111c0a] tracking-tight leading-[1.1] mb-4">
-            Up and running in 30 minutes
+            {t("title")}
           </h2>
           <p className="text-[15px] text-[#6e7f65] font-light max-w-[440px] mx-auto">
-            No IT team required. Onboarding takes minutes, not days.
+            {t("subtitle")}
           </p>
         </div>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:gap-8">
           {[
             [
               "01",
-              "Create your club",
-              "Add your courts, set opening hours and configure pricing. Your club page goes live immediately — no dev work needed.",
+              t("steps.create.title"),
+              t("steps.create.body"),
               "https://images.unsplash.com/photo-1635873021329-c0af04695c9d?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             ],
             [
               "02",
-              "Invite your members",
-              "Share one link. Members sign up, create profiles, and start booking on their own — no hand-holding needed.",
+              t("steps.invite.title"),
+              t("steps.invite.body"),
               "https://images.unsplash.com/photo-1737477009005-803c7c64897c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             ],
             [
               "03",
-              "Watch it run itself",
-              "Bookings, payments, reminders, waitlists — all automated. Focus on growing the community, not managing spreadsheets.",
+              t("steps.run.title"),
+              t("steps.run.body"),
               "https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?q=80&w=870&auto=format&fit=crop",
             ],
           ].map(([num, title, desc, img]) => (

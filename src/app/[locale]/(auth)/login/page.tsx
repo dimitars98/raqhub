@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations, useLocale } from "next-intl";
 import type { Profile } from "@/types/database";
+import { LogoMark } from "@/components/ui/Logo";
 
 type LoginValues = {
   email: string;
@@ -63,7 +64,7 @@ export default function LoginPage() {
     if (redirectTo) {
       router.push(redirectTo);
     } else if (role === "club_admin" || role === "super_admin") {
-      router.push(`/${locale}/admin/members`);
+      router.push(`/${locale}/admin/dashboard`);
     } else {
       router.push(`/${locale}/book`);
     }
@@ -90,8 +91,9 @@ export default function LoginPage() {
       <div className="flex min-h-dvh flex-col px-6 py-8 sm:px-10 lg:px-16">
         <Link
           href={`/${locale}`}
-          className="w-fit text-xl font-semibold tracking-tight text-brand-900"
+          className="inline-flex w-fit items-center gap-2 text-xl font-semibold tracking-tight text-brand-900"
         >
+          <LogoMark className="size-8" />
           ServeTime
         </Link>
 

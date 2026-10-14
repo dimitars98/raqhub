@@ -85,6 +85,28 @@ npx supabase gen types typescript --project-id <your-project-id> \
   > src/types/database.ts
 ```
 
+## Plans and billing
+
+Clubs pay ServeTime; players never do. Every new club gets **1 month free with
+everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts`):
+
+| Plan    | Price            | Courts    | Adds                                                   |
+|---------|------------------|-----------|--------------------------------------------------------|
+| Starter | €9/mo · €90/yr   | up to 3   | bookings, unlimited members, confirmation emails       |
+| Club    | €19/mo · €190/yr | up to 8   | membership plans, coaches, reminder emails, weekly report |
+| Academy | €45/mo · €450/yr | unlimited | analytics (multiple admins coming)                     |
+
+- The court limit is enforced by the database (`supabase/migrations/20261013_plans_trial.sql`).
+  Keep its numbers in step with `src/lib/plans.ts`.
+- Club owners can't change their own plan; only the SQL Editor / service role can.
+- Billing is by hand for now. When a club pays:
+
+  ```sql
+  update public.clubs set plan = 'club', paid_until = '2026-12-31' where slug = 'their-slug';
+  ```
+- When the trial ends unpaid nothing is switched off: the club drops to its plan's
+  limits and sees a "trial has ended" banner until `paid_until` is set.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts
@@ -104,7 +126,7 @@ npx supabase gen types typescript --project-id <your-project-id> \
 - [ ] Coach detail + booking page
 - [ ] Email confirmations via Resend
 - [ ] Club admin dashboard (manage courts, view bookings)
-- [ ] Stripe payment integration
+- [ ] Online payments (Stripe doesn't support North Macedonia, Albania, Kosovo or Serbia)
 - [ ] Availability rules per court/coach
 - [ ] Real-time availability via Supabase Realtime
 - [ ] Vercel deployment

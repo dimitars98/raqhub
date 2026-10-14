@@ -45,7 +45,7 @@ export default async function TimetablePage() {
     const { data: bookingsData } = await supabase
       .from("bookings")
       .select(
-        "*, court:courts(id, name), member:members(full_name), player:profiles(full_name)",
+        "*, court:courts(id, name), member:members(full_name), player:profiles(full_name), coach:coaches(profile:profiles(full_name))",
       )
       .in(
         "court_id",

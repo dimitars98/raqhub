@@ -1,22 +1,24 @@
 import Image from "next/image";
 import { Building2, CalendarCheck, Star, Timer } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("hero");
   const stats = [
     {
       value: "500",
       suffix: "+",
-      label: "Clubs using ServeTime",
+      label: t("stats.clubs"),
       icon: Building2,
     },
     {
       value: "2M",
       suffix: "+",
-      label: "Bookings processed",
+      label: t("stats.bookings"),
       icon: CalendarCheck,
     },
-    { value: "98", suffix: "%", label: "Customer satisfaction", icon: Star },
-    { value: "30", suffix: "min", label: "Average setup time", icon: Timer },
+    { value: "98", suffix: "%", label: t("stats.satisfaction"), icon: Star },
+    { value: "30", suffix: "min", label: t("stats.setup"), icon: Timer },
   ];
   return (
     // <section className="bg-[linear-gradient(165deg,white_50%,var(--color-brand-600)_20%)]">
@@ -59,19 +61,17 @@ export default function Hero() {
           {/* Right: text */}
           <div className="flex flex-col gap-6">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl text-brand-400 font-extrabold leading-tight">
-              Fill Your Courts.
+              {t("title1")}
               <br />
-              Grow Your Club.
+              {t("title2")}
             </h1>
             <p className="text-lg text-gray-500 max-w-md">
-              ServeTime gives tennis clubs and coaches the tools to manage
-              courts, schedules, and bookings — all in one place. Less admin,
-              more time on the court.
+              {t("subtitle")}
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="btn-primary py-5 px-7">Get Started</button>
+              <button className="btn-primary py-5 px-7">{t("getStarted")}</button>
               <button className="btn-secondary py-5 px-7">
-                See How It Works
+                {t("seeHow")}
               </button>
             </div>
           </div>

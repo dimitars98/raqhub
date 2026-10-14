@@ -1,19 +1,20 @@
+import { useTranslations } from "next-intl";
 import { BarChart3, Bell, Calendar, CreditCard, Users } from "lucide-react";
 
 export default function FeatureCards() {
+  const t = useTranslations("featureCards");
   return (
     <section className="max-w-[1180px] mx-auto px-6 py-16 lg:px-10 lg:py-24">
       <div className="text-center mb-10 lg:mb-14">
         <div className="text-[11px] font-semibold text-[#7aad12] uppercase tracking-widest mb-3">
-          Built for every role
+          {t("label")}
         </div>
         <h2 className="font-display text-[28px] sm:text-[34px] lg:text-[40px] font-extrabold text-[#111c0a] tracking-tight leading-[1.1] mb-4">
-          Everything your club needs, <br className="hidden sm:block" />
-          nothing it doesn&apos;t
+          {t("title1")} <br className="hidden sm:block" />
+          {t("title2")}
         </h2>
         <p className="text-[15px] text-[#6e7f65] font-light max-w-[440px] mx-auto">
-          A tightly focused set of tools that actually work together — not a
-          bloated suite nobody uses.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -25,36 +26,35 @@ export default function FeatureCards() {
               <Calendar size={18} className="text-[#a8d832]" />
             </div>
             <h3 className="font-display text-[22px] font-extrabold text-white tracking-tight mb-2">
-              Smart scheduling, zero conflicts
+              {t("scheduling.title")}
             </h3>
             <p className="text-[14px] text-white/50 font-light leading-relaxed max-w-[280px]">
-              Automatic conflict detection, buffer times, blackout dates and
-              rolling availability windows — the calendar runs itself.
+              {t("scheduling.body")}
             </p>
           </div>
           {/* Mini schedule visual */}
           <div className="w-full sm:w-[200px] sm:flex-shrink-0 bg-white/5 border border-white/10 rounded-xl p-4">
             <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-3">
-              Today
+              {t("scheduling.today")}
             </div>
             {[
               { time: "09:00", label: "Ana M.", color: "#a8d832" },
               {
                 time: "10:30",
-                label: "Available",
+                label: t("scheduling.available"),
                 color: "transparent",
                 border: true,
               },
               { time: "12:00", label: "Marko K.", color: "#a8d832" },
               {
                 time: "13:30",
-                label: "Blocked",
+                label: t("scheduling.blocked"),
                 color: "white",
                 opacity: true,
               },
               {
                 time: "15:00",
-                label: "Available",
+                label: t("scheduling.available"),
                 color: "transparent",
                 border: true,
               },
@@ -88,16 +88,15 @@ export default function FeatureCards() {
             <Bell size={18} className="text-[#7aad12]" />
           </div>
           <h3 className="font-display text-[18px] font-extrabold text-[#111c0a] tracking-tight mb-2">
-            Automated reminders
+            {t("reminders.title")}
           </h3>
           <p className="text-[14px] text-[#6e7f65] font-light leading-relaxed mb-5">
-            SMS and email reminders go out automatically before every booking.
-            Reduce no-shows without lifting a finger.
+            {t("reminders.body")}
           </p>
           <div className="space-y-2">
             {[
-              { msg: "Court 3 · tomorrow 10:00", delta: "24h before" },
-              { msg: "Lesson with Sara F. · today", delta: "2h before" },
+              { msg: t("reminders.court"), delta: t("reminders.before24") },
+              { msg: t("reminders.lesson"), delta: t("reminders.before2") },
             ].map(({ msg, delta }) => (
               <div
                 key={msg}
@@ -105,7 +104,7 @@ export default function FeatureCards() {
               >
                 <div className="min-w-0">
                   <div className="text-[11px] font-semibold text-[#111c0a]">
-                    Reminder sent
+                    {t("reminders.sent")}
                   </div>
                   <div className="text-[10px] text-[#6e7f65]">{msg}</div>
                 </div>
@@ -123,11 +122,10 @@ export default function FeatureCards() {
             <CreditCard size={18} className="text-[#7aad12]" />
           </div>
           <h3 className="font-display text-[18px] font-extrabold text-[#111c0a] tracking-tight mb-2">
-            Payments built in
+            {t("payments.title")}
           </h3>
           <p className="text-[14px] text-[#6e7f65] font-light leading-relaxed mb-5">
-            Stripe-powered checkout for bookings, membership plans, and coaching
-            sessions. Payouts land directly in your account.
+            {t("payments.body")}
           </p>
           <div className="flex items-end gap-1.5 h-14">
             {[40, 55, 48, 70, 62, 85, 78].map((h, i) => (
@@ -142,7 +140,7 @@ export default function FeatureCards() {
             ))}
           </div>
           <div className="mt-2 flex justify-between text-[10px] text-[#6e7f65]">
-            <span>Last 7 days</span>
+            <span>{t("payments.last7")}</span>
             <span className="font-semibold text-[#7aad12]">↑ €1,240</span>
           </div>
         </div>
@@ -153,17 +151,16 @@ export default function FeatureCards() {
             <BarChart3 size={18} className="text-[#7aad12]" />
           </div>
           <h3 className="font-display text-[18px] font-extrabold text-[#111c0a] tracking-tight mb-2">
-            Court utilisation at a glance
+            {t("utilisation.title")}
           </h3>
           <p className="text-[14px] text-[#6e7f65] font-light leading-relaxed mb-5">
-            See which courts are filling up and which are sitting empty. Make
-            pricing decisions with real data.
+            {t("utilisation.body")}
           </p>
           <div className="space-y-2">
             {[
-              { name: "Court 1 — Clay", pct: 91 },
-              { name: "Court 2 — Hard", pct: 74 },
-              { name: "Court 3 — Indoor", pct: 55 },
+              { name: t("utilisation.c1"), pct: 91 },
+              { name: t("utilisation.c2"), pct: 74 },
+              { name: t("utilisation.c3"), pct: 55 },
             ].map(({ name, pct }) => (
               <div key={name}>
                 <div className="flex justify-between text-[10px] text-[#6e7f65] mb-1">
@@ -196,12 +193,10 @@ export default function FeatureCards() {
               <Users size={18} className="text-[#7aad12]" />
             </div>
             <h3 className="font-display text-[22px] font-extrabold text-[#111c0a] tracking-tight mb-2">
-              Your whole team, one dashboard
+              {t("team.title")}
             </h3>
             <p className="text-[14px] text-[#6e7f65] font-light leading-relaxed">
-              Invite multiple admins and coaches. Set role-based permissions so
-              everyone sees exactly what they need — and nothing they
-              don&apos;t.
+              {t("team.body")}
             </p>
           </div>
           {/* Role pills */}
@@ -211,8 +206,8 @@ export default function FeatureCards() {
                 init: "TK",
                 bg: "#3a7020",
                 name: "Tomislav K.",
-                role: "Head admin",
-                badge: "Full access",
+                role: t("team.headAdmin"),
+                badge: t("team.fullAccess"),
                 bc: "#f3fbde",
                 tc: "#7aad12",
               },
@@ -220,8 +215,8 @@ export default function FeatureCards() {
                 init: "SF",
                 bg: "#7aad12",
                 name: "Sara F.",
-                role: "Coach",
-                badge: "Coaching only",
+                role: t("team.coach"),
+                badge: t("team.coachingOnly"),
                 bc: "#e8f4fd",
                 tc: "#1a5ea8",
               },
@@ -229,8 +224,8 @@ export default function FeatureCards() {
                 init: "BN",
                 bg: "#2ab87a",
                 name: "Boris N.",
-                role: "Coach",
-                badge: "Coaching only",
+                role: t("team.coach"),
+                badge: t("team.coachingOnly"),
                 bc: "#e8f4fd",
                 tc: "#1a5ea8",
               },
@@ -238,8 +233,8 @@ export default function FeatureCards() {
                 init: "MK",
                 bg: "#d6c832",
                 name: "Mila K.",
-                role: "Receptionist",
-                badge: "Bookings only",
+                role: t("team.receptionist"),
+                badge: t("team.bookingsOnly"),
                 bc: "#fdfae0",
                 tc: "#8a7800",
               },

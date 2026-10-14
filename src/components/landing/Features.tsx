@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 /**
@@ -8,70 +9,24 @@ import Link from "next/link";
  * lime highlighter stroke.
  */
 const copy = [
-  {
-    score: "15",
-    label: "Court bookings",
-    title: { pre: "Book it ", mark: "your way", post: "" },
-    body: "Real-time court availability, instant confirmations, and zero double-bookings. Give members a booking experience they'll love on any device.",
-    points: [
-      "Drag-and-drop schedule management",
-      "Recurring & block booking rules",
-      "Automated waitlist management",
-      "Member-tier booking windows",
-    ],
-    cta: "Explore booking features",
-  },
-  {
-    score: "30",
-    label: "Membership",
-    title: { pre: "Complete ", mark: "member", post: " management" },
-    body: "Keep all your contacts in one place. Track membership status, payments, activity history and skill levels — with tools to stay in touch and grow retention.",
-    points: [
-      "Flexible membership plan builder",
-      "Automated renewal reminders",
-      "Player skill-level profiles",
-      "Bulk email & SMS communication",
-    ],
-    cta: "Explore membership tools",
-  },
-  {
-    score: "40",
-    label: "Coaching",
-    title: { pre: "Pack your coaches' ", mark: "calendars", post: "" },
-    body: "Let players browse and book lessons directly. Manage coach availability, lesson types, group sessions and clinics — and fill every hour automatically.",
-    points: [
-      "Individual & group lesson scheduling",
-      "Coach profile pages & ratings",
-      "Automatic coach payout tracking",
-      "Lesson confirmation & reminders",
-    ],
-    cta: "Explore coaching features",
-  },
-  {
-    score: "Game",
-    label: "Analytics",
-    title: { pre: "", mark: "Data-driven", post: " decisions" },
-    body: "Understand exactly how your club is performing. Track revenue by court, coach or membership plan. Spot peak hours and act on real numbers.",
-    points: [
-      "Revenue by court, coach & period",
-      "Court utilisation heatmaps",
-      "Membership churn tracking",
-      "Exportable financial reports",
-    ],
-    cta: "Explore analytics",
-  },
-];
+  { id: "bookings", score: "15" },
+  { id: "membership", score: "30" },
+  { id: "coaching", score: "40" },
+  { id: "analytics", score: "Game" },
+] as const;
 
 /** Text side of a feature row: scoreboard chip, title, body, points, CTA. */
 function FeatureCopy({
+  id,
   score,
-  label,
-  title,
-  body,
-  points,
-  cta,
   href,
 }: (typeof copy)[number] & { href: string }) {
+  const t = useTranslations(`features.rows.${id}`);
+  const label = t("label");
+  const title = { pre: t("pre"), mark: t("mark"), post: t("post") };
+  const body = t("body");
+  const points = t.raw("points") as string[];
+  const cta = t("cta");
   return (
     <div>
       {/* Scoreboard chip + label + baseline */}
@@ -141,6 +96,7 @@ function FeatureCopy({
 
 export default async function Features() {
   const locale = await getLocale();
+  const t = await getTranslations("features");
   const signupHref = `/${locale}/signup?role=admin`;
   return (
     <section id="features" className="relative overflow-hidden">
@@ -157,19 +113,19 @@ export default async function Features() {
           <div className="bg-white border border-[#e8ede4] rounded-2xl overflow-hidden shadow-sm">
             <div className="px-5 py-3.5 border-b border-[#e8ede4] flex items-center justify-between gap-3">
               <span className="text-[13px] font-semibold text-[#111c0a]">
-                All courts — this week
+                {t("mock.weekTitle")}
               </span>
               <span className="text-[11px] bg-[#f3fbde] text-[#7aad12] px-3 py-1 rounded-md font-medium whitespace-nowrap">
-                Save schedule
+                {t("mock.saveSchedule")}
               </span>
             </div>
             <div className="p-4">
               <div className="grid grid-cols-8 gap-1 mb-2 text-[10px] text-[#6e7f65] font-semibold">
                 <div></div>
-                {["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"].map((d) => (
+                {(t.raw("mock.days") as string[]).map((d, di) => (
                   <div
                     key={d}
-                    className={`text-center ${d === "WED" ? "text-[#7aad12]" : ""}`}
+                    className={`text-center ${di === 2 ? "text-[#7aad12]" : ""}`}
                   >
                     {d}
                   </div>
@@ -204,9 +160,9 @@ export default async function Features() {
               ))}
               <div className="flex gap-4 mt-3 pt-3 border-t border-[#e8ede4]">
                 {[
-                  ["#f3fbde", "#d6f09a", "Available"],
-                  ["#111c0a", null, "Booked"],
-                  ["#f0f0f0", null, "Closed"],
+                  ["#f3fbde", "#d6f09a", t("mock.available")],
+                  ["#111c0a", null, t("mock.booked")],
+                  ["#f0f0f0", null, t("mock.closed")],
                 ].map(([bg, border, label]) => (
                   <div
                     key={label as string}
@@ -233,10 +189,10 @@ export default async function Features() {
           <div className="order-last lg:order-none bg-white border border-[#e8ede4] rounded-2xl overflow-hidden shadow-sm">
             <div className="px-5 py-3.5 border-b border-[#e8ede4] flex items-center justify-between gap-3">
               <span className="text-[13px] font-semibold text-[#111c0a]">
-                Members (342)
+                {t("mock.members")}
               </span>
               <span className="text-[11px] bg-[#111c0a] text-white px-3 py-1 rounded-md font-medium cursor-pointer whitespace-nowrap">
-                + Invite
+                {t("mock.invite")}
               </span>
             </div>
             <div className="p-4">
@@ -246,7 +202,7 @@ export default async function Features() {
                     294
                   </div>
                   <div className="text-[10px] text-[#6e7f65]">
-                    Active members
+                    {t("mock.activeMembers")}
                   </div>
                 </div>
                 <div className="bg-[#f8f9f7] border border-[#e8ede4] rounded-lg p-3">
@@ -254,7 +210,7 @@ export default async function Features() {
                     €8,460
                   </div>
                   <div className="text-[10px] text-[#6e7f65]">
-                    Monthly revenue
+                    {t("mock.monthlyRevenue")}
                   </div>
                 </div>
               </div>
@@ -263,8 +219,8 @@ export default async function Features() {
                   init: "MK",
                   bg: "#3a7020",
                   name: "Marko Kostovski",
-                  plan: "Club plan",
-                  status: "Active",
+                  plan: t("mock.clubPlan"),
+                  status: t("mock.active"),
                   sc: "#7aad12",
                   sb: "#f3fbde",
                 },
@@ -272,8 +228,8 @@ export default async function Features() {
                   init: "AJ",
                   bg: "#7aad12",
                   name: "Ana Jovanova",
-                  plan: "Academy plan",
-                  status: "Active",
+                  plan: t("mock.academyPlan"),
+                  status: t("mock.active"),
                   sc: "#7aad12",
                   sb: "#f3fbde",
                 },
@@ -281,8 +237,8 @@ export default async function Features() {
                   init: "DP",
                   bg: "#d6c832",
                   name: "Dragan Petrović",
-                  plan: "Starter plan",
-                  status: "Pending",
+                  plan: t("mock.starterPlan"),
+                  status: t("mock.pending"),
                   sc: "#8a7800",
                   sb: "#fdfae0",
                 },
@@ -290,8 +246,8 @@ export default async function Features() {
                   init: "NR",
                   bg: "#2ab87a",
                   name: "Nina Ristova",
-                  plan: "Club plan",
-                  status: "Active",
+                  plan: t("mock.clubPlan"),
+                  status: t("mock.active"),
                   sc: "#7aad12",
                   sb: "#f3fbde",
                 },
@@ -331,7 +287,7 @@ export default async function Features() {
           <div className="bg-white border border-[#e8ede4] rounded-2xl overflow-hidden shadow-sm">
             <div className="px-5 py-3.5 border-b border-[#e8ede4]">
               <span className="text-[13px] font-semibold text-[#111c0a]">
-                Our coaching team
+                {t("mock.coachTeam")}
               </span>
             </div>
             <div className="p-4 flex flex-col gap-3">
@@ -340,7 +296,7 @@ export default async function Features() {
                   init: "TK",
                   bg: "#3a7020",
                   name: "Tomislav Kovač",
-                  spec: "Head coach · ITF Level 3",
+                  spec: t("mock.headCoach"),
                   slots: ["09:00", "11:00", "14:00"],
                   open: 3,
                 },
@@ -348,7 +304,7 @@ export default async function Features() {
                   init: "SF",
                   bg: "#7aad12",
                   name: "Sara Filipovska",
-                  spec: "Junior specialist · ITF Level 2",
+                  spec: t("mock.juniorCoach"),
                   slots: ["10:00", "15:30"],
                   open: 2,
                 },
@@ -356,7 +312,7 @@ export default async function Features() {
                   init: "BN",
                   bg: "#2ab87a",
                   name: "Boris Nikolovski",
-                  spec: "Performance · ITF Level 3",
+                  spec: t("mock.performanceCoach"),
                   slots: ["08:00", "12:00", "16:00"],
                   open: 4,
                 },
@@ -390,7 +346,7 @@ export default async function Features() {
                     </div>
                   </div>
                   <span className="text-[10px] font-bold bg-[#f3fbde] text-[#7aad12] px-2 py-1 rounded-md whitespace-nowrap">
-                    {c.open} open
+                    {t("mock.open", { n: c.open })}
                   </span>
                 </div>
               ))}
@@ -403,18 +359,18 @@ export default async function Features() {
           <div className="order-last lg:order-none bg-white border border-[#e8ede4] rounded-2xl overflow-hidden shadow-sm">
             <div className="px-5 py-3.5 border-b border-[#e8ede4] flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
               <span className="text-[13px] font-semibold text-[#111c0a]">
-                Revenue — last 6 months
+                {t("mock.revenueTitle")}
               </span>
               <span className="text-[12px] font-semibold text-[#7aad12]">
-                ↑ 23% vs last year
+                {t("mock.vsLastYear")}
               </span>
             </div>
             <div className="p-4">
               <div className="grid grid-cols-3 gap-2 mb-5">
                 {[
-                  ["€38.7k", "#7aad12", "#f3fbde", "#d6f09a", "Total revenue"],
-                  ["342", "#111c0a", "#f8f9f7", "#e8ede4", "Active members"],
-                  ["€843", "#111c0a", "#f8f9f7", "#e8ede4", "Avg / month"],
+                  ["€38.7k", "#7aad12", "#f3fbde", "#d6f09a", t("mock.totalRevenue")],
+                  ["342", "#111c0a", "#f8f9f7", "#e8ede4", t("mock.activeMembersShort")],
+                  ["€843", "#111c0a", "#f8f9f7", "#e8ede4", t("mock.avgMonth")],
                 ].map(([v, tc, bg, bc, l]) => (
                   <div
                     key={l as string}
@@ -438,12 +394,12 @@ export default async function Features() {
               </div>
               <div className="flex items-end gap-2 h-24 mb-2">
                 {[
-                  ["Nov", 50],
-                  ["Dec", 65],
-                  ["Jan", 52],
-                  ["Feb", 75],
-                  ["Mar", 68],
-                  ["Apr", 88],
+                  [t("mock.months.nov"), 50],
+                  [t("mock.months.dec"), 65],
+                  [t("mock.months.jan"), 52],
+                  [t("mock.months.feb"), 75],
+                  [t("mock.months.mar"), 68],
+                  [t("mock.months.apr"), 88],
                 ].map(([m, h], i) => (
                   <div
                     key={m as string}
@@ -468,10 +424,10 @@ export default async function Features() {
               </div>
               <div className="border-t border-[#e8ede4] pt-3 flex flex-wrap justify-between items-center gap-x-3 gap-y-1">
                 <span className="text-[11px] text-[#6e7f65]">
-                  Court bookings vs coaching revenue
+                  {t("mock.split")}
                 </span>
                 <span className="text-[11px] font-semibold text-[#7aad12] cursor-pointer">
-                  Export CSV →
+                  {t("mock.export")}
                 </span>
               </div>
             </div>

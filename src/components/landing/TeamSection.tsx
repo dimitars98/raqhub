@@ -1,33 +1,26 @@
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 const sports = [
   {
-    title: "Padel",
-    description:
-      "Europe's fastest-growing racket sport. Give your padel courts their own schedule, slot lengths and prices.",
+    id: "padel",
     image:
       "https://images.unsplash.com/photo-1612534847738-b3af9bc31f0c?auto=format&fit=crop&w=800&q=70",
   },
   {
-    title: "Tennis",
-    description:
-      "Clay, hard or indoor. Singles, doubles and lessons booked in seconds on every court you run.",
+    id: "tennis",
     image:
       "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=70",
   },
   {
-    title: "Pickleball",
-    description:
-      "Short games and quick turnover. Offer shorter slots so more players get on court every hour.",
+    id: "pickleball",
     image:
       "https://images.unsplash.com/photo-1659318006095-4d44845f3a1b?auto=format&fit=crop&w=800&q=70",
   },
   {
-    title: "Coaching",
-    description:
-      "Private lessons, group clinics and junior programmes, booked straight into your coaches' calendars.",
+    id: "coaching",
     image:
       "https://images.unsplash.com/photo-1634840542403-1a9b1067aaa0?auto=format&fit=crop&w=800&q=70",
   },
@@ -83,6 +76,7 @@ function ServeButton({
 }
 
 export default function TeamSection() {
+  const t = useTranslations("sports");
   return (
     <section className="relative py-16 lg:flex lg:min-h-[1200px] lg:items-center lg:py-24">
       <Image
@@ -101,7 +95,7 @@ export default function TeamSection() {
             {/* Image */}
             <Image
               src={sports[1].image}
-              alt={sports[1].title}
+              alt={t(`${sports[1].id}.title`)}
               loading="lazy"
               decoding="async"
               width={500}
@@ -112,30 +106,28 @@ export default function TeamSection() {
             {/* White card floating inside the bottom — radius = card radius (2.5rem) minus the 0.75rem inset */}
             <div className="absolute inset-x-3 bottom-3 z-10 bg-white rounded-[1.75rem] p-5 shadow-lg shadow-black/10">
               <h3 className="text-[#111c0a] text-xl font-semibold mb-1">
-                {sports[1].title}
+                {t(`${sports[1].id}.title`)}
               </h3>
               <p className="text-gray-500 text-sm mb-4 max-w-xs">
-                {sports[1].description}
+                {t(`${sports[1].id}.description`)}
               </p>
-              <ServeButton tone="light">Learn more</ServeButton>
+              <ServeButton tone="light">{t("learnMore")}</ServeButton>
             </div>
           </div>
 
           {/* Intro + card — first on mobile/tablet, middle column on desktop */}
           <div className="order-1 lg:order-2 flex flex-col gap-6">
             <span className="inline-block text-cyan-400 font-handwriting text-3xl sm:text-4xl font-bold w-fit">
-              Every court
+              {t("eyebrow")}
             </span>
             <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
-              Tennis, padel or pickleball — ServeTime runs them all. Set up each
-              court the way your club plays it, and manage every booking, member
-              and lesson from one dashboard.
+              {t("intro")}
             </p>
 
             <div className="relative group overflow-hidden rounded-[2.5rem] bg-[#1e3010] mt-auto h-[360px] sm:h-[400px]">
               <Image
                 src={sports[0].image}
-                alt={sports[0].title}
+                alt={t(`${sports[0].id}.title`)}
                 loading="lazy"
                 decoding="async"
                 width={500}
@@ -144,12 +136,12 @@ export default function TeamSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 sm:p-8 flex flex-col justify-end">
                 <h3 className="text-white text-3xl lg:text-4xl font-semibold mb-2">
-                  {sports[0].title}
+                  {t(`${sports[0].id}.title`)}
                 </h3>
                 <p className="text-gray-200 text-sm mb-6 max-w-xs">
-                  {sports[0].description}
+                  {t(`${sports[0].id}.description`)}
                 </p>
-                <ServeButton>Learn more</ServeButton>
+                <ServeButton>{t("learnMore")}</ServeButton>
               </div>
             </div>
           </div>
@@ -158,12 +150,12 @@ export default function TeamSection() {
           <div className="order-3 md:col-span-2 lg:col-span-1 flex flex-col md:flex-row lg:flex-col gap-6">
             {sports.slice(2).map((sport) => (
               <div
-                key={sport.title}
+                key={sport.id}
                 className="relative group overflow-hidden rounded-[2.5rem] bg-[#1e3010] flex-1 min-h-[320px]"
               >
                 <Image
                   src={sport.image}
-                  alt={sport.title}
+                  alt={t(`${sport.id}.title`)}
                   loading="lazy"
                   decoding="async"
                   width={500}
@@ -172,12 +164,12 @@ export default function TeamSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 sm:p-8 flex flex-col justify-end">
                   <h3 className="text-white text-3xl font-semibold mb-2">
-                    {sport.title}
+                    {t(`${sport.id}.title`)}
                   </h3>
                   <p className="text-gray-200 text-sm mb-6 max-w-xs">
-                    {sport.description}
+                    {t(`${sport.id}.description`)}
                   </p>
-                  <ServeButton>Learn more</ServeButton>
+                  <ServeButton>{t("learnMore")}</ServeButton>
                 </div>
               </div>
             ))}
