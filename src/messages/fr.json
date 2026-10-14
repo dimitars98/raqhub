@@ -394,9 +394,12 @@
       "membership": "Adhésion",
       "timetable": "Planning",
       "myBookings": "Mes réservations",
-      "share": "Partager avec les joueurs"
+      "share": "Partager avec les joueurs",
+      "owner": "Clubs et paiements"
     },
-    "share": "Partager"
+    "share": "Partager",
+    "ownerGroup": "ServeTime",
+    "ownerPage": "Clubs et paiements"
   },
   "members": {
     "title": "Membres",
@@ -764,6 +767,21 @@
       "starter": "Starter",
       "club": "Club",
       "academy": "Academy"
+    },
+    "pay": {
+      "title": "Comment payer",
+      "amounts": "{monthly} € par mois, ou {yearly} € par an (deux mois offerts).",
+      "bankTitle": "Virement bancaire",
+      "holder": "Titulaire du compte",
+      "iban": "IBAN",
+      "bank": "Banque",
+      "swift": "SWIFT/BIC",
+      "reference": "Référence du paiement",
+      "referenceNote": "Indiquez cette référence sur le virement pour que nous sachions qu’il vient de votre club.",
+      "bankAsk": "Écrivez à <email></email> et nous vous enverrons nos coordonnées bancaires.",
+      "inPersonTitle": "En personne",
+      "inPersonText": "Vous préférez payer en espèces ? Contactez-nous et nous conviendrons d’un rendez-vous.",
+      "afterPaying": "Dès réception de votre paiement, nous marquons votre formule comme payée, généralement sous un jour ouvré. Besoin d’une facture pour votre société ? Il suffit de demander."
     }
   },
   "setup": {
@@ -1530,6 +1548,80 @@
         }
       ],
       "contact": "Pour toute question sur ces conditions, écrivez à {email}."
+    }
+  },
+  "owner": {
+    "title": "Clubs et paiements",
+    "subtitle": "Vous seul voyez cette page. Enregistrez les paiements, changez les formules et suivez chaque club.",
+    "stats": {
+      "clubs": "Clubs",
+      "trial": "En essai gratuit",
+      "paying": "Payants",
+      "unpaid": "Non payés",
+      "monthly": "Clubs payants, par mois",
+      "received": "Reçu ce mois-ci"
+    },
+    "filters": {
+      "all": "Tous",
+      "trial": "Essai",
+      "active": "Payants",
+      "unpaid": "Non payés"
+    },
+    "search": "Rechercher un club, un gérant ou un e-mail…",
+    "cols": {
+      "club": "Club",
+      "owner": "Gérant",
+      "plan": "Formule",
+      "status": "Statut",
+      "usage": "Activité"
+    },
+    "status": {
+      "trialUntil": "Essai jusqu’au {date}",
+      "paidUntil": "Payé jusqu’au {date}",
+      "unpaid": "Non payé"
+    },
+    "joined": "inscrit le {date}",
+    "perMonth": "{price} € / mois",
+    "courts": "{n, plural, one {# terrain} other {# terrains}}",
+    "bookings30": "{n, plural, one {# réservation} other {# réservations}} sur 30 jours",
+    "manage": "Gérer",
+    "empty": "Aucun club ne correspond.",
+    "payments": {
+      "title": "Paiements",
+      "empty": "Aucun paiement enregistré pour l’instant.",
+      "date": "Date",
+      "method": "Payé par",
+      "paidUntil": "Désormais payé jusqu’au",
+      "amount": "Montant"
+    },
+    "period": {
+      "month": "1 mois",
+      "year": "1 an"
+    },
+    "method": {
+      "bank": "Virement",
+      "cash": "Espèces"
+    },
+    "pay": {
+      "title": "Enregistrer un paiement",
+      "preview": "Payé jusqu’au {date}",
+      "save": "Enregistrer le paiement",
+      "saved": "Paiement enregistré."
+    },
+    "other": {
+      "title": "Autres modifications",
+      "planOnly": "Changer seulement la formule",
+      "extendTrial": "Prolonger l’essai gratuit",
+      "days": "+{n} jours",
+      "paidUntil": "Payé jusqu’au (pour corriger une erreur)",
+      "paidUntilHint": "Laissez vide et enregistrez pour marquer le club comme non payé.",
+      "save": "Enregistrer",
+      "saved": "Enregistré."
+    },
+    "errors": {
+      "notAllowed": "Seul le propriétaire de l’application peut faire cela.",
+      "invalid": "Quelque chose ne va pas dans le formulaire.",
+      "failed": "Échec de l’enregistrement. Veuillez réessayer."
     }
   }
 }

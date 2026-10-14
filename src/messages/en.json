@@ -394,9 +394,12 @@
       "membership": "Membership",
       "timetable": "Timetable",
       "myBookings": "My bookings",
-      "share": "Share with players"
+      "share": "Share with players",
+      "owner": "Clubs & payments"
     },
-    "share": "Share"
+    "share": "Share",
+    "ownerGroup": "ServeTime",
+    "ownerPage": "Clubs & payments"
   },
   "members": {
     "title": "Members",
@@ -764,6 +767,21 @@
       "starter": "Starter",
       "club": "Club",
       "academy": "Academy"
+    },
+    "pay": {
+      "title": "How to pay",
+      "amounts": "€{monthly} a month, or €{yearly} a year (two months free).",
+      "bankTitle": "Bank transfer",
+      "holder": "Account holder",
+      "iban": "IBAN",
+      "bank": "Bank",
+      "swift": "SWIFT/BIC",
+      "reference": "Payment reference",
+      "referenceNote": "Put this reference on the transfer so we know it’s from your club.",
+      "bankAsk": "Write to <email></email> and we’ll send you our bank details.",
+      "inPersonTitle": "In person",
+      "inPersonText": "Prefer to pay in cash? Get in touch and we’ll arrange a time to meet.",
+      "afterPaying": "Once your payment arrives, we mark your plan as paid, usually within one working day. Need an invoice for your company? Just ask."
     }
   },
   "setup": {
@@ -1530,6 +1548,80 @@
         }
       ],
       "contact": "For questions about these terms, write to {email}."
+    }
+  },
+  "owner": {
+    "title": "Clubs & payments",
+    "subtitle": "Only you see this page. Record payments, change plans and see how every club is doing.",
+    "stats": {
+      "clubs": "Clubs",
+      "trial": "In free trial",
+      "paying": "Paying",
+      "unpaid": "Not paid",
+      "monthly": "Paying clubs, per month",
+      "received": "Received this month"
+    },
+    "filters": {
+      "all": "All",
+      "trial": "Trial",
+      "active": "Paying",
+      "unpaid": "Not paid"
+    },
+    "search": "Search club, owner or email…",
+    "cols": {
+      "club": "Club",
+      "owner": "Owner",
+      "plan": "Plan",
+      "status": "Status",
+      "usage": "Activity"
+    },
+    "status": {
+      "trialUntil": "Trial until {date}",
+      "paidUntil": "Paid until {date}",
+      "unpaid": "Not paid"
+    },
+    "joined": "joined {date}",
+    "perMonth": "€{price} / month",
+    "courts": "{n, plural, one {# court} other {# courts}}",
+    "bookings30": "{n, plural, one {# booking} other {# bookings}} in 30 days",
+    "manage": "Manage",
+    "empty": "No clubs match.",
+    "payments": {
+      "title": "Payments",
+      "empty": "No payments recorded yet.",
+      "date": "Date",
+      "method": "Paid by",
+      "paidUntil": "Now paid until",
+      "amount": "Amount"
+    },
+    "period": {
+      "month": "1 month",
+      "year": "1 year"
+    },
+    "method": {
+      "bank": "Bank transfer",
+      "cash": "Cash"
+    },
+    "pay": {
+      "title": "Record a payment",
+      "preview": "Paid until becomes {date}.",
+      "save": "Record payment",
+      "saved": "Payment recorded."
+    },
+    "other": {
+      "title": "Other changes",
+      "planOnly": "Change plan only",
+      "extendTrial": "Extend free trial",
+      "days": "+{n} days",
+      "paidUntil": "Paid until (to fix a mistake)",
+      "paidUntilHint": "Leave empty and save to mark the club as not paid.",
+      "save": "Save",
+      "saved": "Saved."
+    },
+    "errors": {
+      "notAllowed": "Only the app owner can do this.",
+      "invalid": "Something in the form isn’t right.",
+      "failed": "Couldn’t save. Please try again."
     }
   }
 }

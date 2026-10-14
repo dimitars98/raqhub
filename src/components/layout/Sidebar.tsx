@@ -9,6 +9,7 @@ import {
   CalendarDays,
   CalendarRange,
   CreditCard,
+  Crown,
   Globe,
   Share2,
   Grid3x3,
@@ -332,6 +333,8 @@ interface SidebarProps {
   clubName?: string;
   /** Used for the link to the club's public page. */
   clubSlug?: string;
+  /** The app owner (super_admin) also gets the owner page. */
+  isOwner?: boolean;
 }
 
 export default function Sidebar({
@@ -339,6 +342,7 @@ export default function Sidebar({
   userName,
   clubName,
   clubSlug,
+  isOwner = false,
 }: SidebarProps) {
   const { collapsed, mobileOpen, setMobileOpen } = useSidebar();
   const pathname = usePathname();
@@ -346,6 +350,14 @@ export default function Sidebar({
   const t = useTranslations("dashboard");
 
   const ADMIN_NAV: NavGroup[] = [
+    ...(isOwner
+      ? [
+          {
+            group: t("ownerGroup"),
+            items: [{ label: t("ownerPage"), href: "/admin/owner", icon: Crown }],
+          },
+        ]
+      : []),
     {
       group: t("overview"),
       items: [

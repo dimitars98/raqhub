@@ -1,5 +1,5 @@
 import { getFormatter, getTranslations } from "next-intl/server";
-import { Lock, Mail, Sparkles } from "lucide-react";
+import { Banknote, Landmark, Lock, Mail, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   PLANS,
@@ -9,6 +9,7 @@ import {
   type ClubBilling,
   type Feature,
 } from "@/lib/plans";
+import { PAYMENT, paymentReference } from "@/lib/payment";
 
 /** Strip above every admin page: trial days left, or "trial is over". */
 export async function PlanBanner({ access }: { access: ClubAccess }) {
@@ -64,7 +65,13 @@ export async function UpgradeNotice({ feature }: { feature: Feature }) {
 }
 
 /** "Your ServeTime plan" box on the settings page. */
-export async function PlanCard({ club, access }: { club: ClubBilling; access: ClubAccess }) {
+export async function PlanCard({
+  club,
+  access,
+}: {
+  club: ClubBilling & { slug?: string | null };
+  access: ClubAccess;
+}) {
   const t = await getTranslations("billing");
   const format = await getFormatter();
   const plan = PLANS[access.plan];
@@ -110,8 +117,96 @@ export async function PlanCard({ club, access }: { club: ClubBilling; access: Cl
         <p className="mt-3 text-sm text-ink-600">{t("trialNote")}</p>
       )}
       <p className="mt-3 text-sm text-ink-600">
-        {t("changePlan", { email: SALES_EMAIL })}
+        {t("changePlan", { email: PAYMENT.email })}
       </p>
+
+      <HowToPay planId={access.plan} slug={club.slug ?? null} />
+    </div>
+  );
+}
+
+/** Bank transfer and paying in person, with this club's amounts and reference. */
+async function HowToPay({ planId, slug }: { planId: ClubAccess["plan"]; slug: string | null }) {
+  const t = await getTranslations("billing.pay");
+  const plan = PLANS[planId];
+  const bank = PAYMENT.bank;
+  const bankRows: [string, string | null][] = [
+    [t("holder"), bank.holder],
+    [t("iban"), bank.iban],
+    [t("bank"), bank.bankName],
+    [t("swift"), bank.swift],
+  ];
+  const mail = (
+    <a
+      href={`mailto:${PAYMENT.email}`}
+      className="font-medium text-ink-900 underline decoration-brand-400 decoration-2 underline-offset-2"
+    >
+      {PAYMENT.email}
+    </a>
+  );
+
+  return (
+    <div className="mt-5 border-t border-ink-100 pt-5">
+      <p className="text-sm font-semibold text-ink-900">{t("title")}</p>
+      <p className="mt-1 text-sm text-ink-600">
+        {t("amounts", { monthly: plan.priceMonthly, yearly: plan.priceYearly })}
+      </p>
+
+      <div className={`mt-4 grid gap-3 ${PAYMENT.inPerson ? "sm:grid-cols-2" : ""}`}>
+        {/* Bank transfer */}
+        <div className="rounded-xl bg-ink-50 p-4">
+          <p className="flex items-center gap-2 text-sm font-semibold text-ink-900">
+            <Landmark size={16} aria-hidden="true" className="text-brand-600" />
+            {t("bankTitle")}
+          </p>
+          {bank.iban ? (
+            <>
+              <dl className="mt-3 space-y-1.5 text-sm">
+                {bankRows
+                  .filter((row): row is [string, string] => !!row[1])
+                  .map(([label, value]) => (
+                    <div key={label} className="flex flex-wrap gap-x-2">
+                      <dt className="text-ink-400">{label}:</dt>
+                      <dd className="select-all font-medium text-ink-900">{value}</dd>
+                    </div>
+                  ))}
+                {slug && (
+                  <div className="flex flex-wrap gap-x-2">
+                    <dt className="text-ink-400">{t("reference")}:</dt>
+                    <dd className="select-all font-mono text-[13px] font-semibold text-ink-900">
+                      {paymentReference(slug)}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+              {slug && <p className="mt-2 text-xs text-ink-400">{t("referenceNote")}</p>}
+            </>
+          ) : (
+            <p className="mt-2 text-sm text-ink-600">{t.rich("bankAsk", { email: () => mail })}</p>
+          )}
+        </div>
+
+        {/* In person */}
+        {PAYMENT.inPerson && (
+          <div className="rounded-xl bg-ink-50 p-4">
+            <p className="flex items-center gap-2 text-sm font-semibold text-ink-900">
+              <Banknote size={16} aria-hidden="true" className="text-brand-600" />
+              {t("inPersonTitle")}
+            </p>
+            <p className="mt-2 text-sm text-ink-600">{t("inPersonText")}</p>
+            <p className="mt-2 flex flex-col gap-0.5 text-sm">
+              {mail}
+              {PAYMENT.phone && (
+                <a href={`tel:${PAYMENT.phone.replace(/\s/g, "")}`} className="font-medium text-ink-900">
+                  {PAYMENT.phone}
+                </a>
+              )}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <p className="mt-3 text-xs leading-relaxed text-ink-400">{t("afterPaying")}</p>
     </div>
   );
 }

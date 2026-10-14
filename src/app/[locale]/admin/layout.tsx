@@ -55,6 +55,7 @@ export default async function AdminLayout({
       userName={profile.full_name ?? "Admin"}
       clubName={club?.name}
       clubSlug={club?.slug}
+      isOwner={profile.role === "super_admin"}
       notice={club ? <PlanBanner access={clubAccess(club)} /> : undefined}
     >
       {children}

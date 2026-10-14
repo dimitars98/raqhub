@@ -394,9 +394,12 @@
       "membership": "Iscrizione",
       "timetable": "Calendario",
       "myBookings": "Le mie prenotazioni",
-      "share": "Condividi con i giocatori"
+      "share": "Condividi con i giocatori",
+      "owner": "Club e pagamenti"
     },
-    "share": "Condividi"
+    "share": "Condividi",
+    "ownerGroup": "ServeTime",
+    "ownerPage": "Club e pagamenti"
   },
   "members": {
     "title": "Soci",
@@ -764,6 +767,21 @@
       "starter": "Starter",
       "club": "Club",
       "academy": "Academy"
+    },
+    "pay": {
+      "title": "Come pagare",
+      "amounts": "€{monthly} al mese o €{yearly} all’anno (due mesi gratis).",
+      "bankTitle": "Bonifico bancario",
+      "holder": "Intestatario",
+      "iban": "IBAN",
+      "bank": "Banca",
+      "swift": "SWIFT/BIC",
+      "reference": "Causale",
+      "referenceNote": "Scrivi questa causale nel bonifico, così sappiamo che arriva dal tuo club.",
+      "bankAsk": "Scrivi a <email></email> e ti invieremo i nostri dati bancari.",
+      "inPersonTitle": "Di persona",
+      "inPersonText": "Preferisci pagare in contanti? Contattaci e fissiamo un incontro.",
+      "afterPaying": "Appena arriva il pagamento, segniamo il piano come pagato, di solito entro un giorno lavorativo. Ti serve una fattura per la tua azienda? Basta chiedere."
     }
   },
   "setup": {
@@ -1530,6 +1548,80 @@
         }
       ],
       "contact": "Per domande su questi termini, scrivi a {email}."
+    }
+  },
+  "owner": {
+    "title": "Club e pagamenti",
+    "subtitle": "Solo tu vedi questa pagina. Registra i pagamenti, cambia i piani e guarda come va ogni club.",
+    "stats": {
+      "clubs": "Club",
+      "trial": "In prova gratuita",
+      "paying": "Paganti",
+      "unpaid": "Non pagati",
+      "monthly": "Club paganti, al mese",
+      "received": "Ricevuto questo mese"
+    },
+    "filters": {
+      "all": "Tutti",
+      "trial": "Prova",
+      "active": "Paganti",
+      "unpaid": "Non pagati"
+    },
+    "search": "Cerca club, titolare o email…",
+    "cols": {
+      "club": "Club",
+      "owner": "Titolare",
+      "plan": "Piano",
+      "status": "Stato",
+      "usage": "Attività"
+    },
+    "status": {
+      "trialUntil": "Prova fino al {date}",
+      "paidUntil": "Pagato fino al {date}",
+      "unpaid": "Non pagato"
+    },
+    "joined": "iscritto il {date}",
+    "perMonth": "€{price} / mese",
+    "courts": "{n, plural, one {# campo} other {# campi}}",
+    "bookings30": "{n, plural, one {# prenotazione} other {# prenotazioni}} in 30 giorni",
+    "manage": "Gestisci",
+    "empty": "Nessun club corrisponde.",
+    "payments": {
+      "title": "Pagamenti",
+      "empty": "Ancora nessun pagamento registrato.",
+      "date": "Data",
+      "method": "Pagato con",
+      "paidUntil": "Ora pagato fino al",
+      "amount": "Importo"
+    },
+    "period": {
+      "month": "1 mese",
+      "year": "1 anno"
+    },
+    "method": {
+      "bank": "Bonifico",
+      "cash": "Contanti"
+    },
+    "pay": {
+      "title": "Registra un pagamento",
+      "preview": "Pagato fino al {date}",
+      "save": "Registra pagamento",
+      "saved": "Pagamento registrato."
+    },
+    "other": {
+      "title": "Altre modifiche",
+      "planOnly": "Cambia solo il piano",
+      "extendTrial": "Prolunga la prova gratuita",
+      "days": "+{n} giorni",
+      "paidUntil": "Pagato fino al (per correggere un errore)",
+      "paidUntilHint": "Lascia vuoto e salva per segnare il club come non pagato.",
+      "save": "Salva",
+      "saved": "Salvato."
+    },
+    "errors": {
+      "notAllowed": "Solo il titolare dell’app può farlo.",
+      "invalid": "Qualcosa nel modulo non va.",
+      "failed": "Salvataggio non riuscito. Riprova."
     }
   }
 }

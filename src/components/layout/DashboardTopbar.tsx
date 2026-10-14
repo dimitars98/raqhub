@@ -20,7 +20,8 @@ type TitleKey =
   | "book"
   | "myBookings"
   | "profile"
-  | "membership";
+  | "membership"
+  | "owner";
 
 // URL segment → translation key
 const TITLE_KEYS: Record<string, TitleKey> = {
@@ -38,6 +39,7 @@ const TITLE_KEYS: Record<string, TitleKey> = {
   "my-bookings": "myBookings",
   profile: "profile",
   membership: "membership",
+  owner: "owner",
 };
 
 const iconButton =

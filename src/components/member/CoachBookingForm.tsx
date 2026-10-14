@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { addDays, format, setHours, setMinutes, startOfDay } from "date-fns";
 import { createClient } from "@/lib/supabase/client";
+import { dateLocale } from "@/lib/dateLocale";
 import { createCoachBooking } from "@/app/actions/bookings";
 import { startHoursFor } from "@/lib/openingHours";
 import type { MyMembership, OpeningHours } from "@/types/database";
@@ -135,7 +136,8 @@ export default function CoachBookingForm({
     }
   };
 
-  const dayLabel = new Intl.DateTimeFormat(locale, { weekday: "short" });
+  // date-fns, not Intl: not every browser has Macedonian or Albanian day names.
+  const dfLocale = dateLocale(locale);
 
   return (
     <div className="card p-6">
@@ -158,7 +160,7 @@ export default function CoachBookingForm({
                   : "border-ink-200 text-ink-600 hover:border-brand-600"
               }`}
             >
-              <span className="font-medium capitalize">{dayLabel.format(d)}</span>
+              <span className="font-medium capitalize">{format(d, "EEE", { locale: dfLocale })}</span>
               <span className="mt-0.5 text-base font-semibold">{format(d, "d")}</span>
             </button>
           );

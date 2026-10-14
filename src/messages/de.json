@@ -394,9 +394,12 @@
       "membership": "Mitgliedschaft",
       "timetable": "Belegungsplan",
       "myBookings": "Meine Buchungen",
-      "share": "Mit Spielern teilen"
+      "share": "Mit Spielern teilen",
+      "owner": "Clubs & Zahlungen"
     },
-    "share": "Teilen"
+    "share": "Teilen",
+    "ownerGroup": "ServeTime",
+    "ownerPage": "Clubs & Zahlungen"
   },
   "members": {
     "title": "Mitglieder",
@@ -764,6 +767,21 @@
       "starter": "Starter",
       "club": "Club",
       "academy": "Academy"
+    },
+    "pay": {
+      "title": "So bezahlen Sie",
+      "amounts": "{monthly} € pro Monat oder {yearly} € pro Jahr (zwei Monate gratis).",
+      "bankTitle": "Banküberweisung",
+      "holder": "Kontoinhaber",
+      "iban": "IBAN",
+      "bank": "Bank",
+      "swift": "SWIFT/BIC",
+      "reference": "Verwendungszweck",
+      "referenceNote": "Geben Sie diesen Verwendungszweck an, damit wir die Zahlung Ihrem Club zuordnen können.",
+      "bankAsk": "Schreiben Sie an <email></email>, und wir schicken Ihnen unsere Bankverbindung.",
+      "inPersonTitle": "Persönlich",
+      "inPersonText": "Lieber bar bezahlen? Melden Sie sich, und wir vereinbaren einen Termin.",
+      "afterPaying": "Sobald Ihre Zahlung eingeht, markieren wir Ihren Tarif als bezahlt, meist innerhalb eines Werktags. Sie brauchen eine Rechnung für Ihre Firma? Fragen Sie einfach."
     }
   },
   "setup": {
@@ -1530,6 +1548,80 @@
         }
       ],
       "contact": "Bei Fragen zu diesen Bedingungen schreiben Sie an {email}."
+    }
+  },
+  "owner": {
+    "title": "Clubs & Zahlungen",
+    "subtitle": "Nur Sie sehen diese Seite. Zahlungen erfassen, Tarife ändern und sehen, wie es jedem Club geht.",
+    "stats": {
+      "clubs": "Clubs",
+      "trial": "In der Testphase",
+      "paying": "Zahlend",
+      "unpaid": "Nicht bezahlt",
+      "monthly": "Zahlende Clubs pro Monat",
+      "received": "Diesen Monat erhalten"
+    },
+    "filters": {
+      "all": "Alle",
+      "trial": "Testphase",
+      "active": "Zahlend",
+      "unpaid": "Nicht bezahlt"
+    },
+    "search": "Club, Inhaber oder E-Mail suchen…",
+    "cols": {
+      "club": "Club",
+      "owner": "Inhaber",
+      "plan": "Tarif",
+      "status": "Status",
+      "usage": "Aktivität"
+    },
+    "status": {
+      "trialUntil": "Testphase bis {date}",
+      "paidUntil": "Bezahlt bis {date}",
+      "unpaid": "Nicht bezahlt"
+    },
+    "joined": "seit {date}",
+    "perMonth": "{price} € / Monat",
+    "courts": "{n, plural, one {# Platz} other {# Plätze}}",
+    "bookings30": "{n, plural, one {# Buchung} other {# Buchungen}} in 30 Tagen",
+    "manage": "Verwalten",
+    "empty": "Keine passenden Clubs.",
+    "payments": {
+      "title": "Zahlungen",
+      "empty": "Noch keine Zahlungen erfasst.",
+      "date": "Datum",
+      "method": "Bezahlt per",
+      "paidUntil": "Jetzt bezahlt bis",
+      "amount": "Betrag"
+    },
+    "period": {
+      "month": "1 Monat",
+      "year": "1 Jahr"
+    },
+    "method": {
+      "bank": "Überweisung",
+      "cash": "Bar"
+    },
+    "pay": {
+      "title": "Zahlung erfassen",
+      "preview": "Bezahlt bis wird {date}",
+      "save": "Zahlung erfassen",
+      "saved": "Zahlung erfasst."
+    },
+    "other": {
+      "title": "Weitere Änderungen",
+      "planOnly": "Nur Tarif ändern",
+      "extendTrial": "Testphase verlängern",
+      "days": "+{n} Tage",
+      "paidUntil": "Bezahlt bis (zum Korrigieren)",
+      "paidUntilHint": "Leer lassen und speichern, um den Club als nicht bezahlt zu markieren.",
+      "save": "Speichern",
+      "saved": "Gespeichert."
+    },
+    "errors": {
+      "notAllowed": "Das darf nur der Inhaber der App.",
+      "invalid": "Im Formular stimmt etwas nicht.",
+      "failed": "Speichern fehlgeschlagen. Bitte erneut versuchen."
     }
   }
 }

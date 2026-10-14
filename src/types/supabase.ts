@@ -154,6 +154,47 @@ export type Database = {
           },
         ]
       }
+      club_payments: {
+        Row: {
+          id: string
+          club_id: string
+          plan: string
+          period: string
+          amount: number
+          method: string
+          paid_until: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          club_id: string
+          plan: string
+          period: string
+          amount: number
+          method: string
+          paid_until: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          club_id?: string
+          plan?: string
+          period?: string
+          amount?: number
+          method?: string
+          paid_until?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "club_payments_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "clubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       club_notices: {
         Row: {
           club_id: string

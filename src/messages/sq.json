@@ -394,9 +394,12 @@
       "membership": "Anëtarësi",
       "timetable": "Orari",
       "myBookings": "Rezervimet e mia",
-      "share": "Ndajeni me lojtarët"
+      "share": "Ndajeni me lojtarët",
+      "owner": "Klubet dhe pagesat"
     },
-    "share": "Ndaj"
+    "share": "Ndaj",
+    "ownerGroup": "ServeTime",
+    "ownerPage": "Klubet dhe pagesat"
   },
   "members": {
     "title": "Anëtarë",
@@ -764,6 +767,21 @@
       "starter": "Starter",
       "club": "Club",
       "academy": "Academy"
+    },
+    "pay": {
+      "title": "Si të paguani",
+      "amounts": "€{monthly} në muaj ose €{yearly} në vit (dy muaj falas).",
+      "bankTitle": "Transfertë bankare",
+      "holder": "Mbajtësi i llogarisë",
+      "iban": "IBAN",
+      "bank": "Banka",
+      "swift": "SWIFT/BIC",
+      "reference": "Përshkrimi i pagesës",
+      "referenceNote": "Shkruajeni këtë në përshkrimin e transfertës që ta dimë se është nga klubi juaj.",
+      "bankAsk": "Na shkruani në <email></email> dhe do t’ju dërgojmë të dhënat tona bankare.",
+      "inPersonTitle": "Personalisht",
+      "inPersonText": "Preferoni të paguani me para në dorë? Na kontaktoni dhe do të caktojmë një takim.",
+      "afterPaying": "Sapo të mbërrijë pagesa, e shënojmë paketën si të paguar, zakonisht brenda një dite pune. Ju duhet faturë për kompaninë? Thjesht na e kërkoni."
     }
   },
   "setup": {
@@ -1530,6 +1548,80 @@
         }
       ],
       "contact": "Për pyetje rreth këtyre kushteve, na shkruani në {email}."
+    }
+  },
+  "owner": {
+    "title": "Klubet dhe pagesat",
+    "subtitle": "Këtë faqe e shihni vetëm ju. Regjistroni pagesa, ndryshoni paketa dhe shihni si shkon çdo klub.",
+    "stats": {
+      "clubs": "Klube",
+      "trial": "Në provë falas",
+      "paying": "Paguajnë",
+      "unpaid": "Pa paguar",
+      "monthly": "Klubet që paguajnë, në muaj",
+      "received": "Marrë këtë muaj"
+    },
+    "filters": {
+      "all": "Të gjitha",
+      "trial": "Provë",
+      "active": "Paguajnë",
+      "unpaid": "Pa paguar"
+    },
+    "search": "Kërko klub, pronar ose email…",
+    "cols": {
+      "club": "Klubi",
+      "owner": "Pronari",
+      "plan": "Paketa",
+      "status": "Statusi",
+      "usage": "Aktiviteti"
+    },
+    "status": {
+      "trialUntil": "Provë deri më {date}",
+      "paidUntil": "Paguar deri më {date}",
+      "unpaid": "Pa paguar"
+    },
+    "joined": "u regjistrua më {date}",
+    "perMonth": "€{price} / muaj",
+    "courts": "{n, plural, one {# fushë} other {# fusha}}",
+    "bookings30": "{n, plural, one {# rezervim} other {# rezervime}} në 30 ditë",
+    "manage": "Menaxho",
+    "empty": "Asnjë klub nuk përputhet.",
+    "payments": {
+      "title": "Pagesat",
+      "empty": "Ende nuk ka pagesa të regjistruara.",
+      "date": "Data",
+      "method": "Mënyra",
+      "paidUntil": "Tani paguar deri më",
+      "amount": "Shuma"
+    },
+    "period": {
+      "month": "1 muaj",
+      "year": "1 vit"
+    },
+    "method": {
+      "bank": "Transfertë bankare",
+      "cash": "Para në dorë"
+    },
+    "pay": {
+      "title": "Regjistro një pagesë",
+      "preview": "Paguar deri më {date}",
+      "save": "Regjistro pagesën",
+      "saved": "Pagesa u regjistrua."
+    },
+    "other": {
+      "title": "Ndryshime të tjera",
+      "planOnly": "Vetëm ndrysho paketën",
+      "extendTrial": "Zgjat provën falas",
+      "days": "+{n} ditë",
+      "paidUntil": "Paguar deri më (për të ndrequr një gabim)",
+      "paidUntilHint": "Lëreni bosh dhe ruajeni që klubi të shënohet si i papaguar.",
+      "save": "Ruaj",
+      "saved": "U ruajt."
+    },
+    "errors": {
+      "notAllowed": "Këtë mund ta bëjë vetëm pronari i aplikacionit.",
+      "invalid": "Diçka në formular nuk është në rregull.",
+      "failed": "Ruajtja dështoi. Provoni përsëri."
     }
   }
 }
