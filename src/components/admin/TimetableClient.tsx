@@ -7,8 +7,10 @@ import { format, addDays, startOfDay } from "date-fns";
 import type { Booking, Court, Member, Profile } from "@/types/database";
 import { CalendarRange } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useLabels } from "@/hooks/useLabels";
+import { DAY_HOURS } from "@/lib/openingHours";
 
-type BookingWithJoins = Booking & {
+export type BookingWithJoins = Booking & {
   court?: Pick<Court, "id" | "name"> | null;
   member?: Pick<Member, "full_name"> | null;
   player?: Pick<Profile, "full_name"> | null;
@@ -16,28 +18,17 @@ type BookingWithJoins = Booking & {
   coach?: { profile?: Pick<Profile, "full_name"> | null } | null;
 };
 
-type CourtRow = Pick<Court, "id" | "name" | "surface" | "is_indoor" | "sport">;
+export type CourtRow = Pick<Court, "id" | "name" | "surface" | "is_indoor" | "sport">;
 interface Props {
   courts: CourtRow[];
   bookings: BookingWithJoins[];
 }
 
-const HOURS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+const HOURS = DAY_HOURS;
 const SLOTS_PER_HOUR = 2;
 const SLOT_H = 64;
 const TIME_W = 90;
 const DAY_START_MIN = 7 * 60;
-
-// Translation keys in "adminCourts" for each surface.
-const SURFACE_KEY: Record<string, string> = {
-  clay: "clay",
-  hard: "hard",
-  grass: "grass",
-  artificial_grass: "artificialGrass",
-  carpet: "carpet",
-  concrete: "concrete",
-  acrylic: "acrylic",
-};
 
 const STATUS_STYLES: Record<
   string,
@@ -102,8 +93,7 @@ export default function TimetableClient({ courts, bookings }: Props) {
   const t = useTranslations("timetable");
   const dfLocale = dateLocale(useLocale());
   const tCommon = useTranslations("common");
-  const tCourts = useTranslations("adminCourts");
-  const tStatus = useTranslations("myBookings.status");
+  const labels = useLabels();
   const [wrapWidth, setWrapWidth] = useState(600);
   const [offset, setOffset] = useState(0);
   const [nowMin, setNowMin] = useState<number | null>(null);
@@ -240,7 +230,7 @@ export default function TimetableClient({ courts, bookings }: Props) {
             <div
               className={`w-2.5 h-2.5 rounded-[3px] border-2 ${s.dot} opacity-80`}
             />
-            <span>{tStatus(status as "confirmed")}</span>
+            <span>{labels.bookingStatus(status)}</span>
           </div>
         ))}
       </div>
@@ -274,8 +264,8 @@ export default function TimetableClient({ courts, bookings }: Props) {
                 {c.name}
               </div>
               <div className="text-xs text-[#6e7f65] mt-[3px]">
-                {tCourts(c.sport)} · {tCourts(SURFACE_KEY[c.surface] ?? "clay")} ·{" "}
-                {c.is_indoor ? tCourts("indoor") : tCourts("outdoor")}
+                {labels.sport(c.sport)} · {labels.surface(c.surface)} ·{" "}
+                {labels.inOut(c.is_indoor)}
               </div>
             </div>
           ))}
@@ -420,7 +410,7 @@ export default function TimetableClient({ courts, bookings }: Props) {
                   ).dot
                 }`}
               />
-              {tooltip.booking.status}
+              {labels.bookingStatus(tooltip.booking.status)}
             </span>
             <span className="font-semibold text-[#111c0a]">
               €{tooltip.booking.total_price.toFixed(2)}

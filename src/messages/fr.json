@@ -249,11 +249,6 @@
     "saving": "Enregistrement…",
     "confirmBooking": "Confirmer la réservation",
     "statusLabels": {
-      "confirmed": "Confirmée",
-      "pending": "En attente",
-      "cancelled": "Annulée",
-      "completed": "Terminée",
-      "no_show": "Absent",
       "all": "Toutes"
     },
     "slotTaken": "Ce court est déjà réservé à cette heure.",
@@ -287,27 +282,15 @@
     "status": "Statut",
     "description": "Description",
     "descriptionPlaceholder": "Détails sur ce court...",
-    "indoor": "Couvert",
-    "outdoor": "Extérieur",
     "active": "Actif",
     "inactive": "Inactif",
     "edit": "Modifier",
     "activate": "Activer",
     "deactivate": "Désactiver",
-    "clay": "Terre battue",
-    "hard": "Dur",
-    "grass": "Gazon",
-    "artificialGrass": "Gazon synthétique",
-    "carpet": "Moquette",
     "cancel": "Annuler",
     "saving": "Enregistrement…",
     "saveChanges": "Enregistrer les modifications",
     "allSports": "Tous les sports",
-    "tennis": "Tennis",
-    "padel": "Padel",
-    "pickleball": "Pickleball",
-    "concrete": "Béton",
-    "acrylic": "Acrylique",
     "saveError": "Impossible d’enregistrer le court. Veuillez réessayer.",
     "howMany": "Combien",
     "howManyHint": "Ajoute {first} à {last}.",
@@ -336,8 +319,6 @@
     "membership": "Adhésion",
     "signOut": "Se déconnecter",
     "player": "Joueur",
-    "indoor": "Couvert",
-    "outdoor": "Extérieur",
     "greeting": {
       "morning": "Bonjour",
       "afternoon": "Bon après-midi",
@@ -373,11 +354,6 @@
       "manage": "Gérer"
     },
     "status": {
-      "confirmed": "Confirmée",
-      "pending": "En attente",
-      "completed": "Terminée",
-      "cancelled": "Annulée",
-      "no_show": "Absent",
       "live": "En cours"
     },
     "titles": {
@@ -418,11 +394,6 @@
     "actions": {
       "edit": "Modifier",
       "cancel": "Annuler"
-    },
-    "status": {
-      "active": "Actif",
-      "cancelled": "Annulé",
-      "expired": "Expiré"
     },
     "modal": {
       "addTitle": "Ajouter un membre",
@@ -472,11 +443,6 @@
     "cancel": "Annuler",
     "noCoaches": "Aucun coach pour l'instant. Ajoutez le premier.",
     "unknown": "Inconnu",
-    "beginner": "Débutant",
-    "intermediate": "Intermédiaire",
-    "advanced": "Avancé",
-    "junior": "Junior",
-    "adult": "Adulte",
     "coach": "Entraîneur",
     "selectProfile": "Sélectionnez un utilisateur",
     "alreadyCoach": "Cette personne est déjà entraîneur dans votre club.",
@@ -500,35 +466,7 @@
     "website": "Site web",
     "ctaTitle": "Envie de jouer à {club} ?",
     "ctaText": "Créez un compte gratuit, consultez les créneaux libres et réservez en quelques secondes.",
-    "metaDescription": "Courts, entraîneurs et adhésions à {club}. Réservez en ligne avec ServeTime.",
-    "billing": {
-      "monthly": "/ mois",
-      "annual": "/ an",
-      "one_time": "paiement unique"
-    },
-    "indoor": "Couvert",
-    "outdoor": "Extérieur",
-    "sports": {
-      "tennis": "Tennis",
-      "padel": "Padel",
-      "pickleball": "Pickleball"
-    },
-    "surfaces": {
-      "clay": "Terre battue",
-      "hard": "Dur",
-      "grass": "Gazon",
-      "artificial_grass": "Gazon synthétique",
-      "carpet": "Moquette",
-      "concrete": "Béton",
-      "acrylic": "Acrylique"
-    },
-    "levels": {
-      "beginner": "Débutant",
-      "intermediate": "Intermédiaire",
-      "advanced": "Avancé",
-      "junior": "Junior",
-      "adult": "Adulte"
-    }
+    "metaDescription": "Courts, entraîneurs et adhésions à {club}. Réservez en ligne avec ServeTime."
   },
   "myBookings": {
     "title": "Mes réservations",
@@ -554,13 +492,6 @@
     "madeByClub": "Réservé par le club",
     "lesson": "Cours avec {name}",
     "booking": "Réservation",
-    "status": {
-      "confirmed": "Confirmée",
-      "pending": "En attente",
-      "cancelled": "Annulée",
-      "completed": "Terminée",
-      "no_show": "Absent"
-    },
     "minutes": "{n} min",
     "cancelClosed": "Trop tard pour annuler en ligne. Veuillez appeler le club."
   },
@@ -604,17 +535,7 @@
     "saved": "Enregistré",
     "saving": "Enregistrement…",
     "saveChanges": "Enregistrer les modifications",
-    "signOut": "Se déconnecter",
-    "billing": {
-      "monthly": "/ mois",
-      "annual": "/ an",
-      "one_time": "paiement unique"
-    },
-    "memberStatus": {
-      "active": "Active",
-      "cancelled": "Annulée",
-      "expired": "Expirée"
-    }
+    "signOut": "Se déconnecter"
   },
   "membershipPage": {
     "title": "Adhésion",
@@ -629,17 +550,7 @@
     "availablePlans": "Formules de {club}",
     "current": "Actuelle",
     "discountBookings": "{pct} % de réduction sur les réservations",
-    "changePlan": "Pour changer de formule, contactez l’administrateur du club.",
-    "billing": {
-      "monthly": "mensuel",
-      "annual": "annuel",
-      "one_time": "paiement unique"
-    },
-    "status": {
-      "active": "Active",
-      "cancelled": "Annulée",
-      "expired": "Expirée"
-    }
+    "changePlan": "Pour changer de formule, contactez l’administrateur du club."
   },
   "plansAdmin": {
     "title": "Formules d’adhésion",
@@ -1202,11 +1113,6 @@
     "revenue": "Revenus",
     "bookings": "Réservations",
     "members": "Membres",
-    "sports": {
-      "tennis": "Tennis",
-      "padel": "Padel",
-      "pickleball": "Pickleball"
-    },
     "totalRevenue": "Revenu total",
     "totalBookings": "Total des réservations",
     "last12Months": "12 derniers mois",
@@ -1283,7 +1189,9 @@
     "coach": "Entraîneur",
     "independent": "Indépendant",
     "filterByLevel": "Filtrer par niveau",
-    "allLevels": "Tous les niveaux"
+    "allLevels": "Tous les niveaux",
+    "count": "{n, plural, =0 {Aucun entraîneur disponible} one {# entraîneur disponible} other {# entraîneurs disponibles}}",
+    "perHour": "/ h"
   },
   "bookingErrors": {
     "coachTaken": "Cet entraîneur est déjà réservé à cette heure",
@@ -1623,5 +1531,47 @@
       "invalid": "Quelque chose ne va pas dans le formulaire.",
       "failed": "Échec de l’enregistrement. Veuillez réessayer."
     }
+  },
+  "labels": {
+    "sports": {
+      "tennis": "Tennis",
+      "padel": "Padel",
+      "pickleball": "Pickleball"
+    },
+    "surfaces": {
+      "clay": "Terre battue",
+      "hard": "Dur",
+      "grass": "Gazon",
+      "artificial_grass": "Gazon synthétique",
+      "carpet": "Moquette",
+      "concrete": "Béton",
+      "acrylic": "Acrylique"
+    },
+    "levels": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé",
+      "junior": "Junior",
+      "adult": "Adulte"
+    },
+    "bookingStatus": {
+      "confirmed": "Confirmée",
+      "pending": "En attente",
+      "completed": "Terminée",
+      "cancelled": "Annulée",
+      "no_show": "Absent"
+    },
+    "memberStatus": {
+      "active": "Active",
+      "cancelled": "Annulée",
+      "expired": "Expirée"
+    },
+    "billingPeriod": {
+      "monthly": "/ mois",
+      "annual": "/ an",
+      "one_time": "paiement unique"
+    },
+    "indoor": "Couvert",
+    "outdoor": "Extérieur"
   }
 }

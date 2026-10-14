@@ -4,8 +4,6 @@ import CourtsClient from "@/components/admin/CourtsClient";
 import { redirect } from "next/navigation";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 
-type CourtWithClub = Court & { club?: Pick<Club, "id" | "name"> | null };
-
 export default async function AdminCourtsPage() {
   const supabase = await createClient();
 

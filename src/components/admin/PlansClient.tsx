@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { createClient } from "@/lib/supabase/client";
 import type { MembershipPlan, BillingPeriod } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import { useTranslations } from "next-intl";
+import { BILLING_PERIODS } from "@/lib/labels";
+import { useLabels } from "@/hooks/useLabels";
 
 
 type FormValues = {
@@ -24,11 +26,7 @@ export default function PlansClient({
   clubId: string;
 }) {
   const t = useTranslations("plansAdmin");
-  const BILLING_LABEL: Record<BillingPeriod, string> = {
-    monthly: t("billing.monthly"),
-    annual: t("billing.annual"),
-    one_time: t("billing.one_time"),
-  };
+  const labels = useLabels();
   const [plans, setPlans] = useState(initial);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<MembershipPlan | null>(null);
@@ -146,7 +144,7 @@ export default function PlansClient({
                     {p.name}
                   </div>
                   <div className="text-xs text-ink-400 mt-0.5">
-                    {BILLING_LABEL[p.billing_period]}
+                    {labels.billingPeriod(p.billing_period)}
                   </div>
                 </div>
                 <div className="text-lg font-medium text-ink-900">
@@ -215,9 +213,11 @@ export default function PlansClient({
                 </Modal.Field>
                 <Modal.Field label={t("billingPeriod")}>
                   <select className="input" {...register("billing_period")}>
-                    <option value="monthly">{BILLING_LABEL.monthly}</option>
-                    <option value="annual">{BILLING_LABEL.annual}</option>
-                    <option value="one_time">{BILLING_LABEL.one_time}</option>
+                    {BILLING_PERIODS.map((b) => (
+                      <option key={b} value={b}>
+                        {labels.billingPeriod(b)}
+                      </option>
+                    ))}
                   </select>
                 </Modal.Field>
               </Modal.Grid>

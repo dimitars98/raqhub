@@ -3,6 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import type { Booking, Court, Member, Profile } from "@/types/database";
+import { getLabels } from "@/lib/getLabels";
+import { BADGE, bookingStatusTone } from "@/lib/badges";
 
 type CourtWithClub = Court & {
   club?: { name: string; city: string | null } | null;
@@ -11,24 +13,6 @@ type CourtWithClub = Court & {
 type BookingWithPlayer = Booking & {
   player?: Pick<Profile, "full_name"> | null;
   member?: Pick<Member, "full_name"> | null;
-};
-
-const STATUS_STYLES: Record<string, string> = {
-  confirmed: "bg-brand-100 text-brand-800",
-  pending: "bg-accent-100 text-accent-800",
-  cancelled: "bg-ink-100 text-ink-600",
-  completed: "bg-court-100 text-court-800",
-  no_show: "bg-red-100 text-red-700",
-};
-const STATUSES = Object.keys(STATUS_STYLES);
-const SURFACE_KEY: Record<string, string> = {
-  clay: "clay",
-  hard: "hard",
-  grass: "grass",
-  artificial_grass: "artificialGrass",
-  carpet: "carpet",
-  concrete: "concrete",
-  acrylic: "acrylic",
 };
 
 export default async function AdminCourtPage({
@@ -40,7 +24,7 @@ export default async function AdminCourtPage({
   const supabase = await createClient();
   const t = await getTranslations("courtDetail");
   const tCourts = await getTranslations("adminCourts");
-  const tStatus = await getTranslations("adminBookings.statusLabels");
+  const labels = await getLabels();
   const locale = await getLocale();
   const fmt = (value: string, options: Intl.DateTimeFormatOptions) =>
     new Intl.DateTimeFormat(locale, { timeZone: "Europe/Skopje", ...options }).format(
@@ -119,13 +103,13 @@ export default async function AdminCourtPage({
           <div>
             <dt className="text-ink-400 text-xs">{tCourts("surface")}</dt>
             <dd className="text-ink-900 mt-0.5">
-              {SURFACE_KEY[court.surface] ? tCourts(SURFACE_KEY[court.surface] as "clay") : court.surface}
+              {labels.surface(court.surface)}
             </dd>
           </div>
           <div>
             <dt className="text-ink-400 text-xs">{tCourts("type")}</dt>
             <dd className="text-ink-900 mt-0.5">
-              {court.is_indoor ? tCourts("indoor") : tCourts("outdoor")}
+              {labels.inOut(court.is_indoor)}
             </dd>
           </div>
           <div>
@@ -178,9 +162,9 @@ export default async function AdminCourtPage({
                   €{b.total_price}
                 </div>
                 <span
-                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_STYLES[b.status] ?? "bg-brand-100 text-brand-800"}`}
+                  className={`${BADGE} ${bookingStatusTone(b.status)}`}
                 >
-                  {STATUSES.includes(b.status) ? tStatus(b.status as "confirmed") : b.status}
+                  {labels.bookingStatus(b.status)}
                 </span>
               </div>
             );

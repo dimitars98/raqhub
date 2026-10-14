@@ -29,8 +29,9 @@ import {
 } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import { useSidebar } from "./SidebarContext";
-import { TONES, type Role } from "@/types/tones";
+import { TONES, type AreaRole } from "@/types/tones";
 import { LogoMark } from "@/components/ui/Logo";
+import { initials } from "@/lib/avatar";
 
 interface NavItem {
   label: string;
@@ -54,7 +55,7 @@ const isActive = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
 interface SidebarContentProps {
-  role: Role;
+  role: AreaRole;
   userName: string;
   clubName?: string;
   nav: NavGroup[];
@@ -87,13 +88,7 @@ function SidebarContent({
 }: SidebarContentProps) {
   const tc = useTranslations("common");
   const tone = TONES[role];
-  const initials = userName
-    .split(" ")
-    .filter(Boolean)
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
+  const userInitials = initials(userName);
 
   // Labels are never removed when collapsing. The sidebar gets narrower and
   // clips them (overflow-hidden), and they fade out. Icons keep their exact
@@ -211,7 +206,7 @@ function SidebarContent({
           <div
             className={`flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${tone.avatar}`}
           >
-            {initials}
+            {userInitials}
           </div>
           {!collapsed && (
             <div className="min-w-0 flex-1">
@@ -328,7 +323,7 @@ function MobileDrawer({
 }
 
 interface SidebarProps {
-  role: Role;
+  role: AreaRole;
   userName: string;
   clubName?: string;
   /** Used for the link to the club's public page. */

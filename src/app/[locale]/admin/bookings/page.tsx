@@ -1,17 +1,11 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import type { Booking, Club, Profile, Court, Member } from "@/types/database";
+import type { Club, Court, Member } from "@/types/database";
 import BookingsClient from "@/components/admin/BookingsClient";
 import Spinner from "@/components/ui/Spinner";
 import { noShowCutoff, normalizeRules } from "@/lib/bookingRules";
-import type { NoShow } from "@/components/admin/BookingsClient";
-
-type BookingWithJoins = Booking & {
-  court?: Pick<Court, "name"> | null;
-  member?: Pick<Member, "full_name"> | null;
-  player?: (Pick<Profile, "full_name"> & { email?: string | null }) | null;
-};
+import type { BookingWithJoins, NoShow } from "@/components/admin/BookingsClient";
 
 type CourtRow = Pick<Court, "id" | "name" | "price_per_hour" | "is_active">;
 

@@ -1,16 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import type { Profile } from "@/types/database";
+import { getSafeRedirect } from "@/lib/safeRedirect";
+import { routing } from "@/i18n/routing";
 
-const LOCALES = ["en", "de", "mk"];
-
-// Only allow redirects to paths inside this site
-function getSafeRedirect(value: string | null) {
-  if (!value) return null;
-  if (!value.startsWith("/") || value.startsWith("//")) return null;
-  if (value.includes("\\")) return null;
-  return value;
-}
+const LOCALES: readonly string[] = routing.locales;
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);

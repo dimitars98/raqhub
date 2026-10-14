@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { MembershipPlan, MyMembership } from "@/types/database";
+import { getLabels } from "@/lib/getLabels";
+import { BADGE, memberStatusTone } from "@/lib/badges";
 
 export default async function MembershipPage() {
   const supabase = await createClient();
@@ -11,14 +13,7 @@ export default async function MembershipPage() {
   if (!user) redirect("/login");
   const t = await getTranslations("membershipPage");
   const locale = await getLocale();
-  const billingLabel = (period: string) =>
-    ["monthly", "annual", "one_time"].includes(period)
-      ? t(`billing.${period as "monthly"}`)
-      : period;
-  const statusLabel = (status: string) =>
-    ["active", "cancelled", "expired"].includes(status)
-      ? t(`status.${status as "active"}`)
-      : status;
+  const labels = await getLabels();
 
   // The player's own membership comes from a database function; the members
   // table itself is only readable by the club. Active memberships come first.
@@ -35,15 +30,6 @@ export default async function MembershipPage() {
         .order("price")
     : { data: [] };
   const plans = (plansData ?? []) as MembershipPlan[];
-
-  const STATUS_STYLE: Record<string, string> = {
-    active:
-      "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800",
-    cancelled:
-      "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ink-100 text-ink-600",
-    expired:
-      "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700",
-  };
 
   return (
     <div>
@@ -75,12 +61,12 @@ export default async function MembershipPage() {
                 </div>
                 <div className="text-xs text-brand-400 mt-0.5">
                   {member.plan
-                    ? `€${member.plan.price} · ${billingLabel(member.plan.billing_period)}`
+                    ? `€${member.plan.price} · ${labels.billingPeriod(member.plan.billing_period)}`
                     : t("noPlanHint")}
                 </div>
               </div>
-              <span className={STATUS_STYLE[member.status]}>
-                {statusLabel(member.status)}
+              <span className={`${BADGE} ${memberStatusTone(member.status)}`}>
+                {labels.memberStatus(member.status)}
               </span>
             </div>
             {member.plan?.discount_pct && member.plan.discount_pct > 0 && (
@@ -135,7 +121,7 @@ export default async function MembershipPage() {
                     €{p.price}
                   </div>
                   <div className="text-xs text-brand-400 mb-3 capitalize">
-                    {billingLabel(p.billing_period)}
+                    {labels.billingPeriod(p.billing_period)}
                   </div>
                   {p.description && (
                     <p className="text-xs text-brand-500 mb-3">

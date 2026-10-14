@@ -1,21 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
-import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
-import {
-  Check,
-  ArrowRight,
-  Calendar,
-  Users,
-  Clock,
-  CreditCard,
-  BarChart3,
-  Bell,
-} from "lucide-react";
 import Hero from "@/components/layout/Hero";
 import FAQSection from "@/components/layout/FAQSection";
-import Image from "next/image";
 import TeamSection from "@/components/landing/TeamSection";
 import Footer from "@/components/landing/Footer";
 import CTA from "@/components/landing/CTA";
@@ -44,7 +32,6 @@ export default async function HomePage() {
     else redirect(`/${locale}/book`);
   }
 
-  const t = await getTranslations();
   const ta = await getTranslations("announcement");
 
   // Real quotes only, added with the person's permission.

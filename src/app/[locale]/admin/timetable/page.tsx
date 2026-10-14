@@ -1,16 +1,10 @@
 import { redirect } from "next/navigation";
-import TimetableClient from "@/components/admin/TimetableClient";
-import { Link } from "@/i18n/navigation";
+import TimetableClient, {
+  type BookingWithJoins,
+  type CourtRow,
+} from "@/components/admin/TimetableClient";
 import { createClient } from "@/lib/supabase/server";
-import type { Booking, Club, Court, Member, Profile } from "@/types/database";
-
-type BookingWithJoins = Booking & {
-  court?: Pick<Court, "id" | "name"> | null;
-  member?: Pick<Member, "full_name"> | null;
-  player?: Pick<Profile, "full_name"> | null;
-};
-
-type CourtRow = Pick<Court, "id" | "name" | "surface" | "is_indoor" | "sport">;
+import type { Club } from "@/types/database";
 
 export default async function TimetablePage() {
   const supabase = await createClient();

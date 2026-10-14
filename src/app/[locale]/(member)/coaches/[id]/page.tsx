@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { normalizeHours } from "@/lib/openingHours";
 import { normalizeRules } from "@/lib/bookingRules";
 import CoachBookingForm from "@/components/member/CoachBookingForm";
+import Avatar from "@/components/ui/Avatar";
+import { getLabels } from "@/lib/getLabels";
 import type { Coach, Club, Profile } from "@/types/database";
 
 type CoachWithJoins = Pick<
@@ -16,15 +18,6 @@ type CoachWithJoins = Pick<
   club: Pick<Club, "name" | "city" | "opening_hours" | "booking_rules"> | null;
 };
 
-const initials = (name: string | null) =>
-  (name ?? "C")
-    .split(" ")
-    .filter(Boolean)
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
 export default async function CoachPage({
   params,
 }: {
@@ -33,7 +26,7 @@ export default async function CoachPage({
   const { id } = await params;
   const supabase = await createClient();
   const t = await getTranslations("coachBooking");
-  const tLevel = await getTranslations("adminCoaches");
+  const labels = await getLabels();
 
   const { data } = await supabase
     .from("coaches")
@@ -63,21 +56,13 @@ export default async function CoachPage({
 
       {/* Coach card */}
       <div className="card mb-5 flex flex-col gap-5 p-6 sm:flex-row sm:items-start">
-        {coach.profile?.avatar_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={coach.profile.avatar_url}
-            alt=""
-            className="size-20 shrink-0 rounded-full object-cover"
-          />
-        ) : (
-          <div
-            aria-hidden="true"
-            className="flex size-20 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xl font-semibold text-brand-900"
-          >
-            {initials(coach.profile?.full_name ?? null)}
-          </div>
-        )}
+        <Avatar
+          id={coach.id}
+          name={coach.profile?.full_name}
+          src={coach.profile?.avatar_url}
+          className="size-20 text-xl"
+          px={80}
+        />
 
         <div className="min-w-0 flex-1">
           <h1 className="text-2xl font-semibold tracking-tight text-ink-900">
@@ -99,7 +84,7 @@ export default async function CoachPage({
             <div className="mt-4 flex flex-wrap gap-1.5">
               {levels.map((level) => (
                 <span key={level} className="badge-brand">
-                  {tLevel.has(level) ? tLevel(level) : level}
+                  {labels.level(level)}
                 </span>
               ))}
               {specializations.map((s) => (

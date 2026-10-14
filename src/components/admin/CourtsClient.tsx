@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import type { Court, Surface, Sport } from "@/types/database";
 import Modal from "@/components/ui/Modal";
@@ -12,12 +11,8 @@ import {
   updateCourt,
 } from "@/app/[locale]/admin/courts/actions";
 import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
-
-const SURFACES_BY_SPORT: Record<Sport, Surface[]> = {
-  tennis: ["clay", "hard", "grass", "artificial_grass", "carpet"],
-  padel: ["artificial_grass", "carpet", "hard"],
-  pickleball: ["hard", "concrete", "acrylic", "carpet"],
-};
+import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
+import { useLabels } from "@/hooks/useLabels";
 
 const EMPTY_FORM = {
   name: "",
@@ -38,7 +33,7 @@ interface Props {
   maxCourts: number | null;
 }
 
-export default function CourtsClient({ courts: initial, clubId, maxCourts }: Props) {
+export default function CourtsClient({ courts: initial, maxCourts }: Props) {
   const t = useTranslations("adminCourts");
   const tb = useTranslations("billing");
   const tc = useTranslations("common");
@@ -52,21 +47,7 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const SPORT_LABEL: Record<Sport, string> = {
-    tennis: t("tennis"),
-    padel: t("padel"),
-    pickleball: t("pickleball"),
-  };
-
-  const SURFACE_LABEL: Record<string, string> = {
-    clay: t("clay"),
-    hard: t("hard"),
-    grass: t("grass"),
-    artificial_grass: t("artificialGrass"),
-    carpet: t("carpet"),
-    concrete: t("concrete"),
-    acrylic: t("acrylic"),
-  };
+  const labels = useLabels();
 
   const activeCount = courts.filter((c) => c.is_active).length;
   const atLimit = maxCourts !== null && activeCount >= maxCourts;
@@ -212,7 +193,7 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
 
       {/* Sport filter tabs */}
       <div className="flex gap-2 mb-4">
-        {(["all", "tennis", "padel", "pickleball"] as const).map((s) => (
+        {(["all", ...SPORTS] as const).map((s) => (
           <button
             key={s}
             onClick={() => setSportFilter(s)}
@@ -222,9 +203,7 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
                 : "bg-white border border-ink-100 text-ink-600 hover:bg-ink-50"
             }`}
           >
-            {s === "all"
-              ? t("allSports")
-              : t(s as "tennis" | "padel" | "pickleball")}
+            {s === "all" ? t("allSports") : labels.sport(s)}
           </button>
         ))}
       </div>
@@ -283,13 +262,13 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
                     )}
                   </td>
                   <td className="px-5 py-3.5 text-ink-600">
-                    {SPORT_LABEL[c.sport]}
+                    {labels.sport(c.sport)}
                   </td>
                   <td className="px-5 py-3.5 text-ink-600">
-                    {SURFACE_LABEL[c.surface]}
+                    {labels.surface(c.surface)}
                   </td>
                   <td className="px-5 py-3.5 text-ink-600">
-                    {c.is_indoor ? t("indoor") : t("outdoor")}
+                    {labels.inOut(c.is_indoor)}
                   </td>
                   <td className="px-5 py-3.5 font-medium text-ink-900">
                     €{c.price_per_hour}
@@ -389,9 +368,9 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
                   value={form.sport}
                   onChange={(e) => handleSportChange(e.target.value as Sport)}
                 >
-                  {(Object.keys(SPORT_LABEL) as Sport[]).map((s) => (
+                  {SPORTS.map((s) => (
                     <option key={s} value={s}>
-                      {SPORT_LABEL[s]}
+                      {labels.sport(s)}
                     </option>
                   ))}
                 </select>
@@ -410,7 +389,7 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
                 >
                   {SURFACES_BY_SPORT[form.sport].map((s) => (
                     <option key={s} value={s}>
-                      {SURFACE_LABEL[s]}
+                      {labels.surface(s)}
                     </option>
                   ))}
                 </select>
@@ -441,8 +420,8 @@ export default function CourtsClient({ courts: initial, clubId, maxCourts }: Pro
                     }))
                   }
                 >
-                  <option value="outdoor">{t("outdoor")}</option>
-                  <option value="indoor">{t("indoor")}</option>
+                  <option value="outdoor">{labels.inOut(false)}</option>
+                  <option value="indoor">{labels.inOut(true)}</option>
                 </select>
               </Modal.Field>
             </Modal.Grid>

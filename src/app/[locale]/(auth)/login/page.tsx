@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useTranslations, useLocale } from "next-intl";
 import type { Profile } from "@/types/database";
 import { LogoMark } from "@/components/ui/Logo";
+import { getSafeRedirect } from "@/lib/safeRedirect";
 
 type LoginValues = {
   email: string;
@@ -14,13 +15,6 @@ type LoginValues = {
 };
 
 // Only allow redirects to paths inside this site
-function getSafeRedirect(value: string | null) {
-  if (!value) return null;
-  if (!value.startsWith("/") || value.startsWith("//")) return null;
-  if (value.includes("\\")) return null;
-  return value;
-}
-
 export default function LoginPage() {
   const router = useRouter();
   const params = useSearchParams();

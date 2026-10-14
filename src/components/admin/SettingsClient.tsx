@@ -34,6 +34,7 @@ import {
 } from "@/app/[locale]/admin/settings/actions";
 import ProfileAvatarUpload from "@/components/profile/ProfileAvatarUpload";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
+import { initials } from "@/lib/avatar";
 
 export type SettingsClub = Pick<
   Club,
@@ -75,15 +76,6 @@ const SECTIONS = [
   { id: "notifications", icon: Bell, soon: true },
   { id: "danger", icon: Shield, soon: true },
 ];
-
-const initialsOf = (name: string) =>
-  (name || "A")
-    .split(" ")
-    .filter(Boolean)
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
 
 export default function SettingsClient({ club, profile, initialTab }: Props) {
   const t = useTranslations("settingsPage");
@@ -335,7 +327,7 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
               <ProfileAvatarUpload
                 userId={profile.userId}
                 avatarUrl={profile.avatar_url}
-                initials={initialsOf(profile.full_name)}
+                initials={initials(profile.full_name, "A")}
               />
               <p className="text-[13px] text-[#6e7f65]">
                 {t("clickTheCameraToUpload")}

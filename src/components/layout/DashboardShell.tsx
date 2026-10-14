@@ -3,10 +3,11 @@ import DashboardTopbar from "./DashboardTopbar";
 import { SidebarProvider } from "./SidebarContext";
 import { SIDEBAR_COOKIE } from "../../../constants";
 import { cookies } from "next/headers";
+import type { AreaRole } from "@/types/tones";
 
 interface DashboardShellProps {
   children: React.ReactNode;
-  role: "admin" | "member";
+  role: AreaRole;
   userName: string;
   clubName?: string;
   clubSlug?: string;

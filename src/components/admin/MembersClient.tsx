@@ -5,12 +5,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
 import { format } from "date-fns";
-import { createClient } from "@/lib/supabase/client";
 import type { Member, MembershipPlan, MemberStatus } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import SubmitButton from "../ui/SubmitButton";
+import { useLabels } from "@/hooks/useLabels";
+import { BADGE, memberStatusTone } from "@/lib/badges";
+import { MEMBER_STATUSES } from "@/lib/labels";
 
-type MemberWithPlan = Member & { plan?: MembershipPlan | null };
+export type MemberWithPlan = Member & { plan?: MembershipPlan | null };
 
 type FormValues = {
   full_name: string;
@@ -28,27 +30,17 @@ interface Props {
   clubId: string;
 }
 
-const STATUS_STYLE: Record<MemberStatus, string> = {
-  active:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f3fbde] text-[#7aad12]",
-  cancelled:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f4f4f4] text-[#6e7f65]",
-  expired:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700",
-};
-
 export default function MembersClient({
   members: initial,
   plans,
-  clubId,
 }: Props) {
   const dfLocale = dateLocale(useLocale());
   const [members, setMembers] = useState(initial);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<MemberWithPlan | null>(null);
   const [search, setSearch] = useState("");
-  const supabase = createClient();
   const t = useTranslations("members");
+  const labels = useLabels();
 
   const {
     register,
@@ -259,8 +251,8 @@ export default function MembersClient({
                     )}
                   </td>
                   <td className="px-5 py-3.5">
-                    <span className={STATUS_STYLE[m.status]}>
-                      {t(`status.${m.status}`)}
+                    <span className={`${BADGE} ${memberStatusTone(m.status)}`}>
+                      {labels.memberStatus(m.status)}
                     </span>
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
@@ -363,9 +355,11 @@ export default function MembersClient({
               {editing && (
                 <Modal.Field label={t("modal.status")}>
                   <select className="input" {...register("status")}>
-                    <option value="active">{t("status.active")}</option>
-                    <option value="cancelled">{t("status.cancelled")}</option>
-                    <option value="expired">{t("status.expired")}</option>
+                    {MEMBER_STATUSES.map((s) => (
+                      <option key={s} value={s}>
+                        {labels.memberStatus(s)}
+                      </option>
+                    ))}
                   </select>
                 </Modal.Field>
               )}

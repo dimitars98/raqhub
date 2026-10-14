@@ -13,6 +13,9 @@ import type {
   Profile,
 } from "@/types/database";
 import { LogoMark } from "@/components/ui/Logo";
+import Avatar from "@/components/ui/Avatar";
+import { initials } from "@/lib/avatar";
+import { getLabels } from "@/lib/getLabels";
 
 // The public page of one club: what a visitor sees before they have an account.
 // Everything read here is allowed for logged-out visitors by the database
@@ -46,29 +49,6 @@ type Viewer = "visitor" | "player" | "admin";
 
 const CLUB_COLUMNS =
   "id, name, slug, description, address, city, phone, email, website, logo_url";
-
-const AVATAR_COLORS = [
-  "bg-brand-100 text-brand-900",
-  "bg-court-100 text-court-800",
-  "bg-accent-100 text-accent-800",
-  "bg-ink-100 text-ink-800",
-];
-
-const initials = (name: string | null) =>
-  (name ?? "C")
-    .split(" ")
-    .filter(Boolean)
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
-// The same coach always gets the same color.
-const avatarColorFor = (id: string) => {
-  let sum = 0;
-  for (const ch of id) sum += ch.charCodeAt(0);
-  return AVATAR_COLORS[sum % AVATAR_COLORS.length];
-};
 
 // Only http(s) links are shown, so a club can't publish a javascript: link.
 const safeWebsite = (value: string | null) => {
@@ -176,32 +156,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
   const website = safeWebsite(club.website);
   const location = [club.address, club.city].filter(Boolean).join(", ");
 
-  const SPORT: Record<string, string> = {
-    tennis: t("sports.tennis"),
-    padel: t("sports.padel"),
-    pickleball: t("sports.pickleball"),
-  };
-  const SURFACE: Record<string, string> = {
-    clay: t("surfaces.clay"),
-    hard: t("surfaces.hard"),
-    grass: t("surfaces.grass"),
-    artificial_grass: t("surfaces.artificial_grass"),
-    carpet: t("surfaces.carpet"),
-    concrete: t("surfaces.concrete"),
-    acrylic: t("surfaces.acrylic"),
-  };
-  const LEVEL: Record<string, string> = {
-    beginner: t("levels.beginner"),
-    intermediate: t("levels.intermediate"),
-    advanced: t("levels.advanced"),
-    junior: t("levels.junior"),
-    adult: t("levels.adult"),
-  };
-  const BILLING: Record<string, string> = {
-    monthly: t("billing.monthly"),
-    annual: t("billing.annual"),
-    one_time: t("billing.one_time"),
-  };
+  const labels = await getLabels();
 
   return (
     <>
@@ -326,13 +281,13 @@ export default async function ClubPublicPage({ params }: PageProps) {
                   </div>
                   <div className="mb-5 flex flex-wrap gap-1.5">
                     <span className="badge-brand">
-                      {SPORT[court.sport] ?? court.sport}
+                      {labels.sport(court.sport)}
                     </span>
                     <span className="badge bg-ink-50 text-ink-800">
-                      {SURFACE[court.surface] ?? court.surface}
+                      {labels.surface(court.surface)}
                     </span>
                     <span className="badge-blue">
-                      {court.is_indoor ? t("indoor") : t("outdoor")}
+                      {labels.inOut(court.is_indoor)}
                     </span>
                   </div>
                   <div className="mt-auto border-t border-ink-100 pt-4 text-xl font-bold tracking-tight text-ink-900">
@@ -358,21 +313,13 @@ export default async function ClubPublicPage({ params }: PageProps) {
               {coaches.map((coach) => (
                 <div key={coach.id} className="card flex flex-col p-6">
                   <div className="mb-4 flex items-center gap-4">
-                    {coach.profile?.avatar_url ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={coach.profile.avatar_url}
-                        alt=""
-                        className="size-14 shrink-0 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div
-                        aria-hidden="true"
-                        className={`flex size-14 shrink-0 items-center justify-center rounded-full text-base font-semibold ${avatarColorFor(coach.id)}`}
-                      >
-                        {initials(coach.profile?.full_name ?? null)}
-                      </div>
-                    )}
+                    <Avatar
+                      id={coach.id}
+                      name={coach.profile?.full_name}
+                      src={coach.profile?.avatar_url}
+                      className="size-14 text-base"
+                      px={56}
+                    />
                     <div className="min-w-0 truncate text-lg font-semibold leading-snug text-ink-900">
                       {coach.profile?.full_name ?? t("coach")}
                     </div>
@@ -391,7 +338,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
                           key={level}
                           className="badge bg-ink-50 text-ink-800"
                         >
-                          {LEVEL[level] ?? level}
+                          {labels.level(level)}
                         </span>
                       ))}
                     </div>
@@ -426,7 +373,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
                     €{plan.price}
                     <span className="text-sm font-normal tracking-normal text-ink-600">
                       {" "}
-                      {BILLING[plan.billing_period] ?? plan.billing_period}
+                      {labels.billingPeriod(plan.billing_period)}
                     </span>
                   </div>
                   {plan.description && (

@@ -1,34 +1,18 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getLocale, getTranslations } from "next-intl/server";
-import type {
-  Profile,
-  MyMembership,
-  Booking,
-  Court,
-  Coach,
-} from "@/types/database";
+import type { Profile, MyMembership, Booking, Court } from "@/types/database";
 import ProfileAvatarUpload from "@/components/profile/ProfileAvatarUpload";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
-import { User, CreditCard, Calendar, Clock, Trophy } from "lucide-react";
 import SignOutButton from "@/components/profile/SignOutButton";
+import { getLabels } from "@/lib/getLabels";
+import { initials } from "@/lib/avatar";
+import { BADGE, memberStatusTone } from "@/lib/badges";
 
 type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
   coach?: { profile?: Pick<Profile, "full_name"> | null } | null;
 };
-
-const MEMBER_STATUS_STYLE: Record<string, string> = {
-  active:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800",
-  cancelled:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-stone-100 text-stone-500",
-  expired:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700",
-};
-
-const BILLING = ["monthly", "annual", "one_time"];
-const MEMBER_STATUSES = ["active", "cancelled", "expired"];
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -40,8 +24,7 @@ export default async function ProfilePage() {
   const locale = await getLocale();
   const fmt = (value: string, options: Intl.DateTimeFormatOptions) =>
     new Intl.DateTimeFormat(locale, options).format(new Date(value));
-  const billingLabel = (period: string) =>
-    BILLING.includes(period) ? t(`billing.${period as "monthly"}`) : period;
+  const labels = await getLabels();
 
   const [{ data: profileData }, { data: memberData }, { data: bookingsData }] =
     await Promise.all([
@@ -85,13 +68,6 @@ export default async function ProfilePage() {
       (b.status === "confirmed" || b.status === "pending"),
   ).length;
 
-  const initials = (name: string | null) =>
-    (name ?? user.email ?? "U")
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase();
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -105,7 +81,7 @@ export default async function ProfilePage() {
         <ProfileAvatarUpload
           userId={user.id}
           avatarUrl={profile?.avatar_url ?? null}
-          initials={initials(profile?.full_name ?? null)}
+          initials={initials(profile?.full_name ?? user.email, "U")}
         />
         <div className="flex-1 min-w-0">
           <p className="text-base font-medium text-brand-900 truncate">
@@ -165,7 +141,7 @@ export default async function ProfilePage() {
                 {member.plan && (
                   <p className="text-xs text-brand-400 mt-0.5">
                     €{member.plan.price}{" "}
-                    {billingLabel(member.plan.billing_period)}
+                    {labels.billingPeriod(member.plan.billing_period)}
                     {member.plan.discount_pct > 0 && (
                       <span className="ml-2 text-brand-600 font-medium">
                         · {t("discount", { pct: member.plan.discount_pct })}
@@ -174,10 +150,8 @@ export default async function ProfilePage() {
                   </p>
                 )}
               </div>
-              <span className={MEMBER_STATUS_STYLE[member.status] ?? ""}>
-                {MEMBER_STATUSES.includes(member.status)
-                  ? t(`memberStatus.${member.status as "active"}`)
-                  : member.status}
+              <span className={`${BADGE} ${memberStatusTone(member.status)}`}>
+                {labels.memberStatus(member.status)}
               </span>
             </div>
             <div className="border-t border-brand-100 pt-3 flex items-center justify-between">

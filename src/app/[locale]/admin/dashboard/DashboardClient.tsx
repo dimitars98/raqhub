@@ -19,6 +19,11 @@ import type {
   ActiveMember,
   CourtRow,
 } from "./page";
+import { SPORT_EMOJI } from "@/lib/labels";
+import { useLabels } from "@/hooks/useLabels";
+import { BOOKING_STATUS_DOT, bookingStatusTone } from "@/lib/badges";
+import { initials } from "@/lib/avatar";
+import type { BookingStatus, Sport } from "@/types/database";
 
 // ── Props ──────────────────────────────────────────────────────────────────
 
@@ -37,29 +42,7 @@ interface Props {
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
-const SPORT_EMOJI: Record<string, string> = {
-  tennis: "🎾",
-  padel: "🏓",
-  pickleball: "🥒",
-};
-
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-const STATUS_DOT: Record<string, string> = {
-  confirmed: "bg-[#7aad12]",
-  pending: "bg-[#378add]",
-  completed: "bg-[#3d4f35]",
-  cancelled: "bg-[#6e7f65]",
-  no_show: "bg-red-400",
-};
-
-const STATUS_BADGE: Record<string, string> = {
-  confirmed: "bg-[#f3fbde] text-[#7aad12]",
-  pending: "bg-[#e8f4fd] text-[#1a5ea8]",
-  completed: "bg-[#e8ede4] text-[#3d4f35]",
-  cancelled: "bg-[#f4f6f2] text-[#6e7f65]",
-  no_show: "bg-red-50 text-red-600",
-};
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -171,6 +154,7 @@ export default function DashboardClient({
 }: Props) {
   const t = useTranslations("dashboard");
   const tc = useTranslations("common");
+  const labels = useLabels();
   const dfLocale = dateLocale(useLocale());
   const now = new Date();
   const maxRev = Math.max(...DAYS.map((d) => revByDay[d] ?? 0), 1);
@@ -253,7 +237,7 @@ export default function DashboardClient({
         <StatCard
           label={t("stats.activeCourts")}
           value={courts.length}
-          sub={`${[...new Set(courts.map((c) => c.sport))].map((s) => SPORT_EMOJI[s] ?? s).join(" ")} ${t("stats.available")}`}
+          sub={`${[...new Set(courts.map((c) => c.sport))].map((s) => SPORT_EMOJI[s as Sport] ?? s).join(" ")} ${t("stats.available")}`}
           icon={Grid3x3}
           accent="bg-[#e8ede4] text-[#3d4f35]"
           href="/admin/courts"
@@ -311,11 +295,8 @@ export default function DashboardClient({
             <div className="flex flex-col gap-2 max-h-[220px] overflow-y-auto pr-1">
               {upcomingToday.map((b) => {
                 const live = isNowBetween(b.starts_at, b.ends_at);
-                const badgeClass =
-                  STATUS_BADGE[b.status] ?? STATUS_BADGE.confirmed;
-                const statusLabel =
-                  t(`status.${b.status}` as Parameters<typeof t>[0]) ??
-                  b.status;
+                const badgeClass = bookingStatusTone(b.status);
+                const statusLabel = labels.bookingStatus(b.status);
                 return (
                   <div
                     key={b.id}
@@ -384,7 +365,8 @@ export default function DashboardClient({
               </div>
             ) : (
               recentBookings.map((b) => {
-                const dotClass = STATUS_DOT[b.status] ?? STATUS_DOT.confirmed;
+                const dotClass =
+                  BOOKING_STATUS_DOT[b.status as BookingStatus] ?? BOOKING_STATUS_DOT.confirmed;
                 return (
                   <div
                     key={b.id}
@@ -439,19 +421,13 @@ export default function DashboardClient({
                 </div>
               ) : (
                 activeMembers.slice(0, 5).map((m) => {
-                  const initials = m.full_name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")
-                    .toUpperCase()
-                    .slice(0, 2);
                   return (
                     <div
                       key={m.id}
                       className="flex items-center gap-3 px-5 py-2.5"
                     >
                       <div className="w-7 h-7 rounded-full bg-[#111c0a] flex items-center justify-center text-[10px] font-bold text-white flex-shrink-0">
-                        {initials}
+                        {initials(m.full_name)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-[13px] font-medium text-[#111c0a] truncate">
@@ -501,13 +477,13 @@ export default function DashboardClient({
                 courts.slice(0, 4).map((c) => (
                   <div key={c.id} className="flex items-center gap-2">
                     <span className="text-base">
-                      {SPORT_EMOJI[c.sport] ?? "🎾"}
+                      {SPORT_EMOJI[c.sport as Sport] ?? "🎾"}
                     </span>
                     <span className="text-[13px] text-[#111c0a] flex-1 truncate">
                       {c.name}
                     </span>
                     <span className="text-[10px] text-[#6e7f65]">
-                      {c.is_indoor ? t("indoor") : t("outdoor")}
+                      {labels.inOut(c.is_indoor)}
                     </span>
                   </div>
                 ))

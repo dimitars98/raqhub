@@ -1,10 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
-import { format } from "date-fns";
-import type { Member, MembershipPlan } from "@/types/database";
-import MembersClient from "@/components/admin/MembersClient";
+import MembersClient, { type MemberWithPlan } from "@/components/admin/MembersClient";
+import type { MembershipPlan } from "@/types/database";
 import { redirect } from "next/navigation";
-
-type MemberWithPlan = Member & { plan?: MembershipPlan | null };
 
 export default async function MembersPage() {
   const supabase = await createClient();
@@ -24,7 +21,7 @@ export default async function MembersPage() {
   const club = clubData as { id: string } | null;
   if (!club) redirect("/admin/setup");
 
-  const { data: membersData, error } = await supabase
+  const { data: membersData } = await supabase
     .from("members")
     .select("*, plan:membership_plans(id, name, price, billing_period)")
     .eq("club_id", club.id)

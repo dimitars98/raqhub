@@ -16,8 +16,12 @@ import type {
 } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import { noShowCutoff } from "@/lib/bookingRules";
+import { BOOKING_STATUSES } from "@/lib/labels";
+import { useLabels } from "@/hooks/useLabels";
+import { BADGE, bookingStatusTone } from "@/lib/badges";
+import { DAY_HOURS } from "@/lib/openingHours";
 
-type BookingWithJoins = Booking & {
+export type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
   member?: Pick<Member, "full_name"> | null;
   player?: (Pick<Profile, "full_name"> & { email?: string | null }) | null;
@@ -35,28 +39,6 @@ type FormValues = {
   notes: string;
 };
 
-// At the top, replace STATUS_STYLE with new palette colors too:
-const STATUS_STYLE: Record<BookingStatus, string> = {
-  confirmed:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f3fbde] text-[#7aad12]",
-  pending:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#fdfae0] text-[#8a7800]",
-  cancelled:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#f4f4f4] text-[#6e7f65]",
-  completed:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#e8f4fd] text-[#1a5ea8]",
-  no_show:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700",
-};
-
-const STATUS_OPTIONS: BookingStatus[] = [
-  "confirmed",
-  "pending",
-  "cancelled",
-  "completed",
-  "no_show",
-];
-const HOURS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 const DURATIONS = [60, 90, 120];
 
 /** A no-show from the last 90 days, used to count them per player. */
@@ -90,6 +72,7 @@ export default function BookingsClient({
   const searchParams = useSearchParams();
   const supabase = createClient();
   const t = useTranslations("adminBookings");
+  const labels = useLabels();
   const locale = useLocale();
   const dfLocale = dateLocale(locale);
 
@@ -251,7 +234,7 @@ export default function BookingsClient({
           className="input max-w-xs"
         />
         <div className="flex gap-2 flex-wrap">
-          {(["all", ...STATUS_OPTIONS] as const).map((s) => (
+          {(["all", ...BOOKING_STATUSES] as const).map((s) => (
             <button
               key={s}
               onClick={() => setFilter(s)}
@@ -261,7 +244,7 @@ export default function BookingsClient({
                   : "border-[#e8ede4] text-[#6e7f65] hover:bg-[#f8f9f7]"
               }`}
             >
-              {t(`statusLabels.${s}`)}
+              {s === "all" ? t("statusLabels.all") : labels.bookingStatus(s)}
             </button>
           ))}
         </div>
@@ -362,8 +345,8 @@ export default function BookingsClient({
                     €{b.total_price.toFixed(2)}
                   </td>
                   <td className="px-5 py-3.5">
-                    <span className={STATUS_STYLE[b.status]}>
-                      {t(`statusLabels.${b.status}`)}
+                    <span className={`${BADGE} ${bookingStatusTone(b.status)}`}>
+                      {labels.bookingStatus(b.status)}
                     </span>
                   </td>
                   <td className="px-5 py-3.5">
@@ -374,9 +357,9 @@ export default function BookingsClient({
                       }
                       className="text-xs border border-[#e8ede4] rounded-lg px-2 py-1 text-[#3d4f35] bg-white focus:outline-none focus:ring-1 focus:ring-[#d6f09a]"
                     >
-                      {STATUS_OPTIONS.map((s) => (
+                      {BOOKING_STATUSES.map((s) => (
                         <option key={s} value={s}>
-                          {t(`statusLabels.${s}`)}
+                          {labels.bookingStatus(s)}
                         </option>
                       ))}
                     </select>
@@ -486,7 +469,7 @@ export default function BookingsClient({
                     className="input"
                     {...register("hour", { valueAsNumber: true })}
                   >
-                    {HOURS.map((h) => (
+                    {DAY_HOURS.map((h) => (
                       <option key={h} value={h}>
                         {String(h).padStart(2, "0")}:00
                       </option>

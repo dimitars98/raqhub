@@ -1,4 +1,5 @@
-export type Role = "admin" | "member";
+/** Which side of the app a screen belongs to (not the account role in the database). */
+export type AreaRole = "admin" | "member";
 
 /**
  * All role-specific colors in one place.

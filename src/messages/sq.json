@@ -249,11 +249,6 @@
     "saving": "Duke ruajtur…",
     "confirmBooking": "Konfirmo rezervimin",
     "statusLabels": {
-      "confirmed": "Konfirmuar",
-      "pending": "Në pritje",
-      "cancelled": "Anuluar",
-      "completed": "Përfunduar",
-      "no_show": "Nuk u shfaq",
       "all": "Të gjitha"
     },
     "slotTaken": "Kjo fushë është tashmë e rezervuar në këtë orë.",
@@ -287,27 +282,15 @@
     "status": "Statusi",
     "description": "Përshkrimi",
     "descriptionPlaceholder": "Çdo detaj për këtë fushë...",
-    "indoor": "Mbyllur",
-    "outdoor": "Hapur",
     "active": "Aktive",
     "inactive": "Joaktive",
     "edit": "Ndrysho",
     "activate": "Aktivizo",
     "deactivate": "Çaktivizo",
-    "clay": "Argjilë",
-    "hard": "E fortë",
-    "grass": "Bar",
-    "artificialGrass": "Bar artificial",
-    "carpet": "Qilim",
     "cancel": "Anulo",
     "saving": "Duke ruajtur…",
     "saveChanges": "Ruaj ndryshimet",
     "allSports": "Të gjitha sportet",
-    "tennis": "Tenis",
-    "padel": "Padel",
-    "pickleball": "Pickleball",
-    "concrete": "Beton",
-    "acrylic": "Akrilik",
     "saveError": "Fusha nuk mund të ruhej. Ju lutemi provoni përsëri.",
     "howMany": "Sa",
     "howManyHint": "Shton nga {first} deri te {last}.",
@@ -336,8 +319,6 @@
     "membership": "Anëtarësi",
     "signOut": "Dil",
     "player": "Lojtar",
-    "indoor": "Mbyllur",
-    "outdoor": "Hapur",
     "greeting": {
       "morning": "Mirëmëngjes",
       "afternoon": "Mirëdita",
@@ -373,11 +354,6 @@
       "manage": "Menaxho"
     },
     "status": {
-      "confirmed": "Konfirmuar",
-      "pending": "Në pritje",
-      "completed": "Përfunduar",
-      "cancelled": "Anuluar",
-      "no_show": "Nuk u shfaq",
       "live": "Drejtpërdrejt"
     },
     "titles": {
@@ -418,11 +394,6 @@
     "actions": {
       "edit": "Ndrysho",
       "cancel": "Anulo"
-    },
-    "status": {
-      "active": "Aktiv",
-      "cancelled": "Anuluar",
-      "expired": "Skaduar"
     },
     "modal": {
       "addTitle": "Shto anëtar",
@@ -472,11 +443,6 @@
     "cancel": "Anulo",
     "noCoaches": "Nuk ka trajnerë ende. Shtoni trajnerin e parë.",
     "unknown": "I panjohur",
-    "beginner": "Fillestar",
-    "intermediate": "Mesatar",
-    "advanced": "I avancuar",
-    "junior": "Junior",
-    "adult": "I rritur",
     "coach": "Trajner",
     "selectProfile": "Zgjidhni një përdorues",
     "alreadyCoach": "Ky person është tashmë trajner në klubin tuaj.",
@@ -500,35 +466,7 @@
     "website": "Faqja e internetit",
     "ctaTitle": "Gati për të luajtur te {club}?",
     "ctaText": "Krijo një llogari falas, shiko oraret e lira dhe rezervo në pak sekonda.",
-    "metaDescription": "Fusha, trajnerë dhe anëtarësime te {club}. Rezervo online me ServeTime.",
-    "billing": {
-      "monthly": "/ muaj",
-      "annual": "/ vit",
-      "one_time": "një herë"
-    },
-    "indoor": "Mbyllur",
-    "outdoor": "Hapur",
-    "sports": {
-      "tennis": "Tenis",
-      "padel": "Padel",
-      "pickleball": "Pickleball"
-    },
-    "surfaces": {
-      "clay": "Argjilë",
-      "hard": "E fortë",
-      "grass": "Bar",
-      "artificial_grass": "Bar artificial",
-      "carpet": "Qilim",
-      "concrete": "Beton",
-      "acrylic": "Akrilik"
-    },
-    "levels": {
-      "beginner": "Fillestar",
-      "intermediate": "Mesatar",
-      "advanced": "I avancuar",
-      "junior": "Junior",
-      "adult": "I rritur"
-    }
+    "metaDescription": "Fusha, trajnerë dhe anëtarësime te {club}. Rezervo online me ServeTime."
   },
   "myBookings": {
     "title": "Rezervimet e mia",
@@ -554,13 +492,6 @@
     "madeByClub": "Rezervuar nga klubi",
     "lesson": "Orë me {name}",
     "booking": "Rezervim",
-    "status": {
-      "confirmed": "E konfirmuar",
-      "pending": "Në pritje",
-      "cancelled": "E anuluar",
-      "completed": "E përfunduar",
-      "no_show": "Nuk u paraqit"
-    },
     "minutes": "{n} min",
     "cancelClosed": "Është vonë për ta anuluar online. Ju lutemi telefononi klubin."
   },
@@ -604,17 +535,7 @@
     "saved": "U ruajt",
     "saving": "Po ruhet…",
     "saveChanges": "Ruaj ndryshimet",
-    "signOut": "Dil",
-    "billing": {
-      "monthly": "/ muaj",
-      "annual": "/ vit",
-      "one_time": "një herë"
-    },
-    "memberStatus": {
-      "active": "Aktive",
-      "cancelled": "E anuluar",
-      "expired": "E skaduar"
-    }
+    "signOut": "Dil"
   },
   "membershipPage": {
     "title": "Anëtarësia",
@@ -629,17 +550,7 @@
     "availablePlans": "Planet në {club}",
     "current": "Aktual",
     "discountBookings": "{pct}% zbritje në rezervime",
-    "changePlan": "Për të ndryshuar planin, kontaktoni administratorin e klubit.",
-    "billing": {
-      "monthly": "mujore",
-      "annual": "vjetore",
-      "one_time": "një herë"
-    },
-    "status": {
-      "active": "Aktive",
-      "cancelled": "E anuluar",
-      "expired": "E skaduar"
-    }
+    "changePlan": "Për të ndryshuar planin, kontaktoni administratorin e klubit."
   },
   "plansAdmin": {
     "title": "Planet e anëtarësisë",
@@ -1202,11 +1113,6 @@
     "revenue": "Të ardhurat",
     "bookings": "Rezervimet",
     "members": "Anëtarët",
-    "sports": {
-      "tennis": "Tenis",
-      "padel": "Padel",
-      "pickleball": "Pickleball"
-    },
     "totalRevenue": "Të ardhurat totale",
     "totalBookings": "Rezervime gjithsej",
     "last12Months": "12 muajt e fundit",
@@ -1283,7 +1189,9 @@
     "coach": "Trajner",
     "independent": "I pavarur",
     "filterByLevel": "Filtro sipas nivelit",
-    "allLevels": "Të gjitha nivelet"
+    "allLevels": "Të gjitha nivelet",
+    "count": "{n, plural, =0 {Asnjë trajner i disponueshëm} one {# trajner i disponueshëm} other {# trajnerë të disponueshëm}}",
+    "perHour": "/ orë"
   },
   "bookingErrors": {
     "coachTaken": "Ky trajner është i rezervuar tashmë në atë orë",
@@ -1623,5 +1531,47 @@
       "invalid": "Diçka në formular nuk është në rregull.",
       "failed": "Ruajtja dështoi. Provoni përsëri."
     }
+  },
+  "labels": {
+    "sports": {
+      "tennis": "Tenis",
+      "padel": "Padel",
+      "pickleball": "Pickleball"
+    },
+    "surfaces": {
+      "clay": "Argjilë",
+      "hard": "E fortë",
+      "grass": "Bar",
+      "artificial_grass": "Bar artificial",
+      "carpet": "Qilim",
+      "concrete": "Beton",
+      "acrylic": "Akrilik"
+    },
+    "levels": {
+      "beginner": "Fillestar",
+      "intermediate": "Mesatar",
+      "advanced": "I avancuar",
+      "junior": "Junior",
+      "adult": "I rritur"
+    },
+    "bookingStatus": {
+      "confirmed": "Konfirmuar",
+      "pending": "Në pritje",
+      "completed": "Përfunduar",
+      "cancelled": "Anuluar",
+      "no_show": "Nuk u shfaq"
+    },
+    "memberStatus": {
+      "active": "Aktive",
+      "cancelled": "E anuluar",
+      "expired": "E skaduar"
+    },
+    "billingPeriod": {
+      "monthly": "/ muaj",
+      "annual": "/ vit",
+      "one_time": "një herë"
+    },
+    "indoor": "Mbyllur",
+    "outdoor": "Hapur"
   }
 }

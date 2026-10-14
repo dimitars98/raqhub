@@ -5,14 +5,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 import type { Coach, Level } from "@/types/database";
 import Modal from "@/components/ui/Modal";
-
-const LEVELS: Level[] = [
-  "beginner",
-  "intermediate",
-  "advanced",
-  "junior",
-  "adult",
-];
+import { LEVELS } from "@/lib/labels";
+import { useLabels } from "@/hooks/useLabels";
 
 const EMPTY_FORM = {
   email: "",
@@ -44,13 +38,7 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
   const supabase = createClient();
   const t = useTranslations("adminCoaches");
 
-  const LEVEL_LABEL: Record<Level, string> = {
-    beginner: t("beginner"),
-    intermediate: t("intermediate"),
-    advanced: t("advanced"),
-    junior: t("junior"),
-    adult: t("adult"),
-  };
+  const labels = useLabels();
 
   const openAdd = () => {
     setEditing(null);
@@ -299,7 +287,7 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                           key={l}
                           className="badge-brand text-[10px] px-2 py-0.5"
                         >
-                          {LEVEL_LABEL[l]}
+                          {labels.level(l)}
                         </span>
                       ))}
                     </div>
@@ -430,7 +418,7 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                         : "bg-white border-ink-200 text-ink-600 hover:border-brand-400"
                     }`}
                   >
-                    {LEVEL_LABEL[l]}
+                    {labels.level(l)}
                   </button>
                 ))}
               </div>

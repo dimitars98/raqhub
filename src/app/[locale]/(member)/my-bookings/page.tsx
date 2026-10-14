@@ -6,6 +6,9 @@ import { createClient } from "@/lib/supabase/server";
 import { cancelBooking } from "@/app/actions/bookings";
 import type { Booking, Court, Profile } from "@/types/database";
 import { canCancel, normalizeRules } from "@/lib/bookingRules";
+import { getLabels } from "@/lib/getLabels";
+import type { Labels } from "@/lib/labels";
+import { BADGE, bookingStatusTone } from "@/lib/badges";
 
 type ClubRules = { booking_rules: unknown } | null;
 
@@ -18,21 +21,6 @@ type T = Awaited<ReturnType<typeof getTranslations<"myBookings">>>;
 
 // Clubs are in Skopje; times are shown in the club's time, whatever the device.
 const TIME_ZONE = "Europe/Skopje";
-
-const STATUS_STYLE: Record<string, string> = {
-  confirmed:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800",
-  pending:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-100 text-accent-800",
-  cancelled:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ink-100 text-ink-600",
-  completed:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-court-100 text-court-800",
-  no_show:
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700",
-};
-
-const STATUSES = ["confirmed", "pending", "cancelled", "completed", "no_show"];
 
 /** Formats a date in the club's time zone and the page's language. */
 function makeFormatter(locale: string) {
@@ -54,12 +42,6 @@ function bookingName(b: BookingWithJoins, t: T) {
   }
   if (b.court?.name) return b.court.name;
   return t("booking");
-}
-
-function statusLabel(status: string, t: T) {
-  return STATUSES.includes(status)
-    ? t(`status.${status as "confirmed"}`)
-    : status;
 }
 
 function relativeLabel(startsAt: string, t: T) {
@@ -162,7 +144,8 @@ export default async function MyBookingsPage({
     };
   });
 
-  const ctx = { t, fmt, userId: user.id };
+  const labels = await getLabels();
+  const ctx = { t, fmt, userId: user.id, labels };
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -282,7 +265,7 @@ export default async function MyBookingsPage({
   );
 }
 
-type RowProps = { booking: BookingWithJoins; t: T; fmt: Fmt; userId: string };
+type RowProps = { booking: BookingWithJoins; t: T; fmt: Fmt; userId: string; labels: Labels };
 
 /**
  * Only bookings the player made themselves can be cancelled here, and only
@@ -319,7 +302,7 @@ function ClubMadeNote({ b, userId, t }: { b: BookingWithJoins; userId: string; t
   return <span className="text-xs text-ink-400">{t("madeByClub")}</span>;
 }
 
-function NextUpCard({ booking: b, t, fmt, userId }: RowProps) {
+function NextUpCard({ booking: b, t, fmt, userId, labels }: RowProps) {
   const name = bookingName(b, t);
   const label = relativeLabel(b.starts_at, t);
 
@@ -338,7 +321,7 @@ function NextUpCard({ booking: b, t, fmt, userId }: RowProps) {
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-1">
             <span className="text-base font-medium text-ink-900 truncate">{name}</span>
-            <span className={STATUS_STYLE[b.status] ?? ""}>{statusLabel(b.status, t)}</span>
+            <span className={`${BADGE} ${bookingStatusTone(b.status)}`}>{labels.bookingStatus(b.status)}</span>
           </div>
           <p className="text-sm text-ink-600 mb-2.5">
             {fmt(b.starts_at, { hour: "2-digit", minute: "2-digit" })} ·{" "}
@@ -381,7 +364,14 @@ function NextUpCard({ booking: b, t, fmt, userId }: RowProps) {
   );
 }
 
-function BookingRow({ booking: b, t, fmt, userId, past = false }: RowProps & { past?: boolean }) {
+function BookingRow({
+  booking: b,
+  t,
+  fmt,
+  userId,
+  labels,
+  past = false,
+}: RowProps & { past?: boolean }) {
   const name = bookingName(b, t);
 
   return (
@@ -401,7 +391,7 @@ function BookingRow({ booking: b, t, fmt, userId, past = false }: RowProps & { p
           </p>
         </div>
         <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
-          <span className={STATUS_STYLE[b.status] ?? ""}>{statusLabel(b.status, t)}</span>
+          <span className={`${BADGE} ${bookingStatusTone(b.status)}`}>{labels.bookingStatus(b.status)}</span>
           <span className="text-sm font-medium text-ink-800">€{b.total_price.toFixed(2)}</span>
         </div>
       </div>

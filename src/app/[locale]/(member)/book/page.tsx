@@ -1,18 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Court } from "@/types/database";
 import { Suspense } from "react";
 import Spinner from "@/components/ui/Spinner";
-import BookCourtsClient from "@/components/member/BookCourtsClient";
-
-type CourtWithClub = Court & {
-  club?: {
-    name: string;
-    city: string | null;
-    slug: string;
-    opening_hours: unknown;
-    booking_rules: unknown;
-  } | null;
-};
+import BookCourtsClient, { type CourtWithClub } from "@/components/member/BookCourtsClient";
 
 export default async function BookPage({
   searchParams,

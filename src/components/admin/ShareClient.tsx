@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check, Copy, Download, MessageCircle, Printer } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useCopy } from "@/hooks/useCopy";
 
 type Props = {
   link: string;
@@ -14,20 +14,6 @@ type Props = {
   posterHref: string;
   fileName: string;
 };
-
-function useCopy() {
-  const [copied, setCopied] = useState<string | null>(null);
-  const copy = async (key: string, text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(key);
-      setTimeout(() => setCopied((c) => (c === key ? null : c)), 2000);
-    } catch {
-      // Clipboard blocked (old browser or not https): the text is still on screen.
-    }
-  };
-  return { copied, copy };
-}
 
 /** Copy icon that turns into a tick for a moment after copying. */
 function CopyIcon({ done }: { done: boolean }) {

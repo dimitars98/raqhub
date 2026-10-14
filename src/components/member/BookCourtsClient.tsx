@@ -5,20 +5,22 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Court, MyMembership } from "@/types/database";
 import Modal from "@/components/ui/Modal";
-import { MapPin, Wifi, WifiOff } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { createBooking } from "@/app/actions/bookings";
 import { normalizeHours, startHoursFor } from "@/lib/openingHours";
 import { normalizeRules } from "@/lib/bookingRules";
 import { Link } from "@/i18n/navigation";
+import { useLabels } from "@/hooks/useLabels";
+import { surfaceTone } from "@/lib/badges";
 
-type CourtWithClub = Court & {
+export type CourtWithClub = Court & {
   club?: {
     name: string;
     city: string | null;
+    slug?: string;
     opening_hours?: unknown;
     booking_rules?: unknown;
   } | null;
@@ -28,25 +30,6 @@ type FormValues = {
   date: string;
   hour: number;
   duration: number;
-};
-
-// Translation keys in "adminCourts" for each surface.
-const SURFACE_KEY: Record<string, string> = {
-  clay: "clay",
-  hard: "hard",
-  grass: "grass",
-  artificial_grass: "artificialGrass",
-  carpet: "carpet",
-  concrete: "concrete",
-  acrylic: "acrylic",
-};
-
-const SURFACE_COLOR: Record<string, string> = {
-  clay: "bg-amber-100 text-amber-800",
-  hard: "bg-court-100 text-court-800",
-  grass: "bg-brand-100 text-brand-800",
-  artificial_grass: "bg-brand-50 text-brand-700",
-  carpet: "bg-stone-100 text-stone-700",
 };
 
 export default function BookCourtsClient({
@@ -59,12 +42,11 @@ export default function BookCourtsClient({
 }) {
   const t = useTranslations("bookCourts");
   const dfLocale = dateLocale(useLocale());
-  const tCourts = useTranslations("adminCourts");
+  const labels = useLabels();
   const tCoach = useTranslations("coachBooking");
   const [selected, setSelected] = useState<CourtWithClub | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
-  const router = useRouter();
   const supabase = createClient();
   // The selected court's club decides lengths, how far ahead, and cancelling.
   const rules = normalizeRules(selected?.club?.booking_rules);
@@ -196,10 +178,10 @@ export default function BookCourtsClient({
                 </span>
                 <span
                   className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                    SURFACE_COLOR[court.surface] ?? "bg-brand-50 text-brand-600"
+                    surfaceTone(court.surface)
                   }`}
                 >
-                  {tCourts(SURFACE_KEY[court.surface] ?? "clay")}
+                  {labels.surface(court.surface)}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 text-xs text-brand-400">
@@ -212,7 +194,7 @@ export default function BookCourtsClient({
                 )}
                 <span>{court.club?.name}</span>
                 <span>·</span>
-                <span>{court.is_indoor ? tCourts("indoor") : tCourts("outdoor")}</span>
+                <span>{labels.inOut(court.is_indoor)}</span>
               </div>
             </div>
 
@@ -254,11 +236,10 @@ export default function BookCourtsClient({
                 {selected && (
                   <span
                     className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                      SURFACE_COLOR[selected.surface] ??
-                      "bg-brand-50 text-brand-600"
+                      surfaceTone(selected.surface)
                     }`}
                   >
-                    {tCourts(SURFACE_KEY[selected.surface] ?? "clay")}
+                    {labels.surface(selected.surface)}
                   </span>
                 )}
                 <span className="text-xs text-brand-400">
@@ -267,7 +248,7 @@ export default function BookCourtsClient({
                 </span>
                 <span className="text-xs text-brand-400">·</span>
                 <span className="text-xs text-brand-400">
-                  {selected?.is_indoor ? tCourts("indoor") : tCourts("outdoor")}
+                  {labels.inOut(selected?.is_indoor)}
                 </span>
               </div>
 

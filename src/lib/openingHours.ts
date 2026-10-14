@@ -7,6 +7,10 @@ export const DEFAULT_HOURS: OpeningHours = Array.from({ length: 7 }, () => ({
   to: "22:00",
 }));
 
+/** Whole hours from 07:00 to 21:00: the rows of the timetable and the start
+ * times staff can pick, matching the default 07:00–22:00 day. */
+export const DAY_HOURS = Array.from({ length: 15 }, (_, i) => 7 + i);
+
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 /** Turns whatever is stored in clubs.opening_hours into seven clean days. */

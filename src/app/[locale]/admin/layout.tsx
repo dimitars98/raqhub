@@ -4,9 +4,10 @@ import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
 import { PlanBanner } from "@/components/admin/PlanNotices";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
+import type { Club, Profile } from "@/types/database";
 
-type Profile = { full_name: string | null; role: string };
-type Club = { name: string; slug: string } & ClubBilling;
+type LayoutProfile = Pick<Profile, "full_name" | "role">;
+type LayoutClub = Pick<Club, "name" | "slug"> & ClubBilling;
 
 export default async function AdminLayout({
   children,
@@ -39,8 +40,8 @@ export default async function AdminLayout({
       .maybeSingle(),
   ]);
 
-  const profile = profileRes.data as Profile | null;
-  const club = clubRes.data as Club | null;
+  const profile = profileRes.data as LayoutProfile | null;
+  const club = clubRes.data as LayoutClub | null;
 
   if (
     !profile ||

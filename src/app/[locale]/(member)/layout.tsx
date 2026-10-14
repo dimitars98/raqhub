@@ -2,11 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
+import type { Profile } from "@/types/database";
 
-type Profile = {
-  full_name: string | null;
-  role: string;
-};
+type LayoutProfile = Pick<Profile, "full_name" | "role">;
 
 export default async function MemberLayout({
   children,
@@ -25,7 +23,7 @@ export default async function MemberLayout({
     .from("profiles")
     .select("full_name, role")
     .eq("id", user.id)
-    .single()) as { data: Profile | null };
+    .single()) as { data: LayoutProfile | null };
 
   if (!profile) redirect(`/${locale}/login`);
 

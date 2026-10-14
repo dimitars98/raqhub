@@ -26,6 +26,10 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import { SPORT_EMOJI } from "@/lib/labels";
+import { useLabels } from "@/hooks/useLabels";
+import type { BookingStatus, Sport } from "@/types/database";
+import { BOOKING_STATUS_HEX } from "@/lib/badges";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -48,24 +52,11 @@ type Range = "30" | "90" | "365";
 
 // ── Constants ──────────────────────────────────────────────────────────────
 
-const STATUS_COLORS: Record<string, string> = {
-  confirmed: "#7aad12",
-  completed: "#3d4f35",
-  pending: "#378add",
-  cancelled: "#d0d9c9",
-  no_show: "#f87171",
-};
-
-const SPORT_COLORS: Record<string, string> = {
+// Chart colours (hex, for the chart library).
+const SPORT_COLORS: Record<Sport, string> = {
   tennis: "#7aad12",
   padel: "#378add",
   pickleball: "#f59e0b",
-};
-
-const SPORT_EMOJI: Record<string, string> = {
-  tennis: "🎾",
-  padel: "🏓",
-  pickleball: "🥒",
 };
 
 const PLAN_COLORS = [
@@ -216,7 +207,7 @@ function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
 export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
   const t = useTranslations("analytics");
   const dfLocale = dateLocale(useLocale());
-  const tStatus = useTranslations("myBookings.status");
+  const labels = useLabels();
   const [range, setRange] = useState<Range>("30");
 
   const {
@@ -253,7 +244,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
       Object.entries(bookingsByStatus).map(([name, value]) => ({
         name,
         value,
-        color: STATUS_COLORS[name] ?? "#e8ede4",
+        color: BOOKING_STATUS_HEX[name as BookingStatus] ?? "#e8ede4",
       })),
     [bookingsByStatus],
   );
@@ -262,12 +253,12 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
     () =>
       Object.entries(revenueBySport)
         .map(([name, revenue]) => ({
-          name: `${SPORT_EMOJI[name] ?? ""} ${t(`sports.${name}` as "sports.tennis")}`,
+          name: `${SPORT_EMOJI[name as Sport] ?? ""} ${labels.sport(name)}`,
           revenue,
-          color: SPORT_COLORS[name] ?? "#7aad12",
+          color: SPORT_COLORS[name as Sport] ?? "#7aad12",
         }))
         .sort((a, b) => b.revenue - a.revenue),
-    [revenueBySport, t],
+    [revenueBySport, labels],
   );
 
   const courtData = useMemo(
@@ -409,7 +400,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
               width={48}
             />
             <Tooltip
-              formatter={(v, name) => {
+              formatter={(v) => {
                 const num = Number(v ?? 0);
                 return [`€${num.toFixed(2)}`, t("revenue")] as [string, string];
               }}
@@ -461,7 +452,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                       const num = Number(v ?? 0);
                       return [
                         `${num} (${pct(num, totalBookingsCount)}%)`,
-                        tStatus(String(name) as "confirmed"),
+                        labels.bookingStatus(String(name)),
                       ] as [string, string];
                     }}
                     contentStyle={TOOLTIP_STYLE}
@@ -476,7 +467,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                       style={{ background: s.color }}
                     />
                     <span className="text-[#3d4f35] capitalize flex-1">
-                      {tStatus(s.name as "confirmed")}
+                      {labels.bookingStatus(s.name)}
                     </span>
                     <span className="font-medium text-[#111c0a]">
                       {s.value}
@@ -517,7 +508,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                   width={90}
                 />
                 <Tooltip
-                  formatter={(v, name) => {
+                  formatter={(v) => {
                     const num = Number(v ?? 0);
                     return [`€${num.toFixed(2)}`, t("revenue")] as [
                       string,
@@ -687,7 +678,7 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                   allowDecimals={false}
                 />
                 <Tooltip
-                  formatter={(v, name) => {
+                  formatter={(v) => {
                     return [String(Number(v ?? 0)), t("members")] as [
                       string,
                       string,

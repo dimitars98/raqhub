@@ -249,11 +249,6 @@
     "saving": "Зачувување…",
     "confirmBooking": "Потврди резервација",
     "statusLabels": {
-      "confirmed": "Потврдена",
-      "pending": "На чекање",
-      "cancelled": "Откажана",
-      "completed": "Завршена",
-      "no_show": "Не се појавил",
       "all": "Сите"
     },
     "slotTaken": "Теренот е веќе резервиран во овој термин.",
@@ -287,27 +282,15 @@
     "status": "Статус",
     "description": "Опис",
     "descriptionPlaceholder": "Детали за овој терен...",
-    "indoor": "Затворен",
-    "outdoor": "Отворен",
     "active": "Активен",
     "inactive": "Неактивен",
     "edit": "Уреди",
     "activate": "Активирај",
     "deactivate": "Деактивирај",
-    "clay": "Глина",
-    "hard": "Цврста",
-    "grass": "Трева",
-    "artificialGrass": "Вештачка трева",
-    "carpet": "Тепих",
-    "concrete": "Бетон",
-    "acrylic": "Акрил",
     "cancel": "Откажи",
     "saving": "Зачувување…",
     "saveChanges": "Зачувај промени",
     "allSports": "Сите спортови",
-    "tennis": "Тенис",
-    "padel": "Падел",
-    "pickleball": "Пиклбол",
     "saveError": "Теренот не можеше да се зачува. Обидете се повторно.",
     "howMany": "Колку",
     "howManyHint": "Додава од {first} до {last}.",
@@ -336,8 +319,6 @@
     "membership": "Членство",
     "signOut": "Одјави се",
     "player": "Играч",
-    "indoor": "Затворен",
-    "outdoor": "Отворен",
     "greeting": {
       "morning": "Добро утро",
       "afternoon": "Добар ден",
@@ -373,11 +354,6 @@
       "manage": "Управување"
     },
     "status": {
-      "confirmed": "Потврдена",
-      "pending": "На чекање",
-      "completed": "Завршена",
-      "cancelled": "Откажана",
-      "no_show": "Не се појавил",
       "live": "Во живо"
     },
     "titles": {
@@ -418,11 +394,6 @@
     "actions": {
       "edit": "Уреди",
       "cancel": "Откажи"
-    },
-    "status": {
-      "active": "Активен",
-      "cancelled": "Откажан",
-      "expired": "Истечен"
     },
     "modal": {
       "addTitle": "Додај член",
@@ -472,11 +443,6 @@
     "cancel": "Откажи",
     "noCoaches": "Нема тренери. Додајте го првиот тренер.",
     "unknown": "Непознат",
-    "beginner": "Почетник",
-    "intermediate": "Среден",
-    "advanced": "Напреден",
-    "junior": "Јуниор",
-    "adult": "Возрасен",
     "coach": "Тренер",
     "selectProfile": "Изберете корисник",
     "alreadyCoach": "Оваа личност е веќе тренер во вашиот клуб.",
@@ -500,35 +466,7 @@
     "website": "Веб-страница",
     "ctaTitle": "Сакаш да играш во {club}?",
     "ctaText": "Направи бесплатна сметка, види ги слободните термини и резервирај за неколку секунди.",
-    "metaDescription": "Терени, тренери и членарини во {club}. Резервирај онлајн преку ServeTime.",
-    "billing": {
-      "monthly": "/ месечно",
-      "annual": "/ годишно",
-      "one_time": "еднократно"
-    },
-    "indoor": "Затворен",
-    "outdoor": "Отворен",
-    "sports": {
-      "tennis": "Тенис",
-      "padel": "Падел",
-      "pickleball": "Пиклбол"
-    },
-    "surfaces": {
-      "clay": "Глина",
-      "hard": "Цврста",
-      "grass": "Трева",
-      "artificial_grass": "Вештачка трева",
-      "carpet": "Тепих",
-      "concrete": "Бетон",
-      "acrylic": "Акрил"
-    },
-    "levels": {
-      "beginner": "Почетник",
-      "intermediate": "Среден",
-      "advanced": "Напреден",
-      "junior": "Јуниор",
-      "adult": "Возрасен"
-    }
+    "metaDescription": "Терени, тренери и членарини во {club}. Резервирај онлајн преку ServeTime."
   },
   "myBookings": {
     "title": "Мои резервации",
@@ -554,13 +492,6 @@
     "madeByClub": "Резервирано од клубот",
     "lesson": "Час со {name}",
     "booking": "Резервација",
-    "status": {
-      "confirmed": "Потврдена",
-      "pending": "На чекање",
-      "cancelled": "Откажана",
-      "completed": "Завршена",
-      "no_show": "Не се појави"
-    },
     "minutes": "{n} мин",
     "cancelClosed": "Предоцна е за онлајн откажување. Ве молиме јавете се во клубот."
   },
@@ -604,17 +535,7 @@
     "saved": "Зачувано",
     "saving": "Се зачувува…",
     "saveChanges": "Зачувај промени",
-    "signOut": "Одјава",
-    "billing": {
-      "monthly": "/ месечно",
-      "annual": "/ годишно",
-      "one_time": "еднократно"
-    },
-    "memberStatus": {
-      "active": "Активно",
-      "cancelled": "Откажано",
-      "expired": "Истечено"
-    }
+    "signOut": "Одјава"
   },
   "membershipPage": {
     "title": "Членство",
@@ -629,17 +550,7 @@
     "availablePlans": "Планови во {club}",
     "current": "Тековен",
     "discountBookings": "{pct}% попуст на резервации",
-    "changePlan": "За промена на план, контактирајте го администраторот на клубот.",
-    "billing": {
-      "monthly": "месечно",
-      "annual": "годишно",
-      "one_time": "еднократно"
-    },
-    "status": {
-      "active": "Активно",
-      "cancelled": "Откажано",
-      "expired": "Истечено"
-    }
+    "changePlan": "За промена на план, контактирајте го администраторот на клубот."
   },
   "plansAdmin": {
     "title": "Планови за членство",
@@ -1202,11 +1113,6 @@
     "revenue": "Приход",
     "bookings": "Резервации",
     "members": "Членови",
-    "sports": {
-      "tennis": "Тенис",
-      "padel": "Падел",
-      "pickleball": "Пиклбол"
-    },
     "totalRevenue": "Вкупен приход",
     "totalBookings": "Вкупно резервации",
     "last12Months": "Последни 12 месеци",
@@ -1283,7 +1189,9 @@
     "coach": "Тренер",
     "independent": "Независен",
     "filterByLevel": "Филтрирај по ниво",
-    "allLevels": "Сите нивоа"
+    "allLevels": "Сите нивоа",
+    "count": "{n, plural, =0 {Нема достапни тренери} one {# достапен тренер} other {# достапни тренери}}",
+    "perHour": "/ час"
   },
   "bookingErrors": {
     "coachTaken": "Овој тренер е веќе резервиран во тоа време",
@@ -1623,5 +1531,47 @@
       "invalid": "Нешто во формуларот не е точно.",
       "failed": "Зачувувањето не успеа. Обидете се повторно."
     }
+  },
+  "labels": {
+    "sports": {
+      "tennis": "Тенис",
+      "padel": "Падел",
+      "pickleball": "Пиклбол"
+    },
+    "surfaces": {
+      "clay": "Глина",
+      "hard": "Цврста",
+      "grass": "Трева",
+      "artificial_grass": "Вештачка трева",
+      "carpet": "Тепих",
+      "concrete": "Бетон",
+      "acrylic": "Акрил"
+    },
+    "levels": {
+      "beginner": "Почетник",
+      "intermediate": "Среден",
+      "advanced": "Напреден",
+      "junior": "Јуниор",
+      "adult": "Возрасен"
+    },
+    "bookingStatus": {
+      "confirmed": "Потврдена",
+      "pending": "На чекање",
+      "completed": "Завршена",
+      "cancelled": "Откажана",
+      "no_show": "Не се појавил"
+    },
+    "memberStatus": {
+      "active": "Активно",
+      "cancelled": "Откажано",
+      "expired": "Истечено"
+    },
+    "billingPeriod": {
+      "monthly": "/ месечно",
+      "annual": "/ годишно",
+      "one_time": "еднократно"
+    },
+    "indoor": "Затворен",
+    "outdoor": "Отворен"
   }
 }
