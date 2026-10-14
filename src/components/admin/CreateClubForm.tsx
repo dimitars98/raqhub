@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Building2 } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { announceNewClub } from "@/app/actions/clubs";
 
 type CreateClubValues = {
   name: string;
@@ -95,6 +96,9 @@ export default function CreateClubForm({
       setError("root", { message: t("error") });
       return;
     }
+
+    // Lets you know a new club signed up; never holds up the owner.
+    await announceNewClub().catch(() => {});
 
     router.push("/admin/dashboard");
     // Reloads server data so the sidebar and pages pick up the new club.

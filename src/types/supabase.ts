@@ -154,6 +154,32 @@ export type Database = {
           },
         ]
       }
+      club_notices: {
+        Row: {
+          club_id: string
+          kind: string
+          sent_at: string
+        }
+        Insert: {
+          club_id: string
+          kind: string
+          sent_at?: string
+        }
+        Update: {
+          club_id?: string
+          kind?: string
+          sent_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "club_notices_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "clubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       club_weekly_reports: {
         Row: {
           club_id: string

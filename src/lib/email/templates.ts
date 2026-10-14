@@ -6,6 +6,7 @@ import de from "@/messages/de.json";
 import fr from "@/messages/fr.json";
 import it from "@/messages/it.json";
 import type { Locale } from "./locale";
+import { PLANS, type PlanId } from "@/lib/plans";
 
 const MESSAGES = { en, mk, sq, de, fr, it } as const;
 const TIME_ZONE = "Europe/Skopje";
@@ -264,5 +265,85 @@ export function weeklyReportEmail(r: WeeklyReportData): Rendered {
       url,
       footer,
     ),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Free trial, to the club owner
+// ---------------------------------------------------------------------------
+
+export type TrialEmailData = {
+  locale: Locale;
+  kind: "ending" | "ended";
+  ownerName: string | null;
+  clubName: string;
+  plan: PlanId;
+  trialEndsAt: string;
+  appUrl: string;
+};
+
+export function trialEmail(d: TrialEmailData): Rendered {
+  const t = translator(d.locale);
+  const billing = createTranslator({
+    locale: d.locale,
+    messages: MESSAGES[d.locale] as typeof en,
+    namespace: "billing",
+  });
+  const f = formatters(d.locale);
+  const plan = PLANS[d.plan];
+  const date = f.day(d.trialEndsAt);
+
+  const heading = d.ownerName ? t("greeting", { name: d.ownerName }) : t("greetingNoName");
+  const intro = t(`trial.${d.kind}Intro`, { club: d.clubName, date });
+  const rows: [string, string][] = [
+    [t("labels.plan"), billing(`planNames.${d.plan}`)],
+    [t("labels.price"), t("trial.price", { monthly: plan.priceMonthly, yearly: plan.priceYearly })],
+    [t("trial.trialEnds"), date],
+  ];
+  const url = `${d.appUrl}/${d.locale}/admin/settings`;
+  const footer = t("trial.footer");
+
+  return {
+    subject: t(`trial.${d.kind}Subject`, { club: d.clubName, date }),
+    html: layout({ heading, intro, rows, button: { label: t("trial.seePlan"), url }, footer }),
+    text: plainText(heading, intro, rows, url, footer),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// New club signed up, to you (always in English)
+// ---------------------------------------------------------------------------
+
+export type NewClubEmailData = {
+  clubName: string;
+  city: string | null;
+  country: string | null;
+  ownerName: string | null;
+  ownerEmail: string | null;
+  plan: PlanId;
+  trialEndsAt: string | null;
+  totalClubs: number;
+  clubUrl: string;
+};
+
+export function newClubEmail(d: NewClubEmailData): Rendered {
+  const f = formatters("en");
+  const where = [d.city, d.country].filter(Boolean).join(", ");
+  const heading = `New club: ${d.clubName}`;
+  const intro = `${d.clubName}${where ? ` (${where})` : ""} just signed up. That makes ${d.totalClubs} ${d.totalClubs === 1 ? "club" : "clubs"} on ServeTime.`;
+  const rows: [string, string][] = [
+    ["Club", d.clubName],
+    ["Where", where || "–"],
+    ["Owner", d.ownerName ?? "–"],
+    ["Owner email", d.ownerEmail ?? "–"],
+    ["Plan", d.plan.charAt(0).toUpperCase() + d.plan.slice(1)],
+    ["Trial ends", d.trialEndsAt ? f.day(d.trialEndsAt) : "–"],
+  ];
+  const footer = "Sent to ADMIN_EMAIL because a club signed up on ServeTime.";
+
+  return {
+    subject: `New club on ServeTime: ${d.clubName}${d.city ? ` (${d.city})` : ""}`,
+    html: layout({ heading, intro, rows, button: { label: "Open the club page", url: d.clubUrl }, footer }),
+    text: plainText(heading, intro, rows, d.clubUrl, footer),
   };
 }

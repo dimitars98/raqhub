@@ -723,7 +723,17 @@
       "openDashboard": "Dashboard öffnen"
     },
     "footerPlayer": "Gesendet von ServeTime im Namen von {club}.",
-    "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf ServeTime führst."
+    "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf ServeTime führst.",
+    "trial": {
+      "endingSubject": "Ihre ServeTime-Testphase für {club} endet am {date}",
+      "endingIntro": "Ihr kostenloser Monat für {club} endet am {date}. Um ServeTime danach weiter zu nutzen, antworten Sie einfach auf diese E-Mail, und wir schicken Ihnen eine Rechnung. Wenn Sie einen anderen Tarif möchten, schreiben Sie es uns.",
+      "endedSubject": "Ihre ServeTime-Testphase für {club} ist abgelaufen",
+      "endedIntro": "Ihr kostenloser Monat für {club} ist vorbei. Antworten Sie auf diese E-Mail, und wir schicken Ihnen die Rechnung für Ihren Tarif, damit Sie ohne Unterbrechung weiter Buchungen annehmen können.",
+      "price": "{monthly} € pro Monat oder {yearly} € pro Jahr",
+      "trialEnds": "Kostenlos bis",
+      "seePlan": "Tarif ansehen",
+      "footer": "Sie erhalten diese E-Mail, weil Sie einen Club auf ServeTime führen."
+    }
   },
   "billing": {
     "trialBanner": "Kostenlose Testphase: noch {days, plural, one {# Tag} other {# Tage}}. Alles ist freigeschaltet.",

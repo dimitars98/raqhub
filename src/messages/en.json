@@ -723,7 +723,17 @@
       "openDashboard": "Open the dashboard"
     },
     "footerPlayer": "Sent by ServeTime on behalf of {club}.",
-    "footerOwner": "You get this weekly summary because you run a club on ServeTime."
+    "footerOwner": "You get this weekly summary because you run a club on ServeTime.",
+    "trial": {
+      "endingSubject": "Your ServeTime trial for {club} ends on {date}",
+      "endingIntro": "Your free month for {club} ends on {date}. To keep using ServeTime after that, reply to this email and we’ll send you an invoice. If you’d like a different plan, just tell us.",
+      "endedSubject": "Your ServeTime trial for {club} has ended",
+      "endedIntro": "Your free month for {club} has ended. Reply to this email and we’ll send you an invoice for your plan, so you can keep taking bookings without interruption.",
+      "price": "€{monthly} / month or €{yearly} / year",
+      "trialEnds": "Free trial until",
+      "seePlan": "See your plan",
+      "footer": "You get this email because you run a club on ServeTime."
+    }
   },
   "billing": {
     "trialBanner": "Free trial: {days, plural, one {# day} other {# days}} left. Everything is unlocked.",

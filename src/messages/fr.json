@@ -723,7 +723,17 @@
       "openDashboard": "Ouvrir le tableau de bord"
     },
     "footerPlayer": "Envoyé par ServeTime pour le compte de {club}.",
-    "footerOwner": "Vous recevez ce résumé hebdomadaire parce que vous gérez un club sur ServeTime."
+    "footerOwner": "Vous recevez ce résumé hebdomadaire parce que vous gérez un club sur ServeTime.",
+    "trial": {
+      "endingSubject": "Votre essai ServeTime pour {club} se termine le {date}",
+      "endingIntro": "Votre mois gratuit pour {club} se termine le {date}. Pour continuer à utiliser ServeTime, répondez simplement à cet e-mail et nous vous enverrons une facture. Si vous souhaitez une autre formule, dites-le-nous.",
+      "endedSubject": "Votre essai ServeTime pour {club} est terminé",
+      "endedIntro": "Votre mois gratuit pour {club} est terminé. Répondez à cet e-mail et nous vous enverrons la facture de votre formule, pour continuer à prendre des réservations sans interruption.",
+      "price": "{monthly} € / mois ou {yearly} € / an",
+      "trialEnds": "Gratuit jusqu’au",
+      "seePlan": "Voir votre formule",
+      "footer": "Vous recevez cet e-mail car vous gérez un club sur ServeTime."
+    }
   },
   "billing": {
     "trialBanner": "Essai gratuit : encore {days, plural, one {# jour} other {# jours}}. Tout est débloqué.",

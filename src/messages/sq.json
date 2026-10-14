@@ -723,7 +723,17 @@
       "openDashboard": "Hap panelin"
     },
     "footerPlayer": "Dërguar nga ServeTime në emër të {club}.",
-    "footerOwner": "E merrni këtë përmbledhje javore sepse drejtoni një klub në ServeTime."
+    "footerOwner": "E merrni këtë përmbledhje javore sepse drejtoni një klub në ServeTime.",
+    "trial": {
+      "endingSubject": "Prova juaj në ServeTime për {club} mbaron më {date}",
+      "endingIntro": "Muaji falas për {club} mbaron më {date}. Për të vazhduar me ServeTime, përgjigjuni këtij email-i dhe do t’ju dërgojmë një faturë. Nëse doni një paketë tjetër, thjesht na shkruani.",
+      "endedSubject": "Prova në ServeTime për {club} ka mbaruar",
+      "endedIntro": "Muaji falas për {club} ka mbaruar. Përgjigjuni këtij email-i dhe do t’ju dërgojmë faturën për paketën tuaj, që të vazhdoni të merrni rezervime pa ndërprerje.",
+      "price": "€{monthly} në muaj ose €{yearly} në vit",
+      "trialEnds": "Falas deri më",
+      "seePlan": "Shikoni paketën",
+      "footer": "E merrni këtë email sepse drejtoni një klub në ServeTime."
+    }
   },
   "billing": {
     "trialBanner": "Provë falas: {days, plural, one {edhe # ditë} other {edhe # ditë}}. Gjithçka është e hapur.",

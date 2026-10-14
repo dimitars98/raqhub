@@ -4,13 +4,16 @@ import { emailProvider } from "@/lib/email/send";
 import {
   Budget,
   sendBookingReminders,
+  sendNewClubNotices,
   sendRenewalReminders,
+  sendTrialEmails,
   sendWeeklyReports,
 } from "@/lib/automation/jobs";
 
 // Called every hour by Supabase Cron (see supabase/cron_http_job.sql).
-// Sends booking reminders, membership renewal reminders and, on Monday
-// mornings, the weekly report to club owners. Safe to call more often:
+// Sends booking reminders, membership renewal reminders, free-trial emails
+// to club owners, new-club emails to you and, on Monday mornings, the weekly
+// report to club owners. Safe to call more often:
 // nothing is ever sent twice.
 
 export const dynamic = "force-dynamic";
@@ -36,6 +39,8 @@ export async function GET(request: Request) {
     ["reminders", sendBookingReminders],
     ["renewals", sendRenewalReminders],
     ["weeklyReports", sendWeeklyReports],
+    ["trialEmails", sendTrialEmails],
+    ["newClubs", sendNewClubNotices],
   ] as const) {
     try {
       result[name] = await job(db, budget);
