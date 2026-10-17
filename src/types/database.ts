@@ -192,3 +192,37 @@ export type Database = {
     };
   };
 };
+
+export interface Tournament {
+  id: string;
+  club_id: string;
+  name: string;
+  sport: Sport;
+  starts_on: string;
+  description: string | null;
+  max_entries: number;
+  entry_fee: number | null;
+  status: "open" | "closed" | "started" | "finished";
+  created_at: string;
+}
+
+export interface TournamentEntry {
+  id: string;
+  tournament_id: string;
+  /** Player's name, or "Ana / Marko" for doubles. */
+  name: string;
+  /** Set when a player signed up themselves. */
+  player_id: string | null;
+  created_at: string;
+}
+
+export interface TournamentMatch {
+  id: string;
+  tournament_id: string;
+  round: number;
+  position: number;
+  entry1_id: string | null;
+  entry2_id: string | null;
+  winner_id: string | null;
+  score: string | null;
+}

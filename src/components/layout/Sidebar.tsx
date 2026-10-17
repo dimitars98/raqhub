@@ -377,6 +377,7 @@ export default function Sidebar({
         { label: t("plans"), href: "/admin/plans", icon: CreditCard },
         { label: t("coaches"), href: "/admin/coaches", icon: Star },
         { label: t("courts"), href: "/admin/courts", icon: Grid3x3 },
+        { label: t("tournaments"), href: "/admin/tournaments", icon: Trophy },
       ],
     },
     {

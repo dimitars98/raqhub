@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "@/components/ui/LocaleSwitcher";
@@ -16,11 +16,18 @@ import { LogoMark } from "@/components/ui/Logo";
 import Avatar from "@/components/ui/Avatar";
 import { initials } from "@/lib/avatar";
 import { getLabels } from "@/lib/getLabels";
+import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
+import { dateLocale } from "@/lib/dateLocale";
+import { format } from "date-fns";
+import type { Tournament } from "@/types/database";
 
 // The public page of one club: what a visitor sees before they have an account.
 // Everything read here is allowed for logged-out visitors by the database
 // rules (active clubs, active courts, active coaches with name and photo,
 // plans). Booking itself always happens after signing in.
+
+/** yyyy-mm-dd two weeks ago, for "recent" tournaments. */
+const recentDate = () => new Date(Date.now() - 14 * 86_400_000).toISOString().slice(0, 10);
 
 type PublicClub = Pick<
   Club,
@@ -104,6 +111,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
     { data: courtsData },
     { data: coachesData },
     { data: plansData },
+    { data: tournamentsData },
     {
       data: { user },
     },
@@ -127,12 +135,26 @@ export default async function ClubPublicPage({ params }: PageProps) {
       .select("*")
       .eq("club_id", club.id)
       .order("price"),
+    // Upcoming and running tournaments, plus ones from the last two weeks.
+    supabase
+      .from("tournaments")
+      .select("id, name, sport, starts_on, status")
+      .eq("club_id", club.id)
+      .or(`status.neq.finished,starts_on.gte.${recentDate()}`)
+      .order("starts_on")
+      .limit(6),
     supabase.auth.getUser(),
   ]);
 
   const courts = (courtsData ?? []) as unknown as PublicCourt[];
   const coaches = (coachesData ?? []) as unknown as PublicCoach[];
   const plans = (plansData ?? []) as unknown as MembershipPlan[];
+  const tournaments = (tournamentsData ?? []) as Pick<
+    Tournament,
+    "id" | "name" | "sport" | "starts_on" | "status"
+  >[];
+  const tTour = await getTranslations("tournaments");
+  const dfLocale = dateLocale(await getLocale());
 
   // Who is looking decides which button they get.
   let viewer: Viewer = "visitor";
@@ -302,6 +324,35 @@ export default async function ClubPublicPage({ params }: PageProps) {
             </div>
           )}
         </section>
+
+        {/* Tournaments: only shown when the club has any coming up */}
+        {tournaments.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-5 text-xl font-bold tracking-tight text-ink-900">
+              {tTour("public.upcoming")}
+            </h2>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {tournaments.map((tour) => (
+                <Link
+                  key={tour.id}
+                  href={`/tournaments/${tour.id}`}
+                  className="card flex flex-col p-5 transition-colors hover:border-ink-900"
+                >
+                  <span className={`${BADGE} w-fit ${TOURNAMENT_STATUS_TONE[tour.status]}`}>
+                    {tTour(`status.${tour.status}`)}
+                  </span>
+                  <span className="mt-3 text-lg font-semibold text-ink-900">{tour.name}</span>
+                  <span className="mt-1 text-sm text-ink-600">
+                    {labels.sport(tour.sport)} ·{" "}
+                    {format(new Date(`${tour.starts_on}T12:00:00`), "d MMM yyyy", {
+                      locale: dfLocale,
+                    })}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Coaches: only shown when the club has any */}
         {coaches.length > 0 && (

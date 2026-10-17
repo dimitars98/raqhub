@@ -371,11 +371,13 @@
       "timetable": "Calendario",
       "myBookings": "Le mie prenotazioni",
       "share": "Condividi con i giocatori",
-      "owner": "Club e pagamenti"
+      "owner": "Club e pagamenti",
+      "tournaments": "Tornei"
     },
     "share": "Condividi",
     "ownerGroup": "ServeTime",
-    "ownerPage": "Club e pagamenti"
+    "ownerPage": "Club e pagamenti",
+    "tournaments": "Tornei"
   },
   "members": {
     "title": "Soci",
@@ -1573,5 +1575,102 @@
     },
     "indoor": "Coperto",
     "outdoor": "Esterno"
+  },
+  "tournaments": {
+    "title": "Tornei",
+    "subtitle": "Organizza un torneo a eliminazione diretta: iscrizioni, sorteggio, risultati.",
+    "new": "Nuovo torneo",
+    "empty": "Ancora nessun torneo.",
+    "emptyHint": "Creane uno, condividi il link e i giocatori si iscrivono online.",
+    "edit": "Modifica",
+    "delete": "Elimina torneo",
+    "deleteConfirm": "Eliminare questo torneo con tutti i giocatori e i risultati?",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "saving": "Salvataggio…",
+    "fields": {
+      "name": "Nome",
+      "namePlaceholder": "Open d’autunno",
+      "sport": "Sport",
+      "date": "Data",
+      "maxEntries": "Posti",
+      "entryFee": "Quota d’iscrizione (€)",
+      "entryFeeHint": "Lascia vuoto se è gratis. I giocatori pagano al club.",
+      "description": "Dettagli per i giocatori",
+      "descriptionPlaceholder": "Formula, premi, cosa portare…"
+    },
+    "status": {
+      "open": "Iscrizioni aperte",
+      "closed": "Iscrizioni chiuse",
+      "started": "In corso",
+      "finished": "Concluso"
+    },
+    "entriesCount": "{n} posti occupati su {max}",
+    "free": "Iscrizione gratuita",
+    "fee": "Iscrizione €{fee}",
+    "manage": {
+      "back": "Tutti i tornei",
+      "publicPage": "Pagina pubblica",
+      "copyLink": "Copia link",
+      "copied": "Copiato",
+      "closeSignups": "Chiudi le iscrizioni",
+      "openSignups": "Riapri le iscrizioni",
+      "entries": "Giocatori",
+      "addEntry": "Aggiungi",
+      "addPlaceholder": "Nome, o “Ana / Marko” per il doppio",
+      "remove": "Rimuovi",
+      "noEntries": "Ancora nessun iscritto. Condividi il link o aggiungi i nomi qui.",
+      "signedUpOnline": "iscritto online",
+      "draw": "Fai il sorteggio",
+      "drawHint": "I giocatori sono disposti a caso. Se il numero non torna, alcuni passano direttamente al 2° turno (bye).",
+      "tooFewHint": "Servono almeno 2 giocatori per il sorteggio.",
+      "redraw": "Rifai il sorteggio",
+      "redrawConfirm": "Annullare il sorteggio e tutti i risultati?",
+      "bracket": "Tabellone",
+      "pickWinner": "Tocca una partita per inserire il risultato.",
+      "result": "Risultato",
+      "winner": "Vincitore",
+      "score": "Punteggio (facoltativo)",
+      "scorePlaceholder": "6-4 6-3",
+      "saveResult": "Salva risultato",
+      "clearResult": "Cancella",
+      "champion": "Vincitore: {name}"
+    },
+    "rounds": {
+      "final": "Finale",
+      "semi": "Semifinali",
+      "quarter": "Quarti di finale",
+      "roundOf": "Turno dei {n}"
+    },
+    "bye": "Bye",
+    "tbd": "Da definire",
+    "public": {
+      "signUp": "Iscriviti",
+      "signUpTitle": "Iscriviti a questo torneo",
+      "nameOnDraw": "Nome nel tabellone",
+      "nameHint": "Per il doppio scrivi entrambi i nomi, es. “Ana / Marko”.",
+      "signInToSignUp": "Accedi per iscriverti",
+      "youreIn": "Sei iscritto come {name}.",
+      "withdraw": "Ritirati",
+      "full": "Questo torneo è al completo.",
+      "closedNote": "Le iscrizioni sono chiuse.",
+      "players": "Giocatori ({n})",
+      "noPlayers": "Ancora nessun iscritto. Sii il primo!",
+      "upcoming": "Tornei"
+    },
+    "errors": {
+      "name": "Dai un nome al torneo.",
+      "date": "Scegli una data.",
+      "maxEntries": "I posti devono essere da 2 a 64.",
+      "fee": "La quota non può essere negativa.",
+      "entryName": "Scrivi un nome.",
+      "tooFew": "Servono almeno 2 giocatori per il sorteggio.",
+      "nextPlayed": "La partita successiva ha già un risultato. Cancella prima quello.",
+      "failed": "Salvataggio non riuscito. Riprova.",
+      "notSignedIn": "Accedi prima.",
+      "closed": "Le iscrizioni sono chiuse.",
+      "full": "Questo torneo è al completo.",
+      "already": "Sei già iscritto."
+    }
   }
 }

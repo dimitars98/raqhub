@@ -371,11 +371,13 @@
       "timetable": "Planning",
       "myBookings": "Mes réservations",
       "share": "Partager avec les joueurs",
-      "owner": "Clubs et paiements"
+      "owner": "Clubs et paiements",
+      "tournaments": "Tournois"
     },
     "share": "Partager",
     "ownerGroup": "ServeTime",
-    "ownerPage": "Clubs et paiements"
+    "ownerPage": "Clubs et paiements",
+    "tournaments": "Tournois"
   },
   "members": {
     "title": "Membres",
@@ -1573,5 +1575,102 @@
     },
     "indoor": "Couvert",
     "outdoor": "Extérieur"
+  },
+  "tournaments": {
+    "title": "Tournois",
+    "subtitle": "Organisez un tournoi à élimination directe : inscriptions, tirage au sort, résultats.",
+    "new": "Nouveau tournoi",
+    "empty": "Aucun tournoi pour l’instant.",
+    "emptyHint": "Créez-en un, partagez le lien, et les joueurs s’inscrivent en ligne.",
+    "edit": "Modifier",
+    "delete": "Supprimer le tournoi",
+    "deleteConfirm": "Supprimer ce tournoi avec tous ses joueurs et résultats ?",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "saving": "Enregistrement…",
+    "fields": {
+      "name": "Nom",
+      "namePlaceholder": "Open d’automne",
+      "sport": "Sport",
+      "date": "Date",
+      "maxEntries": "Places",
+      "entryFee": "Droit d’inscription (€)",
+      "entryFeeHint": "Laissez vide si c’est gratuit. Les joueurs paient au club.",
+      "description": "Infos pour les joueurs",
+      "descriptionPlaceholder": "Format, lots, quoi apporter…"
+    },
+    "status": {
+      "open": "Inscriptions ouvertes",
+      "closed": "Inscriptions fermées",
+      "started": "En cours",
+      "finished": "Terminé"
+    },
+    "entriesCount": "{n} places prises sur {max}",
+    "free": "Inscription gratuite",
+    "fee": "Inscription {fee} €",
+    "manage": {
+      "back": "Tous les tournois",
+      "publicPage": "Page publique",
+      "copyLink": "Copier le lien",
+      "copied": "Copié",
+      "closeSignups": "Fermer les inscriptions",
+      "openSignups": "Rouvrir les inscriptions",
+      "entries": "Joueurs",
+      "addEntry": "Ajouter",
+      "addPlaceholder": "Nom, ou « Ana / Marko » en double",
+      "remove": "Retirer",
+      "noEntries": "Personne n’est encore inscrit. Partagez le lien ou ajoutez des noms ici.",
+      "signedUpOnline": "inscrit en ligne",
+      "draw": "Faire le tirage",
+      "drawHint": "Les joueurs sont placés au hasard. Si le nombre ne tombe pas juste, certains passent directement au 2e tour (exempt).",
+      "tooFewHint": "Il faut au moins 2 joueurs pour le tirage.",
+      "redraw": "Refaire le tirage",
+      "redrawConfirm": "Annuler le tirage et tous les résultats ?",
+      "bracket": "Tableau",
+      "pickWinner": "Touchez un match pour saisir le résultat.",
+      "result": "Résultat",
+      "winner": "Vainqueur",
+      "score": "Score (facultatif)",
+      "scorePlaceholder": "6-4 6-3",
+      "saveResult": "Enregistrer le résultat",
+      "clearResult": "Effacer",
+      "champion": "Vainqueur : {name}"
+    },
+    "rounds": {
+      "final": "Finale",
+      "semi": "Demi-finales",
+      "quarter": "Quarts de finale",
+      "roundOf": "Tour des {n}"
+    },
+    "bye": "Exempt",
+    "tbd": "À déterminer",
+    "public": {
+      "signUp": "S’inscrire",
+      "signUpTitle": "S’inscrire à ce tournoi",
+      "nameOnDraw": "Nom dans le tableau",
+      "nameHint": "En double, écrivez les deux noms, par ex. « Ana / Marko ».",
+      "signInToSignUp": "Se connecter pour s’inscrire",
+      "youreIn": "Vous êtes inscrit sous le nom {name}.",
+      "withdraw": "Se désinscrire",
+      "full": "Ce tournoi est complet.",
+      "closedNote": "Les inscriptions sont fermées.",
+      "players": "Joueurs ({n})",
+      "noPlayers": "Personne n’est encore inscrit. Soyez le premier !",
+      "upcoming": "Tournois"
+    },
+    "errors": {
+      "name": "Donnez un nom au tournoi.",
+      "date": "Choisissez une date.",
+      "maxEntries": "Le nombre de places doit être entre 2 et 64.",
+      "fee": "Le droit d’inscription ne peut pas être négatif.",
+      "entryName": "Saisissez un nom.",
+      "tooFew": "Il faut au moins 2 joueurs pour le tirage.",
+      "nextPlayed": "Le match suivant a déjà un résultat. Effacez-le d’abord.",
+      "failed": "Échec de l’enregistrement. Veuillez réessayer.",
+      "notSignedIn": "Veuillez d’abord vous connecter.",
+      "closed": "Les inscriptions sont fermées.",
+      "full": "Ce tournoi est complet.",
+      "already": "Vous êtes déjà inscrit."
+    }
   }
 }

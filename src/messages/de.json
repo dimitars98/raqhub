@@ -371,11 +371,13 @@
       "timetable": "Belegungsplan",
       "myBookings": "Meine Buchungen",
       "share": "Mit Spielern teilen",
-      "owner": "Clubs & Zahlungen"
+      "owner": "Clubs & Zahlungen",
+      "tournaments": "Turniere"
     },
     "share": "Teilen",
     "ownerGroup": "ServeTime",
-    "ownerPage": "Clubs & Zahlungen"
+    "ownerPage": "Clubs & Zahlungen",
+    "tournaments": "Turniere"
   },
   "members": {
     "title": "Mitglieder",
@@ -1573,5 +1575,102 @@
     },
     "indoor": "Halle",
     "outdoor": "Außen"
+  },
+  "tournaments": {
+    "title": "Turniere",
+    "subtitle": "Ein K.-o.-Turnier ausrichten: Anmeldungen sammeln, auslosen, Ergebnisse eintragen.",
+    "new": "Neues Turnier",
+    "empty": "Noch keine Turniere.",
+    "emptyHint": "Legen Sie eins an, teilen Sie den Link, und Spieler melden sich online an.",
+    "edit": "Bearbeiten",
+    "delete": "Turnier löschen",
+    "deleteConfirm": "Dieses Turnier mit allen Spielern und Ergebnissen löschen?",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "saving": "Wird gespeichert…",
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "Herbst-Open",
+      "sport": "Sportart",
+      "date": "Datum",
+      "maxEntries": "Plätze",
+      "entryFee": "Startgeld (€)",
+      "entryFeeHint": "Leer lassen, wenn kostenlos. Bezahlt wird im Club.",
+      "description": "Infos für Spieler",
+      "descriptionPlaceholder": "Modus, Preise, was mitzubringen ist…"
+    },
+    "status": {
+      "open": "Anmeldung offen",
+      "closed": "Anmeldung geschlossen",
+      "started": "Läuft",
+      "finished": "Beendet"
+    },
+    "entriesCount": "{n} von {max} Plätzen belegt",
+    "free": "Startgeld frei",
+    "fee": "{fee} € Startgeld",
+    "manage": {
+      "back": "Alle Turniere",
+      "publicPage": "Öffentliche Seite",
+      "copyLink": "Link kopieren",
+      "copied": "Kopiert",
+      "closeSignups": "Anmeldung schließen",
+      "openSignups": "Anmeldung wieder öffnen",
+      "entries": "Spieler",
+      "addEntry": "Hinzufügen",
+      "addPlaceholder": "Name, oder „Ana / Marko“ für Doppel",
+      "remove": "Entfernen",
+      "noEntries": "Noch niemand angemeldet. Teilen Sie den Link oder tragen Sie Namen hier ein.",
+      "signedUpOnline": "online angemeldet",
+      "draw": "Auslosen",
+      "drawHint": "Die Spieler werden zufällig verteilt. Passt die Zahl nicht genau, kommen einige direkt in Runde 2 (Freilos).",
+      "tooFewHint": "Für die Auslosung braucht es mindestens 2 Spieler.",
+      "redraw": "Neu auslosen",
+      "redrawConfirm": "Auslosung und alle Ergebnisse verwerfen?",
+      "bracket": "Tableau",
+      "pickWinner": "Tippen Sie auf ein Match, um das Ergebnis einzutragen.",
+      "result": "Ergebnis",
+      "winner": "Sieger",
+      "score": "Ergebnis (optional)",
+      "scorePlaceholder": "6:4 6:3",
+      "saveResult": "Ergebnis speichern",
+      "clearResult": "Löschen",
+      "champion": "Sieger: {name}"
+    },
+    "rounds": {
+      "final": "Finale",
+      "semi": "Halbfinale",
+      "quarter": "Viertelfinale",
+      "roundOf": "Runde der letzten {n}"
+    },
+    "bye": "Freilos",
+    "tbd": "Steht noch aus",
+    "public": {
+      "signUp": "Anmelden",
+      "signUpTitle": "Zu diesem Turnier anmelden",
+      "nameOnDraw": "Name im Tableau",
+      "nameHint": "Für Doppel beide Namen eintragen, z. B. „Ana / Marko“.",
+      "signInToSignUp": "Zum Anmelden einloggen",
+      "youreIn": "Sie sind als {name} angemeldet.",
+      "withdraw": "Abmelden",
+      "full": "Dieses Turnier ist voll.",
+      "closedNote": "Die Anmeldung ist geschlossen.",
+      "players": "Spieler ({n})",
+      "noPlayers": "Noch niemand angemeldet. Seien Sie der Erste!",
+      "upcoming": "Turniere"
+    },
+    "errors": {
+      "name": "Geben Sie dem Turnier einen Namen.",
+      "date": "Wählen Sie ein Datum.",
+      "maxEntries": "Es müssen 2 bis 64 Plätze sein.",
+      "fee": "Das Startgeld kann nicht negativ sein.",
+      "entryName": "Geben Sie einen Namen ein.",
+      "tooFew": "Für die Auslosung braucht es mindestens 2 Spieler.",
+      "nextPlayed": "Das nächste Match hat schon ein Ergebnis. Löschen Sie zuerst dieses.",
+      "failed": "Speichern fehlgeschlagen. Bitte erneut versuchen.",
+      "notSignedIn": "Bitte melden Sie sich zuerst an.",
+      "closed": "Die Anmeldung ist geschlossen.",
+      "full": "Dieses Turnier ist voll.",
+      "already": "Sie sind bereits angemeldet."
+    }
   }
 }

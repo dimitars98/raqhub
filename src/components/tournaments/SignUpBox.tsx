@@ -1,0 +1,111 @@
+"use client";
+
+import { useState, useTransition } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
+import { signUpForTournament, withdrawFromTournament } from "@/app/actions/tournaments";
+
+/**
+ * Sign-up box on a tournament's public page. Visitors are sent to sign in
+ * first and come back here afterwards.
+ */
+export default function SignUpBox({
+  tournamentId,
+  signedIn,
+  myEntryName,
+  defaultName,
+  open,
+  full,
+}: {
+  tournamentId: string;
+  signedIn: boolean;
+  /** The name this player signed up under, if they did. */
+  myEntryName: string | null;
+  defaultName: string;
+  open: boolean;
+  full: boolean;
+}) {
+  const t = useTranslations("tournaments");
+  const locale = useLocale();
+  const router = useRouter();
+  const [name, setName] = useState(defaultName);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
+
+  const run = (action: () => Promise<{ error?: string }>) => {
+    setError(null);
+    startTransition(async () => {
+      const result = await action();
+      if (result.error) setError(t(`errors.${result.error}`));
+      else router.refresh();
+    });
+  };
+
+  const box = "rounded-2xl border border-ink-100 bg-white p-5";
+
+  if (myEntryName) {
+    return (
+      <div className={box}>
+        <p className="text-sm font-medium text-ink-900">{t("public.youreIn", { name: myEntryName })}</p>
+        {open && (
+          <button
+            type="button"
+            disabled={pending}
+            onClick={() => run(() => withdrawFromTournament(tournamentId))}
+            className="mt-3 text-sm font-medium text-red-500 hover:text-red-700"
+          >
+            {t("public.withdraw")}
+          </button>
+        )}
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      </div>
+    );
+  }
+
+  if (!open || full) {
+    return (
+      <div className={box}>
+        <p className="text-sm text-ink-600">{full && open ? t("public.full") : t("public.closedNote")}</p>
+      </div>
+    );
+  }
+
+  if (!signedIn) {
+    return (
+      <div className={box}>
+        <p className="mb-3 text-sm font-semibold text-ink-900">{t("public.signUpTitle")}</p>
+        <Link
+          href={`/login?redirectTo=${encodeURIComponent(`/${locale}/tournaments/${tournamentId}`)}`}
+          className="btn-primary inline-flex"
+        >
+          {t("public.signInToSignUp")}
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      className={box}
+      onSubmit={(e) => {
+        e.preventDefault();
+        run(() => signUpForTournament(tournamentId, name));
+      }}
+    >
+      <p className="mb-3 text-sm font-semibold text-ink-900">{t("public.signUpTitle")}</p>
+      <label className="mb-1 block text-xs text-ink-400" htmlFor="entry-name">
+        {t("public.nameOnDraw")}
+      </label>
+      <input id="entry-name" className="input" value={name} onChange={(e) => setName(e.target.value)} />
+      <p className="mt-1.5 text-xs text-ink-400">{t("public.nameHint")}</p>
+      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      <button
+        type="submit"
+        disabled={pending || !name.trim()}
+        className="btn-primary mt-4 w-full justify-center disabled:opacity-50"
+      >
+        {t("public.signUp")}
+      </button>
+    </form>
+  );
+}

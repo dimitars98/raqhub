@@ -371,11 +371,13 @@
       "timetable": "Orari",
       "myBookings": "Rezervimet e mia",
       "share": "Ndajeni me lojtarët",
-      "owner": "Klubet dhe pagesat"
+      "owner": "Klubet dhe pagesat",
+      "tournaments": "Turnetë"
     },
     "share": "Ndaj",
     "ownerGroup": "ServeTime",
-    "ownerPage": "Klubet dhe pagesat"
+    "ownerPage": "Klubet dhe pagesat",
+    "tournaments": "Turnetë"
   },
   "members": {
     "title": "Anëtarë",
@@ -1573,5 +1575,102 @@
     },
     "indoor": "Mbyllur",
     "outdoor": "Hapur"
+  },
+  "tournaments": {
+    "title": "Turnetë",
+    "subtitle": "Organizoni një turne me eliminim: regjistrime, short dhe rezultate.",
+    "new": "Turne i ri",
+    "empty": "Ende nuk ka turne.",
+    "emptyHint": "Krijoni një, ndani lidhjen dhe lojtarët regjistrohen online.",
+    "edit": "Ndrysho",
+    "delete": "Fshi turneun",
+    "deleteConfirm": "Të fshihet ky turne me të gjithë lojtarët dhe rezultatet?",
+    "save": "Ruaj",
+    "cancel": "Anulo",
+    "saving": "Po ruhet…",
+    "fields": {
+      "name": "Emri",
+      "namePlaceholder": "Turneu i vjeshtës",
+      "sport": "Sporti",
+      "date": "Data",
+      "maxEntries": "Vende",
+      "entryFee": "Tarifa e pjesëmarrjes (€)",
+      "entryFeeHint": "Lëreni bosh nëse është falas. Lojtarët paguajnë në klub.",
+      "description": "Detaje për lojtarët",
+      "descriptionPlaceholder": "Formati, çmimet, çfarë të sjellin…"
+    },
+    "status": {
+      "open": "Regjistrimet të hapura",
+      "closed": "Regjistrimet të mbyllura",
+      "started": "Në zhvillim",
+      "finished": "Përfunduar"
+    },
+    "entriesCount": "{n} nga {max} vende të zëna",
+    "free": "Pjesëmarrje falas",
+    "fee": "Tarifa €{fee}",
+    "manage": {
+      "back": "Të gjitha turnetë",
+      "publicPage": "Faqja publike",
+      "copyLink": "Kopjo lidhjen",
+      "copied": "U kopjua",
+      "closeSignups": "Mbyll regjistrimet",
+      "openSignups": "Rihap regjistrimet",
+      "entries": "Lojtarët",
+      "addEntry": "Shto",
+      "addPlaceholder": "Emri, ose „Ana / Marko“ për dyshe",
+      "remove": "Hiq",
+      "noEntries": "Ende nuk është regjistruar askush. Ndani lidhjen ose shtoni emra këtu.",
+      "signedUpOnline": "u regjistrua online",
+      "draw": "Bëj shortin",
+      "drawHint": "Lojtarët vendosen rastësisht. Nëse numri nuk përshtatet, disa kalojnë direkt në raundin 2.",
+      "tooFewHint": "Duhen të paktën 2 lojtarë për shortin.",
+      "redraw": "Bëj shortin përsëri",
+      "redrawConfirm": "Të hidhet poshtë shorti dhe të gjitha rezultatet?",
+      "bracket": "Shorti",
+      "pickWinner": "Prekni një ndeshje për të futur rezultatin.",
+      "result": "Rezultati",
+      "winner": "Fituesi",
+      "score": "Rezultati (opsional)",
+      "scorePlaceholder": "6-4 6-3",
+      "saveResult": "Ruaj rezultatin",
+      "clearResult": "Fshi",
+      "champion": "Fituesi: {name}"
+    },
+    "rounds": {
+      "final": "Finalja",
+      "semi": "Gjysmëfinalet",
+      "quarter": "Çerekfinalet",
+      "roundOf": "Raundi i {n}"
+    },
+    "bye": "Kalim i lirë",
+    "tbd": "Do të vendoset",
+    "public": {
+      "signUp": "Regjistrohu",
+      "signUpTitle": "Regjistrohu në këtë turne",
+      "nameOnDraw": "Emri në short",
+      "nameHint": "Për dyshe, shkruani të dy emrat, p.sh. „Ana / Marko“.",
+      "signInToSignUp": "Hyni për t’u regjistruar",
+      "youreIn": "Jeni regjistruar si {name}.",
+      "withdraw": "Tërhiqu",
+      "full": "Ky turne është plot.",
+      "closedNote": "Regjistrimet janë mbyllur.",
+      "players": "Lojtarët ({n})",
+      "noPlayers": "Ende nuk është regjistruar askush. Bëhuni i pari!",
+      "upcoming": "Turnetë"
+    },
+    "errors": {
+      "name": "Jepini turneut një emër.",
+      "date": "Zgjidhni një datë.",
+      "maxEntries": "Vendet duhet të jenë nga 2 deri në 64.",
+      "fee": "Tarifa nuk mund të jetë negative.",
+      "entryName": "Shkruani një emër.",
+      "tooFew": "Duhen të paktën 2 lojtarë për shortin.",
+      "nextPlayed": "Ndeshja tjetër ka tashmë rezultat. Fshijeni atë më parë.",
+      "failed": "Ruajtja dështoi. Provoni përsëri.",
+      "notSignedIn": "Ju lutemi hyni më parë.",
+      "closed": "Regjistrimet janë mbyllur.",
+      "full": "Ky turne është plot.",
+      "already": "Jeni regjistruar tashmë."
+    }
   }
 }

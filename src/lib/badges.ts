@@ -2,6 +2,7 @@
 // every screen. Combine with BADGE: className={`${BADGE} ${BOOKING_STATUS_TONE[s]}`}
 
 import type { BookingStatus, Level, MemberStatus, Surface } from "@/types/database";
+import type { TournamentStatus } from "@/lib/tournament";
 
 /** Shape of every pill. */
 export const BADGE = "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium";
@@ -51,6 +52,13 @@ export const SURFACE_TONE: Partial<Record<Surface, string>> = {
   grass: "bg-brand-100 text-brand-800",
   artificial_grass: "bg-brand-50 text-brand-700",
   carpet: "bg-stone-100 text-stone-700",
+};
+
+export const TOURNAMENT_STATUS_TONE: Record<TournamentStatus, string> = {
+  open: "bg-brand-100 text-brand-800",
+  closed: "bg-accent-100 text-accent-800",
+  started: "bg-court-100 text-court-800",
+  finished: "bg-ink-100 text-ink-600",
 };
 
 /** For values not in the lists above. */

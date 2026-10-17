@@ -1,0 +1,145 @@
+"use client";
+
+import { useState, useTransition } from "react";
+import { useTranslations } from "next-intl";
+import Modal from "@/components/ui/Modal";
+import { SPORTS } from "@/lib/labels";
+import { MAX_ENTRIES_CHOICES } from "@/lib/tournament";
+import { useLabels } from "@/hooks/useLabels";
+import type { Tournament } from "@/types/database";
+import type { TournamentInput } from "@/app/[locale]/admin/tournaments/actions";
+
+/** Create or edit a tournament. `onSave` returns an error key, if any. */
+export default function TournamentForm({
+  initial,
+  onSave,
+  onClose,
+}: {
+  initial?: Tournament;
+  onSave: (input: TournamentInput) => Promise<{ error?: string }>;
+  onClose: () => void;
+}) {
+  const t = useTranslations("tournaments");
+  const labels = useLabels();
+  const [pending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+  const [form, setForm] = useState({
+    name: initial?.name ?? "",
+    sport: initial?.sport ?? "tennis",
+    starts_on: initial?.starts_on ?? "",
+    max_entries: String(initial?.max_entries ?? 16),
+    entry_fee: initial?.entry_fee != null ? String(initial.entry_fee) : "",
+    description: initial?.description ?? "",
+  });
+  const set = (key: keyof typeof form) => (value: string) => setForm((f) => ({ ...f, [key]: value }));
+
+  // Keep a custom number of places that isn't in the usual list.
+  const placeChoices = Array.from(new Set([...MAX_ENTRIES_CHOICES, Number(form.max_entries)])).sort(
+    (a, b) => a - b,
+  );
+
+  const save = () => {
+    setError(null);
+    startTransition(async () => {
+      const result = await onSave({
+        name: form.name,
+        sport: form.sport,
+        starts_on: form.starts_on,
+        max_entries: Number(form.max_entries),
+        entry_fee: form.entry_fee === "" ? null : Number(form.entry_fee),
+        description: form.description,
+      });
+      if (result.error) setError(t(`errors.${result.error}`));
+      else onClose();
+    });
+  };
+
+  return (
+    <Modal open onClose={onClose}>
+      <Modal.Content className="max-h-[90vh] max-w-lg overflow-y-auto">
+        <Modal.Header>{initial ? t("edit") : t("new")}</Modal.Header>
+        <Modal.Body>
+          {error && (
+            <div className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-xs text-red-600">{error}</div>
+          )}
+          <Modal.Field label={t("fields.name")} required>
+            <input
+              className="input"
+              placeholder={t("fields.namePlaceholder")}
+              value={form.name}
+              onChange={(e) => set("name")(e.target.value)}
+            />
+          </Modal.Field>
+          <Modal.Grid>
+            <Modal.Field label={t("fields.sport")}>
+              <select className="input" value={form.sport} onChange={(e) => set("sport")(e.target.value)}>
+                {SPORTS.map((s) => (
+                  <option key={s} value={s}>
+                    {labels.sport(s)}
+                  </option>
+                ))}
+              </select>
+            </Modal.Field>
+            <Modal.Field label={t("fields.date")} required>
+              <input
+                className="input"
+                type="date"
+                value={form.starts_on}
+                onChange={(e) => set("starts_on")(e.target.value)}
+              />
+            </Modal.Field>
+          </Modal.Grid>
+          <Modal.Grid>
+            <Modal.Field label={t("fields.maxEntries")}>
+              <select
+                className="input"
+                value={form.max_entries}
+                onChange={(e) => set("max_entries")(e.target.value)}
+              >
+                {placeChoices.map((n) => (
+                  <option key={n} value={n}>
+                    {n}
+                  </option>
+                ))}
+              </select>
+            </Modal.Field>
+            <Modal.Field label={t("fields.entryFee")}>
+              <input
+                className="input"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="0"
+                value={form.entry_fee}
+                onChange={(e) => set("entry_fee")(e.target.value)}
+              />
+            </Modal.Field>
+          </Modal.Grid>
+          <p className="-mt-1 text-xs text-ink-400">{t("fields.entryFeeHint")}</p>
+          <Modal.Field label={t("fields.description")}>
+            <textarea
+              className="input resize-none"
+              rows={3}
+              placeholder={t("fields.descriptionPlaceholder")}
+              value={form.description}
+              onChange={(e) => set("description")(e.target.value)}
+            />
+          </Modal.Field>
+        </Modal.Body>
+        <Modal.Footer>
+          <button type="button" onClick={onClose} className="btn-secondary flex-1">
+            {t("cancel")}
+          </button>
+          <button
+            type="button"
+            onClick={save}
+            disabled={pending}
+            className="btn-primary flex-1 justify-center disabled:opacity-50"
+          >
+            {pending ? t("saving") : t("save")}
+          </button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
+  );
+}

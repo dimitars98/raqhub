@@ -371,11 +371,13 @@
       "timetable": "Timetable",
       "myBookings": "My bookings",
       "share": "Share with players",
-      "owner": "Clubs & payments"
+      "owner": "Clubs & payments",
+      "tournaments": "Tournaments"
     },
     "share": "Share",
     "ownerGroup": "ServeTime",
-    "ownerPage": "Clubs & payments"
+    "ownerPage": "Clubs & payments",
+    "tournaments": "Tournaments"
   },
   "members": {
     "title": "Members",
@@ -1573,5 +1575,102 @@
     },
     "indoor": "Indoor",
     "outdoor": "Outdoor"
+  },
+  "tournaments": {
+    "title": "Tournaments",
+    "subtitle": "Run a knockout tournament: collect sign-ups, make the draw, enter results.",
+    "new": "New tournament",
+    "empty": "No tournaments yet.",
+    "emptyHint": "Create one, share the link, and players can sign up online.",
+    "edit": "Edit",
+    "delete": "Delete tournament",
+    "deleteConfirm": "Delete this tournament with all its players and results?",
+    "save": "Save",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "Autumn Open",
+      "sport": "Sport",
+      "date": "Date",
+      "maxEntries": "Places",
+      "entryFee": "Entry fee (€)",
+      "entryFeeHint": "Leave empty if it’s free. Players pay at the club.",
+      "description": "Details for players",
+      "descriptionPlaceholder": "Format, prizes, what to bring…"
+    },
+    "status": {
+      "open": "Sign-ups open",
+      "closed": "Sign-ups closed",
+      "started": "In progress",
+      "finished": "Finished"
+    },
+    "entriesCount": "{n} of {max} places taken",
+    "free": "Free entry",
+    "fee": "€{fee} entry",
+    "manage": {
+      "back": "All tournaments",
+      "publicPage": "Public page",
+      "copyLink": "Copy link",
+      "copied": "Copied",
+      "closeSignups": "Close sign-ups",
+      "openSignups": "Reopen sign-ups",
+      "entries": "Players",
+      "addEntry": "Add",
+      "addPlaceholder": "Name, or “Ana / Marko” for doubles",
+      "remove": "Remove",
+      "noEntries": "No one has signed up yet. Share the link, or add names here.",
+      "signedUpOnline": "signed up online",
+      "draw": "Make the draw",
+      "drawHint": "Players are placed at random. If the number doesn’t fit the bracket, some go straight to round 2 (a bye).",
+      "tooFewHint": "At least 2 players are needed for a draw.",
+      "redraw": "Redo the draw",
+      "redrawConfirm": "Throw away the draw and all results?",
+      "bracket": "Draw",
+      "pickWinner": "Tap a match to enter the result.",
+      "result": "Result",
+      "winner": "Winner",
+      "score": "Score (optional)",
+      "scorePlaceholder": "6-4 6-3",
+      "saveResult": "Save result",
+      "clearResult": "Clear",
+      "champion": "Winner: {name}"
+    },
+    "rounds": {
+      "final": "Final",
+      "semi": "Semi-finals",
+      "quarter": "Quarter-finals",
+      "roundOf": "Round of {n}"
+    },
+    "bye": "Bye",
+    "tbd": "To be decided",
+    "public": {
+      "signUp": "Sign up",
+      "signUpTitle": "Sign up for this tournament",
+      "nameOnDraw": "Name on the draw",
+      "nameHint": "For doubles, write both names, e.g. “Ana / Marko”.",
+      "signInToSignUp": "Sign in to sign up",
+      "youreIn": "You’re signed up as {name}.",
+      "withdraw": "Withdraw",
+      "full": "This tournament is full.",
+      "closedNote": "Sign-ups are closed.",
+      "players": "Players ({n})",
+      "noPlayers": "No one has signed up yet. Be the first!",
+      "upcoming": "Tournaments"
+    },
+    "errors": {
+      "name": "Give the tournament a name.",
+      "date": "Pick a date.",
+      "maxEntries": "Places must be between 2 and 64.",
+      "fee": "The entry fee can’t be negative.",
+      "entryName": "Type a name.",
+      "tooFew": "At least 2 players are needed for a draw.",
+      "nextPlayed": "The next match already has a result. Clear that one first.",
+      "failed": "Couldn’t save. Please try again.",
+      "notSignedIn": "Please sign in first.",
+      "closed": "Sign-ups are closed.",
+      "full": "This tournament is full.",
+      "already": "You’re already signed up."
+    }
   }
 }

@@ -21,7 +21,8 @@ type TitleKey =
   | "myBookings"
   | "profile"
   | "membership"
-  | "owner";
+  | "owner"
+  | "tournaments";
 
 // URL segment → translation key
 const TITLE_KEYS: Record<string, TitleKey> = {
@@ -40,6 +41,7 @@ const TITLE_KEYS: Record<string, TitleKey> = {
   profile: "profile",
   membership: "membership",
   owner: "owner",
+  tournaments: "tournaments",
 };
 
 const iconButton =
@@ -51,8 +53,13 @@ export default function DashboardTopbar() {
   const tc = useTranslations("common");
   const { toggle } = useSidebar();
 
-  const segment = pathname.split("/").filter(Boolean).pop() ?? "";
-  const titleKey = TITLE_KEYS[segment];
+  // The deepest part of the path with a title: /admin/tournaments/<id> → "tournaments".
+  const titleKey = pathname
+    .split("/")
+    .filter(Boolean)
+    .reverse()
+    .map((segment) => TITLE_KEYS[segment])
+    .find(Boolean);
   const title = titleKey ? t(titleKey) : "ServeTime";
 
   return (
