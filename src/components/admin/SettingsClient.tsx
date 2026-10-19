@@ -6,9 +6,9 @@ import {
   Building2,
   Clock,
   CalendarOff,
-  CreditCard,
-  Bell,
-  Shield,
+  Database,
+  Download,
+  Mail,
   ChevronRight,
   Save,
   Upload,
@@ -35,6 +35,7 @@ import {
 import ProfileAvatarUpload from "@/components/profile/ProfileAvatarUpload";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { initials } from "@/lib/avatar";
+import { SALES_EMAIL } from "@/lib/plans";
 
 export type SettingsClub = Pick<
   Club,
@@ -66,15 +67,12 @@ interface Props {
 }
 
 
-// Sections marked "soon" are a preview: nothing in them is saved yet.
 const SECTIONS = [
-  { id: "club", icon: Building2, soon: false },
-  { id: "hours", icon: Clock, soon: false },
-  { id: "profile", icon: User, soon: false },
-  { id: "booking", icon: CalendarOff, soon: false },
-  { id: "payments", icon: CreditCard, soon: true },
-  { id: "notifications", icon: Bell, soon: true },
-  { id: "danger", icon: Shield, soon: true },
+  { id: "club", icon: Building2 },
+  { id: "hours", icon: Clock },
+  { id: "profile", icon: User },
+  { id: "booking", icon: CalendarOff },
+  { id: "data", icon: Database },
 ];
 
 export default function SettingsClient({ club, profile, initialTab }: Props) {
@@ -134,25 +132,18 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
         <p className="text-[11px] font-medium text-[#6e7f65] px-3 pt-2 pb-1 uppercase tracking-[0.06em]">
           {t("settings")}
         </p>
-        {SECTIONS.map(({ id, icon: Icon, soon }) => (
+        {SECTIONS.map(({ id, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActive(id)}
             className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] transition-colors mb-0.5 ${
               active === id
                 ? "bg-[#f3fbde] text-[#2e4d03] font-medium"
-                : id === "danger"
-                  ? "text-red-700 hover:bg-red-50"
-                  : "text-[#3d4f35] hover:bg-[#f4f6f2]"
+                : "text-[#3d4f35] hover:bg-[#f4f6f2]"
             }`}
           >
             <Icon size={14} strokeWidth={2} className="shrink-0" />
             <span className="flex-1 text-left">{t(`sections.${id}`)}</span>
-            {soon && (
-              <span className="rounded bg-[#f4f6f2] px-1.5 py-0.5 text-[10px] font-medium text-[#6e7f65]">
-                {t("soon")}
-              </span>
-            )}
             {active === id && (
               <ChevronRight size={13} className="text-[#7aad12]" />
             )}
@@ -455,140 +446,41 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
           </Section>
         )}
 
-        {/* Payments */}
-        {active === "payments" && (
-          <Section
-            title={t("payments")}
-            soon
-            description={t("configurePricingCurrencyAndPayment")}
-          >
-            <div className="grid grid-cols-2 gap-3">
-              <Field label={t("currency")}>
-                <select className="input">
-                  <option>EUR — €</option>
-                  <option>USD — $</option>
-                  <option>MKD — ден</option>
-                  <option>GBP — £</option>
-                </select>
-              </Field>
-              <Field label={t("taxRate")}>
-                <input className="input" type="number" defaultValue={18} />
-              </Field>
-            </div>
-
-            <Field label={t("stripeIntegration")}>
-              <div className="flex items-center justify-between p-4 bg-[#f4f6f2] border border-[#e8ede4] rounded-xl">
-                <div>
-                  <p className="text-[13px] font-medium text-[#111c0a]">
-                    {t("stripe")}
-                  </p>
-                  <p className="text-[12px] text-[#6e7f65] mt-0.5">
-                    {t("notConnected")}
-                  </p>
-                </div>
-                <button className="btn-primary text-[13px]">
-                  {t("connectStripe")}
-                </button>
-              </div>
-            </Field>
-
-            <Field label={t("onlinePayments")}>
-              <Toggle
-                label={t("requirePaymentAtTimeOf")}
-                defaultChecked
-              />
-            </Field>
-
-            <Field label={t("refunds")}>
-              <Toggle
-                label={t("allowAutomaticRefundsOnCancellation")}
-                defaultChecked
-              />
-            </Field>
-
-            <SaveButton soon />
-          </Section>
-        )}
-
-        {/* Notifications */}
-        {active === "notifications" && (
-          <Section
-            title={t("notifications")}
-            soon
-            description={t("chooseWhichEmailNotificationsAre")}
-          >
-            <div className="flex flex-col divide-y divide-[#e8ede4]">
-              {[
-                {
-                  label: t("bookingConfirmed"),
-                  sub: t("sentToMemberWhenA"),
-                },
-                {
-                  label: t("bookingCancelled"),
-                  sub: t("sentWhenABookingIs"),
-                },
-                {
-                  label: t("bookingReminder"),
-                  sub: t("sent24hBeforeTheBooking"),
-                },
-                {
-                  label: t("newMemberJoined"),
-                  sub: t("sentToAdminWhenA"),
-                },
-                {
-                  label: t("paymentReceived"),
-                  sub: t("sentToMemberAfterSuccessful"),
-                },
-                {
-                  label: t("cancellationRefundIssued"),
-                  sub: t("sentWhenARefundIs"),
-                },
-              ].map(({ label, sub }) => (
-                <div
-                  key={label}
-                  className="flex items-center justify-between py-3.5"
+        {/* Your data */}
+        {active === "data" && (
+          <Section title={t("data.title")} description={t("data.description")}>
+            <DataRow
+              title={t("data.bookings")}
+              description={t("data.bookingsDesc")}
+              action={
+                <a href="/api/export?type=bookings" download className={DATA_BUTTON}>
+                  <Download size={13} /> {t("data.download")}
+                </a>
+              }
+            />
+            <DataRow
+              title={t("data.members")}
+              description={t("data.membersDesc")}
+              action={
+                <a href="/api/export?type=members" download className={DATA_BUTTON}>
+                  <Download size={13} /> {t("data.download")}
+                </a>
+              }
+            />
+            <DataRow
+              danger
+              title={t("data.deleteTitle")}
+              description={t("data.deleteDesc")}
+              action={
+                <a
+                  href={`mailto:${SALES_EMAIL}?subject=${encodeURIComponent(
+                    t("data.deleteSubject", { name: club.name }),
+                  )}`}
+                  className={`${DATA_BUTTON} border-[#fecaca] bg-[#fee2e2] text-[#b91c1c] hover:bg-[#fecaca]`}
                 >
-                  <div>
-                    <p className="text-[13px] font-medium text-[#111c0a]">
-                      {label}
-                    </p>
-                    <p className="text-[12px] text-[#6e7f65] mt-0.5">{sub}</p>
-                  </div>
-                  <ToggleSwitch defaultChecked />
-                </div>
-              ))}
-            </div>
-            <Field label={t("replyToEmail")}>
-              <input className="input" defaultValue={club.email ?? ""} />
-            </Field>
-            <SaveButton soon />
-          </Section>
-        )}
-
-        {/* Danger Zone */}
-        {active === "danger" && (
-          <Section
-            title={t("dangerZone")}
-            soon
-            description={t("irreversibleActionsProceedWithCaution")}
-          >
-            <DangerCard
-              title={t("exportAllData")}
-              description={t("downloadAFullExportOf")}
-              action={t("exportData")}
-              variant="default"
-            />
-            <DangerCard
-              title={t("clearAllBookings")}
-              description={t("permanentlyDeleteAllBookingHistory")}
-              action={t("clearBookings")}
-              variant="warning"
-            />
-            <DangerCard
-              title={t("deleteClub")}
-              description={t("permanentlyDeleteYourClubAnd")}
-              action={t("deleteClub2")}
-              variant="danger"
+                  <Mail size={13} /> {t("data.deleteAction")}
+                </a>
+              }
             />
           </Section>
         )}
@@ -602,26 +494,17 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
 function Section({
   title,
   description,
-  soon = false,
   children,
 }: {
   title: string;
   description: string;
-  /** A preview of a setting that isn't saved yet. */
-  soon?: boolean;
   children: React.ReactNode;
 }) {
-  const t = useTranslations("settingsPage");
   return (
     <div className="bg-white border border-[#e8ede4] rounded-2xl p-7">
       <div className="mb-6 pb-5 border-b border-[#e8ede4]">
         <h2 className="text-[18px] font-semibold text-[#111c0a]">{title}</h2>
         <p className="text-[13px] text-[#6e7f65] mt-1">{description}</p>
-        {soon && (
-          <p className="mt-3 rounded-lg bg-[#fdfae0] px-3 py-2 text-[12px] text-[#8a7800]">
-            {t("comingSoonTheseSettingsAre")}
-          </p>
-        )}
       </div>
       <div className="flex flex-col gap-5">{children}</div>
     </div>
@@ -640,22 +523,6 @@ function Field({
       <label className="text-[13px] font-medium text-[#3d4f35]">{label}</label>
       {children}
     </div>
-  );
-}
-
-function Toggle({
-  label,
-  defaultChecked,
-}: {
-  label: string;
-  defaultChecked?: boolean;
-}) {
-  const [checked, setChecked] = useState(defaultChecked ?? false);
-  return (
-    <label className="flex items-center gap-2.5 cursor-pointer">
-      <ToggleSwitch checked={checked} onChange={setChecked} />
-      <span className="text-[13px] text-[#3d4f35]">{label}</span>
-    </label>
   );
 }
 
@@ -690,19 +557,12 @@ function ToggleSwitch({
   );
 }
 
-function SaveButton({
-  onSave,
-  soon = false,
-}: {
-  onSave?: () => Promise<SaveResult>;
-  soon?: boolean;
-}) {
+function SaveButton({ onSave }: { onSave: () => Promise<SaveResult> }) {
   const t = useTranslations("settingsPage");
   const [result, setResult] = useState<SaveResult | null>(null);
   const [pending, start] = useTransition();
 
   const click = () => {
-    if (!onSave) return;
     setResult(null);
     start(async () => setResult(await onSave()));
   };
@@ -712,7 +572,7 @@ function SaveButton({
       <button
         type="button"
         onClick={click}
-        disabled={soon || pending}
+        disabled={pending}
         className="btn-primary flex items-center gap-1.5 text-[13px] disabled:cursor-not-allowed disabled:opacity-40"
       >
         <Save size={13} /> {pending ? t("saving") : t("saveChanges")}
@@ -736,45 +596,31 @@ function StatusLine({ result }: { result: SaveResult | null }) {
   );
 }
 
-function DangerCard({
+const DATA_BUTTON =
+  "inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg border border-[#d0d9c9] bg-[#f4f6f2] px-4 py-1.5 text-[13px] font-medium text-[#3d4f35] transition-colors hover:bg-[#e8ede4]";
+
+function DataRow({
   title,
   description,
   action,
-  variant,
+  danger = false,
 }: {
   title: string;
   description: string;
-  action: string;
-  variant: "default" | "warning" | "danger";
+  action: React.ReactNode;
+  danger?: boolean;
 }) {
-  const styles = {
-    default: {
-      wrap: "bg-white border-[#e8ede4]",
-      btn: "border-[#d0d9c9] bg-[#f4f6f2] text-[#3d4f35] hover:bg-[#e8ede4]",
-    },
-    warning: {
-      wrap: "bg-[#fffbf5] border-[#fcd9a8]",
-      btn: "border-[#fcd9a8] bg-[#fef3e8] text-[#92400e] hover:bg-[#fde8c8]",
-    },
-    danger: {
-      wrap: "bg-[#fff5f5] border-[#fecaca]",
-      btn: "border-[#fecaca] bg-[#fee2e2] text-[#b91c1c] hover:bg-[#fecaca]",
-    },
-  }[variant];
-
   return (
     <div
-      className={`flex items-center justify-between p-4 rounded-xl border ${styles.wrap}`}
+      className={`flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between ${
+        danger ? "border-[#fecaca] bg-[#fff5f5]" : "border-[#e8ede4] bg-white"
+      }`}
     >
-      <div className="flex-1 min-w-0 mr-4">
+      <div className="min-w-0 flex-1">
         <p className="text-[13px] font-medium text-[#111c0a]">{title}</p>
-        <p className="text-[12px] text-[#6e7f65] mt-0.5">{description}</p>
+        <p className="mt-0.5 text-[12px] text-[#6e7f65]">{description}</p>
       </div>
-      <button
-        className={`flex-shrink-0 px-4 py-1.5 rounded-lg text-[13px] font-medium border transition-colors ${styles.btn}`}
-      >
-        {action}
-      </button>
+      {action}
     </div>
   );
 }

@@ -33,6 +33,8 @@ const sports = [
  *
  * tone="dark"  → glass pill, for use over photos
  * tone="light" → ink pill, for use on white surfaces
+ *
+ * It takes the visitor to the features further down the page.
  */
 function ServeButton({
   tone = "dark",
@@ -47,8 +49,8 @@ function ServeButton({
       : "border-[#111c0a] bg-[#111c0a] text-white";
 
   return (
-    <button
-      type="button"
+    <a
+      href="#features"
       className={`group/btn inline-flex w-fit items-center gap-3 rounded-full border py-1.5 pl-5 pr-1.5 text-sm font-semibold transition-[background-color,border-color,color,transform] duration-300 ease-out hover:border-[#a8d832] hover:bg-[#a8d832] hover:text-[#111c0a] active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8d832] motion-reduce:transition-none ${surface}`}
     >
       {children}
@@ -71,7 +73,7 @@ function ServeButton({
           className="absolute z-10 -translate-x-[160%] translate-y-[160%] transition-transform duration-300 ease-out group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 motion-reduce:transition-none"
         />
       </span>
-    </button>
+    </a>
   );
 }
 

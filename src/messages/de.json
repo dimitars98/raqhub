@@ -69,13 +69,13 @@
         "pre": "Buchen, ",
         "mark": "wie Sie wollen",
         "post": "",
-        "body": "Platzverfügbarkeit in Echtzeit, sofortige Bestätigungen und keine Doppelbuchungen. Ein Buchungserlebnis, das Ihre Mitglieder auf jedem Gerät lieben.",
+        "body": "Freie Plätze in Echtzeit, sofortige Bestätigung und keine Doppelbuchungen. Spieler buchen vom Handy, telefonische und spontane Buchungen tragen Sie selbst ein.",
         "cta": "Buchungsfunktionen ansehen",
         "points": [
-          "Zeitplan per Drag-and-drop",
-          "Regeln für Serien- und Blockbuchungen",
-          "Automatische Warteliste",
-          "Buchungsfenster je Mitgliedschaft"
+          "Ein Wochenplan für jeden Platz",
+          "Telefon- und Vor-Ort-Buchungen im selben Plan",
+          "Ihre Regeln: wie weit im Voraus, wie viele pro Tag, bis wann stornieren",
+          "Wer immer wieder nicht erscheint, wird automatisch pausiert"
         ]
       },
       "membership": {
@@ -83,13 +83,13 @@
         "pre": "Komplette ",
         "mark": "Mitglieder",
         "post": "verwaltung",
-        "body": "Alle Kontakte an einem Ort. Verfolgen Sie Mitgliedsstatus, Zahlungen, Aktivität und Spielstärke – mit Werkzeugen, um in Kontakt zu bleiben und Mitglieder zu halten.",
+        "body": "Alle Mitglieder an einem Ort. Sie sehen Tarif, Kontaktdaten und wann die Mitgliedschaft endet, und die Erinnerungs-E-Mails übernehmen das Nachfassen.",
         "cta": "Mitgliederfunktionen ansehen",
         "points": [
-          "Flexible Mitgliedschaften",
-          "Automatische Verlängerungserinnerungen",
-          "Spielerprofile mit Spielstärke",
-          "Massen-E-Mail und SMS"
+          "Monats-, Jahres- oder Einmaltarife",
+          "Buchungsrabatte für Mitglieder",
+          "E-Mails zur Verlängerung",
+          "Wessen Mitgliedschaft in den nächsten 30 Tagen endet"
         ]
       },
       "coaching": {
@@ -97,13 +97,13 @@
         "pre": "Volle ",
         "mark": "Trainerkalender",
         "post": "",
-        "body": "Spieler finden und buchen Trainerstunden direkt. Verwalten Sie Verfügbarkeit, Stundenarten, Gruppen und Camps – und füllen Sie jede Stunde automatisch.",
+        "body": "Spieler sehen Ihre Trainer und buchen Stunden direkt. Jede Stunde hält ihren Platz frei, Trainerstunde und Platzbuchung kommen sich nie in die Quere.",
         "cta": "Trainingsfunktionen ansehen",
         "points": [
-          "Einzel- und Gruppenstunden planen",
-          "Trainerprofile und Bewertungen",
-          "Automatische Trainerabrechnung",
-          "Bestätigungen und Erinnerungen"
+          "Trainerprofile mit Niveau und Preis",
+          "Spieler buchen Stunden online",
+          "Stunden halten den Platz automatisch frei",
+          "Bestätigungs- und Erinnerungs-E-Mails"
         ]
       },
       "analytics": {
@@ -111,13 +111,13 @@
         "pre": "",
         "mark": "Datenbasierte",
         "post": " Entscheidungen",
-        "body": "Sehen Sie genau, wie Ihr Club läuft. Umsatz nach Platz, Trainer oder Mitgliedschaft. Erkennen Sie Stoßzeiten und handeln Sie auf Basis echter Zahlen.",
+        "body": "Auf einen Blick sehen, wie Ihr Club läuft: Umsatz im Zeitverlauf, Ihre Stoßzeiten und wie voll jeder Platz ist.",
         "cta": "Statistiken ansehen",
         "points": [
-          "Umsatz nach Platz, Trainer und Zeitraum",
-          "Heatmaps der Platzauslastung",
-          "Kündigungen im Blick",
-          "Exportierbare Finanzberichte"
+          "Umsatz im Zeitverlauf und nach Sportart",
+          "Heatmap der Stoßzeiten",
+          "Buchungen und Umsatz pro Platz",
+          "Ein Wochenbericht per E-Mail"
         ]
       }
     },
@@ -773,10 +773,11 @@
   },
   "hero": {
     "stats": {
-      "clubs": "Clubs nutzen ServeTime",
-      "bookings": "Verarbeitete Buchungen",
-      "satisfaction": "Kundenzufriedenheit",
-      "setup": "Durchschnittliche Einrichtungszeit"
+      "trial": "Gratis testen, ohne Karte",
+      "daysSuffix": "Tage",
+      "commission": "Provision auf Buchungen",
+      "sports": "Sportarten: Tennis, Padel, Pickleball",
+      "languages": "Sprachen, jeder Spieler wählt selbst"
     },
     "title1": "Füllen Sie Ihre Plätze.",
     "title2": "Lassen Sie Ihren Club wachsen.",
@@ -824,7 +825,7 @@
   },
   "howItWorks": {
     "label": "Einfache Einrichtung",
-    "title": "In 30 Minuten startklar",
+    "title": "Am selben Tag startklar",
     "subtitle": "Kein IT-Team nötig. Die Einrichtung dauert Minuten, nicht Tage.",
     "steps": {
       "create": {
@@ -837,14 +838,14 @@
       },
       "run": {
         "title": "Und es läuft von selbst",
-        "body": "Buchungen, Zahlungen, Erinnerungen, Wartelisten – alles automatisch. Kümmern Sie sich um Ihre Community statt um Tabellen."
+        "body": "Buchungen, Bestätigungen und Erinnerungen laufen von selbst. Kümmern Sie sich um Ihre Spieler, nicht um Tabellen."
       }
     }
   },
   "sports": {
     "padel": {
       "title": "Padel",
-      "description": "Die am schnellsten wachsende Racketsportart Europas. Geben Sie Ihren Padel-Plätzen eigene Zeitpläne, Slotlängen und Preise."
+      "description": "Europas am schnellsten wachsender Rückschlagsport. Jeder Padel-Platz bekommt seinen eigenen Preis und läuft neben Ihren anderen Plätzen."
     },
     "tennis": {
       "title": "Tennis",
@@ -852,36 +853,37 @@
     },
     "pickleball": {
       "title": "Pickleball",
-      "description": "Kurze Spiele und schneller Wechsel. Bieten Sie kürzere Slots an, damit mehr Spieler pro Stunde auf den Platz kommen."
+      "description": "Kurze Spiele, schneller Wechsel. Ihre Pickleball-Plätze laufen neben Tennis und Padel, jeder mit eigenem Preis."
     },
     "coaching": {
       "title": "Training",
-      "description": "Privatstunden, Gruppentrainings und Jugendprogramme – direkt in den Kalender Ihrer Trainer gebucht."
+      "description": "Trainerstunden landen direkt im Kalender Ihrer Trainer, der Platz wird dafür freigehalten."
     },
     "learnMore": "Mehr erfahren",
     "eyebrow": "Jeder Platz",
     "intro": "Tennis, Padel oder Pickleball – ServeTime verwaltet alles. Richten Sie jeden Platz so ein, wie Ihr Club spielt, und verwalten Sie alle Buchungen, Mitglieder und Stunden in einem Dashboard."
   },
   "featureCards": {
-    "label": "Für jede Rolle gemacht",
+    "label": "Für Clubs gemacht",
     "title1": "Alles, was Ihr Club braucht,",
     "title2": "nichts, was er nicht braucht",
     "subtitle": "Ein klar fokussiertes Set an Werkzeugen, die wirklich zusammenarbeiten – keine aufgeblähte Suite, die niemand nutzt.",
     "scheduling": {
       "title": "Intelligente Planung, keine Konflikte",
-      "body": "Automatische Konflikterkennung, Pufferzeiten, Sperrtage und rollierende Buchungsfenster – der Kalender läuft von selbst.",
+      "body": "Doppelbuchungen sind ausgeschlossen, Buchungen bleiben in Ihren Öffnungszeiten, und Sie entscheiden, wie weit im Voraus gebucht werden kann.",
       "today": "Heute",
       "available": "Frei",
       "blocked": "Gesperrt"
     },
     "reminders": {
       "title": "Automatische Erinnerungen",
-      "body": "SMS- und E-Mail-Erinnerungen gehen vor jeder Buchung automatisch raus. Weniger Nichterscheinen, ohne einen Finger zu rühren.",
+      "body": "Spieler bekommen beim Buchen eine E-Mail und am Vortag eine Erinnerung. Weniger vergessene Buchungen, ganz ohne Aufwand.",
       "court": "Platz 3 · morgen 10:00",
       "lesson": "Stunde mit Sara F. · heute",
       "before24": "24 Std. vorher",
-      "before2": "2 Std. vorher",
-      "sent": "Erinnerung gesendet"
+      "sent": "Erinnerung gesendet",
+      "confirmed": "Buchung bestätigt",
+      "instant": "Sofort"
     },
     "payments": {
       "title": "Jede Zahlung erfasst",
@@ -895,15 +897,17 @@
       "c2": "Platz 2 – Hartplatz",
       "c3": "Platz 3 – Halle"
     },
-    "team": {
-      "title": "Ihr ganzes Team, ein Dashboard",
-      "body": "Laden Sie mehrere Admins und Trainer ein. Mit Rollenrechten sieht jeder genau das, was er braucht – und nichts anderes.",
-      "headAdmin": "Hauptadmin",
-      "fullAccess": "Voller Zugriff",
-      "coach": "Trainer",
-      "coachingOnly": "Nur Training",
-      "receptionist": "Empfang",
-      "bookingsOnly": "Nur Buchungen"
+    "page": {
+      "title": "Die eigene Buchungsseite Ihres Clubs",
+      "body": "Jeder Club bekommt eine eigene Seite und einen Link. Teilen Sie ihn auf Instagram oder WhatsApp, oder drucken Sie das Poster mit QR-Code für die Rezeption.",
+      "link": "Ihr Buchungslink",
+      "linkSub": "Für Instagram, WhatsApp und Ihre Website",
+      "poster": "Poster zum Ausdrucken",
+      "posterSub": "Mit QR-Code zum Scannen",
+      "languages": "6 Sprachen",
+      "languagesSub": "Jeder Spieler wählt seine eigene",
+      "tournaments": "Turniere",
+      "tournamentsSub": "Anmeldung und Live-Auslosung"
     }
   },
   "pricing": {
@@ -1001,9 +1005,7 @@
       "hours": "Öffnungszeiten",
       "profile": "Ihr Profil",
       "booking": "Buchungsregeln",
-      "payments": "Zahlungen",
-      "notifications": "Benachrichtigungen",
-      "danger": "Gefahrenbereich"
+      "data": "Ihre Daten"
     },
     "days": [
       "Montag",
@@ -1047,52 +1049,25 @@
     "cancellingOnline": "Online-Stornierung",
     "bookingsPerPlayerPerDay": "Buchungen pro Spieler und Tag",
     "repeatNoShows": "Wiederholtes Nichterscheinen",
-    "payments": "Zahlungen",
-    "configurePricingCurrencyAndPayment": "Preise, Währung und Zahlungsarten einstellen.",
-    "currency": "Währung",
-    "taxRate": "Steuersatz (%)",
-    "stripeIntegration": "Stripe-Anbindung",
-    "onlinePayments": "Online-Zahlungen",
-    "requirePaymentAtTimeOf": "Zahlung bei der Buchung verlangen",
-    "refunds": "Rückerstattungen",
-    "allowAutomaticRefundsOnCancellation": "Automatische Rückerstattung bei rechtzeitiger Stornierung erlauben",
-    "notifications": "Benachrichtigungen",
-    "chooseWhichEmailNotificationsAre": "Wählen Sie, welche E-Mails automatisch gesendet werden.",
-    "replyToEmail": "Antwort-E-Mail",
-    "dangerZone": "Gefahrenbereich",
-    "irreversibleActionsProceedWithCaution": "Unumkehrbare Aktionen. Bitte mit Vorsicht.",
-    "exportAllData": "Alle Daten exportieren",
-    "downloadAFullExportOf": "Laden Sie einen vollständigen Export Ihrer Clubdaten herunter, inklusive Buchungen, Mitglieder und Zahlungen.",
-    "exportData": "Daten exportieren",
-    "clearAllBookings": "Alle Buchungen löschen",
-    "permanentlyDeleteAllBookingHistory": "Löscht den gesamten Buchungsverlauf endgültig. Das kann nicht rückgängig gemacht werden.",
-    "clearBookings": "Buchungen löschen",
-    "deleteClub": "Club löschen",
-    "permanentlyDeleteYourClubAnd": "Löscht Ihren Club und alle zugehörigen Daten endgültig. Diese Aktion ist unumkehrbar.",
-    "deleteClub2": "Club löschen",
-    "bookingConfirmed": "Buchung bestätigt",
-    "sentToMemberWhenA": "An das Mitglied, wenn eine Buchung bestätigt wird",
-    "bookingCancelled": "Buchung storniert",
-    "sentWhenABookingIs": "Wenn eine Buchung von einer Seite storniert wird",
-    "bookingReminder": "Buchungserinnerung",
-    "sent24hBeforeTheBooking": "24 Std. vor Beginn der Buchung",
-    "newMemberJoined": "Neues Mitglied",
-    "sentToAdminWhenA": "An den Admin, wenn sich ein neues Mitglied registriert",
-    "paymentReceived": "Zahlung erhalten",
-    "sentToMemberAfterSuccessful": "An das Mitglied nach erfolgreicher Zahlung",
-    "cancellationRefundIssued": "Rückerstattung veranlasst",
-    "sentWhenARefundIs": "Wenn eine Rückerstattung bearbeitet wird",
     "settings": "Einstellungen",
-    "soon": "Bald",
     "to": "bis",
     "closed": "Geschlossen",
     "clickTheCameraToUpload": "Klicken Sie auf die Kamera, um ein Bild hochzuladen.",
-    "stripe": "Stripe",
-    "notConnected": "Nicht verbunden",
-    "connectStripe": "Stripe verbinden",
-    "comingSoonTheseSettingsAre": "Bald verfügbar. Diese Einstellungen sind eine Vorschau und werden noch nicht gespeichert.",
     "saved": "Gespeichert",
-    "playersSeeOnly": "Spieler sehen nur die Dauern und Tage, die Sie erlauben. Ist es für eine Online-Stornierung zu spät, werden sie gebeten, den Club anzurufen."
+    "playersSeeOnly": "Spieler sehen nur die Dauern und Tage, die Sie erlauben. Ist es für eine Online-Stornierung zu spät, werden sie gebeten, den Club anzurufen.",
+    "data": {
+      "title": "Ihre Daten",
+      "description": "Laden Sie die Daten Ihres Clubs als Tabelle herunter oder bitten Sie uns, Ihren Club zu löschen.",
+      "bookings": "Buchungen",
+      "bookingsDesc": "Jede Buchung und Trainerstunde mit Datum, Platz, Spieler und Preis (CSV).",
+      "members": "Mitglieder",
+      "membersDesc": "Alle Mitglieder mit Tarif, Kontaktdaten und Laufzeit (CSV).",
+      "download": "Herunterladen",
+      "deleteTitle": "Club löschen",
+      "deleteDesc": "Ihr Club, Plätze, Mitglieder und Buchungen werden endgültig gelöscht. Schreiben Sie uns von der E-Mail-Adresse Ihres Kontos, wir kümmern uns darum.",
+      "deleteAction": "E-Mail schreiben",
+      "deleteSubject": "Bitte meinen Club löschen: {name}"
+    }
   },
   "analytics": {
     "daysShort": [
@@ -1672,5 +1647,24 @@
       "full": "Dieses Turnier ist voll.",
       "already": "Sie sind bereits angemeldet."
     }
+  },
+  "export": {
+    "reference": "Nummer",
+    "date": "Datum",
+    "start": "Beginn",
+    "end": "Ende",
+    "minutes": "Minuten",
+    "court": "Platz",
+    "coach": "Trainer",
+    "player": "Spieler",
+    "status": "Status",
+    "price": "Preis (€)",
+    "notes": "Notizen",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "plan": "Tarif",
+    "memberSince": "Mitglied seit",
+    "ends": "Endet"
   }
 }

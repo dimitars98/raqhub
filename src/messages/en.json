@@ -69,13 +69,13 @@
         "pre": "Book it ",
         "mark": "your way",
         "post": "",
-        "body": "Real-time court availability, instant confirmations, and zero double-bookings. Give members a booking experience they'll love on any device.",
+        "body": "Real-time court availability, instant confirmations and no double bookings. Players book from any phone, and you add phone and walk-in bookings yourself.",
         "cta": "Explore booking features",
         "points": [
-          "Drag-and-drop schedule management",
-          "Recurring & block booking rules",
-          "Automated waitlist management",
-          "Member-tier booking windows"
+          "A weekly timetable for every court",
+          "Phone and walk-in bookings in the same timetable",
+          "Your rules: how far ahead, how many a day, when to cancel",
+          "Players who keep not showing up are paused automatically"
         ]
       },
       "membership": {
@@ -83,13 +83,13 @@
         "pre": "Complete ",
         "mark": "member",
         "post": " management",
-        "body": "Keep all your contacts in one place. Track membership status, payments, activity history and skill levels — with tools to stay in touch and grow retention.",
+        "body": "Keep every member in one place. See their plan, contact details and when their membership ends, and let the reminder emails do the chasing.",
         "cta": "Explore membership tools",
         "points": [
-          "Flexible membership plan builder",
-          "Automated renewal reminders",
-          "Player skill-level profiles",
-          "Bulk email & SMS communication"
+          "Monthly, yearly or one-time plans",
+          "Booking discounts for members",
+          "Renewal reminder emails",
+          "See whose membership ends in the next 30 days"
         ]
       },
       "coaching": {
@@ -97,13 +97,13 @@
         "pre": "Pack your coaches' ",
         "mark": "calendars",
         "post": "",
-        "body": "Let players browse and book lessons directly. Manage coach availability, lesson types, group sessions and clinics — and fill every hour automatically.",
+        "body": "Let players browse your coaches and book lessons directly. Each lesson holds its court, so a lesson and a court booking never clash.",
         "cta": "Explore coaching features",
         "points": [
-          "Individual & group lesson scheduling",
-          "Coach profile pages & ratings",
-          "Automatic coach payout tracking",
-          "Lesson confirmation & reminders"
+          "Coach profiles with levels and price",
+          "Players book lessons online",
+          "Lessons hold the court automatically",
+          "Confirmation and reminder emails"
         ]
       },
       "analytics": {
@@ -111,13 +111,13 @@
         "pre": "",
         "mark": "Data-driven",
         "post": " decisions",
-        "body": "Understand exactly how your club is performing. Track revenue by court, coach or membership plan. Spot peak hours and act on real numbers.",
+        "body": "See how your club is doing at a glance: revenue over time, your busiest hours and how full each court is.",
         "cta": "Explore analytics",
         "points": [
-          "Revenue by court, coach & period",
-          "Court utilisation heatmaps",
-          "Membership churn tracking",
-          "Exportable financial reports"
+          "Revenue over time and by sport",
+          "Peak hours heatmap",
+          "Bookings and revenue per court",
+          "A weekly report in your inbox"
         ]
       }
     },
@@ -773,10 +773,11 @@
   },
   "hero": {
     "stats": {
-      "clubs": "Clubs using ServeTime",
-      "bookings": "Bookings processed",
-      "satisfaction": "Customer satisfaction",
-      "setup": "Average setup time"
+      "trial": "Free trial, no card needed",
+      "daysSuffix": "days",
+      "commission": "Commission on bookings",
+      "sports": "Sports: tennis, padel, pickleball",
+      "languages": "Languages, chosen by each player"
     },
     "title1": "Fill Your Courts.",
     "title2": "Grow Your Club.",
@@ -824,7 +825,7 @@
   },
   "howItWorks": {
     "label": "Simple setup",
-    "title": "Up and running in 30 minutes",
+    "title": "Up and running the same day",
     "subtitle": "No IT team required. Onboarding takes minutes, not days.",
     "steps": {
       "create": {
@@ -837,14 +838,14 @@
       },
       "run": {
         "title": "Watch it run itself",
-        "body": "Bookings, payments, reminders, waitlists — all automated. Focus on growing the community, not managing spreadsheets."
+        "body": "Bookings, confirmations and reminders run on their own. Focus on your players, not on spreadsheets."
       }
     }
   },
   "sports": {
     "padel": {
       "title": "Padel",
-      "description": "Europe's fastest-growing racket sport. Give your padel courts their own schedule, slot lengths and prices."
+      "description": "Europe's fastest-growing racket sport. Give each padel court its own price and run it next to your other courts."
     },
     "tennis": {
       "title": "Tennis",
@@ -852,36 +853,37 @@
     },
     "pickleball": {
       "title": "Pickleball",
-      "description": "Short games and quick turnover. Offer shorter slots so more players get on court every hour."
+      "description": "Short games and quick turnover. Run your pickleball courts alongside tennis and padel, each with its own price."
     },
     "coaching": {
       "title": "Coaching",
-      "description": "Private lessons, group clinics and junior programmes, booked straight into your coaches' calendars."
+      "description": "Lessons booked straight into your coaches' calendars, with the court held for them."
     },
     "learnMore": "Learn more",
     "eyebrow": "Every court",
     "intro": "Tennis, padel or pickleball — ServeTime runs them all. Set up each court the way your club plays it, and manage every booking, member and lesson from one dashboard."
   },
   "featureCards": {
-    "label": "Built for every role",
+    "label": "Built for clubs",
     "title1": "Everything your club needs,",
     "title2": "nothing it doesn't",
     "subtitle": "A tightly focused set of tools that actually work together — not a bloated suite nobody uses.",
     "scheduling": {
       "title": "Smart scheduling, zero conflicts",
-      "body": "Automatic conflict detection, buffer times, blackout dates and rolling availability windows — the calendar runs itself.",
+      "body": "Double bookings are blocked, bookings stay inside your opening hours, and you decide how far ahead players can book.",
       "today": "Today",
       "available": "Available",
       "blocked": "Blocked"
     },
     "reminders": {
       "title": "Automated reminders",
-      "body": "SMS and email reminders go out automatically before every booking. Reduce no-shows without lifting a finger.",
+      "body": "Players get an email when they book and a reminder the day before. Fewer forgotten bookings, without lifting a finger.",
       "court": "Court 3 · tomorrow 10:00",
       "lesson": "Lesson with Sara F. · today",
       "before24": "24h before",
-      "before2": "2h before",
-      "sent": "Reminder sent"
+      "sent": "Reminder sent",
+      "confirmed": "Booking confirmed",
+      "instant": "Right away"
     },
     "payments": {
       "title": "Every payment on record",
@@ -895,15 +897,17 @@
       "c2": "Court 2 — Hard",
       "c3": "Court 3 — Indoor"
     },
-    "team": {
-      "title": "Your whole team, one dashboard",
-      "body": "Invite multiple admins and coaches. Set role-based permissions so everyone sees exactly what they need — and nothing they don't.",
-      "headAdmin": "Head admin",
-      "fullAccess": "Full access",
-      "coach": "Coach",
-      "coachingOnly": "Coaching only",
-      "receptionist": "Receptionist",
-      "bookingsOnly": "Bookings only"
+    "page": {
+      "title": "Your club's own booking page",
+      "body": "Every club gets its own page and link. Share it on Instagram or WhatsApp, or print the poster with a QR code for your reception desk.",
+      "link": "Your booking link",
+      "linkSub": "For Instagram, WhatsApp and your website",
+      "poster": "Printable poster",
+      "posterSub": "With a QR code players scan",
+      "languages": "6 languages",
+      "languagesSub": "Each player picks their own",
+      "tournaments": "Tournaments",
+      "tournamentsSub": "Sign-ups and a live draw"
     }
   },
   "pricing": {
@@ -1001,9 +1005,7 @@
       "hours": "Opening Hours",
       "profile": "Your Profile",
       "booking": "Booking Rules",
-      "payments": "Payments",
-      "notifications": "Notifications",
-      "danger": "Danger Zone"
+      "data": "Your Data"
     },
     "days": [
       "Monday",
@@ -1047,52 +1049,25 @@
     "cancellingOnline": "Cancelling online",
     "bookingsPerPlayerPerDay": "Bookings per player per day",
     "repeatNoShows": "Repeat no-shows",
-    "payments": "Payments",
-    "configurePricingCurrencyAndPayment": "Configure pricing, currency and payment methods.",
-    "currency": "Currency",
-    "taxRate": "Tax rate (%)",
-    "stripeIntegration": "Stripe Integration",
-    "onlinePayments": "Online payments",
-    "requirePaymentAtTimeOf": "Require payment at time of booking",
-    "refunds": "Refunds",
-    "allowAutomaticRefundsOnCancellation": "Allow automatic refunds on cancellation within window",
-    "notifications": "Notifications",
-    "chooseWhichEmailNotificationsAre": "Choose which email notifications are sent automatically.",
-    "replyToEmail": "Reply-to email",
-    "dangerZone": "Danger Zone",
-    "irreversibleActionsProceedWithCaution": "Irreversible actions. Proceed with caution.",
-    "exportAllData": "Export all data",
-    "downloadAFullExportOf": "Download a full export of your club data including bookings, members, and payments.",
-    "exportData": "Export Data",
-    "clearAllBookings": "Clear all bookings",
-    "permanentlyDeleteAllBookingHistory": "Permanently delete all booking history. This cannot be undone.",
-    "clearBookings": "Clear Bookings",
-    "deleteClub": "Delete club",
-    "permanentlyDeleteYourClubAnd": "Permanently delete your club and all associated data. This action is irreversible.",
-    "deleteClub2": "Delete Club",
-    "bookingConfirmed": "Booking confirmed",
-    "sentToMemberWhenA": "Sent to member when a booking is confirmed",
-    "bookingCancelled": "Booking cancelled",
-    "sentWhenABookingIs": "Sent when a booking is cancelled by either party",
-    "bookingReminder": "Booking reminder",
-    "sent24hBeforeTheBooking": "Sent 24h before the booking starts",
-    "newMemberJoined": "New member joined",
-    "sentToAdminWhenA": "Sent to admin when a new member registers",
-    "paymentReceived": "Payment received",
-    "sentToMemberAfterSuccessful": "Sent to member after successful payment",
-    "cancellationRefundIssued": "Cancellation refund issued",
-    "sentWhenARefundIs": "Sent when a refund is processed",
     "settings": "Settings",
-    "soon": "Soon",
     "to": "to",
     "closed": "Closed",
     "clickTheCameraToUpload": "Click the camera to upload a picture.",
-    "stripe": "Stripe",
-    "notConnected": "Not connected",
-    "connectStripe": "Connect Stripe",
-    "comingSoonTheseSettingsAre": "Coming soon. These settings are a preview and are not saved yet.",
     "saved": "Saved",
-    "playersSeeOnly": "Players see only the lengths and days you allow. When it's too late to cancel online, they're asked to call the club."
+    "playersSeeOnly": "Players see only the lengths and days you allow. When it's too late to cancel online, they're asked to call the club.",
+    "data": {
+      "title": "Your data",
+      "description": "Download your club's data as a spreadsheet, or ask us to delete your club.",
+      "bookings": "Bookings",
+      "bookingsDesc": "Every booking and lesson with its date, court, player and price (CSV).",
+      "members": "Members",
+      "membersDesc": "All members with their plan, contact details and dates (CSV).",
+      "download": "Download",
+      "deleteTitle": "Delete club",
+      "deleteDesc": "Your club, courts, members and bookings are deleted for good. Write to us from your account's email address and we'll take care of it.",
+      "deleteAction": "Email us",
+      "deleteSubject": "Please delete my club: {name}"
+    }
   },
   "analytics": {
     "daysShort": [
@@ -1672,5 +1647,24 @@
       "full": "This tournament is full.",
       "already": "You’re already signed up."
     }
+  },
+  "export": {
+    "reference": "Reference",
+    "date": "Date",
+    "start": "Start",
+    "end": "End",
+    "minutes": "Minutes",
+    "court": "Court",
+    "coach": "Coach",
+    "player": "Player",
+    "status": "Status",
+    "price": "Price (€)",
+    "notes": "Notes",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "plan": "Plan",
+    "memberSince": "Member since",
+    "ends": "Ends"
   }
 }

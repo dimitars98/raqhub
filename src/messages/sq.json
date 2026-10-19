@@ -69,13 +69,13 @@
         "pre": "Rezervoni ",
         "mark": "si të doni",
         "post": "",
-        "body": "Disponueshmëri në kohë reale, konfirmime të menjëhershme dhe asnjë rezervim i dyfishtë. Një përvojë që anëtarët do ta duan në çdo pajisje.",
+        "body": "Disponueshmëri e fushave në kohë reale, konfirmim i menjëhershëm dhe asnjë rezervim i dyfishtë. Lojtarët rezervojnë nga telefoni, ndërsa ju shtoni rezervimet me telefon dhe në vend.",
         "cta": "Shihni rezervimet",
         "points": [
-          "Orar me tërheqje dhe lëshim",
-          "Rregulla për rezervime të përsëritura dhe blloqe",
-          "Listë pritjeje automatike",
-          "Dritare rezervimi sipas anëtarësimit"
+          "Orar javor për çdo fushë",
+          "Rezervimet me telefon dhe në vend në të njëjtin orar",
+          "Rregullat tuaja: sa përpara, sa në ditë, deri kur anulohet",
+          "Lojtarët që shpesh nuk vijnë pezullohen automatikisht"
         ]
       },
       "membership": {
@@ -83,13 +83,13 @@
         "pre": "Menaxhim i plotë ",
         "mark": "i anëtarëve",
         "post": "",
-        "body": "Të gjithë kontaktet në një vend. Ndiqni statusin e anëtarësimit, pagesat, aktivitetin dhe nivelin e lojës – me mjete për të qëndruar në kontakt dhe për t’i mbajtur anëtarët.",
+        "body": "Të gjithë anëtarët në një vend. Shihni planin, kontaktin dhe kur u mbaron anëtarësia, dhe lërini email-et e rikujtimit të bëjnë ndjekjen.",
         "cta": "Shihni mjetet për anëtarët",
         "points": [
-          "Anëtarësime fleksibël",
-          "Kujtesa automatike për rinovim",
-          "Profile me nivelin e lojës",
-          "Email dhe SMS në masë"
+          "Plane mujore, vjetore ose një herë",
+          "Zbritje në rezervime për anëtarët",
+          "Email rikujtimi për rinovim",
+          "Kujt i mbaron anëtarësia në 30 ditët e ardhshme"
         ]
       },
       "coaching": {
@@ -97,13 +97,13 @@
         "pre": "Mbushni kalendarin e ",
         "mark": "trajnerëve",
         "post": "",
-        "body": "Lojtarët gjejnë dhe rezervojnë mësimet vetë. Menaxhoni disponueshmërinë, llojet e mësimeve, grupet dhe kampet – dhe mbushni çdo orë automatikisht.",
+        "body": "Lojtarët shfletojnë trajnerët tuaj dhe rezervojnë mësime direkt. Çdo mësim mban fushën e vet, kështu që mësimi dhe rezervimi nuk përplasen kurrë.",
         "cta": "Shihni trajnimet",
         "points": [
-          "Mësime individuale dhe në grup",
-          "Profile dhe vlerësime trajnerësh",
-          "Ndjekje automatike e pagesave të trajnerëve",
-          "Konfirmime dhe kujtesa për mësimet"
+          "Profile trajnerësh me nivele dhe çmim",
+          "Lojtarët rezervojnë mësime online",
+          "Mësimet e mbajnë fushën automatikisht",
+          "Email konfirmimi dhe rikujtimi"
         ]
       },
       "analytics": {
@@ -111,13 +111,13 @@
         "pre": "Vendime ",
         "mark": "të bazuara në të dhëna",
         "post": "",
-        "body": "Kuptoni saktësisht si ecën klubi. Të ardhurat sipas fushës, trajnerit ose anëtarësimit. Dalloni orët e pikut dhe veproni mbi shifra reale.",
+        "body": "Shihni me një shikim si po shkon klubi: të ardhurat me kalimin e kohës, orët më të ngarkuara dhe sa e plotë është çdo fushë.",
         "cta": "Shihni statistikat",
         "points": [
-          "Të ardhura sipas fushës, trajnerit dhe periudhës",
-          "Harta të shfrytëzimit të fushave",
-          "Ndjekja e anëtarëve që largohen",
-          "Raporte financiare për eksport"
+          "Të ardhurat me kohën dhe sipas sportit",
+          "Harta e orëve më të ngarkuara",
+          "Rezervime dhe të ardhura për çdo fushë",
+          "Raport javor në email"
         ]
       }
     },
@@ -773,10 +773,11 @@
   },
   "hero": {
     "stats": {
-      "clubs": "Klube përdorin ServeTime",
-      "bookings": "Rezervime të përpunuara",
-      "satisfaction": "Kënaqësia e klientëve",
-      "setup": "Koha mesatare e konfigurimit"
+      "trial": "Provë falas, pa kartë",
+      "daysSuffix": "ditë",
+      "commission": "Komision për rezervimet",
+      "sports": "Sporte: tenis, padel, pickleball",
+      "languages": "Gjuhë, secili lojtar zgjedh të vetën"
     },
     "title1": "Mbushni fushat tuaja.",
     "title2": "Rritni klubin tuaj.",
@@ -824,7 +825,7 @@
   },
   "howItWorks": {
     "label": "Konfigurim i thjeshtë",
-    "title": "Gati për 30 minuta",
+    "title": "Gati po të njëjtën ditë",
     "subtitle": "Nuk ju duhet ekip IT. Fillimi zgjat minuta, jo ditë.",
     "steps": {
       "create": {
@@ -837,14 +838,14 @@
       },
       "run": {
         "title": "Dhe funksionon vetë",
-        "body": "Rezervime, pagesa, kujtesa, lista pritjeje – gjithçka automatike. Përqendrohuni te komuniteti, jo te tabelat."
+        "body": "Rezervimet, konfirmimet dhe rikujtimet ecin vetë. Përqendrohuni te lojtarët, jo te tabelat."
       }
     }
   },
   "sports": {
     "padel": {
       "title": "Padel",
-      "description": "Sporti me raketë që rritet më shpejt në Evropë. Jepuni fushave të padelit orarin, kohëzgjatjen dhe çmimet e tyre."
+      "description": "Sporti me raketë që rritet më shpejt në Evropë. Çdo fushë padeli ka çmimin e vet dhe punon pranë fushave të tjera."
     },
     "tennis": {
       "title": "Tenis",
@@ -852,36 +853,37 @@
     },
     "pickleball": {
       "title": "Pickleball",
-      "description": "Lojëra të shkurtra dhe ndërrim i shpejtë. Ofroni orare më të shkurtra që më shumë lojtarë të luajnë çdo orë."
+      "description": "Lojëra të shkurtra dhe ndërrim i shpejtë. Fushat e pickleball punojnë pranë tenisit dhe padelit, secila me çmimin e vet."
     },
     "coaching": {
       "title": "Trajnime",
-      "description": "Mësime private, trajnime në grup dhe programe për të rinjtë, të rezervuara drejt në kalendarin e trajnerëve tuaj."
+      "description": "Mësimet rezervohen direkt në kalendarin e trajnerëve, me fushën të mbajtur për ta."
     },
     "learnMore": "Mësoni më shumë",
     "eyebrow": "Çdo fushë",
     "intro": "Tenis, padel apo pickleball – ServeTime i drejton të gjitha. Konfiguroni çdo fushë ashtu si luan klubi juaj dhe menaxhoni rezervimet, anëtarët dhe mësimet nga një panel i vetëm."
   },
   "featureCards": {
-    "label": "Ndërtuar për çdo rol",
+    "label": "Ndërtuar për klubet",
     "title1": "Gjithçka që i duhet klubit tuaj,",
     "title2": "asgjë që s’i duhet",
     "subtitle": "Një grup i përqendruar mjetesh që funksionojnë vërtet së bashku – jo një paketë e fryrë që s’e përdor askush.",
     "scheduling": {
       "title": "Orar i zgjuar, zero konflikte",
-      "body": "Zbulim automatik i konflikteve, kohë ndërmjet rezervimeve, ditë të bllokuara dhe periudha rezervimi – kalendari funksionon vetë.",
+      "body": "Rezervimet e dyfishta bllokohen, rezervimet qëndrojnë brenda orarit të punës dhe ju vendosni sa përpara mund të rezervojnë lojtarët.",
       "today": "Sot",
       "available": "E lirë",
       "blocked": "E bllokuar"
     },
     "reminders": {
       "title": "Kujtesa automatike",
-      "body": "Kujtesat me SMS dhe email dërgohen automatikisht para çdo rezervimi. Më pak mosparaqitje, pa asnjë mundim.",
+      "body": "Lojtarët marrin email kur rezervojnë dhe një rikujtim një ditë më parë. Më pak rezervime të harruara, pa asnjë mundim.",
       "court": "Fusha 3 · nesër 10:00",
       "lesson": "Mësim me Sara F. · sot",
       "before24": "24 orë para",
-      "before2": "2 orë para",
-      "sent": "Kujtesa u dërgua"
+      "sent": "Kujtesa u dërgua",
+      "confirmed": "Rezervimi u konfirmua",
+      "instant": "Menjëherë"
     },
     "payments": {
       "title": "Çdo pagesë e regjistruar",
@@ -895,15 +897,17 @@
       "c2": "Fusha 2 – E fortë",
       "c3": "Fusha 3 – E mbyllur"
     },
-    "team": {
-      "title": "I gjithë ekipi, një panel",
-      "body": "Ftoni disa administratorë dhe trajnerë. Me leje sipas rolit, secili sheh pikërisht atë që i duhet – dhe asgjë tjetër.",
-      "headAdmin": "Administratori kryesor",
-      "fullAccess": "Qasje e plotë",
-      "coach": "Trajner",
-      "coachingOnly": "Vetëm trajnime",
-      "receptionist": "Recepsioni",
-      "bookingsOnly": "Vetëm rezervime"
+    "page": {
+      "title": "Faqja e rezervimeve e klubit tuaj",
+      "body": "Çdo klub merr faqen dhe lidhjen e vet. Ndajeni në Instagram ose WhatsApp, ose printoni posterin me kod QR për recepsionin.",
+      "link": "Lidhja juaj e rezervimeve",
+      "linkSub": "Për Instagram, WhatsApp dhe faqen tuaj",
+      "poster": "Poster për printim",
+      "posterSub": "Me kod QR që lojtarët e skanojnë",
+      "languages": "6 gjuhë",
+      "languagesSub": "Secili lojtar zgjedh të vetën",
+      "tournaments": "Turne",
+      "tournamentsSub": "Regjistrime dhe short live"
     }
   },
   "pricing": {
@@ -1001,9 +1005,7 @@
       "hours": "Orari",
       "profile": "Profili juaj",
       "booking": "Rregullat e rezervimit",
-      "payments": "Pagesat",
-      "notifications": "Njoftimet",
-      "danger": "Zona e rrezikut"
+      "data": "Të dhënat tuaja"
     },
     "days": [
       "E hënë",
@@ -1047,52 +1049,25 @@
     "cancellingOnline": "Anulimi online",
     "bookingsPerPlayerPerDay": "Rezervime për lojtar në ditë",
     "repeatNoShows": "Mosparaqitje të përsëritura",
-    "payments": "Pagesat",
-    "configurePricingCurrencyAndPayment": "Konfiguroni çmimet, monedhën dhe mënyrat e pagesës.",
-    "currency": "Monedha",
-    "taxRate": "Norma e TVSH-së (%)",
-    "stripeIntegration": "Lidhja me Stripe",
-    "onlinePayments": "Pagesa online",
-    "requirePaymentAtTimeOf": "Kërko pagesë gjatë rezervimit",
-    "refunds": "Rimbursimet",
-    "allowAutomaticRefundsOnCancellation": "Lejo rimbursim automatik për anulime në kohë",
-    "notifications": "Njoftimet",
-    "chooseWhichEmailNotificationsAre": "Zgjidhni cilat email-e dërgohen automatikisht.",
-    "replyToEmail": "Email për përgjigje",
-    "dangerZone": "Zona e rrezikut",
-    "irreversibleActionsProceedWithCaution": "Veprime të pakthyeshme. Kini kujdes.",
-    "exportAllData": "Eksporto të gjitha të dhënat",
-    "downloadAFullExportOf": "Shkarkoni një eksport të plotë të të dhënave të klubit, përfshirë rezervimet, anëtarët dhe pagesat.",
-    "exportData": "Eksporto të dhënat",
-    "clearAllBookings": "Fshi të gjitha rezervimet",
-    "permanentlyDeleteAllBookingHistory": "Fshin përgjithmonë të gjithë historikun e rezervimeve. Nuk mund të kthehet.",
-    "clearBookings": "Fshi rezervimet",
-    "deleteClub": "Fshi klubin",
-    "permanentlyDeleteYourClubAnd": "Fshin përgjithmonë klubin dhe të gjitha të dhënat e lidhura. Ky veprim është i pakthyeshëm.",
-    "deleteClub2": "Fshi klubin",
-    "bookingConfirmed": "Rezervimi u konfirmua",
-    "sentToMemberWhenA": "I dërgohet anëtarit kur konfirmohet një rezervim",
-    "bookingCancelled": "Rezervimi u anulua",
-    "sentWhenABookingIs": "Dërgohet kur njëra palë anulon rezervimin",
-    "bookingReminder": "Kujtesë rezervimi",
-    "sent24hBeforeTheBooking": "Dërgohet 24 orë para fillimit",
-    "newMemberJoined": "Anëtar i ri",
-    "sentToAdminWhenA": "I dërgohet administratorit kur regjistrohet një anëtar i ri",
-    "paymentReceived": "Pagesa u mor",
-    "sentToMemberAfterSuccessful": "I dërgohet anëtarit pas pagesës së suksesshme",
-    "cancellationRefundIssued": "Rimbursimi u krye",
-    "sentWhenARefundIs": "Dërgohet kur përpunohet një rimbursim",
     "settings": "Cilësimet",
-    "soon": "Së shpejti",
     "to": "deri",
     "closed": "E mbyllur",
     "clickTheCameraToUpload": "Klikoni kamerën për të ngarkuar një foto.",
-    "stripe": "Stripe",
-    "notConnected": "Nuk është lidhur",
-    "connectStripe": "Lidh Stripe",
-    "comingSoonTheseSettingsAre": "Së shpejti. Këto cilësime janë një parapamje dhe ende nuk ruhen.",
     "saved": "U ruajt",
-    "playersSeeOnly": "Lojtarët shohin vetëm kohëzgjatjet dhe ditët që lejoni. Kur është vonë për anulim online, u kërkohet të telefonojnë klubin."
+    "playersSeeOnly": "Lojtarët shohin vetëm kohëzgjatjet dhe ditët që lejoni. Kur është vonë për anulim online, u kërkohet të telefonojnë klubin.",
+    "data": {
+      "title": "Të dhënat tuaja",
+      "description": "Shkarkoni të dhënat e klubit si tabelë, ose na kërkoni të fshijmë klubin.",
+      "bookings": "Rezervimet",
+      "bookingsDesc": "Çdo rezervim dhe mësim me datën, fushën, lojtarin dhe çmimin (CSV).",
+      "members": "Anëtarët",
+      "membersDesc": "Të gjithë anëtarët me planin, kontaktin dhe datat (CSV).",
+      "download": "Shkarko",
+      "deleteTitle": "Fshi klubin",
+      "deleteDesc": "Klubi, fushat, anëtarët dhe rezervimet fshihen përgjithmonë. Na shkruani nga email-i i llogarisë suaj dhe ne do të kujdesemi.",
+      "deleteAction": "Na shkruani",
+      "deleteSubject": "Ju lutem fshini klubin tim: {name}"
+    }
   },
   "analytics": {
     "daysShort": [
@@ -1672,5 +1647,24 @@
       "full": "Ky turne është plot.",
       "already": "Jeni regjistruar tashmë."
     }
+  },
+  "export": {
+    "reference": "Numri",
+    "date": "Data",
+    "start": "Fillimi",
+    "end": "Mbarimi",
+    "minutes": "Minuta",
+    "court": "Fusha",
+    "coach": "Trajneri",
+    "player": "Lojtari",
+    "status": "Statusi",
+    "price": "Çmimi (€)",
+    "notes": "Shënime",
+    "name": "Emri",
+    "email": "Email",
+    "phone": "Telefoni",
+    "plan": "Plani",
+    "memberSince": "Anëtar që nga",
+    "ends": "Mbaron"
   }
 }

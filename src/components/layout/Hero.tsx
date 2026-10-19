@@ -1,24 +1,16 @@
 import Image from "next/image";
-import { Building2, CalendarCheck, Star, Timer } from "lucide-react";
+import { CalendarCheck, Globe, Percent, Trophy } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Hero() {
   const t = useTranslations("hero");
+  // Facts about the product, not made-up usage numbers.
   const stats = [
-    {
-      value: "500",
-      suffix: "+",
-      label: t("stats.clubs"),
-      icon: Building2,
-    },
-    {
-      value: "2M",
-      suffix: "+",
-      label: t("stats.bookings"),
-      icon: CalendarCheck,
-    },
-    { value: "98", suffix: "%", label: t("stats.satisfaction"), icon: Star },
-    { value: "30", suffix: "min", label: t("stats.setup"), icon: Timer },
+    { value: "30", suffix: t("stats.daysSuffix"), label: t("stats.trial"), icon: CalendarCheck },
+    { value: "0", suffix: "%", label: t("stats.commission"), icon: Percent },
+    { value: "3", suffix: "", label: t("stats.sports"), icon: Trophy },
+    { value: "6", suffix: "", label: t("stats.languages"), icon: Globe },
   ];
   return (
     // <section className="bg-[linear-gradient(165deg,white_50%,var(--color-brand-600)_20%)]">
@@ -69,10 +61,12 @@ export default function Hero() {
               {t("subtitle")}
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="btn-primary py-5 px-7">{t("getStarted")}</button>
-              <button className="btn-secondary py-5 px-7">
+              <Link href="/signup?role=admin" className="btn-primary py-5 px-7">
+                {t("getStarted")}
+              </Link>
+              <a href="#how" className="btn-secondary py-5 px-7">
                 {t("seeHow")}
-              </button>
+              </a>
             </div>
           </div>
         </div>

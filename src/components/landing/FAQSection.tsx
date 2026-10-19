@@ -5,7 +5,16 @@ import { Plus, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { PLANS } from "@/lib/plans";
 
-const FAQ_IDS = ["setup", "cost", "app", "phone", "sports", "payOnline", "languages", "data"] as const;
+const FAQ_IDS = [
+  "setup",
+  "cost",
+  "app",
+  "phone",
+  "sports",
+  "payOnline",
+  "languages",
+  "data",
+] as const;
 
 function SupportBlock({ className = "" }: { className?: string }) {
   const t = useTranslations("faq");
@@ -14,9 +23,7 @@ function SupportBlock({ className = "" }: { className?: string }) {
       <p className="text-base font-semibold text-ink-900">
         {t("stillQuestions")}
       </p>
-      <p className="mt-1 text-sm text-ink-600">
-        {t("writeUs")}
-      </p>
+      <p className="mt-1 text-sm text-ink-600">{t("writeUs")}</p>
       <a
         href="mailto:support@servetime.com"
         className="btn-primary mt-4 h-12 px-6 text-sm font-semibold"
@@ -79,10 +86,10 @@ export default function FAQSection() {
         <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           {/* Heading column */}
           <div>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-200 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-900">
+            {/* <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-200 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-900">
               <span className="size-1.5 rounded-full bg-brand-600" />
               {t("label")}
-            </div>
+            </div> */}
             <h2 className="font-display mb-4 text-[30px] font-extrabold leading-[1.1] tracking-tight text-ink-900 sm:text-[36px] lg:text-[44px]">
               {t("title")}
               <br />

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { BarChart3, Bell, Calendar, CreditCard, Users } from "lucide-react";
+import { BarChart3, Bell, Calendar, CreditCard, Globe, Link2, QrCode, Trophy } from "lucide-react";
 
 export default function FeatureCards() {
   const t = useTranslations("featureCards");
@@ -95,16 +95,16 @@ export default function FeatureCards() {
           </p>
           <div className="space-y-2">
             {[
-              { msg: t("reminders.court"), delta: t("reminders.before24") },
-              { msg: t("reminders.lesson"), delta: t("reminders.before2") },
-            ].map(({ msg, delta }) => (
+              { title: t("reminders.confirmed"), msg: t("reminders.lesson"), delta: t("reminders.instant") },
+              { title: t("reminders.sent"), msg: t("reminders.court"), delta: t("reminders.before24") },
+            ].map(({ title, msg, delta }) => (
               <div
                 key={msg}
                 className="bg-white border border-[#e8ede4] rounded-xl px-3 py-2.5 flex items-center justify-between gap-2"
               >
                 <div className="min-w-0">
                   <div className="text-[11px] font-semibold text-[#111c0a]">
-                    {t("reminders.sent")}
+                    {title}
                   </div>
                   <div className="text-[10px] text-[#6e7f65]">{msg}</div>
                 </div>
@@ -145,8 +145,8 @@ export default function FeatureCards() {
           </div>
         </div>
 
-        {/* Utilisation card — full width on tablet so it isn't left alone in a row */}
-        <div className="md:col-span-2 lg:col-span-1 bg-[#f8f9f7] border border-[#e8ede4] rounded-2xl p-6 sm:p-7">
+        {/* Utilisation card — fills the rest of its row on tablet and desktop */}
+        <div className="md:col-span-2 bg-[#f8f9f7] border border-[#e8ede4] rounded-2xl p-6 sm:p-7">
           <div className="w-10 h-10 rounded-xl bg-[#f3fbde] border border-[#d6f09a] flex items-center justify-center mb-5">
             <BarChart3 size={18} className="text-[#7aad12]" />
           </div>
@@ -186,81 +186,37 @@ export default function FeatureCards() {
           </div>
         </div>
 
-        {/* Members / multi-admin card — spans full width */}
+        {/* Club page card — spans full width */}
         <div className="md:col-span-2 lg:col-span-3 bg-white border border-[#e8ede4] rounded-2xl p-6 sm:p-8 flex flex-col gap-8 lg:flex-row lg:gap-16 lg:items-center">
           <div className="lg:flex-1 lg:max-w-[380px]">
             <div className="w-10 h-10 rounded-xl bg-[#f3fbde] border border-[#d6f09a] flex items-center justify-center mb-5">
-              <Users size={18} className="text-[#7aad12]" />
+              <Link2 size={18} className="text-[#7aad12]" />
             </div>
             <h3 className="font-display text-[22px] font-extrabold text-[#111c0a] tracking-tight mb-2">
-              {t("team.title")}
+              {t("page.title")}
             </h3>
             <p className="text-[14px] text-[#6e7f65] font-light leading-relaxed">
-              {t("team.body")}
+              {t("page.body")}
             </p>
           </div>
-          {/* Role pills */}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:flex-1">
             {[
-              {
-                init: "TK",
-                bg: "#3a7020",
-                name: "Tomislav K.",
-                role: t("team.headAdmin"),
-                badge: t("team.fullAccess"),
-                bc: "#f3fbde",
-                tc: "#7aad12",
-              },
-              {
-                init: "SF",
-                bg: "#7aad12",
-                name: "Sara F.",
-                role: t("team.coach"),
-                badge: t("team.coachingOnly"),
-                bc: "#e8f4fd",
-                tc: "#1a5ea8",
-              },
-              {
-                init: "BN",
-                bg: "#2ab87a",
-                name: "Boris N.",
-                role: t("team.coach"),
-                badge: t("team.coachingOnly"),
-                bc: "#e8f4fd",
-                tc: "#1a5ea8",
-              },
-              {
-                init: "MK",
-                bg: "#d6c832",
-                name: "Mila K.",
-                role: t("team.receptionist"),
-                badge: t("team.bookingsOnly"),
-                bc: "#fdfae0",
-                tc: "#8a7800",
-              },
-            ].map((m) => (
+              { icon: Link2, title: t("page.link"), sub: t("page.linkSub") },
+              { icon: QrCode, title: t("page.poster"), sub: t("page.posterSub") },
+              { icon: Globe, title: t("page.languages"), sub: t("page.languagesSub") },
+              { icon: Trophy, title: t("page.tournaments"), sub: t("page.tournamentsSub") },
+            ].map(({ icon: Icon, title, sub }) => (
               <div
-                key={m.name}
+                key={title}
                 className="flex items-center gap-3 bg-[#f8f9f7] border border-[#e8ede4] rounded-xl px-3 py-2.5"
               >
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold text-white flex-shrink-0"
-                  style={{ background: m.bg }}
-                >
-                  {m.init}
+                <div className="w-8 h-8 rounded-full bg-[#f3fbde] flex items-center justify-center flex-shrink-0">
+                  <Icon size={14} className="text-[#7aad12]" aria-hidden="true" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-[12px] font-semibold text-[#111c0a] truncate">
-                    {m.name}
-                  </div>
-                  <div className="text-[10px] text-[#6e7f65]">{m.role}</div>
+                  <div className="text-[12px] font-semibold text-[#111c0a] truncate">{title}</div>
+                  <div className="text-[10px] text-[#6e7f65] truncate">{sub}</div>
                 </div>
-                <span
-                  className="text-[9px] font-semibold px-2 py-0.5 rounded-md whitespace-nowrap"
-                  style={{ background: m.bc, color: m.tc }}
-                >
-                  {m.badge}
-                </span>
               </div>
             ))}
           </div>

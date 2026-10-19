@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/layout/Hero";
-import FAQSection from "@/components/layout/FAQSection";
+import FAQSection from "@/components/landing/FAQSection";
 import TeamSection from "@/components/landing/TeamSection";
 import Footer from "@/components/landing/Footer";
 import CTA from "@/components/landing/CTA";
@@ -44,12 +44,13 @@ export default async function HomePage() {
           {ta("new")}
         </span>
         <span className="text-white/75">{ta("live")}</span>
-        <strong className="text-white">
-          {ta("createLink")}
-        </strong>
-        <span className="text-[#a8d832] font-medium cursor-pointer ml-1">
+        <strong className="text-white">{ta("createLink")}</strong>
+        <a
+          href="#how"
+          className="text-[#a8d832] font-medium ml-1 hover:underline"
+        >
           {ta("learnMore")}
-        </span>
+        </a>
       </div>
 
       <Navbar />

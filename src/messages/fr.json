@@ -69,13 +69,13 @@
         "pre": "Réservez ",
         "mark": "à votre façon",
         "post": "",
-        "body": "Disponibilités en temps réel, confirmations instantanées et zéro double réservation. Une expérience que vos membres adoreront sur tous leurs appareils.",
+        "body": "Disponibilités en temps réel, confirmation immédiate et aucune double réservation. Les joueurs réservent depuis leur téléphone, et vous ajoutez vous-même les réservations par téléphone ou sur place.",
         "cta": "Voir les fonctions de réservation",
         "points": [
-          "Planning en glisser-déposer",
-          "Réservations récurrentes et blocs",
-          "Liste d’attente automatique",
-          "Fenêtres de réservation par formule"
+          "Un planning hebdomadaire pour chaque terrain",
+          "Réservations par téléphone et sur place dans le même planning",
+          "Vos règles : combien à l’avance, combien par jour, jusqu’à quand annuler",
+          "Les joueurs qui ne viennent pas à répétition sont suspendus automatiquement"
         ]
       },
       "membership": {
@@ -83,13 +83,13 @@
         "pre": "Gestion complète ",
         "mark": "des membres",
         "post": "",
-        "body": "Tous vos contacts au même endroit. Suivez statut d’adhésion, paiements, activité et niveau de jeu – avec des outils pour rester en contact et fidéliser.",
+        "body": "Tous vos membres au même endroit. Voyez leur formule, leurs coordonnées et la fin de leur adhésion, et laissez les e-mails de rappel faire les relances.",
         "cta": "Voir les outils membres",
         "points": [
-          "Formules d’adhésion flexibles",
-          "Rappels de renouvellement automatiques",
-          "Profils avec niveau de jeu",
-          "E-mails et SMS groupés"
+          "Formules mensuelles, annuelles ou ponctuelles",
+          "Réductions sur les réservations pour les membres",
+          "E-mails de rappel de renouvellement",
+          "Les adhésions qui se terminent dans les 30 prochains jours"
         ]
       },
       "coaching": {
@@ -97,13 +97,13 @@
         "pre": "Remplissez l’agenda de ",
         "mark": "vos entraîneurs",
         "post": "",
-        "body": "Les joueurs trouvent et réservent leurs cours directement. Gérez disponibilités, types de cours, groupes et stages – et remplissez chaque heure automatiquement.",
+        "body": "Les joueurs parcourent vos entraîneurs et réservent un cours directement. Chaque cours bloque son terrain : un cours et une réservation ne se chevauchent jamais.",
         "cta": "Voir les fonctions cours",
         "points": [
-          "Cours individuels et collectifs",
-          "Pages et avis des entraîneurs",
-          "Suivi automatique des paiements entraîneurs",
-          "Confirmations et rappels de cours"
+          "Profils d’entraîneurs avec niveaux et prix",
+          "Les joueurs réservent leurs cours en ligne",
+          "Les cours bloquent le terrain automatiquement",
+          "E-mails de confirmation et de rappel"
         ]
       },
       "analytics": {
@@ -111,13 +111,13 @@
         "pre": "Des décisions ",
         "mark": "basées sur les données",
         "post": "",
-        "body": "Sachez exactement comment se porte votre club. Revenus par terrain, entraîneur ou formule. Repérez les heures de pointe et agissez sur des chiffres réels.",
+        "body": "Voyez d’un coup d’œil comment va votre club : chiffre d’affaires dans le temps, vos heures de pointe et le taux de remplissage de chaque terrain.",
         "cta": "Voir les statistiques",
         "points": [
-          "Revenus par terrain, entraîneur et période",
-          "Cartes d’occupation des terrains",
-          "Suivi des départs de membres",
-          "Rapports financiers exportables"
+          "Chiffre d’affaires dans le temps et par sport",
+          "Carte des heures de pointe",
+          "Réservations et chiffre d’affaires par terrain",
+          "Un rapport hebdomadaire par e-mail"
         ]
       }
     },
@@ -773,10 +773,11 @@
   },
   "hero": {
     "stats": {
-      "clubs": "Clubs utilisent ServeTime",
-      "bookings": "Réservations traitées",
-      "satisfaction": "Satisfaction client",
-      "setup": "Temps moyen de mise en place"
+      "trial": "Essai gratuit, sans carte",
+      "daysSuffix": "jours",
+      "commission": "Commission sur les réservations",
+      "sports": "Sports : tennis, padel, pickleball",
+      "languages": "Langues, au choix de chaque joueur"
     },
     "title1": "Remplissez vos terrains.",
     "title2": "Faites grandir votre club.",
@@ -824,7 +825,7 @@
   },
   "howItWorks": {
     "label": "Mise en place simple",
-    "title": "Opérationnel en 30 minutes",
+    "title": "Opérationnel le jour même",
     "subtitle": "Pas besoin d’équipe informatique. La prise en main prend quelques minutes, pas des jours.",
     "steps": {
       "create": {
@@ -837,14 +838,14 @@
       },
       "run": {
         "title": "Et tout tourne tout seul",
-        "body": "Réservations, paiements, rappels, listes d’attente – tout est automatisé. Concentrez-vous sur votre communauté, pas sur des tableurs."
+        "body": "Réservations, confirmations et rappels tournent tout seuls. Occupez-vous de vos joueurs, pas de tableurs."
       }
     }
   },
   "sports": {
     "padel": {
       "title": "Padel",
-      "description": "Le sport de raquette qui grandit le plus vite en Europe. Donnez à vos terrains de padel leurs propres plannings, durées et tarifs."
+      "description": "Le sport de raquette qui grandit le plus vite en Europe. Chaque terrain de padel a son propre prix et tourne à côté de vos autres terrains."
     },
     "tennis": {
       "title": "Tennis",
@@ -852,36 +853,37 @@
     },
     "pickleball": {
       "title": "Pickleball",
-      "description": "Parties courtes et rotation rapide. Proposez des créneaux plus courts pour que plus de joueurs jouent chaque heure."
+      "description": "Parties courtes, rotation rapide. Vos terrains de pickleball tournent à côté du tennis et du padel, chacun avec son prix."
     },
     "coaching": {
       "title": "Cours",
-      "description": "Cours particuliers, stages collectifs et programmes jeunes, réservés directement dans l’agenda de vos entraîneurs."
+      "description": "Les cours arrivent directement dans l’agenda de vos entraîneurs, avec le terrain réservé pour eux."
     },
     "learnMore": "En savoir plus",
     "eyebrow": "Tous les terrains",
     "intro": "Tennis, padel ou pickleball – ServeTime gère tout. Configurez chaque terrain comme votre club le joue et gérez réservations, membres et cours depuis un seul tableau de bord."
   },
   "featureCards": {
-    "label": "Pensé pour chaque rôle",
+    "label": "Conçu pour les clubs",
     "title1": "Tout ce dont votre club a besoin,",
     "title2": "rien de superflu",
     "subtitle": "Un ensemble d’outils ciblés qui fonctionnent vraiment ensemble – pas une suite surchargée que personne n’utilise.",
     "scheduling": {
       "title": "Planning intelligent, zéro conflit",
-      "body": "Détection automatique des conflits, temps tampon, jours bloqués et fenêtres de réservation glissantes – le calendrier tourne tout seul.",
+      "body": "Les doubles réservations sont bloquées, les réservations restent dans vos horaires d’ouverture, et vous décidez jusqu’à quand à l’avance on peut réserver.",
       "today": "Aujourd’hui",
       "available": "Libre",
       "blocked": "Bloqué"
     },
     "reminders": {
       "title": "Rappels automatiques",
-      "body": "Des rappels par SMS et e-mail partent automatiquement avant chaque réservation. Moins d’absences, sans lever le petit doigt.",
+      "body": "Les joueurs reçoivent un e-mail à la réservation et un rappel la veille. Moins de réservations oubliées, sans le moindre effort.",
       "court": "Terrain 3 · demain 10:00",
       "lesson": "Cours avec Sara F. · aujourd’hui",
       "before24": "24 h avant",
-      "before2": "2 h avant",
-      "sent": "Rappel envoyé"
+      "sent": "Rappel envoyé",
+      "confirmed": "Réservation confirmée",
+      "instant": "Tout de suite"
     },
     "payments": {
       "title": "Chaque paiement enregistré",
@@ -895,15 +897,17 @@
       "c2": "Terrain 2 – Dur",
       "c3": "Terrain 3 – Couvert"
     },
-    "team": {
-      "title": "Toute votre équipe, un seul tableau de bord",
-      "body": "Invitez plusieurs administrateurs et entraîneurs. Avec des droits par rôle, chacun voit exactement ce dont il a besoin – et rien d’autre.",
-      "headAdmin": "Administrateur principal",
-      "fullAccess": "Accès complet",
-      "coach": "Entraîneur",
-      "coachingOnly": "Cours uniquement",
-      "receptionist": "Accueil",
-      "bookingsOnly": "Réservations uniquement"
+    "page": {
+      "title": "La page de réservation de votre club",
+      "body": "Chaque club a sa propre page et son lien. Partagez-le sur Instagram ou WhatsApp, ou imprimez l’affiche avec un QR code pour l’accueil.",
+      "link": "Votre lien de réservation",
+      "linkSub": "Pour Instagram, WhatsApp et votre site",
+      "poster": "Affiche à imprimer",
+      "posterSub": "Avec un QR code à scanner",
+      "languages": "6 langues",
+      "languagesSub": "Chaque joueur choisit la sienne",
+      "tournaments": "Tournois",
+      "tournamentsSub": "Inscriptions et tableau en direct"
     }
   },
   "pricing": {
@@ -1001,9 +1005,7 @@
       "hours": "Horaires",
       "profile": "Votre profil",
       "booking": "Règles de réservation",
-      "payments": "Paiements",
-      "notifications": "Notifications",
-      "danger": "Zone de danger"
+      "data": "Vos données"
     },
     "days": [
       "Lundi",
@@ -1047,52 +1049,25 @@
     "cancellingOnline": "Annulation en ligne",
     "bookingsPerPlayerPerDay": "Réservations par joueur et par jour",
     "repeatNoShows": "Absences répétées",
-    "payments": "Paiements",
-    "configurePricingCurrencyAndPayment": "Configurez tarifs, devise et moyens de paiement.",
-    "currency": "Devise",
-    "taxRate": "Taux de TVA (%)",
-    "stripeIntegration": "Intégration Stripe",
-    "onlinePayments": "Paiements en ligne",
-    "requirePaymentAtTimeOf": "Exiger le paiement à la réservation",
-    "refunds": "Remboursements",
-    "allowAutomaticRefundsOnCancellation": "Autoriser les remboursements automatiques en cas d’annulation dans les délais",
-    "notifications": "Notifications",
-    "chooseWhichEmailNotificationsAre": "Choisissez les e-mails envoyés automatiquement.",
-    "replyToEmail": "E-mail de réponse",
-    "dangerZone": "Zone de danger",
-    "irreversibleActionsProceedWithCaution": "Actions irréversibles. Procédez avec prudence.",
-    "exportAllData": "Exporter toutes les données",
-    "downloadAFullExportOf": "Téléchargez un export complet des données de votre club, y compris réservations, membres et paiements.",
-    "exportData": "Exporter",
-    "clearAllBookings": "Effacer toutes les réservations",
-    "permanentlyDeleteAllBookingHistory": "Supprime définitivement tout l’historique des réservations. Action irréversible.",
-    "clearBookings": "Effacer les réservations",
-    "deleteClub": "Supprimer le club",
-    "permanentlyDeleteYourClubAnd": "Supprime définitivement votre club et toutes ses données. Cette action est irréversible.",
-    "deleteClub2": "Supprimer le club",
-    "bookingConfirmed": "Réservation confirmée",
-    "sentToMemberWhenA": "Envoyé au membre quand une réservation est confirmée",
-    "bookingCancelled": "Réservation annulée",
-    "sentWhenABookingIs": "Envoyé quand une réservation est annulée par l’une des parties",
-    "bookingReminder": "Rappel de réservation",
-    "sent24hBeforeTheBooking": "Envoyé 24 h avant le début de la réservation",
-    "newMemberJoined": "Nouveau membre",
-    "sentToAdminWhenA": "Envoyé à l’administrateur quand un nouveau membre s’inscrit",
-    "paymentReceived": "Paiement reçu",
-    "sentToMemberAfterSuccessful": "Envoyé au membre après un paiement réussi",
-    "cancellationRefundIssued": "Remboursement effectué",
-    "sentWhenARefundIs": "Envoyé quand un remboursement est traité",
     "settings": "Paramètres",
-    "soon": "Bientôt",
     "to": "à",
     "closed": "Fermé",
     "clickTheCameraToUpload": "Cliquez sur l’appareil photo pour ajouter une image.",
-    "stripe": "Stripe",
-    "notConnected": "Non connecté",
-    "connectStripe": "Connecter Stripe",
-    "comingSoonTheseSettingsAre": "Bientôt disponible. Ces paramètres sont un aperçu et ne sont pas encore enregistrés.",
     "saved": "Enregistré",
-    "playersSeeOnly": "Les joueurs ne voient que les durées et les jours que vous autorisez. Quand il est trop tard pour annuler en ligne, on leur demande d’appeler le club."
+    "playersSeeOnly": "Les joueurs ne voient que les durées et les jours que vous autorisez. Quand il est trop tard pour annuler en ligne, on leur demande d’appeler le club.",
+    "data": {
+      "title": "Vos données",
+      "description": "Téléchargez les données de votre club sous forme de tableau, ou demandez-nous de supprimer votre club.",
+      "bookings": "Réservations",
+      "bookingsDesc": "Chaque réservation et chaque cours avec la date, le terrain, le joueur et le prix (CSV).",
+      "members": "Membres",
+      "membersDesc": "Tous les membres avec leur formule, leurs coordonnées et leurs dates (CSV).",
+      "download": "Télécharger",
+      "deleteTitle": "Supprimer le club",
+      "deleteDesc": "Votre club, vos terrains, membres et réservations sont supprimés définitivement. Écrivez-nous depuis l’adresse e-mail de votre compte et nous nous en occupons.",
+      "deleteAction": "Nous écrire",
+      "deleteSubject": "Merci de supprimer mon club : {name}"
+    }
   },
   "analytics": {
     "daysShort": [
@@ -1672,5 +1647,24 @@
       "full": "Ce tournoi est complet.",
       "already": "Vous êtes déjà inscrit."
     }
+  },
+  "export": {
+    "reference": "Référence",
+    "date": "Date",
+    "start": "Début",
+    "end": "Fin",
+    "minutes": "Minutes",
+    "court": "Terrain",
+    "coach": "Entraîneur",
+    "player": "Joueur",
+    "status": "Statut",
+    "price": "Prix (€)",
+    "notes": "Notes",
+    "name": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "plan": "Formule",
+    "memberSince": "Membre depuis",
+    "ends": "Fin"
   }
 }
