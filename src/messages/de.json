@@ -386,12 +386,15 @@
       "myBookings": "Meine Buchungen",
       "share": "Mit Spielern teilen",
       "owner": "Clubs & Zahlungen",
-      "tournaments": "Turniere"
+      "tournaments": "Turniere",
+      "staff": "Mitarbeiter"
     },
     "share": "Teilen",
     "ownerGroup": "ServeTime",
     "ownerPage": "Clubs & Zahlungen",
-    "tournaments": "Turniere"
+    "tournaments": "Turniere",
+    "staff": "Mitarbeiter",
+    "manageClub": "Club verwalten"
   },
   "members": {
     "title": "Mitglieder",
@@ -663,6 +666,18 @@
       "trialEnds": "Kostenlos bis",
       "seePlan": "Tarif ansehen",
       "footer": "Sie erhalten diese E-Mail, weil Sie einen Club auf ServeTime führen."
+    },
+    "staff": {
+      "subject": "Sie sind eingeladen, bei {club} auf ServeTime mitzuhelfen",
+      "heading": "Willkommen im Team von {club}",
+      "intro": "{owner} hat Sie eingeladen, bei {club} die Buchungen mitzuverwalten.",
+      "introNoName": "Sie sind eingeladen, bei {club} die Buchungen mitzuverwalten.",
+      "club": "Club",
+      "signInWith": "Anmelden mit",
+      "youCan": "Sie können",
+      "screens": "Den Belegungsplan sehen, Buchungen und Mitglieder verwalten",
+      "button": "ServeTime öffnen",
+      "footer": "Sie erhalten diese E-Mail, weil {club} diese Adresse bei ServeTime als Mitarbeiter eingetragen hat. Wenn Sie den Club nicht kennen, können Sie sie ignorieren."
     }
   },
   "billing": {
@@ -688,7 +703,8 @@
       "coaches": "Trainer",
       "reminders": "Erinnerungs-E-Mails",
       "weeklyReport": "Wochenbericht",
-      "analytics": "Statistiken"
+      "analytics": "Statistiken",
+      "staff": "Mitarbeiterkonten"
     },
     "planNames": {
       "starter": "Starter",
@@ -963,7 +979,7 @@
           "Unbegrenzt Plätze",
           "Alles aus Club",
           "Statistiken",
-          "Mehrere Admins (bald verfügbar)",
+          "Mitarbeiterkonten",
           "Bevorzugter Support"
         ]
       }
@@ -1680,5 +1696,42 @@
     "plan": "Tarif",
     "memberSince": "Mitglied seit",
     "ends": "Endet"
+  },
+  "staff": {
+    "title": "Mitarbeiter",
+    "subtitle": "Geben Sie Ihrer Rezeption oder Ihren Trainern einen eigenen Zugang. Sie melden sich mit ihrer eigenen E-Mail an, und Sie können sie jederzeit entfernen.",
+    "canTitle": "Mitarbeiter können",
+    "can": [
+      "Den Belegungsplan sehen",
+      "Buchungen anlegen, ändern und stornieren, auch wöchentliche",
+      "Mitglieder anlegen und ihre Daten ändern"
+    ],
+    "ownerOnlyTitle": "Nur Sie können",
+    "ownerOnly": "Einstellungen, Plätze, Trainer, Tarife und Turniere ändern, die Auswertungen sehen, Ihren ServeTime-Tarif verwalten und Mitarbeiter einladen oder entfernen.",
+    "inviteTitle": "Jemanden einladen",
+    "inviteHint": "Wir schicken einen Link per E-Mail. Mit dieser Adresse anmelden oder ein Konto erstellen, und Ihr Club ist sofort da.",
+    "emailPlaceholder": "name@beispiel.de",
+    "invite": "Einladung senden",
+    "sending": "Wird gesendet…",
+    "invited": "Einladung an {email} gesendet.",
+    "invitedNoEmail": "{email} ist eingeladen. Die E-Mail konnte nicht gesendet werden. Bitten Sie die Person, sich mit dieser Adresse bei ServeTime anzumelden.",
+    "empty": "Noch keine Mitarbeiter",
+    "emptyHint": "Laden Sie oben Ihr erstes Teammitglied ein.",
+    "active": "Aktiv",
+    "pending": "Eingeladen",
+    "joined": "Dabei seit {date}",
+    "invitedOn": "Eingeladen am {date}",
+    "remove": "Entfernen",
+    "removeTitle": "Aus dem Team entfernen",
+    "removeText": "{name} verliert sofort den Zugang zu Ihrem Club. Das eigene Konto bleibt bestehen.",
+    "keep": "Behalten",
+    "errors": {
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "self": "Das ist Ihre eigene E-Mail. Sie haben bereits vollen Zugang.",
+      "already": "Diese Person ist bereits eingeladen.",
+      "limit": "Ein Club kann höchstens 20 Mitarbeiterkonten haben.",
+      "plan": "Mitarbeiterkonten gibt es im Academy-Tarif.",
+      "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    }
   }
 }

@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Coach } from "@/types/database";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 import { UpgradeNotice } from "@/components/admin/PlanNotices";
+import { redirect } from "next/navigation";
 
 export default async function CoachesPage() {
   const supabase = await createClient();
@@ -17,7 +18,8 @@ export default async function CoachesPage() {
     .eq("owner_id", user?.id ?? "")
     .single()) as { data: ({ id: string } & ClubBilling) | null };
 
-  if (club && !clubAccess(club).has("coaches"))
+  if (!club) redirect("/admin/setup");
+  if (!clubAccess(club).has("coaches"))
     return <UpgradeNotice feature="coaches" />;
 
   const { data: coaches } = await supabase

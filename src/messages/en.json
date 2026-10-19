@@ -386,12 +386,15 @@
       "myBookings": "My bookings",
       "share": "Share with players",
       "owner": "Clubs & payments",
-      "tournaments": "Tournaments"
+      "tournaments": "Tournaments",
+      "staff": "Staff"
     },
     "share": "Share",
     "ownerGroup": "ServeTime",
     "ownerPage": "Clubs & payments",
-    "tournaments": "Tournaments"
+    "tournaments": "Tournaments",
+    "staff": "Staff",
+    "manageClub": "Manage club"
   },
   "members": {
     "title": "Members",
@@ -663,6 +666,18 @@
       "trialEnds": "Free trial until",
       "seePlan": "See your plan",
       "footer": "You get this email because you run a club on ServeTime."
+    },
+    "staff": {
+      "subject": "You're invited to help run {club} on ServeTime",
+      "heading": "Join {club} on ServeTime",
+      "intro": "{owner} invited you to help manage bookings at {club}.",
+      "introNoName": "You're invited to help manage bookings at {club}.",
+      "club": "Club",
+      "signInWith": "Sign in with",
+      "youCan": "You can",
+      "screens": "See the timetable, manage bookings and members",
+      "button": "Open ServeTime",
+      "footer": "You get this email because {club} added this address to their staff on ServeTime. If you don't know them, you can ignore it."
     }
   },
   "billing": {
@@ -688,7 +703,8 @@
       "coaches": "Coaches",
       "reminders": "Reminder emails",
       "weeklyReport": "Weekly report",
-      "analytics": "Analytics"
+      "analytics": "Analytics",
+      "staff": "Staff accounts"
     },
     "planNames": {
       "starter": "Starter",
@@ -963,7 +979,7 @@
           "Unlimited courts",
           "Everything in Club",
           "Analytics",
-          "Multiple admins (coming soon)",
+          "Staff accounts",
           "Priority support"
         ]
       }
@@ -1680,5 +1696,42 @@
     "plan": "Plan",
     "memberSince": "Member since",
     "ends": "Ends"
+  },
+  "staff": {
+    "title": "Staff",
+    "subtitle": "Give your receptionist or coaches their own login. They sign in with their own email, and you can remove them at any time.",
+    "canTitle": "Staff can",
+    "can": [
+      "See the timetable",
+      "Add, change and cancel bookings, weekly ones too",
+      "Add members and change their details"
+    ],
+    "ownerOnlyTitle": "Only you can",
+    "ownerOnly": "Change settings, courts, coaches, plans and tournaments, see analytics, manage your ServeTime plan, and invite or remove staff.",
+    "inviteTitle": "Invite someone",
+    "inviteHint": "We email them a link. They sign in or create an account with this email address, and your club is there for them straight away.",
+    "emailPlaceholder": "name@example.com",
+    "invite": "Send invite",
+    "sending": "Sending…",
+    "invited": "Invite sent to {email}.",
+    "invitedNoEmail": "{email} is invited. We couldn't send the email, so ask them to sign in to ServeTime with this address.",
+    "empty": "No staff yet",
+    "emptyHint": "Invite your first team member above.",
+    "active": "Active",
+    "pending": "Invited",
+    "joined": "Joined {date}",
+    "invitedOn": "Invited {date}",
+    "remove": "Remove",
+    "removeTitle": "Remove from staff",
+    "removeText": "{name} loses access to your club straight away. Their own account stays.",
+    "keep": "Keep",
+    "errors": {
+      "email": "Please enter a valid email address.",
+      "self": "That's your own email. You already have full access.",
+      "already": "This person is already invited.",
+      "limit": "A club can have at most 20 staff accounts.",
+      "plan": "Staff accounts come with the Academy plan.",
+      "failed": "Something went wrong. Please try again."
+    }
   }
 }

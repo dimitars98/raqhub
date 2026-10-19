@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 import type { Member, MembershipPlan } from "@/types/database";
+import { getMyClub } from "@/lib/myClub";
 
 function handleError(error: unknown) {
   const err = error as {
@@ -28,12 +29,8 @@ export async function POST(request: Request) {
 
   const body = await request.json();
 
-  const { data: clubData } = await supabase
-    .from("clubs")
-    .select("id")
-    .eq("owner_id", user.id)
-    .single();
-  const club = clubData as { id: string } | null;
+  // The club the signed-in admin owns, or is staff of
+  const { club } = await getMyClub<{ id: string }>(supabase, user.id, "id");
   if (!club)
     return NextResponse.json({ error: "No club found" }, { status: 403 });
 

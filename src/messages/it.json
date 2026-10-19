@@ -386,12 +386,15 @@
       "myBookings": "Le mie prenotazioni",
       "share": "Condividi con i giocatori",
       "owner": "Club e pagamenti",
-      "tournaments": "Tornei"
+      "tournaments": "Tornei",
+      "staff": "Staff"
     },
     "share": "Condividi",
     "ownerGroup": "ServeTime",
     "ownerPage": "Club e pagamenti",
-    "tournaments": "Tornei"
+    "tournaments": "Tornei",
+    "staff": "Staff",
+    "manageClub": "Gestisci il club"
   },
   "members": {
     "title": "Soci",
@@ -663,6 +666,18 @@
       "trialEnds": "Gratis fino al",
       "seePlan": "Vedi il tuo piano",
       "footer": "Ricevi questa email perché gestisci un club su ServeTime."
+    },
+    "staff": {
+      "subject": "Siete invitati ad aiutare {club} su ServeTime",
+      "heading": "Entrate nel team di {club} su ServeTime",
+      "intro": "{owner} vi ha invitato a gestire le prenotazioni di {club}.",
+      "introNoName": "Siete invitati a gestire le prenotazioni di {club}.",
+      "club": "Club",
+      "signInWith": "Entrate con",
+      "youCan": "Potrete",
+      "screens": "Vedere il calendario, gestire prenotazioni e soci",
+      "button": "Apri ServeTime",
+      "footer": "Ricevete questa e-mail perché {club} ha aggiunto questo indirizzo al suo staff su ServeTime. Se non li conoscete, potete ignorarla."
     }
   },
   "billing": {
@@ -688,7 +703,8 @@
       "coaches": "Maestri",
       "reminders": "Email di promemoria",
       "weeklyReport": "Report settimanale",
-      "analytics": "Statistiche"
+      "analytics": "Statistiche",
+      "staff": "Account staff"
     },
     "planNames": {
       "starter": "Starter",
@@ -963,7 +979,7 @@
           "Campi illimitati",
           "Tutto di Club",
           "Statistiche",
-          "Più amministratori (in arrivo)",
+          "Account staff",
           "Assistenza prioritaria"
         ]
       }
@@ -1680,5 +1696,42 @@
     "plan": "Piano",
     "memberSince": "Socio dal",
     "ends": "Scade"
+  },
+  "staff": {
+    "title": "Staff",
+    "subtitle": "Date alla reception o ai maestri un accesso tutto loro. Entrano con la propria e-mail e potete rimuoverli in qualsiasi momento.",
+    "canTitle": "Lo staff può",
+    "can": [
+      "Vedere il calendario",
+      "Aggiungere, modificare e disdire prenotazioni, anche settimanali",
+      "Aggiungere soci e modificarne i dati"
+    ],
+    "ownerOnlyTitle": "Solo voi potete",
+    "ownerOnly": "Modificare impostazioni, campi, maestri, piani e tornei, vedere le statistiche, gestire il piano ServeTime e invitare o rimuovere lo staff.",
+    "inviteTitle": "Invita qualcuno",
+    "inviteHint": "Gli inviamo un link via e-mail. Entra o crea un account con questo indirizzo e il club è subito lì.",
+    "emailPlaceholder": "nome@esempio.it",
+    "invite": "Invia invito",
+    "sending": "Invio…",
+    "invited": "Invito inviato a {email}.",
+    "invitedNoEmail": "{email} è stato invitato. Non siamo riusciti a inviare l’e-mail: chiedetegli di entrare in ServeTime con questo indirizzo.",
+    "empty": "Ancora nessuno nello staff",
+    "emptyHint": "Invitate qui sopra il primo membro del team.",
+    "active": "Attivo",
+    "pending": "Invitato",
+    "joined": "Dal {date}",
+    "invitedOn": "Invitato il {date}",
+    "remove": "Rimuovi",
+    "removeTitle": "Rimuovi dallo staff",
+    "removeText": "{name} perde subito l’accesso al vostro club. Il suo account personale resta.",
+    "keep": "Mantieni",
+    "errors": {
+      "email": "Inserite un indirizzo e-mail valido.",
+      "self": "È la vostra e-mail. Avete già accesso completo.",
+      "already": "Questa persona è già invitata.",
+      "limit": "Un club può avere al massimo 20 account staff.",
+      "plan": "Gli account staff sono inclusi nel piano Academy.",
+      "failed": "Qualcosa è andato storto. Riprovate."
+    }
   }
 }

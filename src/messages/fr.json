@@ -386,12 +386,15 @@
       "myBookings": "Mes réservations",
       "share": "Partager avec les joueurs",
       "owner": "Clubs et paiements",
-      "tournaments": "Tournois"
+      "tournaments": "Tournois",
+      "staff": "Équipe"
     },
     "share": "Partager",
     "ownerGroup": "ServeTime",
     "ownerPage": "Clubs et paiements",
-    "tournaments": "Tournois"
+    "tournaments": "Tournois",
+    "staff": "Équipe",
+    "manageClub": "Gérer le club"
   },
   "members": {
     "title": "Membres",
@@ -663,6 +666,18 @@
       "trialEnds": "Gratuit jusqu’au",
       "seePlan": "Voir votre formule",
       "footer": "Vous recevez cet e-mail car vous gérez un club sur ServeTime."
+    },
+    "staff": {
+      "subject": "Vous êtes invité à aider {club} sur ServeTime",
+      "heading": "Rejoignez {club} sur ServeTime",
+      "intro": "{owner} vous invite à gérer les réservations de {club}.",
+      "introNoName": "Vous êtes invité à gérer les réservations de {club}.",
+      "club": "Club",
+      "signInWith": "Connectez-vous avec",
+      "youCan": "Vous pourrez",
+      "screens": "Voir le planning, gérer les réservations et les membres",
+      "button": "Ouvrir ServeTime",
+      "footer": "Vous recevez cet e-mail car {club} a ajouté cette adresse à son équipe sur ServeTime. Si vous ne les connaissez pas, vous pouvez l’ignorer."
     }
   },
   "billing": {
@@ -688,7 +703,8 @@
       "coaches": "Entraîneurs",
       "reminders": "E-mails de rappel",
       "weeklyReport": "Rapport hebdomadaire",
-      "analytics": "Statistiques"
+      "analytics": "Statistiques",
+      "staff": "Comptes d’équipe"
     },
     "planNames": {
       "starter": "Starter",
@@ -963,7 +979,7 @@
           "Terrains illimités",
           "Tout Club",
           "Statistiques",
-          "Plusieurs administrateurs (bientôt)",
+          "Comptes d’équipe",
           "Support prioritaire"
         ]
       }
@@ -1680,5 +1696,42 @@
     "plan": "Formule",
     "memberSince": "Membre depuis",
     "ends": "Fin"
+  },
+  "staff": {
+    "title": "Équipe",
+    "subtitle": "Donnez à votre accueil ou à vos entraîneurs leur propre accès. Ils se connectent avec leur propre e-mail, et vous pouvez les retirer à tout moment.",
+    "canTitle": "L’équipe peut",
+    "can": [
+      "Voir le planning",
+      "Ajouter, modifier et annuler des réservations, même hebdomadaires",
+      "Ajouter des membres et modifier leurs coordonnées"
+    ],
+    "ownerOnlyTitle": "Vous seul pouvez",
+    "ownerOnly": "Modifier les paramètres, terrains, entraîneurs, formules et tournois, voir les statistiques, gérer votre abonnement ServeTime et inviter ou retirer des membres de l’équipe.",
+    "inviteTitle": "Inviter quelqu’un",
+    "inviteHint": "Nous lui envoyons un lien par e-mail. Il se connecte ou crée un compte avec cette adresse, et votre club est là tout de suite.",
+    "emailPlaceholder": "nom@exemple.fr",
+    "invite": "Envoyer l’invitation",
+    "sending": "Envoi…",
+    "invited": "Invitation envoyée à {email}.",
+    "invitedNoEmail": "{email} est invité. L’e-mail n’a pas pu être envoyé : demandez-lui de se connecter à ServeTime avec cette adresse.",
+    "empty": "Pas encore d’équipe",
+    "emptyHint": "Invitez votre premier membre d’équipe ci-dessus.",
+    "active": "Actif",
+    "pending": "Invité",
+    "joined": "Depuis le {date}",
+    "invitedOn": "Invité le {date}",
+    "remove": "Retirer",
+    "removeTitle": "Retirer de l’équipe",
+    "removeText": "{name} perd immédiatement l’accès à votre club. Son compte personnel reste.",
+    "keep": "Garder",
+    "errors": {
+      "email": "Saisissez une adresse e-mail valide.",
+      "self": "C’est votre propre e-mail. Vous avez déjà un accès complet.",
+      "already": "Cette personne est déjà invitée.",
+      "limit": "Un club peut avoir au maximum 20 comptes d’équipe.",
+      "plan": "Les comptes d’équipe sont inclus dans la formule Academy.",
+      "failed": "Une erreur s’est produite. Veuillez réessayer."
+    }
   }
 }

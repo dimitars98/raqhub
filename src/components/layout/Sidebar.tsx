@@ -18,6 +18,7 @@ import {
   Settings,
   Star,
   Trophy,
+  UserPlus,
   Users,
   X,
 } from "lucide-react";
@@ -65,6 +66,8 @@ interface SidebarContentProps {
   onSignOut: () => void;
   onClose?: () => void;
   playerLabel: string;
+  /** "Admin", "Staff" or "Player" next to the logo. */
+  badgeLabel: string;
   signOutLabel: string;
   collapsed?: boolean;
   /** Keeps the sliding bar of the desktop and the mobile copy from interfering. */
@@ -82,6 +85,7 @@ function SidebarContent({
   onSignOut,
   onClose,
   playerLabel,
+  badgeLabel,
   signOutLabel,
   collapsed = false,
   layoutGroupId,
@@ -125,7 +129,7 @@ function SidebarContent({
             <span
               className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${tone.badge}`}
             >
-              {role === "admin" ? "Admin" : playerLabel}
+              {badgeLabel}
             </span>
           )}
         </div>
@@ -330,6 +334,10 @@ interface SidebarProps {
   clubSlug?: string;
   /** The app owner (super_admin) also gets the owner page. */
   isOwner?: boolean;
+  /** Staff of a club: only timetable, bookings and members. */
+  isStaff?: boolean;
+  /** A player who is also staff: a link to the club's admin screens. */
+  staffLink?: boolean;
 }
 
 export default function Sidebar({
@@ -338,6 +346,8 @@ export default function Sidebar({
   clubName,
   clubSlug,
   isOwner = false,
+  isStaff = false,
+  staffLink = false,
 }: SidebarProps) {
   const { collapsed, mobileOpen, setMobileOpen } = useSidebar();
   const pathname = usePathname();
@@ -385,6 +395,7 @@ export default function Sidebar({
       items: [
         { label: t("analytics"), href: "/admin/analytics", icon: BarChart3 },
         { label: t("settings"), href: "/admin/settings", icon: Settings },
+        { label: t("staff"), href: "/admin/staff", icon: UserPlus },
         { label: t("share"), href: "/admin/share", icon: Share2 },
         // What visitors see before they have an account.
         ...(clubSlug
@@ -395,6 +406,21 @@ export default function Sidebar({
                 icon: Globe,
               },
             ]
+          : []),
+      ],
+    },
+  ];
+
+  // Staff see only the screens they can use.
+  const STAFF_NAV: NavGroup[] = [
+    {
+      group: t("overview"),
+      items: [
+        { label: t("timetable"), href: "/admin/timetable", icon: CalendarRange },
+        { label: t("bookings"), href: "/admin/bookings", icon: CalendarDays },
+        { label: t("members"), href: "/admin/members", icon: Users },
+        ...(clubSlug
+          ? [{ label: t("publicPage"), href: `/clubs/${clubSlug}`, icon: Globe }]
           : []),
       ],
     },
@@ -416,9 +442,19 @@ export default function Sidebar({
         { label: t("membership"), href: "/membership", icon: CreditCard },
       ],
     },
+    ...(staffLink
+      ? [
+          {
+            group: t("club"),
+            items: [
+              { label: t("manageClub"), href: "/admin/timetable", icon: CalendarRange },
+            ],
+          },
+        ]
+      : []),
   ];
 
-  const nav = role === "admin" ? ADMIN_NAV : MEMBER_NAV;
+  const nav = role === "admin" ? (isStaff ? STAFF_NAV : ADMIN_NAV) : MEMBER_NAV;
 
   const handleSignOut = async () => {
     // Created here, not on every render.
@@ -446,6 +482,7 @@ export default function Sidebar({
     onNavClick: closeMobile,
     onSignOut: handleSignOut,
     playerLabel: t("player"),
+    badgeLabel: role === "admin" ? (isStaff ? t("staff") : "Admin") : t("player"),
     signOutLabel: t("signOut"),
   };
 

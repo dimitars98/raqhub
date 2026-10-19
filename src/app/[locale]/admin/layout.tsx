@@ -2,7 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
-import { PlanBanner } from "@/components/admin/PlanNotices";
+import { PlanBanner, UpgradeNotice } from "@/components/admin/PlanNotices";
+import { acceptStaffInvites } from "@/lib/myClub";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 import type { Club, Profile } from "@/types/database";
 
@@ -25,7 +26,7 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/login`);
 
-  // 4. Fetch profile and club in parallel
+  // 4. Fetch profile and the club they own in parallel
   const [profileRes, clubRes] = await Promise.all([
     supabase
       .from("profiles")
@@ -41,14 +42,29 @@ export default async function AdminLayout({
   ]);
 
   const profile = profileRes.data as LayoutProfile | null;
-  const club = clubRes.data as LayoutClub | null;
+  let club = clubRes.data as LayoutClub | null;
+  if (!profile) redirect(`/${locale}/login`);
 
-  if (
-    !profile ||
-    (profile.role !== "club_admin" && profile.role !== "super_admin")
-  ) {
-    redirect(`/${locale}/login`);
+  // Club owners and the app owner, as before. Anyone else gets in only as
+  // staff of a club that invited them (and only on the timetable, bookings
+  // and members screens, see src/lib/myClub.ts).
+  const isAdmin = profile.role === "club_admin" || profile.role === "super_admin";
+  let isStaff = false;
+  if (!isAdmin) {
+    const staffClubId = await acceptStaffInvites(supabase);
+    if (!staffClubId) redirect(`/${locale}/book`);
+    const { data } = await supabase
+      .from("clubs")
+      .select(`name, slug, ${BILLING_COLUMNS}`)
+      .eq("id", staffClubId)
+      .maybeSingle();
+    club = data as LayoutClub | null;
+    if (!club) redirect(`/${locale}/book`);
+    isStaff = true;
   }
+
+  // Staff accounts come with the Academy plan (and the free trial).
+  const staffLocked = isStaff && !clubAccess(club).has("staff");
 
   return (
     <DashboardShell
@@ -57,9 +73,11 @@ export default async function AdminLayout({
       clubName={club?.name}
       clubSlug={club?.slug}
       isOwner={profile.role === "super_admin"}
-      notice={club ? <PlanBanner access={clubAccess(club)} /> : undefined}
+      isStaff={isStaff}
+      // The plan and trial are the owner's business, not the staff's.
+      notice={club && !isStaff ? <PlanBanner access={clubAccess(club)} /> : undefined}
     >
-      {children}
+      {staffLocked ? <UpgradeNotice feature="staff" /> : children}
     </DashboardShell>
   );
 }

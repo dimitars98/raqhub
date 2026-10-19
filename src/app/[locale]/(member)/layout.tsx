@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
 import type { Profile } from "@/types/database";
+import { acceptStaffInvites } from "@/lib/myClub";
 
 type LayoutProfile = Pick<Profile, "full_name" | "role">;
 
@@ -31,8 +32,15 @@ export default async function MemberLayout({
     redirect(`/${locale}/admin/dashboard`);
   }
 
+  // A player who is also staff of a club gets a link to its admin screens.
+  const isStaff = !!(await acceptStaffInvites(supabase));
+
   return (
-    <DashboardShell role="member" userName={profile.full_name ?? "Player"}>
+    <DashboardShell
+      role="member"
+      userName={profile.full_name ?? "Player"}
+      staffLink={isStaff}
+    >
       {children}
     </DashboardShell>
   );

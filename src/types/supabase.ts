@@ -224,6 +224,41 @@ export type Database = {
           },
         ]
       }
+      club_staff: {
+        Row: {
+          id: string
+          club_id: string
+          email: string
+          user_id: string | null
+          created_at: string
+          accepted_at: string | null
+        }
+        Insert: {
+          id?: string
+          club_id: string
+          email: string
+          user_id?: string | null
+          created_at?: string
+          accepted_at?: string | null
+        }
+        Update: {
+          id?: string
+          club_id?: string
+          email?: string
+          user_id?: string | null
+          created_at?: string
+          accepted_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "club_staff_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "clubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       club_weekly_reports: {
         Row: {
           club_id: string

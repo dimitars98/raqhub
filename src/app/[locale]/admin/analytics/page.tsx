@@ -45,7 +45,7 @@ export default async function AnalyticsPage() {
     .select(`id, name, ${BILLING_COLUMNS}`)
     .eq("owner_id", user.id)
     .single();
-  if (!club) redirect("/login");
+  if (!club) redirect("/admin/setup");
   if (!clubAccess(club).has("analytics"))
     return <UpgradeNotice feature="analytics" />;
 

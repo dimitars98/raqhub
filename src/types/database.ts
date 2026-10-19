@@ -228,3 +228,14 @@ export interface TournamentMatch {
   winner_id: string | null;
   score: string | null;
 }
+
+/** Someone the club owner invited as staff (supabase/migrations/20261020_staff.sql). */
+export interface ClubStaff {
+  id: string;
+  club_id: string;
+  email: string;
+  /** Set once they have signed in with that email. */
+  user_id: string | null;
+  created_at: string;
+  accepted_at: string | null;
+}

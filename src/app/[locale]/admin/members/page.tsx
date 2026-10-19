@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import MembersClient, { type MemberWithPlan } from "@/components/admin/MembersClient";
 import type { MembershipPlan } from "@/types/database";
 import { redirect } from "next/navigation";
+import { getMyClub } from "@/lib/myClub";
 
 export default async function MembersPage() {
   const supabase = await createClient();
@@ -11,14 +12,8 @@ export default async function MembersPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // The club owned by the signed-in admin
-  const { data: clubData } = await supabase
-    .from("clubs")
-    .select("id")
-    .eq("owner_id", user.id)
-    .limit(1)
-    .maybeSingle();
-  const club = clubData as { id: string } | null;
+  // The club the signed-in admin owns, or is staff of
+  const { club } = await getMyClub<{ id: string }>(supabase, user.id, "id");
   if (!club) redirect("/admin/setup");
 
   const { data: membersData } = await supabase

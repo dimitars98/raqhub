@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
+import { getMyClub } from "@/lib/myClub";
 import { createClient } from "@/lib/supabase/server";
 import type { Club, Court, Member } from "@/types/database";
 import BookingsClient from "@/components/admin/BookingsClient";
@@ -17,14 +18,12 @@ export default async function AdminBookingsPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // The club owned by the signed-in admin
-  const { data: clubData } = await supabase
-    .from("clubs")
-    .select("id, booking_rules")
-    .eq("owner_id", user.id)
-    .limit(1)
-    .maybeSingle();
-  const club = clubData as Pick<Club, "id" | "booking_rules"> | null;
+  // The club the signed-in admin owns, or is staff of
+  const { club } = await getMyClub<Pick<Club, "id" | "booking_rules">>(
+    supabase,
+    user.id,
+    "id, booking_rules",
+  );
   if (!club) redirect("/admin/setup");
 
   // All of the club's courts, so bookings on a deactivated court still show

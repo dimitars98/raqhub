@@ -386,12 +386,15 @@
       "myBookings": "Rezervimet e mia",
       "share": "Ndajeni me lojtarët",
       "owner": "Klubet dhe pagesat",
-      "tournaments": "Turnetë"
+      "tournaments": "Turnetë",
+      "staff": "Stafi"
     },
     "share": "Ndaj",
     "ownerGroup": "ServeTime",
     "ownerPage": "Klubet dhe pagesat",
-    "tournaments": "Turnetë"
+    "tournaments": "Turnetë",
+    "staff": "Stafi",
+    "manageClub": "Menaxho klubin"
   },
   "members": {
     "title": "Anëtarë",
@@ -663,6 +666,18 @@
       "trialEnds": "Falas deri më",
       "seePlan": "Shikoni paketën",
       "footer": "E merrni këtë email sepse drejtoni një klub në ServeTime."
+    },
+    "staff": {
+      "subject": "Jeni ftuar të ndihmoni në {club} në ServeTime",
+      "heading": "Bashkohuni me {club} në ServeTime",
+      "intro": "{owner} ju ftoi të ndihmoni me rezervimet në {club}.",
+      "introNoName": "Jeni ftuar të ndihmoni me rezervimet në {club}.",
+      "club": "Klubi",
+      "signInWith": "Hyni me",
+      "youCan": "Mund të",
+      "screens": "Shihni orarin, menaxhoni rezervimet dhe anëtarët",
+      "button": "Hap ServeTime",
+      "footer": "E merrni këtë email sepse {club} e shtoi këtë adresë te stafi i tyre në ServeTime. Nëse nuk i njihni, mund ta injoroni."
     }
   },
   "billing": {
@@ -688,7 +703,8 @@
       "coaches": "Trajnerët",
       "reminders": "Email kujtese",
       "weeklyReport": "Raporti javor",
-      "analytics": "Statistikat"
+      "analytics": "Statistikat",
+      "staff": "Llogari stafi"
     },
     "planNames": {
       "starter": "Starter",
@@ -963,7 +979,7 @@
           "Fusha pa kufi",
           "Gjithçka nga Club",
           "Statistika",
-          "Disa administratorë (së shpejti)",
+          "Llogari stafi",
           "Mbështetje me përparësi"
         ]
       }
@@ -1680,5 +1696,42 @@
     "plan": "Plani",
     "memberSince": "Anëtar që nga",
     "ends": "Mbaron"
+  },
+  "staff": {
+    "title": "Stafi",
+    "subtitle": "Jepini recepsionistit ose trajnerëve hyrjen e tyre. Hyjnë me email-in e tyre dhe ju mund t'i hiqni në çdo kohë.",
+    "canTitle": "Stafi mund",
+    "can": [
+      "Të shohë orarin",
+      "Të shtojë, ndryshojë dhe anulojë rezervime, edhe ato javore",
+      "Të shtojë anëtarë dhe të ndryshojë të dhënat e tyre"
+    ],
+    "ownerOnlyTitle": "Vetëm ju mund",
+    "ownerOnly": "Të ndryshoni cilësimet, fushat, trajnerët, planet dhe turnet, të shihni statistikat, të menaxhoni planin ServeTime dhe të ftoni ose hiqni stafin.",
+    "inviteTitle": "Ftoni dikë",
+    "inviteHint": "I dërgojmë një lidhje me email. Hyn ose krijon llogari me këtë email dhe klubi është menjëherë aty për të.",
+    "emailPlaceholder": "emri@shembull.com",
+    "invite": "Dërgo ftesën",
+    "sending": "Po dërgohet…",
+    "invited": "Ftesa u dërgua te {email}.",
+    "invitedNoEmail": "{email} është ftuar. Nuk arritëm ta dërgojmë email-in, ndaj kërkojini të hyjë në ServeTime me këtë adresë.",
+    "empty": "Ende pa staf",
+    "emptyHint": "Ftoni anëtarin e parë të ekipit më lart.",
+    "active": "Aktiv",
+    "pending": "I ftuar",
+    "joined": "U bashkua më {date}",
+    "invitedOn": "U ftua më {date}",
+    "remove": "Hiq",
+    "removeTitle": "Hiq nga stafi",
+    "removeText": "{name} humb menjëherë qasjen në klubin tuaj. Llogaria e tij mbetet.",
+    "keep": "Mbaje",
+    "errors": {
+      "email": "Shkruani një adresë email të vlefshme.",
+      "self": "Ky është email-i juaj. Ju keni tashmë qasje të plotë.",
+      "already": "Ky person është ftuar tashmë.",
+      "limit": "Një klub mund të ketë deri në 20 llogari stafi.",
+      "plan": "Llogaritë e stafit vijnë me planin Academy.",
+      "failed": "Diçka shkoi keq. Provoni përsëri."
+    }
   }
 }

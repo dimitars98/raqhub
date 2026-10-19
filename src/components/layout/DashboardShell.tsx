@@ -15,6 +15,10 @@ interface DashboardShellProps {
   notice?: React.ReactNode;
   /** The app owner (super_admin): adds the owner page to the sidebar. */
   isOwner?: boolean;
+  /** Staff of a club: only the screens staff can use. */
+  isStaff?: boolean;
+  /** A player who is also staff: link to the club's admin screens. */
+  staffLink?: boolean;
 }
 
 export default async function DashboardShell({
@@ -25,6 +29,8 @@ export default async function DashboardShell({
   clubSlug,
   notice,
   isOwner,
+  isStaff,
+  staffLink,
 }: DashboardShellProps) {
   const cookieStore = await cookies();
   const defaultCollapsed =
@@ -39,6 +45,8 @@ export default async function DashboardShell({
           clubName={clubName}
           clubSlug={clubSlug}
           isOwner={isOwner}
+          isStaff={isStaff}
+          staffLink={staffLink}
         />
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
           <DashboardTopbar />

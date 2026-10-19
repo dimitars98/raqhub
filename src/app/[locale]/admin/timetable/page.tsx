@@ -5,6 +5,7 @@ import TimetableClient, {
 } from "@/components/admin/TimetableClient";
 import { createClient } from "@/lib/supabase/server";
 import type { Club } from "@/types/database";
+import { getMyClub } from "@/lib/myClub";
 
 export default async function TimetablePage() {
   const supabase = await createClient();
@@ -14,14 +15,8 @@ export default async function TimetablePage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // The club owned by the signed-in admin
-  const { data: clubData } = await supabase
-    .from("clubs")
-    .select("id")
-    .eq("owner_id", user.id)
-    .limit(1)
-    .maybeSingle();
-  const club = clubData as Pick<Club, "id"> | null;
+  // The club the signed-in admin owns, or is staff of
+  const { club } = await getMyClub<Pick<Club, "id">>(supabase, user.id, "id");
 
   if (!club) redirect("/admin/setup");
 

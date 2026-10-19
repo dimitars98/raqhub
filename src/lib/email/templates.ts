@@ -347,3 +347,37 @@ export function newClubEmail(d: NewClubEmailData): Rendered {
     text: plainText(heading, intro, rows, d.clubUrl, footer),
   };
 }
+
+// ---------------------------------------------------------------------------
+// Staff invite, to the person the club owner invited
+// ---------------------------------------------------------------------------
+
+export type StaffInviteEmailData = {
+  locale: Locale;
+  clubName: string;
+  ownerName: string | null;
+  email: string;
+  appUrl: string;
+};
+
+export function staffInviteEmail(d: StaffInviteEmailData): Rendered {
+  const t = translator(d.locale);
+  const heading = t("staff.heading", { club: d.clubName });
+  const intro = d.ownerName
+    ? t("staff.intro", { owner: d.ownerName, club: d.clubName })
+    : t("staff.introNoName", { club: d.clubName });
+  const rows: [string, string][] = [
+    [t("staff.club"), d.clubName],
+    [t("staff.signInWith"), d.email],
+    [t("staff.youCan"), t("staff.screens")],
+  ];
+  // After signing in they land straight on the club's timetable.
+  const url = `${d.appUrl}/${d.locale}/login?redirectTo=${encodeURIComponent(`/${d.locale}/admin/timetable`)}`;
+  const footer = t("staff.footer", { club: d.clubName });
+
+  return {
+    subject: t("staff.subject", { club: d.clubName }),
+    html: layout({ heading, intro, rows, button: { label: t("staff.button"), url }, footer }),
+    text: plainText(heading, intro, rows, url, footer),
+  };
+}
