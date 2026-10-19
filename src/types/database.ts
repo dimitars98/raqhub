@@ -151,6 +151,8 @@ export interface Booking {
   reminder_sent_at?: string | null;
   /** Language the player booked in, used for their emails. */
   locale?: string | null;
+  /** Shared by the weeks of a weekly repeating booking. */
+  series_id?: string | null;
   created_at: string;
   updated_at: string;
   player?: Profile;

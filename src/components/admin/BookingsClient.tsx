@@ -20,6 +20,8 @@ import { BOOKING_STATUSES } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { BADGE, bookingStatusTone } from "@/lib/badges";
 import { DAY_HOURS } from "@/lib/openingHours";
+import { REPEAT_CHOICES, weeklyStarts } from "@/lib/recurring";
+import { Repeat, X } from "lucide-react";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
@@ -36,8 +38,13 @@ type FormValues = {
   date: string;
   hour: number;
   duration: number;
+  /** Weeks in a row, 1 = just once. */
+  repeat: number;
   notes: string;
 };
+
+/** Shown after a weekly booking: how many were added, which weeks were taken. */
+type SeriesNotice = { added: number; skipped: Date[] };
 
 const DURATIONS = [60, 90, 120];
 
@@ -67,6 +74,9 @@ export default function BookingsClient({
   const [bookings, setBookings] = useState(initial);
   const [showModal, setShowModal] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<SeriesNotice | null>(null);
+  /** A weekly booking the admin is about to cancel: just it, or later weeks too? */
+  const [cancelling, setCancelling] = useState<BookingWithJoins | null>(null);
   const [search, setSearch] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -94,6 +104,7 @@ export default function BookingsClient({
       date: format(new Date(), "yyyy-MM-dd"),
       hour: 9,
       duration: 60,
+      repeat: 1,
       notes: "",
     },
   });
@@ -101,6 +112,7 @@ export default function BookingsClient({
   const watchedCourt = watch("court_id");
   const watchedDuration = watch("duration");
   const watchedType = watch("player_type");
+  const watchedRepeat = watch("repeat");
   const selectedCourt = courts.find((c) => c.id === watchedCourt);
   const total = selectedCourt
     ? (selectedCourt.price_per_hour * watchedDuration) / 60
@@ -117,51 +129,96 @@ export default function BookingsClient({
   };
 
   const onSubmit = async (values: FormValues) => {
-    const startsAt = setMinutes(
-      setHours(new Date(values.date), values.hour),
-      0,
-    );
-    const endsAt = new Date(startsAt.getTime() + values.duration * 60 * 1000);
+    // The chosen day at the chosen hour, in the admin's own time.
+    const first = setMinutes(setHours(new Date(`${values.date}T00:00`), values.hour), 0);
+    const weeks = values.repeat > 1 ? values.repeat : 1;
+    const seriesId = weeks > 1 ? crypto.randomUUID() : null;
 
-    const payload = {
-      court_id: values.court_id,
-      member_id:
-        values.player_type === "member" && values.member_id
-          ? values.member_id
-          : null,
-      walk_in_name:
-        values.player_type === "walkin" && values.walk_in_name
-          ? values.walk_in_name
-          : null,
-      player_id: null,
-      starts_at: startsAt.toISOString(),
-      ends_at: endsAt.toISOString(),
-      duration_min: values.duration,
-      total_price: total,
-      status: "confirmed",
-      notes: values.notes || null,
-    } as unknown as never;
+    const bookingAt = (startsAt: Date) =>
+      ({
+        court_id: values.court_id,
+        member_id:
+          values.player_type === "member" && values.member_id
+            ? values.member_id
+            : null,
+        walk_in_name:
+          values.player_type === "walkin" && values.walk_in_name
+            ? values.walk_in_name
+            : null,
+        player_id: null,
+        starts_at: startsAt.toISOString(),
+        ends_at: new Date(startsAt.getTime() + values.duration * 60_000).toISOString(),
+        duration_min: values.duration,
+        total_price: total,
+        status: "confirmed",
+        notes: values.notes || null,
+        series_id: seriesId,
+      }) as unknown as never;
 
     setSubmitError(null);
+    setNotice(null);
 
-    const { data, error } = (await supabase
-      .from("bookings")
-      .insert(payload)
-      .select("*, court:courts(name), member:members(full_name)")
-      .single()) as {
-      data: BookingWithJoins | null;
-      error: { code?: string } | null;
-    };
-
-    if (error || !data) {
+    // One week at a time, so a week that is already taken is skipped
+    // instead of stopping the whole series.
+    const added: BookingWithJoins[] = [];
+    const skipped: Date[] = [];
+    let failed = false;
+    for (const startsAt of weeklyStarts(first, weeks)) {
+      const { data, error } = (await supabase
+        .from("bookings")
+        .insert(bookingAt(startsAt))
+        .select("*, court:courts(name), member:members(full_name)")
+        .single()) as {
+        data: BookingWithJoins | null;
+        error: { code?: string } | null;
+      };
       // 23P01 is the database's code for "overlaps an existing booking"
-      setSubmitError(error?.code === "23P01" ? t("slotTaken") : t("saveError"));
+      if (error?.code === "23P01") skipped.push(startsAt);
+      else if (error || !data) {
+        failed = true;
+        break;
+      } else added.push(data);
+    }
+
+    if (added.length === 0) {
+      setSubmitError(
+        failed ? t("saveError") : weeks > 1 ? t("allWeeksTaken") : t("slotTaken"),
+      );
       return;
     }
 
-    setBookings((prev) => [data, ...prev]);
+    setBookings((prev) => [...added.reverse(), ...prev]);
+    if (weeks > 1) setNotice({ added: added.length, skipped });
+    if (failed) {
+      // Some weeks were saved before something went wrong: keep the form
+      // open so the admin sees it, and show what was added.
+      setSubmitError(t("saveError"));
+      return;
+    }
     setShowModal(false);
     reset();
+  };
+
+  /** Cancels a weekly booking and, if asked, every later week of it. */
+  const cancelSeries = async (b: BookingWithJoins, later: boolean) => {
+    setCancelling(null);
+    if (!later || !b.series_id) return handleStatus(b.id, "cancelled");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase.from("bookings") as any)
+      .update({ status: "cancelled" })
+      .eq("series_id", b.series_id)
+      .gte("starts_at", b.starts_at)
+      .eq("status", "confirmed");
+    if (error) return;
+    setBookings((prev) =>
+      prev.map((x) =>
+        x.series_id === b.series_id &&
+        x.status === "confirmed" &&
+        x.starts_at >= b.starts_at
+          ? { ...x, status: "cancelled" }
+          : x,
+      ),
+    );
   };
 
   const handleStatus = async (id: string, status: BookingStatus) => {
@@ -250,6 +307,35 @@ export default function BookingsClient({
         </div>
       </div>
 
+      {notice && (
+        <div
+          role="status"
+          className="mb-4 flex items-start gap-3 rounded-xl border border-[#d6f09a] bg-[#f3fbde] px-4 py-3 text-sm text-[#2e4d03]"
+        >
+          <Repeat size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <div className="flex-1">
+            <p className="font-medium">{t("addedSeries", { n: notice.added })}</p>
+            {notice.skipped.length > 0 && (
+              <p className="mt-0.5 text-[#4d7a08]">
+                {t("skippedWeeks", {
+                  dates: notice.skipped
+                    .map((d) => format(d, "EEE d MMM", { locale: dfLocale }))
+                    .join(", "),
+                })}
+              </p>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => setNotice(null)}
+            aria-label={t("dismiss")}
+            className="shrink-0 rounded p-0.5 hover:bg-[#e3f5b8]"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      )}
+
       <div className="bg-white border border-[#e8ede4] rounded-2xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
@@ -337,6 +423,11 @@ export default function BookingsClient({
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
                     {format(new Date(b.starts_at), "EEE d MMM, HH:mm", { locale: dfLocale })}
+                    {b.series_id && (
+                      <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#f3fbde] px-2 py-0.5 text-[11px] font-medium text-[#4d7a08]">
+                        <Repeat size={11} aria-hidden="true" /> {t("weekly")}
+                      </div>
+                    )}
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
                     {b.duration_min} {t("min")}
@@ -352,9 +443,11 @@ export default function BookingsClient({
                   <td className="px-5 py-3.5">
                     <select
                       value={b.status}
-                      onChange={(e) =>
-                        handleStatus(b.id, e.target.value as BookingStatus)
-                      }
+                      onChange={(e) => {
+                        const status = e.target.value as BookingStatus;
+                        if (status === "cancelled" && b.series_id) setCancelling(b);
+                        else handleStatus(b.id, status);
+                      }}
                       className="text-xs border border-[#e8ede4] rounded-lg px-2 py-1 text-[#3d4f35] bg-white focus:outline-none focus:ring-1 focus:ring-[#d6f09a]"
                     >
                       {BOOKING_STATUSES.map((s) => (
@@ -490,6 +583,22 @@ export default function BookingsClient({
                 </Modal.Field>
               </Modal.Grid>
 
+              <Modal.Field label={t("repeat")}>
+                <select
+                  className="input"
+                  {...register("repeat", { valueAsNumber: true })}
+                >
+                  {REPEAT_CHOICES.map((n) => (
+                    <option key={n} value={n}>
+                      {n === 1 ? t("repeatOnce") : t("repeatWeeks", { n })}
+                    </option>
+                  ))}
+                </select>
+                {watchedRepeat > 1 && (
+                  <p className="mt-1.5 text-xs text-[#6e7f65]">{t("repeatHint")}</p>
+                )}
+              </Modal.Field>
+
               <Modal.Field label={t("notes")}>
                 <textarea
                   className="input resize-none"
@@ -504,8 +613,16 @@ export default function BookingsClient({
                   <span className="text-sm text-[#6e7f65]">
                     {watchedDuration} {t("min")} · {selectedCourt.name}
                   </span>
-                  <span className="text-sm font-medium text-[#111c0a]">
+                  <span className="text-right text-sm font-medium text-[#111c0a]">
                     €{total.toFixed(2)}
+                    {watchedRepeat > 1 && (
+                      <span className="block text-xs font-normal text-[#6e7f65]">
+                        {t("seriesTotal", {
+                          n: watchedRepeat,
+                          total: (total * watchedRepeat).toFixed(2),
+                        })}
+                      </span>
+                    )}
                   </span>
                 </div>
               )}
@@ -535,6 +652,38 @@ export default function BookingsClient({
               </button>
             </Modal.Footer>
           </form>
+        </Modal.Content>
+      </Modal>
+
+      <Modal open={!!cancelling} onClose={() => setCancelling(null)}>
+        <Modal.Content className="max-w-md">
+          <Modal.Header>{t("cancelSeriesTitle")}</Modal.Header>
+          <Modal.Body>
+            <p className="text-sm text-[#3d4f35]">
+              {cancelling &&
+                t("cancelSeriesText", {
+                  date: format(new Date(cancelling.starts_at), "EEE d MMM, HH:mm", {
+                    locale: dfLocale,
+                  }),
+                })}
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              type="button"
+              onClick={() => cancelling && cancelSeries(cancelling, false)}
+              className="btn-secondary flex-1"
+            >
+              {t("cancelOnlyThis")}
+            </button>
+            <button
+              type="button"
+              onClick={() => cancelling && cancelSeries(cancelling, true)}
+              className="btn-primary flex-1"
+            >
+              {t("cancelThisAndLater")}
+            </button>
+          </Modal.Footer>
         </Modal.Content>
       </Modal>
     </div>

@@ -72,7 +72,7 @@
         "body": "Disponueshmëri e fushave në kohë reale, konfirmim i menjëhershëm dhe asnjë rezervim i dyfishtë. Lojtarët rezervojnë nga telefoni, ndërsa ju shtoni rezervimet me telefon dhe në vend.",
         "cta": "Shihni rezervimet",
         "points": [
-          "Orar javor për çdo fushë",
+          "Rezervime javore që përsëriten për lojtarët e rregullt",
           "Rezervimet me telefon dhe në vend në të njëjtin orar",
           "Rregullat tuaja: sa përpara, sa në ditë, deri kur anulohet",
           "Lojtarët që shpesh nuk vijnë pezullohen automatikisht"
@@ -256,7 +256,21 @@
     "lesson": "Orë mësimi",
     "noShowCount": "{n, plural, one {# mosparaqitje} other {# mosparaqitje}}",
     "paused": "pezulluar",
-    "pausedHint": "Nuk mund të rezervojë online derisa të ndryshoni një nga këto mosparaqitje ose derisa të jenë më të vjetra se 90 ditë. Ju ende mund të rezervoni për të."
+    "pausedHint": "Nuk mund të rezervojë online derisa të ndryshoni një nga këto mosparaqitje ose derisa të jenë më të vjetra se 90 ditë. Ju ende mund të rezervoni për të.",
+    "repeat": "Përsëritje",
+    "repeatOnce": "Vetëm një herë",
+    "repeatWeeks": "Çdo javë, për {n} javë",
+    "repeatHint": "E njëjta fushë dhe orë çdo javë. Javët kur fusha është e zënë kapërcehen.",
+    "seriesTotal": "{n} javë · €{total}",
+    "weekly": "Çdo javë",
+    "addedSeries": "{n, plural, one {U shtua # rezervim javor.} other {U shtuan # rezervime javore.}}",
+    "skippedWeeks": "U kapërcyen sepse fusha ishte e zënë: {dates}",
+    "allWeeksTaken": "Fusha është e zënë në këtë orë në secilën nga ato javë.",
+    "dismiss": "Mbyll",
+    "cancelSeriesTitle": "Anulo një rezervim javor",
+    "cancelSeriesText": "Rezervimi më {date} përsëritet çdo javë. Të anulohet vetëm ky, apo ky dhe të gjitha javët pas tij?",
+    "cancelOnlyThis": "Vetëm këtë",
+    "cancelThisAndLater": "Këtë dhe javët pas"
   },
   "booking": {
     "bookThisCourt": "Rezervo këtë fushë",

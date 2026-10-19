@@ -72,7 +72,7 @@
         "body": "Disponibilités en temps réel, confirmation immédiate et aucune double réservation. Les joueurs réservent depuis leur téléphone, et vous ajoutez vous-même les réservations par téléphone ou sur place.",
         "cta": "Voir les fonctions de réservation",
         "points": [
-          "Un planning hebdomadaire pour chaque terrain",
+          "Réservations hebdomadaires récurrentes pour vos habitués",
           "Réservations par téléphone et sur place dans le même planning",
           "Vos règles : combien à l’avance, combien par jour, jusqu’à quand annuler",
           "Les joueurs qui ne viennent pas à répétition sont suspendus automatiquement"
@@ -256,7 +256,21 @@
     "lesson": "Cours",
     "noShowCount": "{n, plural, one {# absence} other {# absences}}",
     "paused": "suspendu",
-    "pausedHint": "Ne peut plus réserver en ligne tant que vous ne modifiez pas une de ces absences ou qu’elles n’ont pas plus de 90 jours. Vous pouvez toujours réserver pour cette personne."
+    "pausedHint": "Ne peut plus réserver en ligne tant que vous ne modifiez pas une de ces absences ou qu’elles n’ont pas plus de 90 jours. Vous pouvez toujours réserver pour cette personne.",
+    "repeat": "Répéter",
+    "repeatOnce": "Une seule fois",
+    "repeatWeeks": "Chaque semaine pendant {n} semaines",
+    "repeatHint": "Même terrain, même heure, chaque semaine. Les semaines où le terrain est déjà réservé sont sautées.",
+    "seriesTotal": "{n} semaines · {total} €",
+    "weekly": "Chaque semaine",
+    "addedSeries": "{n, plural, one {# réservation hebdomadaire ajoutée.} other {# réservations hebdomadaires ajoutées.}}",
+    "skippedWeeks": "Sautées car le terrain était déjà réservé : {dates}",
+    "allWeeksTaken": "Le terrain est déjà réservé à cette heure chacune de ces semaines.",
+    "dismiss": "Fermer",
+    "cancelSeriesTitle": "Annuler une réservation hebdomadaire",
+    "cancelSeriesText": "La réservation du {date} se répète chaque semaine. Annuler seulement celle-ci, ou celle-ci et toutes les semaines suivantes ?",
+    "cancelOnlyThis": "Seulement celle-ci",
+    "cancelThisAndLater": "Celle-ci et les suivantes"
   },
   "booking": {
     "bookThisCourt": "Réserver ce court",

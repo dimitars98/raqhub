@@ -74,6 +74,7 @@ export type Database = {
           player_id: string | null
           reference: string
           reminder_sent_at: string | null
+          series_id: string | null
           starts_at: string
           status: string
           stripe_payment_intent_id: string | null
@@ -95,6 +96,7 @@ export type Database = {
           player_id?: string | null
           reference?: string
           reminder_sent_at?: string | null
+          series_id?: string | null
           starts_at: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -116,6 +118,7 @@ export type Database = {
           player_id?: string | null
           reference?: string
           reminder_sent_at?: string | null
+          series_id?: string | null
           starts_at?: string
           status?: string
           stripe_payment_intent_id?: string | null

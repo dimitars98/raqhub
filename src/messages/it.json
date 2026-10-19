@@ -72,7 +72,7 @@
         "body": "Disponibilità in tempo reale, conferma immediata e nessuna doppia prenotazione. I giocatori prenotano dal telefono, e voi aggiungete le prenotazioni telefoniche e di chi passa al club.",
         "cta": "Scopri le prenotazioni",
         "points": [
-          "Un calendario settimanale per ogni campo",
+          "Prenotazioni settimanali ricorrenti per i vostri habitué",
           "Prenotazioni al telefono e al club nello stesso calendario",
           "Le vostre regole: quanto in anticipo, quante al giorno, fino a quando disdire",
           "Chi non si presenta di continuo viene sospeso automaticamente"
@@ -256,7 +256,21 @@
     "lesson": "Lezione",
     "noShowCount": "{n, plural, one {# assenza} other {# assenze}}",
     "paused": "sospeso",
-    "pausedHint": "Non può prenotare online finché non modifichi una di queste assenze o finché non hanno più di 90 giorni. Puoi comunque prenotare tu per questa persona."
+    "pausedHint": "Non può prenotare online finché non modifichi una di queste assenze o finché non hanno più di 90 giorni. Puoi comunque prenotare tu per questa persona.",
+    "repeat": "Ripeti",
+    "repeatOnce": "Solo una volta",
+    "repeatWeeks": "Ogni settimana per {n} settimane",
+    "repeatHint": "Stesso campo e stessa ora ogni settimana. Le settimane in cui il campo è già prenotato vengono saltate.",
+    "seriesTotal": "{n} settimane · €{total}",
+    "weekly": "Settimanale",
+    "addedSeries": "{n, plural, one {# prenotazione settimanale aggiunta.} other {# prenotazioni settimanali aggiunte.}}",
+    "skippedWeeks": "Saltate perché il campo era già prenotato: {dates}",
+    "allWeeksTaken": "Il campo è già prenotato a quest’ora in ognuna di quelle settimane.",
+    "dismiss": "Chiudi",
+    "cancelSeriesTitle": "Disdici una prenotazione settimanale",
+    "cancelSeriesText": "La prenotazione del {date} si ripete ogni settimana. Disdire solo questa, o questa e tutte le settimane successive?",
+    "cancelOnlyThis": "Solo questa",
+    "cancelThisAndLater": "Questa e le successive"
   },
   "booking": {
     "bookThisCourt": "Prenota questo campo",

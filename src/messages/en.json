@@ -72,7 +72,7 @@
         "body": "Real-time court availability, instant confirmations and no double bookings. Players book from any phone, and you add phone and walk-in bookings yourself.",
         "cta": "Explore booking features",
         "points": [
-          "A weekly timetable for every court",
+          "Weekly repeating bookings for your regulars",
           "Phone and walk-in bookings in the same timetable",
           "Your rules: how far ahead, how many a day, when to cancel",
           "Players who keep not showing up are paused automatically"
@@ -256,7 +256,21 @@
     "lesson": "Lesson",
     "noShowCount": "{n, plural, one {# no-show} other {# no-shows}}",
     "paused": "paused",
-    "pausedHint": "Can't book online until you change one of these no-shows or they're older than 90 days. You can still book for them."
+    "pausedHint": "Can't book online until you change one of these no-shows or they're older than 90 days. You can still book for them.",
+    "repeat": "Repeat",
+    "repeatOnce": "Just once",
+    "repeatWeeks": "Every week for {n} weeks",
+    "repeatHint": "Same court and time every week. Weeks when the court is already booked are skipped.",
+    "seriesTotal": "{n} weeks · €{total}",
+    "weekly": "Weekly",
+    "addedSeries": "{n, plural, one {# weekly booking added.} other {# weekly bookings added.}}",
+    "skippedWeeks": "Skipped because the court was already booked: {dates}",
+    "allWeeksTaken": "The court is already booked at this time in every one of those weeks.",
+    "dismiss": "Dismiss",
+    "cancelSeriesTitle": "Cancel a weekly booking",
+    "cancelSeriesText": "The booking on {date} repeats every week. Cancel only this one, or this one and every later week?",
+    "cancelOnlyThis": "Only this one",
+    "cancelThisAndLater": "This and later weeks"
   },
   "booking": {
     "bookThisCourt": "Book this court",

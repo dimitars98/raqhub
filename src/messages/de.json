@@ -72,7 +72,7 @@
         "body": "Freie Plätze in Echtzeit, sofortige Bestätigung und keine Doppelbuchungen. Spieler buchen vom Handy, telefonische und spontane Buchungen tragen Sie selbst ein.",
         "cta": "Buchungsfunktionen ansehen",
         "points": [
-          "Ein Wochenplan für jeden Platz",
+          "Wöchentliche Serienbuchungen für Stammspieler",
           "Telefon- und Vor-Ort-Buchungen im selben Plan",
           "Ihre Regeln: wie weit im Voraus, wie viele pro Tag, bis wann stornieren",
           "Wer immer wieder nicht erscheint, wird automatisch pausiert"
@@ -256,7 +256,21 @@
     "lesson": "Trainerstunde",
     "noShowCount": "{n, plural, one {# Nichterscheinen} other {# Nichterscheinen}}",
     "paused": "pausiert",
-    "pausedHint": "Kann erst wieder online buchen, wenn Sie eines dieser Nichterscheinen ändern oder es älter als 90 Tage ist. Sie können weiterhin für diese Person buchen."
+    "pausedHint": "Kann erst wieder online buchen, wenn Sie eines dieser Nichterscheinen ändern oder es älter als 90 Tage ist. Sie können weiterhin für diese Person buchen.",
+    "repeat": "Wiederholen",
+    "repeatOnce": "Nur einmal",
+    "repeatWeeks": "Jede Woche, {n} Wochen lang",
+    "repeatHint": "Gleicher Platz, gleiche Zeit, jede Woche. Wochen, in denen der Platz schon belegt ist, werden übersprungen.",
+    "seriesTotal": "{n} Wochen · €{total}",
+    "weekly": "Wöchentlich",
+    "addedSeries": "{n, plural, one {# wöchentliche Buchung hinzugefügt.} other {# wöchentliche Buchungen hinzugefügt.}}",
+    "skippedWeeks": "Übersprungen, weil der Platz schon belegt war: {dates}",
+    "allWeeksTaken": "Der Platz ist zu dieser Zeit in jeder dieser Wochen schon belegt.",
+    "dismiss": "Schließen",
+    "cancelSeriesTitle": "Wöchentliche Buchung stornieren",
+    "cancelSeriesText": "Die Buchung am {date} wiederholt sich jede Woche. Nur diese stornieren oder diese und alle späteren Wochen?",
+    "cancelOnlyThis": "Nur diese",
+    "cancelThisAndLater": "Diese und spätere Wochen"
   },
   "booking": {
     "bookThisCourt": "Diesen Platz buchen",
