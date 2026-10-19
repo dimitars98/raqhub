@@ -1733,5 +1733,32 @@
       "plan": "Gli account staff sono inclusi nel piano Academy.",
       "failed": "Qualcosa è andato storto. Riprovate."
     }
+  },
+  "heroProduct": {
+    "eyebrow": "Software per club di sport con racchetta",
+    "title": "Riempite i campi. Fate crescere il club",
+    "subtitle": "I giocatori prenotano dal telefono, lo staff gestisce il calendario, gli habitué tengono il loro turno settimanale. Pronti in giornata.",
+    "start": "Inizia il mese gratis",
+    "seeHow": "Scopri come funziona",
+    "phone": {
+      "club": "TK Vardar · Skopje",
+      "title": "Prenota un campo",
+      "court": "Campo {n}",
+      "clay": "Terra rossa",
+      "padel": "Padel",
+      "indoor": "Coperto",
+      "confirm": "Conferma prenotazione"
+    },
+    "weeklyCard": {
+      "label": "Prenotazione settimanale",
+      "when": "Ogni {day}, 19:00",
+      "who": "Ana P. · Campo 2",
+      "progress": "Settimana {week} di {weeks}"
+    },
+    "reminderCard": {
+      "label": "E-mail di promemoria",
+      "title": "Ci vediamo in campo domani",
+      "sent": "Inviata 24 ore prima"
+    }
   }
 }

@@ -2,7 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/layout/Hero";
+// The previous hero is kept in src/components/layout/Hero.tsx: to switch
+// back, import it here and use <Hero /> instead of <HeroProduct />.
+import HeroProduct from "@/components/landing/HeroProduct";
 import FAQSection from "@/components/landing/FAQSection";
 import TeamSection from "@/components/landing/TeamSection";
 import Footer from "@/components/landing/Footer";
@@ -44,11 +46,10 @@ export default async function HomePage() {
           {ta("new")}
         </span>
         <span className="text-white/75">{ta("live")}</span>
-        <strong className="text-white">{ta("createLink")}</strong>
-        <a
-          href="#how"
-          className="text-[#a8d832] font-medium ml-1 hover:underline"
-        >
+        <strong className="text-white">
+          {ta("createLink")}
+        </strong>
+        <a href="#how" className="text-[#a8d832] font-medium ml-1 hover:underline">
           {ta("learnMore")}
         </a>
       </div>
@@ -56,7 +57,7 @@ export default async function HomePage() {
       <Navbar />
 
       {/* HERO */}
-      <Hero />
+      <HeroProduct />
       {/* <section className="max-w-[1180px] mx-auto px-10 pt-20 pb-0 grid grid-cols-2 gap-16 items-start">
         <div className="pt-3">
           <div className="inline-flex items-center gap-2 bg-[#f3fbde] border border-[#d6f09a] text-[#7aad12] text-[11px] font-semibold px-3 py-1.5 rounded-md mb-6 uppercase tracking-wider">

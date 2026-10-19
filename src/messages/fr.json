@@ -1733,5 +1733,32 @@
       "plan": "Les comptes d’équipe sont inclus dans la formule Academy.",
       "failed": "Une erreur s’est produite. Veuillez réessayer."
     }
+  },
+  "heroProduct": {
+    "eyebrow": "Logiciel de club pour les sports de raquette",
+    "title": "Remplissez vos terrains. Faites grandir votre club",
+    "subtitle": "Les joueurs réservent depuis leur téléphone, l’équipe gère le planning, les habitués gardent leur créneau chaque semaine. Prêt le jour même.",
+    "start": "Commencer le mois gratuit",
+    "seeHow": "Voir comment ça marche",
+    "phone": {
+      "club": "TK Vardar · Skopje",
+      "title": "Réserver un terrain",
+      "court": "Terrain {n}",
+      "clay": "Terre battue",
+      "padel": "Padel",
+      "indoor": "Couvert",
+      "confirm": "Confirmer"
+    },
+    "weeklyCard": {
+      "label": "Réservation hebdomadaire",
+      "when": "Chaque {day}, 19:00",
+      "who": "Ana P. · Terrain 2",
+      "progress": "Semaine {week} sur {weeks}"
+    },
+    "reminderCard": {
+      "label": "E-mail de rappel",
+      "title": "À demain sur le terrain",
+      "sent": "Envoyé 24 heures avant"
+    }
   }
 }

@@ -1733,5 +1733,32 @@
       "plan": "Llogaritë e stafit vijnë me planin Academy.",
       "failed": "Diçka shkoi keq. Provoni përsëri."
     }
+  },
+  "heroProduct": {
+    "eyebrow": "Softuer për klubet e sporteve me raketë",
+    "title": "Mbushni fushat. Rritni klubin",
+    "subtitle": "Lojtarët rezervojnë nga telefoni, stafi menaxhon orarin, të rregulltit e mbajnë terminin javor. Gati po të njëjtën ditë.",
+    "start": "Filloni muajin falas",
+    "seeHow": "Shihni si funksionon",
+    "phone": {
+      "club": "TK Vardar · Shkup",
+      "title": "Rezervo një fushë",
+      "court": "Fusha {n}",
+      "clay": "Dhe",
+      "padel": "Padel",
+      "indoor": "E mbyllur",
+      "confirm": "Konfirmo rezervimin"
+    },
+    "weeklyCard": {
+      "label": "Rezervim javor",
+      "when": "Çdo {day}, 19:00",
+      "who": "Ana P. · Fusha 2",
+      "progress": "Java {week} nga {weeks}"
+    },
+    "reminderCard": {
+      "label": "Rikujtim me email",
+      "title": "Shihemi nesër në fushë",
+      "sent": "Dërguar 24 orë më parë"
+    }
   }
 }

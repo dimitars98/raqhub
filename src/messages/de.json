@@ -1733,5 +1733,32 @@
       "plan": "Mitarbeiterkonten gibt es im Academy-Tarif.",
       "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
     }
+  },
+  "heroProduct": {
+    "eyebrow": "Clubsoftware für Rückschlagsportarten",
+    "title": "Plätze füllen. Club wachsen lassen",
+    "subtitle": "Spieler buchen vom Handy, Ihr Team führt den Belegungsplan, Stammspieler behalten ihren Wochentermin. Am selben Tag startklar.",
+    "start": "Gratismonat starten",
+    "seeHow": "So funktioniert’s",
+    "phone": {
+      "club": "TK Vardar · Skopje",
+      "title": "Platz buchen",
+      "court": "Platz {n}",
+      "clay": "Sand",
+      "padel": "Padel",
+      "indoor": "Halle",
+      "confirm": "Buchung bestätigen"
+    },
+    "weeklyCard": {
+      "label": "Wöchentliche Buchung",
+      "when": "Jeden {day}, 19:00",
+      "who": "Ana P. · Platz 2",
+      "progress": "Woche {week} von {weeks}"
+    },
+    "reminderCard": {
+      "label": "Erinnerungs-E-Mail",
+      "title": "Bis morgen auf dem Platz",
+      "sent": "24 Stunden vorher gesendet"
+    }
   }
 }

@@ -1733,5 +1733,32 @@
       "plan": "Staff accounts come with the Academy plan.",
       "failed": "Something went wrong. Please try again."
     }
+  },
+  "heroProduct": {
+    "eyebrow": "Club software for racket sports",
+    "title": "Fill your courts. Grow your club",
+    "subtitle": "Players book from their phone, staff run the timetable, regulars keep their weekly slot. Set up the same day.",
+    "start": "Start your free month",
+    "seeHow": "See how it works",
+    "phone": {
+      "club": "TK Vardar · Skopje",
+      "title": "Book a court",
+      "court": "Court {n}",
+      "clay": "Clay",
+      "padel": "Padel",
+      "indoor": "Indoor",
+      "confirm": "Confirm booking"
+    },
+    "weeklyCard": {
+      "label": "Weekly booking",
+      "when": "Every {day}, 19:00",
+      "who": "Ana P. · Court 2",
+      "progress": "Week {week} of {weeks}"
+    },
+    "reminderCard": {
+      "label": "Reminder email",
+      "title": "See you on court tomorrow",
+      "sent": "Sent 24 hours before"
+    }
   }
 }
