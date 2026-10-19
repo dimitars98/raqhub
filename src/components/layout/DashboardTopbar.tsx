@@ -62,7 +62,7 @@ export default function DashboardTopbar() {
     .reverse()
     .map((segment) => TITLE_KEYS[segment])
     .find(Boolean);
-  const title = titleKey ? t(titleKey) : "ServeTime";
+  const title = titleKey ? t(titleKey) : "Kortello";
 
   return (
     <header className="flex h-[60px] shrink-0 items-center justify-between border-b border-ink-100 bg-white px-4 lg:px-6">

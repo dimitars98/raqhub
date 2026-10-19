@@ -36,7 +36,7 @@ export async function generateMetadata({
   const { id } = await params;
   const { tournament } = await load(id);
   if (!tournament) return {};
-  return { title: `${tournament.name} · ${tournament.club?.name ?? "ServeTime"}` };
+  return { title: `${tournament.name} · ${tournament.club?.name ?? "Kortello"}` };
 }
 
 /** A tournament's public page: details, sign-up, players and the draw. */

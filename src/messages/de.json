@@ -390,7 +390,7 @@
       "staff": "Mitarbeiter"
     },
     "share": "Teilen",
-    "ownerGroup": "ServeTime",
+    "ownerGroup": "Kortello",
     "ownerPage": "Clubs & Zahlungen",
     "tournaments": "Turniere",
     "staff": "Mitarbeiter",
@@ -466,7 +466,7 @@
     "selectProfile": "Benutzer auswählen",
     "alreadyCoach": "Diese Person ist bereits Trainer in deinem Club.",
     "coachEmail": "E-Mail des Trainers",
-    "coachEmailHint": "Der Trainer braucht ein ServeTime-Konto mit dieser E-Mail.",
+    "coachEmailHint": "Der Trainer braucht ein Kortello-Konto mit dieser E-Mail.",
     "coachEmailPlaceholder": "trainer@beispiel.de"
   },
   "clubPage": {
@@ -485,7 +485,7 @@
     "website": "Website",
     "ctaTitle": "Lust, bei {club} zu spielen?",
     "ctaText": "Erstelle ein kostenloses Konto, sieh freie Zeiten und buche in Sekunden.",
-    "metaDescription": "Plätze, Trainer und Mitgliedschaften bei {club}. Online buchen mit ServeTime."
+    "metaDescription": "Plätze, Trainer und Mitgliedschaften bei {club}. Online buchen mit Kortello."
   },
   "myBookings": {
     "title": "Meine Buchungen",
@@ -655,20 +655,20 @@
       "noneExpiring": "Keine",
       "openDashboard": "Dashboard öffnen"
     },
-    "footerPlayer": "Gesendet von ServeTime im Namen von {club}.",
-    "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf ServeTime führst.",
+    "footerPlayer": "Gesendet von Kortello im Namen von {club}.",
+    "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf Kortello führst.",
     "trial": {
-      "endingSubject": "Ihre ServeTime-Testphase für {club} endet am {date}",
-      "endingIntro": "Ihr kostenloser Monat für {club} endet am {date}. Um ServeTime danach weiter zu nutzen, antworten Sie einfach auf diese E-Mail, und wir schicken Ihnen eine Rechnung. Wenn Sie einen anderen Tarif möchten, schreiben Sie es uns.",
-      "endedSubject": "Ihre ServeTime-Testphase für {club} ist abgelaufen",
+      "endingSubject": "Ihre Kortello-Testphase für {club} endet am {date}",
+      "endingIntro": "Ihr kostenloser Monat für {club} endet am {date}. Um Kortello danach weiter zu nutzen, antworten Sie einfach auf diese E-Mail, und wir schicken Ihnen eine Rechnung. Wenn Sie einen anderen Tarif möchten, schreiben Sie es uns.",
+      "endedSubject": "Ihre Kortello-Testphase für {club} ist abgelaufen",
       "endedIntro": "Ihr kostenloser Monat für {club} ist vorbei. Antworten Sie auf diese E-Mail, und wir schicken Ihnen die Rechnung für Ihren Tarif, damit Sie ohne Unterbrechung weiter Buchungen annehmen können.",
       "price": "{monthly} € pro Monat oder {yearly} € pro Jahr",
       "trialEnds": "Kostenlos bis",
       "seePlan": "Tarif ansehen",
-      "footer": "Sie erhalten diese E-Mail, weil Sie einen Club auf ServeTime führen."
+      "footer": "Sie erhalten diese E-Mail, weil Sie einen Club auf Kortello führen."
     },
     "staff": {
-      "subject": "Sie sind eingeladen, bei {club} auf ServeTime mitzuhelfen",
+      "subject": "Sie sind eingeladen, bei {club} auf Kortello mitzuhelfen",
       "heading": "Willkommen im Team von {club}",
       "intro": "{owner} hat Sie eingeladen, bei {club} die Buchungen mitzuverwalten.",
       "introNoName": "Sie sind eingeladen, bei {club} die Buchungen mitzuverwalten.",
@@ -676,8 +676,8 @@
       "signInWith": "Anmelden mit",
       "youCan": "Sie können",
       "screens": "Den Belegungsplan sehen, Buchungen und Mitglieder verwalten",
-      "button": "ServeTime öffnen",
-      "footer": "Sie erhalten diese E-Mail, weil {club} diese Adresse bei ServeTime als Mitarbeiter eingetragen hat. Wenn Sie den Club nicht kennen, können Sie sie ignorieren."
+      "button": "Kortello öffnen",
+      "footer": "Sie erhalten diese E-Mail, weil {club} diese Adresse bei Kortello als Mitarbeiter eingetragen hat. Wenn Sie den Club nicht kennen, können Sie sie ignorieren."
     }
   },
   "billing": {
@@ -689,7 +689,7 @@
     "lockedBody": "Schreiben Sie uns, und wir stellen Ihren Club auf den Plan {plan} um.",
     "courtsUsed": "{used} von {max} aktiven Plätzen",
     "courtLimit": "Ihr Plan erlaubt {max} aktive Plätze. Deaktivieren Sie einen Platz oder wechseln Sie den Plan.",
-    "cardTitle": "Ihr ServeTime-Plan",
+    "cardTitle": "Ihr Kortello-Plan",
     "trialUntil": "Kostenlos testen bis {date}",
     "paidUntil": "Bezahlt bis {date}",
     "unpaid": "Noch nicht bezahlt",
@@ -811,7 +811,7 @@
     },
     "title1": "Füllen Sie Ihre Plätze.",
     "title2": "Lassen Sie Ihren Club wachsen.",
-    "subtitle": "ServeTime gibt Tennisclubs und Trainern die Werkzeuge, um Plätze, Zeitpläne und Buchungen zu verwalten – alles an einem Ort. Weniger Verwaltung, mehr Zeit auf dem Platz.",
+    "subtitle": "Kortello gibt Tennisclubs und Trainern die Werkzeuge, um Plätze, Zeitpläne und Buchungen zu verwalten – alles an einem Ort. Weniger Verwaltung, mehr Zeit auf dem Platz.",
     "getStarted": "Jetzt starten",
     "seeHow": "So funktioniert es"
   },
@@ -851,7 +851,7 @@
   },
   "testimonials": {
     "label": "Das sagen Clubs",
-    "title": "Von Clubs, die ServeTime nutzen"
+    "title": "Von Clubs, die Kortello nutzen"
   },
   "howItWorks": {
     "label": "Einfache Einrichtung",
@@ -891,7 +891,7 @@
     },
     "learnMore": "Mehr erfahren",
     "eyebrow": "Jeder Platz",
-    "intro": "Tennis, Padel oder Pickleball – ServeTime verwaltet alles. Richten Sie jeden Platz so ein, wie Ihr Club spielt, und verwalten Sie alle Buchungen, Mitglieder und Stunden in einem Dashboard."
+    "intro": "Tennis, Padel oder Pickleball – Kortello verwaltet alles. Richten Sie jeden Platz so ein, wie Ihr Club spielt, und verwalten Sie alle Buchungen, Mitglieder und Stunden in einem Dashboard."
   },
   "featureCards": {
     "label": "Für Clubs gemacht",
@@ -917,7 +917,7 @@
     },
     "payments": {
       "title": "Jede Zahlung erfasst",
-      "body": "Spieler zahlen im Club, wie bisher. ServeTime erfasst den Preis jeder Buchung, damit Sie immer wissen, was jeder Platz einbringt. Ohne Provision.",
+      "body": "Spieler zahlen im Club, wie bisher. Kortello erfasst den Preis jeder Buchung, damit Sie immer wissen, was jeder Platz einbringt. Ohne Provision.",
       "last7": "Letzte 7 Tage"
     },
     "utilisation": {
@@ -997,7 +997,7 @@
       },
       "app": {
         "q": "Müssen meine Spieler eine App herunterladen?",
-        "a": "Nein. ServeTime läuft im Browser auf jedem Handy, Tablet oder Computer. Spieler öffnen den Buchungslink Ihres Clubs, registrieren sich per E-Mail oder Google-Konto und buchen einen Platz."
+        "a": "Nein. Kortello läuft im Browser auf jedem Handy, Tablet oder Computer. Spieler öffnen den Buchungslink Ihres Clubs, registrieren sich per E-Mail oder Google-Konto und buchen einen Platz."
       },
       "phone": {
         "q": "Kann ich weiterhin telefonische oder persönliche Buchungen annehmen?",
@@ -1009,14 +1009,14 @@
       },
       "payOnline": {
         "q": "Können Spieler online bezahlen?",
-        "a": "Noch nicht. Online-Zahlung ist in Entwicklung. Bis dahin zahlen Spieler wie gewohnt im Club, und ServeTime erfasst den Preis jeder Buchung, damit Sie sehen, was jeder Platz einbringt."
+        "a": "Noch nicht. Online-Zahlung ist in Entwicklung. Bis dahin zahlen Spieler wie gewohnt im Club, und Kortello erfasst den Preis jeder Buchung, damit Sie sehen, was jeder Platz einbringt."
       },
       "languages": {
         "q": "In welchen Sprachen ist es verfügbar?",
         "a": "Englisch, Mazedonisch, Albanisch, Deutsch, Französisch und Italienisch. Jede Person wählt ihre eigene Sprache, Personal und Spieler können also unterschiedliche nutzen."
       },
       "data": {
-        "q": "Was passiert mit unseren Daten, wenn wir ServeTime nicht mehr nutzen?",
+        "q": "Was passiert mit unseren Daten, wenn wir Kortello nicht mehr nutzen?",
         "a": "Die Daten Ihres Clubs gehören Ihnen. Wenn Sie gehen möchten, sagen Sie uns Bescheid und wir löschen Ihren Club, Ihre Mitglieder und Buchungen."
       }
     },
@@ -1248,13 +1248,13 @@
     "contactTitle": "Kontakt",
     "privacy": {
       "title": "Datenschutzerklärung",
-      "intro": "Diese Erklärung beschreibt, welche personenbezogenen Daten ServeTime erhebt, warum wir das tun und welche Rechte Sie haben. ServeTime ist ein Online-Buchungssystem für Sportclubs: Clubs verwalten damit ihre Plätze, Mitglieder und Trainer, Spieler buchen darüber.",
+      "intro": "Diese Erklärung beschreibt, welche personenbezogenen Daten Kortello erhebt, warum wir das tun und welche Rechte Sie haben. Kortello ist ein Online-Buchungssystem für Sportclubs: Clubs verwalten damit ihre Plätze, Mitglieder und Trainer, Spieler buchen darüber.",
       "sections": [
         {
           "title": "Wer verantwortlich ist",
           "body": [
-            "Für Ihr ServeTime-Konto und die Nutzung der Website entscheidet ServeTime, wie Ihre Daten verwendet werden, und ist dafür verantwortlich („Verantwortlicher“). Unsere Kontaktdaten finden Sie am Ende dieser Seite.",
-            "Wenn ein Club Angaben zu seinen Mitgliedern, Gastspielern oder Buchungen erfasst, entscheidet der Club, was er erfasst, und ist für diese Daten verantwortlich. ServeTime speichert und verarbeitet sie im Auftrag des Clubs („Auftragsverarbeiter“). Bei Fragen zu diesen Daten wenden Sie sich bitte an den Club; wir helfen dem Club, Ihnen zu antworten."
+            "Für Ihr Kortello-Konto und die Nutzung der Website entscheidet Kortello, wie Ihre Daten verwendet werden, und ist dafür verantwortlich („Verantwortlicher“). Unsere Kontaktdaten finden Sie am Ende dieser Seite.",
+            "Wenn ein Club Angaben zu seinen Mitgliedern, Gastspielern oder Buchungen erfasst, entscheidet der Club, was er erfasst, und ist für diese Daten verantwortlich. Kortello speichert und verarbeitet sie im Auftrag des Clubs („Auftragsverarbeiter“). Bei Fragen zu diesen Daten wenden Sie sich bitte an den Club; wir helfen dem Club, Ihnen zu antworten."
           ]
         },
         {
@@ -1290,7 +1290,7 @@
             [
               "<b>Der Club, bei dem Sie buchen,</b> sieht Ihren Namen, Ihre Kontaktdaten und Ihre Buchungen in diesem Club, einschließlich Nichterscheinen.",
               "<b>Alle</b> können Clubseiten, Plätze, Öffnungszeiten und Trainerprofile sehen.",
-              "<b>Dienstleister,</b> die Teile von ServeTime für uns betreiben: Supabase (Datenbank, Anmeldung und Dateispeicher), unser E-Mail-Anbieter (Resend oder ein üblicher Mail-Dienst) und unser Webhosting-Anbieter. Sie dürfen die Daten nur nutzen, um ihren Dienst für uns zu erbringen.",
+              "<b>Dienstleister,</b> die Teile von Kortello für uns betreiben: Supabase (Datenbank, Anmeldung und Dateispeicher), unser E-Mail-Anbieter (Resend oder ein üblicher Mail-Dienst) und unser Webhosting-Anbieter. Sie dürfen die Daten nur nutzen, um ihren Dienst für uns zu erbringen.",
               "<b>Behörden,</b> wenn wir gesetzlich zur Weitergabe verpflichtet sind."
             ],
             "Einige dieser Anbieter haben ihren Sitz in anderen Ländern oder nutzen dort Server, auch in den USA. Wenn Daten Nordmazedonien oder die Europäische Union verlassen, stützen wir uns auf die gesetzlich vorgesehenen Garantien, etwa die Standardvertragsklauseln der Europäischen Kommission."
@@ -1302,7 +1302,7 @@
             [
               "<b>Konto- und Profildaten:</b> solange Ihr Konto besteht. Wenn Sie die Löschung Ihres Kontos verlangen, löschen oder anonymisieren wir Ihre Daten innerhalb von 30 Tagen.",
               "<b>Buchungen:</b> solange das Konto des Clubs besteht, da der Club seinen Buchungsverlauf braucht. Nichterscheinen zählt nur 90 Tage lang für die Buchungslimits eines Clubs.",
-              "<b>Clubdaten:</b> solange der Club ServeTime nutzt und 90 Tage darüber hinaus, damit er ohne Datenverlust zurückkehren kann. Rechnungen und Buchhaltungsunterlagen bewahren wir so lange auf, wie es das Steuerrecht verlangt.",
+              "<b>Clubdaten:</b> solange der Club Kortello nutzt und 90 Tage darüber hinaus, damit er ohne Datenverlust zurückkehren kann. Rechnungen und Buchhaltungsunterlagen bewahren wir so lange auf, wie es das Steuerrecht verlangt.",
               "<b>Server-Logs:</b> für kurze Zeit, wie von unseren Hosting-Anbietern festgelegt."
             ]
           ]
@@ -1310,7 +1310,7 @@
         {
           "title": "Cookies",
           "body": [
-            "ServeTime verwendet nur Cookies, die für den Betrieb der Website nötig sind:",
+            "Kortello verwendet nur Cookies, die für den Betrieb der Website nötig sind:",
             [
               "<b>Anmelde-Cookies</b> von Supabase, die Sie angemeldet halten.",
               "<b>Ein Sprach-Cookie</b> (NEXT_LOCALE), das sich die gewählte Sprache merkt."
@@ -1343,7 +1343,7 @@
         {
           "title": "Kinder",
           "body": [
-            "ServeTime ist nicht dafür gedacht, dass Kinder unter 14 Jahren es selbstständig nutzen. Ein Elternteil oder Erziehungsberechtigter kann ein Konto anlegen und für das Kind buchen."
+            "Kortello ist nicht dafür gedacht, dass Kinder unter 14 Jahren es selbstständig nutzen. Ein Elternteil oder Erziehungsberechtigter kann ein Konto anlegen und für das Kind buchen."
           ]
         },
         {
@@ -1357,12 +1357,12 @@
     },
     "terms": {
       "title": "Nutzungsbedingungen",
-      "intro": "Diese Bedingungen gelten für alle, die ServeTime nutzen: Clubs, die damit ihre Plätze verwalten, und Spieler, die darüber buchen. Mit dem Erstellen eines Kontos oder der Nutzung der Website akzeptieren Sie diese Bedingungen.",
+      "intro": "Diese Bedingungen gelten für alle, die Kortello nutzen: Clubs, die damit ihre Plätze verwalten, und Spieler, die darüber buchen. Mit dem Erstellen eines Kontos oder der Nutzung der Website akzeptieren Sie diese Bedingungen.",
       "sections": [
         {
           "title": "Der Dienst",
           "body": [
-            "ServeTime ist Online-Software für Sportclubs. Clubs veröffentlichen ihre Plätze, Öffnungszeiten, Preise, Trainer und Mitgliedschaften, und Spieler buchen Plätze und Trainerstunden online. ServeTime stellt nur die Software bereit: Wir betreiben keine Clubs, besitzen keine Plätze und beschäftigen keine Trainer."
+            "Kortello ist Online-Software für Sportclubs. Clubs veröffentlichen ihre Plätze, Öffnungszeiten, Preise, Trainer und Mitgliedschaften, und Spieler buchen Plätze und Trainerstunden online. Kortello stellt nur die Software bereit: Wir betreiben keine Clubs, besitzen keine Plätze und beschäftigen keine Trainer."
           ]
         },
         {
@@ -1380,7 +1380,7 @@
           "body": [
             [
               "Eine Buchung ist eine Vereinbarung zwischen Ihnen und dem Club. Der Club legt Preise, Öffnungszeiten und Buchungsregeln fest und ist für den Platz, die Trainerstunde und jede Zahlung verantwortlich, die er einnimmt.",
-              "Sie bezahlen Buchungen beim Club, so wie der Club es vorsieht. ServeTime nimmt keine Zahlungen für Buchungen entgegen.",
+              "Sie bezahlen Buchungen beim Club, so wie der Club es vorsieht. Kortello nimmt keine Zahlungen für Buchungen entgegen.",
               "Jeder Club kann Regeln festlegen, etwa wie lang eine Buchung sein darf, wie weit im Voraus Sie buchen können, wie viele Buchungen pro Tag möglich sind und bis wann Sie online stornieren können. Danach wenden Sie sich zum Stornieren an den Club.",
               "Wenn Sie zu einer Buchung nicht erscheinen, kann der Club sie als Nichterscheinen markieren. Ein Club kann die Online-Buchung für Spieler mit zu vielen Nichterscheinen in den letzten 90 Tagen pausieren. Der Club kann trotzdem direkt für Sie buchen.",
               "Fragen zu einer Buchung, Erstattung oder ausgefallenen Stunde klären Sie mit dem Club, wir helfen aber gern, wo wir können."
@@ -1404,16 +1404,16 @@
           "title": "Wofür Clubs verantwortlich sind",
           "body": [
             [
-              "Clubs sind für die Informationen verantwortlich, die sie veröffentlichen, und für die Daten, die sie über ihre Mitglieder und Spieler eingeben. Sie brauchen dafür eine rechtliche Grundlage und müssen ihre Mitglieder darüber informieren, dass sie ServeTime nutzen.",
-              "Für diese Daten ist der Club Verantwortlicher und ServeTime sein Auftragsverarbeiter, wie in der Datenschutzerklärung beschrieben. Wir verarbeiten sie nur, um dem Club den Dienst bereitzustellen.",
-              "Clubs müssen über ServeTime gebuchte Termine nach ihren eigenen Regeln einhalten oder den Spieler kontaktieren, wenn eine Buchung nicht stattfinden kann."
+              "Clubs sind für die Informationen verantwortlich, die sie veröffentlichen, und für die Daten, die sie über ihre Mitglieder und Spieler eingeben. Sie brauchen dafür eine rechtliche Grundlage und müssen ihre Mitglieder darüber informieren, dass sie Kortello nutzen.",
+              "Für diese Daten ist der Club Verantwortlicher und Kortello sein Auftragsverarbeiter, wie in der Datenschutzerklärung beschrieben. Wir verarbeiten sie nur, um dem Club den Dienst bereitzustellen.",
+              "Clubs müssen über Kortello gebuchte Termine nach ihren eigenen Regeln einhalten oder den Spieler kontaktieren, wenn eine Buchung nicht stattfinden kann."
             ]
           ]
         },
         {
           "title": "Zulässige Nutzung",
           "body": [
-            "Nutzen Sie ServeTime nicht, um:",
+            "Nutzen Sie Kortello nicht, um:",
             [
               "etwas Rechtswidriges zu tun;",
               "Scheinbuchungen vorzunehmen oder Plätze zu blockieren, die Sie nicht nutzen wollen;",
@@ -1426,15 +1426,15 @@
         {
           "title": "Ihre Inhalte",
           "body": [
-            "Die Rechte an hochgeladenen Inhalten wie Logos, Fotos und Beschreibungen bleiben bei Ihnen. Sie erlauben uns, sie zu speichern und anzuzeigen, soweit es für den Betrieb des Dienstes nötig ist, zum Beispiel das Logo eines Clubs auf seiner öffentlichen Seite. Der Name ServeTime, die Software und das Design gehören uns."
+            "Die Rechte an hochgeladenen Inhalten wie Logos, Fotos und Beschreibungen bleiben bei Ihnen. Sie erlauben uns, sie zu speichern und anzuzeigen, soweit es für den Betrieb des Dienstes nötig ist, zum Beispiel das Logo eines Clubs auf seiner öffentlichen Seite. Der Name Kortello, die Software und das Design gehören uns."
           ]
         },
         {
           "title": "Verfügbarkeit und Haftung",
           "body": [
             [
-              "Wir arbeiten daran, dass ServeTime verfügbar und korrekt ist, können aber nicht garantieren, dass es immer ohne Unterbrechungen oder Fehler läuft. Für Wartungsarbeiten können wir es kurz pausieren.",
-              "ServeTime haftet nicht für Vorgänge im Club, für Entscheidungen des Clubs oder für Schäden durch ein Buchungsproblem, das wir vernünftigerweise nicht verhindern konnten.",
+              "Wir arbeiten daran, dass Kortello verfügbar und korrekt ist, können aber nicht garantieren, dass es immer ohne Unterbrechungen oder Fehler läuft. Für Wartungsarbeiten können wir es kurz pausieren.",
+              "Kortello haftet nicht für Vorgänge im Club, für Entscheidungen des Clubs oder für Schäden durch ein Buchungsproblem, das wir vernünftigerweise nicht verhindern konnten.",
               "Soweit gesetzlich zulässig, ist unsere Gesamthaftung gegenüber einem Club auf die Beträge begrenzt, die der Club uns in den 12 Monaten vor dem Anspruch gezahlt hat.",
               "Nichts in diesen Bedingungen beschränkt eine Haftung, die gesetzlich nicht beschränkt werden darf, oder Ihre Rechte als Verbraucher."
             ]
@@ -1444,7 +1444,7 @@
           "title": "Beendigung der Nutzung",
           "body": [
             [
-              "Sie können ServeTime jederzeit nicht mehr nutzen und die Löschung Ihres Kontos verlangen.",
+              "Sie können Kortello jederzeit nicht mehr nutzen und die Löschung Ihres Kontos verlangen.",
               "Wir können ein Konto, das gegen diese Bedingungen verstößt, sperren oder schließen, wo angemessen nach vorheriger Warnung."
             ]
           ]
@@ -1452,7 +1452,7 @@
         {
           "title": "Änderungen dieser Bedingungen",
           "body": [
-            "Wir können diese Bedingungen ändern. Das Datum oben zeigt die letzte Änderung, und über wichtige Änderungen informieren wir die Nutzer, bevor sie gelten. Wenn Sie ServeTime danach weiter nutzen, gelten die neuen Bedingungen."
+            "Wir können diese Bedingungen ändern. Das Datum oben zeigt die letzte Änderung, und über wichtige Änderungen informieren wir die Nutzer, bevor sie gelten. Wenn Sie Kortello danach weiter nutzen, gelten die neuen Bedingungen."
           ]
         },
         {
@@ -1707,14 +1707,14 @@
       "Mitglieder anlegen und ihre Daten ändern"
     ],
     "ownerOnlyTitle": "Nur Sie können",
-    "ownerOnly": "Einstellungen, Plätze, Trainer, Tarife und Turniere ändern, die Auswertungen sehen, Ihren ServeTime-Tarif verwalten und Mitarbeiter einladen oder entfernen.",
+    "ownerOnly": "Einstellungen, Plätze, Trainer, Tarife und Turniere ändern, die Auswertungen sehen, Ihren Kortello-Tarif verwalten und Mitarbeiter einladen oder entfernen.",
     "inviteTitle": "Jemanden einladen",
     "inviteHint": "Wir schicken einen Link per E-Mail. Mit dieser Adresse anmelden oder ein Konto erstellen, und Ihr Club ist sofort da.",
     "emailPlaceholder": "name@beispiel.de",
     "invite": "Einladung senden",
     "sending": "Wird gesendet…",
     "invited": "Einladung an {email} gesendet.",
-    "invitedNoEmail": "{email} ist eingeladen. Die E-Mail konnte nicht gesendet werden. Bitten Sie die Person, sich mit dieser Adresse bei ServeTime anzumelden.",
+    "invitedNoEmail": "{email} ist eingeladen. Die E-Mail konnte nicht gesendet werden. Bitten Sie die Person, sich mit dieser Adresse bei Kortello anzumelden.",
     "empty": "Noch keine Mitarbeiter",
     "emptyHint": "Laden Sie oben Ihr erstes Teammitglied ein.",
     "active": "Aktiv",

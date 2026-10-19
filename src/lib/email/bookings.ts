@@ -24,7 +24,7 @@ export function appUrl() {
   return (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
 }
 
-/** The club's email, so a player's reply goes to the club, not to ServeTime. */
+/** The club's email, so a player's reply goes to the club, not to Kortello. */
 export const clubEmailOf = (row: BookingEmailRow) =>
   row.court?.club?.email ?? row.coach?.club?.email ?? null;
 
@@ -38,7 +38,7 @@ export function bookingEmailData(
     name: name?.trim() || null,
     courtName: row.court?.name ?? null,
     coachName: row.coach?.profile?.full_name ?? null,
-    clubName: row.court?.club?.name ?? row.coach?.club?.name ?? "ServeTime",
+    clubName: row.court?.club?.name ?? row.coach?.club?.name ?? "Kortello",
     startsAt: row.starts_at,
     endsAt: row.ends_at,
     durationMin: row.duration_min,

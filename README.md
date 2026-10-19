@@ -1,4 +1,4 @@
-# ServeTime 🎾
+# Kortello 🎾
 
 Tennis court & coach booking platform. Built with Next.js 14 App Router, Supabase, and Tailwind CSS.
 
@@ -87,7 +87,7 @@ npx supabase gen types typescript --project-id <your-project-id> \
 
 ## Plans and billing
 
-Clubs pay ServeTime; players never do. Every new club gets **1 month free with
+Clubs pay Kortello; players never do. Every new club gets **1 month free with
 everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts`):
 
 | Plan    | Price            | Courts    | Adds                                                   |

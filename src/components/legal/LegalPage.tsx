@@ -43,7 +43,7 @@ function rich(text: string): ReactNode[] {
 
 export async function legalTitle(kind: LegalKind) {
   const t = await getTranslations(`legal.${kind}`);
-  return `${t("title")} · ServeTime`;
+  return `${t("title")} · Kortello`;
 }
 
 export default async function LegalPage({ kind }: { kind: LegalKind }) {

@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: tournaments (18 Oct 2026)
+-- Kortello: tournaments (18 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261017_owner_page.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

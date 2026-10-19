@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: hourly email job
+-- Kortello: hourly email job
 --
 -- Run this AFTER the app is online (Vercel), not while testing on localhost:
 -- Supabase must be able to reach the app's address.

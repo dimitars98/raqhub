@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: free automation (12 Oct 2026)
+-- Kortello: free automation (12 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after the two earlier files.
 -- Wrapped in a transaction; safe to run a second time.

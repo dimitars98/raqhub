@@ -64,7 +64,7 @@ function calendarLink(b: BookingWithJoins, title: string) {
     action: "TEMPLATE",
     text: title,
     dates: `${stamp(b.starts_at)}/${stamp(b.ends_at)}`,
-    details: `ServeTime · ${b.reference}`,
+    details: `Kortello · ${b.reference}`,
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }

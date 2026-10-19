@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: RLS hardening (11 Oct 2026)
+-- Kortello: RLS hardening (11 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor. It is wrapped in a transaction, so if
 -- any statement fails nothing is changed. Safe to run a second time.

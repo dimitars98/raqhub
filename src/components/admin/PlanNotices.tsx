@@ -64,7 +64,7 @@ export async function UpgradeNotice({ feature }: { feature: Feature }) {
   );
 }
 
-/** "Your ServeTime plan" box on the settings page. */
+/** "Your Kortello plan" box on the settings page. */
 export async function PlanCard({
   club,
   access,

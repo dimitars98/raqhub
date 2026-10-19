@@ -1,4 +1,4 @@
-// ServeTime's own plans for clubs (not the membership plans a club sells).
+// Kortello's own plans for clubs (not the membership plans a club sells).
 //
 // Keep the court limits in step with club_max_courts() in
 // supabase/migrations/20261013_plans_trial.sql: the database enforces them,
@@ -86,4 +86,4 @@ export function clubAccess(club: ClubBilling | null | undefined, now = new Date(
 
 export const BILLING_COLUMNS = "plan, trial_ends_at, paid_until";
 
-export const SALES_EMAIL = "support@servetime.com";
+export const SALES_EMAIL = "support@kortello.com";

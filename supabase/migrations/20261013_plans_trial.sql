@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: plans and the 1-month free trial (13 Oct 2026)
+-- Kortello: plans and the 1-month free trial (13 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after the 12 Oct files.
 -- Wrapped in a transaction: if anything fails, nothing changes.

@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: booking rules per club (14 Oct 2026)
+-- Kortello: booking rules per club (14 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261013_plans_trial.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

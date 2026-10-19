@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: no-shows (14 Oct 2026)
+-- Kortello: no-shows (14 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261014_booking_rules.sql.
 -- Wrapped in a transaction; safe to run a second time.

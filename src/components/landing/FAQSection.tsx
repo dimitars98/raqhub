@@ -25,7 +25,7 @@ function SupportBlock({ className = "" }: { className?: string }) {
       </p>
       <p className="mt-1 text-sm text-ink-600">{t("writeUs")}</p>
       <a
-        href="mailto:support@servetime.com"
+        href="mailto:support@kortello.com"
         className="btn-primary mt-4 h-12 px-6 text-sm font-semibold"
       >
         <Mail size={16} className="text-brand-400" aria-hidden="true" />

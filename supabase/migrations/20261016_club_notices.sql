@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: emails about a club's account (16 Oct 2026)
+-- Kortello: emails about a club's account (16 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261015_lessons_hold_court.sql.
 -- Safe to run a second time.

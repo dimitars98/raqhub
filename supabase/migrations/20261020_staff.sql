@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: staff accounts (20 Oct 2026)
+-- Kortello: staff accounts (20 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261019_recurring_bookings.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: owner page (17 Oct 2026)
+-- Kortello: owner page (17 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261016_club_notices.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

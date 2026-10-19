@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: lessons hold a court (15 Oct 2026)
+-- Kortello: lessons hold a court (15 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261014b_no_shows.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

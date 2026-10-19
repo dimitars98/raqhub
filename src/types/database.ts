@@ -94,7 +94,7 @@ export interface Club {
   booking_rules: unknown;
   is_active: boolean;
   owner_id: string | null;
-  /** ServeTime plan: starter / club / academy. Only changed by you. */
+  /** Kortello plan: starter / club / academy. Only changed by you. */
   plan: "starter" | "club" | "academy";
   /** End of the free trial. */
   trial_ends_at: string | null;

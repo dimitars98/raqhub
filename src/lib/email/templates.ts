@@ -85,7 +85,7 @@ function layout(opts: {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f2;padding:24px 12px">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px">
-        <tr><td style="padding:0 4px 16px;font-size:20px;font-weight:700;color:#111c0a">Serve<span style="color:#7aad12">Time</span></td></tr>
+        <tr><td style="padding:0 4px 16px;font-size:20px;font-weight:700;color:#111c0a">Kort<span style="color:#7aad12">ello</span></td></tr>
         <tr><td style="background:#ffffff;border:1px solid #e8ede4;border-radius:16px;padding:28px">
           <h1 style="margin:0 0 10px;font-size:20px;line-height:1.3;color:#111c0a">${esc(opts.heading)}</h1>
           <p style="margin:0 0 18px;font-size:15px;line-height:1.55;color:#3d4f35">${esc(opts.intro)}</p>
@@ -330,7 +330,7 @@ export function newClubEmail(d: NewClubEmailData): Rendered {
   const f = formatters("en");
   const where = [d.city, d.country].filter(Boolean).join(", ");
   const heading = `New club: ${d.clubName}`;
-  const intro = `${d.clubName}${where ? ` (${where})` : ""} just signed up. That makes ${d.totalClubs} ${d.totalClubs === 1 ? "club" : "clubs"} on ServeTime.`;
+  const intro = `${d.clubName}${where ? ` (${where})` : ""} just signed up. That makes ${d.totalClubs} ${d.totalClubs === 1 ? "club" : "clubs"} on Kortello.`;
   const rows: [string, string][] = [
     ["Club", d.clubName],
     ["Where", where || "–"],
@@ -339,10 +339,10 @@ export function newClubEmail(d: NewClubEmailData): Rendered {
     ["Plan", d.plan.charAt(0).toUpperCase() + d.plan.slice(1)],
     ["Trial ends", d.trialEndsAt ? f.day(d.trialEndsAt) : "–"],
   ];
-  const footer = "Sent to ADMIN_EMAIL because a club signed up on ServeTime.";
+  const footer = "Sent to ADMIN_EMAIL because a club signed up on Kortello.";
 
   return {
-    subject: `New club on ServeTime: ${d.clubName}${d.city ? ` (${d.city})` : ""}`,
+    subject: `New club on Kortello: ${d.clubName}${d.city ? ` (${d.city})` : ""}`,
     html: layout({ heading, intro, rows, button: { label: "Open the club page", url: d.clubUrl }, footer }),
     text: plainText(heading, intro, rows, d.clubUrl, footer),
   };

@@ -70,7 +70,7 @@ export default async function HomePage() {
             the <span className="text-[#7aad12]">right way.</span>
           </h1>
           <p className="text-[17px] text-[#6e7f65] leading-[1.75] font-light max-w-[420px] mb-9">
-            ServeTime powers everything from reservations and memberships to
+            Kortello powers everything from reservations and memberships to
             coaching and payments — the complete platform built for tennis
             clubs.
           </p>

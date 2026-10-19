@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: weekly repeating bookings (19 Oct 2026)
+-- Kortello: weekly repeating bookings (19 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261018_tournaments.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

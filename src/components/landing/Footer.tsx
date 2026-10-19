@@ -74,7 +74,7 @@ export default async function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-6 text-sm text-white/40">
-          © {new Date().getFullYear()} ServeTime
+          © {new Date().getFullYear()} Kortello
         </div>
 
         {/* Oversized wordmark, cropped by the bottom edge */}
@@ -82,7 +82,7 @@ export default async function Footer() {
           aria-hidden="true"
           className="mt-10 -mb-[0.14em] select-none whitespace-nowrap font-extrabold leading-[0.8] tracking-tighter text-brand-400 text-[length:min(15vw,190px)]"
         >
-          ServeTime
+          Kortello
         </div>
       </div>
     </footer>

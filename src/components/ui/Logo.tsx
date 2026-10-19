@@ -1,4 +1,4 @@
-// Temporary ServeTime mark: a lime tennis ball with dark seams.
+// Kortello mark: a lime tennis ball with dark seams.
 // The same drawing is used for the browser tab icon in src/app/icon.svg.
 
 export function LogoMark({ className = "size-7" }: { className?: string }) {

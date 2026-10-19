@@ -34,7 +34,7 @@ export default function Navbar() {
           className="inline-flex shrink-0 items-center gap-2 text-lg font-semibold text-brand-900 tracking-tight cursor-pointer"
         >
           <LogoMark className="size-7" />
-          ServeTime
+          Kortello
         </Link>
 
         {/* Center links — share the row with logo and buttons, so longer

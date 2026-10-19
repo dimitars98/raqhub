@@ -3,7 +3,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: { default: "ServeTime", template: "%s | ServeTime" },
+  title: { default: "Kortello", template: "%s | Kortello" },
   description: "Book tennis courts and coaches near you.",
 };
 

@@ -1,5 +1,5 @@
 -- ============================================
--- ServeTime — Supabase Schema
+-- Kortello — Supabase Schema
 -- Run this in Supabase SQL Editor
 -- ============================================
 

@@ -1,5 +1,5 @@
 -- ============================================================================
--- ServeTime: coach bookings, opening hours, member bookings (12 Oct 2026)
+-- Kortello: coach bookings, opening hours, member bookings (12 Oct 2026)
 --
 -- Run once in the Supabase SQL Editor, after 20261011_rls_hardening.sql.
 -- Wrapped in a transaction: if anything fails, nothing changes.

@@ -115,13 +115,13 @@ function SidebarContent({
           <Link
             href={homeHref}
             onClick={onNavClick}
-            aria-label="ServeTime"
+            aria-label="Kortello"
             className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-[#111c0a]"
           >
             <LogoMark className="size-7" />
             {!collapsed && (
               <span>
-                Serve<span className="text-[#7aad12]">Time</span>
+                Kort<span className="text-[#7aad12]">ello</span>
               </span>
             )}
           </Link>
