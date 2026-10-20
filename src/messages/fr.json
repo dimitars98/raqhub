@@ -895,49 +895,55 @@
   },
   "featureCards": {
     "label": "Conçu pour les clubs",
-    "title1": "Tout ce dont votre club a besoin,",
-    "title2": "rien de superflu",
-    "subtitle": "Un ensemble d’outils ciblés qui fonctionnent vraiment ensemble – pas une suite surchargée que personne n’utilise.",
-    "scheduling": {
-      "title": "Planning intelligent, zéro conflit",
-      "body": "Les doubles réservations sont bloquées, les réservations restent dans vos horaires d’ouverture, et vous décidez jusqu’à quand à l’avance on peut réserver.",
-      "today": "Aujourd’hui",
-      "available": "Libre",
-      "blocked": "Bloqué"
-    },
-    "reminders": {
-      "title": "Rappels automatiques",
-      "body": "Les joueurs reçoivent un e-mail à la réservation et un rappel la veille. Moins de réservations oubliées, sans le moindre effort.",
-      "court": "Terrain 3 · demain 10:00",
-      "lesson": "Cours avec Sara F. · aujourd’hui",
-      "before24": "24 h avant",
-      "sent": "Rappel envoyé",
-      "confirmed": "Réservation confirmée",
-      "instant": "Tout de suite"
-    },
-    "payments": {
-      "title": "Chaque paiement enregistré",
-      "body": "Les joueurs paient au club, comme aujourd’hui. Kortello enregistre le prix de chaque réservation pour que vous sachiez ce que rapporte chaque terrain. Sans commission.",
-      "last7": "7 derniers jours"
-    },
-    "utilisation": {
-      "title": "L’occupation des terrains en un coup d’œil",
-      "body": "Voyez quels terrains se remplissent et lesquels restent vides. Fixez vos prix avec de vraies données.",
-      "c1": "Terrain 1 – Terre battue",
-      "c2": "Terrain 2 – Dur",
-      "c3": "Terrain 3 – Couvert"
-    },
+    "title": "Tout ce qui entoure la réservation, réglé.",
+    "subtitle": "Les petites tâches qui mangent la semaine d’un club, de l’affiche à l’accueil au joueur qui ne vient jamais.",
     "page": {
       "title": "La page de réservation de votre club",
-      "body": "Chaque club a sa propre page et son lien. Partagez-le sur Instagram ou WhatsApp, ou imprimez l’affiche avec un QR code pour l’accueil.",
-      "link": "Votre lien de réservation",
-      "linkSub": "Pour Instagram, WhatsApp et votre site",
-      "poster": "Affiche à imprimer",
-      "posterSub": "Avec un QR code à scanner",
-      "languages": "6 langues",
-      "languagesSub": "Chaque joueur choisit la sienne",
-      "tournaments": "Tournois",
-      "tournamentsSub": "Inscriptions et tableau en direct"
+      "body": "Un lien pour Instagram, WhatsApp et votre site, et une affiche avec un QR code pour l’accueil. Les joueurs réservent sans appeler.",
+      "poster": "Réservez un terrain depuis votre téléphone",
+      "scan": "Scannez, choisissez, c’est fait."
+    },
+    "weekly": {
+      "title": "Les habitués, réglés une fois",
+      "body": "Même terrain, même heure, jusqu’à 26 semaines. Les semaines déjà prises sont sautées, jamais réservées deux fois.",
+      "booked": "Réservé",
+      "skipped": "Terrain pris, sauté"
+    },
+    "staff": {
+      "title": "Un accès pour votre équipe",
+      "body": "Invitez votre accueil ou vos entraîneurs par e-mail. Ils gèrent réservations et membres ; les réglages et la facturation restent chez vous.",
+      "owner": "Propriétaire · tout",
+      "staff": "Équipe · planning, réservations, membres",
+      "invited": "{email} · invité"
+    },
+    "reminders": {
+      "title": "Les rappels partent tout seuls",
+      "body": "Une confirmation à la réservation et un rappel la veille, dans la langue de chaque joueur.",
+      "subject": "À demain sur le terrain",
+      "court": "Terrain {n}",
+      "sent": "Envoyé 24 heures avant"
+    },
+    "noShows": {
+      "title": "Qui ne vient pas ne réserve plus",
+      "body": "Choisissez combien d’absences vous acceptez. Ensuite, la réservation en ligne est suspendue pour ce joueur. Vous pouvez toujours réserver pour lui.",
+      "count": "{n, plural, one {# absence} other {# absences}}",
+      "paused": "suspendu",
+      "pauseAfter": "Suspendre la réservation en ligne après"
+    },
+    "tournament": {
+      "title": "Un tournoi, tirage compris",
+      "body": "Les joueurs s’inscrivent sur la page du club. Un clic fait un tirage à élimination équitable, et chaque résultat fait avancer le gagnant.",
+      "semis": "Demi-finales",
+      "final": "Finale · {day} 16:00",
+      "size": "{players} joueurs · {rounds} tours"
+    },
+    "data": {
+      "title": "Vos données restent à vous",
+      "body": "Téléchargez toutes les réservations et tous les membres sous forme de tableau, quand vous voulez. Il s’ouvre directement dans Excel.",
+      "date": "Date",
+      "court": "Terrain",
+      "player": "Joueur",
+      "price": "Prix"
     }
   },
   "pricing": {
@@ -1735,13 +1741,12 @@
     }
   },
   "heroProduct": {
-    "eyebrow": "Logiciel de club pour les sports de raquette",
     "title": "Remplissez vos terrains. Faites grandir votre club",
     "subtitle": "Les joueurs réservent depuis leur téléphone, l’équipe gère le planning, les habitués gardent leur créneau chaque semaine. Prêt le jour même.",
     "start": "Commencer le mois gratuit",
     "seeHow": "Voir comment ça marche",
     "phone": {
-      "club": "TK Vardar · Skopje",
+      "club": "Riverside Tennis Club",
       "title": "Réserver un terrain",
       "court": "Terrain {n}",
       "clay": "Terre battue",

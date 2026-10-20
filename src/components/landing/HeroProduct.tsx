@@ -156,10 +156,6 @@ export default function HeroProduct() {
         <div className="relative mx-auto flex max-w-[1280px] flex-wrap items-center gap-12 px-6 pb-28 lg:min-h-[820px] lg:px-10 lg:pb-32">
           {/* Text */}
           <div className="flex min-w-0 max-w-[560px] flex-[1_1_480px] flex-col gap-7 pt-16 lg:py-24">
-            <p className="flex items-center gap-3 text-[13px] font-medium uppercase tracking-[0.14em] text-ink-600">
-              <span className="h-0.5 w-7 bg-brand-400" />
-              {t("eyebrow")}
-            </p>
             <h1 className="text-[42px] font-semibold leading-[1.04] tracking-[-0.045em] text-[#0e1a07] text-balance sm:text-[56px] lg:text-[64px]">
               {t("title")}
               <span className="text-brand-400">.</span>

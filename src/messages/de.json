@@ -895,49 +895,55 @@
   },
   "featureCards": {
     "label": "Für Clubs gemacht",
-    "title1": "Alles, was Ihr Club braucht,",
-    "title2": "nichts, was er nicht braucht",
-    "subtitle": "Ein klar fokussiertes Set an Werkzeugen, die wirklich zusammenarbeiten – keine aufgeblähte Suite, die niemand nutzt.",
-    "scheduling": {
-      "title": "Intelligente Planung, keine Konflikte",
-      "body": "Doppelbuchungen sind ausgeschlossen, Buchungen bleiben in Ihren Öffnungszeiten, und Sie entscheiden, wie weit im Voraus gebucht werden kann.",
-      "today": "Heute",
-      "available": "Frei",
-      "blocked": "Gesperrt"
-    },
-    "reminders": {
-      "title": "Automatische Erinnerungen",
-      "body": "Spieler bekommen beim Buchen eine E-Mail und am Vortag eine Erinnerung. Weniger vergessene Buchungen, ganz ohne Aufwand.",
-      "court": "Platz 3 · morgen 10:00",
-      "lesson": "Stunde mit Sara F. · heute",
-      "before24": "24 Std. vorher",
-      "sent": "Erinnerung gesendet",
-      "confirmed": "Buchung bestätigt",
-      "instant": "Sofort"
-    },
-    "payments": {
-      "title": "Jede Zahlung erfasst",
-      "body": "Spieler zahlen im Club, wie bisher. Kortello erfasst den Preis jeder Buchung, damit Sie immer wissen, was jeder Platz einbringt. Ohne Provision.",
-      "last7": "Letzte 7 Tage"
-    },
-    "utilisation": {
-      "title": "Platzauslastung auf einen Blick",
-      "body": "Sehen Sie, welche Plätze voll sind und welche leer stehen. Preise auf Basis echter Daten festlegen.",
-      "c1": "Platz 1 – Sand",
-      "c2": "Platz 2 – Hartplatz",
-      "c3": "Platz 3 – Halle"
-    },
+    "title": "Alles rund um die Buchung, erledigt.",
+    "subtitle": "Die kleinen Aufgaben, die einem Club die Woche fressen, vom Poster an der Rezeption bis zum Spieler, der nie kommt.",
     "page": {
       "title": "Die eigene Buchungsseite Ihres Clubs",
-      "body": "Jeder Club bekommt eine eigene Seite und einen Link. Teilen Sie ihn auf Instagram oder WhatsApp, oder drucken Sie das Poster mit QR-Code für die Rezeption.",
-      "link": "Ihr Buchungslink",
-      "linkSub": "Für Instagram, WhatsApp und Ihre Website",
-      "poster": "Poster zum Ausdrucken",
-      "posterSub": "Mit QR-Code zum Scannen",
-      "languages": "6 Sprachen",
-      "languagesSub": "Jeder Spieler wählt seine eigene",
-      "tournaments": "Turniere",
-      "tournamentsSub": "Anmeldung und Live-Auslosung"
+      "body": "Ein Link für Instagram, WhatsApp und Ihre Website, dazu ein Poster mit QR-Code für die Rezeption. Spieler buchen, ohne anzurufen.",
+      "poster": "Platz buchen per Handy",
+      "scan": "Scannen, Zeit wählen, fertig."
+    },
+    "weekly": {
+      "title": "Stammspieler, einmal eingetragen",
+      "body": "Gleicher Platz, gleiche Zeit, bis zu 26 Wochen. Belegte Wochen werden übersprungen, nicht doppelt gebucht.",
+      "booked": "Gebucht",
+      "skipped": "Platz belegt, übersprungen"
+    },
+    "staff": {
+      "title": "Ein Zugang für Ihr Team",
+      "body": "Laden Sie Rezeption oder Trainer per E-Mail ein. Sie verwalten Buchungen und Mitglieder; Einstellungen und Abrechnung bleiben bei Ihnen.",
+      "owner": "Inhaber · alles",
+      "staff": "Team · Belegungsplan, Buchungen, Mitglieder",
+      "invited": "{email} · eingeladen"
+    },
+    "reminders": {
+      "title": "Erinnerungen gehen von selbst raus",
+      "body": "Eine Bestätigung beim Buchen und eine Erinnerung am Vortag, in der Sprache jedes Spielers.",
+      "subject": "Bis morgen auf dem Platz",
+      "court": "Platz {n}",
+      "sent": "24 Stunden vorher gesendet"
+    },
+    "noShows": {
+      "title": "Wer nicht kommt, bucht nicht mehr",
+      "body": "Legen Sie fest, wie viele Nichterscheinen Sie akzeptieren. Danach pausiert die Online-Buchung für diesen Spieler. Sie können weiterhin für ihn buchen.",
+      "count": "{n, plural, one {# Nichterscheinen} other {# Nichterscheinen}}",
+      "paused": "pausiert",
+      "pauseAfter": "Online-Buchung pausieren nach"
+    },
+    "tournament": {
+      "title": "Turniere, mit Auslosung",
+      "body": "Spieler melden sich auf Ihrer Clubseite an. Ein Klick erstellt eine faire K.-o.-Auslosung, und jedes Ergebnis bringt den Sieger weiter.",
+      "semis": "Halbfinale",
+      "final": "Finale · {day} 16:00",
+      "size": "{players} Spieler · {rounds} Runden"
+    },
+    "data": {
+      "title": "Ihre Daten gehören Ihnen",
+      "body": "Laden Sie alle Buchungen und Mitglieder jederzeit als Tabelle herunter. Sie öffnet sich direkt in Excel.",
+      "date": "Datum",
+      "court": "Platz",
+      "player": "Spieler",
+      "price": "Preis"
     }
   },
   "pricing": {
@@ -1735,13 +1741,12 @@
     }
   },
   "heroProduct": {
-    "eyebrow": "Clubsoftware für Rückschlagsportarten",
     "title": "Plätze füllen. Club wachsen lassen",
     "subtitle": "Spieler buchen vom Handy, Ihr Team führt den Belegungsplan, Stammspieler behalten ihren Wochentermin. Am selben Tag startklar.",
     "start": "Gratismonat starten",
     "seeHow": "So funktioniert’s",
     "phone": {
-      "club": "TK Vardar · Skopje",
+      "club": "Riverside Tennis Club",
       "title": "Platz buchen",
       "court": "Platz {n}",
       "clay": "Sand",

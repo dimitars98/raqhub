@@ -895,49 +895,55 @@
   },
   "featureCards": {
     "label": "Pensato per i club",
-    "title1": "Tutto ciò che serve al tuo club,",
-    "title2": "niente di superfluo",
-    "subtitle": "Un insieme mirato di strumenti che funzionano davvero insieme – non una suite gonfiata che nessuno usa.",
-    "scheduling": {
-      "title": "Pianificazione intelligente, zero conflitti",
-      "body": "Le doppie prenotazioni sono bloccate, le prenotazioni restano negli orari di apertura e decidete voi quanto in anticipo si può prenotare.",
-      "today": "Oggi",
-      "available": "Libero",
-      "blocked": "Bloccato"
-    },
-    "reminders": {
-      "title": "Promemoria automatici",
-      "body": "I giocatori ricevono un’e-mail quando prenotano e un promemoria il giorno prima. Meno prenotazioni dimenticate, senza alcuno sforzo.",
-      "court": "Campo 3 · domani 10:00",
-      "lesson": "Lezione con Sara F. · oggi",
-      "before24": "24 ore prima",
-      "sent": "Promemoria inviato",
-      "confirmed": "Prenotazione confermata",
-      "instant": "Subito"
-    },
-    "payments": {
-      "title": "Ogni pagamento registrato",
-      "body": "I giocatori pagano al club, come oggi. Kortello registra il prezzo di ogni prenotazione, così sai sempre quanto rende ogni campo. Nessuna commissione.",
-      "last7": "Ultimi 7 giorni"
-    },
-    "utilisation": {
-      "title": "Occupazione dei campi a colpo d’occhio",
-      "body": "Vedi quali campi si riempiono e quali restano vuoti. Decidi i prezzi con dati reali.",
-      "c1": "Campo 1 – Terra",
-      "c2": "Campo 2 – Cemento",
-      "c3": "Campo 3 – Indoor"
-    },
+    "title": "Tutto quello che c’è intorno alla prenotazione, fatto.",
+    "subtitle": "I piccoli lavori che mangiano la settimana di un club, dal poster in reception al giocatore che non si presenta mai.",
     "page": {
       "title": "La pagina di prenotazione del vostro club",
-      "body": "Ogni club ha la sua pagina e il suo link. Condividetelo su Instagram o WhatsApp, oppure stampate il poster con il codice QR per la reception.",
-      "link": "Il vostro link di prenotazione",
-      "linkSub": "Per Instagram, WhatsApp e il vostro sito",
-      "poster": "Poster da stampare",
-      "posterSub": "Con un codice QR da scansionare",
-      "languages": "6 lingue",
-      "languagesSub": "Ogni giocatore sceglie la sua",
-      "tournaments": "Tornei",
-      "tournamentsSub": "Iscrizioni e tabellone dal vivo"
+      "body": "Un link per Instagram, WhatsApp e il vostro sito, e un poster con codice QR per la reception. I giocatori prenotano senza telefonare.",
+      "poster": "Prenota un campo dal telefono",
+      "scan": "Scansiona, scegli l’ora, fatto."
+    },
+    "weekly": {
+      "title": "Habitué, impostati una volta",
+      "body": "Stesso campo, stessa ora, fino a 26 settimane. Le settimane già occupate vengono saltate, mai prenotate due volte.",
+      "booked": "Prenotato",
+      "skipped": "Campo occupato, saltato"
+    },
+    "staff": {
+      "title": "Un accesso per il vostro staff",
+      "body": "Invitate la reception o i maestri via e-mail. Gestiscono prenotazioni e soci; impostazioni e fatturazione restano a voi.",
+      "owner": "Titolare · tutto",
+      "staff": "Staff · calendario, prenotazioni, soci",
+      "invited": "{email} · invitato"
+    },
+    "reminders": {
+      "title": "I promemoria partono da soli",
+      "body": "Una conferma quando prenotano e un promemoria il giorno prima, nella lingua di ogni giocatore.",
+      "subject": "Ci vediamo in campo domani",
+      "court": "Campo {n}",
+      "sent": "Inviato 24 ore prima"
+    },
+    "noShows": {
+      "title": "Chi non si presenta non prenota più",
+      "body": "Scegliete quante assenze accettate. Dopo, la prenotazione online si sospende per quel giocatore. Voi potete comunque prenotare per lui.",
+      "count": "{n, plural, one {# assenza} other {# assenze}}",
+      "paused": "sospeso",
+      "pauseAfter": "Sospendi la prenotazione online dopo"
+    },
+    "tournament": {
+      "title": "Un torneo, sorteggio incluso",
+      "body": "I giocatori si iscrivono sulla pagina del club. Un clic crea un sorteggio a eliminazione equo, e ogni risultato fa avanzare il vincitore.",
+      "semis": "Semifinali",
+      "final": "Finale · {day} 16:00",
+      "size": "{players} giocatori · {rounds} turni"
+    },
+    "data": {
+      "title": "I vostri dati restano vostri",
+      "body": "Scaricate tutte le prenotazioni e i soci come tabella, quando volete. Si apre direttamente in Excel.",
+      "date": "Data",
+      "court": "Campo",
+      "player": "Giocatore",
+      "price": "Prezzo"
     }
   },
   "pricing": {
@@ -1735,13 +1741,12 @@
     }
   },
   "heroProduct": {
-    "eyebrow": "Software per club di sport con racchetta",
     "title": "Riempite i campi. Fate crescere il club",
     "subtitle": "I giocatori prenotano dal telefono, lo staff gestisce il calendario, gli habitué tengono il loro turno settimanale. Pronti in giornata.",
     "start": "Inizia il mese gratis",
     "seeHow": "Scopri come funziona",
     "phone": {
-      "club": "TK Vardar · Skopje",
+      "club": "Riverside Tennis Club",
       "title": "Prenota un campo",
       "court": "Campo {n}",
       "clay": "Terra rossa",

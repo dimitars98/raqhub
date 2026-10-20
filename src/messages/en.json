@@ -895,49 +895,55 @@
   },
   "featureCards": {
     "label": "Built for clubs",
-    "title1": "Everything your club needs,",
-    "title2": "nothing it doesn't",
-    "subtitle": "A tightly focused set of tools that actually work together — not a bloated suite nobody uses.",
-    "scheduling": {
-      "title": "Smart scheduling, zero conflicts",
-      "body": "Double bookings are blocked, bookings stay inside your opening hours, and you decide how far ahead players can book.",
-      "today": "Today",
-      "available": "Available",
-      "blocked": "Blocked"
-    },
-    "reminders": {
-      "title": "Automated reminders",
-      "body": "Players get an email when they book and a reminder the day before. Fewer forgotten bookings, without lifting a finger.",
-      "court": "Court 3 · tomorrow 10:00",
-      "lesson": "Lesson with Sara F. · today",
-      "before24": "24h before",
-      "sent": "Reminder sent",
-      "confirmed": "Booking confirmed",
-      "instant": "Right away"
-    },
-    "payments": {
-      "title": "Every payment on record",
-      "body": "Players pay at the club, just like today. Kortello records the price of every booking, so you always know what each court brings in. No commission, ever.",
-      "last7": "Last 7 days"
-    },
-    "utilisation": {
-      "title": "Court utilisation at a glance",
-      "body": "See which courts are filling up and which are sitting empty. Make pricing decisions with real data.",
-      "c1": "Court 1 — Clay",
-      "c2": "Court 2 — Hard",
-      "c3": "Court 3 — Indoor"
-    },
+    "title": "Everything around the booking, handled.",
+    "subtitle": "The small jobs that eat up a club's week, from the poster at reception to the player who never shows up.",
     "page": {
       "title": "Your club's own booking page",
-      "body": "Every club gets its own page and link. Share it on Instagram or WhatsApp, or print the poster with a QR code for your reception desk.",
-      "link": "Your booking link",
-      "linkSub": "For Instagram, WhatsApp and your website",
-      "poster": "Printable poster",
-      "posterSub": "With a QR code players scan",
-      "languages": "6 languages",
-      "languagesSub": "Each player picks their own",
-      "tournaments": "Tournaments",
-      "tournamentsSub": "Sign-ups and a live draw"
+      "body": "One link for Instagram, WhatsApp and your website, and a poster with a QR code for the reception desk. Players book without calling.",
+      "poster": "Book a court from your phone",
+      "scan": "Scan, pick a time, done."
+    },
+    "weekly": {
+      "title": "Weekly regulars, set once",
+      "body": "Same court, same time, for up to 26 weeks. Weeks that are already taken are skipped, not double-booked.",
+      "booked": "Booked",
+      "skipped": "Court taken, skipped"
+    },
+    "staff": {
+      "title": "A login for your staff",
+      "body": "Invite your receptionist or coaches by email. They run bookings and members; settings and billing stay with you.",
+      "owner": "Owner · everything",
+      "staff": "Staff · timetable, bookings, members",
+      "invited": "{email} · invited"
+    },
+    "reminders": {
+      "title": "Reminders go out on their own",
+      "body": "A confirmation when they book and a reminder the day before, in each player's own language.",
+      "subject": "See you on court tomorrow",
+      "court": "Court {n}",
+      "sent": "Sent 24 hours before"
+    },
+    "noShows": {
+      "title": "No-shows stop booking",
+      "body": "Pick how many no-shows you accept. After that, online booking pauses for that player. You can still book for them.",
+      "count": "{n, plural, one {# no-show} other {# no-shows}}",
+      "paused": "paused",
+      "pauseAfter": "Pause online booking after"
+    },
+    "tournament": {
+      "title": "Run a tournament, draw included",
+      "body": "Players sign up on your club page. One click makes a fair knockout draw, and every result moves the winner on.",
+      "semis": "Semi-finals",
+      "final": "Final · {day} 16:00",
+      "size": "{players} players · {rounds} rounds"
+    },
+    "data": {
+      "title": "Your data stays yours",
+      "body": "Download every booking and member as a spreadsheet, whenever you want. It opens straight in Excel.",
+      "date": "Date",
+      "court": "Court",
+      "player": "Player",
+      "price": "Price"
     }
   },
   "pricing": {
@@ -1735,13 +1741,12 @@
     }
   },
   "heroProduct": {
-    "eyebrow": "Club software for racket sports",
     "title": "Fill your courts. Grow your club",
     "subtitle": "Players book from their phone, staff run the timetable, regulars keep their weekly slot. Set up the same day.",
     "start": "Start your free month",
     "seeHow": "See how it works",
     "phone": {
-      "club": "TK Vardar · Skopje",
+      "club": "Riverside Tennis Club",
       "title": "Book a court",
       "court": "Court {n}",
       "clay": "Clay",

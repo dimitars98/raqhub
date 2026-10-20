@@ -895,49 +895,55 @@
   },
   "featureCards": {
     "label": "Ndërtuar për klubet",
-    "title1": "Gjithçka që i duhet klubit tuaj,",
-    "title2": "asgjë që s’i duhet",
-    "subtitle": "Një grup i përqendruar mjetesh që funksionojnë vërtet së bashku – jo një paketë e fryrë që s’e përdor askush.",
-    "scheduling": {
-      "title": "Orar i zgjuar, zero konflikte",
-      "body": "Rezervimet e dyfishta bllokohen, rezervimet qëndrojnë brenda orarit të punës dhe ju vendosni sa përpara mund të rezervojnë lojtarët.",
-      "today": "Sot",
-      "available": "E lirë",
-      "blocked": "E bllokuar"
-    },
-    "reminders": {
-      "title": "Kujtesa automatike",
-      "body": "Lojtarët marrin email kur rezervojnë dhe një rikujtim një ditë më parë. Më pak rezervime të harruara, pa asnjë mundim.",
-      "court": "Fusha 3 · nesër 10:00",
-      "lesson": "Mësim me Sara F. · sot",
-      "before24": "24 orë para",
-      "sent": "Kujtesa u dërgua",
-      "confirmed": "Rezervimi u konfirmua",
-      "instant": "Menjëherë"
-    },
-    "payments": {
-      "title": "Çdo pagesë e regjistruar",
-      "body": "Lojtarët paguajnë në klub, si deri tani. Kortello regjistron çmimin e çdo rezervimi, që të dini gjithmonë sa sjell çdo fushë. Pa komision.",
-      "last7": "7 ditët e fundit"
-    },
-    "utilisation": {
-      "title": "Shfrytëzimi i fushave me një shikim",
-      "body": "Shihni cilat fusha mbushen dhe cilat rrinë bosh. Vendosni çmimet me të dhëna reale.",
-      "c1": "Fusha 1 – Dhe",
-      "c2": "Fusha 2 – E fortë",
-      "c3": "Fusha 3 – E mbyllur"
-    },
+    "title": "Gjithçka rreth rezervimit, e rregulluar.",
+    "subtitle": "Punët e vogla që ia hanë javën një klubi, nga posteri në recepsion te lojtari që nuk vjen kurrë.",
     "page": {
       "title": "Faqja e rezervimeve e klubit tuaj",
-      "body": "Çdo klub merr faqen dhe lidhjen e vet. Ndajeni në Instagram ose WhatsApp, ose printoni posterin me kod QR për recepsionin.",
-      "link": "Lidhja juaj e rezervimeve",
-      "linkSub": "Për Instagram, WhatsApp dhe faqen tuaj",
-      "poster": "Poster për printim",
-      "posterSub": "Me kod QR që lojtarët e skanojnë",
-      "languages": "6 gjuhë",
-      "languagesSub": "Secili lojtar zgjedh të vetën",
-      "tournaments": "Turne",
-      "tournamentsSub": "Regjistrime dhe short live"
+      "body": "Një lidhje për Instagram, WhatsApp dhe faqen tuaj, dhe një poster me kod QR për recepsionin. Lojtarët rezervojnë pa telefonuar.",
+      "poster": "Rezervo një fushë nga telefoni",
+      "scan": "Skano, zgjidh orën, gati."
+    },
+    "weekly": {
+      "title": "Termine javore, të vendosura një herë",
+      "body": "E njëjta fushë, e njëjta orë, deri në 26 javë. Javët e zëna kapërcehen, nuk rezervohen dy herë.",
+      "booked": "Rezervuar",
+      "skipped": "Fusha e zënë, kapërcyer"
+    },
+    "staff": {
+      "title": "Hyrje për stafin tuaj",
+      "body": "Ftoni recepsionistin ose trajnerët me email. Ata menaxhojnë rezervimet dhe anëtarët; cilësimet dhe pagesat mbeten te ju.",
+      "owner": "Pronar · gjithçka",
+      "staff": "Staf · orari, rezervimet, anëtarët",
+      "invited": "{email} · i ftuar"
+    },
+    "reminders": {
+      "title": "Rikujtimet dërgohen vetë",
+      "body": "Një konfirmim kur rezervojnë dhe një rikujtim një ditë më parë, në gjuhën e çdo lojtari.",
+      "subject": "Shihemi nesër në fushë",
+      "court": "Fusha {n}",
+      "sent": "Dërguar 24 orë më parë"
+    },
+    "noShows": {
+      "title": "Kush nuk vjen, nuk rezervon",
+      "body": "Zgjidhni sa mungesa pranoni. Pas kësaj, rezervimi online pezullohet për atë lojtar. Ju mund të rezervoni ende për të.",
+      "count": "{n, plural, one {# mungesë} other {# mungesa}}",
+      "paused": "pezulluar",
+      "pauseAfter": "Pezullo rezervimin online pas"
+    },
+    "tournament": {
+      "title": "Organizoni një turne, me short",
+      "body": "Lojtarët regjistrohen në faqen e klubit. Një klikim bën një short të drejtë me eliminim, dhe çdo rezultat e çon fituesin përpara.",
+      "semis": "Gjysmëfinale",
+      "final": "Finale · {day} 16:00",
+      "size": "{players} lojtarë · {rounds} raunde"
+    },
+    "data": {
+      "title": "Të dhënat tuaja mbeten tuajat",
+      "body": "Shkarkoni çdo rezervim dhe anëtar si tabelë, kur të doni. Hapet direkt në Excel.",
+      "date": "Data",
+      "court": "Fusha",
+      "player": "Lojtari",
+      "price": "Çmimi"
     }
   },
   "pricing": {
@@ -1735,13 +1741,12 @@
     }
   },
   "heroProduct": {
-    "eyebrow": "Softuer për klubet e sporteve me raketë",
     "title": "Mbushni fushat. Rritni klubin",
     "subtitle": "Lojtarët rezervojnë nga telefoni, stafi menaxhon orarin, të rregulltit e mbajnë terminin javor. Gati po të njëjtën ditë.",
     "start": "Filloni muajin falas",
     "seeHow": "Shihni si funksionon",
     "phone": {
-      "club": "TK Vardar · Shkup",
+      "club": "Riverside Tennis Club",
       "title": "Rezervo një fushë",
       "court": "Fusha {n}",
       "clay": "Dhe",
