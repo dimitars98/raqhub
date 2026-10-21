@@ -1,7 +1,5 @@
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 
 const sports = [
   {
@@ -25,57 +23,6 @@ const sports = [
       "https://images.unsplash.com/photo-1634840542403-1a9b1067aaa0?auto=format&fit=crop&w=800&q=70",
   },
 ];
-
-/**
- * ServeButton — a pill with a tennis ball on the end.
- * On hover the arrow is "served" out of the ball and a new one lands,
- * while the pill floods with brand lime and the ball turns ink.
- *
- * tone="dark"  → glass pill, for use over photos
- * tone="light" → ink pill, for use on white surfaces
- *
- * It takes the visitor to the features further down the page.
- */
-function ServeButton({
-  tone = "dark",
-  children,
-}: {
-  tone?: "dark" | "light";
-  children: ReactNode;
-}) {
-  const surface =
-    tone === "dark"
-      ? "border-white/30 bg-white/10 text-white backdrop-blur-md"
-      : "border-[#111c0a] bg-[#111c0a] text-white";
-
-  return (
-    <a
-      href="#features"
-      className={`group/btn inline-flex w-fit items-center gap-3 rounded-full border py-1.5 pl-5 pr-1.5 text-sm font-semibold transition-[background-color,border-color,color,transform] duration-300 ease-out hover:border-[#a8d832] hover:bg-[#a8d832] hover:text-[#111c0a] active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a8d832] motion-reduce:transition-none ${surface}`}
-    >
-      {children}
-
-      {/* The ball. before/after draw the two seams and inherit the arrow colour. */}
-      <span
-        aria-hidden
-        className="relative grid size-9 shrink-0 place-items-center overflow-hidden rounded-full bg-[#a8d832] text-[#111c0a] transition-colors duration-300 ease-out before:absolute before:inset-y-0 before:-left-[64%] before:w-full before:rounded-full before:border-[1.5px] before:border-current before:opacity-20 after:absolute after:inset-y-0 after:-right-[64%] after:w-full after:rounded-full after:border-[1.5px] after:border-current after:opacity-20 group-hover/btn:bg-[#111c0a] group-hover/btn:text-[#a8d832] motion-reduce:transition-none"
-      >
-        {/* Arrow that gets served out */}
-        <ArrowUpRight
-          size={16}
-          strokeWidth={2.5}
-          className="relative z-10 transition-transform duration-300 ease-out group-hover/btn:translate-x-[160%] group-hover/btn:-translate-y-[160%] motion-reduce:transition-none"
-        />
-        {/* Arrow that lands in its place */}
-        <ArrowUpRight
-          size={16}
-          strokeWidth={2.5}
-          className="absolute z-10 -translate-x-[160%] translate-y-[160%] transition-transform duration-300 ease-out group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 motion-reduce:transition-none"
-        />
-      </span>
-    </a>
-  );
-}
 
 export default function TeamSection() {
   const t = useTranslations("sports");
@@ -110,18 +57,17 @@ export default function TeamSection() {
               <h3 className="text-[#111c0a] text-xl font-semibold mb-1">
                 {t(`${sports[1].id}.title`)}
               </h3>
-              <p className="text-gray-500 text-sm mb-4 max-w-xs">
+              <p className="text-gray-500 text-sm max-w-xs">
                 {t(`${sports[1].id}.description`)}
               </p>
-              <ServeButton tone="light">{t("learnMore")}</ServeButton>
             </div>
           </div>
 
           {/* Intro + card — first on mobile/tablet, middle column on desktop */}
           <div className="order-1 lg:order-2 flex flex-col gap-6">
-            <span className="inline-block text-cyan-400 font-handwriting text-3xl sm:text-4xl font-bold w-fit">
+            <h2 className="font-display text-[34px] font-extrabold leading-[1.05] tracking-tight text-white sm:text-[44px]">
               {t("eyebrow")}
-            </span>
+            </h2>
             <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
               {t("intro")}
             </p>
@@ -140,10 +86,9 @@ export default function TeamSection() {
                 <h3 className="text-white text-3xl lg:text-4xl font-semibold mb-2">
                   {t(`${sports[0].id}.title`)}
                 </h3>
-                <p className="text-gray-200 text-sm mb-6 max-w-xs">
+                <p className="text-gray-200 text-sm max-w-xs">
                   {t(`${sports[0].id}.description`)}
                 </p>
-                <ServeButton>{t("learnMore")}</ServeButton>
               </div>
             </div>
           </div>
@@ -168,10 +113,9 @@ export default function TeamSection() {
                   <h3 className="text-white text-3xl font-semibold mb-2">
                     {t(`${sport.id}.title`)}
                   </h3>
-                  <p className="text-gray-200 text-sm mb-6 max-w-xs">
+                  <p className="text-gray-200 text-sm max-w-xs">
                     {t(`${sport.id}.description`)}
                   </p>
-                  <ServeButton>{t("learnMore")}</ServeButton>
                 </div>
               </div>
             ))}

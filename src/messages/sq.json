@@ -51,120 +51,67 @@
     "footer": "Ndërtuar për klubet e tenisit."
   },
   "features": {
-    "courtBookings": "Rezervimet e fushave",
-    "courtBookingsDesc": "Shtoni rezervime për anëtarë ose vizitorë. Gjurmoni hapësirat kohore, kohëzgjatjet dhe të ardhurat.",
-    "memberManagement": "Menaxhimi i anëtarëve",
-    "memberManagementDesc": "Mbani gjurmë të të gjithë anëtarëve tuaj, planet e tyre, informacionin e kontaktit dhe statusin.",
-    "membershipPlans": "Planet e anëtarësimit",
-    "membershipPlansDesc": "Krijoni plane mujore, vjetore ose një herë me çmime të personalizuara dhe zbritje.",
-    "bookingStatus": "Statusi i rezervimit",
-    "bookingStatusDesc": "Shënoni rezervimet si të konfirmuara, të përfunduara, të anuluara me një klik.",
-    "multiCourt": "Mbështetje për shumë fusha",
-    "multiCourtDesc": "Menaxhoni fushat e argjilës, të forta, barit dhe të mbyllura — secila me çmimin e vet.",
-    "adminDashboard": "Paneli i administratorit",
-    "adminDashboardDesc": "Një vend për të gjithë klubin tuaj. Pa fletëllogaritje, pa letër, pa kaos.",
     "rows": {
       "bookings": {
-        "label": "Rezervimi i fushave",
-        "pre": "Rezervoni ",
-        "mark": "si të doni",
+        "label": "Rezervimet e fushave",
+        "pre": "Një orar për ",
+        "mark": "çdo fushë",
         "post": "",
-        "body": "Disponueshmëri e fushave në kohë reale, konfirmim i menjëhershëm dhe asnjë rezervim i dyfishtë. Lojtarët rezervojnë nga telefoni, ndërsa ju shtoni rezervimet me telefon dhe në vend.",
-        "cta": "Shihni rezervimet",
+        "body": "Lojtarët rezervojnë online, ju shtoni rezervimet me telefon dhe në vend, dhe gjithçka shfaqet në të njëjtën pamje ditore. Një fushë nuk mund të rezervohet kurrë dy herë.",
         "points": [
-          "Rezervime javore që përsëriten për lojtarët e rregullt",
-          "Rezervimet me telefon dhe në vend në të njëjtin orar",
+          "Të gjitha fushat krah njëra-tjetrës, për çdo ditë",
+          "Online, me telefon dhe në vend, të gjitha bashkë",
           "Rregullat tuaja: sa përpara, sa në ditë, deri kur anulohet",
-          "Lojtarët që shpesh nuk vijnë pezullohen automatikisht"
+          "Orare nga 30, 60, 90 ose 120 minuta"
         ]
       },
       "membership": {
         "label": "Anëtarësimi",
-        "pre": "Menaxhim i plotë ",
-        "mark": "i anëtarëve",
+        "pre": "Anëtarë që ",
+        "mark": "rinovojnë",
         "post": "",
-        "body": "Të gjithë anëtarët në një vend. Shihni planin, kontaktin dhe kur u mbaron anëtarësia, dhe lërini email-et e rikujtimit të bëjnë ndjekjen.",
-        "cta": "Shihni mjetet për anëtarët",
+        "body": "Shisni anëtarësimet tuaja, u jepni anëtarëve zbritje për çdo rezervim dhe lëreni Kortello t’ua kujtojë para se të skadojë.",
         "points": [
-          "Plane mujore, vjetore ose një herë",
+          "Planet tuaja mujore, vjetore ose një herë",
           "Zbritje në rezervime për anëtarët",
-          "Email rikujtimi për rinovim",
-          "Kujt i mbaron anëtarësia në 30 ditët e ardhshme"
+          "Email kujtese për rinovim",
+          "Kujt i skadon në 30 ditët e ardhshme"
         ]
       },
       "coaching": {
-        "label": "Trajnime",
-        "pre": "Mbushni kalendarin e ",
-        "mark": "trajnerëve",
+        "label": "Trajnimi",
+        "pre": "Trajnerë me ",
+        "mark": "kalendarë plot",
         "post": "",
-        "body": "Lojtarët shfletojnë trajnerët tuaj dhe rezervojnë mësime direkt. Çdo mësim mban fushën e vet, kështu që mësimi dhe rezervimi nuk përplasen kurrë.",
-        "cta": "Shihni trajnimet",
+        "body": "Lojtarët gjejnë trajnerët tuaj dhe rezervojnë një orë mësimi me disa prekje. Çdo orë mban një fushë të lirë, kështu që një orë dhe një rezervim nuk përplasen kurrë.",
         "points": [
-          "Profile trajnerësh me nivele dhe çmim",
-          "Lojtarët rezervojnë mësime online",
-          "Mësimet e mbajnë fushën automatikisht",
-          "Email konfirmimi dhe rikujtimi"
+          "Profile me nivele, specialitete dhe çmim",
+          "Orë mësimi të rezervuara online",
+          "Një fushë e lirë për çdo orë",
+          "Email konfirmimi dhe kujtese"
         ]
       },
       "analytics": {
-        "label": "Statistika",
-        "pre": "Vendime ",
-        "mark": "të bazuara në të dhëna",
+        "label": "Analitika",
+        "pre": "Njihni ",
+        "mark": "orët më të ngarkuara",
         "post": "",
-        "body": "Shihni me një shikim si po shkon klubi: të ardhurat me kalimin e kohës, orët më të ngarkuara dhe sa e plotë është çdo fushë.",
-        "cta": "Shihni statistikat",
+        "body": "Shihni kur mbushen fushat, cili sport sjell më shumë dhe si lëvizin të ardhurat, pa ndërtuar tabela.",
         "points": [
-          "Të ardhurat me kohën dhe sipas sportit",
-          "Harta e orëve më të ngarkuara",
-          "Rezervime dhe të ardhura për çdo fushë",
+          "Orët më të ngarkuara, ditë pas dite",
+          "Të ardhurat sipas sportit dhe fushës",
+          "Të ardhurat krahasuar me periudhën e mëparshme",
           "Raport javor në email"
         ]
       }
     },
+    "cta": "Filloni muajin falas",
     "mock": {
-      "weekTitle": "Të gjitha fushat – këtë javë",
-      "saveSchedule": "Ruaj orarin",
-      "available": "E lirë",
-      "booked": "E rezervuar",
-      "closed": "E mbyllur",
-      "members": "Anëtarët (342)",
-      "invite": "+ Fto",
-      "activeMembers": "Anëtarë aktivë",
-      "monthlyRevenue": "Të ardhurat mujore",
-      "clubPlan": "Paketa Club",
-      "academyPlan": "Paketa Academy",
-      "starterPlan": "Paketa Starter",
-      "active": "Aktiv",
-      "pending": "Në pritje",
-      "coachTeam": "Ekipi ynë i trajnerëve",
-      "headCoach": "Trajner kryesor · ITF niveli 3",
-      "juniorCoach": "Specialiste për të rinjtë · ITF niveli 2",
-      "performanceCoach": "Garues · ITF niveli 3",
-      "open": "{n} të lira",
-      "revenueTitle": "Të ardhurat – 6 muajt e fundit",
-      "vsLastYear": "↑ 23% krahasuar me vitin e kaluar",
-      "totalRevenue": "Të ardhurat totale",
-      "activeMembersShort": "Anëtarë aktivë",
-      "avgMonth": "Mesatarja / muaj",
-      "split": "Fushat kundrejt të ardhurave nga trajnimet",
-      "export": "Eksporto CSV →",
-      "days": [
-        "HËN",
-        "MAR",
-        "MËR",
-        "ENJ",
-        "PRE",
-        "SHT",
-        "DIE"
-      ],
-      "months": {
-        "nov": "nën",
-        "dec": "dhj",
-        "jan": "jan",
-        "feb": "shk",
-        "mar": "mar",
-        "apr": "pri"
-      }
+      "court": "Fusha {n}",
+      "gold": "Gold",
+      "juniors": "Të rinjtë",
+      "specServe": "Shërbimi",
+      "specFootwork": "Lëvizja e këmbëve"
     }
   },
   "plans": {
@@ -394,7 +341,9 @@
     "ownerPage": "Klubet dhe pagesat",
     "tournaments": "Turnetë",
     "staff": "Stafi",
-    "manageClub": "Menaxho klubin"
+    "manageClub": "Menaxho klubin",
+    "superAdmin": "Super admin",
+    "clubAdmin": "Admin"
   },
   "members": {
     "title": "Anëtarë",
@@ -816,10 +765,9 @@
     "seeHow": "Shihni si funksionon"
   },
   "announcement": {
-    "new": "E re",
-    "live": "Rezervimi publik është aktiv –",
-    "createLink": "Krijoni një lidhje. Pranoni lojtarë nga kudo.",
-    "learnMore": "Mësoni më shumë →"
+    "free": "Provoni Kortello falas për {days} ditë.",
+    "noCard": "Pa kartë.",
+    "link": "Shihni planet →"
   },
   "cta": {
     "title1": "Fushat tuaja meritojnë",
@@ -989,6 +937,15 @@
           "Mbështetje me përparësi"
         ]
       }
+    },
+    "everyPlan": {
+      "title": "Përfshihet në çdo plan",
+      "items": [
+        "Faqja juaj e rezervimeve dhe posteri QR",
+        "Rezervime javore dhe kufi për mosparaqitjet",
+        "Turne me short automatik",
+        "Eksportoni të dhënat në Excel"
+      ]
     }
   },
   "faq": {
@@ -1757,7 +1714,7 @@
     "weeklyCard": {
       "label": "Rezervim javor",
       "when": "Çdo {day}, 19:00",
-      "who": "Ana P. · Fusha 2",
+      "who": "Emma L. · Fusha 2",
       "progress": "Java {week} nga {weeks}"
     },
     "reminderCard": {

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import type { Profile } from "@/types/database";
 import { getSafeRedirect } from "@/lib/safeRedirect";
 import { routing } from "@/i18n/routing";
+import { homeFor } from "@/lib/roles";
 
 const LOCALES: readonly string[] = routing.locales;
 
@@ -40,10 +41,7 @@ export async function GET(request: Request) {
         const role = (data as Pick<Profile, "role"> | null)?.role;
 
         if (next) return NextResponse.redirect(`${origin}${next}`);
-        if (role === "club_admin" || role === "super_admin") {
-          return NextResponse.redirect(`${origin}${prefix}/admin/dashboard`);
-        }
-        return NextResponse.redirect(`${origin}${prefix}/book`);
+        return NextResponse.redirect(`${origin}${prefix}${homeFor(role)}`);
       }
     }
   }

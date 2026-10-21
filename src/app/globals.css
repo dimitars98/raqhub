@@ -6,7 +6,7 @@
 
 @theme {
   --font-sans: "Poppins", system-ui, sans-serif;
-  --font-display: "Syne", sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
 
   /* Lime green — primary brand */
   --color-brand-50: #f3fbde;

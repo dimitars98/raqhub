@@ -35,8 +35,7 @@ export default function Pricing() {
     >
       <div className="mx-auto max-w-[1080px]">
         <div className="mb-12 text-center lg:mb-16">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-brand-100 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-900">
-            <span className="size-1.5 rounded-full bg-brand-600" />
+          <div className="mb-3.5 text-[11px] font-semibold uppercase tracking-widest text-[#4d7a08]">
             {t("label")}
           </div>
           <h2 className="font-display mb-3 text-[28px] font-extrabold leading-[1.1] tracking-tight text-ink-900 sm:text-[34px] lg:text-[44px]">
@@ -163,6 +162,23 @@ export default function Pricing() {
               </Link>
             </div>
           ))}
+        </div>
+
+        {/* Things every plan has, so no card has to repeat them */}
+        <div className="mt-8 rounded-3xl border border-ink-100 bg-white px-6 py-5 sm:px-8">
+          <div className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[#4d7a08]">
+            {t("everyPlan.title")}
+          </div>
+          <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-4">
+            {(t.raw("everyPlan.items") as string[]).map((item) => (
+              <li key={item} className="flex items-center gap-3 text-[14px] text-ink-800">
+                <span className="grid size-5 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-900">
+                  <Check size={12} strokeWidth={3} aria-hidden="true" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

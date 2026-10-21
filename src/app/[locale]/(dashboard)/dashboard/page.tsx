@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Profile } from "@/types/database";
+import { homeFor, usesAdminArea } from "@/lib/roles";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -16,9 +17,5 @@ export default async function DashboardPage() {
     .single();
   const role = (data as Pick<Profile, "role"> | null)?.role;
 
-  if (role === "club_admin" || role === "super_admin") {
-    redirect("/admin/dashboard");
-  } else {
-    redirect("/my-bookings");
-  }
+  redirect(usesAdminArea(role) ? homeFor(role) : "/my-bookings");
 }

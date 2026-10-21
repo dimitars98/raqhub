@@ -51,120 +51,67 @@
     "footer": "Conçu pour les clubs de tennis."
   },
   "features": {
-    "courtBookings": "Réservations de courts",
-    "courtBookingsDesc": "Ajoutez des réservations pour les membres ou les visiteurs. Suivez les créneaux, les durées et les revenus par court.",
-    "memberManagement": "Gestion des membres",
-    "memberManagementDesc": "Gardez une vue d'ensemble sur tous vos membres, leurs formules, coordonnées et statut d'adhésion.",
-    "membershipPlans": "Formules d'adhésion",
-    "membershipPlansDesc": "Créez des formules mensuelles, annuelles ou ponctuelles avec une tarification personnalisée et des remises sur les réservations.",
-    "bookingStatus": "Statut des réservations",
-    "bookingStatusDesc": "Marquez les réservations comme confirmées, terminées, annulées ou absentes en un clic.",
-    "multiCourt": "Multi-courts",
-    "multiCourtDesc": "Gérez des courts en terre battue, dur, gazon et couverts — chacun avec sa propre tarification.",
-    "adminDashboard": "Tableau de bord admin",
-    "adminDashboardDesc": "Un seul endroit pour tout votre club. Pas de tableurs, pas de papier, pas de chaos.",
     "rows": {
       "bookings": {
-        "label": "Réservation de terrains",
-        "pre": "Réservez ",
-        "mark": "à votre façon",
+        "label": "Réservations de terrains",
+        "pre": "Un planning pour ",
+        "mark": "tous vos terrains",
         "post": "",
-        "body": "Disponibilités en temps réel, confirmation immédiate et aucune double réservation. Les joueurs réservent depuis leur téléphone, et vous ajoutez vous-même les réservations par téléphone ou sur place.",
-        "cta": "Voir les fonctions de réservation",
+        "body": "Les joueurs réservent en ligne, vous ajoutez les réservations par téléphone et sur place, et tout arrive dans la même vue du jour. Un terrain ne peut jamais être réservé deux fois.",
         "points": [
-          "Réservations hebdomadaires récurrentes pour vos habitués",
-          "Réservations par téléphone et sur place dans le même planning",
-          "Vos règles : combien à l’avance, combien par jour, jusqu’à quand annuler",
-          "Les joueurs qui ne viennent pas à répétition sont suspendus automatiquement"
+          "Tous les terrains côte à côte, jour par jour",
+          "En ligne, par téléphone et sur place au même endroit",
+          "Vos règles : combien à l’avance, combien par jour, quand annuler",
+          "Créneaux de 30, 60, 90 ou 120 minutes"
         ]
       },
       "membership": {
         "label": "Adhésions",
-        "pre": "Gestion complète ",
-        "mark": "des membres",
+        "pre": "Des membres qui ",
+        "mark": "renouvellent",
         "post": "",
-        "body": "Tous vos membres au même endroit. Voyez leur formule, leurs coordonnées et la fin de leur adhésion, et laissez les e-mails de rappel faire les relances.",
-        "cta": "Voir les outils membres",
+        "body": "Vendez vos propres adhésions, offrez aux membres une remise sur chaque réservation et laissez Kortello les relancer avant l’échéance.",
         "points": [
-          "Formules mensuelles, annuelles ou ponctuelles",
-          "Réductions sur les réservations pour les membres",
+          "Vos formules mensuelles, annuelles ou ponctuelles",
+          "Une remise sur les réservations pour les membres",
           "E-mails de rappel de renouvellement",
-          "Les adhésions qui se terminent dans les 30 prochains jours"
+          "Qui arrive à échéance dans les 30 jours"
         ]
       },
       "coaching": {
-        "label": "Cours",
-        "pre": "Remplissez l’agenda de ",
-        "mark": "vos entraîneurs",
+        "label": "Coaching",
+        "pre": "Des coachs aux ",
+        "mark": "agendas pleins",
         "post": "",
-        "body": "Les joueurs parcourent vos entraîneurs et réservent un cours directement. Chaque cours bloque son terrain : un cours et une réservation ne se chevauchent jamais.",
-        "cta": "Voir les fonctions cours",
+        "body": "Les joueurs trouvent vos coachs et réservent un cours en quelques gestes. Chaque cours bloque un terrain libre, donc un cours et une réservation ne se chevauchent jamais.",
         "points": [
-          "Profils d’entraîneurs avec niveaux et prix",
-          "Les joueurs réservent leurs cours en ligne",
-          "Les cours bloquent le terrain automatiquement",
+          "Profils avec niveaux, spécialités et tarif",
+          "Cours réservés en ligne",
+          "Un terrain libre bloqué pour chaque cours",
           "E-mails de confirmation et de rappel"
         ]
       },
       "analytics": {
         "label": "Statistiques",
-        "pre": "Des décisions ",
-        "mark": "basées sur les données",
+        "pre": "Connaissez vos ",
+        "mark": "heures de pointe",
         "post": "",
-        "body": "Voyez d’un coup d’œil comment va votre club : chiffre d’affaires dans le temps, vos heures de pointe et le taux de remplissage de chaque terrain.",
-        "cta": "Voir les statistiques",
+        "body": "Voyez quand vos terrains se remplissent, quel sport rapporte le plus et comment évolue votre chiffre d’affaires, sans tableur.",
         "points": [
-          "Chiffre d’affaires dans le temps et par sport",
-          "Carte des heures de pointe",
-          "Réservations et chiffre d’affaires par terrain",
+          "Heures de pointe, jour par jour",
+          "Revenus par sport et par terrain",
+          "Revenus comparés à la période précédente",
           "Un rapport hebdomadaire par e-mail"
         ]
       }
     },
+    "cta": "Commencer le mois gratuit",
     "mock": {
-      "weekTitle": "Tous les terrains – cette semaine",
-      "saveSchedule": "Enregistrer",
-      "available": "Libre",
-      "booked": "Réservé",
-      "closed": "Fermé",
-      "members": "Membres (342)",
-      "invite": "+ Inviter",
-      "activeMembers": "Membres actifs",
-      "monthlyRevenue": "Revenu mensuel",
-      "clubPlan": "Formule Club",
-      "academyPlan": "Formule Academy",
-      "starterPlan": "Formule Starter",
-      "active": "Actif",
-      "pending": "En attente",
-      "coachTeam": "Notre équipe d’entraîneurs",
-      "headCoach": "Entraîneur principal · ITF niveau 3",
-      "juniorCoach": "Spécialiste jeunes · ITF niveau 2",
-      "performanceCoach": "Performance · ITF niveau 3",
-      "open": "{n} libres",
-      "revenueTitle": "Revenus – 6 derniers mois",
-      "vsLastYear": "↑ 23 % vs l’an dernier",
-      "totalRevenue": "Revenu total",
-      "activeMembersShort": "Membres actifs",
-      "avgMonth": "Moy. / mois",
-      "split": "Terrains vs revenus des cours",
-      "export": "Exporter en CSV →",
-      "days": [
-        "LUN",
-        "MAR",
-        "MER",
-        "JEU",
-        "VEN",
-        "SAM",
-        "DIM"
-      ],
-      "months": {
-        "nov": "nov.",
-        "dec": "déc.",
-        "jan": "janv.",
-        "feb": "févr.",
-        "mar": "mars",
-        "apr": "avr."
-      }
+      "court": "Terrain {n}",
+      "gold": "Gold",
+      "juniors": "Juniors",
+      "specServe": "Service",
+      "specFootwork": "Jeu de jambes"
     }
   },
   "plans": {
@@ -394,7 +341,9 @@
     "ownerPage": "Clubs et paiements",
     "tournaments": "Tournois",
     "staff": "Équipe",
-    "manageClub": "Gérer le club"
+    "manageClub": "Gérer le club",
+    "superAdmin": "Super admin",
+    "clubAdmin": "Admin"
   },
   "members": {
     "title": "Membres",
@@ -816,10 +765,9 @@
     "seeHow": "Voir comment ça marche"
   },
   "announcement": {
-    "new": "Nouveau",
-    "live": "La réservation publique est en ligne –",
-    "createLink": "Créez un lien. Accueillez des joueurs partout.",
-    "learnMore": "En savoir plus →"
+    "free": "Essayez Kortello gratuitement pendant {days} jours.",
+    "noCard": "Sans carte bancaire.",
+    "link": "Voir les formules →"
   },
   "cta": {
     "title1": "Vos terrains méritent",
@@ -989,6 +937,15 @@
           "Support prioritaire"
         ]
       }
+    },
+    "everyPlan": {
+      "title": "Inclus dans toutes les formules",
+      "items": [
+        "Votre page de réservation et affiche QR",
+        "Réservations hebdomadaires et limite d’absences",
+        "Tournois avec tirage automatique",
+        "Export de vos données vers Excel"
+      ]
     }
   },
   "faq": {
@@ -1757,7 +1714,7 @@
     "weeklyCard": {
       "label": "Réservation hebdomadaire",
       "when": "Chaque {day}, 19:00",
-      "who": "Ana P. · Terrain 2",
+      "who": "Emma L. · Terrain 2",
       "progress": "Semaine {week} sur {weeks}"
     },
     "reminderCard": {

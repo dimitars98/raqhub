@@ -243,7 +243,7 @@ export default function MembersClient({
                       <div>
                         <div className="text-[#3d4f35]">{m.plan.name}</div>
                         <div className="text-xs text-[#6e7f65]">
-                          €{m.plan.price} / {m.plan.billing_period}
+                          €{m.plan.price} {labels.billingPeriod(m.plan.billing_period)}
                         </div>
                       </div>
                     ) : (

@@ -6,6 +6,7 @@ import { PlanBanner, UpgradeNotice } from "@/components/admin/PlanNotices";
 import { acceptStaffInvites } from "@/lib/myClub";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 import type { Club, Profile } from "@/types/database";
+import { usesAdminArea } from "@/lib/roles";
 
 type LayoutProfile = Pick<Profile, "full_name" | "role">;
 type LayoutClub = Pick<Club, "name" | "slug"> & ClubBilling;
@@ -48,7 +49,7 @@ export default async function AdminLayout({
   // Club owners and the app owner, as before. Anyone else gets in only as
   // staff of a club that invited them (and only on the timetable, bookings
   // and members screens, see src/lib/myClub.ts).
-  const isAdmin = profile.role === "club_admin" || profile.role === "super_admin";
+  const isAdmin = usesAdminArea(profile.role);
   let isStaff = false;
   if (!isAdmin) {
     const staffClubId = await acceptStaffInvites(supabase);
@@ -72,7 +73,7 @@ export default async function AdminLayout({
       userName={profile.full_name ?? "Admin"}
       clubName={club?.name}
       clubSlug={club?.slug}
-      isOwner={profile.role === "super_admin"}
+      isSuperAdmin={profile.role === "super_admin"}
       isStaff={isStaff}
       // The plan and trial are the owner's business, not the staff's.
       notice={club && !isStaff ? <PlanBanner access={clubAccess(club)} /> : undefined}

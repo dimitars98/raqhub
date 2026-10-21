@@ -65,6 +65,7 @@ interface SidebarContentProps {
   onNavClick: () => void;
   onSignOut: () => void;
   onClose?: () => void;
+  /** Shown under the name when there is no club name. */
   playerLabel: string;
   /** "Admin", "Staff" or "Player" next to the logo. */
   badgeLabel: string;
@@ -127,7 +128,7 @@ function SidebarContent({
           </Link>
           {!collapsed && (
             <span
-              className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${tone.badge}`}
+              className={`whitespace-nowrap rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${tone.badge}`}
             >
               {badgeLabel}
             </span>
@@ -332,8 +333,11 @@ interface SidebarProps {
   clubName?: string;
   /** Used for the link to the club's public page. */
   clubSlug?: string;
-  /** The app owner (super_admin) also gets the owner page. */
-  isOwner?: boolean;
+  /**
+   * You, the person who runs Kortello. Gets the Kortello screens, plus the
+   * club screens only if this account also has a club of its own.
+   */
+  isSuperAdmin?: boolean;
   /** Staff of a club: only timetable, bookings and members. */
   isStaff?: boolean;
   /** A player who is also staff: a link to the club's admin screens. */
@@ -345,7 +349,7 @@ export default function Sidebar({
   userName,
   clubName,
   clubSlug,
-  isOwner = false,
+  isSuperAdmin = false,
   isStaff = false,
   staffLink = false,
 }: SidebarProps) {
@@ -354,15 +358,16 @@ export default function Sidebar({
   const router = useRouter();
   const t = useTranslations("dashboard");
 
-  const ADMIN_NAV: NavGroup[] = [
-    ...(isOwner
-      ? [
-          {
-            group: t("ownerGroup"),
-            items: [{ label: t("ownerPage"), href: "/admin/owner", icon: Crown }],
-          },
-        ]
-      : []),
+  // Super admin: the screens for running Kortello itself.
+  const SUPER_ADMIN_NAV: NavGroup[] = [
+    {
+      group: t("ownerGroup"),
+      items: [{ label: t("ownerPage"), href: "/admin/owner", icon: Crown }],
+    },
+  ];
+
+  // Club admin: the person who signed their club up and runs it.
+  const CLUB_ADMIN_NAV: NavGroup[] = [
     {
       group: t("overview"),
       items: [
@@ -454,7 +459,16 @@ export default function Sidebar({
       : []),
   ];
 
-  const nav = role === "admin" ? (isStaff ? STAFF_NAV : ADMIN_NAV) : MEMBER_NAV;
+  // A super admin who also runs a club (e.g. a test club) gets both.
+  const hasClub = !!clubSlug;
+  const nav =
+    role !== "admin"
+      ? MEMBER_NAV
+      : isStaff
+        ? STAFF_NAV
+        : isSuperAdmin
+          ? [...SUPER_ADMIN_NAV, ...(hasClub ? CLUB_ADMIN_NAV : [])]
+          : CLUB_ADMIN_NAV;
 
   const handleSignOut = async () => {
     // Created here, not on every render.
@@ -478,11 +492,23 @@ export default function Sidebar({
     nav,
     pathname,
     // The logo keeps people inside the app instead of sending them to the public site.
-    homeHref: role === "admin" ? "/admin/timetable" : "/my-bookings",
+    homeHref:
+      role !== "admin"
+        ? "/my-bookings"
+        : isSuperAdmin && !hasClub
+          ? "/admin/owner"
+          : "/admin/timetable",
     onNavClick: closeMobile,
     onSignOut: handleSignOut,
-    playerLabel: t("player"),
-    badgeLabel: role === "admin" ? (isStaff ? t("staff") : "Admin") : t("player"),
+    playerLabel: isSuperAdmin ? t("superAdmin") : t("player"),
+    badgeLabel:
+      role !== "admin"
+        ? t("player")
+        : isStaff
+          ? t("staff")
+          : isSuperAdmin
+            ? t("superAdmin")
+            : t("clubAdmin"),
     signOutLabel: t("signOut"),
   };
 

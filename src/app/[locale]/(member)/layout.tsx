@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
 import type { Profile } from "@/types/database";
 import { acceptStaffInvites } from "@/lib/myClub";
+import { homeFor, usesAdminArea } from "@/lib/roles";
 
 type LayoutProfile = Pick<Profile, "full_name" | "role">;
 
@@ -28,9 +29,7 @@ export default async function MemberLayout({
 
   if (!profile) redirect(`/${locale}/login`);
 
-  if (profile.role === "club_admin" || profile.role === "super_admin") {
-    redirect(`/${locale}/admin/dashboard`);
-  }
+  if (usesAdminArea(profile.role)) redirect(`/${locale}${homeFor(profile.role)}`);
 
   // A player who is also staff of a club gets a link to its admin screens.
   const isStaff = !!(await acceptStaffInvites(supabase));

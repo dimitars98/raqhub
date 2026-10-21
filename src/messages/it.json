@@ -51,120 +51,67 @@
     "footer": "Pensato per i circoli di tennis."
   },
   "features": {
-    "courtBookings": "Prenotazioni campi",
-    "courtBookingsDesc": "Aggiungi prenotazioni per i soci o gli utenti occasionali. Tieni traccia delle fasce orarie, delle durate e dei ricavi per campo.",
-    "memberManagement": "Gestione soci",
-    "memberManagementDesc": "Tieni traccia di tutti i tuoi soci, i loro piani, le informazioni di contatto e lo stato dell'iscrizione.",
-    "membershipPlans": "Piani di iscrizione",
-    "membershipPlansDesc": "Crea piani mensili, annuali o una tantum con prezzi personalizzati e sconti sulle prenotazioni.",
-    "bookingStatus": "Stato prenotazione",
-    "bookingStatusDesc": "Contrassegna le prenotazioni come confermate, completate, annullate o assenti con un clic.",
-    "multiCourt": "Supporto multi-campo",
-    "multiCourtDesc": "Gestisci campi in terra rossa, cemento, erba e coperti — ognuno con il proprio prezzo.",
-    "adminDashboard": "Pannello admin",
-    "adminDashboardDesc": "Un unico posto per tutto il tuo circolo. Niente fogli di calcolo, niente carta, niente caos.",
     "rows": {
       "bookings": {
-        "label": "Prenotazione campi",
-        "pre": "Prenota ",
-        "mark": "a modo tuo",
+        "label": "Prenotazioni campi",
+        "pre": "Un solo planning per ",
+        "mark": "ogni campo",
         "post": "",
-        "body": "Disponibilità in tempo reale, conferma immediata e nessuna doppia prenotazione. I giocatori prenotano dal telefono, e voi aggiungete le prenotazioni telefoniche e di chi passa al club.",
-        "cta": "Scopri le prenotazioni",
+        "body": "I giocatori prenotano online, voi aggiungete le prenotazioni al telefono e di persona, e tutto finisce nella stessa vista del giorno. Un campo non può mai essere prenotato due volte.",
         "points": [
-          "Prenotazioni settimanali ricorrenti per i vostri habitué",
-          "Prenotazioni al telefono e al club nello stesso calendario",
-          "Le vostre regole: quanto in anticipo, quante al giorno, fino a quando disdire",
-          "Chi non si presenta di continuo viene sospeso automaticamente"
+          "Tutti i campi affiancati, giorno per giorno",
+          "Online, al telefono e di persona in un unico posto",
+          "Le vostre regole: quanto in anticipo, quante al giorno, quando disdire",
+          "Fasce da 30, 60, 90 o 120 minuti"
         ]
       },
       "membership": {
-        "label": "Soci",
-        "pre": "Gestione completa ",
-        "mark": "dei soci",
+        "label": "Abbonamenti",
+        "pre": "Soci che ",
+        "mark": "rinnovano",
         "post": "",
-        "body": "Tutti i soci in un unico posto. Vedete il piano, i contatti e quando scade l’iscrizione, e lasciate che le e-mail di promemoria facciano i solleciti.",
-        "cta": "Scopri la gestione soci",
+        "body": "Vendete i vostri abbonamenti, date ai soci uno sconto su ogni prenotazione e lasciate che Kortello li avvisi prima della scadenza.",
         "points": [
           "Piani mensili, annuali o una tantum",
-          "Sconti sulle prenotazioni per i soci",
-          "E-mail di promemoria per il rinnovo",
-          "Chi ha l’iscrizione in scadenza nei prossimi 30 giorni"
+          "Uno sconto sulle prenotazioni per i soci",
+          "Email di promemoria per il rinnovo",
+          "Chi scade nei prossimi 30 giorni"
         ]
       },
       "coaching": {
         "label": "Lezioni",
-        "pre": "Riempi il calendario dei ",
-        "mark": "tuoi maestri",
+        "pre": "Maestri con ",
+        "mark": "agende piene",
         "post": "",
-        "body": "I giocatori sfogliano i vostri maestri e prenotano le lezioni direttamente. Ogni lezione tiene il suo campo, così lezione e prenotazione non si sovrappongono mai.",
-        "cta": "Scopri le lezioni",
+        "body": "I giocatori trovano i vostri maestri e prenotano una lezione in pochi tocchi. Ogni lezione occupa un campo libero, così lezioni e prenotazioni non si sovrappongono mai.",
         "points": [
-          "Profili dei maestri con livelli e prezzo",
-          "I giocatori prenotano le lezioni online",
-          "Le lezioni tengono il campo automaticamente",
-          "E-mail di conferma e promemoria"
+          "Profili con livelli, specialità e prezzo",
+          "Lezioni prenotate online",
+          "Un campo libero per ogni lezione",
+          "Email di conferma e promemoria"
         ]
       },
       "analytics": {
         "label": "Statistiche",
-        "pre": "Decisioni ",
-        "mark": "basate sui dati",
+        "pre": "Scoprite le ",
+        "mark": "ore di punta",
         "post": "",
-        "body": "Vedete a colpo d’occhio come va il club: incassi nel tempo, le ore di punta e quanto è pieno ogni campo.",
-        "cta": "Scopri le statistiche",
+        "body": "Vedete quando i campi si riempiono, quale sport rende di più e come va l’incasso, senza fogli di calcolo.",
         "points": [
-          "Incassi nel tempo e per sport",
-          "Mappa delle ore di punta",
-          "Prenotazioni e incassi per campo",
-          "Un report settimanale via e-mail"
+          "Ore di punta, giorno per giorno",
+          "Incassi per sport e per campo",
+          "Incassi a confronto con il periodo precedente",
+          "Un report settimanale via email"
         ]
       }
     },
+    "cta": "Inizia il mese gratis",
     "mock": {
-      "weekTitle": "Tutti i campi – questa settimana",
-      "saveSchedule": "Salva calendario",
-      "available": "Libero",
-      "booked": "Prenotato",
-      "closed": "Chiuso",
-      "members": "Soci (342)",
-      "invite": "+ Invita",
-      "activeMembers": "Soci attivi",
-      "monthlyRevenue": "Ricavi mensili",
-      "clubPlan": "Piano Club",
-      "academyPlan": "Piano Academy",
-      "starterPlan": "Piano Starter",
-      "active": "Attivo",
-      "pending": "In attesa",
-      "coachTeam": "Il nostro staff tecnico",
-      "headCoach": "Responsabile tecnico · ITF livello 3",
-      "juniorCoach": "Specialista giovanile · ITF livello 2",
-      "performanceCoach": "Agonistica · ITF livello 3",
-      "open": "{n} liberi",
-      "revenueTitle": "Ricavi – ultimi 6 mesi",
-      "vsLastYear": "↑ 23% rispetto all’anno scorso",
-      "totalRevenue": "Ricavi totali",
-      "activeMembersShort": "Soci attivi",
-      "avgMonth": "Media / mese",
-      "split": "Campi vs ricavi delle lezioni",
-      "export": "Esporta CSV →",
-      "days": [
-        "LUN",
-        "MAR",
-        "MER",
-        "GIO",
-        "VEN",
-        "SAB",
-        "DOM"
-      ],
-      "months": {
-        "nov": "nov",
-        "dec": "dic",
-        "jan": "gen",
-        "feb": "feb",
-        "mar": "mar",
-        "apr": "apr"
-      }
+      "court": "Campo {n}",
+      "gold": "Gold",
+      "juniors": "Juniores",
+      "specServe": "Servizio",
+      "specFootwork": "Gioco di gambe"
     }
   },
   "plans": {
@@ -394,7 +341,9 @@
     "ownerPage": "Club e pagamenti",
     "tournaments": "Tornei",
     "staff": "Staff",
-    "manageClub": "Gestisci il club"
+    "manageClub": "Gestisci il club",
+    "superAdmin": "Super admin",
+    "clubAdmin": "Admin"
   },
   "members": {
     "title": "Soci",
@@ -816,10 +765,9 @@
     "seeHow": "Scopri come funziona"
   },
   "announcement": {
-    "new": "Novità",
-    "live": "La prenotazione pubblica è attiva –",
-    "createLink": "Crea un link. Accogli giocatori ovunque.",
-    "learnMore": "Scopri di più →"
+    "free": "Provate Kortello gratis per {days} giorni.",
+    "noCard": "Senza carta.",
+    "link": "Vedi i piani →"
   },
   "cta": {
     "title1": "I tuoi campi meritano",
@@ -989,6 +937,15 @@
           "Assistenza prioritaria"
         ]
       }
+    },
+    "everyPlan": {
+      "title": "Incluso in ogni piano",
+      "items": [
+        "La vostra pagina di prenotazione e poster QR",
+        "Prenotazioni settimanali e limite di assenze",
+        "Tornei con sorteggio automatico",
+        "Esportazione dei dati in Excel"
+      ]
     }
   },
   "faq": {
@@ -1757,7 +1714,7 @@
     "weeklyCard": {
       "label": "Prenotazione settimanale",
       "when": "Ogni {day}, 19:00",
-      "who": "Ana P. · Campo 2",
+      "who": "Emma L. · Campo 2",
       "progress": "Settimana {week} di {weeks}"
     },
     "reminderCard": {

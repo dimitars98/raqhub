@@ -13,8 +13,8 @@ interface DashboardShellProps {
   clubSlug?: string;
   /** Shown above the page content (e.g. the free-trial banner). */
   notice?: React.ReactNode;
-  /** The app owner (super_admin): adds the owner page to the sidebar. */
-  isOwner?: boolean;
+  /** You, the person who runs Kortello: gets the super admin screens. */
+  isSuperAdmin?: boolean;
   /** Staff of a club: only the screens staff can use. */
   isStaff?: boolean;
   /** A player who is also staff: link to the club's admin screens. */
@@ -28,7 +28,7 @@ export default async function DashboardShell({
   clubName,
   clubSlug,
   notice,
-  isOwner,
+  isSuperAdmin,
   isStaff,
   staffLink,
 }: DashboardShellProps) {
@@ -44,7 +44,7 @@ export default async function DashboardShell({
           userName={userName}
           clubName={clubName}
           clubSlug={clubSlug}
-          isOwner={isOwner}
+          isSuperAdmin={isSuperAdmin}
           isStaff={isStaff}
           staffLink={staffLink}
         />

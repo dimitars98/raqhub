@@ -51,120 +51,67 @@
     "footer": "Built for tennis clubs."
   },
   "features": {
-    "courtBookings": "Court bookings",
-    "courtBookingsDesc": "Add bookings for members or walk-ins. Track time slots, durations, and revenue per court.",
-    "memberManagement": "Member management",
-    "memberManagementDesc": "Keep track of all your members, their plans, contact info, and membership status.",
-    "membershipPlans": "Membership plans",
-    "membershipPlansDesc": "Create monthly, annual, or one-time plans with custom pricing and booking discounts.",
-    "bookingStatus": "Booking status",
-    "bookingStatusDesc": "Mark bookings as confirmed, completed, cancelled or no-show with one click.",
-    "multiCourt": "Multi-court support",
-    "multiCourtDesc": "Manage clay, hard, grass and indoor courts — each with their own pricing.",
-    "adminDashboard": "Admin dashboard",
-    "adminDashboardDesc": "One place for your whole club. No spreadsheets, no paper, no chaos.",
     "rows": {
       "bookings": {
         "label": "Court bookings",
-        "pre": "Book it ",
-        "mark": "your way",
+        "pre": "One timetable for ",
+        "mark": "every court",
         "post": "",
-        "body": "Real-time court availability, instant confirmations and no double bookings. Players book from any phone, and you add phone and walk-in bookings yourself.",
-        "cta": "Explore booking features",
+        "body": "Players book online, you add phone and walk-in bookings, and it all lands in the same day view. A court can never be booked twice.",
         "points": [
-          "Weekly repeating bookings for your regulars",
-          "Phone and walk-in bookings in the same timetable",
+          "Every court side by side, per day",
+          "Online, phone and walk-in in one place",
           "Your rules: how far ahead, how many a day, when to cancel",
-          "Players who keep not showing up are paused automatically"
+          "Slots of 30, 60, 90 or 120 minutes"
         ]
       },
       "membership": {
         "label": "Membership",
-        "pre": "Complete ",
-        "mark": "member",
-        "post": " management",
-        "body": "Keep every member in one place. See their plan, contact details and when their membership ends, and let the reminder emails do the chasing.",
-        "cta": "Explore membership tools",
+        "pre": "Members who ",
+        "mark": "renew",
+        "post": "",
+        "body": "Sell your own memberships, give members a discount on every booking, and let Kortello remind them before it runs out.",
         "points": [
-          "Monthly, yearly or one-time plans",
-          "Booking discounts for members",
+          "Your own monthly, yearly or one-time plans",
+          "A booking discount for members",
           "Renewal reminder emails",
-          "See whose membership ends in the next 30 days"
+          "See who ends in the next 30 days"
         ]
       },
       "coaching": {
         "label": "Coaching",
-        "pre": "Pack your coaches' ",
-        "mark": "calendars",
+        "pre": "Coaches with ",
+        "mark": "full calendars",
         "post": "",
-        "body": "Let players browse your coaches and book lessons directly. Each lesson holds its court, so a lesson and a court booking never clash.",
-        "cta": "Explore coaching features",
+        "body": "Players find your coaches and book a lesson in a few taps. Every lesson takes a free court with it, so a lesson and a booking never clash.",
         "points": [
-          "Coach profiles with levels and price",
-          "Players book lessons online",
-          "Lessons hold the court automatically",
+          "Profiles with levels, specialities and price",
+          "Lessons booked online",
+          "A free court held for every lesson",
           "Confirmation and reminder emails"
         ]
       },
       "analytics": {
         "label": "Analytics",
-        "pre": "",
-        "mark": "Data-driven",
-        "post": " decisions",
-        "body": "See how your club is doing at a glance: revenue over time, your busiest hours and how full each court is.",
-        "cta": "Explore analytics",
+        "pre": "Know your ",
+        "mark": "busiest hours",
+        "post": "",
+        "body": "See when your courts fill up, which sport earns the most and how revenue moves, without building a spreadsheet.",
         "points": [
-          "Revenue over time and by sport",
-          "Peak hours heatmap",
-          "Bookings and revenue per court",
+          "Peak hours, day by day",
+          "Revenue by sport and by court",
+          "Revenue compared with the period before",
           "A weekly report in your inbox"
         ]
       }
     },
+    "cta": "Start your free month",
     "mock": {
-      "weekTitle": "All courts — this week",
-      "saveSchedule": "Save schedule",
-      "available": "Available",
-      "booked": "Booked",
-      "closed": "Closed",
-      "members": "Members (342)",
-      "invite": "+ Invite",
-      "activeMembers": "Active members",
-      "monthlyRevenue": "Monthly revenue",
-      "clubPlan": "Club plan",
-      "academyPlan": "Academy plan",
-      "starterPlan": "Starter plan",
-      "active": "Active",
-      "pending": "Pending",
-      "coachTeam": "Our coaching team",
-      "headCoach": "Head coach · ITF Level 3",
-      "juniorCoach": "Junior specialist · ITF Level 2",
-      "performanceCoach": "Performance · ITF Level 3",
-      "open": "{n} open",
-      "revenueTitle": "Revenue — last 6 months",
-      "vsLastYear": "↑ 23% vs last year",
-      "totalRevenue": "Total revenue",
-      "activeMembersShort": "Active members",
-      "avgMonth": "Avg / month",
-      "split": "Court bookings vs coaching revenue",
-      "export": "Export CSV →",
-      "days": [
-        "MON",
-        "TUE",
-        "WED",
-        "THU",
-        "FRI",
-        "SAT",
-        "SUN"
-      ],
-      "months": {
-        "nov": "Nov",
-        "dec": "Dec",
-        "jan": "Jan",
-        "feb": "Feb",
-        "mar": "Mar",
-        "apr": "Apr"
-      }
+      "court": "Court {n}",
+      "gold": "Gold",
+      "juniors": "Juniors",
+      "specServe": "Serve",
+      "specFootwork": "Footwork"
     }
   },
   "plans": {
@@ -394,7 +341,9 @@
     "ownerPage": "Clubs & payments",
     "tournaments": "Tournaments",
     "staff": "Staff",
-    "manageClub": "Manage club"
+    "manageClub": "Manage club",
+    "superAdmin": "Super admin",
+    "clubAdmin": "Admin"
   },
   "members": {
     "title": "Members",
@@ -816,10 +765,9 @@
     "seeHow": "See How It Works"
   },
   "announcement": {
-    "new": "New",
-    "live": "Public Booking is live —",
-    "createLink": "Create a link. Accept players anywhere.",
-    "learnMore": "Learn more →"
+    "free": "Try Kortello free for {days} days.",
+    "noCard": "No card needed.",
+    "link": "See plans →"
   },
   "cta": {
     "title1": "Your courts deserve",
@@ -989,6 +937,15 @@
           "Priority support"
         ]
       }
+    },
+    "everyPlan": {
+      "title": "Included in every plan",
+      "items": [
+        "Your booking page and QR poster",
+        "Weekly bookings and no-show limits",
+        "Tournaments with automatic draws",
+        "Export your data to Excel"
+      ]
     }
   },
   "faq": {
@@ -1757,7 +1714,7 @@
     "weeklyCard": {
       "label": "Weekly booking",
       "when": "Every {day}, 19:00",
-      "who": "Ana P. · Court 2",
+      "who": "Emma L. · Court 2",
       "progress": "Week {week} of {weeks}"
     },
     "reminderCard": {

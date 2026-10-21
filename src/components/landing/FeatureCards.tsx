@@ -116,7 +116,7 @@ export default function FeatureCards() {
           </div>
           <ul className="mt-auto flex flex-col gap-2">
             {[
-              { initial: "D", name: "Dimitar", role: t("staff.owner"), dark: true },
+              { initial: "D", name: "Daniel", role: t("staff.owner"), dark: true },
               { initial: "S", name: "Sara", role: t("staff.staff"), dark: false },
             ].map((p) => (
               <li key={p.name} className="flex items-center gap-2.5 rounded-2xl border border-[#e8ede4] bg-white px-3 py-2.5">
@@ -175,13 +175,13 @@ export default function FeatureCards() {
           </div>
           <div className="mt-auto flex flex-col gap-2">
             <div className="flex items-center justify-between gap-2.5 rounded-2xl border border-[#e8ede4] px-3 py-[11px] text-[13px]">
-              <span className="font-semibold">Marko I.</span>
+              <span className="font-semibold">Lucas M.</span>
               <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-800">
                 {t("noShows.count", { n: 1 })}
               </span>
             </div>
             <div className="flex items-center justify-between gap-2.5 rounded-2xl border border-[#e8ede4] px-3 py-[11px] text-[13px]">
-              <span className="font-semibold">Petar N.</span>
+              <span className="font-semibold">Noah K.</span>
               <span className="rounded-full bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-700">
                 {t("noShows.count", { n: 2 })} · {t("noShows.paused")}
               </span>
@@ -206,12 +206,12 @@ export default function FeatureCards() {
               <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#4d7a08]">{t("tournament.semis")}</span>
               {[
                 [
-                  { name: "Ana P.", won: true },
-                  { name: "Marko I.", score: "6-4 6-3" },
+                  { name: "Emma L.", won: true },
+                  { name: "Lucas M.", score: "6-4 6-3" },
                 ],
                 [
-                  { name: "Petar N.", score: "7-6 3-6 8-10" },
-                  { name: "Elena T.", won: true },
+                  { name: "Noah K.", score: "7-6 3-6 8-10" },
+                  { name: "Sofia R.", won: true },
                 ],
               ].map((match, i) => (
                 <div key={i} className="overflow-hidden rounded-xl border border-[#e3eed3] bg-white text-[12px]">
@@ -241,8 +241,8 @@ export default function FeatureCards() {
                 {t("tournament.final", { day: finalDay })}
               </span>
               <div className="overflow-hidden rounded-xl border-[1.5px] border-[#111c0a] bg-white text-[12px] font-semibold">
-                <div className="px-2.5 py-2">Ana P.</div>
-                <div className="border-t border-[#eef3e6] px-2.5 py-2">Elena T.</div>
+                <div className="px-2.5 py-2">Emma L.</div>
+                <div className="border-t border-[#eef3e6] px-2.5 py-2">Sofia R.</div>
               </div>
               <span className="self-start rounded-full bg-[#111c0a] px-2.5 py-1 text-[11px] font-semibold text-[#a8d832]">
                 {t("tournament.size", { players: 8, rounds: 3 })}
@@ -266,8 +266,8 @@ export default function FeatureCards() {
                 <span className="text-right">{t("data.price")}</span>
               </div>
               {[
-                { court: 2, player: "Ana P.", price: 12 },
-                { court: 1, player: "Marko I.", price: 10 },
+                { court: 2, player: "Emma L.", price: 12 },
+                { court: 1, player: "Lucas M.", price: 10 },
               ].map((r) => (
                 <div key={r.player} className="grid grid-cols-4 gap-1.5 border-t border-[#eef1ea] px-2.5 py-2">
                   <span>{format(firstTuesday, "d MMM", { locale: df })}</span>

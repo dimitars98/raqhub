@@ -51,120 +51,67 @@
     "footer": "Für Tennisclubs entwickelt."
   },
   "features": {
-    "courtBookings": "Platzbuchungen",
-    "courtBookingsDesc": "Buchungen für Mitglieder oder Laufkundschaft hinzufügen. Zeitfenster, Dauer und Einnahmen pro Platz verfolgen.",
-    "memberManagement": "Mitgliederverwaltung",
-    "memberManagementDesc": "Behalten Sie den Überblick über alle Mitglieder, ihre Tarife, Kontaktdaten und den Mitgliedschaftsstatus.",
-    "membershipPlans": "Mitgliedschaftstarife",
-    "membershipPlansDesc": "Monatliche, jährliche oder einmalige Tarife mit individueller Preisgestaltung und Buchungsrabatten erstellen.",
-    "bookingStatus": "Buchungsstatus",
-    "bookingStatusDesc": "Buchungen mit einem Klick als bestätigt, abgeschlossen, storniert oder nicht erschienen markieren.",
-    "multiCourt": "Mehrere Plätze",
-    "multiCourtDesc": "Sand-, Hart-, Rasen- und Hallenplätze verwalten — jeder mit eigener Preisgestaltung.",
-    "adminDashboard": "Admin-Dashboard",
-    "adminDashboardDesc": "Ein Ort für Ihren gesamten Club. Keine Tabellen, kein Papier, kein Chaos.",
     "rows": {
       "bookings": {
         "label": "Platzbuchungen",
-        "pre": "Buchen, ",
-        "mark": "wie Sie wollen",
+        "pre": "Ein Belegungsplan für ",
+        "mark": "alle Plätze",
         "post": "",
-        "body": "Freie Plätze in Echtzeit, sofortige Bestätigung und keine Doppelbuchungen. Spieler buchen vom Handy, telefonische und spontane Buchungen tragen Sie selbst ein.",
-        "cta": "Buchungsfunktionen ansehen",
+        "body": "Spieler buchen online, Sie tragen Telefonbuchungen und Gäste vor Ort ein, und alles landet in derselben Tagesansicht. Ein Platz kann nie doppelt gebucht werden.",
         "points": [
-          "Wöchentliche Serienbuchungen für Stammspieler",
-          "Telefon- und Vor-Ort-Buchungen im selben Plan",
+          "Alle Plätze nebeneinander, pro Tag",
+          "Online, Telefon und vor Ort an einem Ort",
           "Ihre Regeln: wie weit im Voraus, wie viele pro Tag, bis wann stornieren",
-          "Wer immer wieder nicht erscheint, wird automatisch pausiert"
+          "Zeiten von 30, 60, 90 oder 120 Minuten"
         ]
       },
       "membership": {
         "label": "Mitgliedschaft",
-        "pre": "Komplette ",
-        "mark": "Mitglieder",
-        "post": "verwaltung",
-        "body": "Alle Mitglieder an einem Ort. Sie sehen Tarif, Kontaktdaten und wann die Mitgliedschaft endet, und die Erinnerungs-E-Mails übernehmen das Nachfassen.",
-        "cta": "Mitgliederfunktionen ansehen",
+        "pre": "Mitglieder, die ",
+        "mark": "verlängern",
+        "post": "",
+        "body": "Verkaufen Sie eigene Mitgliedschaften, geben Sie Mitgliedern Rabatt auf jede Buchung und lassen Sie Kortello vor dem Ablauf erinnern.",
         "points": [
-          "Monats-, Jahres- oder Einmaltarife",
-          "Buchungsrabatte für Mitglieder",
-          "E-Mails zur Verlängerung",
-          "Wessen Mitgliedschaft in den nächsten 30 Tagen endet"
+          "Eigene Monats-, Jahres- oder Einmaltarife",
+          "Buchungsrabatt für Mitglieder",
+          "Erinnerungs-E-Mails zur Verlängerung",
+          "Wer in den nächsten 30 Tagen ausläuft"
         ]
       },
       "coaching": {
         "label": "Training",
-        "pre": "Volle ",
-        "mark": "Trainerkalender",
+        "pre": "Trainer mit ",
+        "mark": "vollen Kalendern",
         "post": "",
-        "body": "Spieler sehen Ihre Trainer und buchen Stunden direkt. Jede Stunde hält ihren Platz frei, Trainerstunde und Platzbuchung kommen sich nie in die Quere.",
-        "cta": "Trainingsfunktionen ansehen",
+        "body": "Spieler finden Ihre Trainer und buchen eine Stunde mit wenigen Klicks. Jede Stunde belegt einen freien Platz, so kommen sich Training und Buchung nie in die Quere.",
         "points": [
-          "Trainerprofile mit Niveau und Preis",
-          "Spieler buchen Stunden online",
-          "Stunden halten den Platz automatisch frei",
+          "Profile mit Niveaus, Schwerpunkten und Preis",
+          "Trainerstunden online gebucht",
+          "Ein freier Platz für jede Stunde",
           "Bestätigungs- und Erinnerungs-E-Mails"
         ]
       },
       "analytics": {
-        "label": "Statistiken",
-        "pre": "",
-        "mark": "Datenbasierte",
-        "post": " Entscheidungen",
-        "body": "Auf einen Blick sehen, wie Ihr Club läuft: Umsatz im Zeitverlauf, Ihre Stoßzeiten und wie voll jeder Platz ist.",
-        "cta": "Statistiken ansehen",
+        "label": "Auswertungen",
+        "pre": "Kennen Sie Ihre ",
+        "mark": "Stoßzeiten",
+        "post": "",
+        "body": "Sehen Sie, wann Ihre Plätze voll sind, welche Sportart am meisten einbringt und wie sich der Umsatz entwickelt – ganz ohne Tabellenkalkulation.",
         "points": [
-          "Umsatz im Zeitverlauf und nach Sportart",
-          "Heatmap der Stoßzeiten",
-          "Buchungen und Umsatz pro Platz",
+          "Stoßzeiten, Tag für Tag",
+          "Umsatz nach Sportart und Platz",
+          "Umsatz im Vergleich zum Vorzeitraum",
           "Ein Wochenbericht per E-Mail"
         ]
       }
     },
+    "cta": "Gratismonat starten",
     "mock": {
-      "weekTitle": "Alle Plätze – diese Woche",
-      "saveSchedule": "Plan speichern",
-      "available": "Frei",
-      "booked": "Gebucht",
-      "closed": "Geschlossen",
-      "members": "Mitglieder (342)",
-      "invite": "+ Einladen",
-      "activeMembers": "Aktive Mitglieder",
-      "monthlyRevenue": "Monatsumsatz",
-      "clubPlan": "Club-Plan",
-      "academyPlan": "Academy-Plan",
-      "starterPlan": "Starter-Plan",
-      "active": "Aktiv",
-      "pending": "Ausstehend",
-      "coachTeam": "Unser Trainerteam",
-      "headCoach": "Cheftrainer · ITF Level 3",
-      "juniorCoach": "Jugendtrainerin · ITF Level 2",
-      "performanceCoach": "Leistungstraining · ITF Level 3",
-      "open": "{n} frei",
-      "revenueTitle": "Umsatz – letzte 6 Monate",
-      "vsLastYear": "↑ 23 % zum Vorjahr",
-      "totalRevenue": "Gesamtumsatz",
-      "activeMembersShort": "Aktive Mitglieder",
-      "avgMonth": "Ø / Monat",
-      "split": "Platzbuchungen vs. Trainerumsatz",
-      "export": "CSV exportieren →",
-      "days": [
-        "MO",
-        "DI",
-        "MI",
-        "DO",
-        "FR",
-        "SA",
-        "SO"
-      ],
-      "months": {
-        "nov": "Nov",
-        "dec": "Dez",
-        "jan": "Jan",
-        "feb": "Feb",
-        "mar": "Mär",
-        "apr": "Apr"
-      }
+      "court": "Platz {n}",
+      "gold": "Gold",
+      "juniors": "Junioren",
+      "specServe": "Aufschlag",
+      "specFootwork": "Beinarbeit"
     }
   },
   "plans": {
@@ -394,7 +341,9 @@
     "ownerPage": "Clubs & Zahlungen",
     "tournaments": "Turniere",
     "staff": "Mitarbeiter",
-    "manageClub": "Club verwalten"
+    "manageClub": "Club verwalten",
+    "superAdmin": "Super-Admin",
+    "clubAdmin": "Admin"
   },
   "members": {
     "title": "Mitglieder",
@@ -816,10 +765,9 @@
     "seeHow": "So funktioniert es"
   },
   "announcement": {
-    "new": "Neu",
-    "live": "Öffentliche Buchung ist live –",
-    "createLink": "Link erstellen. Spieler überall annehmen.",
-    "learnMore": "Mehr erfahren →"
+    "free": "Kortello {days} Tage kostenlos testen.",
+    "noCard": "Keine Karte nötig.",
+    "link": "Tarife ansehen →"
   },
   "cta": {
     "title1": "Ihre Plätze verdienen",
@@ -989,6 +937,15 @@
           "Bevorzugter Support"
         ]
       }
+    },
+    "everyPlan": {
+      "title": "In jedem Tarif enthalten",
+      "items": [
+        "Eigene Buchungsseite und QR-Poster",
+        "Wöchentliche Buchungen und No-Show-Limit",
+        "Turniere mit automatischer Auslosung",
+        "Datenexport nach Excel"
+      ]
     }
   },
   "faq": {
@@ -1757,7 +1714,7 @@
     "weeklyCard": {
       "label": "Wöchentliche Buchung",
       "when": "Jeden {day}, 19:00",
-      "who": "Ana P. · Platz 2",
+      "who": "Emma L. · Platz 2",
       "progress": "Woche {week} von {weeks}"
     },
     "reminderCard": {

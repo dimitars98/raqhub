@@ -61,7 +61,7 @@ export default async function MembershipPage() {
                 </div>
                 <div className="text-xs text-brand-400 mt-0.5">
                   {member.plan
-                    ? `€${member.plan.price} · ${labels.billingPeriod(member.plan.billing_period)}`
+                    ? `€${member.plan.price} ${labels.billingPeriod(member.plan.billing_period)}`
                     : t("noPlanHint")}
                 </div>
               </div>

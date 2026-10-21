@@ -8,6 +8,7 @@ import { useTranslations, useLocale } from "next-intl";
 import type { Profile } from "@/types/database";
 import { LogoMark } from "@/components/ui/Logo";
 import { getSafeRedirect } from "@/lib/safeRedirect";
+import { homeFor } from "@/lib/roles";
 
 type LoginValues = {
   email: string;
@@ -57,10 +58,8 @@ export default function LoginPage() {
     const redirectTo = getSafeRedirect(params.get("redirectTo"));
     if (redirectTo) {
       router.push(redirectTo);
-    } else if (role === "club_admin" || role === "super_admin") {
-      router.push(`/${locale}/admin/dashboard`);
     } else {
-      router.push(`/${locale}/book`);
+      router.push(`/${locale}${homeFor(role)}`);
     }
     router.refresh();
   };

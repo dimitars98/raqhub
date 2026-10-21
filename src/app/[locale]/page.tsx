@@ -14,6 +14,8 @@ import FeatureCards from "@/components/landing/FeatureCards";
 import Features from "@/components/landing/Features";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
+import { TRIAL_DAYS } from "@/lib/plans";
+import { homeFor } from "@/lib/roles";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -29,9 +31,7 @@ export default async function HomePage() {
       .eq("id", user.id)
       .single();
     const role = (data as { role: string } | null)?.role;
-    if (role === "club_admin" || role === "super_admin")
-      redirect(`/${locale}/admin/dashboard`);
-    else redirect(`/${locale}/book`);
+    redirect(`/${locale}${homeFor(role)}`);
   }
 
   const ta = await getTranslations("announcement");
@@ -41,16 +41,11 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* ANNOUNCEMENT BAR */}
-      <div className="bg-[#111c0a] text-white text-[13px] text-center py-2.5 px-4 flex items-center justify-center gap-2">
-        <span className="bg-[#a8d832] text-[#111c0a] text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">
-          {ta("new")}
-        </span>
-        <span className="text-white/75">{ta("live")}</span>
-        <strong className="text-white">
-          {ta("createLink")}
-        </strong>
-        <a href="#how" className="text-[#a8d832] font-medium ml-1 hover:underline">
-          {ta("learnMore")}
+      <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 bg-[#111c0a] px-4 py-2.5 text-center text-[13px] text-white">
+        <strong className="text-white">{ta("free", { days: TRIAL_DAYS })}</strong>
+        <span className="text-white/75">{ta("noCard")}</span>
+        <a href="#pricing" className="ml-1 font-medium text-[#a8d832] hover:underline">
+          {ta("link")}
         </a>
       </div>
 

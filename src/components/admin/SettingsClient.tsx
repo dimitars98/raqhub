@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import {
   Building2,
   Clock,
@@ -100,6 +100,16 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
   const [logoStatus, setLogoStatus] = useState<SaveResult | null>(null);
   const [logoPending, startLogo] = useTransition();
   const logoInput = useRef<HTMLInputElement>(null);
+  const nav = useRef<HTMLElement>(null);
+
+  // On phones the tabs scroll sideways: keep the open one in view.
+  useEffect(() => {
+    const row = nav.current;
+    const tab = row?.querySelector<HTMLElement>(`[data-tab="${active}"]`);
+    if (!row || !tab || row.scrollWidth <= row.clientWidth) return;
+    const left = tab.offsetLeft - (row.clientWidth - tab.offsetWidth) / 2;
+    row.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+  }, [active]);
 
   const setField =
     (key: keyof typeof info) =>
@@ -126,17 +136,24 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
   };
 
   return (
-    <div className="max-w-[900px] mx-auto flex gap-6 items-start">
-      {/* Sidebar nav */}
-      <div className="w-[200px] flex-shrink-0 bg-white border border-[#e8ede4] rounded-2xl p-2 sticky top-6">
-        <p className="text-[11px] font-medium text-[#6e7f65] px-3 pt-2 pb-1 uppercase tracking-[0.06em]">
+    <div className="max-w-[900px] mx-auto flex flex-col gap-4 md:flex-row md:items-start md:gap-6">
+      {/* Section nav: a scrollable row of tabs on phones, a sidebar from md up */}
+      <nav
+        ref={nav}
+        aria-label={t("settings")}
+        className="relative flex gap-1 overflow-x-auto rounded-2xl border border-[#e8ede4] bg-white p-1.5 md:sticky md:top-6 md:w-[200px] md:shrink-0 md:flex-col md:gap-0 md:overflow-visible md:p-2"
+      >
+        <p className="hidden px-3 pt-2 pb-1 text-[11px] font-medium uppercase tracking-[0.06em] text-[#6e7f65] md:block">
           {t("settings")}
         </p>
         {SECTIONS.map(({ id, icon: Icon }) => (
           <button
             key={id}
+            type="button"
+            data-tab={id}
             onClick={() => setActive(id)}
-            className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] transition-colors mb-0.5 ${
+            aria-current={active === id ? "page" : undefined}
+            className={`flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-xl px-3 py-2.5 text-[13px] transition-colors md:mb-0.5 md:w-full ${
               active === id
                 ? "bg-[#f3fbde] text-[#2e4d03] font-medium"
                 : "text-[#3d4f35] hover:bg-[#f4f6f2]"
@@ -145,11 +162,11 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
             <Icon size={14} strokeWidth={2} className="shrink-0" />
             <span className="flex-1 text-left">{t(`sections.${id}`)}</span>
             {active === id && (
-              <ChevronRight size={13} className="text-[#7aad12]" />
+              <ChevronRight size={13} className="hidden text-[#7aad12] md:block" />
             )}
           </button>
         ))}
-      </div>
+      </nav>
 
       {/* Content */}
       <div className="flex-1 min-w-0">
@@ -160,7 +177,7 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
             description={t("basicInformationAboutYourClub")}
           >
             <Field label={t("clubLogo")}>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 {logoUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -196,7 +213,7 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
               <input className="input" value={info.name} onChange={setField("name")} />
             </Field>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label={t("email")}>
                 <input className="input" type="email" value={info.email} onChange={setField("email")} />
               </Field>
@@ -209,7 +226,7 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
               <input className="input" value={info.address} onChange={setField("address")} />
             </Field>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label={t("city")}>
                 <input className="input" value={info.city} onChange={setField("city")} />
               </Field>
@@ -250,10 +267,9 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
               {hours.map((h, i) => (
                 <div
                   key={h.day}
-                  className={`grid items-center gap-3 px-4 py-3 rounded-xl border border-[#e8ede4] ${
+                  className={`grid grid-cols-[1fr_auto] items-center gap-3 rounded-xl border border-[#e8ede4] px-4 py-3 sm:grid-cols-[minmax(0,1fr)_44px_auto] ${
                     h.open ? "bg-white" : "bg-[#f4f6f2]"
                   }`}
-                  style={{ gridTemplateColumns: "130px 44px 1fr" }}
                 >
                   <span
                     className={`text-[13px] font-medium ${h.open ? "text-[#111c0a]" : "text-[#6e7f65]"}`}
@@ -262,13 +278,14 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
                   </span>
                   <ToggleSwitch
                     checked={h.open}
+                    label={h.day}
                     onChange={() => toggleDay(i)}
                   />
                   {h.open ? (
-                    <div className="flex items-center gap-2">
+                    <div className="col-span-2 flex items-center gap-2 sm:col-span-1">
                       <input
                         type="time"
-                        className="input"
+                        className="input min-w-0 flex-1 sm:w-[136px] sm:flex-none"
                         value={h.from}
                         onChange={(e) =>
                           setHours((prev) =>
@@ -277,12 +294,11 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
                             ),
                           )
                         }
-                        style={{ width: 110 }}
                       />
                       <span className="text-[13px] text-[#6e7f65]">{t("to")}</span>
                       <input
                         type="time"
-                        className="input"
+                        className="input min-w-0 flex-1 sm:w-[136px] sm:flex-none"
                         value={h.to}
                         onChange={(e) =>
                           setHours((prev) =>
@@ -291,11 +307,10 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
                             ),
                           )
                         }
-                        style={{ width: 110 }}
                       />
                     </div>
                   ) : (
-                    <span className="text-[13px] text-[#6e7f65]">{t("closed")}</span>
+                    <span className="col-span-2 text-[13px] text-[#6e7f65] sm:col-span-1">{t("closed")}</span>
                   )}
                 </div>
               ))}
@@ -501,7 +516,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white border border-[#e8ede4] rounded-2xl p-7">
+    <div className="bg-white border border-[#e8ede4] rounded-2xl p-5 sm:p-7">
       <div className="mb-6 pb-5 border-b border-[#e8ede4]">
         <h2 className="text-[18px] font-semibold text-[#111c0a]">{title}</h2>
         <p className="text-[13px] text-[#6e7f65] mt-1">{description}</p>
@@ -529,17 +544,23 @@ function Field({
 function ToggleSwitch({
   defaultChecked,
   checked: controlledChecked,
+  label,
   onChange,
 }: {
   defaultChecked?: boolean;
   checked?: boolean;
+  label?: string;
   onChange?: (v: boolean) => void;
 }) {
   const [internal, setInternal] = useState(defaultChecked ?? false);
   const isOn = controlledChecked !== undefined ? controlledChecked : internal;
 
   return (
-    <div
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isOn}
+      aria-label={label}
       onClick={() => {
         setInternal(!isOn);
         onChange?.(!isOn);
@@ -553,7 +574,7 @@ function ToggleSwitch({
           isOn ? "left-[18px]" : "left-[3px]"
         }`}
       />
-    </div>
+    </button>
   );
 }
 
@@ -568,7 +589,7 @@ function SaveButton({ onSave }: { onSave: () => Promise<SaveResult> }) {
   };
 
   return (
-    <div className="pt-2 flex items-center gap-3">
+    <div className="pt-2 flex flex-wrap items-center gap-3">
       <button
         type="button"
         onClick={click}
