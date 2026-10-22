@@ -1,0 +1,2479 @@
+{
+  "nav": {
+    "features": "Mogućnosti",
+    "pricing": "Cene",
+    "signIn": "Prijava",
+    "forClubs": "Za klubove",
+    "imPlayer": "Ja sam igrač"
+  },
+  "auth": {
+    "signIn": "Prijavite se na svoj nalog",
+    "continueGoogle": "Nastavite sa Google nalogom",
+    "or": "ili",
+    "email": "E-pošta",
+    "password": "Lozinka",
+    "signingIn": "Prijavljivanje…",
+    "noAccount": "Nemate nalog?",
+    "signUpPlayer": "Registrujte se kao igrač",
+    "tennisClub": "Teniski klub",
+    "createClubAccount": "Napravite nalog za klub",
+    "createPlayerAccount": "Napravite nalog za igrača",
+    "clubAccount": "Nalog za klub",
+    "playerAccount": "Nalog za igrača",
+    "fullName": "Ime i prezime",
+    "checkEmail": "Proverite e-poštu",
+    "confirmationSent": "Poslali smo link za potvrdu na",
+    "backToSignIn": "Nazad na prijavu",
+    "creatingAccount": "Pravljenje naloga…",
+    "createAccount": "Napravi nalog",
+    "alreadyAccount": "Već imate nalog?",
+    "signUpHere": "Registrujte se ovde",
+    "emailRequired": "E-pošta je obavezna.",
+    "emailInvalid": "Unesite ispravnu adresu e-pošte.",
+    "passwordRequired": "Lozinka je obavezna.",
+    "fullNameRequired": "Ime i prezime su obavezni.",
+    "passwordMinLength": "Lozinka mora imati najmanje 8 znakova.",
+    "emailTaken": "Nalog sa ovom e-poštom već postoji.",
+    "genericError": "Nešto nije u redu. Pokušajte ponovo.",
+    "invalidCredentials": "Pogrešna e-pošta ili lozinka.",
+    "agreeToTerms": "Pravljenjem naloga prihvatate <terms>Uslove korišćenja</terms> i <privacy>Politiku privatnosti</privacy>."
+  },
+  "landing": {
+    "badge": "Napravljeno za teniske klubove",
+    "title": "Vodite klub bez papirologije",
+    "subtitle": "Rezervacije terena, članarine i članovi — sve na jednom mestu.",
+    "startTrial": "Započnite besplatnu probu",
+    "seeHow": "Pogledajte kako radi",
+    "featuresLabel": "Mogućnosti",
+    "featuresTitle": "Sve što vašem klubu treba",
+    "pricingLabel": "Cene",
+    "pricingTitle": "Jednostavne i jasne cene",
+    "footer": "Napravljeno za teniske klubove."
+  },
+  "features": {
+    "rows": {
+      "bookings": {
+        "label": "Rezervacije terena",
+        "pre": "Jedan raspored za ",
+        "mark": "svaki teren",
+        "post": "",
+        "body": "Igrači rezervišu onlajn, vi dodajete rezervacije telefonom i uživo, i sve se pojavljuje u istom dnevnom prikazu. Isti teren nikada ne može biti rezervisan dvaput.",
+        "points": [
+          "Svi tereni jedan pored drugog, po danu",
+          "Onlajn, telefonom i uživo na jednom mestu",
+          "Vaša pravila: koliko unapred, koliko dnevno, do kada se otkazuje",
+          "Termini od 30, 60, 90 ili 120 minuta"
+        ]
+      },
+      "membership": {
+        "label": "Članstvo",
+        "pre": "Članovi koji ",
+        "mark": "obnavljaju",
+        "post": "",
+        "body": "Prodajte svoje članarine, dajte članovima popust na svaku rezervaciju i pustite Kortello da ih podseti pre isteka.",
+        "points": [
+          "Vaši mesečni, godišnji ili jednokratni paketi",
+          "Popust na rezervacije za članove",
+          "Podsetnici za obnovu e-poštom",
+          "Kome ističe u narednih 30 dana"
+        ]
+      },
+      "coaching": {
+        "label": "Treninzi",
+        "pre": "Treneri sa ",
+        "mark": "punim kalendarima",
+        "post": "",
+        "body": "Igrači pronalaze vaše trenere i rezervišu čas u nekoliko dodira. Svaki čas zauzima slobodan teren, pa se čas i rezervacija nikada ne preklapaju.",
+        "points": [
+          "Profili sa nivoima, specijalnostima i cenom",
+          "Časovi rezervisani onlajn",
+          "Slobodan teren za svaki čas",
+          "Potvrde i podsetnici e-poštom"
+        ]
+      },
+      "analytics": {
+        "label": "Analitika",
+        "pre": "Znajte svoje ",
+        "mark": "najprometnije sate",
+        "post": "",
+        "body": "Pogledajte kada se tereni popunjavaju, koji sport najviše donosi i kako se kreće prihod, bez pravljenja tabela.",
+        "points": [
+          "Najprometniji sati, dan po dan",
+          "Prihod po sportu i po terenu",
+          "Prihod u poređenju sa prethodnim periodom",
+          "Nedeljni izveštaj u vašem sandučetu"
+        ]
+      }
+    },
+    "cta": "Započnite besplatan mesec",
+    "mock": {
+      "court": "Teren {n}",
+      "gold": "Gold",
+      "juniors": "Juniori",
+      "specServe": "Servis",
+      "specFootwork": "Rad nogu"
+    }
+  },
+  "plans": {
+    "starter": "Starter",
+    "club": "Club",
+    "academy": "Academy",
+    "free": "Zauvek besplatno",
+    "perMonth": "mesečno",
+    "getStarted": "Započnite",
+    "startTrial": "Započnite besplatnu probu",
+    "contactUs": "Kontaktirajte nas",
+    "mostPopular": "Najpopularniji"
+  },
+  "admin": {
+    "members": "Članovi",
+    "plans": "Paketi",
+    "courts": "Tereni",
+    "bookings": "Rezervacije",
+    "timetable": "Raspored",
+    "signOut": "Odjava",
+    "addMember": "Dodaj člana",
+    "total": "ukupno",
+    "searchMembers": "Pretraga po imenu, e-pošti ili telefonu...",
+    "noMembers": "Još nema članova. Dodajte prvog.",
+    "noMembersSearch": "Nijedan član ne odgovara pretrazi.",
+    "name": "Ime",
+    "contact": "Kontakt",
+    "plan": "Paket",
+    "status": "Status",
+    "expires": "Ističe",
+    "edit": "Izmeni",
+    "cancel": "Otkaži",
+    "addMemberTitle": "Dodaj člana",
+    "editMemberTitle": "Izmeni člana",
+    "fullName": "Ime i prezime",
+    "email": "E-pošta",
+    "phone": "Telefon",
+    "noPlan": "Bez paketa",
+    "saveChanges": "Sačuvaj izmene",
+    "saving": "Čuvanje…"
+  },
+  "member": {
+    "bookCourt": "Rezerviši teren",
+    "bookCoach": "Rezerviši trenera",
+    "myBookings": "Moje rezervacije",
+    "membership": "Članstvo",
+    "signOut": "Odjava",
+    "upcoming": "Predstojeće",
+    "past": "Prošle",
+    "noUpcoming": "Nema predstojećih rezervacija",
+    "findCourt": "Pronađite teren",
+    "bookingConfirmed": "Rezervacija je potvrđena!",
+    "seeYou": "Vidimo se na terenu.",
+    "ref": "Br.",
+    "cancelBooking": "Otkaži"
+  },
+  "adminBookings": {
+    "title": "Rezervacije",
+    "total": "ukupno",
+    "addBooking": "Dodaj rezervaciju",
+    "searchPlaceholder": "Pretraga po imenu, terenu ili broju...",
+    "all": "Sve",
+    "noShow": "Nije došao",
+    "ref": "Br.",
+    "player": "Igrač",
+    "court": "Teren",
+    "dateTime": "Datum i vreme",
+    "duration": "Trajanje",
+    "min": "min",
+    "status": "Status",
+    "noBookings": "Nema pronađenih rezervacija.",
+    "walkIn": "Bez naloga",
+    "selectCourt": "Izaberite teren…",
+    "member": "Član",
+    "selectMember": "Izaberite člana…",
+    "fullName": "Ime i prezime",
+    "date": "Datum",
+    "startTime": "Početak",
+    "notes": "Napomene",
+    "notesPlaceholder": "Bilo kakve napomene...",
+    "cancel": "Otkaži",
+    "saving": "Čuvanje…",
+    "confirmBooking": "Potvrdi rezervaciju",
+    "statusLabels": {
+      "all": "Sve"
+    },
+    "slotTaken": "Taj teren je već rezervisan u to vreme.",
+    "saveError": "Rezervacija nije sačuvana. Pokušajte ponovo.",
+    "lesson": "Čas",
+    "noShowCount": "{n, plural, one {# nedolazak} few {# nedolaska} other {# nedolazaka}}",
+    "paused": "pauzirano",
+    "pausedHint": "Ne može da rezerviše onlajn dok ne promenite neki od ovih nedolazaka ili dok ne budu stariji od 90 dana. Vi i dalje možete da rezervišete za njega.",
+    "repeat": "Ponavljanje",
+    "repeatOnce": "Samo jednom",
+    "repeatWeeks": "Svake nedelje, {n} nedelja",
+    "repeatHint": "Isti teren i vreme svake nedelje. Nedelje kada je teren već rezervisan se preskaču.",
+    "seriesTotal": "{n} nedelja · €{total}",
+    "weekly": "Nedeljno",
+    "addedSeries": "{n, plural, one {Dodata je # nedeljna rezervacija.} few {Dodate su # nedeljne rezervacije.} other {Dodato je # nedeljnih rezervacija.}}",
+    "skippedWeeks": "Preskočeno jer je teren već bio rezervisan: {dates}",
+    "allWeeksTaken": "Teren je već rezervisan u to vreme u svakoj od tih nedelja.",
+    "dismiss": "Zatvori",
+    "cancelSeriesTitle": "Otkazivanje nedeljne rezervacije",
+    "cancelSeriesText": "Rezervacija za {date} se ponavlja svake nedelje. Da otkažete samo ovu, ili ovu i sve kasnije nedelje?",
+    "cancelOnlyThis": "Samo ovu",
+    "cancelThisAndLater": "Ovu i kasnije nedelje"
+  },
+  "booking": {
+    "bookThisCourt": "Rezerviši ovaj teren",
+    "date": "Datum",
+    "duration": "Trajanje",
+    "time": "Vreme",
+    "min": "min",
+    "booking": "Rezervisanje…",
+    "selectSlot": "Izaberite termin",
+    "confirmBooking": "Potvrdi rezervaciju →",
+    "bookingFailed": "Rezervacija nije uspela"
+  },
+  "adminCourts": {
+    "title": "Tereni",
+    "total": "ukupno",
+    "addCourt": "Dodaj teren",
+    "editCourt": "Izmeni teren",
+    "noCourts": "Još nema terena. Dodajte prvi.",
+    "name": "Naziv",
+    "surface": "Podloga",
+    "type": "Tip",
+    "pricePerHour": "Cena / sat",
+    "status": "Status",
+    "description": "Opis",
+    "descriptionPlaceholder": "Bilo kakvi detalji o ovom terenu...",
+    "active": "Aktivan",
+    "inactive": "Neaktivan",
+    "edit": "Izmeni",
+    "activate": "Aktiviraj",
+    "deactivate": "Deaktiviraj",
+    "cancel": "Otkaži",
+    "saving": "Čuvanje…",
+    "saveChanges": "Sačuvaj izmene",
+    "allSports": "Svi sportovi",
+    "saveError": "Teren nije sačuvan. Pokušajte ponovo.",
+    "howMany": "Koliko",
+    "howManyHint": "Dodaje od {first} do {last}.",
+    "namePlaceholderMany": "Teren na šljaci"
+  },
+  "dashboard": {
+    "dashboard": "Kontrolna tabla",
+    "overview": "Pregled",
+    "bookings": "Rezervacije",
+    "timetable": "Raspored",
+    "manage": "Upravljanje",
+    "members": "Članovi",
+    "plans": "Paketi",
+    "publicPage": "Javna stranica",
+    "coaches": "Treneri",
+    "courts": "Tereni",
+    "club": "Klub",
+    "analytics": "Analitika",
+    "settings": "Podešavanja",
+    "play": "Igra",
+    "myBookings": "Moje rezervacije",
+    "bookACourt": "Rezerviši teren",
+    "findACoach": "Pronađi trenera",
+    "account": "Nalog",
+    "profile": "Profil",
+    "membership": "Članstvo",
+    "signOut": "Odjava",
+    "player": "Igrač",
+    "greeting": {
+      "morning": "Dobro jutro",
+      "afternoon": "Dobar dan",
+      "evening": "Dobro veče"
+    },
+    "stats": {
+      "todaysBookings": "Današnje rezervacije",
+      "completed": "završeno",
+      "upcoming": "predstoji",
+      "weeklyRevenue": "Nedeljni prihod",
+      "noLastWeek": "Nema podataka za prošlu nedelju",
+      "vsLastWeek": "u odnosu na prošlu nedelju",
+      "sameAsLastWeek": "Isto kao prošle nedelje",
+      "activeMembers": "Aktivni članovi",
+      "activeMembersSub": "Sa aktivnim članstvom",
+      "activeCourts": "Aktivni tereni",
+      "available": "dostupno"
+    },
+    "sections": {
+      "thisWeek": "Ove nedelje",
+      "revenueByDay": "Prihod po danima",
+      "todaysSchedule": "Današnji raspored",
+      "noUpcoming": "Danas nema predstojećih rezervacija",
+      "recentBookings": "Nedavne rezervacije",
+      "noBookings": "Još nema rezervacija",
+      "members": "Članovi",
+      "noMembers": "Nema aktivnih članova",
+      "moreMembers": "+{count} članova više",
+      "courts": "Tereni",
+      "noCourts": "Još nema terena",
+      "viewAll": "Prikaži sve",
+      "timetable": "Raspored",
+      "manage": "Upravljaj"
+    },
+    "status": {
+      "live": "Uživo"
+    },
+    "titles": {
+      "plans": "Paketi",
+      "dashboard": "Kontrolna tabla",
+      "bookings": "Rezervacije",
+      "members": "Članovi",
+      "coaches": "Treneri",
+      "courts": "Tereni",
+      "analytics": "Analitika",
+      "settings": "Podešavanja",
+      "book": "Rezerviši teren",
+      "profile": "Profil",
+      "membership": "Članstvo",
+      "timetable": "Raspored",
+      "myBookings": "Moje rezervacije",
+      "share": "Podeli sa igračima",
+      "owner": "Klubovi i uplate",
+      "tournaments": "Turniri",
+      "staff": "Osoblje",
+      "notifications": "Obaveštenja",
+      "groups": "Grupe"
+    },
+    "share": "Podeli",
+    "ownerGroup": "Kortello",
+    "ownerPage": "Klubovi i uplate",
+    "tournaments": "Turniri",
+    "staff": "Osoblje",
+    "manageClub": "Upravljaj klubom",
+    "superAdmin": "Super admin",
+    "clubAdmin": "Admin",
+    "groups": "Grupe",
+    "myGroups": "Moje grupe"
+  },
+  "members": {
+    "title": "Članovi",
+    "addMember": "Dodaj člana",
+    "searchPlaceholder": "Pretraga po imenu, e-pošti ili telefonu...",
+    "noResults": "Nijedan član ne odgovara pretrazi.",
+    "noMembers": "Još nema članova. Dodajte prvog.",
+    "columns": {
+      "plan": "Paket",
+      "status": "Status",
+      "expires": "Ističe",
+      "member": "Član"
+    },
+    "actions": {
+      "edit": "Izmeni",
+      "cancel": "Otkaži"
+    },
+    "modal": {
+      "addTitle": "Dodaj člana",
+      "editTitle": "Izmeni člana",
+      "fullName": "Ime i prezime",
+      "fullNamePlaceholder": "Ana Jovanović",
+      "fullNameRequired": "Ime je obavezno",
+      "email": "E-pošta",
+      "emailPlaceholder": "ana@email.com",
+      "phone": "Telefon",
+      "phonePlaceholder": "+381 64 123 4567",
+      "plan": "Paket",
+      "noPlan": "Bez paketa",
+      "expires": "Ističe",
+      "status": "Status",
+      "notes": "Napomene",
+      "notesPlaceholder": "Bilo kakve napomene...",
+      "cancelBtn": "Otkaži",
+      "saveBtn": "Sačuvaj izmene",
+      "addBtn": "Dodaj člana",
+      "saving": "Čuvanje…"
+    },
+    "export": "Izvezi",
+    "tabs": {
+      "all": "Svi",
+      "active": "Aktivni",
+      "ending": "Uskoro ističe",
+      "expired": "Istekli",
+      "cancelled": "Otkazani"
+    },
+    "filters": {
+      "plan": "Paket",
+      "allPlans": "Svi paketi",
+      "ends": "Ističe",
+      "anyTime": "Bilo kada",
+      "within": "U narednih {days} dana",
+      "show": "Prikaži"
+    },
+    "inDays": "{n, plural, =0 {danas} one {za # dan} few {za # dana} other {za # dana}}",
+    "daysAgo": "{n, plural, one {pre # dan} few {pre # dana} other {pre # dana}}",
+    "showing": "Prikazano {from}–{to} od {total}",
+    "prevPage": "Prethodna stranica",
+    "nextPage": "Sledeća stranica",
+    "bulk": {
+      "selected": "Izabrano: {n}",
+      "clear": "Poništi izbor",
+      "selectPage": "Izaberi sve na ovoj stranici",
+      "selectRow": "Izaberi: {name}",
+      "email": "E-pošta",
+      "extend": "Produži",
+      "extendBy": "{months, plural, =12 {Za 1 godinu} one {Za # mesec} few {Za # meseca} other {Za # meseci}}",
+      "extendHint": "Od datuma isteka svakog člana, ili od danas ako je već prošao. Članstvo ponovo postaje aktivno.",
+      "changePlan": "Promeni paket",
+      "cancel": "Otkaži",
+      "confirmCancel": "{n, plural, one {Otkazati # članstvo?} few {Otkazati # članstva?} other {Otkazati # članstava?}}",
+      "confirmYes": "Da, otkaži",
+      "confirmNo": "Zadrži",
+      "extended": "{n, plural, one {Produženo je # članstvo.} few {Produžena su # članstva.} other {Produženo je # članstava.}}",
+      "planChanged": "{n, plural, one {Paket je promenjen za # člana.} few {Paket je promenjen za # člana.} other {Paket je promenjen za # članova.}}",
+      "cancelled": "{n, plural, one {Otkazano je # članstvo.} few {Otkazana su # članstva.} other {Otkazano je # članstava.}}",
+      "noEmails": "Nijedan od izabranih članova nema adresu e-pošte.",
+      "withoutEmail": "{n, plural, one {# bez adrese e-pošte je izostavljen.} few {# bez adrese e-pošte su izostavljena.} other {# bez adrese e-pošte je izostavljeno.}}",
+      "emailOpened": "{n, plural, one {Otvorena je aplikacija za e-poštu sa # adresom u BCC.} other {Otvorena je aplikacija za e-poštu sa # adresa u BCC.}}",
+      "emailsCopied": "Kopirano je {n} adresa. Nalepite ih u polje BCC nove poruke.",
+      "failed": "Nešto nije u redu. Pokušajte ponovo.",
+      "dismiss": "Zatvori"
+    }
+  },
+  "adminCoaches": {
+    "title": "Treneri",
+    "total": "ukupno",
+    "addCoach": "Dodaj trenera",
+    "editCoach": "Izmeni trenera",
+    "name": "Ime",
+    "specializations": "Specijalnosti",
+    "specializationsPlaceholder": "Servis, bekhend, rad nogu",
+    "levels": "Nivoi",
+    "pricePerHour": "Cena / sat",
+    "status": "Status",
+    "bio": "Biografija",
+    "bioPlaceholder": "Kratak opis trenera...",
+    "profileId": "ID profila",
+    "profileIdPlaceholder": "Nalepite ID profila korisnika",
+    "profileNotFound": "Nema naloga igrača sa tom e-poštom. Zamolite trenera da se prvo registruje.",
+    "active": "Aktivan",
+    "inactive": "Neaktivan",
+    "activate": "Aktiviraj",
+    "deactivate": "Deaktiviraj",
+    "edit": "Izmeni",
+    "saving": "Čuvanje...",
+    "saveChanges": "Sačuvaj izmene",
+    "cancel": "Otkaži",
+    "noCoaches": "Još nema trenera. Dodajte prvog.",
+    "unknown": "Nepoznato",
+    "coach": "Trener",
+    "selectProfile": "Izaberite korisnika",
+    "coachEmail": "E-pošta trenera",
+    "coachEmailPlaceholder": "trener@example.com",
+    "coachEmailHint": "Trener mora imati Kortello nalog sa ovom e-poštom.",
+    "alreadyCoach": "Ova osoba je već trener u vašem klubu."
+  },
+  "clubPage": {
+    "signIn": "Prijava",
+    "signUpToBook": "Registrujte se da rezervišete",
+    "bookCourt": "Rezerviši teren",
+    "backToDashboard": "Nazad na kontrolnu tablu",
+    "courtsTitle": "Tereni",
+    "courtsEmpty": "Ovaj klub još nije objavio terene.",
+    "coachesTitle": "Treneri",
+    "coach": "Trener",
+    "plansTitle": "Članarine",
+    "plansNote": "Da postanete član, javite se klubu.",
+    "perHour": "/ sat",
+    "discount": "{pct}% popusta na rezervacije",
+    "website": "Sajt",
+    "ctaTitle": "Spremni za igru u klubu {club}?",
+    "ctaText": "Napravite besplatan nalog da vidite slobodne termine i rezervišete za nekoliko sekundi.",
+    "metaDescription": "Tereni, treneri i članarine u klubu {club}. Rezervišite onlajn uz Kortello."
+  },
+  "myBookings": {
+    "title": "Moje rezervacije",
+    "bookCourt": "Rezerviši teren",
+    "bookedTitle": "Rezervacija je potvrđena!",
+    "bookedText": "Vidimo se na terenu.",
+    "sessions": "Termini",
+    "hoursPlayed": "Odigrano sati",
+    "totalSpent": "Ukupno potrošeno",
+    "thisWeek": "Ove nedelje",
+    "nextUp": "Sledeće",
+    "noUpcoming": "Nema predstojećih rezervacija",
+    "upcoming": "Predstojeće",
+    "past": "Prošle",
+    "ref": "Br.",
+    "addToCalendar": "Dodaj u kalendar",
+    "cancelBooking": "Otkaži rezervaciju",
+    "cancel": "Otkaži",
+    "bookAgain": "Rezerviši ponovo",
+    "inMinutes": "Za {n} min",
+    "inHours": "Za {n} h",
+    "tomorrow": "Sutra",
+    "madeByClub": "Rezervisao klub",
+    "lesson": "Čas sa: {name}",
+    "booking": "Rezervacija",
+    "minutes": "{n} min",
+    "cancelClosed": "Prekasno je za onlajn otkazivanje. Pozovite klub."
+  },
+  "coachBooking": {
+    "allCoaches": "Svi treneri",
+    "coach": "Trener",
+    "perHour": "/ sat",
+    "bookTitle": "Rezervišite čas",
+    "date": "Datum",
+    "duration": "Trajanje",
+    "minutes": "{n} min",
+    "startTime": "Početak",
+    "closed": "Klub ne radi tog dana. Izaberite drugi dan.",
+    "loading": "Učitavanje slobodnih termina…",
+    "memberDiscount": "Popust za članove {pct}%",
+    "confirm": "Potvrdi rezervaciju",
+    "booking": "Rezervisanje…",
+    "selectTime": "Izaberite vreme",
+    "cancelNote": "Onlajn možete otkazati najkasnije {hours} h pre početka."
+  },
+  "profilePage": {
+    "title": "Moj profil",
+    "yourName": "Vaše ime",
+    "sessions": "Termini",
+    "played": "Odigrano",
+    "upcoming": "Predstojeće",
+    "spent": "Potrošeno",
+    "membership": "Članstvo",
+    "member": "Član",
+    "discount": "{pct}% popusta na rezervacije",
+    "memberSince": "Član od",
+    "renews": "Obnavlja se",
+    "noMembership": "Nema aktivnog članstva",
+    "noMembershipHint": "Javite se klubu da vas dodaju u paket.",
+    "personalDetails": "Lični podaci",
+    "account": "Nalog",
+    "email": "E-pošta",
+    "accountSince": "Nalog napravljen",
+    "fullName": "Ime i prezime",
+    "phone": "Telefon",
+    "saved": "Sačuvano",
+    "saving": "Čuvanje…",
+    "saveChanges": "Sačuvaj izmene",
+    "signOut": "Odjava"
+  },
+  "membershipPage": {
+    "title": "Članstvo",
+    "subtitle": "Vaš paket i ostali paketi u vašem klubu",
+    "yourPlan": "Vaš paket",
+    "notMember": "Još niste član",
+    "notMemberHint": "Javite se klubu da vas dodaju kao člana.",
+    "noPlan": "Paket nije dodeljen",
+    "noPlanHint": "Obratite se administratoru kluba",
+    "discountEvery": "{pct}% popusta na svaku rezervaciju",
+    "expires": "Ističe {date}",
+    "availablePlans": "Paketi u klubu {club}",
+    "current": "Trenutni",
+    "discountBookings": "{pct}% popusta na rezervacije",
+    "changePlan": "Za promenu paketa obratite se administratoru kluba."
+  },
+  "plansAdmin": {
+    "title": "Članarine",
+    "count": "{n, plural, one {# paket} few {# paketa} other {# paketa}}",
+    "addPlan": "Dodaj paket",
+    "empty": "Još nema paketa. Napravite jedan da ga dodelite članovima.",
+    "addFirst": "Dodajte prvi paket",
+    "discount": "{pct}% popusta na rezervacije",
+    "edit": "Izmeni",
+    "delete": "Obriši",
+    "deleting": "Brisanje…",
+    "confirmDelete": "Obrisati ovaj paket? Članovi kojima je dodeljen ostaće bez paketa.",
+    "editPlan": "Izmeni paket",
+    "name": "Naziv paketa",
+    "namePlaceholder": "Mesečna članarina",
+    "nameRequired": "Naziv je obavezan",
+    "price": "Cena (€)",
+    "billingPeriod": "Period naplate",
+    "discountField": "Popust na rezervacije (%)",
+    "description": "Opis",
+    "descriptionPlaceholder": "Šta je uključeno u ovaj paket…",
+    "cancel": "Otkaži",
+    "saving": "Čuvanje…",
+    "saveChanges": "Sačuvaj izmene",
+    "billing": {
+      "monthly": "Mesečno",
+      "annual": "Godišnje",
+      "one_time": "Jednokratno"
+    }
+  },
+  "courtDetail": {
+    "courts": "Tereni",
+    "details": "Detalji",
+    "upcoming": "Predstojeće rezervacije",
+    "noUpcoming": "Nema predstojećih rezervacija.",
+    "unknown": "Nepoznato"
+  },
+  "emails": {
+    "greeting": "Zdravo {name},",
+    "greetingNoName": "Zdravo,",
+    "lessonWith": "Čas sa: {name}",
+    "minutes": "{n} min",
+    "viewBookings": "Pogledaj moje rezervacije",
+    "labels": {
+      "what": "Rezervacija",
+      "club": "Klub",
+      "when": "Kada",
+      "duration": "Trajanje",
+      "price": "Cena",
+      "reference": "Broj",
+      "plan": "Paket",
+      "ends": "Ističe",
+      "phone": "Telefon",
+      "email": "E-pošta"
+    },
+    "confirmed": {
+      "subject": "Rezervacija potvrđena: {what}, {date} u {time}",
+      "intro": "Vaša rezervacija je potvrđena. Vidimo se na terenu!"
+    },
+    "cancelled": {
+      "subject": "Rezervacija otkazana: {what}, {date}",
+      "intro": "Vaša rezervacija je otkazana. Ako to niste vi uradili, javite se klubu."
+    },
+    "reminder": {
+      "subject": "Podsetnik: {what}, {date} u {time}",
+      "intro": "Kratak podsetnik za vašu predstojeću rezervaciju. Ne možete da dođete? Otkažite u aplikaciji da neko drugi može da igra."
+    },
+    "renewal": {
+      "subject": "Vaše članstvo u klubu {club} ističe {date}",
+      "intro": "Vaše članstvo u klubu {club} ističe {date}. Da zadržite pogodnosti za članove, javite se klubu za obnovu.",
+      "contact": "Pišite klubu"
+    },
+    "report": {
+      "subject": "{club}: vaša nedelja u brojevima ({week})",
+      "intro": "Evo kako je prošla nedelja {week} u klubu {club}.",
+      "bookings": "Rezervacije",
+      "revenue": "Prihod",
+      "occupancy": "Popunjenost terena",
+      "cancellations": "Otkazivanja",
+      "noShows": "Nedolasci",
+      "newMembers": "Novi članovi",
+      "expiring": "Članstva koja ističu u narednih 14 dana",
+      "noneExpiring": "Nema",
+      "openDashboard": "Otvori kontrolnu tablu"
+    },
+    "footerPlayer": "Šalje Kortello u ime kluba {club}.",
+    "footerOwner": "Ovaj nedeljni pregled dobijate jer vodite klub na Kortellu.",
+    "trial": {
+      "endingSubject": "Vaša Kortello proba za {club} ističe {date}",
+      "endingIntro": "Vaš besplatni mesec za {club} ističe {date}. Da nastavite da koristite Kortello posle toga, odgovorite na ovu poruku i poslaćemo vam račun. Ako želite drugi paket, samo nam recite.",
+      "endedSubject": "Vaša Kortello proba za {club} je istekla",
+      "endedIntro": "Vaš besplatni mesec za {club} je istekao. Odgovorite na ovu poruku i poslaćemo vam račun za paket, da biste nastavili da primate rezervacije bez prekida.",
+      "price": "€{monthly} / mesečno ili €{yearly} / godišnje",
+      "trialEnds": "Besplatna proba do",
+      "seePlan": "Pogledajte paket",
+      "footer": "Ovu poruku dobijate jer vodite klub na Kortellu."
+    },
+    "staff": {
+      "subject": "Pozvani ste da pomognete u vođenju kluba {club} na Kortellu",
+      "heading": "Pridružite se klubu {club} na Kortellu",
+      "intro": "{owner} vas je pozvao da pomognete u upravljanju rezervacijama u klubu {club}.",
+      "introNoName": "Pozvani ste da pomognete u upravljanju rezervacijama u klubu {club}.",
+      "club": "Klub",
+      "signInWith": "Prijavite se sa",
+      "youCan": "Možete",
+      "screens": "Da vidite raspored, upravljate rezervacijama i članovima",
+      "button": "Otvori Kortello",
+      "footer": "Ovu poruku dobijate jer je {club} dodao ovu adresu u svoje osoblje na Kortellu. Ako ih ne poznajete, možete je zanemariti."
+    },
+    "groups": {
+      "group": "Grupa",
+      "player": "Igrač",
+      "reason": "Razlog",
+      "schedule": "Kada",
+      "answerBy": "Odgovor do",
+      "month": "Mesec",
+      "open": "Otvori Kortello",
+      "cancelledSubject": "Otkazano: {group}, {date}",
+      "cancelledIntro": "Trening grupe {group} zakazan za {date} je otkazan. Ostali treninzi se održavaju kao i obično.",
+      "offerSubject": "Oslobodilo se mesto u grupi {group}",
+      "offerIntro": "Dobre vesti: oslobodilo se mesto za {name} u grupi {group} u klubu {club}. Čuva se 48 sati.",
+      "offerButton": "Odgovorite na ponudu",
+      "offerFooter": "Ovu poruku dobijate jer ste na listi čekanja kluba {club} na Kortellu.",
+      "feeSubject": "{group}: članarina za {month}",
+      "feeIntro": "Podsetnik: članarina za {month} za {name} u grupi {group} još nije evidentirana kao plaćena.",
+      "feeFooter": "Poslao Kortello u ime kluba {club}. Već ste platili? Onda ne morate ništa da radite, klub će to označiti."
+    }
+  },
+  "billing": {
+    "trialBanner": "Besplatna proba: {days, plural, one {preostao je # dan} few {preostala su # dana} other {preostalo je # dana}}. Sve je otključano.",
+    "unpaidBanner": "Vaša besplatna proba je istekla. Pišite nam da paket nastavi da radi.",
+    "seePlan": "Pogledajte paket",
+    "contact": "Kontaktirajte nas",
+    "lockedTitle": "{feature} — dostupno u paketu {plan}",
+    "lockedBody": "Pišite nam i prebacićemo vaš klub na paket {plan}.",
+    "courtsUsed": "{used} od {max} aktivnih terena",
+    "courtLimit": "Vaš paket dozvoljava {max} aktivnih terena. Isključite jedan ili pređite na veći paket.",
+    "cardTitle": "Vaš Kortello paket",
+    "trialUntil": "Besplatna proba do {date}",
+    "paidUntil": "Plaćeno do {date}",
+    "unpaid": "Još nije plaćeno",
+    "courts": "Tereni",
+    "unlimited": "Neograničeno",
+    "perMonth": "€{price} / mesečno",
+    "trialNote": "Tokom probe sve je otključano, bez ograničenja terena.",
+    "changePlan": "Za promenu paketa ili plaćanje pišite na {email}.",
+    "features": {
+      "membershipPlans": "Članarine",
+      "coaches": "Treneri",
+      "reminders": "Podsetnici e-poštom",
+      "weeklyReport": "Nedeljni izveštaj",
+      "analytics": "Analitika",
+      "staff": "Nalozi za osoblje",
+      "groups": "Grupe za trening"
+    },
+    "planNames": {
+      "starter": "Starter",
+      "club": "Club",
+      "academy": "Academy"
+    },
+    "pay": {
+      "title": "Kako da platite",
+      "amounts": "€{monthly} mesečno ili €{yearly} godišnje (dva meseca besplatno).",
+      "bankTitle": "Uplata na račun",
+      "holder": "Vlasnik računa",
+      "iban": "IBAN",
+      "bank": "Banka",
+      "swift": "SWIFT/BIC",
+      "reference": "Poziv na broj",
+      "referenceNote": "Navedite ovaj poziv na broj u uplati da znamo da je od vašeg kluba.",
+      "bankAsk": "Pišite na <email></email> i poslaćemo vam podatke o računu.",
+      "inPersonTitle": "Lično",
+      "inPersonText": "Želite da platite gotovinom? Javite nam se i dogovorićemo sastanak.",
+      "afterPaying": "Kada uplata stigne, označavamo paket kao plaćen, obično u roku od jednog radnog dana. Treba vam račun za firmu? Samo recite."
+    }
+  },
+  "setup": {
+    "title": "Podesite svoj klub",
+    "subtitle": "Za sada samo osnovno. Adresu, telefon i logo možete dodati kasnije u Podešavanjima.",
+    "name": "Naziv kluba",
+    "nameError": "Unesite naziv kluba.",
+    "city": "Grad",
+    "cityError": "Unesite grad.",
+    "country": "Država",
+    "create": "Napravi klub",
+    "creating": "Pravljenje…",
+    "error": "Klub nije napravljen. Pokušajte ponovo.",
+    "trialNote": "Vaš besplatni mesec počinje danas. Kartica nije potrebna."
+  },
+  "onboarding": {
+    "title": "Pripremite klub",
+    "subtitle": "Nekoliko koraka i igrači mogu da počnu da rezervišu onlajn.",
+    "progress": "Završeno {done} od {total}",
+    "done": "završeno",
+    "todo": "za uraditi",
+    "steps": {
+      "courts": {
+        "title": "Dodajte terene",
+        "body": "Dodajte svaki teren sa sportom, podlogom i cenom po satu. Možete dodati više odjednom.",
+        "cta": "Dodaj terene"
+      },
+      "hours": {
+        "title": "Proverite radno vreme",
+        "body": "Igrači mogu da rezervišu samo dok radite. Dok ga ne promenite, radno vreme je 07:00–22:00 svakog dana.",
+        "cta": "Podesi radno vreme"
+      },
+      "plans": {
+        "title": "Napravite članarinu",
+        "body": "Mesečni ili godišnji paketi, sa popustom na svaku rezervaciju za članove.",
+        "cta": "Napravi paket"
+      },
+      "members": {
+        "title": "Dodajte članove",
+        "body": "Dodajte članove koje već imate, da bi im se popust primenio kada rezervišu.",
+        "cta": "Dodaj članove"
+      },
+      "shared": {
+        "title": "Podelite link za rezervacije",
+        "body": "Pošaljite link igračima ili odštampajte QR poster. Ovo se samo označi kada prvi igrač rezerviše onlajn.",
+        "cta": "Podeli"
+      }
+    }
+  },
+  "share": {
+    "title": "Podelite sa igračima",
+    "subtitle": "Igrači rezervišu na stranici vašeg kluba. Ovde je sve što vam treba da ih tamo pošaljete.",
+    "linkTitle": "Vaš link za rezervacije",
+    "linkBody": "Stavite ga na sajt, Instagram ili Facebook stranicu.",
+    "copyLink": "Kopiraj link",
+    "copied": "Kopirano",
+    "messageTitle": "Poruka za igrače",
+    "messageBody": "Pošaljite je u WhatsApp ili Viber grupu kluba.",
+    "copyMessage": "Kopiraj poruku",
+    "message": "🎾 Terene u klubu {club} sada možete rezervisati onlajn!\nIzaberite slobodan termin i rezervišite za manje od minut:\n{link}",
+    "qrTitle": "QR kod",
+    "qrBody": "Odštampajte poster i okačite ga u klubu, pored terena ili na recepciji.",
+    "qrAlt": "QR kod koji otvara stranicu za rezervacije kluba",
+    "printPoster": "Otvori poster za štampu",
+    "downloadQr": "Preuzmi QR kod",
+    "poster": {
+      "title": "Rezervišite teren onlajn",
+      "body": "Skenirajte kod kamerom telefona, izaberite slobodan termin i rezervisali ste. Aplikacija nije potrebna.",
+      "step1": "Skenirajte kod",
+      "step2": "Izaberite teren i vreme",
+      "step3": "Igrajte!",
+      "orVisit": "Ili otvorite ovaj link:",
+      "print": "Štampaj poster",
+      "qrAlt": "QR kod koji otvara stranicu za rezervacije"
+    }
+  },
+  "hero": {
+    "stats": {
+      "trial": "Besplatna proba, bez kartice",
+      "daysSuffix": "dana",
+      "commission": "Provizija na rezervacije",
+      "sports": "Sportovi: tenis, padel, pikleball",
+      "languages": "Jezika, svaki igrač bira svoj"
+    },
+    "title1": "Popunite terene.",
+    "title2": "Razvijajte klub.",
+    "subtitle": "Kortello daje teniskim klubovima i trenerima alate za terene, raspored i rezervacije — sve na jednom mestu. Manje administracije, više vremena na terenu.",
+    "getStarted": "Započnite",
+    "seeHow": "Pogledajte kako radi"
+  },
+  "announcement": {
+    "free": "Isprobajte Kortello besplatno {days} dana.",
+    "noCard": "Kartica nije potrebna.",
+    "link": "Pogledajte pakete →"
+  },
+  "cta": {
+    "title1": "Vaši tereni zaslužuju",
+    "title2": "bolji softver.",
+    "trial": "Isprobajte sve besplatno mesec dana.",
+    "noCard": "Za početak nije potrebna kartica.",
+    "start": "Započnite besplatan mesec",
+    "player": "Ja sam igrač →"
+  },
+  "footer": {
+    "statement": "Softver za rezervacije za teniske, padel i pikleball klubove.",
+    "setUp": "Podesite svoj klub",
+    "navLabel": "Podnožje",
+    "groups": {
+      "product": "Proizvod",
+      "account": "Nalog",
+      "legal": "Pravno"
+    },
+    "links": {
+      "features": "Mogućnosti",
+      "how": "Kako radi",
+      "pricing": "Cene",
+      "signIn": "Prijava",
+      "forClubs": "Za klubove",
+      "forPlayers": "Za igrače",
+      "privacy": "Politika privatnosti",
+      "terms": "Uslovi korišćenja"
+    }
+  },
+  "testimonials": {
+    "label": "Šta kažu klubovi",
+    "title": "Od klubova koji koriste Kortello"
+  },
+  "howItWorks": {
+    "label": "Lako podešavanje",
+    "title": "Spremni isti dan",
+    "subtitle": "Ne treba vam IT tim. Podešavanje traje nekoliko minuta, ne dana.",
+    "steps": {
+      "create": {
+        "title": "Napravite svoj klub",
+        "body": "Dodajte terene, podesite radno vreme i cene. Stranica vašeg kluba odmah je dostupna — bez programiranja."
+      },
+      "invite": {
+        "title": "Pozovite članove",
+        "body": "Podelite jedan link. Članovi se registruju, prave profile i sami rezervišu — bez vaše pomoći."
+      },
+      "run": {
+        "title": "Sve radi samo",
+        "body": "Rezervacije, potvrde i podsetnici idu sami. Posvetite se igračima, a ne tabelama."
+      }
+    }
+  },
+  "sports": {
+    "padel": {
+      "title": "Padel",
+      "description": "Najbrže rastući sport sa reketom u Evropi. Dajte svakom padel terenu svoju cenu i vodite ga pored ostalih terena."
+    },
+    "tennis": {
+      "title": "Tenis",
+      "description": "Šljaka, tvrda podloga ili hala. Singl, dubl i časovi rezervisani za nekoliko sekundi na svakom vašem terenu."
+    },
+    "pickleball": {
+      "title": "Pikleball",
+      "description": "Kratke partije i brza smena. Vodite pikleball terene pored tenisa i padela, svaki sa svojom cenom."
+    },
+    "coaching": {
+      "title": "Treninzi",
+      "description": "Časovi upisani direktno u kalendare vaših trenera, sa terenom koji je za njih zadržan."
+    },
+    "learnMore": "Saznajte više",
+    "eyebrow": "Svaki teren",
+    "intro": "Tenis, padel ili pikleball — Kortello vodi sve. Podesite svaki teren onako kako ga vaš klub koristi i upravljajte svakom rezervacijom, članom i časom sa jedne kontrolne table."
+  },
+  "featureCards": {
+    "label": "Napravljeno za klubove",
+    "title": "Sve oko rezervacije je rešeno.",
+    "subtitle": "Sitni poslovi koji klubu pojedu nedelju, od postera na recepciji do igrača koji se nikad ne pojavi.",
+    "page": {
+      "title": "Stranica za rezervacije vašeg kluba",
+      "body": "Jedan link za Instagram, WhatsApp i vaš sajt, i poster sa QR kodom za recepciju. Igrači rezervišu bez poziva.",
+      "poster": "Rezervišite teren sa telefona",
+      "scan": "Skenirajte, izaberite vreme, gotovo."
+    },
+    "weekly": {
+      "title": "Stalni igrači, podešeni jednom",
+      "body": "Isti teren, isto vreme, do 26 nedelja. Nedelje koje su već zauzete se preskaču, a ne rezervišu dvaput.",
+      "booked": "Rezervisano",
+      "skipped": "Teren zauzet, preskočeno"
+    },
+    "staff": {
+      "title": "Nalog za vaše osoblje",
+      "body": "Pozovite recepcionera ili trenere e-poštom. Oni vode rezervacije i članove; podešavanja i naplata ostaju kod vas.",
+      "owner": "Vlasnik · sve",
+      "staff": "Osoblje · raspored, rezervacije, članovi",
+      "invited": "{email} · pozvan"
+    },
+    "reminders": {
+      "title": "Podsetnici idu sami",
+      "body": "Potvrda kada rezervišu i podsetnik dan ranije, na jeziku svakog igrača.",
+      "subject": "Vidimo se sutra na terenu",
+      "court": "Teren {n}",
+      "sent": "Poslato 24 sata ranije"
+    },
+    "noShows": {
+      "title": "Ko ne dolazi, ne rezerviše",
+      "body": "Izaberite koliko nedolazaka prihvatate. Posle toga onlajn rezervisanje se pauzira za tog igrača. Vi i dalje možete da rezervišete za njega.",
+      "count": "{n, plural, one {# nedolazak} few {# nedolaska} other {# nedolazaka}}",
+      "paused": "pauzirano",
+      "pauseAfter": "Pauziraj onlajn rezervisanje posle"
+    },
+    "tournament": {
+      "title": "Organizujte turnir, sa žrebom",
+      "body": "Igrači se prijavljuju na stranici kluba. Jedan klik pravi pošten žreb na ispadanje, a svaki rezultat pomera pobednika dalje.",
+      "semis": "Polufinale",
+      "final": "Finale · {day} 16:00",
+      "size": "{players} igrača · {rounds} kola"
+    },
+    "data": {
+      "title": "Vaši podaci ostaju vaši",
+      "body": "Preuzmite sve rezervacije i članove kao tabelu, kad god želite. Otvara se direktno u Excelu.",
+      "date": "Datum",
+      "court": "Teren",
+      "player": "Igrač",
+      "price": "Cena"
+    }
+  },
+  "pricing": {
+    "label": "Jednostavne cene",
+    "title1": "Bez iznenađenja.",
+    "title2": "Bez skrivenih troškova.",
+    "subtitle": "Isprobajte sve besplatno mesec dana. Bez kartice, bez provizije na rezervacije, otkažite kad želite.",
+    "mostPopular": "Najpopularniji",
+    "perMonth": "/mes.",
+    "yearly": "ili €{price} godišnje (uštedite €{save})",
+    "cta": "Započnite besplatan mesec",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "tagline": "Za male klubove sa nekoliko terena.",
+        "features": [
+          "Do {courts} terena",
+          "Neograničen broj članova",
+          "Onlajn rezervacije terena",
+          "Potvrde rezervacija e-poštom"
+        ]
+      },
+      "club": {
+        "name": "Club",
+        "tagline": "Za klubove sa rezervacijama svakog dana.",
+        "features": [
+          "Do {courts} terena",
+          "Sve iz paketa Starter",
+          "Članarine sa popustima",
+          "Treneri i rezervacije časova",
+          "Grupe za trening sa evidencijom i članarinama",
+          "Podsetnici e-poštom",
+          "Nedeljni izveštaj"
+        ]
+      },
+      "academy": {
+        "name": "Academy",
+        "tagline": "Za akademije sa trenerima i osobljem.",
+        "features": [
+          "Neograničen broj terena",
+          "Sve iz paketa Club",
+          "Analitika",
+          "Nalozi za osoblje",
+          "Prioritetna podrška"
+        ]
+      }
+    },
+    "everyPlan": {
+      "title": "Uključeno u svaki paket",
+      "items": [
+        "Vaša stranica za rezervacije i QR poster",
+        "Nedeljne rezervacije i ograničenje nedolazaka",
+        "Turniri sa automatskim žrebom",
+        "Izvoz vaših podataka u Excel"
+      ]
+    }
+  },
+  "faq": {
+    "items": {
+      "setup": {
+        "q": "Koliko traje podešavanje?",
+        "a": "Napravite klub, dodajte terene sa cenama i prvu rezervaciju možete primiti istog dana. Ništa se ne instalira i nije potrebna obuka. Ako zapnete, pišite nam i pomoći ćemo vam."
+      },
+      "cost": {
+        "q": "Koliko košta?",
+        "a": "Svaki klub dobija prvi mesec besplatno, sa svim otključanim i bez kartice. Posle toga Starter je €{starter} mesečno za do {starterCourts} terena, Club je €{club} mesečno za do {clubCourts} terena, a Academy je €{academy} mesečno bez ograničenja terena. Godišnje plaćanje košta kao 10 meseci. Svaki paket uključuje neograničen broj članova, nema troška podešavanja ni provizije na rezervacije, a otkazati možete u bilo kom trenutku."
+      },
+      "app": {
+        "q": "Da li igrači moraju da preuzmu aplikaciju?",
+        "a": "Ne. Kortello radi u pregledaču na svakom telefonu, tabletu ili računaru. Igrači otvore link vašeg kluba, registruju se e-poštom ili Google nalogom i rezervišu teren."
+      },
+      "phone": {
+        "q": "Da li i dalje mogu da primam rezervacije telefonom ili uživo?",
+        "a": "Da. Rezervaciju možete sami dodati za člana ili za nekoga bez naloga, pa sve završi u jednom rasporedu, bez obzira na to kako vas je igrač kontaktirao."
+      },
+      "sports": {
+        "q": "Koje sportove i terene podržava?",
+        "a": "Tenis, padel i pikleball. Svaki teren ima svoj sport, podlogu, oznaku hala ili otvoreno i cenu po satu, pa klub sa različitim terenima može da ih vodi sve sa jednog mesta."
+      },
+      "payOnline": {
+        "q": "Mogu li igrači da plate onlajn?",
+        "a": "Još ne. Onlajn plaćanje je u razvoju. Za sada igrači plaćaju u klubu kao i do sada, a Kortello beleži cenu svake rezervacije, pa vidite koliko donosi svaki teren."
+      },
+      "languages": {
+        "q": "Na kojim jezicima je dostupan?",
+        "a": "Engleski, makedonski, srpski, albanski, nemački, francuski i italijanski. Svako bira svoj jezik, pa osoblje i igrači mogu da koriste različite."
+      },
+      "data": {
+        "q": "Šta se dešava sa našim podacima ako prestanemo da koristimo Kortello?",
+        "a": "Podaci vašeg kluba pripadaju vama. Ako odlučite da odete, javite nam i obrisaćemo vaš klub, članove i rezervacije."
+      }
+    },
+    "stillQuestions": "Imate još pitanja?",
+    "writeUs": "Pišite nam i javićemo vam se.",
+    "contact": "Kontaktirajte podršku",
+    "label": "Česta pitanja",
+    "title": "Imate pitanja?",
+    "weveGot": "Imamo",
+    "answers": "odgovore.",
+    "subtitle": "Šta nas vlasnici klubova najčešće pitaju pre početka."
+  },
+  "settingsPage": {
+    "sections": {
+      "club": "Podaci o klubu",
+      "hours": "Radno vreme",
+      "profile": "Vaš profil",
+      "booking": "Pravila rezervacija",
+      "data": "Vaši podaci"
+    },
+    "days": [
+      "Ponedeljak",
+      "Utorak",
+      "Sreda",
+      "Četvrtak",
+      "Petak",
+      "Subota",
+      "Nedelja"
+    ],
+    "uploading": "Otpremanje…",
+    "uploadLogo": "Otpremi logo",
+    "minutes": "{n} min",
+    "cancelAnyTime": "Bilo kada",
+    "cancelUntil": "Do {h} h pre početka",
+    "noLimit": "Bez ograničenja",
+    "neverPause": "Nikada ne pauziraj onlajn rezervisanje",
+    "pauseAfter": "Pauziraj onlajn rezervisanje posle {n} nedolazaka",
+    "noShowHelp": "Računa se poslednjih {days} dana. Nedolaske označite u Rezervacijama; ako jedan vratite, pauza se ukida. Vi uvek možete sami da rezervišete za igrača.",
+    "saving": "Čuvanje…",
+    "saveChanges": "Sačuvaj izmene",
+    "clubInfo": "Podaci o klubu",
+    "basicInformationAboutYourClub": "Osnovni podaci o klubu koje vide članovi.",
+    "clubLogo": "Logo kluba",
+    "clubName": "Naziv kluba",
+    "email": "E-pošta",
+    "phone": "Telefon",
+    "address": "Adresa",
+    "city": "Grad",
+    "country": "Država",
+    "website": "Sajt",
+    "description": "Opis",
+    "openingHours": "Radno vreme",
+    "setYourClubsOperatingHours": "Podesite radno vreme kluba za svaki dan u nedelji.",
+    "yourProfile": "Vaš profil",
+    "yourOwnNamePhoneAnd": "Vaše ime, telefon i slika, koje vide vaše osoblje i igrači.",
+    "bookingRules": "Pravila rezervacija",
+    "whatPlayersCanBookOnline": "Šta igrači mogu da rezervišu onlajn. Vi i dalje možete sami da rezervišete bilo šta iz rasporeda.",
+    "bookingLengthsPlayersCanChoose": "Trajanja termina koja igrači mogu da izaberu",
+    "bookUpToDaysAhead": "Rezervacija do (dana unapred)",
+    "cancellingOnline": "Onlajn otkazivanje",
+    "bookingsPerPlayerPerDay": "Rezervacija po igraču dnevno",
+    "repeatNoShows": "Ponovljeni nedolasci",
+    "settings": "Podešavanja",
+    "to": "do",
+    "closed": "Zatvoreno",
+    "clickTheCameraToUpload": "Kliknite na kameru da otpremite sliku.",
+    "saved": "Sačuvano",
+    "playersSeeOnly": "Igrači vide samo trajanja i dane koje dozvolite. Kada je prekasno za onlajn otkazivanje, zamoljeni su da pozovu klub.",
+    "data": {
+      "title": "Vaši podaci",
+      "description": "Preuzmite podatke kluba kao tabelu ili nas zamolite da obrišemo klub.",
+      "bookings": "Rezervacije",
+      "bookingsDesc": "Svaka rezervacija i čas sa datumom, terenom, igračem i cenom (CSV).",
+      "members": "Članovi",
+      "membersDesc": "Svi članovi sa paketom, kontakt podacima i datumima (CSV).",
+      "download": "Preuzmi",
+      "deleteTitle": "Brisanje kluba",
+      "deleteDesc": "Vaš klub, tereni, članovi i rezervacije se trajno brišu. Pišite nam sa e-pošte vašeg naloga i mi ćemo se pobrinuti za to.",
+      "deleteAction": "Pišite nam",
+      "deleteSubject": "Molim vas obrišite moj klub: {name}"
+    }
+  },
+  "analytics": {
+    "daysShort": [
+      "Pon",
+      "Uto",
+      "Sre",
+      "Čet",
+      "Pet",
+      "Sub",
+      "Ned"
+    ],
+    "heatmapCell": "{day} {hour}:00 — {n, plural, one {# rezervacija} few {# rezervacije} other {# rezervacija}}",
+    "oneYear": "1 godina",
+    "days": "{n} dana",
+    "vsPrevious": "u odnosu na prethodni period",
+    "changeUp": "+{pct}% u odnosu na prethodnih {days} dana",
+    "changeDown": "{pct}% u odnosu na prethodnih {days} dana",
+    "same": "Isto kao prethodnih {days} dana",
+    "lastDays": "Poslednjih {n} dana",
+    "revenue": "Prihod",
+    "bookings": "Rezervacije",
+    "members": "Članovi",
+    "totalRevenue": "Ukupan prihod",
+    "totalBookings": "Ukupno rezervacija",
+    "last12Months": "Poslednjih 12 meseci",
+    "activeMembers": "Aktivni članovi",
+    "allTime": "Od početka",
+    "expiringSoon": "Uskoro ističe",
+    "next30Days": "Narednih 30 dana",
+    "revenueOverTime": "Prihod kroz vreme",
+    "bookingsByStatus": "Rezervacije po statusu",
+    "revenueBySport": "Prihod po sportu",
+    "peakHours": "Najprometniji sati",
+    "bookingFrequencyByDayAnd": "Učestalost rezervacija po danu i satu",
+    "courtUtilization": "Iskorišćenost terena",
+    "bookingsPerCourtAllTime": "Rezervacije po terenu (od početka)",
+    "membersByPlan": "Članovi po paketu",
+    "currentDistribution": "Trenutna raspodela",
+    "memberGrowth": "Rast broja članova",
+    "cumulativeMembersOver12Months": "Ukupan broj članova kroz 12 meseci",
+    "low": "Malo",
+    "high": "Mnogo",
+    "analytics": "Analitika",
+    "performanceOverviewForYourClub": "Pregled rezultata vašeg kluba",
+    "noDataYet": "Još nema podataka",
+    "noCourtData": "Nema podataka o terenima",
+    "noMembers": "Nema članova"
+  },
+  "common": {
+    "closeMenu": "Zatvori meni",
+    "mainNav": "Glavni meni",
+    "menu": "Meni",
+    "toggleMenu": "Otvori ili zatvori meni",
+    "toggleSidebar": "Prikaži ili sakrij bočni meni",
+    "toggleSidebarHint": "Prikaži ili sakrij bočni meni (Ctrl+B)",
+    "notifications": "Obaveštenja",
+    "selectLanguage": "Izaberite jezik",
+    "avatar": "Profilna slika",
+    "changeAvatar": "Promeni profilnu sliku",
+    "walkIn": "Bez rezervacije",
+    "sport": "Sport",
+    "noPlan": "Bez paketa"
+  },
+  "timetable": {
+    "title": "Raspored",
+    "noCourts": "Još nema terena",
+    "addCourt": "Dodaj teren",
+    "today": "Danas",
+    "noBookings": "Još nema rezervacija za ovaj dan.",
+    "noCourtsHint": "Dodajte prvi teren i pojaviće se ovde kao kolona, spreman za rezervacije.",
+    "lessonWith": "Čas sa: {coach}",
+    "group": "Grupa",
+    "groupWith": "sa: {coach}"
+  },
+  "bookCourts": {
+    "titleAtClub": "Rezervišite teren u klubu {club}",
+    "title": "Rezervišite teren",
+    "available": "{n, plural, one {# slobodan teren} few {# slobodna terena} other {# slobodnih terena}}",
+    "bookCourt": "Rezerviši teren",
+    "date": "Datum",
+    "startTime": "Početak",
+    "duration": "Trajanje",
+    "closed": "Zatvoreno",
+    "minutes": "{n} min",
+    "memberDiscount": "Popust za članove {pct}%",
+    "booking": "Rezervisanje…",
+    "confirm": "Potvrdi · €{price}",
+    "showAll": "Prikaži sve klubove",
+    "closedDay": "Klub ne radi tog dana. Izaberite drugi dan.",
+    "cancel": "Otkaži",
+    "book": "Rezerviši"
+  },
+  "coachesList": {
+    "title": "Treneri",
+    "empty": "Nijedan trener ne odgovara filterima",
+    "emptyHint": "Probajte drugi nivo da vidite više trenera.",
+    "viewProfile": "Pogledaj profil",
+    "coach": "Trener",
+    "independent": "Samostalni",
+    "filterByLevel": "Filtriraj po nivou",
+    "allLevels": "Svi nivoi",
+    "count": "{n, plural, =0 {Nema dostupnih trenera} one {# dostupan trener} few {# dostupna trenera} other {# dostupnih trenera}}",
+    "perHour": "/ sat"
+  },
+  "bookingErrors": {
+    "coachTaken": "Ovaj trener je već zauzet u to vreme",
+    "slotTaken": "Ovaj termin je već rezervisan",
+    "closedDay": "Klub ne radi tog dana",
+    "outsideHours": "To vreme je van radnog vremena kluba",
+    "passed": "To vreme je već prošlo",
+    "notAvailable": "Ovaj teren ili trener nije dostupan",
+    "failed": "Rezervacija nije uspela",
+    "notSignedIn": "Prijavite se da biste rezervisali",
+    "courtNotFound": "Teren nije pronađen",
+    "coachNotAvailable": "Ovaj trener nije dostupan",
+    "invalid": "Neispravni podaci rezervacije",
+    "ruleLength": "Ovaj klub ne prima rezervacije od {n} minuta.",
+    "ruleDaysAhead": "Ovaj klub prima rezervacije najviše {n} dana unapred.",
+    "rulePerDay": "U ovom klubu možete napraviti najviše {n} rezervacija dnevno.",
+    "ruleCancel": "Ovaj klub dozvoljava otkazivanje najkasnije {n} h pre početka. Pozovite klub.",
+    "ruleNoShows": "Onlajn rezervisanje je pauzirano posle {n} propuštenih rezervacija. Javite se klubu.",
+    "noCourtFree": "Svi tereni su zauzeti u to vreme. Izaberite drugo vreme."
+  },
+  "settingsErrors": {
+    "sevenDays": "Potrebno je sedam dana",
+    "timeFormat": "Koristite vreme kao 08:00",
+    "closeAfterOpen": "Vreme zatvaranja mora biti posle otvaranja",
+    "durations": "Izaberite bar jedno trajanje termina.",
+    "lengthUnavailable": "To trajanje termina nije dostupno.",
+    "daysAhead": "Igrači mogu da rezervišu od 1 do {max} dana unapred.",
+    "cancelDeadline": "Izaberite rok za otkazivanje sa liste.",
+    "perDay": "Izaberite dnevno ograničenje sa liste.",
+    "noShows": "Izaberite ograničenje nedolazaka sa liste.",
+    "notAllowed": "Nije dozvoljeno",
+    "needName": "Klub mora imati naziv",
+    "badWebsite": "Adresa sajta ne izgleda ispravno",
+    "saveFailed": "Čuvanje nije uspelo. Pokušajte ponovo.",
+    "chooseImage": "Izaberite sliku",
+    "notImage": "Logo mora biti slika",
+    "tooBig": "Slika mora biti manja od 2 MB",
+    "uploadFailed": "Otpremanje nije uspelo. Pokušajte ponovo."
+  },
+  "meta": {
+    "description": "Rezervišite teniske terene i trenere u svojoj blizini."
+  },
+  "legal": {
+    "label": "Pravne informacije",
+    "updated": "Poslednja izmena: {date}",
+    "contents": "Sadržaj",
+    "contactTitle": "Kontakt",
+    "privacy": {
+      "title": "Politika privatnosti",
+      "intro": "Ova politika objašnjava koje lične podatke Kortello prikuplja, zašto ih prikupljamo i šta vi možete da uradite povodom toga. Kortello je onlajn sistem za rezervacije za sportske klubove: klubovi ga koriste za upravljanje terenima, članovima i trenerima, a igrači preko njega rezervišu.",
+      "sections": [
+        {
+          "title": "Ko je odgovoran",
+          "body": [
+            "Za vaš Kortello nalog i korišćenje sajta, Kortello odlučuje kako se vaši podaci koriste i odgovoran je za njih („rukovalac”). Naši kontakt podaci nalaze se na kraju ove stranice.",
+            "Kada klub beleži podatke o svojim članovima, igračima bez naloga ili rezervacijama, klub odlučuje šta će beležiti i odgovoran je za te podatke. Kortello ih čuva i obrađuje u ime kluba (kao „obrađivač”). Za pitanja o tim podacima obratite se klubu; mi ćemo pomoći klubu da vam odgovori."
+          ]
+        },
+        {
+          "title": "Koje podatke prikupljamo",
+          "body": [
+            [
+              "<b>Podaci o nalogu:</b> vaše ime, adresa e-pošte, lozinka (čuva se samo u šifrovanom obliku) i vaša uloga (igrač, trener ili administrator kluba). Ako se prijavite preko Google-a, Google sa nama deli vaše ime, adresu e-pošte i profilnu fotografiju.",
+              "<b>Podaci profila</b> koje sami dodate, kao što su broj telefona i profilna fotografija.",
+              "<b>Rezervacije:</b> teren ili trener, datum i vreme, cena, status i da li je rezervacija otkazana ili označena kao nedolazak.",
+              "<b>Podaci o klubu</b> koje unose administratori kluba: naziv kluba, adresa, kontakt podaci, logo, radno vreme, tereni, cene i pravila rezervisanja.",
+              "<b>Profili trenera:</b> ime i fotografija trenera, nivoi i specijalnosti koje predaje, cena i kratak opis. Profili trenera su javni.",
+              "<b>Podaci o članovima</b> koje unose klubovi: ime, adresa e-pošte, broj telefona, paket i status članstva i privatne beleške koje vidi samo klub.",
+              "<b>Tehnički podaci:</b> kolačići opisani u nastavku i serverski logovi (kao što su IP adresa i tip pregledača) koje naši pružaoci hostinga čuvaju radi bezbednosti i otklanjanja problema."
+            ],
+            "Ne koristimo reklamne kolačiće, kolačiće za praćenje ili analitiku i ne prodajemo vaše podatke."
+          ]
+        },
+        {
+          "title": "Zašto ih koristimo",
+          "body": [
+            [
+              "<b>Da bismo pružali uslugu:</b> kreiranje naloga, primanje rezervacija, prikaz rasporeda klubovima i slanje potvrda i podsetnika za rezervacije. Pravni osnov: izvršenje ugovora sa vama.",
+              "<b>Da bi usluga bila bezbedna i ispravna:</b> sprečavanje zloupotreba, ispravljanje grešaka i primena pravila rezervisanja svakog kluba. Pravni osnov: naš legitimni interes da vodimo bezbednu i pouzdanu uslugu.",
+              "<b>Za naplatu klubovima:</b> fakturisanje paketa klubovima i vođenje računovodstvene evidencije. Pravni osnov: naš ugovor sa klubom i naše zakonske obaveze.",
+              "<b>Da bismo vam odgovorili</b> kada nam pišete."
+            ],
+            "Šaljemo e-poruke samo o vašem nalogu i vašim rezervacijama (a administratorima klubova i o paketu kluba i nedeljnim izveštajima). Nećemo vam slati marketinške e-poruke ako prethodno ne pristanete na njih."
+          ]
+        },
+        {
+          "title": "Ko može da vidi vaše podatke",
+          "body": [
+            [
+              "<b>Klub kod kog rezervišete</b> vidi vaše ime, kontakt podatke i vaše rezervacije u tom klubu, uključujući nedolaske.",
+              "<b>Svi</b> mogu da vide stranice klubova, terene, radno vreme i profile trenera.",
+              "<b>Pružaoci usluga</b> koji za nas vode delove Kortella: Supabase (baza podataka, prijava i skladištenje fajlova), naš pružalac usluge e-pošte (Resend ili standardni servis za e-poštu) i naš pružalac veb hostinga. Podatke smeju da koriste samo da bi nam pružili svoju uslugu.",
+              "<b>Nadležni organi</b>, kada zakon zahteva da ih podelimo."
+            ],
+            "Neki od ovih pružalaca nalaze se u drugim zemljama ili koriste servere u njima, uključujući Sjedinjene Američke Države. Kada podaci napuštaju Severnu Makedoniju ili Evropsku uniju, oslanjamo se na zaštitne mere koje zakon zahteva, kao što su Standardne ugovorne klauzule Evropske komisije."
+          ]
+        },
+        {
+          "title": "Koliko dugo ih čuvamo",
+          "body": [
+            [
+              "<b>Podaci o nalogu i profilu:</b> dok god vaš nalog postoji. Kada zatražite brisanje naloga, vaše podatke brišemo ili anonimizujemo u roku od 30 dana.",
+              "<b>Rezervacije:</b> dok god postoji nalog kluba, jer je klubu potrebna istorija rezervacija. Nedolasci se računaju u ograničenja rezervisanja kluba samo 90 dana.",
+              "<b>Podaci o klubu:</b> dok god klub koristi Kortello i još 90 dana nakon što prestane, kako bi mogao da se vrati bez gubitka podataka. Fakture i računovodstvena evidencija čuvaju se onoliko dugo koliko zahteva poreski zakon.",
+              "<b>Serverski logovi:</b> kratko vreme, kako odrede naši pružaoci hostinga."
+            ]
+          ]
+        },
+        {
+          "title": "Kolačići",
+          "body": [
+            "Kortello koristi samo kolačiće koji su sajtu potrebni da bi radio:",
+            [
+              "<b>Kolačići za prijavu</b> koje postavlja Supabase i koji vas drže prijavljenim.",
+              "<b>Kolačić za jezik</b> (NEXT_LOCALE), koji pamti jezik koji ste izabrali."
+            ],
+            "Pošto su ovi kolačići neophodni, ne tražimo pristanak za njihovo korišćenje. Ako ih blokirate, nećete moći da se prijavite."
+          ]
+        },
+        {
+          "title": "Vaša prava",
+          "body": [
+            "U svakom trenutku možete da:",
+            [
+              "vidite lične podatke koje čuvamo o vama i dobijete njihovu kopiju;",
+              "tražite ispravku netačnih ili nepotpunih podataka;",
+              "tražite brisanje svojih podataka i naloga;",
+              "ograničite način na koji koristimo vaše podatke ili mu se usprotivite;",
+              "dobijete svoje podatke u uobičajenom, mašinski čitljivom formatu kako biste ih preneli drugde;",
+              "povučete svaki pristanak koji ste dali."
+            ],
+            "Pišite na {email} sa adrese e-pošte vašeg naloga. Odgovorićemo u roku od mesec dana. Ako se vaš zahtev odnosi na podatke koje je o vama zabeležio klub, prosledićemo ga klubu.",
+            "Ako smatrate da smo vaše podatke obradili nepravilno, možete podneti pritužbu Agenciji za zaštitu ličnih podataka Severne Makedonije (azlp.mk) ili organu za zaštitu podataka u zemlji EU u kojoj živite."
+          ]
+        },
+        {
+          "title": "Bezbednost",
+          "body": [
+            "Svi podaci putuju preko šifrovanih veza (HTTPS). Lozinke se čuvaju u šifrovanom obliku i ne možemo da ih vidimo ni mi ni klubovi. Pravila pristupa bazi podataka obezbeđuju da svaki klub vidi samo svoje podatke, a svaki igrač samo svoje rezervacije."
+          ]
+        },
+        {
+          "title": "Deca",
+          "body": [
+            "Kortello nije namenjen deci mlađoj od 14 godina za samostalno korišćenje. Roditelj ili staratelj može da napravi nalog i rezerviše za dete."
+          ]
+        },
+        {
+          "title": "Izmene ove politike",
+          "body": [
+            "Možemo da ažuriramo ovu politiku kada se usluga promeni. Datum na vrhu pokazuje kada je poslednji put izmenjena. Ako su izmene važne, obavestićemo korisnike e-poštom ili u aplikaciji pre nego što stupe na snagu."
+          ]
+        }
+      ],
+      "contact": "Za pitanja o ovoj politici ili vašim podacima pišite na {email}."
+    },
+    "terms": {
+      "title": "Uslovi korišćenja",
+      "intro": "Ovi uslovi važe za sve koji koriste Kortello: klubove koji preko njega upravljaju terenima i igrače koji preko njega rezervišu. Kreiranjem naloga ili korišćenjem sajta prihvatate ove uslove.",
+      "sections": [
+        {
+          "title": "Usluga",
+          "body": [
+            "Kortello je onlajn softver za sportske klubove. Klubovi objavljuju svoje terene, radno vreme, cene, trenere i članstva, a igrači onlajn rezervišu terene i časove. Kortello pruža samo softver: ne vodimo klubove, ne posedujemo terene i ne zapošljavamo trenere."
+          ]
+        },
+        {
+          "title": "Vaš nalog",
+          "body": [
+            [
+              "Prilikom registracije dajte tačne podatke i ažurirajte ih.",
+              "Čuvajte lozinku za sebe i ne delite nalog. Odgovorni ste za ono što se njime radi.",
+              "Ako mislite da je neko drugi koristio vaš nalog, odmah nam javite na {email}."
+            ]
+          ]
+        },
+        {
+          "title": "Rezervacije",
+          "body": [
+            [
+              "Rezervacija je dogovor između vas i kluba. Klub određuje cene, radno vreme i pravila rezervisanja i odgovoran je za teren, čas i svako plaćanje koje naplati.",
+              "Rezervacije plaćate klubu, na način koji klub odredi. Kortello ne prima uplate za rezervacije.",
+              "Svaki klub može da postavi pravila, na primer koliko dugo rezervacija može da traje, koliko unapred možete da rezervišete, koliko rezervacija dnevno možete da napravite i do kada još možete da otkažete onlajn. Posle tog roka, za otkazivanje se obratite klubu.",
+              "Ako ne dođete na rezervaciju, klub može da je označi kao nedolazak. Klub može da pauzira onlajn rezervisanje igračima sa previše nedolazaka u poslednjih 90 dana. Klub i dalje može direktno da rezerviše za vas.",
+              "Pitanja o rezervaciji, povraćaju novca ili otkazanom terminu rešavaju se između vas i kluba, ali rado ćemo pomoći gde možemo."
+            ]
+          ]
+        },
+        {
+          "title": "Paketi za klubove",
+          "body": [
+            [
+              "Novi klubovi dobijaju besplatnu probu od {trialDays} dana sa svim funkcijama. Kartica nije potrebna.",
+              "Posle probe, klub nastavlja na plaćenom paketu (Starter, Club ili Academy), uz mesečnu ili godišnju naplatu. Aktuelne cene nalaze se na stranici sa cenama.",
+              "Klubovima izdajemo fakture unapred za svaki period. Paketi se ne obnavljaju automatski: klub zadržava paket plaćanjem sledeće fakture.",
+              "Ako faktura nije plaćena, možemo da ograničimo funkcije kluba ili suspendujemo njegov nalog nakon što ga obavestimo. Podaci kluba ostaju dostupni 90 dana.",
+              "Klub može da prestane u bilo kom trenutku tako što neće obnoviti paket. Već plaćeni iznosi se ne vraćaju, osim kada to zakon zahteva.",
+              "Cene možemo da promenimo uz najmanje 30 dana prethodnog obaveštenja. Nove cene važe od sledećeg obračunskog perioda."
+            ]
+          ]
+        },
+        {
+          "title": "Za šta su klubovi odgovorni",
+          "body": [
+            [
+              "Klubovi su odgovorni za informacije koje objavljuju i za podatke koje unose o svojim članovima i igračima. Moraju imati zakonit osnov za njihovo beleženje i moraju obavestiti članove da koriste Kortello.",
+              "Za te podatke klub je rukovalac, a Kortello njegov obrađivač, kako je opisano u Politici privatnosti. Obrađujemo ih samo da bismo klubu pružili uslugu.",
+              "Klubovi moraju da poštuju rezervacije napravljene preko Kortella u skladu sa pravilima koja su postavili ili da kontaktiraju igrača ako rezervacija ne može da se realizuje."
+            ]
+          ]
+        },
+        {
+          "title": "Prihvatljivo korišćenje",
+          "body": [
+            "Ne koristite Kortello da biste:",
+            [
+              "radili bilo šta nezakonito;",
+              "pravili lažne rezervacije ili zauzimali terene koje ne nameravate da koristite;",
+              "otpremali sadržaj za koji nemate prava ili uvredljiv sadržaj;",
+              "pokušali da pristupite tuđim podacima ili zaobiđete bezbednost sajta;",
+              "preopteretili uslugu automatizovanim zahtevima."
+            ]
+          ]
+        },
+        {
+          "title": "Vaš sadržaj",
+          "body": [
+            "Zadržavate prava na ono što otpremite, kao što su logoi, fotografije i opisi. Dozvoljavate nam da ih čuvamo i prikazujemo koliko je potrebno za rad usluge, na primer logo kluba na njegovoj javnoj stranici. Naziv Kortello, softver i dizajn pripadaju nama."
+          ]
+        },
+        {
+          "title": "Dostupnost i odgovornost",
+          "body": [
+            [
+              "Trudimo se da Kortello bude dostupan i tačan, ali ne možemo da obećamo da će uvek raditi bez prekida ili grešaka. Možemo ga kratko pauzirati radi održavanja.",
+              "Kortello nije odgovoran za ono što se dešava u klubu, za odluke kluba niti za gubitke izazvane problemom sa rezervacijom koji razumno nismo mogli da sprečimo.",
+              "U meri u kojoj zakon dozvoljava, naša ukupna odgovornost prema klubu ograničena je na iznose koje nam je klub platio u 12 meseci pre zahteva.",
+              "Ništa u ovim uslovima ne ograničava odgovornost koju zakon ne dozvoljava da se ograniči, niti vaša prava kao potrošača."
+            ]
+          ]
+        },
+        {
+          "title": "Prestanak korišćenja",
+          "body": [
+            [
+              "Možete u bilo kom trenutku da prestanete da koristite Kortello i zatražite brisanje naloga.",
+              "Možemo da suspendujemo ili zatvorimo nalog koji krši ove uslove, nakon upozorenja kada je to razumno."
+            ]
+          ]
+        },
+        {
+          "title": "Izmene ovih uslova",
+          "body": [
+            "Možemo da menjamo ove uslove. Datum na vrhu pokazuje kada su poslednji put izmenjeni, a o važnim izmenama obavestićemo korisnike pre nego što stupe na snagu. Ako i posle toga nastavite da koristite Kortello, važe novi uslovi."
+          ]
+        },
+        {
+          "title": "Merodavno pravo",
+          "body": [
+            "Na ove uslove primenjuje se pravo Severne Makedonije. Sporovi se rešavaju pred nadležnim sudom u Skoplju, osim ako vam zakon o zaštiti potrošača daje pravo da se obratite sudu u mestu gde živite."
+          ]
+        }
+      ],
+      "contact": "Za pitanja o ovim uslovima pišite na {email}."
+    }
+  },
+  "owner": {
+    "title": "Klubovi i uplate",
+    "subtitle": "Samo vi vidite ovu stranicu. Beležite uplate, menjajte pakete i pratite kako napreduje svaki klub.",
+    "stats": {
+      "clubs": "Klubovi",
+      "trial": "Na besplatnoj probi",
+      "paying": "Plaćaju",
+      "unpaid": "Nisu platili",
+      "monthly": "Klubovi koji plaćaju, mesečno",
+      "received": "Primljeno ovog meseca"
+    },
+    "filters": {
+      "all": "Svi",
+      "trial": "Proba",
+      "active": "Plaćaju",
+      "unpaid": "Nisu platili"
+    },
+    "search": "Pretraga po klubu, vlasniku ili e-pošti…",
+    "cols": {
+      "club": "Klub",
+      "owner": "Vlasnik",
+      "plan": "Paket",
+      "status": "Status",
+      "usage": "Aktivnost"
+    },
+    "status": {
+      "trialUntil": "Proba do {date}",
+      "paidUntil": "Plaćeno do {date}",
+      "unpaid": "Nije plaćeno"
+    },
+    "joined": "pridružio se {date}",
+    "perMonth": "€{price} / mesečno",
+    "courts": "{n, plural, one {# teren} few {# terena} other {# terena}}",
+    "bookings30": "{n, plural, one {# rezervacija} few {# rezervacije} other {# rezervacija}} za 30 dana",
+    "manage": "Upravljaj",
+    "empty": "Nijedan klub ne odgovara.",
+    "payments": {
+      "title": "Uplate",
+      "empty": "Još nema zabeleženih uplata.",
+      "date": "Datum",
+      "method": "Način plaćanja",
+      "paidUntil": "Sada plaćeno do",
+      "amount": "Iznos"
+    },
+    "period": {
+      "month": "1 mesec",
+      "year": "1 godina"
+    },
+    "method": {
+      "bank": "Uplata na račun",
+      "cash": "Gotovina"
+    },
+    "pay": {
+      "title": "Zabeleži uplatu",
+      "preview": "Plaćeno do postaje {date}.",
+      "save": "Zabeleži uplatu",
+      "saved": "Uplata je zabeležena."
+    },
+    "other": {
+      "title": "Ostale izmene",
+      "planOnly": "Promeni samo paket",
+      "extendTrial": "Produži besplatnu probu",
+      "days": "+{n} dana",
+      "paidUntil": "Plaćeno do (za ispravku greške)",
+      "paidUntilHint": "Ostavite prazno i sačuvajte da označite klub kao neplaćen.",
+      "save": "Sačuvaj",
+      "saved": "Sačuvano."
+    },
+    "errors": {
+      "notAllowed": "Ovo može samo vlasnik aplikacije.",
+      "invalid": "Nešto u obrascu nije ispravno.",
+      "failed": "Čuvanje nije uspelo. Pokušajte ponovo."
+    }
+  },
+  "labels": {
+    "sports": {
+      "tennis": "Tenis",
+      "padel": "Padel",
+      "pickleball": "Pikleball"
+    },
+    "surfaces": {
+      "clay": "Šljaka",
+      "hard": "Tvrda podloga",
+      "grass": "Trava",
+      "artificial_grass": "Veštačka trava",
+      "carpet": "Tepih",
+      "concrete": "Beton",
+      "acrylic": "Akril"
+    },
+    "levels": {
+      "beginner": "Početnik",
+      "intermediate": "Srednji nivo",
+      "advanced": "Napredni",
+      "junior": "Junior",
+      "adult": "Odrasli"
+    },
+    "bookingStatus": {
+      "confirmed": "Potvrđena",
+      "pending": "Na čekanju",
+      "completed": "Završena",
+      "cancelled": "Otkazana",
+      "no_show": "Nije došao"
+    },
+    "memberStatus": {
+      "active": "Aktivno",
+      "cancelled": "Otkazano",
+      "expired": "Isteklo"
+    },
+    "billingPeriod": {
+      "monthly": "/ mesečno",
+      "annual": "/ godišnje",
+      "one_time": "jednokratno"
+    },
+    "indoor": "U hali",
+    "outdoor": "Otvoreni"
+  },
+  "tournaments": {
+    "title": "Turniri",
+    "subtitle": "Organizujte turnir na ispadanje: prikupite prijave, napravite žreb, unesite rezultate.",
+    "new": "Novi turnir",
+    "empty": "Još nema turnira.",
+    "emptyHint": "Napravite jedan, podelite link i igrači se mogu prijaviti onlajn.",
+    "edit": "Izmeni",
+    "delete": "Obriši turnir",
+    "deleteConfirm": "Obrisati ovaj turnir sa svim igračima i rezultatima?",
+    "save": "Sačuvaj",
+    "cancel": "Otkaži",
+    "saving": "Čuvanje…",
+    "fields": {
+      "name": "Naziv",
+      "namePlaceholder": "Jesenji turnir",
+      "sport": "Sport",
+      "date": "Datum",
+      "maxEntries": "Mesta",
+      "entryFee": "Kotizacija (€)",
+      "entryFeeHint": "Ostavite prazno ako je besplatno. Igrači plaćaju u klubu.",
+      "description": "Informacije za igrače",
+      "descriptionPlaceholder": "Format, nagrade, šta da ponesu…"
+    },
+    "status": {
+      "open": "Prijave otvorene",
+      "closed": "Prijave zatvorene",
+      "started": "U toku",
+      "finished": "Završen"
+    },
+    "entriesCount": "Popunjeno {n} od {max} mesta",
+    "free": "Besplatno učešće",
+    "fee": "Kotizacija €{fee}",
+    "manage": {
+      "back": "Svi turniri",
+      "publicPage": "Javna stranica",
+      "copyLink": "Kopiraj link",
+      "copied": "Kopirano",
+      "closeSignups": "Zatvori prijave",
+      "openSignups": "Ponovo otvori prijave",
+      "entries": "Igrači",
+      "addEntry": "Dodaj",
+      "addPlaceholder": "Ime, ili „Ana / Marko” za dubl",
+      "remove": "Ukloni",
+      "noEntries": "Još se niko nije prijavio. Podelite link ili dodajte imena ovde.",
+      "signedUpOnline": "prijavljen onlajn",
+      "draw": "Napravi žreb",
+      "drawHint": "Igrači se raspoređuju nasumično. Ako broj ne odgovara žrebu, neki idu direktno u 2. kolo (slobodan prolaz).",
+      "tooFewHint": "Za žreb su potrebna najmanje 2 igrača.",
+      "redraw": "Napravi žreb ponovo",
+      "redrawConfirm": "Odbaciti žreb i sve rezultate?",
+      "bracket": "Žreb",
+      "pickWinner": "Dodirnite meč da unesete rezultat.",
+      "result": "Rezultat",
+      "winner": "Pobednik",
+      "score": "Rezultat (opciono)",
+      "scorePlaceholder": "6-4 6-3",
+      "saveResult": "Sačuvaj rezultat",
+      "clearResult": "Obriši",
+      "champion": "Pobednik: {name}"
+    },
+    "rounds": {
+      "final": "Finale",
+      "semi": "Polufinale",
+      "quarter": "Četvrtfinale",
+      "roundOf": "Kolo od {n}"
+    },
+    "bye": "Slobodan prolaz",
+    "tbd": "Biće određeno",
+    "public": {
+      "signUp": "Prijavi se",
+      "signUpTitle": "Prijavite se za ovaj turnir",
+      "nameOnDraw": "Ime u žrebu",
+      "nameHint": "Za dubl napišite oba imena, npr. „Ana / Marko”.",
+      "signInToSignUp": "Prijavite se na nalog da biste se prijavili",
+      "youreIn": "Prijavljeni ste kao {name}.",
+      "withdraw": "Odjavi se",
+      "full": "Ovaj turnir je popunjen.",
+      "closedNote": "Prijave su zatvorene.",
+      "players": "Igrači ({n})",
+      "noPlayers": "Još se niko nije prijavio. Budite prvi!",
+      "upcoming": "Turniri"
+    },
+    "errors": {
+      "name": "Dajte turniru naziv.",
+      "date": "Izaberite datum.",
+      "maxEntries": "Broj mesta mora biti od 2 do 64.",
+      "fee": "Kotizacija ne može biti negativna.",
+      "entryName": "Upišite ime.",
+      "tooFew": "Za žreb su potrebna najmanje 2 igrača.",
+      "nextPlayed": "Sledeći meč već ima rezultat. Prvo obrišite taj rezultat.",
+      "failed": "Čuvanje nije uspelo. Pokušajte ponovo.",
+      "notSignedIn": "Prvo se prijavite.",
+      "closed": "Prijave su zatvorene.",
+      "full": "Ovaj turnir je popunjen.",
+      "already": "Već ste prijavljeni."
+    }
+  },
+  "export": {
+    "reference": "Broj",
+    "date": "Datum",
+    "start": "Početak",
+    "end": "Kraj",
+    "minutes": "Minuta",
+    "court": "Teren",
+    "coach": "Trener",
+    "player": "Igrač",
+    "status": "Status",
+    "price": "Cena (€)",
+    "notes": "Napomene",
+    "name": "Ime",
+    "email": "E-pošta",
+    "phone": "Telefon",
+    "plan": "Paket",
+    "memberSince": "Član od",
+    "ends": "Ističe"
+  },
+  "staff": {
+    "title": "Osoblje",
+    "subtitle": "Dajte recepcioneru ili trenerima njihovu prijavu. Prijavljuju se svojom e-poštom, a možete ih ukloniti u bilo kom trenutku.",
+    "canTitle": "Osoblje može",
+    "can": [
+      "Da vidi raspored",
+      "Da dodaje, menja i otkazuje rezervacije, i nedeljne",
+      "Da dodaje članove i menja njihove podatke"
+    ],
+    "ownerOnlyTitle": "Samo vi možete",
+    "ownerOnly": "Da menjate podešavanja, terene, trenere, pakete i turnire, vidite analitiku, upravljate Kortello paketom i pozivate ili uklanjate osoblje.",
+    "inviteTitle": "Pozovite nekoga",
+    "inviteHint": "Šaljemo im link e-poštom. Prijave se ili naprave nalog sa ovom adresom i vaš klub ih odmah čeka.",
+    "emailPlaceholder": "ime@example.com",
+    "invite": "Pošalji poziv",
+    "sending": "Slanje…",
+    "invited": "Poziv je poslat na {email}.",
+    "invitedNoEmail": "{email} je pozvan. Nismo uspeli da pošaljemo e-poštu, pa zamolite osobu da se prijavi na Kortello sa ovom adresom.",
+    "empty": "Još nema osoblja",
+    "emptyHint": "Pozovite prvog člana tima iznad.",
+    "active": "Aktivan",
+    "pending": "Pozvan",
+    "joined": "Pridružio se {date}",
+    "invitedOn": "Pozvan {date}",
+    "remove": "Ukloni",
+    "removeTitle": "Uklanjanje iz osoblja",
+    "removeText": "{name} odmah gubi pristup vašem klubu. Njegov nalog ostaje.",
+    "keep": "Zadrži",
+    "errors": {
+      "email": "Unesite ispravnu adresu e-pošte.",
+      "self": "To je vaša e-pošta. Već imate pun pristup.",
+      "already": "Ova osoba je već pozvana.",
+      "limit": "Klub može imati najviše 20 naloga za osoblje.",
+      "plan": "Nalozi za osoblje dolaze uz paket Academy.",
+      "failed": "Nešto nije u redu. Pokušajte ponovo."
+    }
+  },
+  "heroProduct": {
+    "title": "Popunite terene. Razvijajte klub",
+    "subtitle": "Igrači rezervišu sa telefona, osoblje vodi raspored, stalni igrači čuvaju svoj nedeljni termin. Spremni ste isti dan.",
+    "start": "Započnite besplatan mesec",
+    "seeHow": "Pogledajte kako radi",
+    "phone": {
+      "club": "Riverside Tennis Club",
+      "title": "Rezervišite teren",
+      "court": "Teren {n}",
+      "clay": "Šljaka",
+      "padel": "Padel",
+      "indoor": "U hali",
+      "confirm": "Potvrdi rezervaciju"
+    },
+    "weeklyCard": {
+      "label": "Nedeljna rezervacija",
+      "when": "Svaki {day}, 19:00",
+      "who": "Emma L. · Teren 2",
+      "progress": "Nedelja {week} od {weeks}"
+    },
+    "reminderCard": {
+      "label": "Podsetnik e-poštom",
+      "title": "Vidimo se sutra na terenu",
+      "sent": "Poslato 24 sata ranije"
+    }
+  },
+  "groups": {
+    "title": "Grupe",
+    "new": "Nova grupa",
+    "empty": "Još nema grupa",
+    "emptyHint": "Napravite nedeljne grupe vaših trenera za decu, juniore i odrasle. Kortello drži teren za svaki trening, vodi evidenciju dolazaka i prati mesečne članarine.",
+    "noMatch": "Nijedna grupa ne odgovara ovim filterima.",
+    "stats": {
+      "sessions": "Treninga ove nedelje",
+      "players": "Igrača u grupama",
+      "full": "{n, plural, one {# grupa je puna} few {# grupe su pune} other {# grupa je puno}}",
+      "waiting": "Lista čekanja",
+      "inGroups": "{n, plural, one {u # grupi} few {u # grupe} other {u # grupa}}",
+      "unpaid": "Neplaćeno za {month}"
+    },
+    "tabs": {
+      "all": "Sve",
+      "season": "Sezonske grupe",
+      "dropin": "Slobodni treninzi",
+      "places": "Ima mesta",
+      "archived": "Završene"
+    },
+    "filters": {
+      "coach": "Trener",
+      "anyCoach": "Svi treneri",
+      "day": "Dan",
+      "anyDay": "Svaki dan"
+    },
+    "todayAt": "Danas {time}",
+    "kind": {
+      "season": "Sezonska grupa",
+      "dropin": "Slobodni trening"
+    },
+    "level": {
+      "beginner": "Početnici",
+      "intermediate": "Srednji nivo",
+      "advanced": "Napredni",
+      "all": "Svi nivoi"
+    },
+    "adults": "Odrasli",
+    "ages": "{from}–{to} god.",
+    "agesFrom": "Od {from} god.",
+    "agesTo": "Do {to} god.",
+    "placesOf": "{n} / {max}",
+    "bookedNext": "{n} / {max} prijavljeno za sledeći trening",
+    "full": "Popunjeno",
+    "waitingCount": "{n} čeka",
+    "requestsCount": "{n} zahteva",
+    "placesLeft": "{n, plural, one {Još # mesto} few {Još # mesta} other {Još # mesta}}",
+    "perMonth": "{price} / mesec",
+    "perSession": "{price} / trening",
+    "unpaidCount": "{n} neplaćeno",
+    "allPaid": "Sve plaćeno",
+    "bookEachWeek": "Igrači se prijavljuju svake nedelje",
+    "form": {
+      "back": "Nazad",
+      "editTitle": "Izmena grupe",
+      "create": "Napravi grupu",
+      "save": "Sačuvaj izmene",
+      "saving": "Čuvanje…",
+      "sections": {
+        "group": "Grupa",
+        "when": "Kada i gde",
+        "players": "Igrači i prijave",
+        "price": "Cena"
+      },
+      "name": "Naziv",
+      "namePlaceholder": "npr. Deca 9–12 · Početnici",
+      "sport": "Sport",
+      "coach": "Trener",
+      "noCoach": "Još bez trenera",
+      "level": "Nivo",
+      "ages": "Uzrast",
+      "from": "Od",
+      "to": "Do",
+      "ageFrom": "Najmanji uzrast",
+      "ageTo": "Najveći uzrast",
+      "description": "Opis",
+      "descriptionPlaceholder": "Na čemu će igrači raditi, šta da ponesu…",
+      "kind": "Vrsta grupe",
+      "kindHint": {
+        "season": "Isti igrači svake nedelje. Plaća se mesečno.",
+        "dropin": "Igrači se prijavljuju za svaki trening. Plaća se po treningu."
+      },
+      "kindSeasonLocked": "Sezonska grupa: isti igrači svake nedelje, plaća se mesečno.",
+      "kindDropinLocked": "Slobodni trening: igrači se prijavljuju za svaki trening.",
+      "days": "Dani",
+      "court": "Teren",
+      "starts": "Početak",
+      "ends": "Kraj",
+      "breaks": "Bez treninga",
+      "addBreak": "Dodaj datume",
+      "removeBreak": "Ukloni {name}",
+      "breakName": "Naziv",
+      "breakPlaceholder": "npr. Zimski raspust",
+      "addBreakConfirm": "Dodaj",
+      "cancel": "Otkaži",
+      "maxPlayers": "Najviše igrača",
+      "maxPlayersHint": "Kada je grupa puna, novi igrači idu na listu čekanja.",
+      "maxPerSession": "Mesta po treningu",
+      "maxPerSessionHint": "Prijave se zatvaraju kada je trening popunjen.",
+      "fewer": "Jedan manje",
+      "more": "Jedan više",
+      "onlineSignup": "Prijava preko interneta",
+      "onlineSignupHint": "Prikazuje se na stranici vašeg kluba. Roditelji mogu da prijave dete.",
+      "onlineSignupDropin": "Prikazuje se na stranici vašeg kluba. Igrači rezervišu mesto za svaki trening.",
+      "coachApproves": "Trener odobrava nove igrače",
+      "coachApprovesHint": "{coach} prvo vidi svaki zahtev, da proveri nivo.",
+      "theCoach": "Trener",
+      "trial": "Besplatan probni trening",
+      "trialHint": "Jedan besplatan trening pre upisa, ako ima mesta.",
+      "pricePerMonth": "Cena mesečno",
+      "pricePerSession": "Cena po treningu",
+      "memberPrice": "Cena za članove sa paketom",
+      "memberPlan": "Članski paket",
+      "optional": "Nije obavezno",
+      "paySeason": "Igrači plaćaju klubu direktno, gotovinom ili uplatom na račun. Vi označite svaki mesec kao plaćen, a Kortello do 10. podseti one koji nisu platili.",
+      "payDropin": "Igrači plaćaju na treningu. Trener u evidenciji označi ko je platio.",
+      "summary": "Pregled",
+      "pickDays": "Izaberite dane da vidite treninge.",
+      "checking": "Provera terena…",
+      "sessionsCount": "{n, plural, one {# trening} few {# treninga} other {# treninga}}",
+      "every": "Svaki {days}, {from}–{to}, {court}",
+      "withoutBreaks": "{n, plural, one {bez # pauze} few {bez # pauze} other {bez # pauza}}",
+      "upTo": "Do {n, plural, one {# igrača} few {# igrača} other {# igrača}}",
+      "freeTrial": "Besplatna proba",
+      "allFree": "{court} je slobodan za svaki trening",
+      "freeFor": "Slobodno je {n} od {total} treninga",
+      "clashClosed": "Klub tada ne radi",
+      "clashCourt": "Teren je zauzet: {who}, {time}",
+      "clashCoach": "Trener je zauzet: {who}, {time}",
+      "useCourt": "Koristi {court}, slobodan je",
+      "skipDay": "Preskoči ovaj dan",
+      "skipped": "Preskočeno",
+      "moreClashes": "{n, plural, one {Još # dan se preklapa} few {Još # dana se preklapaju} other {Još # dana se preklapa}}: koristi se drugi slobodan teren ili se dan preskače.",
+      "neverMoved": "Postojeće rezervacije se nikada ne pomeraju niti otkazuju.",
+      "noSessions": "Od danas u ovoj sezoni nema više treninga. Proverite datume.",
+      "noCourtsTitle": "Prvo dodajte teren",
+      "noCourtsBody": "Grupi je potreban teren. Dodajte svoje terene, pa se vratite da napravite grupu.",
+      "addCourt": "Dodaj terene",
+      "errors": {
+        "name": "Dajte grupi naziv (od 2 do 80 znakova).",
+        "days": "Izaberite bar jedan dan.",
+        "times": "Trening mora trajati između 30 minuta i 4 sata.",
+        "dates": "Proverite datume sezone: kraj mora biti posle početka, u roku od 400 dana.",
+        "court": "Izaberite teren.",
+        "players": "Broj mesta mora biti između 1 i 60.",
+        "price": "Cene ne mogu biti negativne.",
+        "ages": "Proverite uzrast: od 3 do 99, prvo manji broj.",
+        "plan": "Grupe su uključene u pakete Club i Academy.",
+        "sessions": "Grupa je sačuvana, ali treninzi nisu napravljeni. Otvorite je i sačuvajte ponovo.",
+        "failed": "Nešto nije u redu. Pokušajte ponovo."
+      }
+    },
+    "detail": {
+      "myGroups": "Moje grupe",
+      "archived": "Završena",
+      "emailParents": "Pošalji e-poštu roditeljima",
+      "edit": "Izmeni grupu",
+      "addPlayer": "Dodaj igrača",
+      "more": "Još",
+      "archive": "Završi grupu",
+      "unarchive": "Ponovo aktiviraj grupu",
+      "archiveConfirm": "Završiti ovu grupu? Budući treninzi se otkazuju i teren se oslobađa. Igrači i istorija ostaju.",
+      "archivedDone": "Grupa je završena. Budući treninzi su otkazani.",
+      "unarchived": "Grupa je ponovo aktivna.",
+      "delete": "Obriši grupu",
+      "deleteConfirm": "Trajno obrisati ovu grupu? Brišu se i igrači, dolasci i članarine. Ako želite da sačuvate istoriju, završite grupu umesto toga.",
+      "dismiss": "Zatvori",
+      "tabs": {
+        "players": "Igrači",
+        "sessions": "Treninzi",
+        "fees": "Članarine",
+        "waiting": "Lista čekanja"
+      },
+      "requests": "{n, plural, one {# zahtev za mesto} few {# zahteva za mesto} other {# zahteva za mesto}}",
+      "accept": "Prihvati",
+      "acceptToWaiting": "Stavi na listu čekanja",
+      "decline": "Odbij",
+      "accepted": "{name} je u grupi.",
+      "toWaiting": "{name} je na listi čekanja.",
+      "declined": "Zahtev za {name} je odbijen.",
+      "feesFor": "Članarine za {month}",
+      "paidOf": "Plaćeno {n} od {of} · {amount} od {total}",
+      "remindUnpaid": "Podseti {n} neplaćenih",
+      "reminded": "{n, plural, =0 {Nijedan podsetnik nije poslat: niko od onih koji nisu platili nema e-poštu.} one {Podsetnik je poslat # roditelju.} few {Podsetnici su poslati # roditelja.} other {Podsetnici su poslati # roditelja.}}",
+      "noPlayers": "Još nema igrača",
+      "noPlayersOnline": "Podelite link za prijavu ili sami dodajte igrače.",
+      "noPlayersHint": "Dodajte igrače koje trener već ima.",
+      "col": {
+        "player": "Igrač",
+        "contact": "Roditelj ili kontakt",
+        "attendance": "Dolasci",
+        "actions": "Radnje",
+        "amount": "Iznos",
+        "status": "Status",
+        "paidOn": "Plaćeno"
+      },
+      "since": "od {date}",
+      "trialOn": "Besplatna proba {date}",
+      "trial": "Besplatna proba",
+      "keep": "Zadrži u grupi",
+      "kept": "{name} je sada u grupi.",
+      "ownAccount": "Ima svoj nalog",
+      "attended": "{n} od {of}",
+      "moreFor": "Još za {name}",
+      "editPlayer": "Izmeni",
+      "moveToWaiting": "Premesti na listu čekanja",
+      "remove": "Ukloni iz grupe",
+      "removeConfirm": "Ukloniti {name} sa spiska?",
+      "removed": "{name} je uklonjen sa spiska.",
+      "removedOffered": "{name} je uklonjen sa spiska. Mesto je ponuđeno listi čekanja.",
+      "paidBy": "Plaćeno · {method}",
+      "method": {
+        "cash": "Gotovina",
+        "bank": "Uplata na račun",
+        "other": "Drugo"
+      },
+      "undoPaid": "Označi kao neplaćeno",
+      "unpaidMark": "Neplaćeno · označi {amount} kao plaćeno",
+      "month": "Mesec",
+      "noFees": "Za ovaj mesec niko nije na spisku.",
+      "feesHint": "Članarine se plaćaju klubu gotovinom ili uplatom. Kortello samo vodi evidenciju.",
+      "leftGroup": "(napustio)",
+      "waitingTitle": "Lista čekanja",
+      "waitingHint": "Kada se mesto oslobodi, sledeći na listi dobija e-poštu i ima 48 sati da prihvati.",
+      "waitingEmpty": "Niko ne čeka.",
+      "offeredUntil": "Mesto ponuđeno · odgovor do {date}",
+      "waitingSince": "Čeka od {date}",
+      "joinedOnline": "prijavljen preko interneta",
+      "addedByClub": "dodao klub",
+      "offerPlace": "Ponudi mesto",
+      "offerSent": "Mesto je ponuđeno igraču {name} e-poštom.",
+      "offerMade": "Mesto je ponuđeno igraču {name}. E-pošta nije poslata, javite mu sami.",
+      "removeFromWaiting": "Ukloni {name}",
+      "requestsOnPlayers": "{n, plural, one {# zahtev čeka} few {# zahteva čekaju} other {# zahteva čeka}} odgovor u",
+      "nextSessions": "Sledeći treninzi",
+      "noUpcoming": "Nema zakazanih treninga.",
+      "noPast": "Još nije bilo treninga.",
+      "todayAt": "Danas {time}",
+      "coming": "{n} dolazi",
+      "bookedOf": "{n} / {max} prijavljeno",
+      "cantCome": "{n} ne dolazi",
+      "register": "Evidencija",
+      "viewRegister": "Evidencija",
+      "setup": "Podešavanja",
+      "season": "Sezona",
+      "sessionsLabel": "Treninzi",
+      "sessionsDone": "{n} · održano {done}",
+      "noSessionsOn": "Bez treninga",
+      "places": "Mesta",
+      "perSessionMax": "{n} po treningu",
+      "onlineSignup": "Prijava preko interneta",
+      "on": "Uključeno",
+      "off": "Isključeno",
+      "onApproval": "Uključeno · trener odobrava",
+      "trialSession": "Besplatan probni trening",
+      "memberPrice": "Cena za članove",
+      "copyLink": "Kopiraj link za prijavu",
+      "copied": "Link je kopiran",
+      "upcoming": "Predstojeći",
+      "past": "Prošli",
+      "cancelled": "Otkazan",
+      "moved": "Pomeren",
+      "noReason": "Razlog nije naveden",
+      "registerSummary": "{here} prisutno · {away} odsutno",
+      "noRegister": "Evidencija nije popunjena",
+      "move": "Pomeri",
+      "cancel": "Otkaži",
+      "restore": "Vrati trening",
+      "restored": "Trening je ponovo zakazan.",
+      "showMore": "Prikaži još {n}",
+      "cancelTitle": "Otkazati {date}?",
+      "cancelBody": "Teren se oslobađa, a {n, plural, =0 {nikoga ne treba obavestiti} one {roditelj ili igrač dobija e-poštu} few {# roditelja i igrača dobijaju e-poštu} other {# roditelja i igrača dobija e-poštu}}.",
+      "reason": "Razlog (nije obavezno)",
+      "reasonPlaceholder": "npr. Kiša, trener je bolestan",
+      "keepSession": "Zadrži",
+      "cancelSession": "Otkaži trening",
+      "working": "Obrada…",
+      "cancelledSent": "Trening je otkazan. {n, plural, one {Poslata je # poruka.} few {Poslate su # poruke.} other {Poslato je # poruka.}}",
+      "cancelledDone": "Trening je otkazan.",
+      "moveTitle": "Pomeri ovaj trening",
+      "date": "Datum",
+      "from": "Od",
+      "to": "Do",
+      "court": "Teren",
+      "moveHint": "Pomera se samo ovaj trening. Teren mora biti slobodan u to vreme.",
+      "close": "Zatvori",
+      "moveSave": "Pomeri trening",
+      "movedDone": "Trening je pomeren.",
+      "noEmails": "Niko na spisku još nema adresu e-pošte.",
+      "emailsCopied": "Kopirano je {n} adresa. Nalepite ih u polje Bcc u svojoj e-pošti.",
+      "saved": "Sačuvano:",
+      "savedCreated": "{n, plural, one {dodat # trening} few {dodata # treninga} other {dodato # treninga}}",
+      "savedRemoved": "uklonjeno {n}",
+      "savedSkipped": "{n, plural, one {preskočen # dan} few {preskočena # dana} other {preskočeno # dana}}",
+      "errors": {
+        "failed": "Nešto nije u redu. Pokušajte ponovo.",
+        "times": "Proverite vreme.",
+        "busy": "Teren ili trener su tada zauzeti.",
+        "past": "To vreme je već prošlo.",
+        "notAllowed": "Ne možete to da uradite za ovu grupu.",
+        "taken": "Teren je u međuvremenu rezervisan, pa trening ne može da se vrati.",
+        "started": "Taj trening je već počeo.",
+        "plan": "Grupe su uključene u pakete Club i Academy.",
+        "sessions": "Sačuvano, ali treninzi nisu ažurirani. Pokušajte ponovo."
+      }
+    },
+    "player": {
+      "addTitle": "Dodaj igrača",
+      "editTitle": "Izmena igrača",
+      "name": "Ime",
+      "age": "Uzrast",
+      "contactName": "Roditelj ili kontakt",
+      "contactPlaceholder": "npr. Claire Martin (prazno za odrasle)",
+      "email": "E-pošta",
+      "phone": "Telefon",
+      "emailHint": "Sa e-poštom roditelj dobija otkazivanja i podsetnike za plaćanje, i vidi grupu kada se prijavi u Kortello sa tom adresom.",
+      "price": "Mesečna cena",
+      "priceHint": "Ostavite prazno za cenu grupe. Korisno za popust za braću i sestre ili za članove.",
+      "notes": "Beleške za trenera",
+      "waiting": "Stavi na listu čekanja",
+      "waitingFull": "Grupa je puna: stavi na listu čekanja",
+      "cancel": "Otkaži",
+      "add": "Dodaj",
+      "save": "Sačuvaj",
+      "saving": "Čuvanje…",
+      "added": "{name} je dodat.",
+      "addedWaiting": "{name} je na listi čekanja.",
+      "saved": "Sačuvano.",
+      "errors": {
+        "playerName": "Unesite ime igrača.",
+        "email": "Proverite adresu e-pošte.",
+        "age": "Uzrast mora biti između 3 i 99 godina.",
+        "price": "Cena ne može biti negativna.",
+        "failed": "Nešto nije u redu. Pokušajte ponovo."
+      }
+    },
+    "register": {
+      "title": "Evidencija",
+      "back": "Nazad",
+      "today": "Danas",
+      "sessionOf": "Trening {n} od {total}",
+      "cancelledNote": "Ovaj trening je otkazan. {reason}",
+      "here": "{n} prisutno",
+      "away": "{n} odsutno",
+      "toMark": "{n} za označavanje",
+      "allHere": "Svi su tu",
+      "noBookings": "Niko se još nije prijavio za ovaj trening.",
+      "noPlayers": "Na spisku još nema nikoga.",
+      "parentSaid": "Roditelj je javio: {reason}",
+      "parentSaidNo": "Roditelj je javio da neće doći",
+      "trial": "Besplatna proba",
+      "unpaid": "Mesec nije plaćen",
+      "guest": "Gost",
+      "guestNew": "Dodat danas",
+      "guestName": "Ime",
+      "add": "Dodaj",
+      "close": "Zatvori",
+      "addGuest": "Dodaj nekoga za danas (proba ili gost)",
+      "addDropin": "Dodaj nekoga ko je došao bez prijave",
+      "note": "Beleška o treningu",
+      "notePlaceholder": "Na čemu ste radili, za roditelje",
+      "noteHint": "Roditelji vide poslednju belešku u Kortellu.",
+      "cancelToday": "Otkaži današnji trening",
+      "cancelThis": "Otkaži ovaj trening",
+      "save": "Sačuvaj evidenciju",
+      "saving": "Čuvanje…",
+      "saved": "Sačuvano",
+      "paid": "Plaćeno",
+      "hereButton": "Tu je",
+      "awayButton": "Nije tu",
+      "removeName": "Ukloni {name}",
+      "errors": {
+        "notAllowed": "Evidenciju mogu da vode samo klub i trener grupe.",
+        "failed": "Nešto nije u redu. Pokušajte ponovo."
+      }
+    }
+  },
+  "myGroups": {
+    "title": "Moje grupe",
+    "subtitle": "Grupe za trening za vas i vašu decu.",
+    "empty": "Još nema grupa",
+    "emptyHint": "Kada trener doda vas ili vaše dete sa vašom e-poštom, ili se prijavite sa stranice kluba, grupa će se pojaviti ovde.",
+    "youCoach": "Grupe koje vodite",
+    "yourPlaces": "Vaše grupe",
+    "dropins": "Prijavljeni slobodni treninzi",
+    "players": "{n} / {max} igrača",
+    "dropinGroup": "Slobodni trening",
+    "waitingOrAsking": "{n} čeka",
+    "registerToday": "Evidencija · danas {time}",
+    "registerNext": "Evidencija · {date}",
+    "nextToday": "Sledeći: danas · {time}",
+    "next": "Sledeći: {date} · {time}",
+    "with": "sa: {coach}",
+    "addedByClub": "Klub je dodao igrača {name} sa vašom e-poštom, zato ovde vidite grupu.",
+    "trialNote": "Besplatan probni trening je zakazan. Posle njega trener će razgovarati sa vama o upisu.",
+    "requested": "Čeka se da {coach} potvrdi mesto.",
+    "theCoach": "trener",
+    "waiting": "Na listi čekanja od {date}. Dobićete e-poštu kada se oslobodi mesto.",
+    "offered": "Oslobodilo se mesto! Odgovorite do {date}.",
+    "answer": "Odgovori",
+    "noSession": "Nema treninga",
+    "notComing": "{name} ne dolazi",
+    "canComeAfterAll": "Ipak dolazi",
+    "cantCome": "{name} ne može da dođe",
+    "cameTo": "Dolasci",
+    "cameOf": "{n} od {of}",
+    "paid": "Plaćeno",
+    "notPaid": "Još nije plaćeno",
+    "schedule": "Raspored",
+    "payClub": "Platite klubu ili treneru gotovinom ili uplatom na račun.",
+    "payClubPhone": "Platite klubu ili treneru gotovinom ili uplatom na račun. Pitanja? {phone}",
+    "fromCoach": "Od: {coach} · {date}",
+    "moreAt": "Još grupa u klubu {club}",
+    "leave": "Napusti grupu",
+    "leaveWaiting": "Napusti listu čekanja",
+    "leaveConfirm": "Ukloniti {name} iz grupe {group}? Mesto ide sledećem na listi čekanja.",
+    "leaveWaitingConfirm": "Ukloniti {name} sa liste čekanja?",
+    "unbook": "Otkaži",
+    "unbookConfirm": "Osloboditi vaše mesto na ovom treningu?",
+    "errors": {
+      "notAllowed": "Ne možete to da uradite za ovog igrača.",
+      "started": "Taj trening je već počeo.",
+      "failed": "Nešto nije u redu. Pokušajte ponovo."
+    }
+  },
+  "groupSignup": {
+    "title": "Grupe i treninzi",
+    "subtitle": "Nedeljne grupe sa trenerima kluba. Prijavite se preko interneta.",
+    "dropin": "Slobodni trening",
+    "with": "sa: {coach}",
+    "perMonth": "/ mesec",
+    "perSession": "/ trening",
+    "full": "Popunjeno",
+    "fullWaiting": "Popunjeno · {n} čeka",
+    "placesLeft": "{n, plural, one {Još # mesto} few {Još # mesta} other {Još # mesta}}",
+    "signInToJoin": "Prijavite se da biste se upisali",
+    "signIn": "Prijava",
+    "join": "Upiši se",
+    "joinWaiting": "Stavi me na listu čekanja",
+    "askToJoin": "Zatraži mesto",
+    "tryFree": "Probaj besplatno",
+    "noSessions": "Nema zakazanih treninga.",
+    "booked": "Prijavljeno · otkaži",
+    "book": "Prijavi se",
+    "joinTitle": "Upis u grupu {group}",
+    "trialTitle": "Besplatan trening u grupi {group}",
+    "fullNote": "Grupa je puna. Bićete na listi čekanja i dobićete e-poštu kada se oslobodi mesto.",
+    "approveNote": "Trener potvrđuje svakog novog igrača, uskoro ćete dobiti odgovor.",
+    "trialNote": "Dođite besplatno na sledeći trening. Ako vam se dopadne, trener vas dodaje u grupu.",
+    "joinNote": "Odmah ste upisani. Klub će vam javiti kako da platite.",
+    "who": "Za koga je?",
+    "me": "Za mene",
+    "myChild": "Za moje dete",
+    "yourName": "Vaše ime",
+    "childName": "Ime deteta",
+    "age": "Uzrast",
+    "phone": "Telefon (nije obavezno)",
+    "contactNote": "Klub koristi e-poštu vašeg naloga za otkazivanja i podsetnike.",
+    "cancel": "Otkaži",
+    "sending": "Slanje…",
+    "bookTrial": "Zakaži besplatan trening",
+    "seeMyGroups": "Pogledaj moje grupe",
+    "done": {
+      "active": "{name} je u grupi {group}.",
+      "trial": "Besplatan trening za {name} u grupi {group} je zakazan.",
+      "requested": "Zahtev je poslat. Trener će potvrditi mesto za {name} u grupi {group}.",
+      "waiting": "{name} je na listi čekanja za grupu {group}."
+    },
+    "errors": {
+      "notSignedIn": "Prvo se prijavite.",
+      "confirmEmail": "Prvo potvrdite svoju adresu e-pošte: proverite poštu.",
+      "already": "Već je upisan u ovu grupu.",
+      "age": "Ova grupa je za uzrast od {from} do {to} godina.",
+      "full": "Nažalost, grupa se upravo popunila.",
+      "closed": "Ovde prijava preko interneta nije otvorena.",
+      "name": "Unesite ime.",
+      "notAllowed": "Ne možete to da uradite.",
+      "failed": "Nešto nije u redu. Pokušajte ponovo."
+    }
+  },
+  "groupOffer": {
+    "title": "Mesto za: {name}",
+    "intro": "Oslobodilo se mesto u grupi {group}.",
+    "group": "Grupa",
+    "when": "Kada",
+    "price": "Cena",
+    "perMonth": "{price} / mesec",
+    "answerBy": "Odgovorite do {date}. Posle toga mesto ide sledećem na listi.",
+    "accept": "Da, uzimam mesto",
+    "decline": "Ne, hvala",
+    "questions": "Pitanja? Pozovite klub na {phone}.",
+    "acceptedTitle": "Vidimo se na terenu!",
+    "acceptedBody": "{name} je sada u grupi {group}. Klub će vam javiti kako da platite.",
+    "declinedTitle": "Hvala što ste javili",
+    "declinedBody": "Mesto ide sledećem na listi čekanja.",
+    "closedTitle": "Ova ponuda je zatvorena",
+    "closedBody": "Na nju je već odgovoreno, ili mesta više nema.",
+    "expiredBody": "Prošlo je 48 sati i mesto je otišlo sledećem. Za ponovni upis obratite se klubu {club}.",
+    "toClub": "Idi na {club}",
+    "errors": {
+      "closed": "Ova ponuda je zatvorena.",
+      "expired": "Ova ponuda je istekla.",
+      "failed": "Nešto nije u redu. Pokušajte ponovo."
+    }
+  },
+  "notifications": {
+    "title": "Obaveštenja",
+    "bell": "{n, plural, =0 {Obaveštenja} other {Obaveštenja, nepročitano: #}}",
+    "markAllRead": "Označi sve kao pročitano",
+    "all": "Sva",
+    "unread": "Nepročitana",
+    "seeAll": "Pogledaj sva obaveštenja",
+    "empty": "Ovde još nema ničega.",
+    "emptyUnread": "Sve ste pročitali.",
+    "today": "Danas",
+    "earlier": "Ranije",
+    "kept": "Obaveštenja se čuvaju 60 dana.",
+    "loadMore": "Prikaži još",
+    "justNow": "upravo sada",
+    "yesterday": "Juče, {time}",
+    "unreadDot": "Nepročitano",
+    "filters": {
+      "bookings": "Rezervacije",
+      "members": "Članovi",
+      "tournaments": "Turniri",
+      "membership": "Članstvo",
+      "groups": "Grupe"
+    },
+    "settings": {
+      "title": "Šta dobijate",
+      "hintClub": "Samo za vas. Osoblje bira za sebe. E-poruke igračima se ne menjaju.",
+      "hintPlayer": "Samo za vas. E-poruke iz kluba se ne menjaju.",
+      "alwaysOn": "Uvek uključeno",
+      "saveFailed": "Čuvanje nije uspelo. Pokušajte ponovo.",
+      "plan": {
+        "title": "Vaš Kortello paket",
+        "desc": "Podsetnici za probu i plaćanje"
+      },
+      "admin": {
+        "bookings": {
+          "title": "Nove rezervacije",
+          "desc": "Kada igrač rezerviše teren onlajn"
+        },
+        "lessons": {
+          "title": "Časovi",
+          "desc": "Kada igrač rezerviše nekog od vaših trenera"
+        },
+        "cancellations": {
+          "title": "Otkazivanja",
+          "desc": "Kada igrač otkaže rezervaciju ili čas"
+        },
+        "tournaments": {
+          "title": "Prijave za turnire",
+          "desc": "Kada se neko prijavi ili odjavi sa turnira"
+        },
+        "members": {
+          "title": "Članstva koja ističu",
+          "desc": "Jedan pregled dnevno, nedelju dana ranije"
+        },
+        "staff": {
+          "title": "Osoblje",
+          "desc": "Kada neko prihvati vaš poziv"
+        },
+        "groups": {
+          "title": "Grupe",
+          "desc": "Prijave, odgovori sa liste čekanja i najavljeni izostanci"
+        }
+      },
+      "member": {
+        "club_changes": {
+          "title": "Izmene od strane kluba",
+          "desc": "Kada klub rezerviše ili otkaže za vas"
+        },
+        "reminders": {
+          "title": "Podsetnici",
+          "desc": "Dan pre nego što igrate"
+        },
+        "tournaments": {
+          "title": "Turniri",
+          "desc": "Kada izađe žreb"
+        },
+        "membership": {
+          "title": "Članstvo",
+          "desc": "Nedelju dana pre isteka"
+        },
+        "groups": {
+          "title": "Grupe",
+          "desc": "Otkazani treninzi, ponuđena mesta, podsetnici za plaćanje"
+        }
+      }
+    },
+    "kinds": {
+      "someone": "Neko",
+      "lessonWith": "Čas sa: {coach}",
+      "unknown": "Obaveštenje",
+      "places": "Popunjeno {count} od {max} mesta",
+      "booking_new": {
+        "title": "<b>{who}</b> je rezervisao {court}"
+      },
+      "lesson_new": {
+        "title": "<b>{who}</b> je rezervisao čas kod trenera {coach}",
+        "court": "{court} je zadržan"
+      },
+      "booking_cancelled": {
+        "court": "<b>{who}</b> je otkazao {court}",
+        "lesson": "<b>{who}</b> je otkazao čas kod trenera {coach}",
+        "free": "termin je ponovo slobodan"
+      },
+      "tournament_joined": {
+        "title": "<b>{name}</b> se prijavio za {tournament}"
+      },
+      "tournament_left": {
+        "title": "<b>{name}</b> se odjavio sa turnira {tournament}"
+      },
+      "members_ending": {
+        "title": "{count, plural, one {<b># članstvo</b> ističe} few {<b># članstva</b> ističu} other {<b># članstava</b> ističe}} u narednih 7 dana",
+        "more": "{names} i još {n}"
+      },
+      "staff_joined": {
+        "title": "<b>{email}</b> je prihvatio poziv za osoblje"
+      },
+      "trial_ending": {
+        "title": "Vaša besplatna proba ističe za <b>{days, plural, =0 {manje od dan} one {# dan} few {# dana} other {# dana}}</b>",
+        "detail": "Izaberite paket da sve nastavi da radi"
+      },
+      "trial_ended": {
+        "title": "Vaša besplatna proba je <b>istekla</b>",
+        "detail": "Izaberite paket da nastavite da koristite Kortello"
+      },
+      "club_booked": {
+        "title": "<b>{club}</b> je rezervisao teren za vas",
+        "weekly": "svake nedelje"
+      },
+      "club_cancelled": {
+        "title": "<b>{club}</b> je otkazao vašu rezervaciju",
+        "phone": "Pitanja? Pozovite klub na {phone}"
+      },
+      "reminder": {
+        "title": "Uskoro: <b>{what}</b>"
+      },
+      "draw": {
+        "title": "Izašao je žreb za <b>{tournament}</b>",
+        "opponent": "Vaš prvi meč: protiv {opponent}",
+        "bye": "Direktno prolazite u drugo kolo"
+      },
+      "membership_ending": {
+        "plan": "Vaše <b>{plan}</b> članstvo ističe {days, plural, =0 {danas} one {za # dan} few {za # dana} other {za # dana}}",
+        "noPlan": "Vaše članstvo ističe <b>{days, plural, =0 {danas} one {za # dan} few {za # dana} other {za # dana}}</b>",
+        "detail": "Zamolite klub da ga obnovi"
+      },
+      "group_signup": {
+        "active": "<b>{name}</b> se upisao u grupu {group}",
+        "trial": "<b>{name}</b> je zakazao besplatan trening u grupi {group}",
+        "requested": "<b>{name}</b> traži mesto u grupi {group}",
+        "waiting": "<b>{name}</b> je na listi čekanja za grupu {group}",
+        "booked": "<b>{name}</b> se prijavio za trening grupe {group}"
+      },
+      "group_left": {
+        "title": "<b>{name}</b> je napustio grupu {group}"
+      },
+      "group_offer_answer": {
+        "yes": "<b>{name}</b> je prihvatio mesto u grupi {group}",
+        "no": "<b>{name}</b> je odbio mesto u grupi {group}",
+        "next": "Mesto ide sledećem na listi čekanja"
+      },
+      "group_absence": {
+        "title": "<b>{name}</b> ne može da dođe na trening grupe {group}"
+      },
+      "group_cancelled": {
+        "title": "Trening grupe <b>{group}</b> je otkazan"
+      },
+      "group_added": {
+        "title": "<b>{name}</b> je dodat u grupu {group}"
+      },
+      "group_offer": {
+        "title": "Oslobodilo se mesto u grupi <b>{group}</b> za: {name}",
+        "until": "Odgovorite do {date}"
+      },
+      "group_fee_due": {
+        "title": "Članarina za <b>{month}</b> u grupi {group} još nije plaćena"
+      }
+    }
+  }
+}

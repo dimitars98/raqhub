@@ -20,6 +20,7 @@ import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import { format } from "date-fns";
 import type { Tournament } from "@/types/database";
+import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
 
 // The public page of one club: what a visitor sees before they have an account.
 // Everything read here is allowed for logged-out visitors by the database
@@ -115,6 +116,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
     {
       data: { user },
     },
+    { data: groupsData },
   ] = await Promise.all([
     supabase
       .from("courts")
@@ -144,7 +146,10 @@ export default async function ClubPublicPage({ params }: PageProps) {
       .order("starts_on")
       .limit(6),
     supabase.auth.getUser(),
+    // Groups and drop-in clinics open to sign up online.
+    supabase.rpc("public_groups", { p_club: club.id }),
   ]);
+  const groups = (groupsData ?? []) as unknown as PublicGroup[];
 
   const courts = (courtsData ?? []) as unknown as PublicCourt[];
   const coaches = (coachesData ?? []) as unknown as PublicCoach[];
@@ -154,17 +159,20 @@ export default async function ClubPublicPage({ params }: PageProps) {
     "id" | "name" | "sport" | "starts_on" | "status"
   >[];
   const tTour = await getTranslations("tournaments");
-  const dfLocale = dateLocale(await getLocale());
+  const locale = await getLocale();
+  const dfLocale = dateLocale(locale);
 
   // Who is looking decides which button they get.
   let viewer: Viewer = "visitor";
+  let myName: string | null = null;
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("role")
+      .select("role, full_name")
       .eq("id", user.id)
       .maybeSingle();
     const role = (profile as Pick<Profile, "role"> | null)?.role;
+    myName = (profile as Pick<Profile, "full_name"> | null)?.full_name ?? null;
     viewer = role === "club_admin" || role === "super_admin" ? "admin" : "player";
   }
 
@@ -324,6 +332,16 @@ export default async function ClubPublicPage({ params }: PageProps) {
             </div>
           )}
         </section>
+
+        {/* Groups and clinics: only shown when the club has any open */}
+        {groups.length > 0 && (
+          <ClubGroups
+            groups={groups}
+            viewer={viewer}
+            myName={myName}
+            loginHref={`/login?redirectTo=${encodeURIComponent(`/${locale}/clubs/${club.slug}#groups`)}`}
+          />
+        )}
 
         {/* Tournaments: only shown when the club has any coming up */}
         {tournaments.length > 0 && (

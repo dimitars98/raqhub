@@ -100,14 +100,17 @@ function Field({
   label,
   children,
   required,
+  htmlFor,
 }: {
   label: string;
   children: React.ReactNode;
   required?: boolean;
+  /** The id of the input, so the label names it. */
+  htmlFor?: string;
 }) {
   return (
     <div>
-      <label className="text-xs text-ink-400 mb-1 block">
+      <label htmlFor={htmlFor} className="text-xs text-ink-400 mb-1 block">
         {label}
         {required && <span className="text-red-400 ml-0.5">*</span>}
       </label>

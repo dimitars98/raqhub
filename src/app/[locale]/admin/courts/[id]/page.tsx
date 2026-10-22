@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import type { Booking, Court, Member, Profile } from "@/types/database";
 import { getLabels } from "@/lib/getLabels";
+import { intlLocale } from "@/lib/dateLocale";
 import { BADGE, bookingStatusTone } from "@/lib/badges";
 
 type CourtWithClub = Court & {
@@ -27,7 +28,7 @@ export default async function AdminCourtPage({
   const labels = await getLabels();
   const locale = await getLocale();
   const fmt = (value: string, options: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(locale, { timeZone: "Europe/Skopje", ...options }).format(
+    new Intl.DateTimeFormat(intlLocale(locale), { timeZone: "Europe/Skopje", ...options }).format(
       new Date(value),
     );
 

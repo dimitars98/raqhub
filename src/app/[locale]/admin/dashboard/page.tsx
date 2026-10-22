@@ -110,6 +110,7 @@ export default async function AdminDashboardPage() {
           "id, status, total_price, starts_at, ends_at, duration_min, walk_in_name, member:members(full_name), court:courts!inner(id, name, club_id)",
         )
         .eq("court.club_id", club.id)
+        .is("group_id", null)
         .gte("starts_at", todayStart)
         .lte("starts_at", todayEnd)
         .neq("status", "cancelled"),
@@ -120,6 +121,7 @@ export default async function AdminDashboardPage() {
         .from("bookings")
         .select("id, total_price, starts_at, court:courts!inner(id, club_id)")
         .eq("court.club_id", club.id)
+        .is("group_id", null)
         .gte("starts_at", weekStart)
         .lte("starts_at", weekEnd)
         .neq("status", "cancelled"),
@@ -130,6 +132,7 @@ export default async function AdminDashboardPage() {
         .from("bookings")
         .select("id, total_price, court:courts!inner(id, club_id)")
         .eq("court.club_id", club.id)
+        .is("group_id", null)
         .gte("starts_at", prevWeekStart)
         .lte("starts_at", prevWeekEnd)
         .neq("status", "cancelled"),
@@ -160,6 +163,7 @@ export default async function AdminDashboardPage() {
           "id, starts_at, ends_at, status, total_price, walk_in_name, reference, duration_min, member:members(full_name), court:courts!inner(id, name, club_id)",
         )
         .eq("court.club_id", club.id)
+        .is("group_id", null)
         .order("created_at", { ascending: false })
         .limit(8),
     ),

@@ -26,6 +26,10 @@ export function localeForCountry(country: string | null | undefined): Locale {
       return "fr";
     case "IT":
       return "it";
+    case "RS":
+    case "ME":
+    case "BA":
+      return "sr";
     default:
       return routing.defaultLocale;
   }

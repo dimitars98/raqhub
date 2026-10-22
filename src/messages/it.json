@@ -334,7 +334,9 @@
       "share": "Condividi con i giocatori",
       "owner": "Club e pagamenti",
       "tournaments": "Tornei",
-      "staff": "Staff"
+      "staff": "Staff",
+      "notifications": "Notifiche",
+      "groups": "Gruppi"
     },
     "share": "Condividi",
     "ownerGroup": "Kortello",
@@ -343,21 +345,21 @@
     "staff": "Staff",
     "manageClub": "Gestisci il club",
     "superAdmin": "Super admin",
-    "clubAdmin": "Admin"
+    "clubAdmin": "Admin",
+    "groups": "Gruppi",
+    "myGroups": "I miei gruppi"
   },
   "members": {
     "title": "Soci",
-    "total": "{count} totale",
     "addMember": "Aggiungi socio",
     "searchPlaceholder": "Cerca per nome, e-mail o telefono...",
     "noResults": "Nessun socio corrisponde alla tua ricerca.",
     "noMembers": "Nessun socio ancora. Aggiungi il primo.",
     "columns": {
-      "name": "Nome",
-      "contact": "Contatto",
       "plan": "Piano",
       "status": "Stato",
-      "expires": "Scade il"
+      "expires": "Scade il",
+      "member": "Socio"
     },
     "actions": {
       "edit": "Modifica",
@@ -383,6 +385,51 @@
       "saveBtn": "Salva modifiche",
       "addBtn": "Aggiungi socio",
       "saving": "Salvataggio…"
+    },
+    "export": "Esporta",
+    "tabs": {
+      "all": "Tutti",
+      "active": "Attivi",
+      "ending": "In scadenza",
+      "expired": "Scaduti",
+      "cancelled": "Annullati"
+    },
+    "filters": {
+      "plan": "Piano",
+      "allPlans": "Tutti i piani",
+      "ends": "Scadenza",
+      "anyTime": "Qualsiasi",
+      "within": "Entro {days} giorni",
+      "show": "Mostra"
+    },
+    "inDays": "{n, plural, =0 {oggi} one {tra # giorno} other {tra # giorni}}",
+    "daysAgo": "{n, plural, one {# giorno fa} other {# giorni fa}}",
+    "showing": "{from}–{to} di {total}",
+    "prevPage": "Pagina precedente",
+    "nextPage": "Pagina successiva",
+    "bulk": {
+      "selected": "{n, plural, one {# selezionato} other {# selezionati}}",
+      "clear": "Deseleziona",
+      "selectPage": "Seleziona tutti in questa pagina",
+      "selectRow": "Seleziona {name}",
+      "email": "Email",
+      "extend": "Rinnova",
+      "extendBy": "{months, plural, =12 {Di 1 anno} one {Di # mese} other {Di # mesi}}",
+      "extendHint": "Dalla data di scadenza di ogni socio, o da oggi se è già passata. L’abbonamento torna attivo.",
+      "changePlan": "Cambia piano",
+      "cancel": "Annulla",
+      "confirmCancel": "{n, plural, one {Annullare # abbonamento?} other {Annullare # abbonamenti?}}",
+      "confirmYes": "Sì, annulla",
+      "confirmNo": "Mantieni",
+      "extended": "{n, plural, one {# abbonamento rinnovato.} other {# abbonamenti rinnovati.}}",
+      "planChanged": "{n, plural, one {Piano cambiato per # socio.} other {Piano cambiato per # soci.}}",
+      "cancelled": "{n, plural, one {# abbonamento annullato.} other {# abbonamenti annullati.}}",
+      "noEmails": "Nessuno dei soci selezionati ha un indirizzo email.",
+      "withoutEmail": "{n, plural, one {# senza indirizzo email è stato escluso.} other {# senza indirizzo email sono stati esclusi.}}",
+      "emailOpened": "{n, plural, one {Aperta la tua app email con # indirizzo in Ccn.} other {Aperta la tua app email con # indirizzi in Ccn.}}",
+      "emailsCopied": "{n} indirizzi email copiati. Incollali nel campo Ccn di una nuova email.",
+      "failed": "Qualcosa è andato storto. Riprova.",
+      "dismiss": "Chiudi"
     }
   },
   "adminCoaches": {
@@ -627,6 +674,24 @@
       "screens": "Vedere il calendario, gestire prenotazioni e soci",
       "button": "Apri Kortello",
       "footer": "Ricevete questa e-mail perché {club} ha aggiunto questo indirizzo al suo staff su Kortello. Se non li conoscete, potete ignorarla."
+    },
+    "groups": {
+      "group": "Gruppo",
+      "player": "Giocatore",
+      "reason": "Motivo",
+      "schedule": "Quando",
+      "answerBy": "Risposta entro",
+      "month": "Mese",
+      "open": "Apri Kortello",
+      "cancelledSubject": "Cancellata: {group}, {date}",
+      "cancelledIntro": "La lezione di {group} di {date} è cancellata. Le altre lezioni si svolgono come sempre.",
+      "offerSubject": "C'è un posto libero in {group}",
+      "offerIntro": "Bella notizia: si è liberato un posto per {name} in {group} da {club}. Resta riservato per 48 ore.",
+      "offerButton": "Rispondi all'offerta",
+      "offerFooter": "Ricevi questa email perché sei nella lista d'attesa di {club} su Kortello.",
+      "feeSubject": "{group}: quota di {month}",
+      "feeIntro": "Un promemoria: la quota di {month} di {name} per {group} non risulta ancora pagata.",
+      "feeFooter": "Inviata da Kortello per conto di {club}. Hai già pagato? Allora non devi fare nulla: il club lo segnerà."
     }
   },
   "billing": {
@@ -653,7 +718,8 @@
       "reminders": "Email di promemoria",
       "weeklyReport": "Report settimanale",
       "analytics": "Statistiche",
-      "staff": "Account staff"
+      "staff": "Account staff",
+      "groups": "Gruppi di allenamento"
     },
     "planNames": {
       "starter": "Starter",
@@ -922,6 +988,7 @@
           "Tutto di Starter",
           "Abbonamenti con sconti",
           "Maestri e lezioni",
+          "Gruppi di allenamento con registro e quote",
           "Email di promemoria",
           "Report settimanale"
         ]
@@ -976,7 +1043,7 @@
       },
       "languages": {
         "q": "In quali lingue è disponibile?",
-        "a": "Inglese, macedone, albanese, tedesco, francese e italiano. Ognuno sceglie la propria lingua, quindi staff e giocatori possono usarne di diverse."
+        "a": "Inglese, macedone, serbo, albanese, tedesco, francese e italiano. Ognuno sceglie la propria lingua, quindi staff e giocatori possono usarne di diverse."
       },
       "data": {
         "q": "Cosa succede ai nostri dati se smettiamo di usare Kortello?",
@@ -1116,7 +1183,9 @@
     "today": "Oggi",
     "noBookings": "Nessuna prenotazione in questo giorno.",
     "noCourtsHint": "Aggiungi il tuo primo campo: comparirà qui come colonna, pronto per le prenotazioni.",
-    "lessonWith": "Lezione con {coach}"
+    "lessonWith": "Lezione con {coach}",
+    "group": "Gruppo",
+    "groupWith": "con {coach}"
   },
   "common": {
     "closeMenu": "Chiudi menu",
@@ -1721,6 +1790,690 @@
       "label": "E-mail di promemoria",
       "title": "Ci vediamo in campo domani",
       "sent": "Inviata 24 ore prima"
+    }
+  },
+  "groups": {
+    "title": "Gruppi",
+    "new": "Nuovo gruppo",
+    "empty": "Ancora nessun gruppo",
+    "emptyHint": "Crea i gruppi settimanali dei tuoi maestri per bambini, ragazzi e adulti. Kortello tiene il campo per ogni lezione, gestisce il registro presenze e segue le quote mensili.",
+    "noMatch": "Nessun gruppo corrisponde a questi filtri.",
+    "stats": {
+      "sessions": "Lezioni questa settimana",
+      "players": "Giocatori nei gruppi",
+      "full": "{n, plural, one {# gruppo pieno} other {# gruppi pieni}}",
+      "waiting": "Lista d'attesa",
+      "inGroups": "{n, plural, one {in # gruppo} other {in # gruppi}}",
+      "unpaid": "Quote di {month} non pagate"
+    },
+    "tabs": {
+      "all": "Tutti",
+      "season": "Gruppi stagionali",
+      "dropin": "Lezioni libere",
+      "places": "Con posti liberi",
+      "archived": "Conclusi"
+    },
+    "filters": {
+      "coach": "Maestro",
+      "anyCoach": "Tutti i maestri",
+      "day": "Giorno",
+      "anyDay": "Ogni giorno"
+    },
+    "todayAt": "Oggi {time}",
+    "kind": {
+      "season": "Gruppo stagionale",
+      "dropin": "Lezione libera"
+    },
+    "level": {
+      "beginner": "Principianti",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzato",
+      "all": "Tutti i livelli"
+    },
+    "adults": "Adulti",
+    "ages": "{from}–{to} anni",
+    "agesFrom": "Da {from} anni",
+    "agesTo": "Fino a {to} anni",
+    "placesOf": "{n} / {max}",
+    "bookedNext": "{n} / {max} prenotati per la prossima lezione",
+    "full": "Pieno",
+    "waitingCount": "{n} in attesa",
+    "requestsCount": "{n} richieste",
+    "placesLeft": "{n, plural, one {# posto libero} other {# posti liberi}}",
+    "perMonth": "{price} / mese",
+    "perSession": "{price} / lezione",
+    "unpaidCount": "{n} non pagate",
+    "allPaid": "Tutti in regola",
+    "bookEachWeek": "I giocatori prenotano ogni settimana",
+    "form": {
+      "back": "Indietro",
+      "editTitle": "Modifica gruppo",
+      "create": "Crea gruppo",
+      "save": "Salva modifiche",
+      "saving": "Salvataggio…",
+      "sections": {
+        "group": "Il gruppo",
+        "when": "Quando e dove",
+        "players": "Giocatori e iscrizioni",
+        "price": "Prezzo"
+      },
+      "name": "Nome",
+      "namePlaceholder": "es. Bambini 9–12 · Principianti",
+      "sport": "Sport",
+      "coach": "Maestro",
+      "noCoach": "Ancora senza maestro",
+      "level": "Livello",
+      "ages": "Età",
+      "from": "Da",
+      "to": "A",
+      "ageFrom": "Età minima",
+      "ageTo": "Età massima",
+      "description": "Descrizione",
+      "descriptionPlaceholder": "Su cosa lavoreranno i giocatori, cosa portare…",
+      "kind": "Tipo di gruppo",
+      "kindHint": {
+        "season": "Gli stessi giocatori ogni settimana. Pagamento mensile.",
+        "dropin": "I giocatori prenotano ogni lezione. Pagamento a lezione."
+      },
+      "kindSeasonLocked": "Un gruppo stagionale: gli stessi giocatori ogni settimana, pagamento mensile.",
+      "kindDropinLocked": "Una lezione libera: i giocatori prenotano ogni lezione.",
+      "days": "Giorni",
+      "court": "Campo",
+      "starts": "Inizio",
+      "ends": "Fine",
+      "breaks": "Niente lezioni il",
+      "addBreak": "Aggiungi date",
+      "removeBreak": "Rimuovi {name}",
+      "breakName": "Nome",
+      "breakPlaceholder": "es. Vacanze di Natale",
+      "addBreakConfirm": "Aggiungi",
+      "cancel": "Annulla",
+      "maxPlayers": "Numero massimo di giocatori",
+      "maxPlayersHint": "Quando è pieno, i nuovi entrano in lista d'attesa.",
+      "maxPerSession": "Posti per lezione",
+      "maxPerSessionHint": "Le prenotazioni si chiudono quando una lezione è piena.",
+      "fewer": "Uno in meno",
+      "more": "Uno in più",
+      "onlineSignup": "Iscrizione online",
+      "onlineSignupHint": "Visibile nella pagina del tuo club. I genitori possono iscrivere un figlio.",
+      "onlineSignupDropin": "Visibile nella pagina del tuo club. I giocatori prenotano un posto per ogni lezione.",
+      "coachApproves": "Il maestro approva i nuovi giocatori",
+      "coachApprovesHint": "{coach} vede prima ogni richiesta, per controllare il livello.",
+      "theCoach": "Il maestro",
+      "trial": "Lezione di prova gratuita",
+      "trialHint": "Una lezione gratuita prima di iscriversi, se c'è posto.",
+      "pricePerMonth": "Prezzo al mese",
+      "pricePerSession": "Prezzo a lezione",
+      "memberPrice": "Prezzo per i soci con un piano",
+      "memberPlan": "Piano soci",
+      "optional": "Facoltativo",
+      "paySeason": "I giocatori pagano direttamente il club, in contanti o con bonifico. Tu segni ogni mese come pagato e Kortello ricorda a chi non ha pagato entro il 10.",
+      "payDropin": "I giocatori pagano alla lezione. Il maestro segna nel registro chi ha pagato.",
+      "summary": "Riepilogo",
+      "pickDays": "Scegli i giorni per vedere le lezioni.",
+      "checking": "Controllo del campo…",
+      "sessionsCount": "{n, plural, one {# lezione} other {# lezioni}}",
+      "every": "Ogni {days}, {from}–{to}, {court}",
+      "withoutBreaks": "{n, plural, one {senza # pausa} other {senza # pause}}",
+      "upTo": "Fino a {n, plural, one {# giocatore} other {# giocatori}}",
+      "freeTrial": "Prova gratuita",
+      "allFree": "{court} è libero per ogni lezione",
+      "freeFor": "{n} lezioni su {total} sono libere",
+      "clashClosed": "Il club è chiuso in quell'orario",
+      "clashCourt": "Il campo è occupato: {who}, {time}",
+      "clashCoach": "Il maestro è occupato: {who}, {time}",
+      "useCourt": "Usa {court}, è libero",
+      "skipDay": "Salta questo giorno",
+      "skipped": "Saltato",
+      "moreClashes": "{n, plural, one {Ancora # giorno} other {Ancora # giorni}} con sovrapposizione: si usa un altro campo libero o il giorno viene saltato.",
+      "neverMoved": "Le prenotazioni esistenti non vengono mai spostate né cancellate.",
+      "noSessions": "Da oggi non restano lezioni in questa stagione. Controlla le date.",
+      "noCourtsTitle": "Aggiungi prima un campo",
+      "noCourtsBody": "Un gruppo ha bisogno di un campo. Aggiungi i tuoi campi e poi torna a creare il gruppo.",
+      "addCourt": "Aggiungi campi",
+      "errors": {
+        "name": "Dai un nome al gruppo (da 2 a 80 caratteri).",
+        "days": "Scegli almeno un giorno.",
+        "times": "Una lezione deve durare tra 30 minuti e 4 ore.",
+        "dates": "Controlla le date della stagione: la fine deve venire dopo l'inizio, entro 400 giorni.",
+        "court": "Scegli un campo.",
+        "players": "I posti devono essere tra 1 e 60.",
+        "price": "I prezzi non possono essere negativi.",
+        "ages": "Controlla le età: da 3 a 99, prima la più bassa.",
+        "plan": "I gruppi sono inclusi nei piani Club e Academy.",
+        "sessions": "Il gruppo è salvato, ma le lezioni non sono state create. Aprilo e salva di nuovo.",
+        "failed": "Qualcosa è andato storto. Riprova."
+      }
+    },
+    "detail": {
+      "myGroups": "I miei gruppi",
+      "archived": "Concluso",
+      "emailParents": "Email ai genitori",
+      "edit": "Modifica gruppo",
+      "addPlayer": "Aggiungi giocatore",
+      "more": "Altro",
+      "archive": "Concludi il gruppo",
+      "unarchive": "Riattiva il gruppo",
+      "archiveConfirm": "Concludere questo gruppo? Le lezioni future vengono cancellate e il campo si libera. I giocatori e lo storico restano.",
+      "archivedDone": "Gruppo concluso. Le lezioni future sono cancellate.",
+      "unarchived": "Gruppo riattivato.",
+      "delete": "Elimina il gruppo",
+      "deleteConfirm": "Eliminare definitivamente questo gruppo? Vengono eliminati anche giocatori, presenze e quote. Per tenere lo storico, concludi il gruppo invece.",
+      "dismiss": "Chiudi",
+      "tabs": {
+        "players": "Giocatori",
+        "sessions": "Lezioni",
+        "fees": "Quote",
+        "waiting": "Lista d'attesa"
+      },
+      "requests": "{n, plural, one {# richiesta di posto} other {# richieste di posto}}",
+      "accept": "Accetta",
+      "acceptToWaiting": "Metti in lista d'attesa",
+      "decline": "Rifiuta",
+      "accepted": "{name} è nel gruppo.",
+      "toWaiting": "{name} è in lista d'attesa.",
+      "declined": "La richiesta di {name} è stata rifiutata.",
+      "feesFor": "Quote di {month}",
+      "paidOf": "{n} su {of} pagate · {amount} su {total}",
+      "remindUnpaid": "Ricorda {n} non pagate",
+      "reminded": "{n, plural, =0 {Nessun promemoria inviato: nessuno tra chi non ha pagato ha un'email.} one {Promemoria inviato a # genitore.} other {Promemoria inviati a # genitori.}}",
+      "noPlayers": "Ancora nessun giocatore",
+      "noPlayersOnline": "Condividi il link di iscrizione o aggiungi tu i giocatori.",
+      "noPlayersHint": "Aggiungi i giocatori che il maestro ha già.",
+      "col": {
+        "player": "Giocatore",
+        "contact": "Genitore o contatto",
+        "attendance": "Presente",
+        "actions": "Azioni",
+        "amount": "Importo",
+        "status": "Stato",
+        "paidOn": "Pagato il"
+      },
+      "since": "dal {date}",
+      "trialOn": "Prova gratuita {date}",
+      "trial": "Prova gratuita",
+      "keep": "Tieni nel gruppo",
+      "kept": "{name} ora è nel gruppo.",
+      "ownAccount": "Account proprio",
+      "attended": "{n} su {of}",
+      "moreFor": "Altro per {name}",
+      "editPlayer": "Modifica",
+      "moveToWaiting": "Sposta in lista d'attesa",
+      "remove": "Togli dal gruppo",
+      "removeConfirm": "Togliere {name} dalla lista?",
+      "removed": "{name} è stato tolto dalla lista.",
+      "removedOffered": "{name} è stato tolto dalla lista. Il posto è stato offerto alla lista d'attesa.",
+      "paidBy": "Pagato · {method}",
+      "method": {
+        "cash": "Contanti",
+        "bank": "Bonifico",
+        "other": "Altro"
+      },
+      "undoPaid": "Segna come non pagato",
+      "unpaidMark": "Non pagato · segna {amount} pagato",
+      "month": "Mese",
+      "noFees": "Nessuno in lista per questo mese.",
+      "feesHint": "Le quote si pagano al club in contanti o con bonifico. Kortello tiene solo il conto.",
+      "leftGroup": "(uscito)",
+      "waitingTitle": "Lista d'attesa",
+      "waitingHint": "Quando si libera un posto, il prossimo riceve un'email e ha 48 ore per accettare.",
+      "waitingEmpty": "Nessuno in attesa.",
+      "offeredUntil": "Posto offerto · risposta entro {date}",
+      "waitingSince": "In attesa dal {date}",
+      "joinedOnline": "iscritto online",
+      "addedByClub": "aggiunto dal club",
+      "offerPlace": "Offri un posto",
+      "offerSent": "Posto offerto a {name} via email.",
+      "offerMade": "Posto offerto a {name}. Non è partita nessuna email, avvisalo tu.",
+      "removeFromWaiting": "Rimuovi {name}",
+      "requestsOnPlayers": "{n, plural, one {# richiesta} other {# richieste}} a cui rispondere in",
+      "nextSessions": "Prossime lezioni",
+      "noUpcoming": "Nessuna lezione in programma.",
+      "noPast": "Ancora nessuna lezione.",
+      "todayAt": "Oggi {time}",
+      "coming": "{n} presenti",
+      "bookedOf": "{n} / {max} prenotati",
+      "cantCome": "{n} assenti",
+      "register": "Registro",
+      "viewRegister": "Registro",
+      "setup": "Impostazioni",
+      "season": "Stagione",
+      "sessionsLabel": "Lezioni",
+      "sessionsDone": "{n} · {done} svolte",
+      "noSessionsOn": "Niente lezioni il",
+      "places": "Posti",
+      "perSessionMax": "{n} per lezione",
+      "onlineSignup": "Iscrizione online",
+      "on": "Attiva",
+      "off": "Disattiva",
+      "onApproval": "Attiva · approva il maestro",
+      "trialSession": "Lezione di prova gratuita",
+      "memberPrice": "Prezzo soci",
+      "copyLink": "Copia link di iscrizione",
+      "copied": "Link copiato",
+      "upcoming": "In programma",
+      "past": "Passate",
+      "cancelled": "Cancellata",
+      "moved": "Spostata",
+      "noReason": "Nessun motivo indicato",
+      "registerSummary": "{here} presenti · {away} assenti",
+      "noRegister": "Registro non compilato",
+      "move": "Sposta",
+      "cancel": "Cancella",
+      "restore": "Annulla cancellazione",
+      "restored": "La lezione è di nuovo in programma.",
+      "showMore": "Mostra altre {n}",
+      "cancelTitle": "Cancellare {date}?",
+      "cancelBody": "Il campo si libera e {n, plural, =0 {non serve avvisare nessuno} one {il genitore o il giocatore riceve un'email} other {i # genitori e giocatori ricevono un'email}}.",
+      "reason": "Motivo (facoltativo)",
+      "reasonPlaceholder": "es. Pioggia, il maestro è malato",
+      "keepSession": "Tienila",
+      "cancelSession": "Cancella lezione",
+      "working": "In corso…",
+      "cancelledSent": "Lezione cancellata. {n, plural, one {# email inviata.} other {# email inviate.}}",
+      "cancelledDone": "Lezione cancellata.",
+      "moveTitle": "Sposta questa lezione",
+      "date": "Data",
+      "from": "Da",
+      "to": "A",
+      "court": "Campo",
+      "moveHint": "Si sposta solo questa lezione. Il campo deve essere libero in quell'orario.",
+      "close": "Chiudi",
+      "moveSave": "Sposta lezione",
+      "movedDone": "Lezione spostata.",
+      "noEmails": "Nessuno in lista ha ancora un indirizzo email.",
+      "emailsCopied": "{n} indirizzi email copiati. Incollali in Ccn della tua email.",
+      "saved": "Salvato:",
+      "savedCreated": "{n, plural, one {# lezione aggiunta} other {# lezioni aggiunte}}",
+      "savedRemoved": "{n} rimosse",
+      "savedSkipped": "{n, plural, one {# giorno saltato} other {# giorni saltati}}",
+      "errors": {
+        "failed": "Qualcosa è andato storto. Riprova.",
+        "times": "Controlla gli orari.",
+        "busy": "Il campo o il maestro sono occupati in quell'orario.",
+        "past": "Quell'orario è già passato.",
+        "notAllowed": "Non puoi farlo per questo gruppo.",
+        "taken": "Nel frattempo il campo è stato prenotato, quindi la lezione non può tornare.",
+        "started": "Quella lezione è già iniziata.",
+        "plan": "I gruppi sono inclusi nei piani Club e Academy.",
+        "sessions": "Salvato, ma le lezioni non sono state aggiornate. Riprova."
+      }
+    },
+    "player": {
+      "addTitle": "Aggiungi un giocatore",
+      "editTitle": "Modifica giocatore",
+      "name": "Nome",
+      "age": "Età",
+      "contactName": "Genitore o contatto",
+      "contactPlaceholder": "es. Claire Martin (vuoto per gli adulti)",
+      "email": "Email",
+      "phone": "Telefono",
+      "emailHint": "Con un'email, il genitore riceve cancellazioni e promemoria di pagamento, e vede il gruppo se accede a Kortello con quell'indirizzo.",
+      "price": "Prezzo mensile",
+      "priceHint": "Lascia vuoto per il prezzo del gruppo. Utile per uno sconto fratelli o soci.",
+      "notes": "Note per il maestro",
+      "waiting": "Metti in lista d'attesa",
+      "waitingFull": "Il gruppo è pieno: metti in lista d'attesa",
+      "cancel": "Annulla",
+      "add": "Aggiungi",
+      "save": "Salva",
+      "saving": "Salvataggio…",
+      "added": "{name} è stato aggiunto.",
+      "addedWaiting": "{name} è in lista d'attesa.",
+      "saved": "Salvato.",
+      "errors": {
+        "playerName": "Inserisci il nome del giocatore.",
+        "email": "Controlla l'indirizzo email.",
+        "age": "L'età deve essere tra 3 e 99 anni.",
+        "price": "Il prezzo non può essere negativo.",
+        "failed": "Qualcosa è andato storto. Riprova."
+      }
+    },
+    "register": {
+      "title": "Registro",
+      "back": "Indietro",
+      "today": "Oggi",
+      "sessionOf": "Lezione {n} di {total}",
+      "cancelledNote": "Questa lezione è stata cancellata. {reason}",
+      "here": "{n} presenti",
+      "away": "{n} assenti",
+      "toMark": "{n} da segnare",
+      "allHere": "Tutti presenti",
+      "noBookings": "Nessuno ha ancora prenotato questa lezione.",
+      "noPlayers": "Ancora nessuno in lista.",
+      "parentSaid": "Il genitore ha detto: {reason}",
+      "parentSaidNo": "Il genitore ha avvisato dell'assenza",
+      "trial": "Prova gratuita",
+      "unpaid": "Mese non pagato",
+      "guest": "Ospite",
+      "guestNew": "Aggiunto oggi",
+      "guestName": "Nome",
+      "add": "Aggiungi",
+      "close": "Chiudi",
+      "addGuest": "Aggiungi qualcuno per oggi (prova o ospite)",
+      "addDropin": "Aggiungi chi è venuto senza prenotare",
+      "note": "Nota sulla lezione",
+      "notePlaceholder": "Su cosa avete lavorato, per i genitori",
+      "noteHint": "I genitori vedono l'ultima nota in Kortello.",
+      "cancelToday": "Cancella la lezione di oggi",
+      "cancelThis": "Cancella questa lezione",
+      "save": "Salva registro",
+      "saving": "Salvataggio…",
+      "saved": "Salvato",
+      "paid": "Pagato",
+      "hereButton": "Presente",
+      "awayButton": "Assente",
+      "removeName": "Rimuovi {name}",
+      "errors": {
+        "notAllowed": "Solo il club e il maestro del gruppo possono compilare il registro.",
+        "failed": "Qualcosa è andato storto. Riprova."
+      }
+    }
+  },
+  "myGroups": {
+    "title": "I miei gruppi",
+    "subtitle": "Gruppi di allenamento per te e i tuoi figli.",
+    "empty": "Ancora nessun gruppo",
+    "emptyHint": "Quando un maestro aggiunge te o tuo figlio con la tua email, o ti iscrivi dalla pagina di un club, il gruppo appare qui.",
+    "youCoach": "Gruppi che alleni",
+    "yourPlaces": "I tuoi gruppi",
+    "dropins": "Lezioni libere prenotate",
+    "players": "{n} / {max} giocatori",
+    "dropinGroup": "Lezione libera",
+    "waitingOrAsking": "{n} in attesa",
+    "registerToday": "Registro · oggi {time}",
+    "registerNext": "Registro · {date}",
+    "nextToday": "Prossima: oggi · {time}",
+    "next": "Prossima: {date} · {time}",
+    "with": "con {coach}",
+    "addedByClub": "Il club ha aggiunto {name} con la tua email, per questo vedi il gruppo qui.",
+    "trialNote": "È prenotata una lezione di prova gratuita. Dopo, il maestro ti parlerà dell'iscrizione.",
+    "requested": "In attesa che {coach} confermi il posto.",
+    "theCoach": "il maestro",
+    "waiting": "In lista d'attesa dal {date}. Riceverai un'email quando si libera un posto.",
+    "offered": "C'è un posto libero! Rispondi entro il {date}.",
+    "answer": "Rispondi",
+    "noSession": "Niente lezione",
+    "notComing": "{name} non viene",
+    "canComeAfterAll": "Viene lo stesso",
+    "cantCome": "{name} non può venire",
+    "cameTo": "Presenze",
+    "cameOf": "{n} su {of}",
+    "paid": "Pagato",
+    "notPaid": "Non ancora pagato",
+    "schedule": "Orari",
+    "payClub": "Paga il club o il maestro in contanti o con bonifico.",
+    "payClubPhone": "Paga il club o il maestro in contanti o con bonifico. Domande? {phone}",
+    "fromCoach": "Da {coach} · {date}",
+    "moreAt": "Altri gruppi da {club}",
+    "leave": "Lascia il gruppo",
+    "leaveWaiting": "Esci dalla lista d'attesa",
+    "leaveConfirm": "Togliere {name} da {group}? Il posto va al prossimo in attesa.",
+    "leaveWaitingConfirm": "Togliere {name} dalla lista d'attesa?",
+    "unbook": "Annulla",
+    "unbookConfirm": "Liberare il tuo posto in questa lezione?",
+    "errors": {
+      "notAllowed": "Non puoi farlo per questo giocatore.",
+      "started": "Quella lezione è già iniziata.",
+      "failed": "Qualcosa è andato storto. Riprova."
+    }
+  },
+  "groupSignup": {
+    "title": "Gruppi e lezioni",
+    "subtitle": "Gruppi settimanali con i maestri del club. Iscriviti online.",
+    "dropin": "Lezione libera",
+    "with": "con {coach}",
+    "perMonth": "/ mese",
+    "perSession": "/ lezione",
+    "full": "Pieno",
+    "fullWaiting": "Pieno · {n} in attesa",
+    "placesLeft": "{n, plural, one {# posto libero} other {# posti liberi}}",
+    "signInToJoin": "Accedi per iscriverti",
+    "signIn": "Accedi",
+    "join": "Iscriviti",
+    "joinWaiting": "Entra in lista d'attesa",
+    "askToJoin": "Chiedi un posto",
+    "tryFree": "Prova gratis",
+    "noSessions": "Nessuna lezione in programma.",
+    "booked": "Prenotato · annulla",
+    "book": "Prenota",
+    "joinTitle": "Iscrizione a {group}",
+    "trialTitle": "Lezione gratuita in {group}",
+    "fullNote": "Il gruppo è pieno. Entrerai in lista d'attesa e riceverai un'email quando si libera un posto.",
+    "approveNote": "Il maestro conferma ogni nuovo giocatore, avrai presto una risposta.",
+    "trialNote": "Vieni gratis alla prossima lezione. Se ti trovi bene, il maestro ti aggiunge al gruppo.",
+    "joinNote": "Sei dentro subito. Il club ti dirà come pagare.",
+    "who": "Per chi è?",
+    "me": "Per me",
+    "myChild": "Per mio figlio",
+    "yourName": "Il tuo nome",
+    "childName": "Nome del figlio",
+    "age": "Età",
+    "phone": "Telefono (facoltativo)",
+    "contactNote": "Il club usa l'email del tuo account per cancellazioni e promemoria.",
+    "cancel": "Annulla",
+    "sending": "Invio…",
+    "bookTrial": "Prenota la lezione gratuita",
+    "seeMyGroups": "Vedi i miei gruppi",
+    "done": {
+      "active": "{name} è in {group}.",
+      "trial": "La lezione gratuita di {name} in {group} è prenotata.",
+      "requested": "Richiesta inviata. Il maestro confermerà il posto di {name} in {group}.",
+      "waiting": "{name} è in lista d'attesa per {group}."
+    },
+    "errors": {
+      "notSignedIn": "Accedi prima.",
+      "confirmEmail": "Conferma prima il tuo indirizzo email: controlla la posta.",
+      "already": "Già iscritto a questo gruppo.",
+      "age": "Questo gruppo è per età da {from} a {to} anni.",
+      "full": "Peccato, si è appena riempito.",
+      "closed": "Qui l'iscrizione online non è aperta.",
+      "name": "Inserisci un nome.",
+      "notAllowed": "Non puoi farlo.",
+      "failed": "Qualcosa è andato storto. Riprova."
+    }
+  },
+  "groupOffer": {
+    "title": "Un posto per {name}",
+    "intro": "Si è liberato un posto in {group}.",
+    "group": "Gruppo",
+    "when": "Quando",
+    "price": "Prezzo",
+    "perMonth": "{price} / mese",
+    "answerBy": "Rispondi entro il {date}. Dopo, il posto passa al prossimo.",
+    "accept": "Sì, prendo il posto",
+    "decline": "No, grazie",
+    "questions": "Domande? Chiama il club al {phone}.",
+    "acceptedTitle": "Ci vediamo in campo!",
+    "acceptedBody": "{name} ora è in {group}. Il club ti dirà come pagare.",
+    "declinedTitle": "Grazie per averci avvisato",
+    "declinedBody": "Il posto passa al prossimo in lista d'attesa.",
+    "closedTitle": "Questa offerta è chiusa",
+    "closedBody": "Ha già ricevuto una risposta, oppure il posto non c'è più.",
+    "expiredBody": "Sono passate le 48 ore e il posto è andato al prossimo. Per iscriverti di nuovo, contatta {club}.",
+    "toClub": "Vai a {club}",
+    "errors": {
+      "closed": "Questa offerta è chiusa.",
+      "expired": "Questa offerta è scaduta.",
+      "failed": "Qualcosa è andato storto. Riprova."
+    }
+  },
+  "notifications": {
+    "title": "Notifiche",
+    "bell": "{n, plural, =0 {Notifiche} one {Notifiche, # da leggere} other {Notifiche, # da leggere}}",
+    "markAllRead": "Segna tutte come lette",
+    "all": "Tutte",
+    "unread": "Da leggere",
+    "seeAll": "Vedi tutte le notifiche",
+    "empty": "Ancora niente qui.",
+    "emptyUnread": "Hai letto tutto.",
+    "today": "Oggi",
+    "earlier": "Prima",
+    "kept": "Le notifiche vengono conservate per 60 giorni.",
+    "loadMore": "Mostra altre",
+    "justNow": "adesso",
+    "yesterday": "Ieri, {time}",
+    "unreadDot": "Da leggere",
+    "filters": {
+      "bookings": "Prenotazioni",
+      "members": "Soci",
+      "tournaments": "Tornei",
+      "membership": "Abbonamento",
+      "groups": "Gruppi"
+    },
+    "settings": {
+      "title": "Cosa ricevi",
+      "hintClub": "Solo per te. Il tuo staff sceglie per sé. Le email ai giocatori non cambiano.",
+      "hintPlayer": "Solo per te. Le email del tuo club non cambiano.",
+      "alwaysOn": "Sempre attivo",
+      "saveFailed": "Impossibile salvare. Riprova.",
+      "plan": {
+        "title": "Il tuo piano Kortello",
+        "desc": "Promemoria su prova e pagamento"
+      },
+      "admin": {
+        "bookings": {
+          "title": "Nuove prenotazioni",
+          "desc": "Quando un giocatore prenota un campo online"
+        },
+        "lessons": {
+          "title": "Lezioni",
+          "desc": "Quando un giocatore prenota uno dei tuoi maestri"
+        },
+        "cancellations": {
+          "title": "Disdette",
+          "desc": "Quando un giocatore disdice una prenotazione o lezione"
+        },
+        "tournaments": {
+          "title": "Iscrizioni ai tornei",
+          "desc": "Quando qualcuno si iscrive o si ritira"
+        },
+        "members": {
+          "title": "Abbonamenti in scadenza",
+          "desc": "Un riepilogo al giorno, una settimana prima"
+        },
+        "staff": {
+          "title": "Staff",
+          "desc": "Quando qualcuno accetta il tuo invito"
+        },
+        "groups": {
+          "title": "Gruppi",
+          "desc": "Iscrizioni, risposte dalla lista d'attesa e assenze annunciate"
+        }
+      },
+      "member": {
+        "club_changes": {
+          "title": "Modifiche del club",
+          "desc": "Quando il club prenota o disdice per te"
+        },
+        "reminders": {
+          "title": "Promemoria",
+          "desc": "Il giorno prima di giocare"
+        },
+        "tournaments": {
+          "title": "Tornei",
+          "desc": "Quando esce il tabellone"
+        },
+        "membership": {
+          "title": "Abbonamento",
+          "desc": "Una settimana prima della scadenza"
+        },
+        "groups": {
+          "title": "Gruppi",
+          "desc": "Lezioni cancellate, posti offerti, promemoria di pagamento"
+        }
+      }
+    },
+    "kinds": {
+      "someone": "Qualcuno",
+      "lessonWith": "Lezione con {coach}",
+      "unknown": "Notifica",
+      "places": "{count} posti su {max} occupati",
+      "booking_new": {
+        "title": "<b>{who}</b> ha prenotato {court}"
+      },
+      "lesson_new": {
+        "title": "<b>{who}</b> ha prenotato una lezione con {coach}",
+        "court": "{court} riservato"
+      },
+      "booking_cancelled": {
+        "court": "<b>{who}</b> ha disdetto {court}",
+        "lesson": "<b>{who}</b> ha disdetto una lezione con {coach}",
+        "free": "l’orario è di nuovo libero"
+      },
+      "tournament_joined": {
+        "title": "<b>{name}</b> si è iscritto a {tournament}"
+      },
+      "tournament_left": {
+        "title": "<b>{name}</b> si è ritirato da {tournament}"
+      },
+      "members_ending": {
+        "title": "{count, plural, one {<b># abbonamento</b> scade} other {<b># abbonamenti</b> scadono}} nei prossimi 7 giorni",
+        "more": "{names} e altri {n}"
+      },
+      "staff_joined": {
+        "title": "<b>{email}</b> ha accettato il tuo invito"
+      },
+      "trial_ending": {
+        "title": "La tua prova gratuita finisce tra <b>{days, plural, =0 {meno di un giorno} one {# giorno} other {# giorni}}</b>",
+        "detail": "Scegli un piano per continuare senza interruzioni"
+      },
+      "trial_ended": {
+        "title": "La tua prova gratuita è <b>finita</b>",
+        "detail": "Scegli un piano per continuare con Kortello"
+      },
+      "club_booked": {
+        "title": "<b>{club}</b> ha prenotato un campo per te",
+        "weekly": "ogni settimana"
+      },
+      "club_cancelled": {
+        "title": "<b>{club}</b> ha disdetto la tua prenotazione",
+        "phone": "Domande? Chiama il club al {phone}"
+      },
+      "reminder": {
+        "title": "A breve: <b>{what}</b>"
+      },
+      "draw": {
+        "title": "È uscito il tabellone di <b>{tournament}</b>",
+        "opponent": "La tua prima partita: contro {opponent}",
+        "bye": "Passi direttamente il primo turno"
+      },
+      "membership_ending": {
+        "plan": "Il tuo abbonamento <b>{plan}</b> scade {days, plural, =0 {oggi} one {tra # giorno} other {tra # giorni}}",
+        "noPlan": "Il tuo abbonamento scade <b>{days, plural, =0 {oggi} one {tra # giorno} other {tra # giorni}}</b>",
+        "detail": "Chiedi al club di rinnovarlo"
+      },
+      "group_signup": {
+        "active": "<b>{name}</b> è entrato in {group}",
+        "trial": "<b>{name}</b> ha prenotato una lezione gratuita in {group}",
+        "requested": "<b>{name}</b> chiede un posto in {group}",
+        "waiting": "<b>{name}</b> è in lista d'attesa per {group}",
+        "booked": "<b>{name}</b> ha prenotato un posto in {group}"
+      },
+      "group_left": {
+        "title": "<b>{name}</b> ha lasciato {group}"
+      },
+      "group_offer_answer": {
+        "yes": "<b>{name}</b> ha preso il posto in {group}",
+        "no": "<b>{name}</b> ha rifiutato il posto in {group}",
+        "next": "Il posto passa al prossimo in attesa"
+      },
+      "group_absence": {
+        "title": "<b>{name}</b> non può venire a {group}"
+      },
+      "group_cancelled": {
+        "title": "<b>{group}</b> è cancellata"
+      },
+      "group_added": {
+        "title": "<b>{name}</b> è stato aggiunto a {group}"
+      },
+      "group_offer": {
+        "title": "C'è un posto libero in <b>{group}</b> per {name}",
+        "until": "Rispondi entro il {date}"
+      },
+      "group_fee_due": {
+        "title": "La quota di <b>{month}</b> per {group} non è ancora pagata"
+      }
     }
   }
 }

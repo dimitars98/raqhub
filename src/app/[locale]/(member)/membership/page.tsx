@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { MembershipPlan, MyMembership } from "@/types/database";
 import { getLabels } from "@/lib/getLabels";
+import { intlLocale } from "@/lib/dateLocale";
 import { BADGE, memberStatusTone } from "@/lib/badges";
 
 export default async function MembershipPage() {
@@ -77,7 +78,7 @@ export default async function MembershipPage() {
             {member.ends_at && (
               <div className="text-xs text-brand-500 pt-3 border-t border-brand-100">
                 {t("expires", {
-                  date: new Intl.DateTimeFormat(locale, {
+                  date: new Intl.DateTimeFormat(intlLocale(locale), {
                     day: "numeric",
                     month: "short",
                     year: "numeric",

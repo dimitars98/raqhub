@@ -4,6 +4,8 @@ import { emailProvider } from "@/lib/email/send";
 import {
   Budget,
   sendBookingReminders,
+  sendGroupFeeReminders,
+  sendGroupOffers,
   sendNewClubNotices,
   sendRenewalReminders,
   sendTrialEmails,
@@ -13,7 +15,7 @@ import {
 // Called every hour by Supabase Cron (see supabase/cron_http_job.sql).
 // Sends booking reminders, membership renewal reminders, free-trial emails
 // to club owners, new-club emails to you and, on Monday mornings, the weekly
-// report to club owners. Safe to call more often:
+// report to club owners. Also makes the day's in-app notifications. Safe to call more often:
 // nothing is ever sent twice.
 
 export const dynamic = "force-dynamic";
@@ -41,6 +43,8 @@ export async function GET(request: Request) {
     ["weeklyReports", sendWeeklyReports],
     ["trialEmails", sendTrialEmails],
     ["newClubs", sendNewClubNotices],
+    ["groupOffers", sendGroupOffers],
+    ["groupFees", sendGroupFeeReminders],
   ] as const) {
     try {
       result[name] = await job(db, budget);
@@ -48,6 +52,15 @@ export async function GET(request: Request) {
       console.error(`[cron] ${name} failed`, e);
       result[name] = { error: e instanceof Error ? e.message : String(e) };
     }
+  }
+
+  // In-app notifications: reminders, memberships and trials ending (no email budget).
+  try {
+    const { data, error } = await db.rpc("run_scheduled_notifications");
+    result.notifications = error ? { error: error.message } : data;
+  } catch (e) {
+    console.error("[cron] notifications failed", e);
+    result.notifications = { error: e instanceof Error ? e.message : String(e) };
   }
 
   result.budgetLeft = budget.left;

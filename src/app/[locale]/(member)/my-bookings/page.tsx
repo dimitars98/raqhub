@@ -7,6 +7,7 @@ import { cancelBooking } from "@/app/actions/bookings";
 import type { Booking, Court, Profile } from "@/types/database";
 import { canCancel, normalizeRules } from "@/lib/bookingRules";
 import { getLabels } from "@/lib/getLabels";
+import { intlLocale } from "@/lib/dateLocale";
 import type { Labels } from "@/lib/labels";
 import { BADGE, bookingStatusTone } from "@/lib/badges";
 
@@ -25,7 +26,7 @@ const TIME_ZONE = "Europe/Skopje";
 /** Formats a date in the club's time zone and the page's language. */
 function makeFormatter(locale: string) {
   return (value: string | Date, options: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(locale, { timeZone: TIME_ZONE, ...options }).format(
+    new Intl.DateTimeFormat(intlLocale(locale), { timeZone: TIME_ZONE, ...options }).format(
       typeof value === "string" ? new Date(value) : value,
     );
 }

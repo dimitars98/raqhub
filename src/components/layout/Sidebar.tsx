@@ -21,6 +21,7 @@ import {
   UserPlus,
   Users,
   X,
+  UsersRound,
 } from "lucide-react";
 import {
   AnimatePresence,
@@ -391,6 +392,7 @@ export default function Sidebar({
         { label: t("members"), href: "/admin/members", icon: Users },
         { label: t("plans"), href: "/admin/plans", icon: CreditCard },
         { label: t("coaches"), href: "/admin/coaches", icon: Star },
+        { label: t("groups"), href: "/admin/groups", icon: UsersRound },
         { label: t("courts"), href: "/admin/courts", icon: Grid3x3 },
         { label: t("tournaments"), href: "/admin/tournaments", icon: Trophy },
       ],
@@ -424,6 +426,7 @@ export default function Sidebar({
         { label: t("timetable"), href: "/admin/timetable", icon: CalendarRange },
         { label: t("bookings"), href: "/admin/bookings", icon: CalendarDays },
         { label: t("members"), href: "/admin/members", icon: Users },
+        { label: t("groups"), href: "/admin/groups", icon: UsersRound },
         ...(clubSlug
           ? [{ label: t("publicPage"), href: `/clubs/${clubSlug}`, icon: Globe }]
           : []),
@@ -438,6 +441,7 @@ export default function Sidebar({
         { label: t("myBookings"), href: "/my-bookings", icon: CalendarDays },
         { label: t("bookACourt"), href: "/book", icon: BookOpen },
         { label: t("findACoach"), href: "/coaches", icon: Trophy },
+        { label: t("myGroups"), href: "/groups", icon: UsersRound },
       ],
     },
     {

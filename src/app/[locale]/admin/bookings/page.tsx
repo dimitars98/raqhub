@@ -57,6 +57,8 @@ export default async function AdminBookingsPage() {
             "*, court:courts(name), member:members(full_name), player:profiles(full_name), coach:coaches(profile:profiles(full_name))",
           )
           .or(filters.join(","))
+          // A group's sessions are managed on the group's page.
+          .is("group_id", null)
           .order("starts_at", { ascending: false })
           .limit(100)
       : Promise.resolve({ data: [] }),

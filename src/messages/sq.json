@@ -334,7 +334,9 @@
       "share": "Ndajeni me lojtarët",
       "owner": "Klubet dhe pagesat",
       "tournaments": "Turnetë",
-      "staff": "Stafi"
+      "staff": "Stafi",
+      "notifications": "Njoftimet",
+      "groups": "Grupet"
     },
     "share": "Ndaj",
     "ownerGroup": "Kortello",
@@ -343,21 +345,21 @@
     "staff": "Stafi",
     "manageClub": "Menaxho klubin",
     "superAdmin": "Super admin",
-    "clubAdmin": "Admin"
+    "clubAdmin": "Admin",
+    "groups": "Grupet",
+    "myGroups": "Grupet e mia"
   },
   "members": {
     "title": "Anëtarë",
-    "total": "{count} gjithsej",
     "addMember": "Shto anëtar",
     "searchPlaceholder": "Kërko sipas emrit, emailit ose telefonit...",
     "noResults": "Nuk ka anëtarë që përputhen me kërkimin.",
     "noMembers": "Ende nuk ka anëtarë. Shto të parin.",
     "columns": {
-      "name": "Emri",
-      "contact": "Kontakti",
       "plan": "Plani",
       "status": "Statusi",
-      "expires": "Skadon"
+      "expires": "Skadon",
+      "member": "Anëtari"
     },
     "actions": {
       "edit": "Ndrysho",
@@ -383,6 +385,51 @@
       "saveBtn": "Ruaj ndryshimet",
       "addBtn": "Shto anëtar",
       "saving": "Duke ruajtur…"
+    },
+    "export": "Eksporto",
+    "tabs": {
+      "all": "Të gjithë",
+      "active": "Aktivë",
+      "ending": "Skadojnë së shpejti",
+      "expired": "Të skaduar",
+      "cancelled": "Të anuluar"
+    },
+    "filters": {
+      "plan": "Plani",
+      "allPlans": "Të gjitha planet",
+      "ends": "Skadon",
+      "anyTime": "Çdo kohë",
+      "within": "Brenda {days} ditëve",
+      "show": "Shfaq"
+    },
+    "inDays": "{n, plural, =0 {sot} one {pas # dite} other {pas # ditësh}}",
+    "daysAgo": "{n, plural, one {para # dite} other {para # ditësh}}",
+    "showing": "{from}–{to} nga {total}",
+    "prevPage": "Faqja e mëparshme",
+    "nextPage": "Faqja tjetër",
+    "bulk": {
+      "selected": "{n} të zgjedhur",
+      "clear": "Hiq zgjedhjen",
+      "selectPage": "Zgjidh të gjithë në këtë faqe",
+      "selectRow": "Zgjidh {name}",
+      "email": "Email",
+      "extend": "Zgjat",
+      "extendBy": "{months, plural, =12 {Me 1 vit} one {Me # muaj} other {Me # muaj}}",
+      "extendHint": "Nga data e skadimit të secilit anëtar, ose nga sot nëse ka kaluar. Anëtarësimi bëhet sërish aktiv.",
+      "changePlan": "Ndrysho planin",
+      "cancel": "Anulo",
+      "confirmCancel": "{n, plural, one {Të anulohet # anëtarësim?} other {Të anulohen # anëtarësime?}}",
+      "confirmYes": "Po, anulo",
+      "confirmNo": "Mbaje",
+      "extended": "{n, plural, one {U zgjat # anëtarësim.} other {U zgjatën # anëtarësime.}}",
+      "planChanged": "{n, plural, one {Plani u ndryshua për # anëtar.} other {Plani u ndryshua për # anëtarë.}}",
+      "cancelled": "{n, plural, one {U anulua # anëtarësim.} other {U anuluan # anëtarësime.}}",
+      "noEmails": "Asnjë nga anëtarët e zgjedhur nuk ka adresë email.",
+      "withoutEmail": "{n, plural, one {# pa adresë email u la jashtë.} other {# pa adresë email u lanë jashtë.}}",
+      "emailOpened": "{n, plural, one {U hap aplikacioni i email-it me # adresë në BCC.} other {U hap aplikacioni i email-it me # adresa në BCC.}}",
+      "emailsCopied": "U kopjuan {n} adresa. Ngjitini në fushën BCC të një email-i të ri.",
+      "failed": "Diçka shkoi keq. Provoni përsëri.",
+      "dismiss": "Mbyll"
     }
   },
   "adminCoaches": {
@@ -627,6 +674,24 @@
       "screens": "Shihni orarin, menaxhoni rezervimet dhe anëtarët",
       "button": "Hap Kortello",
       "footer": "E merrni këtë email sepse {club} e shtoi këtë adresë te stafi i tyre në Kortello. Nëse nuk i njihni, mund ta injoroni."
+    },
+    "groups": {
+      "group": "Grupi",
+      "player": "Lojtari",
+      "reason": "Arsyeja",
+      "schedule": "Kur",
+      "answerBy": "Përgjigju deri më",
+      "month": "Muaji",
+      "open": "Hap Kortello",
+      "cancelledSubject": "Anuluar: {group}, {date}",
+      "cancelledIntro": "Seanca e {group} më {date} u anulua. Seancat e tjera vazhdojnë si zakonisht.",
+      "offerSubject": "Ka një vend të lirë në {group}",
+      "offerIntro": "Lajm i mirë: u lirua një vend për {name} në {group} te {club}. Mbahet për 48 orë.",
+      "offerButton": "Përgjigju ofertës",
+      "offerFooter": "E merrni këtë email sepse jeni në listën e pritjes së {club} në Kortello.",
+      "feeSubject": "{group}: pagesa për {month}",
+      "feeIntro": "Një kujtesë miqësore: pagesa e {name} për {month} për {group} ende nuk është shënuar si e paguar.",
+      "feeFooter": "Dërguar nga Kortello në emër të {club}. E keni paguar tashmë? Atëherë nuk keni asgjë për të bërë: klubi do ta shënojë."
     }
   },
   "billing": {
@@ -653,7 +718,8 @@
       "reminders": "Email kujtese",
       "weeklyReport": "Raporti javor",
       "analytics": "Statistikat",
-      "staff": "Llogari stafi"
+      "staff": "Llogari stafi",
+      "groups": "Grupe stërvitjeje"
     },
     "planNames": {
       "starter": "Starter",
@@ -922,6 +988,7 @@
           "Gjithçka nga Starter",
           "Anëtarësime me zbritje",
           "Trajnerë dhe mësime",
+          "Grupe stërvitjeje me regjistër dhe pagesa",
           "Kujtesa me email",
           "Raport javor"
         ]
@@ -976,7 +1043,7 @@
       },
       "languages": {
         "q": "Në cilat gjuhë është i disponueshëm?",
-        "a": "Anglisht, maqedonisht, shqip, gjermanisht, frëngjisht dhe italisht. Secili zgjedh gjuhën e vet, kështu që stafi dhe lojtarët mund të përdorin gjuhë të ndryshme."
+        "a": "Anglisht, maqedonisht, serbisht, shqip, gjermanisht, frëngjisht dhe italisht. Secili zgjedh gjuhën e vet, kështu që stafi dhe lojtarët mund të përdorin gjuhë të ndryshme."
       },
       "data": {
         "q": "Çfarë ndodh me të dhënat tona nëse ndalojmë së përdoruri Kortello?",
@@ -1116,7 +1183,9 @@
     "today": "Sot",
     "noBookings": "Ende pa rezervime për këtë ditë.",
     "noCourtsHint": "Shtoni fushën e parë dhe ajo do të shfaqet këtu si kolonë, gati për rezervime.",
-    "lessonWith": "Stërvitje me {coach}"
+    "lessonWith": "Stërvitje me {coach}",
+    "group": "Grup",
+    "groupWith": "me {coach}"
   },
   "common": {
     "closeMenu": "Mbyll menunë",
@@ -1721,6 +1790,690 @@
       "label": "Rikujtim me email",
       "title": "Shihemi nesër në fushë",
       "sent": "Dërguar 24 orë më parë"
+    }
+  },
+  "groups": {
+    "title": "Grupet",
+    "new": "Grup i ri",
+    "empty": "Ende nuk ka grupe",
+    "emptyHint": "Shtoni grupet javore të trajnerëve tuaj për fëmijë, të rinj dhe të rritur. Kortello e mban fushën për çdo seancë, mban regjistrin e pjesëmarrjes dhe ndjek pagesat mujore.",
+    "noMatch": "Asnjë grup nuk përputhet me këto filtra.",
+    "stats": {
+      "sessions": "Seanca këtë javë",
+      "players": "Lojtarë në grupe",
+      "full": "{n, plural, one {# grup plot} other {# grupe plot}}",
+      "waiting": "Lista e pritjes",
+      "inGroups": "{n, plural, one {në # grup} other {në # grupe}}",
+      "unpaid": "Pa paguar për {month}"
+    },
+    "tabs": {
+      "all": "Të gjitha",
+      "season": "Grupe sezonale",
+      "dropin": "Seanca të hapura",
+      "places": "Me vende",
+      "archived": "Të mbyllura"
+    },
+    "filters": {
+      "coach": "Trajneri",
+      "anyCoach": "Çdo trajner",
+      "day": "Dita",
+      "anyDay": "Çdo ditë"
+    },
+    "todayAt": "Sot {time}",
+    "kind": {
+      "season": "Grup sezonal",
+      "dropin": "Seancë e hapur"
+    },
+    "level": {
+      "beginner": "Fillestarë",
+      "intermediate": "Nivel mesatar",
+      "advanced": "Të avancuar",
+      "all": "Të gjitha nivelet"
+    },
+    "adults": "Të rritur",
+    "ages": "Mosha {from}–{to}",
+    "agesFrom": "Mosha {from}+",
+    "agesTo": "Deri në {to} vjeç",
+    "placesOf": "{n} / {max}",
+    "bookedNext": "{n} / {max} të rezervuar për seancën e radhës",
+    "full": "Plot",
+    "waitingCount": "{n} në pritje",
+    "requestsCount": "{n} kërkojnë vend",
+    "placesLeft": "{n, plural, one {mbetet # vend} other {mbeten # vende}}",
+    "perMonth": "{price} / muaj",
+    "perSession": "{price} / seancë",
+    "unpaidCount": "{n} pa paguar",
+    "allPaid": "Të gjithë kanë paguar",
+    "bookEachWeek": "Lojtarët rezervojnë çdo javë",
+    "form": {
+      "back": "Kthehu",
+      "editTitle": "Ndrysho grupin",
+      "create": "Krijo grupin",
+      "save": "Ruaj ndryshimet",
+      "saving": "Duke ruajtur…",
+      "sections": {
+        "group": "Grupi",
+        "when": "Kur dhe ku",
+        "players": "Lojtarët dhe regjistrimi",
+        "price": "Çmimi"
+      },
+      "name": "Emri",
+      "namePlaceholder": "p.sh. Fëmijë 9–12 · Fillestarë",
+      "sport": "Sporti",
+      "coach": "Trajneri",
+      "noCoach": "Ende pa trajner",
+      "level": "Niveli",
+      "ages": "Mosha",
+      "from": "Nga",
+      "to": "Deri",
+      "ageFrom": "Mosha më e vogël",
+      "ageTo": "Mosha më e madhe",
+      "description": "Përshkrimi",
+      "descriptionPlaceholder": "Mbi çfarë do të punojnë lojtarët, çfarë të sjellin…",
+      "kind": "Lloji i grupit",
+      "kindHint": {
+        "season": "Të njëjtët lojtarë çdo javë. Paguhet çdo muaj.",
+        "dropin": "Lojtarët rezervojnë çdo seancë. Paguhet për seancë."
+      },
+      "kindSeasonLocked": "Grup sezonal: të njëjtët lojtarë çdo javë, paguhet çdo muaj.",
+      "kindDropinLocked": "Seancë e hapur: lojtarët rezervojnë çdo seancë.",
+      "days": "Ditët",
+      "court": "Fusha",
+      "starts": "Fillon",
+      "ends": "Mbaron",
+      "breaks": "Pa seanca më",
+      "addBreak": "Shto data",
+      "removeBreak": "Hiq {name}",
+      "breakName": "Emri",
+      "breakPlaceholder": "p.sh. Pushimet e dimrit",
+      "addBreakConfirm": "Shto",
+      "cancel": "Anulo",
+      "maxPlayers": "Numri më i madh i lojtarëve",
+      "maxPlayersHint": "Kur grupi mbushet, të rinjtë shkojnë në listën e pritjes.",
+      "maxPerSession": "Vende për seancë",
+      "maxPerSessionHint": "Rezervimet mbyllen kur seanca mbushet.",
+      "fewer": "Një më pak",
+      "more": "Një më shumë",
+      "onlineSignup": "Regjistrim online",
+      "onlineSignupHint": "Shfaqet në faqen e klubit. Prindërit mund të regjistrojnë një fëmijë.",
+      "onlineSignupDropin": "Shfaqet në faqen e klubit. Lojtarët rezervojnë vend për çdo seancë.",
+      "coachApproves": "Trajneri i miraton lojtarët e rinj",
+      "coachApprovesHint": "{coach} e sheh fillimisht çdo kërkesë, për të kontrolluar nivelin.",
+      "theCoach": "Trajneri",
+      "trial": "Seancë prove falas",
+      "trialHint": "Një seancë falas para se të regjistrohen, nëse ka vend.",
+      "pricePerMonth": "Çmimi në muaj",
+      "pricePerSession": "Çmimi për seancë",
+      "memberPrice": "Çmimi për anëtarët me paketë",
+      "memberPlan": "Anëtarësimi",
+      "optional": "Opsionale",
+      "paySeason": "Lojtarët i paguajnë drejtpërdrejt klubit, në para në dorë ose me transfertë bankare. Ju e shënoni çdo muaj si të paguar dhe Kortello u kujton atyre që nuk kanë paguar deri më 10.",
+      "payDropin": "Lojtarët paguajnë në seancë. Trajneri shënon në regjistër kush ka paguar.",
+      "summary": "Përmbledhje",
+      "pickDays": "Zgjidhni ditët për të parë seancat.",
+      "checking": "Duke kontrolluar fushën…",
+      "sessionsCount": "{n, plural, one {# seancë} other {# seanca}}",
+      "every": "Çdo {days}, {from}–{to}, {court}",
+      "withoutBreaks": "{n, plural, one {pa # pushim} other {pa # pushime}}",
+      "upTo": "Deri në {n, plural, one {# lojtar} other {# lojtarë}}",
+      "freeTrial": "Provë falas",
+      "allFree": "{court} është e lirë për çdo seancë",
+      "freeFor": "{n} nga {total} seanca janë të lira",
+      "clashClosed": "Klubi është i mbyllur atëherë",
+      "clashCourt": "Fusha është e zënë: {who}, {time}",
+      "clashCoach": "Trajneri është i zënë: {who}, {time}",
+      "useCourt": "Përdor {court}, është e lirë",
+      "skipDay": "Kapërce këtë ditë",
+      "skipped": "Kapërcyer",
+      "moreClashes": "Edhe {n, plural, one {# ditë} other {# ditë}} me përplasje: përdoret një fushë tjetër e lirë ose dita kapërcehet.",
+      "neverMoved": "Rezervimet ekzistuese nuk zhvendosen dhe nuk anulohen kurrë.",
+      "noSessions": "Nga sot nuk mbeten seanca në këtë sezon. Kontrolloni datat.",
+      "noCourtsTitle": "Shtoni fillimisht një fushë",
+      "noCourtsBody": "Grupi ka nevojë për një fushë. Shtoni fushat tuaja dhe pastaj kthehuni për të krijuar grupin.",
+      "addCourt": "Shto fusha",
+      "errors": {
+        "name": "Jepini grupit një emër (2 deri në 80 shkronja).",
+        "days": "Zgjidhni të paktën një ditë.",
+        "times": "Seanca duhet të zgjasë nga 30 minuta deri në 4 orë.",
+        "dates": "Kontrolloni datat e sezonit: fundi duhet të jetë pas fillimit, brenda 400 ditëve.",
+        "court": "Zgjidhni një fushë.",
+        "players": "Vendet duhet të jenë nga 1 deri në 60.",
+        "price": "Çmimet nuk mund të jenë negative.",
+        "ages": "Kontrolloni moshat: nga 3 deri në 99, fillimisht më e vogla.",
+        "plan": "Grupet vijnë me paketat Club dhe Academy.",
+        "sessions": "Grupi u ruajt, por seancat nuk mund të krijoheshin. Hapeni dhe ruajeni sërish.",
+        "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
+      }
+    },
+    "detail": {
+      "myGroups": "Grupet e mia",
+      "archived": "I mbyllur",
+      "emailParents": "Email prindërve",
+      "edit": "Ndrysho grupin",
+      "addPlayer": "Shto lojtar",
+      "more": "Më shumë",
+      "archive": "Mbyll grupin",
+      "unarchive": "Rifillo grupin",
+      "archiveConfirm": "Të mbyllet ky grup? Seancat e ardhshme anulohen dhe fusha lirohet. Lojtarët dhe historia mbeten.",
+      "archivedDone": "Grupi u mbyll. Seancat e ardhshme u anuluan.",
+      "unarchived": "Grupi rifilloi.",
+      "delete": "Fshi grupin",
+      "deleteConfirm": "Të fshihet përgjithmonë ky grup? Fshihen edhe lojtarët, regjistri dhe pagesat. Për ta ruajtur historinë, më mirë mbylleni grupin.",
+      "dismiss": "Mbyll",
+      "tabs": {
+        "players": "Lojtarët",
+        "sessions": "Seancat",
+        "fees": "Pagesat",
+        "waiting": "Lista e pritjes"
+      },
+      "requests": "{n, plural, one {# person kërkon vend} other {# persona kërkojnë vend}}",
+      "accept": "Prano",
+      "acceptToWaiting": "Shto në listën e pritjes",
+      "decline": "Refuzo",
+      "accepted": "{name} është në grup.",
+      "toWaiting": "{name} është në listën e pritjes.",
+      "declined": "Kërkesa e {name} u refuzua.",
+      "feesFor": "Pagesat për {month}",
+      "paidOf": "{n} nga {of} kanë paguar · {amount} nga {total}",
+      "remindUnpaid": "Kujto {n} pa paguar",
+      "reminded": "{n, plural, =0 {Nuk u dërgua asnjë kujtesë: askush pa paguar nuk ka email.} one {Kujtesa iu dërgua # prindi.} other {Kujtesat iu dërguan # prindërve.}}",
+      "noPlayers": "Ende pa lojtarë",
+      "noPlayersOnline": "Ndani lidhjen e regjistrimit ose shtoni vetë lojtarët.",
+      "noPlayersHint": "Shtoni lojtarët që trajneri i ka tashmë.",
+      "col": {
+        "player": "Lojtari",
+        "contact": "Prindi ose kontakti",
+        "attendance": "Erdhi",
+        "actions": "Veprime",
+        "amount": "Shuma",
+        "status": "Statusi",
+        "paidOn": "Paguar më"
+      },
+      "since": "që nga {date}",
+      "trialOn": "Provë falas {date}",
+      "trial": "Provë falas",
+      "keep": "Mbaje në grup",
+      "kept": "{name} tani është në grup.",
+      "ownAccount": "Llogari e vet",
+      "attended": "{n} nga {of}",
+      "moreFor": "Më shumë për {name}",
+      "editPlayer": "Ndrysho",
+      "moveToWaiting": "Kalo në listën e pritjes",
+      "remove": "Hiq nga grupi",
+      "removeConfirm": "Të hiqet {name} nga lista?",
+      "removed": "{name} u hoq nga lista.",
+      "removedOffered": "{name} u hoq nga lista. Vendi iu ofrua listës së pritjes.",
+      "paidBy": "Paguar · {method}",
+      "method": {
+        "cash": "Para në dorë",
+        "bank": "Bankë",
+        "other": "Tjetër"
+      },
+      "undoPaid": "Shëno si të papaguar",
+      "unpaidMark": "Pa paguar · shëno {amount} të paguar",
+      "month": "Muaji",
+      "noFees": "Askush në listë për këtë muaj.",
+      "feesHint": "Pagesat i bëhen klubit në para në dorë ose me transfertë bankare. Kortello vetëm i mban shënim.",
+      "leftGroup": "(u largua)",
+      "waitingTitle": "Lista e pritjes",
+      "waitingHint": "Kur lirohet një vend, i radhës merr një email dhe 48 orë për ta pranuar.",
+      "waitingEmpty": "Askush nuk është në pritje.",
+      "offeredUntil": "Vend i ofruar · përgjigje deri më {date}",
+      "waitingSince": "Në pritje që nga {date}",
+      "joinedOnline": "u regjistrua online",
+      "addedByClub": "u shtua nga klubi",
+      "offerPlace": "Ofro një vend",
+      "offerSent": "Vendi iu ofrua {name} me email.",
+      "offerMade": "Vendi iu ofrua {name}. Nuk u dërgua email, prandaj njoftojeni vetë.",
+      "removeFromWaiting": "Hiq {name}",
+      "requestsOnPlayers": "{n, plural, one {# kërkesë} other {# kërkesa}} për t'u përgjigjur te",
+      "nextSessions": "Seancat e radhës",
+      "noUpcoming": "Nuk ka seanca të ardhshme.",
+      "noPast": "Ende nuk ka seanca.",
+      "todayAt": "Sot {time}",
+      "coming": "vijnë {n}",
+      "bookedOf": "{n} / {max} të rezervuar",
+      "cantCome": "{n} nuk mund të vijnë",
+      "register": "Regjistri",
+      "viewRegister": "Regjistri",
+      "setup": "Cilësimet",
+      "season": "Sezoni",
+      "sessionsLabel": "Seancat",
+      "sessionsDone": "{n} · {done} të mbajtura",
+      "noSessionsOn": "Pa seanca më",
+      "places": "Vendet",
+      "perSessionMax": "{n} për seancë",
+      "onlineSignup": "Regjistrim online",
+      "on": "Aktiv",
+      "off": "Joaktiv",
+      "onApproval": "Aktiv · trajneri miraton",
+      "trialSession": "Seancë prove falas",
+      "memberPrice": "Çmimi për anëtarët",
+      "copyLink": "Kopjo lidhjen e regjistrimit",
+      "copied": "Lidhja u kopjua",
+      "upcoming": "Të ardhshme",
+      "past": "Të kaluara",
+      "cancelled": "Anuluar",
+      "moved": "Zhvendosur",
+      "noReason": "Pa arsye",
+      "registerSummary": "{here} të pranishëm · {away} mungojnë",
+      "noRegister": "Pa regjistër",
+      "move": "Zhvendos",
+      "cancel": "Anulo",
+      "restore": "Zhbëj anulimin",
+      "restored": "Seanca u rikthye.",
+      "showMore": "Shfaq edhe {n}",
+      "cancelTitle": "Të anulohet {date}?",
+      "cancelBody": "Fusha lirohet dhe {n, plural, =0 {nuk duhet njoftuar askush} one {prindi ose lojtari merr një email} other {# prindër dhe lojtarë marrin një email}}.",
+      "reason": "Arsyeja (opsionale)",
+      "reasonPlaceholder": "p.sh. Shi, trajneri është i sëmurë",
+      "keepSession": "Mbaje",
+      "cancelSession": "Anulo seancën",
+      "working": "Duke punuar…",
+      "cancelledSent": "Seanca u anulua. {n, plural, one {U dërgua # email.} other {U dërguan # email.}}",
+      "cancelledDone": "Seanca u anulua.",
+      "moveTitle": "Zhvendos këtë seancë",
+      "date": "Data",
+      "from": "Nga",
+      "to": "Deri",
+      "court": "Fusha",
+      "moveHint": "Zhvendoset vetëm kjo seancë. Fusha duhet të jetë e lirë atëherë.",
+      "close": "Mbyll",
+      "moveSave": "Zhvendos seancën",
+      "movedDone": "Seanca u zhvendos.",
+      "noEmails": "Askush në listë nuk ka ende email.",
+      "emailsCopied": "U kopjuan {n} adresa email. Ngjitini te BCC i emailit tuaj.",
+      "saved": "U ruajt:",
+      "savedCreated": "{n, plural, one {u shtua # seancë} other {u shtuan # seanca}}",
+      "savedRemoved": "u hoqën {n}",
+      "savedSkipped": "{n, plural, one {u kapërce # ditë} other {u kapërcyen # ditë}}",
+      "errors": {
+        "failed": "Diçka shkoi keq. Ju lutemi provoni sërish.",
+        "times": "Kontrolloni oraret.",
+        "busy": "Fusha ose trajneri janë të zënë atëherë.",
+        "past": "Ajo orë ka kaluar.",
+        "notAllowed": "Nuk mund ta bëni këtë për këtë grup.",
+        "taken": "Fusha është rezervuar ndërkohë, prandaj seanca nuk mund të rikthehet.",
+        "started": "Ajo seancë ka filluar tashmë.",
+        "plan": "Grupet vijnë me paketat Club dhe Academy.",
+        "sessions": "U ruajt, por seancat nuk mund të përditësoheshin. Ju lutemi provoni sërish."
+      }
+    },
+    "player": {
+      "addTitle": "Shto lojtar",
+      "editTitle": "Ndrysho lojtarin",
+      "name": "Emri",
+      "age": "Mosha",
+      "contactName": "Prindi ose kontakti",
+      "contactPlaceholder": "p.sh. Claire Martin (bosh për të rriturit)",
+      "email": "Email",
+      "phone": "Telefoni",
+      "emailHint": "Me email, prindi merr njoftime për anulime dhe kujtesa për pagesë, dhe e sheh grupin nëse hyn në Kortello me të.",
+      "price": "Çmimi mujor",
+      "priceHint": "Lëreni bosh për çmimin e grupit. Përdoreni për zbritje për vëllezër/motra ose anëtarë.",
+      "notes": "Shënime për trajnerin",
+      "waiting": "Vendos në listën e pritjes",
+      "waitingFull": "Grupi është plot: vendos në listën e pritjes",
+      "cancel": "Anulo",
+      "add": "Shto",
+      "save": "Ruaj",
+      "saving": "Duke ruajtur…",
+      "added": "{name} u shtua.",
+      "addedWaiting": "{name} është në listën e pritjes.",
+      "saved": "U ruajt.",
+      "errors": {
+        "playerName": "Shkruani emrin e lojtarit.",
+        "email": "Kontrolloni adresën email.",
+        "age": "Mosha duhet të jetë nga 3 deri në 99.",
+        "price": "Çmimi nuk mund të jetë negativ.",
+        "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
+      }
+    },
+    "register": {
+      "title": "Regjistri",
+      "back": "Kthehu",
+      "today": "Sot",
+      "sessionOf": "Seanca {n} nga {total}",
+      "cancelledNote": "Kjo seancë u anulua. {reason}",
+      "here": "{n} të pranishëm",
+      "away": "{n} mungojnë",
+      "toMark": "{n} për t'u shënuar",
+      "allHere": "Të gjithë këtu",
+      "noBookings": "Askush nuk e ka rezervuar ende këtë seancë.",
+      "noPlayers": "Ende askush në listë.",
+      "parentSaid": "Prindi tha: {reason}",
+      "parentSaidNo": "Prindi tha që nuk mund të vijë",
+      "trial": "Provë falas",
+      "unpaid": "Ky muaj nuk është paguar",
+      "guest": "Mysafir",
+      "guestNew": "Shtuar sot",
+      "guestName": "Emri",
+      "add": "Shto",
+      "close": "Mbyll",
+      "addGuest": "Shto dikë për sot (provë ose mysafir)",
+      "addDropin": "Shto dikë që erdhi pa rezervim",
+      "note": "Shënim për këtë seancë",
+      "notePlaceholder": "Mbi çfarë punuat, për prindërit",
+      "noteHint": "Prindërit shohin shënimin e fundit në Kortello.",
+      "cancelToday": "Anulo seancën e sotme",
+      "cancelThis": "Anulo këtë seancë",
+      "save": "Ruaj regjistrin",
+      "saving": "Duke ruajtur…",
+      "saved": "U ruajt",
+      "paid": "Paguar",
+      "hereButton": "Këtu",
+      "awayButton": "Mungon",
+      "removeName": "Hiq {name}",
+      "errors": {
+        "notAllowed": "Vetëm klubi dhe trajneri i grupit mund ta mbajnë regjistrin.",
+        "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
+      }
+    }
+  },
+  "myGroups": {
+    "title": "Grupet e mia",
+    "subtitle": "Grupe stërvitjeje për ju dhe fëmijët tuaj.",
+    "empty": "Ende nuk ka grupe",
+    "emptyHint": "Kur një trajner ju shton ju ose fëmijën tuaj me emailin tuaj, ose kur regjistroheni në faqen e një klubi, grupi shfaqet këtu.",
+    "youCoach": "Grupet që stërvitni",
+    "yourPlaces": "Grupet tuaja",
+    "dropins": "Seancat e hapura që rezervuat",
+    "players": "{n} / {max} lojtarë",
+    "dropinGroup": "Seancë e hapur",
+    "waitingOrAsking": "{n} në pritje",
+    "registerToday": "Regjistri · sot {time}",
+    "registerNext": "Regjistri · {date}",
+    "nextToday": "Radhës: sot · {time}",
+    "next": "Radhës: {date} · {time}",
+    "with": "me {coach}",
+    "addedByClub": "Klubi e shtoi {name} me emailin tuaj, prandaj grupi shfaqet këtu.",
+    "trialNote": "Është rezervuar një seancë prove falas. Trajneri do t'ju flasë për regjistrimin pas saj.",
+    "requested": "Në pritje që {coach} ta konfirmojë vendin.",
+    "theCoach": "trajneri",
+    "waiting": "Në listën e pritjes që nga {date}. Do të merrni një email kur të lirohet një vend.",
+    "offered": "Ka një vend të lirë! Përgjigjuni deri më {date}.",
+    "answer": "Përgjigju",
+    "noSession": "Pa seancë",
+    "notComing": "{name} nuk vjen",
+    "canComeAfterAll": "Mund të vijë në fund të fundit",
+    "cantCome": "{name} nuk mund të vijë",
+    "cameTo": "Erdhi",
+    "cameOf": "{n} nga {of}",
+    "paid": "Paguar",
+    "notPaid": "Ende pa paguar",
+    "schedule": "Orari",
+    "payClub": "Paguajini klubit ose trajnerit në para në dorë ose me transfertë bankare.",
+    "payClubPhone": "Paguajini klubit ose trajnerit në para në dorë ose me transfertë bankare. Pyetje? {phone}",
+    "fromCoach": "Nga {coach} · {date}",
+    "moreAt": "Më shumë grupe në {club}",
+    "leave": "Largohu nga grupi",
+    "leaveWaiting": "Dil nga lista e pritjes",
+    "leaveConfirm": "Të largohet {name} nga {group}? Vendi i kalon tjetrit në pritje.",
+    "leaveWaitingConfirm": "Të hiqet {name} nga lista e pritjes?",
+    "unbook": "Anulo",
+    "unbookConfirm": "Ta lironi vendin tuaj në këtë seancë?",
+    "errors": {
+      "notAllowed": "Nuk mund ta bëni këtë për këtë lojtar.",
+      "started": "Ajo seancë ka filluar tashmë.",
+      "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
+    }
+  },
+  "groupSignup": {
+    "title": "Grupe dhe seanca",
+    "subtitle": "Grupe javore me trajnerët e klubit. Regjistrohuni online.",
+    "dropin": "Seancë e hapur",
+    "with": "me {coach}",
+    "perMonth": "/ muaj",
+    "perSession": "/ seancë",
+    "full": "Plot",
+    "fullWaiting": "Plot · {n} në pritje",
+    "placesLeft": "{n, plural, one {mbetet # vend} other {mbeten # vende}}",
+    "signInToJoin": "Hyni për t'u regjistruar",
+    "signIn": "Hyr",
+    "join": "Regjistrohu",
+    "joinWaiting": "Hyr në listën e pritjes",
+    "askToJoin": "Kërko vend",
+    "tryFree": "Provo një seancë falas",
+    "noSessions": "Nuk ka seanca të ardhshme.",
+    "booked": "Rezervuar · anulo",
+    "book": "Rezervo",
+    "joinTitle": "Regjistrim në {group}",
+    "trialTitle": "Seancë falas në {group}",
+    "fullNote": "Grupi është plot. Do të jeni në listën e pritjes dhe do të merrni një email kur të lirohet një vend.",
+    "approveNote": "Trajneri konfirmon çdo lojtar të ri, prandaj do të merrni përgjigje së shpejti.",
+    "trialNote": "Ejani falas në seancën e radhës. Nëse ju përshtatet, trajneri ju shton në grup.",
+    "joinNote": "Jeni në grup menjëherë. Klubi do t'ju tregojë si të paguani.",
+    "who": "Për kë është?",
+    "me": "Për mua",
+    "myChild": "Për fëmijën tim",
+    "yourName": "Emri juaj",
+    "childName": "Emri i fëmijës",
+    "age": "Mosha",
+    "phone": "Telefoni (opsional)",
+    "contactNote": "Klubi përdor emailin e llogarisë suaj për anulime dhe kujtesa.",
+    "cancel": "Anulo",
+    "sending": "Duke dërguar…",
+    "bookTrial": "Rezervo seancën falas",
+    "seeMyGroups": "Shih grupet e mia",
+    "done": {
+      "active": "{name} është në {group}.",
+      "trial": "Seanca falas e {name} në {group} u rezervua.",
+      "requested": "Kërkesa u dërgua. Trajneri do ta konfirmojë vendin e {name} në {group}.",
+      "waiting": "{name} është në listën e pritjes për {group}."
+    },
+    "errors": {
+      "notSignedIn": "Ju lutemi hyni fillimisht.",
+      "confirmEmail": "Ju lutemi konfirmoni fillimisht adresën email: kontrolloni kutinë postare.",
+      "already": "Jeni regjistruar tashmë në këtë grup.",
+      "age": "Ky grup është për moshat {from} deri në {to}.",
+      "full": "Na vjen keq, sapo u mbush.",
+      "closed": "Kjo nuk është e hapur për regjistrim online.",
+      "name": "Ju lutemi shkruani një emër.",
+      "notAllowed": "Nuk mund ta bëni këtë.",
+      "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
+    }
+  },
+  "groupOffer": {
+    "title": "Një vend për {name}",
+    "intro": "U lirua një vend në {group}.",
+    "group": "Grupi",
+    "when": "Kur",
+    "price": "Çmimi",
+    "perMonth": "{price} / muaj",
+    "answerBy": "Ju lutemi përgjigjuni deri më {date}. Pas kësaj, vendi i kalon tjetrit.",
+    "accept": "Po, e marr vendin",
+    "decline": "Jo, faleminderit",
+    "questions": "Pyetje? Telefononi klubin në {phone}.",
+    "acceptedTitle": "Shihemi në fushë!",
+    "acceptedBody": "{name} tani është në {group}. Klubi do t'ju tregojë si të paguani.",
+    "declinedTitle": "Faleminderit që na njoftuat",
+    "declinedBody": "Vendi i kalon tjetrit në listën e pritjes.",
+    "closedTitle": "Kjo ofertë është e mbyllur",
+    "closedBody": "Është përgjigjur tashmë ose vendi është zënë.",
+    "expiredBody": "Kaluan 48 orët, prandaj vendi i kaloi tjetrit. Për t'u regjistruar sërish, kontaktoni {club}.",
+    "toClub": "Shko te {club}",
+    "errors": {
+      "closed": "Kjo ofertë është e mbyllur.",
+      "expired": "Kjo ofertë ka skaduar.",
+      "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
+    }
+  },
+  "notifications": {
+    "title": "Njoftimet",
+    "bell": "{n, plural, =0 {Njoftimet} other {Njoftimet, # të palexuara}}",
+    "markAllRead": "Shëno të gjitha si të lexuara",
+    "all": "Të gjitha",
+    "unread": "Të palexuara",
+    "seeAll": "Shiko të gjitha njoftimet",
+    "empty": "Ende asgjë këtu.",
+    "emptyUnread": "I keni lexuar të gjitha.",
+    "today": "Sot",
+    "earlier": "Më herët",
+    "kept": "Njoftimet ruhen për 60 ditë.",
+    "loadMore": "Shfaq më shumë",
+    "justNow": "tani",
+    "yesterday": "Dje, {time}",
+    "unreadDot": "I palexuar",
+    "filters": {
+      "bookings": "Rezervimet",
+      "members": "Anëtarët",
+      "tournaments": "Turnetë",
+      "membership": "Anëtarësimi",
+      "groups": "Grupet"
+    },
+    "settings": {
+      "title": "Çfarë merrni",
+      "hintClub": "Vetëm për ju. Stafi zgjedh vetë për veten. Email-et për lojtarët nuk ndryshojnë.",
+      "hintPlayer": "Vetëm për ju. Email-et nga klubi nuk ndryshojnë.",
+      "alwaysOn": "Gjithmonë aktiv",
+      "saveFailed": "Nuk u ruajt. Provoni përsëri.",
+      "plan": {
+        "title": "Plani juaj Kortello",
+        "desc": "Kujtesa për provën dhe pagesën"
+      },
+      "admin": {
+        "bookings": {
+          "title": "Rezervime të reja",
+          "desc": "Kur një lojtar rezervon një fushë online"
+        },
+        "lessons": {
+          "title": "Orët e mësimit",
+          "desc": "Kur një lojtar rezervon një nga trajnerët tuaj"
+        },
+        "cancellations": {
+          "title": "Anulimet",
+          "desc": "Kur një lojtar anulon një rezervim ose orë"
+        },
+        "tournaments": {
+          "title": "Regjistrimet në turne",
+          "desc": "Kur dikush hyn ose del nga një turne"
+        },
+        "members": {
+          "title": "Anëtarësimet që skadojnë",
+          "desc": "Një përmbledhje në ditë, një javë më parë"
+        },
+        "staff": {
+          "title": "Stafi",
+          "desc": "Kur dikush pranon ftesën tuaj"
+        },
+        "groups": {
+          "title": "Grupet",
+          "desc": "Regjistrime, përgjigje nga lista e pritjes dhe kush nuk mund të vijë"
+        }
+      },
+      "member": {
+        "club_changes": {
+          "title": "Ndryshime nga klubi",
+          "desc": "Kur klubi rezervon ose anulon për ju"
+        },
+        "reminders": {
+          "title": "Kujtesa",
+          "desc": "Një ditë para se të luani"
+        },
+        "tournaments": {
+          "title": "Turnetë",
+          "desc": "Kur del shorti"
+        },
+        "membership": {
+          "title": "Anëtarësimi",
+          "desc": "Një javë para se të skadojë"
+        },
+        "groups": {
+          "title": "Grupet",
+          "desc": "Seanca të anuluara, vende të ofruara, kujtesa për pagesë"
+        }
+      }
+    },
+    "kinds": {
+      "someone": "Dikush",
+      "lessonWith": "Orë me {coach}",
+      "unknown": "Njoftim",
+      "places": "{count} nga {max} vende të zëna",
+      "booking_new": {
+        "title": "<b>{who}</b> rezervoi {court}"
+      },
+      "lesson_new": {
+        "title": "<b>{who}</b> rezervoi një orë me {coach}",
+        "court": "{court} e mbajtur"
+      },
+      "booking_cancelled": {
+        "court": "<b>{who}</b> anuloi {court}",
+        "lesson": "<b>{who}</b> anuloi një orë me {coach}",
+        "free": "orari është sërish i lirë"
+      },
+      "tournament_joined": {
+        "title": "<b>{name}</b> u regjistrua në {tournament}"
+      },
+      "tournament_left": {
+        "title": "<b>{name}</b> u tërhoq nga {tournament}"
+      },
+      "members_ending": {
+        "title": "{count, plural, one {<b># anëtarësim</b> skadon} other {<b># anëtarësime</b> skadojnë}} në 7 ditët e ardhshme",
+        "more": "{names} dhe {n} të tjerë"
+      },
+      "staff_joined": {
+        "title": "<b>{email}</b> pranoi ftesën si staf"
+      },
+      "trial_ending": {
+        "title": "Prova juaj falas mbaron për <b>{days, plural, =0 {më pak se një ditë} one {# ditë} other {# ditë}}</b>",
+        "detail": "Zgjidhni një plan që gjithçka të vazhdojë"
+      },
+      "trial_ended": {
+        "title": "Prova juaj falas <b>mbaroi</b>",
+        "detail": "Zgjidhni një plan për të vazhduar me Kortello"
+      },
+      "club_booked": {
+        "title": "<b>{club}</b> rezervoi një fushë për ju",
+        "weekly": "çdo javë"
+      },
+      "club_cancelled": {
+        "title": "<b>{club}</b> anuloi rezervimin tuaj",
+        "phone": "Pyetje? Telefononi klubin në {phone}"
+      },
+      "reminder": {
+        "title": "Së shpejti: <b>{what}</b>"
+      },
+      "draw": {
+        "title": "Doli shorti për <b>{tournament}</b>",
+        "opponent": "Ndeshja juaj e parë: kundër {opponent}",
+        "bye": "Kaloni drejtpërdrejt raundin e parë"
+      },
+      "membership_ending": {
+        "plan": "Anëtarësimi juaj <b>{plan}</b> skadon {days, plural, =0 {sot} one {pas # dite} other {pas # ditësh}}",
+        "noPlan": "Anëtarësimi juaj skadon <b>{days, plural, =0 {sot} one {pas # dite} other {pas # ditësh}}</b>",
+        "detail": "Kërkojini klubit ta rinovojë"
+      },
+      "group_signup": {
+        "active": "<b>{name}</b> u bashkua me {group}",
+        "trial": "<b>{name}</b> rezervoi një seancë falas në {group}",
+        "requested": "<b>{name}</b> kërkoi vend në {group}",
+        "waiting": "<b>{name}</b> hyri në listën e pritjes për {group}",
+        "booked": "<b>{name}</b> rezervoi një vend në {group}"
+      },
+      "group_left": {
+        "title": "<b>{name}</b> u largua nga {group}"
+      },
+      "group_offer_answer": {
+        "yes": "<b>{name}</b> e mori vendin në {group}",
+        "no": "<b>{name}</b> e refuzoi vendin në {group}",
+        "next": "Vendi i kalon tjetrit në pritje"
+      },
+      "group_absence": {
+        "title": "<b>{name}</b> nuk mund të vijë në {group}"
+      },
+      "group_cancelled": {
+        "title": "<b>{group}</b> u anulua"
+      },
+      "group_added": {
+        "title": "<b>{name}</b> u shtua në {group}"
+      },
+      "group_offer": {
+        "title": "Ka një vend të lirë në <b>{group}</b> për {name}",
+        "until": "Përgjigjuni deri më {date}"
+      },
+      "group_fee_due": {
+        "title": "Pagesa e <b>{month}</b> për {group} ende nuk është bërë"
+      }
     }
   }
 }

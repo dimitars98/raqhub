@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/supabase";
 import { sendEmail } from "@/lib/email/send";
+import { emailFeeDue, emailOffers } from "@/lib/email/groups";
 import { localeForCountry } from "@/lib/email/locale";
 import {
   bookingReminderEmail,
@@ -218,7 +219,7 @@ export async function sendWeeklyReports(db: Db, budget: Budget, now = new Date()
       ? (
           await db
             .from("bookings")
-            .select("court_id, status, total_price, duration_min")
+            .select("court_id, status, total_price, duration_min, group_id")
             .or(filters.join(","))
             .gte("starts_at", from)
             .lt("starts_at", to)
@@ -260,10 +261,11 @@ export async function sendWeeklyReports(db: Db, budget: Budget, now = new Date()
       ownerName: owner.name,
       clubName: club.name,
       weekStart,
-      bookings: played.length,
+      // Group sessions fill courts (occupancy) but aren't bookings.
+      bookings: played.filter((b) => !b.group_id).length,
       revenue: paid.reduce((sum, b) => sum + Number(b.total_price), 0),
       occupancy: capacity > 0 ? Math.round((courtMinutes / 60 / capacity) * 100) : null,
-      cancellations: bookings.filter((b) => b.status === "cancelled").length,
+      cancellations: bookings.filter((b) => b.status === "cancelled" && !b.group_id).length,
       noShows: bookings.filter((b) => b.status === "no_show").length,
       newMembers: newMembers ?? 0,
       expiring: (expiring ?? [])
@@ -420,4 +422,74 @@ export async function sendNewClubNotices(db: Db, budget: Budget, now = new Date(
     if (await notifyNewClub(db, club.id)) sent++;
   }
   return { sent };
+}
+
+
+// ---------------------------------------------------------------------------
+// Coaching groups: waiting-list offers and fee reminders
+// ---------------------------------------------------------------------------
+
+/**
+ * Offers nobody answered within 48 hours go off the waiting list, and free
+ * places (someone left, an offer ran out) go to the next in line, by email.
+ */
+export async function sendGroupOffers(db: Db, budget: Budget) {
+  const { error: expireError } = await db.rpc("expire_group_offers");
+  if (expireError) throw expireError;
+
+  // Groups with someone waiting.
+  const { data: waiting, error } = await db
+    .from("group_players")
+    .select("group_id")
+    .eq("status", "waiting")
+    .limit(2000);
+  if (error) throw error;
+  const groupIds = [...new Set((waiting ?? []).map((w) => w.group_id))];
+
+  let offered = 0;
+  let sent = 0;
+  for (const groupId of groupIds) {
+    const { data: group } = await db
+      .from("groups")
+      .select("name, days, start_time, end_time, archived_at, club:clubs(name, country, phone, email)")
+      .eq("id", groupId)
+      .maybeSingle();
+    const g = group as unknown as {
+      name: string;
+      days: number[];
+      start_time: string;
+      end_time: string;
+      archived_at: string | null;
+      club: { name: string; country: string | null; phone: string | null; email: string | null } | null;
+    } | null;
+    if (!g?.club || g.archived_at) continue;
+    const { data: offers } = await db.rpc("offer_group_places", { p_group: groupId });
+    if (!offers?.length) continue;
+    offered += offers.length;
+    // Offers are made either way; the email may wait for the next run's budget.
+    const withEmail = offers.filter((o) => o.email && budget.take());
+    sent += await emailOffers(g.club, g, withEmail);
+  }
+  return { offered, sent };
+}
+
+/** From the 10th: one reminder a month to whoever hasn't paid this month's fee. */
+export async function sendGroupFeeReminders(db: Db, budget: Budget) {
+  if (budget.left <= 0) return { sent: 0, waiting: true };
+  const { data, error } = await db.rpc("due_group_fee_reminders");
+  if (error) throw error;
+  const rows = data ?? [];
+  if (!rows.length) return { sent: 0 };
+
+  const clubIds = [...new Set(rows.map((r) => r.club_id))];
+  const { data: clubs } = await db.from("clubs").select("id, name, country, phone, email").in("id", clubIds);
+  const clubOf = new Map((clubs ?? []).map((c) => [c.id, c]));
+
+  let sent = 0;
+  for (const r of rows) {
+    const club = clubOf.get(r.club_id);
+    if (!club || !r.email || !budget.take()) continue;
+    if (await emailFeeDue(club, r.group_name, r.month, { ...r, amount: Number(r.amount) })) sent++;
+  }
+  return { sent, due: rows.length };
 }

@@ -60,6 +60,8 @@ export default async function AnalyticsPage() {
           "id, starts_at, status, total_price, duration_min, walk_in_name, court:courts!inner(id, name, sport, club_id), member:members(full_name)",
         )
         .eq("court.club_id", club.id)
+        // Group sessions aren't bookings: they have their own page.
+        .is("group_id", null)
         .gte("starts_at", yearAgo)
         .order("starts_at", { ascending: true }),
     ),

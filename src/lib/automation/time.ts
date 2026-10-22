@@ -42,3 +42,22 @@ export function clubMidnight(date: string) {
   const minutes = match ? (match[1] === "-" ? -1 : 1) * (Number(match[2]) * 60 + Number(match[3])) : 0;
   return new Date(guess.getTime() - minutes * 60_000);
 }
+
+/** The UTC moment of a club-time date and "HH:MM", e.g. ("2026-10-25", "17:00"). */
+export function toUtc(date: string, time: string) {
+  const guess = new Date(`${date}T${time}:00Z`);
+  const offsetAt = (d: Date) => {
+    const name = new Intl.DateTimeFormat("en-US", {
+      timeZone: CLUB_TIME_ZONE,
+      timeZoneName: "longOffset",
+    })
+      .formatToParts(d)
+      .find((p) => p.type === "timeZoneName")?.value;
+    const m = name?.match(/GMT([+-])(\d{2}):(\d{2})/);
+    return m ? (m[1] === "-" ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3])) : 0;
+  };
+  // The offset where the result lands, not at the guess (matters on the days
+  // the clocks change).
+  const first = new Date(guess.getTime() - offsetAt(guess) * 60_000);
+  return new Date(guess.getTime() - offsetAt(first) * 60_000);
+}

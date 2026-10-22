@@ -153,6 +153,8 @@ export interface Booking {
   locale?: string | null;
   /** Shared by the weeks of a weekly repeating booking. */
   series_id?: string | null;
+  /** Set when the booking holds the court for a group's session. */
+  group_id?: string | null;
   created_at: string;
   updated_at: string;
   player?: Profile;
@@ -238,4 +240,110 @@ export interface ClubStaff {
   user_id: string | null;
   created_at: string;
   accepted_at: string | null;
+}
+
+// ---------------------------------------------------------------------------
+// Coaching groups (supabase/migrations/20261024_groups.sql)
+// ---------------------------------------------------------------------------
+
+export type GroupKind = "season" | "dropin";
+export type GroupLevel = "beginner" | "intermediate" | "advanced" | "all";
+export type GroupPlayerStatus = "active" | "trial" | "requested" | "waiting" | "offered" | "left";
+export type AttendanceStatus = "booked" | "present" | "absent" | "excused";
+export type FeeMethod = "cash" | "bank" | "other";
+
+/** A day with no sessions, e.g. the winter break. Dates are yyyy-mm-dd. */
+export type GroupBreak = { from: string; to: string; label?: string };
+
+export interface Group {
+  id: string;
+  club_id: string;
+  name: string;
+  kind: GroupKind;
+  sport: Sport;
+  level: GroupLevel;
+  age_min: number | null;
+  age_max: number | null;
+  adults: boolean;
+  coach_id: string | null;
+  court_id: string | null;
+  /** ISO weekdays: 1 = Monday … 7 = Sunday */
+  days: number[];
+  /** "HH:MM:SS" */
+  start_time: string;
+  end_time: string;
+  starts_on: string;
+  ends_on: string;
+  breaks: GroupBreak[];
+  max_players: number;
+  /** Per month (season) or per session (drop-in). */
+  price: number;
+  member_price: number | null;
+  member_plan_id: string | null;
+  online_signup: boolean;
+  coach_approves: boolean;
+  trial: boolean;
+  description: string | null;
+  archived_at: string | null;
+  created_at: string;
+}
+
+export interface GroupSession {
+  id: string;
+  group_id: string;
+  starts_at: string;
+  ends_at: string;
+  court_id: string | null;
+  booking_id: string | null;
+  status: "scheduled" | "cancelled";
+  moved: boolean;
+  schedule_cancelled: boolean;
+  cancel_reason: string | null;
+  note: string | null;
+  register_taken_at: string | null;
+  created_at: string;
+}
+
+export interface GroupPlayer {
+  id: string;
+  group_id: string;
+  name: string;
+  age: number | null;
+  contact_name: string | null;
+  email: string | null;
+  phone: string | null;
+  profile_id: string | null;
+  status: GroupPlayerStatus;
+  source: "club" | "online";
+  monthly_price: number | null;
+  trial_session_id: string | null;
+  waiting_since: string | null;
+  offer_expires_at: string | null;
+  joined_on: string;
+  left_on: string | null;
+  notes: string | null;
+  created_at: string;
+}
+
+export interface GroupAttendance {
+  id: string;
+  session_id: string;
+  player_id: string | null;
+  guest_name: string | null;
+  profile_id: string | null;
+  status: AttendanceStatus;
+  paid: boolean;
+  reason: string | null;
+  updated_at: string;
+}
+
+export interface GroupFee {
+  id: string;
+  player_id: string;
+  /** yyyy-mm-01 */
+  month: string;
+  amount: number;
+  method: FeeMethod;
+  paid_at: string;
+  marked_by: string | null;
 }

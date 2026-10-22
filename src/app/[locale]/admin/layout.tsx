@@ -70,6 +70,7 @@ export default async function AdminLayout({
   return (
     <DashboardShell
       role="admin"
+      userId={user.id}
       userName={profile.full_name ?? "Admin"}
       clubName={club?.name}
       clubSlug={club?.slug}

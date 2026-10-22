@@ -7,6 +7,7 @@ import { Building2 } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { announceNewClub } from "@/app/actions/clubs";
+import { intlLocale } from "@/lib/dateLocale";
 
 type CreateClubValues = {
   name: string;
@@ -69,7 +70,7 @@ export default function CreateClubForm({
   const countries = useMemo(() => {
     let names: Intl.DisplayNames | null = null;
     try {
-      names = new Intl.DisplayNames([locale], { type: "region" });
+      names = new Intl.DisplayNames([intlLocale(locale)], { type: "region" });
     } catch {
       // Very old browsers: fall back to the codes.
     }

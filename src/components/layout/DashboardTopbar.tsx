@@ -2,12 +2,15 @@
 
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { Bell, PanelLeft } from "lucide-react";
+import { PanelLeft } from "lucide-react";
 import LocaleSwitcher from "../ui/LocaleSwitcher";
 import { useSidebar } from "./SidebarContext";
+import NotificationBell from "../notifications/NotificationBell";
+import type { Area } from "@/lib/notifications";
 
 type TitleKey =
   | "dashboard"
+  | "groups"
   | "timetable"
   | "bookings"
   | "members"
@@ -23,11 +26,13 @@ type TitleKey =
   | "membership"
   | "owner"
   | "tournaments"
-  | "staff";
+  | "staff"
+  | "notifications";
 
 // URL segment → translation key
 const TITLE_KEYS: Record<string, TitleKey> = {
   dashboard: "dashboard",
+  groups: "groups",
   timetable: "timetable",
   bookings: "bookings",
   members: "members",
@@ -44,12 +49,13 @@ const TITLE_KEYS: Record<string, TitleKey> = {
   owner: "owner",
   tournaments: "tournaments",
   staff: "staff",
+  notifications: "notifications",
 };
 
 const iconButton =
   "grid size-9 place-items-center rounded-lg text-ink-400 transition-colors hover:bg-ink-50 hover:text-ink-900";
 
-export default function DashboardTopbar() {
+export default function DashboardTopbar({ userId, area }: { userId: string; area: Area }) {
   const pathname = usePathname();
   const t = useTranslations("dashboard.titles");
   const tc = useTranslations("common");
@@ -83,9 +89,7 @@ export default function DashboardTopbar() {
 
       <div className="flex items-center gap-2">
         <LocaleSwitcher size="sm" />
-        <button type="button" aria-label={tc("notifications")} className={iconButton}>
-          <Bell className="size-[18px]" strokeWidth={1.75} aria-hidden="true" />
-        </button>
+        <NotificationBell userId={userId} area={area} />
       </div>
     </header>
   );

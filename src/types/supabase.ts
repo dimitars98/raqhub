@@ -75,6 +75,7 @@ export type Database = {
           reference: string
           reminder_sent_at: string | null
           series_id: string | null
+          group_id: string | null
           starts_at: string
           status: string
           stripe_payment_intent_id: string | null
@@ -97,6 +98,7 @@ export type Database = {
           reference?: string
           reminder_sent_at?: string | null
           series_id?: string | null
+          group_id?: string | null
           starts_at: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -119,6 +121,7 @@ export type Database = {
           reference?: string
           reminder_sent_at?: string | null
           series_id?: string | null
+          group_id?: string | null
           starts_at?: string
           status?: string
           stripe_payment_intent_id?: string | null
@@ -258,6 +261,52 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      notifications: {
+        Row: {
+          id: string
+          user_id: string
+          club_id: string | null
+          kind: string
+          data: Json
+          link: string | null
+          dedupe_key: string | null
+          read_at: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          club_id?: string | null
+          kind: string
+          data?: Json
+          link?: string | null
+          dedupe_key?: string | null
+          read_at?: string | null
+          created_at?: string
+        }
+        Update: {
+          read_at?: string | null
+        }
+        Relationships: []
+      }
+      notification_prefs: {
+        Row: {
+          user_id: string
+          muted: string[]
+          updated_at: string
+        }
+        Insert: {
+          user_id: string
+          muted?: string[]
+          updated_at?: string
+        }
+        Update: {
+          user_id?: string
+          muted?: string[]
+          updated_at?: string
+        }
+        Relationships: []
       }
       club_weekly_reports: {
         Row: {
@@ -612,6 +661,361 @@ export type Database = {
         }
         Relationships: []
       }
+      groups: {
+        Row: {
+          adults: boolean
+          age_max: number | null
+          age_min: number | null
+          archived_at: string | null
+          breaks: Json
+          club_id: string
+          coach_approves: boolean
+          coach_id: string | null
+          court_id: string | null
+          created_at: string
+          days: number[]
+          description: string | null
+          end_time: string
+          ends_on: string
+          id: string
+          kind: string
+          level: string
+          max_players: number
+          member_plan_id: string | null
+          member_price: number | null
+          name: string
+          online_signup: boolean
+          price: number
+          sport: string
+          start_time: string
+          starts_on: string
+          trial: boolean
+        }
+        Insert: {
+          adults?: boolean
+          age_max?: number | null
+          age_min?: number | null
+          archived_at?: string | null
+          breaks?: Json
+          club_id: string
+          coach_approves?: boolean
+          coach_id?: string | null
+          court_id?: string | null
+          created_at?: string
+          days: number[]
+          description?: string | null
+          end_time: string
+          ends_on: string
+          id?: string
+          kind?: string
+          level?: string
+          max_players?: number
+          member_plan_id?: string | null
+          member_price?: number | null
+          name: string
+          online_signup?: boolean
+          price?: number
+          sport?: string
+          start_time: string
+          starts_on: string
+          trial?: boolean
+        }
+        Update: {
+          adults?: boolean
+          age_max?: number | null
+          age_min?: number | null
+          archived_at?: string | null
+          breaks?: Json
+          club_id?: string
+          coach_approves?: boolean
+          coach_id?: string | null
+          court_id?: string | null
+          created_at?: string
+          days?: number[]
+          description?: string | null
+          end_time?: string
+          ends_on?: string
+          id?: string
+          kind?: string
+          level?: string
+          max_players?: number
+          member_plan_id?: string | null
+          member_price?: number | null
+          name?: string
+          online_signup?: boolean
+          price?: number
+          sport?: string
+          start_time?: string
+          starts_on?: string
+          trial?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "groups_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "clubs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "groups_coach_id_fkey"
+            columns: ["coach_id"]
+            isOneToOne: false
+            referencedRelation: "coaches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "groups_court_id_fkey"
+            columns: ["court_id"]
+            isOneToOne: false
+            referencedRelation: "courts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      group_sessions: {
+        Row: {
+          booking_id: string | null
+          cancel_reason: string | null
+          court_id: string | null
+          created_at: string
+          ends_at: string
+          group_id: string
+          id: string
+          moved: boolean
+          note: string | null
+          register_taken_at: string | null
+          schedule_cancelled: boolean
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          booking_id?: string | null
+          cancel_reason?: string | null
+          court_id?: string | null
+          created_at?: string
+          ends_at: string
+          group_id: string
+          id?: string
+          moved?: boolean
+          note?: string | null
+          register_taken_at?: string | null
+          schedule_cancelled?: boolean
+          starts_at: string
+          status?: string
+        }
+        Update: {
+          booking_id?: string | null
+          cancel_reason?: string | null
+          court_id?: string | null
+          created_at?: string
+          ends_at?: string
+          group_id?: string
+          id?: string
+          moved?: boolean
+          note?: string | null
+          register_taken_at?: string | null
+          schedule_cancelled?: boolean
+          starts_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_sessions_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_sessions_court_id_fkey"
+            columns: ["court_id"]
+            isOneToOne: false
+            referencedRelation: "courts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_sessions_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      group_players: {
+        Row: {
+          age: number | null
+          contact_name: string | null
+          created_at: string
+          email: string | null
+          fee_reminded_month: string | null
+          group_id: string
+          id: string
+          joined_on: string
+          left_on: string | null
+          monthly_price: number | null
+          name: string
+          notes: string | null
+          offer_expires_at: string | null
+          offer_token: string | null
+          phone: string | null
+          profile_id: string | null
+          source: string
+          status: string
+          trial_session_id: string | null
+          waiting_since: string | null
+        }
+        Insert: {
+          age?: number | null
+          contact_name?: string | null
+          created_at?: string
+          email?: string | null
+          fee_reminded_month?: string | null
+          group_id: string
+          id?: string
+          joined_on?: string
+          left_on?: string | null
+          monthly_price?: number | null
+          name: string
+          notes?: string | null
+          offer_expires_at?: string | null
+          offer_token?: string | null
+          phone?: string | null
+          profile_id?: string | null
+          source?: string
+          status?: string
+          trial_session_id?: string | null
+          waiting_since?: string | null
+        }
+        Update: {
+          age?: number | null
+          contact_name?: string | null
+          created_at?: string
+          email?: string | null
+          fee_reminded_month?: string | null
+          group_id?: string
+          id?: string
+          joined_on?: string
+          left_on?: string | null
+          monthly_price?: number | null
+          name?: string
+          notes?: string | null
+          offer_expires_at?: string | null
+          offer_token?: string | null
+          phone?: string | null
+          profile_id?: string | null
+          source?: string
+          status?: string
+          trial_session_id?: string | null
+          waiting_since?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_players_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_players_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      group_attendance: {
+        Row: {
+          guest_name: string | null
+          id: string
+          paid: boolean
+          player_id: string | null
+          profile_id: string | null
+          reason: string | null
+          session_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          guest_name?: string | null
+          id?: string
+          paid?: boolean
+          player_id?: string | null
+          profile_id?: string | null
+          reason?: string | null
+          session_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          guest_name?: string | null
+          id?: string
+          paid?: boolean
+          player_id?: string | null
+          profile_id?: string | null
+          reason?: string | null
+          session_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_attendance_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "group_sessions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_attendance_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "group_players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      group_fees: {
+        Row: {
+          amount: number
+          id: string
+          marked_by: string | null
+          method: string
+          month: string
+          paid_at: string
+          player_id: string
+        }
+        Insert: {
+          amount: number
+          id?: string
+          marked_by?: string | null
+          method?: string
+          month: string
+          paid_at?: string
+          player_id: string
+        }
+        Update: {
+          amount?: number
+          id?: string
+          marked_by?: string | null
+          method?: string
+          month?: string
+          paid_at?: string
+          player_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_fees_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "group_players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tournaments: {
         Row: {
           id: string
@@ -745,6 +1149,121 @@ export type Database = {
     }
     Functions: {
       claim_club_admin_role: { Args: never; Returns: undefined }
+      run_scheduled_notifications: { Args: never; Returns: Json }
+      preview_group_sessions: {
+        Args: {
+          p_club: string
+          p_court: string | null
+          p_coach: string | null
+          p_days: number[]
+          p_start_time: string
+          p_end_time: string
+          p_starts_on: string
+          p_ends_on: string
+          p_breaks: Json
+          p_group?: string | null
+        }
+        Returns: {
+          day: string
+          starts_at: string
+          ends_at: string
+          existing: boolean
+          clash: string | null
+          clash_who: string | null
+          clash_starts: string | null
+          clash_ends: string | null
+          free_court_id: string | null
+          free_court_name: string | null
+        }[]
+      }
+      sync_group_sessions: { Args: { p_group: string; p_choices?: Json }; Returns: Json }
+      cancel_group_session: {
+        Args: { p_session: string; p_reason?: string | null }
+        Returns: { name: string; contact_name: string | null; email: string | null }[]
+      }
+      restore_group_session: { Args: { p_session: string }; Returns: undefined }
+      move_group_session: {
+        Args: { p_session: string; p_starts_at: string; p_ends_at: string; p_court: string }
+        Returns: undefined
+      }
+      save_group_register: {
+        Args: { p_session: string; p_rows: Json; p_note?: string | null }
+        Returns: undefined
+      }
+      set_group_absence: {
+        Args: { p_session: string; p_player: string; p_absent: boolean; p_reason?: string | null }
+        Returns: undefined
+      }
+      join_group: {
+        Args: {
+          p_group: string
+          p_name: string
+          p_age?: number | null
+          p_phone?: string | null
+          p_for_self?: boolean
+          p_trial?: boolean
+        }
+        Returns: Json
+      }
+      leave_group: { Args: { p_player: string }; Returns: undefined }
+      offer_group_places: {
+        Args: { p_group: string; p_player?: string | null }
+        Returns: {
+          player_id: string
+          name: string
+          contact_name: string | null
+          email: string | null
+          token: string
+          expires_at: string
+        }[]
+      }
+      group_offer_info: { Args: { p_token: string }; Returns: Json }
+      respond_group_offer: { Args: { p_token: string; p_accept: boolean }; Returns: string }
+      expire_group_offers: { Args: never; Returns: string[] }
+      book_group_session: { Args: { p_session: string; p_name?: string | null }; Returns: undefined }
+      unbook_group_session: { Args: { p_session: string }; Returns: undefined }
+      public_groups: {
+        Args: { p_club: string }
+        Returns: {
+          id: string
+          name: string
+          kind: string
+          sport: string
+          level: string
+          age_min: number | null
+          age_max: number | null
+          adults: boolean
+          days: number[]
+          start_time: string
+          end_time: string
+          starts_on: string
+          ends_on: string
+          price: number
+          max_players: number
+          trial: boolean
+          coach_approves: boolean
+          description: string | null
+          coach_name: string | null
+          court_name: string | null
+          taken: number
+          waiting: number
+          sessions: Json
+        }[]
+      }
+      due_group_fee_reminders: {
+        Args: never
+        Returns: {
+          player_id: string
+          name: string
+          contact_name: string | null
+          email: string | null
+          group_name: string
+          club_id: string
+          club_name: string
+          amount: number
+          month: string
+        }[]
+      }
       club_max_courts: { Args: { p_club_id: string }; Returns: number | null }
       find_profile_by_email: {
         Args: { lookup_email: string }

@@ -334,7 +334,9 @@
       "share": "Share with players",
       "owner": "Clubs & payments",
       "tournaments": "Tournaments",
-      "staff": "Staff"
+      "staff": "Staff",
+      "notifications": "Notifications",
+      "groups": "Groups"
     },
     "share": "Share",
     "ownerGroup": "Kortello",
@@ -343,21 +345,21 @@
     "staff": "Staff",
     "manageClub": "Manage club",
     "superAdmin": "Super admin",
-    "clubAdmin": "Admin"
+    "clubAdmin": "Admin",
+    "groups": "Groups",
+    "myGroups": "My groups"
   },
   "members": {
     "title": "Members",
-    "total": "{count} total",
     "addMember": "Add member",
     "searchPlaceholder": "Search by name, email or phone...",
     "noResults": "No members match your search.",
     "noMembers": "No members yet. Add your first one.",
     "columns": {
-      "name": "Name",
-      "contact": "Contact",
       "plan": "Plan",
       "status": "Status",
-      "expires": "Expires"
+      "expires": "Expires",
+      "member": "Member"
     },
     "actions": {
       "edit": "Edit",
@@ -383,6 +385,51 @@
       "saveBtn": "Save changes",
       "addBtn": "Add member",
       "saving": "Saving…"
+    },
+    "export": "Export",
+    "tabs": {
+      "all": "All",
+      "active": "Active",
+      "ending": "Ending soon",
+      "expired": "Expired",
+      "cancelled": "Cancelled"
+    },
+    "filters": {
+      "plan": "Plan",
+      "allPlans": "All plans",
+      "ends": "Ends",
+      "anyTime": "Any time",
+      "within": "Within {days} days",
+      "show": "Show"
+    },
+    "inDays": "{n, plural, =0 {today} one {in # day} other {in # days}}",
+    "daysAgo": "{n, plural, one {# day ago} other {# days ago}}",
+    "showing": "Showing {from}–{to} of {total}",
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "bulk": {
+      "selected": "{n} selected",
+      "clear": "Clear selection",
+      "selectPage": "Select everyone on this page",
+      "selectRow": "Select {name}",
+      "email": "Email",
+      "extend": "Extend",
+      "extendBy": "{months, plural, =12 {By 1 year} one {By # month} other {By # months}}",
+      "extendHint": "From each member’s end date, or from today if it has passed. They become active again.",
+      "changePlan": "Change plan",
+      "cancel": "Cancel",
+      "confirmCancel": "{n, plural, one {Cancel # membership?} other {Cancel # memberships?}}",
+      "confirmYes": "Yes, cancel",
+      "confirmNo": "Keep",
+      "extended": "{n, plural, one {# membership extended.} other {# memberships extended.}}",
+      "planChanged": "{n, plural, one {Plan changed for # member.} other {Plan changed for # members.}}",
+      "cancelled": "{n, plural, one {# membership cancelled.} other {# memberships cancelled.}}",
+      "noEmails": "None of the selected members has an email address.",
+      "withoutEmail": "{n, plural, one {# without an email address was left out.} other {# without an email address were left out.}}",
+      "emailOpened": "{n, plural, one {Opened your email app with # address in BCC.} other {Opened your email app with # addresses in BCC.}}",
+      "emailsCopied": "{n} email addresses copied. Paste them into the BCC field of a new email.",
+      "failed": "Something went wrong. Please try again.",
+      "dismiss": "Dismiss"
     }
   },
   "adminCoaches": {
@@ -627,6 +674,24 @@
       "screens": "See the timetable, manage bookings and members",
       "button": "Open Kortello",
       "footer": "You get this email because {club} added this address to their staff on Kortello. If you don't know them, you can ignore it."
+    },
+    "groups": {
+      "group": "Group",
+      "player": "Player",
+      "reason": "Reason",
+      "schedule": "When",
+      "answerBy": "Answer by",
+      "month": "Month",
+      "open": "Open Kortello",
+      "cancelledSubject": "Cancelled: {group}, {date}",
+      "cancelledIntro": "The {group} session on {date} is cancelled. The other sessions go ahead as usual.",
+      "offerSubject": "A place is free in {group}",
+      "offerIntro": "Good news: a place has opened up for {name} in {group} at {club}. It's held for 48 hours.",
+      "offerButton": "Answer the offer",
+      "offerFooter": "You get this email because you're on {club}'s waiting list on Kortello.",
+      "feeSubject": "{group}: {month} fee",
+      "feeIntro": "A friendly reminder: {name}'s {month} fee for {group} hasn't been marked as paid yet.",
+      "feeFooter": "Sent by Kortello on behalf of {club}. Already paid? Then there's nothing to do: the club will mark it."
     }
   },
   "billing": {
@@ -653,7 +718,8 @@
       "reminders": "Reminder emails",
       "weeklyReport": "Weekly report",
       "analytics": "Analytics",
-      "staff": "Staff accounts"
+      "staff": "Staff accounts",
+      "groups": "Coaching groups"
     },
     "planNames": {
       "starter": "Starter",
@@ -922,6 +988,7 @@
           "Everything in Starter",
           "Membership plans with discounts",
           "Coaches and lesson bookings",
+          "Coaching groups with registers and fees",
           "Reminder emails",
           "Weekly report"
         ]
@@ -976,7 +1043,7 @@
       },
       "languages": {
         "q": "Which languages is it available in?",
-        "a": "English, Macedonian, Albanian, German, French and Italian. Each person chooses their own language, so staff and players can use different ones."
+        "a": "English, Macedonian, Serbian, Albanian, German, French and Italian. Each person chooses their own language, so staff and players can use different ones."
       },
       "data": {
         "q": "What happens to our data if we stop using Kortello?",
@@ -1131,7 +1198,9 @@
     "today": "Today",
     "noBookings": "No bookings on this day yet.",
     "noCourtsHint": "Add your first court and it will appear here as a column, ready for bookings.",
-    "lessonWith": "Lesson with {coach}"
+    "lessonWith": "Lesson with {coach}",
+    "group": "Group",
+    "groupWith": "with {coach}"
   },
   "bookCourts": {
     "titleAtClub": "Book a court at {club}",
@@ -1721,6 +1790,690 @@
       "label": "Reminder email",
       "title": "See you on court tomorrow",
       "sent": "Sent 24 hours before"
+    }
+  },
+  "groups": {
+    "title": "Groups",
+    "new": "New group",
+    "empty": "No groups yet",
+    "emptyHint": "Set up your coaches' weekly groups for kids, juniors and adults. Kortello holds the court for every session, keeps the register and tracks monthly fees.",
+    "noMatch": "No groups match these filters.",
+    "stats": {
+      "sessions": "Sessions this week",
+      "players": "Players in groups",
+      "full": "{n, plural, one {# group full} other {# groups full}}",
+      "waiting": "Waiting list",
+      "inGroups": "{n, plural, one {in # group} other {in # groups}}",
+      "unpaid": "{month} fees unpaid"
+    },
+    "tabs": {
+      "all": "All",
+      "season": "Season groups",
+      "dropin": "Drop-in clinics",
+      "places": "Has places",
+      "archived": "Ended"
+    },
+    "filters": {
+      "coach": "Coach",
+      "anyCoach": "Any coach",
+      "day": "Day",
+      "anyDay": "Any day"
+    },
+    "todayAt": "Today {time}",
+    "kind": {
+      "season": "Season group",
+      "dropin": "Drop-in clinic"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "all": "All levels"
+    },
+    "adults": "Adults",
+    "ages": "Ages {from}–{to}",
+    "agesFrom": "Ages {from}+",
+    "agesTo": "Up to age {to}",
+    "placesOf": "{n} / {max}",
+    "bookedNext": "{n} / {max} booked for the next session",
+    "full": "Full",
+    "waitingCount": "{n} waiting",
+    "requestsCount": "{n} asking to join",
+    "placesLeft": "{n, plural, one {# place left} other {# places left}}",
+    "perMonth": "{price} / month",
+    "perSession": "{price} / session",
+    "unpaidCount": "{n} unpaid",
+    "allPaid": "All paid",
+    "bookEachWeek": "Players book each week",
+    "form": {
+      "back": "Back",
+      "editTitle": "Edit group",
+      "create": "Create group",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "sections": {
+        "group": "The group",
+        "when": "When and where",
+        "players": "Players and sign-up",
+        "price": "Price"
+      },
+      "name": "Name",
+      "namePlaceholder": "e.g. Kids 9–12 · Beginners",
+      "sport": "Sport",
+      "coach": "Coach",
+      "noCoach": "No coach yet",
+      "level": "Level",
+      "ages": "Ages",
+      "from": "From",
+      "to": "To",
+      "ageFrom": "Youngest age",
+      "ageTo": "Oldest age",
+      "description": "Description",
+      "descriptionPlaceholder": "What players will work on, what to bring…",
+      "kind": "Kind of group",
+      "kindHint": {
+        "season": "The same players every week. Paid monthly.",
+        "dropin": "Players book each session. Paid per session."
+      },
+      "kindSeasonLocked": "A season group: the same players every week, paid monthly.",
+      "kindDropinLocked": "A drop-in clinic: players book each session.",
+      "days": "Days",
+      "court": "Court",
+      "starts": "Starts",
+      "ends": "Ends",
+      "breaks": "No sessions on",
+      "addBreak": "Add dates",
+      "removeBreak": "Remove {name}",
+      "breakName": "Name",
+      "breakPlaceholder": "e.g. Winter break",
+      "addBreakConfirm": "Add",
+      "cancel": "Cancel",
+      "maxPlayers": "Most players",
+      "maxPlayersHint": "When it's full, new people join the waiting list.",
+      "maxPerSession": "Places per session",
+      "maxPerSessionHint": "Booking closes when a session is full.",
+      "fewer": "One fewer",
+      "more": "One more",
+      "onlineSignup": "Online sign-up",
+      "onlineSignupHint": "Shown on your club page. Parents can sign up a child.",
+      "onlineSignupDropin": "Shown on your club page. Players book a place in each session.",
+      "coachApproves": "Coach approves new players",
+      "coachApprovesHint": "{coach} sees each request first, to check the level.",
+      "theCoach": "The coach",
+      "trial": "Free trial session",
+      "trialHint": "One free session before they commit, if there's a place.",
+      "pricePerMonth": "Price per month",
+      "pricePerSession": "Price per session",
+      "memberPrice": "Price for members on a plan",
+      "memberPlan": "Membership plan",
+      "optional": "Optional",
+      "paySeason": "Players pay the club directly, in cash or by bank transfer. You tick each month as paid, and Kortello reminds anyone who hasn't paid by the 10th.",
+      "payDropin": "Players pay at the session. The coach ticks who paid in the register.",
+      "summary": "Summary",
+      "pickDays": "Pick the days to see the sessions.",
+      "checking": "Checking the court…",
+      "every": "Every {days}, {from}–{to}, {court}",
+      "withoutBreaks": "{n, plural, one {without # break} other {without # breaks}}",
+      "upTo": "Up to {n, plural, one {# player} other {# players}}",
+      "freeTrial": "Free trial",
+      "allFree": "{court} is free for every session",
+      "freeFor": "{n} of {total} sessions are clear",
+      "clashClosed": "The club is closed then",
+      "clashCourt": "{who} has the court, {time}",
+      "clashCoach": "The coach is busy: {who}, {time}",
+      "useCourt": "Use {court}, it's free",
+      "skipDay": "Skip this day",
+      "moreClashes": "{n, plural, one {# more day} other {# more days}} with a clash: another free court is used, or the day is skipped.",
+      "neverMoved": "Existing bookings are never moved or cancelled.",
+      "noSessions": "No sessions left in this season from today. Check the dates.",
+      "noCourtsTitle": "Add a court first",
+      "noCourtsBody": "A group needs a court to play on. Add your courts, then come back to make the group.",
+      "addCourt": "Add courts",
+      "errors": {
+        "name": "Give the group a name (2 to 80 characters).",
+        "days": "Pick at least one day.",
+        "times": "A session must be between 30 minutes and 4 hours long.",
+        "dates": "Check the season dates: the end must come after the start, within 400 days.",
+        "court": "Pick a court.",
+        "players": "Places must be between 1 and 60.",
+        "price": "Prices can't be negative.",
+        "ages": "Check the ages: from 3 to 99, youngest first.",
+        "plan": "Groups come with the Club and Academy plans.",
+        "sessions": "The group is saved, but its sessions couldn't be made. Open it and save again.",
+        "failed": "Something went wrong. Please try again."
+      },
+      "sessionsCount": "{n, plural, one {# session} other {# sessions}}",
+      "skipped": "Skipped"
+    },
+    "detail": {
+      "myGroups": "My groups",
+      "archived": "Ended",
+      "emailParents": "Email parents",
+      "edit": "Edit group",
+      "addPlayer": "Add player",
+      "more": "More",
+      "archive": "End group",
+      "unarchive": "Restart group",
+      "archiveConfirm": "End this group? Sessions still to come are cancelled and the court is freed. The players and history stay.",
+      "archivedDone": "Group ended. Its sessions still to come are cancelled.",
+      "unarchived": "Group restarted.",
+      "delete": "Delete group",
+      "deleteConfirm": "Delete this group for good? Its players, register and fees are deleted too. To keep the history, end the group instead.",
+      "dismiss": "Close",
+      "tabs": {
+        "players": "Players",
+        "sessions": "Sessions",
+        "fees": "Fees",
+        "waiting": "Waiting list"
+      },
+      "requests": "{n, plural, one {# person asking to join} other {# people asking to join}}",
+      "accept": "Accept",
+      "acceptToWaiting": "Add to waiting list",
+      "decline": "Decline",
+      "accepted": "{name} is in the group.",
+      "toWaiting": "{name} is on the waiting list.",
+      "declined": "{name}'s request was declined.",
+      "feesFor": "{month} fees",
+      "paidOf": "{n} of {of} paid · {amount} of {total}",
+      "remindUnpaid": "Remind {n} unpaid",
+      "reminded": "{n, plural, =0 {No reminders sent: nobody unpaid has an email address.} one {Reminder sent to # parent.} other {Reminders sent to # parents.}}",
+      "noPlayers": "No players yet",
+      "noPlayersOnline": "Share the sign-up link, or add the players yourself.",
+      "noPlayersHint": "Add the players the coach already has.",
+      "col": {
+        "player": "Player",
+        "contact": "Parent or contact",
+        "attendance": "Came",
+        "actions": "Actions",
+        "amount": "Amount",
+        "status": "Status",
+        "paidOn": "Paid on"
+      },
+      "since": "since {date}",
+      "trialOn": "Free trial {date}",
+      "trial": "Free trial",
+      "keep": "Keep in group",
+      "kept": "{name} is now in the group.",
+      "ownAccount": "Own account",
+      "attended": "{n} of {of}",
+      "moreFor": "More for {name}",
+      "editPlayer": "Edit",
+      "moveToWaiting": "Move to waiting list",
+      "remove": "Remove from group",
+      "removeConfirm": "Take {name} off the list?",
+      "removed": "{name} was taken off the list.",
+      "removedOffered": "{name} was taken off the list. The place was offered to the waiting list.",
+      "paidBy": "Paid · {method}",
+      "method": {
+        "cash": "Cash",
+        "bank": "Bank",
+        "other": "Other"
+      },
+      "undoPaid": "Mark as not paid",
+      "unpaidMark": "Unpaid · mark {amount} paid",
+      "month": "Month",
+      "noFees": "Nobody on the list for this month.",
+      "feesHint": "Fees are paid to the club in cash or by bank transfer. Kortello only keeps track.",
+      "leftGroup": "(left)",
+      "waitingTitle": "Waiting list",
+      "waitingHint": "When a place opens, the next person gets an email and 48 hours to accept.",
+      "waitingEmpty": "Nobody is waiting.",
+      "offeredUntil": "Place offered · answer by {date}",
+      "waitingSince": "Waiting since {date}",
+      "joinedOnline": "signed up online",
+      "addedByClub": "added by the club",
+      "offerPlace": "Offer a place",
+      "offerSent": "Place offered to {name} by email.",
+      "offerMade": "Place offered to {name}. No email went out, so let them know yourself.",
+      "removeFromWaiting": "Remove {name}",
+      "requestsOnPlayers": "{n, plural, one {# request} other {# requests}} to answer on",
+      "nextSessions": "Next sessions",
+      "noUpcoming": "No sessions coming up.",
+      "noPast": "No sessions yet.",
+      "todayAt": "Today {time}",
+      "coming": "{n} coming",
+      "bookedOf": "{n} / {max} booked",
+      "cantCome": "{n} can't come",
+      "register": "Register",
+      "viewRegister": "Register",
+      "setup": "Setup",
+      "season": "Season",
+      "sessionsLabel": "Sessions",
+      "sessionsDone": "{n} · {done} done",
+      "noSessionsOn": "No sessions on",
+      "places": "Places",
+      "perSessionMax": "{n} per session",
+      "onlineSignup": "Online sign-up",
+      "on": "On",
+      "off": "Off",
+      "onApproval": "On · coach approves",
+      "trialSession": "Free trial session",
+      "memberPrice": "Members' price",
+      "copyLink": "Copy sign-up link",
+      "copied": "Link copied",
+      "upcoming": "Coming up",
+      "past": "Past",
+      "cancelled": "Cancelled",
+      "moved": "Moved",
+      "noReason": "No reason given",
+      "registerSummary": "{here} here · {away} away",
+      "noRegister": "No register taken",
+      "move": "Move",
+      "cancel": "Cancel",
+      "restore": "Undo cancel",
+      "restored": "The session is back on.",
+      "showMore": "Show {n} more",
+      "cancelTitle": "Cancel {date}?",
+      "cancelBody": "The court is freed and {n, plural, =0 {nobody needs telling} one {the parent or player gets an email} other {the # parents and players get an email}}.",
+      "reason": "Reason (optional)",
+      "reasonPlaceholder": "e.g. Rain, the coach is ill",
+      "keepSession": "Keep it",
+      "cancelSession": "Cancel session",
+      "working": "Working…",
+      "cancelledSent": "Session cancelled. {n, plural, one {# email sent.} other {# emails sent.}}",
+      "cancelledDone": "Session cancelled.",
+      "moveTitle": "Move this session",
+      "date": "Date",
+      "from": "From",
+      "to": "To",
+      "court": "Court",
+      "moveHint": "Only this one session moves. The court must be free then.",
+      "close": "Close",
+      "moveSave": "Move session",
+      "movedDone": "Session moved.",
+      "noEmails": "Nobody on the list has an email address yet.",
+      "emailsCopied": "{n} email addresses copied. Paste them into the BCC of your email.",
+      "saved": "Saved:",
+      "savedCreated": "{n, plural, one {# session added} other {# sessions added}}",
+      "savedRemoved": "{n} removed",
+      "savedSkipped": "{n, plural, one {# day skipped} other {# days skipped}}",
+      "errors": {
+        "failed": "Something went wrong. Please try again.",
+        "times": "Check the times.",
+        "busy": "The court or the coach is busy then.",
+        "past": "That time has already passed.",
+        "notAllowed": "You can't do that for this group.",
+        "taken": "The court has been booked since, so the session can't come back.",
+        "started": "That session has already started.",
+        "plan": "Groups come with the Club and Academy plans.",
+        "sessions": "Saved, but the sessions couldn't be updated. Please try again."
+      }
+    },
+    "player": {
+      "addTitle": "Add a player",
+      "editTitle": "Edit player",
+      "name": "Name",
+      "age": "Age",
+      "contactName": "Parent or contact",
+      "contactPlaceholder": "e.g. Claire Martin (empty for adults)",
+      "email": "Email",
+      "phone": "Phone",
+      "emailHint": "With an email, the parent gets cancellations and fee reminders, and sees the group if they sign in to Kortello with it.",
+      "price": "Monthly price",
+      "priceHint": "Leave empty for the group's price. Use it for a sibling or member discount.",
+      "notes": "Notes for the coach",
+      "waiting": "Put on the waiting list",
+      "waitingFull": "The group is full: put on the waiting list",
+      "cancel": "Cancel",
+      "add": "Add",
+      "save": "Save",
+      "saving": "Saving…",
+      "added": "{name} was added.",
+      "addedWaiting": "{name} is on the waiting list.",
+      "saved": "Saved.",
+      "errors": {
+        "playerName": "Enter the player's name.",
+        "email": "Check the email address.",
+        "age": "The age must be between 3 and 99.",
+        "price": "The price can't be negative.",
+        "failed": "Something went wrong. Please try again."
+      }
+    },
+    "register": {
+      "title": "Register",
+      "back": "Back",
+      "today": "Today",
+      "sessionOf": "Session {n} of {total}",
+      "cancelledNote": "This session was cancelled. {reason}",
+      "here": "{n} here",
+      "away": "{n} away",
+      "toMark": "{n} to mark",
+      "allHere": "All here",
+      "noBookings": "Nobody has booked this session yet.",
+      "noPlayers": "Nobody on the list yet.",
+      "parentSaid": "Parent said: {reason}",
+      "parentSaidNo": "Parent said they can't come",
+      "trial": "Free trial",
+      "unpaid": "This month not paid",
+      "guest": "Guest",
+      "guestNew": "Added today",
+      "guestName": "Name",
+      "add": "Add",
+      "close": "Close",
+      "addGuest": "Add someone for today (trial or guest)",
+      "addDropin": "Add someone who came without booking",
+      "note": "Note for this session",
+      "notePlaceholder": "What you worked on, for the parents",
+      "noteHint": "Parents see the latest note in Kortello.",
+      "cancelToday": "Cancel today's session",
+      "cancelThis": "Cancel this session",
+      "save": "Save register",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "paid": "Paid",
+      "hereButton": "Here",
+      "awayButton": "Away",
+      "removeName": "Remove {name}",
+      "errors": {
+        "notAllowed": "Only the club and the group's coach can take the register.",
+        "failed": "Something went wrong. Please try again."
+      }
+    }
+  },
+  "myGroups": {
+    "title": "My groups",
+    "subtitle": "Coaching groups for you and your children.",
+    "empty": "No groups yet",
+    "emptyHint": "When a coach adds you or your child with your email, or you sign up on a club's page, the group shows here.",
+    "youCoach": "Groups you coach",
+    "yourPlaces": "Your groups",
+    "dropins": "Clinic sessions you booked",
+    "players": "{n} / {max} players",
+    "dropinGroup": "Drop-in clinic",
+    "waitingOrAsking": "{n} waiting",
+    "registerToday": "Register · today {time}",
+    "registerNext": "Register · {date}",
+    "nextToday": "Next: today · {time}",
+    "next": "Next: {date} · {time}",
+    "with": "with {coach}",
+    "addedByClub": "The club added {name} with your email, so the group shows here.",
+    "trialNote": "A free trial session is booked. The coach will talk to you about joining after it.",
+    "requested": "Waiting for {coach} to confirm the place.",
+    "theCoach": "the coach",
+    "waiting": "On the waiting list since {date}. You'll get an email when a place opens.",
+    "offered": "A place is free! Answer by {date}.",
+    "answer": "Answer",
+    "noSession": "No session",
+    "notComing": "{name} isn't coming",
+    "canComeAfterAll": "Can come after all",
+    "cantCome": "{name} can't come",
+    "cameTo": "Came to",
+    "cameOf": "{n} of {of}",
+    "paid": "Paid",
+    "notPaid": "Not paid yet",
+    "schedule": "Schedule",
+    "payClub": "Pay the club or the coach in cash or by bank transfer.",
+    "payClubPhone": "Pay the club or the coach in cash or by bank transfer. Questions? {phone}",
+    "fromCoach": "From {coach} · {date}",
+    "moreAt": "More groups at {club}",
+    "leave": "Leave the group",
+    "leaveWaiting": "Leave the waiting list",
+    "leaveConfirm": "Take {name} out of {group}? The place goes to the next person waiting.",
+    "leaveWaitingConfirm": "Take {name} off the waiting list?",
+    "unbook": "Cancel",
+    "unbookConfirm": "Give back your place in this session?",
+    "errors": {
+      "notAllowed": "You can't do that for this player.",
+      "started": "That session has already started.",
+      "failed": "Something went wrong. Please try again."
+    }
+  },
+  "groupSignup": {
+    "title": "Groups and clinics",
+    "subtitle": "Weekly groups with the club's coaches. Sign up online.",
+    "dropin": "Drop-in clinic",
+    "with": "with {coach}",
+    "perMonth": "/ month",
+    "perSession": "/ session",
+    "full": "Full",
+    "fullWaiting": "Full · {n} waiting",
+    "placesLeft": "{n, plural, one {# place left} other {# places left}}",
+    "signInToJoin": "Sign in to join",
+    "signIn": "Sign in",
+    "join": "Join",
+    "joinWaiting": "Join the waiting list",
+    "askToJoin": "Ask to join",
+    "tryFree": "Try a free session",
+    "noSessions": "No sessions coming up.",
+    "booked": "Booked · cancel",
+    "book": "Book",
+    "joinTitle": "Join {group}",
+    "trialTitle": "Free session in {group}",
+    "fullNote": "The group is full. You'll go on the waiting list and get an email when a place opens.",
+    "approveNote": "The coach confirms each new player, so you'll hear back soon.",
+    "trialNote": "Come to the next session for free. If it's a good fit, the coach adds you to the group.",
+    "joinNote": "You're in straight away. The club will tell you how to pay.",
+    "who": "Who is it for?",
+    "me": "Me",
+    "myChild": "My child",
+    "yourName": "Your name",
+    "childName": "Child's name",
+    "age": "Age",
+    "phone": "Phone (optional)",
+    "contactNote": "The club uses your account's email for cancellations and reminders.",
+    "cancel": "Cancel",
+    "sending": "Sending…",
+    "bookTrial": "Book the free session",
+    "seeMyGroups": "See my groups",
+    "done": {
+      "active": "{name} is in {group}.",
+      "trial": "{name}'s free session in {group} is booked.",
+      "requested": "Request sent. The coach will confirm {name}'s place in {group}.",
+      "waiting": "{name} is on the waiting list for {group}."
+    },
+    "errors": {
+      "notSignedIn": "Please sign in first.",
+      "confirmEmail": "Please confirm your email address first: check your inbox.",
+      "already": "Already signed up for this group.",
+      "age": "This group is for ages {from} to {to}.",
+      "full": "Sorry, that just filled up.",
+      "closed": "This isn't open for sign-up online.",
+      "name": "Please enter a name.",
+      "notAllowed": "You can't do that.",
+      "failed": "Something went wrong. Please try again."
+    }
+  },
+  "groupOffer": {
+    "title": "A place for {name}",
+    "intro": "A place has opened up in {group}.",
+    "group": "Group",
+    "when": "When",
+    "price": "Price",
+    "perMonth": "{price} / month",
+    "answerBy": "Please answer by {date}. After that, the place goes to the next person.",
+    "accept": "Yes, take the place",
+    "decline": "No, thanks",
+    "questions": "Questions? Call the club on {phone}.",
+    "acceptedTitle": "See you on court!",
+    "acceptedBody": "{name} is now in {group}. The club will tell you how to pay.",
+    "declinedTitle": "Thanks for letting us know",
+    "declinedBody": "The place goes to the next person on the waiting list.",
+    "closedTitle": "This offer is closed",
+    "closedBody": "It was already answered, or the place has gone.",
+    "expiredBody": "The 48 hours have passed, so the place went to the next person. To join again, contact {club}.",
+    "toClub": "Go to {club}",
+    "errors": {
+      "closed": "This offer is closed.",
+      "expired": "This offer has run out.",
+      "failed": "Something went wrong. Please try again."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "bell": "{n, plural, =0 {Notifications} other {Notifications, # unread}}",
+    "markAllRead": "Mark all as read",
+    "all": "All",
+    "unread": "Unread",
+    "seeAll": "See all notifications",
+    "empty": "Nothing here yet.",
+    "emptyUnread": "You’re all caught up.",
+    "today": "Today",
+    "earlier": "Earlier",
+    "kept": "Notifications are kept for 60 days.",
+    "loadMore": "Show more",
+    "justNow": "just now",
+    "yesterday": "Yesterday, {time}",
+    "unreadDot": "Unread",
+    "filters": {
+      "bookings": "Bookings",
+      "members": "Members",
+      "tournaments": "Tournaments",
+      "membership": "Membership",
+      "groups": "Groups"
+    },
+    "settings": {
+      "title": "What you get",
+      "hintClub": "Just for you. Your staff choose their own. Emails to players don’t change.",
+      "hintPlayer": "Just for you. Emails from your club don’t change.",
+      "alwaysOn": "Always on",
+      "saveFailed": "Couldn’t save. Please try again.",
+      "plan": {
+        "title": "Your Kortello plan",
+        "desc": "Trial and payment reminders"
+      },
+      "admin": {
+        "bookings": {
+          "title": "New bookings",
+          "desc": "When a player books a court online"
+        },
+        "lessons": {
+          "title": "Lessons",
+          "desc": "When a player books one of your coaches"
+        },
+        "cancellations": {
+          "title": "Cancellations",
+          "desc": "When a player cancels a booking or lesson"
+        },
+        "tournaments": {
+          "title": "Tournament sign-ups",
+          "desc": "When someone enters or leaves a tournament"
+        },
+        "members": {
+          "title": "Memberships ending",
+          "desc": "One summary a day, a week before"
+        },
+        "staff": {
+          "title": "Staff",
+          "desc": "When someone accepts your invite"
+        },
+        "groups": {
+          "title": "Groups",
+          "desc": "Sign-ups, answers from the waiting list, and who can't come"
+        }
+      },
+      "member": {
+        "club_changes": {
+          "title": "Changes by the club",
+          "desc": "When the club books or cancels for you"
+        },
+        "reminders": {
+          "title": "Reminders",
+          "desc": "The day before you play"
+        },
+        "tournaments": {
+          "title": "Tournaments",
+          "desc": "When the draw is out"
+        },
+        "membership": {
+          "title": "Membership",
+          "desc": "A week before it ends"
+        },
+        "groups": {
+          "title": "Groups",
+          "desc": "Cancelled sessions, places offered, fee reminders"
+        }
+      }
+    },
+    "kinds": {
+      "someone": "Someone",
+      "lessonWith": "Lesson with {coach}",
+      "unknown": "Notification",
+      "places": "{count} of {max} places taken",
+      "booking_new": {
+        "title": "<b>{who}</b> booked {court}"
+      },
+      "lesson_new": {
+        "title": "<b>{who}</b> booked a lesson with {coach}",
+        "court": "{court} held"
+      },
+      "booking_cancelled": {
+        "court": "<b>{who}</b> cancelled {court}",
+        "lesson": "<b>{who}</b> cancelled a lesson with {coach}",
+        "free": "the slot is free again"
+      },
+      "tournament_joined": {
+        "title": "<b>{name}</b> signed up for {tournament}"
+      },
+      "tournament_left": {
+        "title": "<b>{name}</b> left {tournament}"
+      },
+      "members_ending": {
+        "title": "{count, plural, one {<b># membership</b> ends} other {<b># memberships</b> end}} in the next 7 days",
+        "more": "{names} and {n} more"
+      },
+      "staff_joined": {
+        "title": "<b>{email}</b> accepted your staff invite"
+      },
+      "trial_ending": {
+        "title": "Your free trial ends in <b>{days, plural, =0 {less than a day} one {# day} other {# days}}</b>",
+        "detail": "Choose a plan to keep everything running"
+      },
+      "trial_ended": {
+        "title": "Your free trial has <b>ended</b>",
+        "detail": "Choose a plan to keep using Kortello"
+      },
+      "club_booked": {
+        "title": "<b>{club}</b> booked a court for you",
+        "weekly": "every week"
+      },
+      "club_cancelled": {
+        "title": "<b>{club}</b> cancelled your booking",
+        "phone": "Questions? Call the club on {phone}"
+      },
+      "reminder": {
+        "title": "Coming up: <b>{what}</b>"
+      },
+      "draw": {
+        "title": "The <b>{tournament}</b> draw is out",
+        "opponent": "Your first match: against {opponent}",
+        "bye": "You go straight through the first round"
+      },
+      "membership_ending": {
+        "plan": "Your <b>{plan}</b> membership ends {days, plural, =0 {today} one {in # day} other {in # days}}",
+        "noPlan": "Your membership ends <b>{days, plural, =0 {today} one {in # day} other {in # days}}</b>",
+        "detail": "Ask the club to renew it"
+      },
+      "group_signup": {
+        "active": "<b>{name}</b> joined {group}",
+        "trial": "<b>{name}</b> booked a free session in {group}",
+        "requested": "<b>{name}</b> asked to join {group}",
+        "waiting": "<b>{name}</b> joined the waiting list for {group}",
+        "booked": "<b>{name}</b> booked a place in {group}"
+      },
+      "group_left": {
+        "title": "<b>{name}</b> left {group}"
+      },
+      "group_offer_answer": {
+        "yes": "<b>{name}</b> took the place in {group}",
+        "no": "<b>{name}</b> turned down the place in {group}",
+        "next": "The place goes to the next person waiting"
+      },
+      "group_absence": {
+        "title": "<b>{name}</b> can't come to {group}"
+      },
+      "group_cancelled": {
+        "title": "<b>{group}</b> is cancelled"
+      },
+      "group_added": {
+        "title": "<b>{name}</b> was added to {group}"
+      },
+      "group_offer": {
+        "title": "A place in <b>{group}</b> is free for {name}",
+        "until": "Answer by {date}"
+      },
+      "group_fee_due": {
+        "title": "The <b>{month}</b> fee for {group} isn't paid yet"
+      }
     }
   }
 }

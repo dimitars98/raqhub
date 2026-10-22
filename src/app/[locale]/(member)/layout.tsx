@@ -37,6 +37,7 @@ export default async function MemberLayout({
   return (
     <DashboardShell
       role="member"
+      userId={user.id}
       userName={profile.full_name ?? "Player"}
       staffLink={isStaff}
     >

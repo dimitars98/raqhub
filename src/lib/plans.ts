@@ -11,7 +11,8 @@ export type Feature =
   | "reminders"
   | "weeklyReport"
   | "analytics"
-  | "staff";
+  | "staff"
+  | "groups";
 
 export const TRIAL_DAYS = 30;
 
@@ -32,13 +33,13 @@ export const PLANS: Record<
     priceMonthly: 19,
     priceYearly: 190,
     maxCourts: 8,
-    features: ["membershipPlans", "coaches", "reminders", "weeklyReport"],
+    features: ["membershipPlans", "coaches", "groups", "reminders", "weeklyReport"],
   },
   academy: {
     priceMonthly: 45,
     priceYearly: 450,
     maxCourts: null,
-    features: ["membershipPlans", "coaches", "reminders", "weeklyReport", "analytics", "staff"],
+    features: ["membershipPlans", "coaches", "groups", "reminders", "weeklyReport", "analytics", "staff"],
   },
 };
 

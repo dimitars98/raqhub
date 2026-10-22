@@ -8,6 +8,8 @@ import type { AreaRole } from "@/types/tones";
 interface DashboardShellProps {
   children: React.ReactNode;
   role: AreaRole;
+  /** The signed-in person, for their notifications. */
+  userId: string;
   userName: string;
   clubName?: string;
   clubSlug?: string;
@@ -24,6 +26,7 @@ interface DashboardShellProps {
 export default async function DashboardShell({
   children,
   role,
+  userId,
   userName,
   clubName,
   clubSlug,
@@ -49,7 +52,7 @@ export default async function DashboardShell({
           staffLink={staffLink}
         />
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-          <DashboardTopbar />
+          <DashboardTopbar userId={userId} area={role === "admin" ? "admin" : "member"} />
           <main className="flex-1 overflow-y-auto p-4 lg:p-6">
             <div className="max-w-[1100px] mx-auto">
               {notice}

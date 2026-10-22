@@ -4,7 +4,13 @@ import type { MembershipPlan } from "@/types/database";
 import { redirect } from "next/navigation";
 import { getMyClub } from "@/lib/myClub";
 
-export default async function MembersPage() {
+export default async function MembersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
+  // ?tab=ending, e.g. from the "memberships ending" notification
+  const { tab } = await searchParams;
   const supabase = await createClient();
 
   const {
@@ -31,5 +37,5 @@ export default async function MembersPage() {
   const members = (membersData ?? []) as MemberWithPlan[];
   const plans = (plansData ?? []) as MembershipPlan[];
 
-  return <MembersClient members={members} plans={plans} clubId={club.id} />;
+  return <MembersClient members={members} plans={plans} clubId={club.id} initialTab={tab} />;
 }

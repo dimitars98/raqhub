@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { format, addDays, startOfDay } from "date-fns";
 import type { Booking, Court, Member, Profile } from "@/types/database";
 import { CalendarRange } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useLabels } from "@/hooks/useLabels";
 import { DAY_HOURS } from "@/lib/openingHours";
 
@@ -63,6 +63,14 @@ const STATUS_TEXT_COLORS: Record<string, { name: string; time: string }> = {
   cancelled: { name: "text-[#3d4f35]", time: "text-[#6e7f65]" },
 };
 
+// A group's session: dark, so it stands apart from single bookings.
+const GROUP_STYLE = {
+  wrapper: "bg-[#111c0a] border-l-[#a8d832]",
+  dot: "bg-[#111c0a]",
+  badge: "bg-[#111c0a] text-white",
+};
+const GROUP_TEXT = { name: "text-white", time: "text-[#d6f09a]" };
+
 const HALF_SLOTS = HOURS.flatMap((h) => [
   { hour: h, half: 0, label: `${String(h).padStart(2, "0")}:00` },
   { hour: h, half: 1, label: `${String(h).padStart(2, "0")}:30` },
@@ -94,6 +102,7 @@ export default function TimetableClient({ courts, bookings }: Props) {
   const dfLocale = dateLocale(useLocale());
   const tCommon = useTranslations("common");
   const labels = useLabels();
+  const router = useRouter();
   const [wrapWidth, setWrapWidth] = useState(600);
   const [offset, setOffset] = useState(0);
   const [nowMin, setNowMin] = useState<number | null>(null);
@@ -137,6 +146,11 @@ export default function TimetableClient({ courts, bookings }: Props) {
     booking: BookingWithJoins,
   ) => {
     e.stopPropagation();
+    // A group's session opens the group.
+    if (booking.group_id) {
+      router.push(`/admin/groups/${booking.group_id}`);
+      return;
+    }
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const wrapRect = wrapRef.current?.getBoundingClientRect();
     if (!wrapRect) return;
@@ -233,6 +247,10 @@ export default function TimetableClient({ courts, bookings }: Props) {
             <span>{labels.bookingStatus(status)}</span>
           </div>
         ))}
+        <div className="flex items-center gap-1.5 text-xs text-[#3d4f35]">
+          <div className="w-2.5 h-2.5 rounded-[3px] bg-[#111c0a]" />
+          <span>{t("group")}</span>
+        </div>
       </div>
 
       {!dayHasBookings && (
@@ -333,11 +351,14 @@ export default function TimetableClient({ courts, bookings }: Props) {
 
                   {/* Bookings */}
                   {courtBookings.map((b) => {
-                    const s =
-                      STATUS_STYLES[b.status] ?? STATUS_STYLES.confirmed;
-                    const tc =
-                      STATUS_TEXT_COLORS[b.status] ??
-                      STATUS_TEXT_COLORS.confirmed;
+                    const isGroup = !!b.group_id;
+                    const s = isGroup
+                      ? GROUP_STYLE
+                      : STATUS_STYLES[b.status] ?? STATUS_STYLES.confirmed;
+                    const tc = isGroup
+                      ? GROUP_TEXT
+                      : STATUS_TEXT_COLORS[b.status] ??
+                        STATUS_TEXT_COLORS.confirmed;
                     const startMin = timeToMinutes(new Date(b.starts_at));
                     const topPx =
                       ((startMin - DAY_START_MIN) / 30) * SLOT_H + 2;
@@ -356,7 +377,9 @@ export default function TimetableClient({ courts, bookings }: Props) {
                         </div>
                         {b.coach && heightPx > 36 && (
                           <div className={`text-[11px] font-medium truncate ${tc.time}`}>
-                            {t("lessonWith", { coach: b.coach.profile?.full_name ?? "" })}
+                            {isGroup
+                              ? t("groupWith", { coach: b.coach.profile?.full_name ?? "" })
+                              : t("lessonWith", { coach: b.coach.profile?.full_name ?? "" })}
                           </div>
                         )}
                         {heightPx > (b.coach ? 56 : 36) && (

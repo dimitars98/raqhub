@@ -1,4 +1,4 @@
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Banknote, Landmark, Lock, Mail, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
@@ -10,6 +10,7 @@ import {
   type Feature,
 } from "@/lib/plans";
 import { PAYMENT, paymentReference } from "@/lib/payment";
+import { intlLocale } from "@/lib/dateLocale";
 
 /** Strip above every admin page: trial days left, or "trial is over". */
 export async function PlanBanner({ access }: { access: ClubAccess }) {
@@ -73,10 +74,13 @@ export async function PlanCard({
   access: ClubAccess;
 }) {
   const t = await getTranslations("billing");
-  const format = await getFormatter();
+  const dayFormat = new Intl.DateTimeFormat(intlLocale(await getLocale()), {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   const plan = PLANS[access.plan];
-  const day = (iso: string) =>
-    format.dateTime(new Date(iso), { day: "numeric", month: "long", year: "numeric" });
+  const day = (iso: string) => dayFormat.format(new Date(iso));
 
   const status =
     access.status === "trial" && club.trial_ends_at

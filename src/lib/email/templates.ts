@@ -5,10 +5,12 @@ import sq from "@/messages/sq.json";
 import de from "@/messages/de.json";
 import fr from "@/messages/fr.json";
 import it from "@/messages/it.json";
+import sr from "@/messages/sr.json";
 import type { Locale } from "./locale";
 import { PLANS, type PlanId } from "@/lib/plans";
+import { intlLocale } from "@/lib/dateLocale";
 
-const MESSAGES = { en, mk, sq, de, fr, it } as const;
+const MESSAGES = { en, mk, sq, de, fr, it, sr } as const;
 const TIME_ZONE = "Europe/Skopje";
 
 type Rendered = { subject: string; html: string; text: string };
@@ -29,18 +31,19 @@ const esc = (value: string) =>
     .replace(/"/g, "&quot;");
 
 function formatters(locale: Locale) {
-  const date = new Intl.DateTimeFormat(locale, {
+  const intl = intlLocale(locale);
+  const date = new Intl.DateTimeFormat(intl, {
     timeZone: TIME_ZONE,
     weekday: "long",
     day: "numeric",
     month: "long",
   });
-  const time = new Intl.DateTimeFormat(locale, {
+  const time = new Intl.DateTimeFormat(intl, {
     timeZone: TIME_ZONE,
     hour: "2-digit",
     minute: "2-digit",
   });
-  const day = new Intl.DateTimeFormat(locale, {
+  const day = new Intl.DateTimeFormat(intl, {
     timeZone: TIME_ZONE,
     day: "numeric",
     month: "long",
@@ -379,5 +382,96 @@ export function staffInviteEmail(d: StaffInviteEmailData): Rendered {
     subject: t("staff.subject", { club: d.clubName }),
     html: layout({ heading, intro, rows, button: { label: t("staff.button"), url }, footer }),
     text: plainText(heading, intro, rows, url, footer),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Coaching groups, to parents and players (they may have no account)
+// ---------------------------------------------------------------------------
+
+export type GroupEmailBase = {
+  locale: Locale;
+  /** The parent, or the player themselves. */
+  contactName: string | null;
+  /** The player on the list (often a child). */
+  playerName: string;
+  groupName: string;
+  clubName: string;
+  appUrl: string;
+};
+
+/** A session was cancelled (rain, a holiday). */
+export function groupCancelledEmail(
+  d: GroupEmailBase & { startsAt: string; endsAt: string; reason: string | null },
+): Rendered {
+  const t = translator(d.locale);
+  const f = formatters(d.locale);
+  const when = `${f.date(d.startsAt)}, ${f.time(d.startsAt)}–${f.time(d.endsAt)}`;
+  const heading = d.contactName ? t("greeting", { name: d.contactName }) : t("greetingNoName");
+  const intro = t("groups.cancelledIntro", { group: d.groupName, date: f.date(d.startsAt) });
+  const rows: [string, string][] = [
+    [t("groups.group"), d.groupName],
+    [t("groups.player"), d.playerName],
+    [t("labels.when"), when],
+  ];
+  if (d.reason) rows.push([t("groups.reason"), d.reason]);
+  const url = `${d.appUrl}/${d.locale}/groups`;
+  const footer = t("footerPlayer", { club: d.clubName });
+  return {
+    subject: t("groups.cancelledSubject", { group: d.groupName, date: f.date(d.startsAt) }),
+    html: layout({ heading, intro, rows, button: { label: t("groups.open"), url }, footer }),
+    text: plainText(heading, intro, rows, url, footer),
+  };
+}
+
+/** A place opened up for someone on the waiting list. */
+export function groupOfferEmail(
+  d: GroupEmailBase & { token: string; expiresAt: string; schedule: string },
+): Rendered {
+  const t = translator(d.locale);
+  const f = formatters(d.locale);
+  const until = `${f.date(d.expiresAt)}, ${f.time(d.expiresAt)}`;
+  const heading = d.contactName ? t("greeting", { name: d.contactName }) : t("greetingNoName");
+  const intro = t("groups.offerIntro", { name: d.playerName, group: d.groupName, club: d.clubName });
+  const rows: [string, string][] = [
+    [t("groups.group"), d.groupName],
+    [t("groups.player"), d.playerName],
+    [t("groups.schedule"), d.schedule],
+    [t("groups.answerBy"), until],
+  ];
+  const url = `${d.appUrl}/${d.locale}/groups/offer/${d.token}`;
+  const footer = t("groups.offerFooter", { club: d.clubName });
+  return {
+    subject: t("groups.offerSubject", { group: d.groupName }),
+    html: layout({ heading, intro, rows, button: { label: t("groups.offerButton"), url }, footer }),
+    text: plainText(heading, intro, rows, url, footer),
+  };
+}
+
+/** This month's fee hasn't been paid yet. */
+export function groupFeeEmail(
+  d: GroupEmailBase & { month: string; amount: number; clubPhone: string | null },
+): Rendered {
+  const t = translator(d.locale);
+  const f = formatters(d.locale);
+  const month = new Intl.DateTimeFormat(intlLocale(d.locale), {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${d.month}T12:00:00Z`));
+  const heading = d.contactName ? t("greeting", { name: d.contactName }) : t("greetingNoName");
+  const intro = t("groups.feeIntro", { name: d.playerName, group: d.groupName, month });
+  const rows: [string, string][] = [
+    [t("groups.group"), d.groupName],
+    [t("groups.player"), d.playerName],
+    [t("groups.month"), month],
+    [t("labels.price"), f.money(d.amount)],
+  ];
+  if (d.clubPhone) rows.push([t("labels.phone"), d.clubPhone]);
+  const footer = t("groups.feeFooter", { club: d.clubName });
+  return {
+    subject: t("groups.feeSubject", { group: d.groupName, month }),
+    html: layout({ heading, intro, rows, footer }),
+    text: plainText(heading, intro, rows, undefined, footer),
   };
 }

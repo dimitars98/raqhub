@@ -6,6 +6,7 @@ import ProfileAvatarUpload from "@/components/profile/ProfileAvatarUpload";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import SignOutButton from "@/components/profile/SignOutButton";
 import { getLabels } from "@/lib/getLabels";
+import { intlLocale } from "@/lib/dateLocale";
 import { initials } from "@/lib/avatar";
 import { BADGE, memberStatusTone } from "@/lib/badges";
 
@@ -23,7 +24,7 @@ export default async function ProfilePage() {
   const t = await getTranslations("profilePage");
   const locale = await getLocale();
   const fmt = (value: string, options: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(locale, options).format(new Date(value));
+    new Intl.DateTimeFormat(intlLocale(locale), options).format(new Date(value));
   const labels = await getLabels();
 
   const [{ data: profileData }, { data: memberData }, { data: bookingsData }] =

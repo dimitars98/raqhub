@@ -5,6 +5,7 @@ import Footer from "@/components/landing/Footer";
 import { Link } from "@/i18n/navigation";
 import { LEGAL } from "@/lib/legal";
 import { TRIAL_DAYS } from "@/lib/plans";
+import { intlLocale } from "@/lib/dateLocale";
 
 // A section's body is a list of blocks: a string is a paragraph, an array
 // of strings is a bullet list. Text may use <b>…</b> and the {email} and
@@ -51,7 +52,7 @@ export default async function LegalPage({ kind }: { kind: LegalKind }) {
   const t = await getTranslations("legal");
   const sections = t.raw(`${kind}.sections`) as Section[];
   // "14 October 2026", "14. Oktober 2026", "14 октомври 2026 г." …
-  const updated = new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
+  const updated = new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: "long" }).format(
     new Date(`${LEGAL.updated}T12:00:00`),
   );
   const other = OTHER[kind];

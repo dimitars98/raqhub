@@ -14,6 +14,7 @@ const LOCALES = [
   { code: "de", label: "DE", name: "Deutsch" },
   { code: "fr", label: "FR", name: "Français" },
   { code: "it", label: "IT", name: "Italiano" },
+  { code: "sr", label: "SR", name: "Srpski" },
 ];
 
 type LocaleSwitcherProps = {
