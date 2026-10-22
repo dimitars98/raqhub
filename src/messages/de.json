@@ -3,8 +3,11 @@
     "features": "Funktionen",
     "pricing": "Preise",
     "signIn": "Anmelden",
-    "forClubs": "Für clubs",
-    "imPlayer": "Ich bin Spieler"
+    "forClubs": "Für Clubs",
+    "imPlayer": "Ich bin Spieler",
+    "how": "So funktioniert es",
+    "faq": "Häufige Fragen",
+    "language": "Sprache"
   },
   "auth": {
     "signIn": "Bei Ihrem Konto anmelden",
@@ -15,7 +18,7 @@
     "signingIn": "Anmeldung läuft…",
     "noAccount": "Kein Konto?",
     "signUpPlayer": "Als Spieler registrieren",
-    "tennisClub": "Tennisclub",
+    "tennisClub": "Club",
     "createClubAccount": "Club-Konto erstellen",
     "createPlayerAccount": "Spieler-Konto erstellen",
     "clubAccount": "Club-Konto",
@@ -39,7 +42,7 @@
     "agreeToTerms": "Mit dem Erstellen eines Kontos stimmen Sie den <terms>Nutzungsbedingungen</terms> und der <privacy>Datenschutzerklärung</privacy> zu."
   },
   "landing": {
-    "badge": "Für Tennisclubs entwickelt",
+    "badge": "Für Tennis-, Padel- und Pickleball-Clubs entwickelt",
     "title": "Verwalten Sie Ihren Club ohne Papierkram",
     "subtitle": "Platzbuchungen, Mitgliedschaften und Mitgliederverwaltung — alles an einem Ort.",
     "startTrial": "Kostenlos testen",
@@ -48,7 +51,7 @@
     "featuresTitle": "Alles, was Ihr Club braucht",
     "pricingLabel": "Preise",
     "pricingTitle": "Einfache, transparente Preise",
-    "footer": "Für Tennisclubs entwickelt."
+    "footer": "Für Tennis-, Padel- und Pickleball-Clubs entwickelt."
   },
   "features": {
     "rows": {
@@ -826,7 +829,7 @@
     },
     "title1": "Füllen Sie Ihre Plätze.",
     "title2": "Lassen Sie Ihren Club wachsen.",
-    "subtitle": "Kortello gibt Tennisclubs und Trainern die Werkzeuge, um Plätze, Zeitpläne und Buchungen zu verwalten – alles an einem Ort. Weniger Verwaltung, mehr Zeit auf dem Platz.",
+    "subtitle": "Kortello gibt Tennis-, Padel- und Pickleball-Clubs und ihren Trainern die Werkzeuge, um Plätze, Zeitpläne und Buchungen zu verwalten – alles an einem Ort. Weniger Verwaltung, mehr Zeit auf dem Platz.",
     "getStarted": "Jetzt starten",
     "seeHow": "So funktioniert es"
   },
@@ -1271,7 +1274,7 @@
     "uploadFailed": "Hochladen fehlgeschlagen. Bitte erneut versuchen."
   },
   "meta": {
-    "description": "Tennisplätze und Trainer in Ihrer Nähe buchen."
+    "description": "Tennis-, Padel- und Pickleballplätze und Trainer in Ihrer Nähe buchen."
   },
   "legal": {
     "label": "Rechtliches",

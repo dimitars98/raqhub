@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: { default: "Kortello", template: "%s | Kortello" },
-  description: "Book tennis courts and coaches near you.",
+  description: "Book tennis, padel and pickleball courts and coaches near you.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

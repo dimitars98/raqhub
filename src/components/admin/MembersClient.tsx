@@ -8,6 +8,7 @@ import { addMonths, differenceInCalendarDays, format, parseISO, startOfDay } fro
 import { ChevronDown, Download, Mail, RotateCw, Search, X } from "lucide-react";
 import type { Member, MembershipPlan, MemberStatus } from "@/types/database";
 import Modal from "@/components/ui/Modal";
+import FilterSelect from "@/components/ui/FilterSelect";
 import SubmitButton from "../ui/SubmitButton";
 import { useLabels } from "@/hooks/useLabels";
 import { useClickOutside } from "@/hooks/useClickOutside";
@@ -102,9 +103,6 @@ const BAR_BUTTON_LIME =
   "inline-flex items-center gap-1.5 rounded-xl bg-[#a8d832] px-3 py-2 text-[13px] font-semibold text-[#111c0a] transition-colors hover:bg-[#bde65a] disabled:opacity-50";
 const MENU_ITEM =
   "rounded-xl px-3 py-2.5 text-left text-[13px] transition-colors hover:bg-[#f3fbde] disabled:opacity-50";
-const FILTER =
-  "inline-flex h-10 items-center gap-2 rounded-xl border border-[#d0d9c9] bg-white px-3 text-[13px] text-[#55664c]";
-
 export default function MembersClient({
   members: initial,
   plans,
@@ -665,48 +663,34 @@ export default function MembersClient({
               className="min-w-0 flex-1 bg-transparent text-[#111c0a] outline-none placeholder:text-[#6e7f65]"
             />
           </label>
-          <label className={FILTER}>
-            {t("filters.plan")}
-            <select
-              value={planFilter}
-              onChange={(e) => refilter(setPlanFilter)(e.target.value)}
-              className="bg-transparent font-medium text-[#111c0a] outline-none"
-            >
-              <option value="all">{t("filters.allPlans")}</option>
-              {plans.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name}
-                </option>
-              ))}
-              <option value="none">{t("modal.noPlan")}</option>
-            </select>
-          </label>
-          <label className={FILTER}>
-            {t("filters.ends")}
-            <select
-              value={endsWithin}
-              onChange={(e) => refilter(setEndsWithin)(Number(e.target.value))}
-              className="bg-transparent font-medium text-[#111c0a] outline-none"
-            >
-              <option value={0}>{t("filters.anyTime")}</option>
-              <option value={30}>{t("filters.within", { days: 30 })}</option>
-              <option value={90}>{t("filters.within", { days: 90 })}</option>
-            </select>
-          </label>
-          <label className={`${FILTER} md:ml-auto`}>
-            {t("filters.show")}
-            <select
-              value={perPage}
-              onChange={(e) => refilter(setPerPage)(Number(e.target.value))}
-              className="bg-transparent font-medium text-[#111c0a] outline-none"
-            >
-              {PER_PAGE.map((p) => (
-                <option key={p} value={p}>
-                  {p}
-                </option>
-              ))}
-            </select>
-          </label>
+          <FilterSelect
+            label={t("filters.plan")}
+            value={planFilter}
+            onChange={refilter(setPlanFilter)}
+            options={[
+              { value: "all", label: t("filters.allPlans") },
+              ...plans.map((p) => ({ value: p.id, label: p.name })),
+              { value: "none", label: t("modal.noPlan") },
+            ]}
+          />
+          <FilterSelect
+            label={t("filters.ends")}
+            value={String(endsWithin)}
+            onChange={(v) => refilter(setEndsWithin)(Number(v))}
+            options={[
+              { value: "0", label: t("filters.anyTime") },
+              { value: "30", label: t("filters.within", { days: 30 }) },
+              { value: "90", label: t("filters.within", { days: 90 }) },
+            ]}
+          />
+          <FilterSelect
+            label={t("filters.show")}
+            value={String(perPage)}
+            onChange={(v) => refilter(setPerPage)(Number(v))}
+            options={PER_PAGE.map((n) => ({ value: String(n), label: String(n) }))}
+            align="end"
+            className="md:ml-auto"
+          />
         </div>
 
         {!rows.length ? (

@@ -3,8 +3,11 @@
     "features": "Funzionalità",
     "pricing": "Prezzi",
     "signIn": "Accedi",
-    "forClubs": "Per i circoli di tennis",
-    "imPlayer": "Sono un giocatore"
+    "forClubs": "Per i circoli",
+    "imPlayer": "Sono un giocatore",
+    "how": "Come funziona",
+    "faq": "Domande frequenti",
+    "language": "Lingua"
   },
   "auth": {
     "signIn": "Accedi al tuo account",
@@ -15,7 +18,7 @@
     "signingIn": "Accesso in corso…",
     "noAccount": "Non hai un account?",
     "signUpPlayer": "Registrati come giocatore",
-    "tennisClub": "Circolo di tennis",
+    "tennisClub": "Circolo",
     "createClubAccount": "Crea l'account del circolo",
     "createPlayerAccount": "Crea il tuo account giocatore",
     "clubAccount": "Account circolo",
@@ -39,7 +42,7 @@
     "agreeToTerms": "Creando un account accetti i <terms>Termini di servizio</terms> e l’<privacy>Informativa sulla privacy</privacy>."
   },
   "landing": {
-    "badge": "Pensato per i circoli di tennis",
+    "badge": "Pensato per i circoli di tennis, padel e pickleball",
     "title": "Gestisci il tuo circolo senza burocrazia",
     "subtitle": "Prenotazioni campi, abbonamenti e gestione dei soci — tutto in un unico posto.",
     "startTrial": "Inizia la prova gratuita",
@@ -48,7 +51,7 @@
     "featuresTitle": "Tutto ciò di cui ha bisogno il tuo circolo",
     "pricingLabel": "Prezzi",
     "pricingTitle": "Prezzi semplici e trasparenti",
-    "footer": "Pensato per i circoli di tennis."
+    "footer": "Pensato per i circoli di tennis, padel e pickleball."
   },
   "features": {
     "rows": {
@@ -826,7 +829,7 @@
     },
     "title1": "Riempi i tuoi campi.",
     "title2": "Fai crescere il tuo club.",
-    "subtitle": "Kortello offre a circoli di tennis e maestri gli strumenti per gestire campi, orari e prenotazioni – tutto in un unico posto. Meno burocrazia, più tempo in campo.",
+    "subtitle": "Kortello offre ai circoli di tennis, padel e pickleball e ai loro maestri gli strumenti per gestire campi, orari e prenotazioni – tutto in un unico posto. Meno burocrazia, più tempo in campo.",
     "getStarted": "Inizia ora",
     "seeHow": "Scopri come funziona"
   },
@@ -1271,7 +1274,7 @@
     "uploadFailed": "Caricamento non riuscito. Riprova."
   },
   "meta": {
-    "description": "Prenota campi da tennis e maestri vicino a te."
+    "description": "Prenota campi da tennis, padel e pickleball e maestri vicino a te."
   },
   "legal": {
     "label": "Note legali",

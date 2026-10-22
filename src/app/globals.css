@@ -40,6 +40,10 @@
 }
 
 @layer base {
+  /* Anchor links (#features, #pricing…) land below the sticky navbar */
+  html {
+    scroll-padding-top: 5.5rem;
+  }
   body {
     @apply font-sans text-ink-900 bg-white antialiased;
   }
@@ -104,4 +108,15 @@
   background-position: right center;
   background-repeat: no-repeat;
   background-size: contain; /* or 'cover' depending on how cropped you want it */
+}
+
+@keyframes filter-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

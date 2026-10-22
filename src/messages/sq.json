@@ -3,8 +3,11 @@
     "features": "Veçoritë",
     "pricing": "Çmimet",
     "signIn": "Hyr",
-    "forClubs": "Për klubet e tenisit",
-    "imPlayer": "Jam lojtar"
+    "forClubs": "Për klubet",
+    "imPlayer": "Jam lojtar",
+    "how": "Si funksionon",
+    "faq": "Pyetje të shpeshta",
+    "language": "Gjuha"
   },
   "auth": {
     "signIn": "Hyni në llogarinë tuaj",
@@ -15,7 +18,7 @@
     "signingIn": "Duke hyrë…",
     "noAccount": "Nuk keni llogari?",
     "signUpPlayer": "Regjistrohu si lojtar",
-    "tennisClub": "Klub tenisi",
+    "tennisClub": "Klub",
     "createClubAccount": "Krijo llogarinë e klubit",
     "createPlayerAccount": "Krijo llogarinë e lojtarit",
     "clubAccount": "Llogari klubi",
@@ -39,7 +42,7 @@
     "agreeToTerms": "Duke krijuar një llogari, ju pranoni <terms>Kushtet e përdorimit</terms> dhe <privacy>Politikën e privatësisë</privacy>."
   },
   "landing": {
-    "badge": "Ndërtuar për klubet e tenisit",
+    "badge": "Ndërtuar për klube tenisi, padeli dhe pickleball-i",
     "title": "Menaxhoni klubin tuaj pa letërsi",
     "subtitle": "Rezervimet e fushave, anëtarësimet dhe menaxhimi i anëtarëve — të gjitha në një vend.",
     "startTrial": "Filloni provën falas",
@@ -48,7 +51,7 @@
     "featuresTitle": "Gjithçka që i nevojitet klubit tuaj",
     "pricingLabel": "Çmimet",
     "pricingTitle": "Çmime të thjeshta dhe transparente",
-    "footer": "Ndërtuar për klubet e tenisit."
+    "footer": "Ndërtuar për klube tenisi, padeli dhe pickleball-i."
   },
   "features": {
     "rows": {
@@ -826,7 +829,7 @@
     },
     "title1": "Mbushni fushat tuaja.",
     "title2": "Rritni klubin tuaj.",
-    "subtitle": "Kortello u jep klubeve të tenisit dhe trajnerëve mjetet për të menaxhuar fushat, oraret dhe rezervimet – gjithçka në një vend. Më pak administratë, më shumë kohë në fushë.",
+    "subtitle": "Kortello u jep klubeve të tenisit, padelit dhe pickleball-it dhe trajnerëve të tyre mjetet për të menaxhuar fushat, oraret dhe rezervimet – gjithçka në një vend. Më pak administratë, më shumë kohë në fushë.",
     "getStarted": "Filloni",
     "seeHow": "Shihni si funksionon"
   },
@@ -1271,7 +1274,7 @@
     "uploadFailed": "Ngarkimi dështoi. Provoni përsëri."
   },
   "meta": {
-    "description": "Rezervoni fusha tenisi dhe trajnerë pranë jush."
+    "description": "Rezervoni fusha tenisi, padeli dhe pickleball-i dhe trajnerë pranë jush."
   },
   "legal": {
     "label": "Informacion ligjor",

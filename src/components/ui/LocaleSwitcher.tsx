@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
 // Every language in src/messages, each named in its own language.
-const LOCALES = [
+export const LOCALES = [
   { code: "en", label: "EN", name: "English" },
   { code: "mk", label: "МК", name: "Македонски" },
   { code: "sq", label: "SQ", name: "Shqip" },

@@ -4,7 +4,10 @@
     "pricing": "Cene",
     "signIn": "Prijava",
     "forClubs": "Za klubove",
-    "imPlayer": "Ja sam igrač"
+    "imPlayer": "Ja sam igrač",
+    "how": "Kako radi",
+    "faq": "Česta pitanja",
+    "language": "Jezik"
   },
   "auth": {
     "signIn": "Prijavite se na svoj nalog",
@@ -15,7 +18,7 @@
     "signingIn": "Prijavljivanje…",
     "noAccount": "Nemate nalog?",
     "signUpPlayer": "Registrujte se kao igrač",
-    "tennisClub": "Teniski klub",
+    "tennisClub": "Klub",
     "createClubAccount": "Napravite nalog za klub",
     "createPlayerAccount": "Napravite nalog za igrača",
     "clubAccount": "Nalog za klub",
@@ -39,7 +42,7 @@
     "agreeToTerms": "Pravljenjem naloga prihvatate <terms>Uslove korišćenja</terms> i <privacy>Politiku privatnosti</privacy>."
   },
   "landing": {
-    "badge": "Napravljeno za teniske klubove",
+    "badge": "Napravljeno za klubove za tenis, padel i pikleball",
     "title": "Vodite klub bez papirologije",
     "subtitle": "Rezervacije terena, članarine i članovi — sve na jednom mestu.",
     "startTrial": "Započnite besplatnu probu",
@@ -48,7 +51,7 @@
     "featuresTitle": "Sve što vašem klubu treba",
     "pricingLabel": "Cene",
     "pricingTitle": "Jednostavne i jasne cene",
-    "footer": "Napravljeno za teniske klubove."
+    "footer": "Napravljeno za klubove za tenis, padel i pikleball."
   },
   "features": {
     "rows": {
@@ -826,7 +829,7 @@
     },
     "title1": "Popunite terene.",
     "title2": "Razvijajte klub.",
-    "subtitle": "Kortello daje teniskim klubovima i trenerima alate za terene, raspored i rezervacije — sve na jednom mestu. Manje administracije, više vremena na terenu.",
+    "subtitle": "Kortello daje klubovima za tenis, padel i pikleball i njihovim trenerima alate za terene, raspored i rezervacije — sve na jednom mestu. Manje administracije, više vremena na terenu.",
     "getStarted": "Započnite",
     "seeHow": "Pogledajte kako radi"
   },
@@ -1271,7 +1274,7 @@
     "uploadFailed": "Otpremanje nije uspelo. Pokušajte ponovo."
   },
   "meta": {
-    "description": "Rezervišite teniske terene i trenere u svojoj blizini."
+    "description": "Rezervišite terene za tenis, padel i pikleball i trenere u svojoj blizini."
   },
   "legal": {
     "label": "Pravne informacije",

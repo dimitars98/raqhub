@@ -3,8 +3,11 @@
     "features": "Fonctionnalités",
     "pricing": "Tarifs",
     "signIn": "Se connecter",
-    "forClubs": "Pour les clubs de tennis",
-    "imPlayer": "Je suis joueur"
+    "forClubs": "Pour les clubs",
+    "imPlayer": "Je suis joueur",
+    "how": "Comment ça marche",
+    "faq": "Questions fréquentes",
+    "language": "Langue"
   },
   "auth": {
     "signIn": "Connectez-vous à votre compte",
@@ -15,7 +18,7 @@
     "signingIn": "Connexion en cours…",
     "noAccount": "Pas de compte ?",
     "signUpPlayer": "S'inscrire comme joueur",
-    "tennisClub": "Club de tennis",
+    "tennisClub": "Club",
     "createClubAccount": "Créer le compte de votre club",
     "createPlayerAccount": "Créer votre compte joueur",
     "clubAccount": "Compte club",
@@ -39,7 +42,7 @@
     "agreeToTerms": "En créant un compte, vous acceptez les <terms>Conditions d’utilisation</terms> et la <privacy>Politique de confidentialité</privacy>."
   },
   "landing": {
-    "badge": "Conçu pour les clubs de tennis",
+    "badge": "Conçu pour les clubs de tennis, padel et pickleball",
     "title": "Gérez votre club sans paperasse",
     "subtitle": "Réservations de courts, adhésions et gestion des membres — tout en un seul endroit.",
     "startTrial": "Essai gratuit",
@@ -48,7 +51,7 @@
     "featuresTitle": "Tout ce dont votre club a besoin",
     "pricingLabel": "Tarifs",
     "pricingTitle": "Tarification simple et transparente",
-    "footer": "Conçu pour les clubs de tennis."
+    "footer": "Conçu pour les clubs de tennis, padel et pickleball."
   },
   "features": {
     "rows": {
@@ -826,7 +829,7 @@
     },
     "title1": "Remplissez vos terrains.",
     "title2": "Faites grandir votre club.",
-    "subtitle": "Kortello donne aux clubs de tennis et aux entraîneurs les outils pour gérer terrains, plannings et réservations – au même endroit. Moins d’administratif, plus de temps sur le court.",
+    "subtitle": "Kortello donne aux clubs de tennis, padel et pickleball et à leurs entraîneurs les outils pour gérer terrains, plannings et réservations – au même endroit. Moins d’administratif, plus de temps sur le court.",
     "getStarted": "Commencer",
     "seeHow": "Voir comment ça marche"
   },
@@ -1271,7 +1274,7 @@
     "uploadFailed": "Échec de l’envoi. Veuillez réessayer."
   },
   "meta": {
-    "description": "Réservez des terrains de tennis et des entraîneurs près de chez vous."
+    "description": "Réservez des terrains de tennis, padel et pickleball et des entraîneurs près de chez vous."
   },
   "legal": {
     "label": "Mentions légales",

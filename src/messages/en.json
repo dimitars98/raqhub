@@ -4,7 +4,10 @@
     "pricing": "Pricing",
     "signIn": "Sign in",
     "forClubs": "For clubs",
-    "imPlayer": "I'm a player"
+    "imPlayer": "I'm a player",
+    "how": "How it works",
+    "faq": "FAQ",
+    "language": "Language"
   },
   "auth": {
     "signIn": "Sign in to your account",
@@ -15,7 +18,7 @@
     "signingIn": "Signing in…",
     "noAccount": "No account?",
     "signUpPlayer": "Sign up as player",
-    "tennisClub": "Tennis club",
+    "tennisClub": "Club",
     "createClubAccount": "Create your club account",
     "createPlayerAccount": "Create your player account",
     "clubAccount": "Club account",
@@ -39,7 +42,7 @@
     "agreeToTerms": "By creating an account, you agree to the <terms>Terms of Service</terms> and the <privacy>Privacy Policy</privacy>."
   },
   "landing": {
-    "badge": "Built for tennis clubs",
+    "badge": "Built for tennis, padel and pickleball clubs",
     "title": "Manage your club without the paperwork",
     "subtitle": "Court bookings, memberships, and member management — all in one place.",
     "startTrial": "Start free trial",
@@ -48,7 +51,7 @@
     "featuresTitle": "Everything your club needs",
     "pricingLabel": "Pricing",
     "pricingTitle": "Simple, transparent pricing",
-    "footer": "Built for tennis clubs."
+    "footer": "Built for tennis, padel and pickleball clubs."
   },
   "features": {
     "rows": {
@@ -826,7 +829,7 @@
     },
     "title1": "Fill Your Courts.",
     "title2": "Grow Your Club.",
-    "subtitle": "Kortello gives tennis clubs and coaches the tools to manage courts, schedules, and bookings — all in one place. Less admin, more time on the court.",
+    "subtitle": "Kortello gives tennis, padel and pickleball clubs and their coaches the tools to manage courts, schedules and bookings — all in one place. Less admin, more time on the court.",
     "getStarted": "Get Started",
     "seeHow": "See How It Works"
   },
@@ -1271,7 +1274,7 @@
     "uploadFailed": "Upload failed. Please try again."
   },
   "meta": {
-    "description": "Book tennis courts and coaches near you."
+    "description": "Book tennis, padel and pickleball courts and coaches near you."
   },
   "legal": {
     "label": "Legal",
