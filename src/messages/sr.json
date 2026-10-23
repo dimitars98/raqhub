@@ -1,4 +1,19 @@
 {
+  "paused": {
+    "bodyNamed": "{club} trenutno ne prima onlajn rezervacije ni prijave. Obratite se direktno klubu.",
+    "body": "Ovaj klub trenutno ne prima onlajn rezervacije ni prijave. Obratite se direktno klubu.",
+    "title": "Onlajn rezervacije su pauzirane"
+  },
+  "errorPage": {
+    "title": "Nešto nije u redu",
+    "body": "Stranica se nije učitala. Obično je u pitanju kratak prekid, pokušajte ponovo za trenutak.",
+    "retry": "Pokušaj ponovo",
+    "home": "Na početnu stranicu",
+    "backToApp": "Nazad na moju kontrolnu tablu",
+    "reference": "Referenca: {code}",
+    "notFoundTitle": "Stranica nije pronađena",
+    "notFoundBody": "Ova stranica ne postoji ili je premeštena. Proverite adresu ili počnite od početne stranice."
+  },
   "nav": {
     "features": "Mogućnosti",
     "pricing": "Cene",
@@ -10,6 +25,7 @@
     "language": "Jezik"
   },
   "auth": {
+    "callbackFailed": "Prijava preko Google-a nije uspela. Pokušajte ponovo ili se prijavite e-poštom i lozinkom.",
     "signIn": "Prijavite se na svoj nalog",
     "continueGoogle": "Nastavite sa Google nalogom",
     "or": "ili",
@@ -172,6 +188,7 @@
     "cancelBooking": "Otkaži"
   },
   "adminBookings": {
+    "statusFailed": "Rezervacija nije mogla da se promeni. Pokušajte ponovo.",
     "title": "Rezervacije",
     "total": "ukupno",
     "addBooking": "Dodaj rezervaciju",
@@ -353,6 +370,13 @@
     "myGroups": "Moje grupe"
   },
   "members": {
+    "errors": {
+      "duplicateEmail": "Već postoji član sa ovom e-poštom.",
+      "duplicatePhone": "Već postoji član sa ovim brojem telefona.",
+      "saveFailed": "Član nije mogao da se sačuva. Pokušajte ponovo.",
+      "cancelFailed": "Članstvo nije moglo da se otkaže. Pokušajte ponovo."
+    },
+    "total": "{count, plural, one {# član} few {# člana} other {# članova}}",
     "title": "Članovi",
     "addMember": "Dodaj člana",
     "searchPlaceholder": "Pretraga po imenu, e-pošti ili telefonu...",
@@ -469,6 +493,7 @@
     "alreadyCoach": "Ova osoba je već trener u vašem klubu."
   },
   "clubPage": {
+    "pausedCta": "Onlajn rezervacije su trenutno pauzirane. Obratite se direktno klubu.",
     "signIn": "Prijava",
     "signUpToBook": "Registrujte se da rezervišete",
     "bookCourt": "Rezerviši teren",
@@ -531,6 +556,10 @@
     "cancelNote": "Onlajn možete otkazati najkasnije {hours} h pre početka."
   },
   "profilePage": {
+    "saveFailed": "Čuvanje nije uspelo. Pokušajte ponovo.",
+    "photoFailed": "Fotografija nije mogla da se otpremi. Pokušajte ponovo.",
+    "photoType": "Izaberite sliku (JPG, PNG ili slično).",
+    "photoTooBig": "Fotografija je prevelika. Izaberite neku manju od {mb} MB.",
     "title": "Moj profil",
     "yourName": "Vaše ime",
     "sessions": "Termini",
@@ -571,6 +600,8 @@
     "changePlan": "Za promenu paketa obratite se administratoru kluba."
   },
   "plansAdmin": {
+    "deleteFailed": "Paket nije mogao da se obriše. Pokušajte ponovo.",
+    "saveFailed": "Paket nije mogao da se sačuva. Pokušajte ponovo.",
     "title": "Članarine",
     "count": "{n, plural, one {# paket} few {# paketa} other {# paketa}}",
     "addPlan": "Dodaj paket",
@@ -658,9 +689,9 @@
     "footerOwner": "Ovaj nedeljni pregled dobijate jer vodite klub na Kortellu.",
     "trial": {
       "endingSubject": "Vaša Kortello proba za {club} ističe {date}",
-      "endingIntro": "Vaš besplatni mesec za {club} ističe {date}. Da nastavite da koristite Kortello posle toga, odgovorite na ovu poruku i poslaćemo vam račun. Ako želite drugi paket, samo nam recite.",
+      "endingIntro": "Vaš besplatni mesec za {club} ističe {date}. Tri dana kasnije nalog postaje samo za čitanje: i dalje ćete moći da pregledate i izvezete sve, ali ništa novo neće moći da se doda i onlajn rezervacije se pauziraju. Ništa se nikada ne naplaćuje automatski. Da biste nastavili, odgovorite na ovu poruku i poslaćemo vam račun.",
       "endedSubject": "Vaša Kortello proba za {club} je istekla",
-      "endedIntro": "Vaš besplatni mesec za {club} je istekao. Odgovorite na ovu poruku i poslaćemo vam račun za paket, da biste nastavili da primate rezervacije bez prekida.",
+      "endedIntro": "Vaš besplatni mesec za {club} je istekao. Za tri dana nalog postaje samo za čitanje i onlajn rezervacije se pauziraju. Vaši podaci ostaju bezbedni i ništa se ne naplaćuje. Da biste nastavili da primate rezervacije, odgovorite na ovu poruku i poslaćemo vam račun.",
       "price": "€{monthly} / mesečno ili €{yearly} / godišnje",
       "trialEnds": "Besplatna proba do",
       "seePlan": "Pogledajte paket",
@@ -698,6 +729,14 @@
     }
   },
   "billing": {
+    "readOnlySince": "Samo za čitanje od {date}",
+    "readOnlyFrom": "Proba je istekla · samo za čitanje od {date}",
+    "readOnlyBody": "Besplatna proba je istekla. I dalje možete da pregledate sve i izvezete podatke. Pišite nam da nastavite.",
+    "readOnlyTitle": "Ovaj nalog je samo za čitanje",
+    "readOnlyHint": "Samo za čitanje: besplatna proba je istekla",
+    "staffLockedBanner": "Nalog ovog kluba je za sada samo za čitanje, pa ništa ne može da se dodaje ni menja.",
+    "lockedBanner": "Vaša besplatna proba je istekla, pa je nalog samo za čitanje i onlajn rezervacije su pauzirane. Vaši podaci su bezbedni i ništa se ne naplaćuje. Pišite nam da nastavite.",
+    "graceBanner": "Vaša besplatna proba je istekla. Za {days, plural, one {# dan} few {# dana} other {# dana}} nalog postaje samo za čitanje: i dalje ćete videti sve, ali ništa novo neće moći da se doda i onlajn rezervacije se pauziraju.",
     "trialBanner": "Besplatna proba: {days, plural, one {preostao je # dan} few {preostala su # dana} other {preostalo je # dana}}. Sve je otključano.",
     "unpaidBanner": "Vaša besplatna proba je istekla. Pišite nam da paket nastavi da radi.",
     "seePlan": "Pogledajte paket",
@@ -1236,6 +1275,7 @@
     "perHour": "/ sat"
   },
   "bookingErrors": {
+    "clubPaused": "Ovaj klub trenutno ne prima onlajn rezervacije. Obratite se direktno klubu.",
     "coachTaken": "Ovaj trener je već zauzet u to vreme",
     "slotTaken": "Ovaj termin je već rezervisan",
     "closedDay": "Klub ne radi tog dana",
@@ -1501,6 +1541,11 @@
     }
   },
   "owner": {
+    "missingKey": {
+      "title": "Ovoj verziji nedostaje servisni ključ",
+      "body": "Stranica za vlasnika čita sve klubove, pa joj treba service-role ključ iz Supabase-a. Dodajte ga u podešavanjima hostinga pod ovim imenom, pa ponovo objavite:",
+      "where": "Naći ćete ga u Supabase-u pod Project Settings → API keys (secret ili service_role ključ). Bez njega ne rade ni obaveštenja o novim klubovima ni zakazani podsetnici."
+    },
     "title": "Klubovi i uplate",
     "subtitle": "Samo vi vidite ovu stranicu. Beležite uplate, menjajte pakete i pratite kako napreduje svaki klub.",
     "stats": {
@@ -1526,6 +1571,8 @@
       "usage": "Aktivnost"
     },
     "status": {
+      "readOnlySince": "Samo za čitanje od {date}",
+      "readOnlyFrom": "Samo za čitanje od {date}",
       "trialUntil": "Proba do {date}",
       "paidUntil": "Plaćeno do {date}",
       "unpaid": "Nije plaćeno"
@@ -1699,6 +1746,7 @@
       "upcoming": "Turniri"
     },
     "errors": {
+      "paused": "Ovaj klub trenutno ne prima onlajn prijave.",
       "name": "Dajte turniru naziv.",
       "date": "Izaberite datum.",
       "maxEntries": "Broj mesta mora biti od 2 do 64.",
@@ -2091,6 +2139,7 @@
       "savedRemoved": "uklonjeno {n}",
       "savedSkipped": "{n, plural, one {preskočen # dan} few {preskočena # dana} other {preskočeno # dana}}",
       "errors": {
+        "readOnly": "Samo za čitanje: besplatna proba je istekla.",
         "failed": "Nešto nije u redu. Pokušajte ponovo.",
         "times": "Proverite vreme.",
         "busy": "Teren ili trener su tada zauzeti.",
@@ -2168,6 +2217,7 @@
       "awayButton": "Nije tu",
       "removeName": "Ukloni {name}",
       "errors": {
+        "readOnly": "Samo za čitanje: besplatna proba kluba je istekla.",
         "notAllowed": "Evidenciju mogu da vode samo klub i trener grupe.",
         "failed": "Nešto nije u redu. Pokušajte ponovo."
       }
@@ -2216,6 +2266,7 @@
     "unbook": "Otkaži",
     "unbookConfirm": "Osloboditi vaše mesto na ovom treningu?",
     "errors": {
+      "paused": "Ovaj klub trenutno ne prima onlajn rezervacije.",
       "notAllowed": "Ne možete to da uradite za ovog igrača.",
       "started": "Taj trening je već počeo.",
       "failed": "Nešto nije u redu. Pokušajte ponovo."
@@ -2265,6 +2316,7 @@
       "waiting": "{name} je na listi čekanja za grupu {group}."
     },
     "errors": {
+      "paused": "Ovaj klub trenutno ne prima onlajn prijave. Obratite se direktno klubu.",
       "notSignedIn": "Prvo se prijavite.",
       "confirmEmail": "Prvo potvrdite svoju adresu e-pošte: proverite poštu.",
       "already": "Već je upisan u ovu grupu.",
@@ -2296,6 +2348,7 @@
     "expiredBody": "Prošlo je 48 sati i mesto je otišlo sledećem. Za ponovni upis obratite se klubu {club}.",
     "toClub": "Idi na {club}",
     "errors": {
+      "paused": "Ovaj klub trenutno ne prima nove igrače onlajn. Obratite se direktno klubu.",
       "closed": "Ova ponuda je zatvorena.",
       "expired": "Ova ponuda je istekla.",
       "failed": "Nešto nije u redu. Pokušajte ponovo."
@@ -2423,7 +2476,7 @@
       },
       "trial_ended": {
         "title": "Vaša besplatna proba je <b>istekla</b>",
-        "detail": "Izaberite paket da nastavite da koristite Kortello"
+        "detail": "Za 3 dana nalog postaje samo za čitanje. Pišite nam da nastavite"
       },
       "club_booked": {
         "title": "<b>{club}</b> je rezervisao teren za vas",

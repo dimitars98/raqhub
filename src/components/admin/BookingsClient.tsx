@@ -22,6 +22,7 @@ import { BADGE, bookingStatusTone } from "@/lib/badges";
 import { DAY_HOURS } from "@/lib/openingHours";
 import { REPEAT_CHOICES, weeklyStarts } from "@/lib/recurring";
 import { Repeat, X } from "lucide-react";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
@@ -75,6 +76,8 @@ export default function BookingsClient({
   const [showModal, setShowModal] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [notice, setNotice] = useState<SeriesNotice | null>(null);
+  // A status change or cancellation that didn't save.
+  const [rowError, setRowError] = useState<string | null>(null);
   /** A weekly booking the admin is about to cancel: just it, or later weeks too? */
   const [cancelling, setCancelling] = useState<BookingWithJoins | null>(null);
   const [search, setSearch] = useState("");
@@ -82,6 +85,7 @@ export default function BookingsClient({
   const searchParams = useSearchParams();
   const supabase = createClient();
   const t = useTranslations("adminBookings");
+const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const locale = useLocale();
   const dfLocale = dateLocale(locale);
@@ -209,7 +213,11 @@ export default function BookingsClient({
       .eq("series_id", b.series_id)
       .gte("starts_at", b.starts_at)
       .eq("status", "confirmed");
-    if (error) return;
+    if (error) {
+      console.error("[bookings] cancel series", error);
+      setRowError(readOnly ? hint ?? null : t("statusFailed"));
+      return;
+    }
     setBookings((prev) =>
       prev.map((x) =>
         x.series_id === b.series_id &&
@@ -227,7 +235,12 @@ export default function BookingsClient({
       .update({ status })
       .eq("id", id);
     // Only show the change if it was really saved.
-    if (error) return;
+    if (error) {
+      console.error("[bookings] status", error);
+      setRowError(readOnly ? hint ?? null : t("statusFailed"));
+      return;
+    }
+    setRowError(null);
     setBookings((prev) =>
       prev.map((b) => (b.id === id ? { ...b, status } : b)),
     );
@@ -272,6 +285,8 @@ export default function BookingsClient({
           </p>
         </div>
         <button
+          disabled={readOnly}
+          title={hint}
           onClick={() => {
             reset();
             setShowModal(true);
@@ -306,6 +321,12 @@ export default function BookingsClient({
           ))}
         </div>
       </div>
+
+      {rowError && (
+        <p role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {rowError}
+        </p>
+      )}
 
       {notice && (
         <div
@@ -371,6 +392,8 @@ export default function BookingsClient({
                   <p className="text-sm text-[#6e7f65]">{t("noBookings")}</p>
                   {bookings.length === 0 && (
                     <button
+                      disabled={readOnly}
+                      title={hint}
                       type="button"
                       onClick={() => {
                         reset();
@@ -442,6 +465,8 @@ export default function BookingsClient({
                   </td>
                   <td className="px-5 py-3.5">
                     <select
+                      disabled={readOnly}
+                      title={hint}
                       value={b.status}
                       onChange={(e) => {
                         const status = e.target.value as BookingStatus;

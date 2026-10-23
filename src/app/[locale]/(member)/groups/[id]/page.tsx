@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { ReadOnlyProvider } from "@/components/admin/ReadOnly";
 import GroupClient from "@/components/groups/GroupClient";
 import { loadGroupDetail } from "@/lib/groupDetail";
 import { monthOf } from "@/lib/groups";
@@ -14,7 +15,10 @@ export default async function CoachGroupPage({ params }: { params: Promise<{ id:
   if (!user) redirect("/login");
   const detail = await loadGroupDetail(supabase, id);
   if (!detail || detail.coachProfileId !== user.id) notFound();
+  // After the club's free trial, its coach can look but not change anything.
+  const { data: locked } = await supabase.rpc("club_locked", { p_club: detail.group.club_id });
   return (
+    <ReadOnlyProvider value={!!locked}>
     <GroupClient
       mode="coach"
       group={detail.group}
@@ -26,5 +30,6 @@ export default async function CoachGroupPage({ params }: { params: Promise<{ id:
       month={monthOf()}
       signupUrl={null}
     />
+    </ReadOnlyProvider>
   );
 }

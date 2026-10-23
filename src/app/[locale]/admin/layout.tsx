@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
 import { PlanBanner, UpgradeNotice } from "@/components/admin/PlanNotices";
+import { ReadOnlyProvider } from "@/components/admin/ReadOnly";
 import { acceptStaffInvites } from "@/lib/myClub";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 import type { Club, Profile } from "@/types/database";
@@ -65,7 +66,10 @@ export default async function AdminLayout({
   }
 
   // Staff accounts come with the Academy plan (and the free trial).
-  const staffLocked = isStaff && !clubAccess(club).has("staff");
+  const access = clubAccess(club);
+  const staffLocked = isStaff && !access.has("staff");
+  // The app owner's own pages (owner page) are never read-only.
+  const readOnly = !!club && access.readOnly && profile.role !== "super_admin";
 
   return (
     <DashboardShell
@@ -77,9 +81,11 @@ export default async function AdminLayout({
       isSuperAdmin={profile.role === "super_admin"}
       isStaff={isStaff}
       // The plan and trial are the owner's business, not the staff's.
-      notice={club && !isStaff ? <PlanBanner access={clubAccess(club)} /> : undefined}
+      notice={club ? <PlanBanner access={access} staff={isStaff} /> : undefined}
     >
-      {staffLocked ? <UpgradeNotice feature="staff" /> : children}
+      <ReadOnlyProvider value={readOnly}>
+        {staffLocked ? <UpgradeNotice feature="staff" /> : children}
+      </ReadOnlyProvider>
     </DashboardShell>
   );
 }

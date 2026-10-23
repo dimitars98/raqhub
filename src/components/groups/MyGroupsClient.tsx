@@ -362,6 +362,7 @@ function DropinRow({ d }: { d: MyDropin }) {
   const locale = useLocale();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-[18px] border border-ink-100 bg-white p-4">
       <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-800">
@@ -380,7 +381,12 @@ function DropinRow({ d }: { d: MyDropin }) {
         onClick={() =>
           confirm(t("unbookConfirm")) &&
           startTransition(async () => {
-            await unbookSession(d.session.id);
+            setError(null);
+            const r = await unbookSession(d.session.id);
+            if (r.error) {
+              setError(t.has(`errors.${r.error}`) ? t(`errors.${r.error}`) : t("errors.failed"));
+              return;
+            }
             router.refresh();
           })
         }
@@ -388,6 +394,11 @@ function DropinRow({ d }: { d: MyDropin }) {
       >
         {t("unbook")}
       </button>
+      {error && (
+        <p role="alert" className="basis-full text-[13px] text-red-700">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

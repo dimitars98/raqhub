@@ -55,6 +55,15 @@
            hover:bg-ink-800 active:scale-95 transition-all duration-150 cursor-pointer border-0
            inline-flex items-center gap-2;
   }
+  /* Disabled (e.g. read-only after the trial): no hover or press effect */
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .btn-ghost:disabled {
+    @apply cursor-not-allowed opacity-40 active:scale-100;
+  }
+  .btn-primary:disabled {
+    @apply hover:bg-ink-900;
+  }
   .btn-secondary {
     @apply bg-white text-ink-900 border border-ink-200 rounded-full px-5 py-2.5
            text-sm font-medium hover:border-brand-600 hover:bg-brand-50

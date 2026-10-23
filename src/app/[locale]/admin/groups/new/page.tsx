@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getMyClub } from "@/lib/myClub";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
-import { UpgradeNotice } from "@/components/admin/PlanNotices";
+import { ReadOnlyNotice, UpgradeNotice } from "@/components/admin/PlanNotices";
 import GroupForm from "@/components/groups/GroupForm";
 import { groupFormOptions } from "@/lib/groupForm";
 import { clubDay } from "@/lib/groups";
@@ -17,7 +17,9 @@ export default async function NewGroupPage() {
   if (!user) redirect("/login");
   const { club } = await getMyClub<{ id: string } & ClubBilling>(supabase, user.id, `id, ${BILLING_COLUMNS}`);
   if (!club) redirect("/admin/setup");
-  if (!clubAccess(club).has("groups")) return <UpgradeNotice feature="groups" />;
+  const access = clubAccess(club);
+  if (access.readOnly) return <ReadOnlyNotice />;
+  if (!access.has("groups")) return <UpgradeNotice feature="groups" />;
 
   const options = await groupFormOptions(supabase, club.id);
   if (options.courts.length === 0) {

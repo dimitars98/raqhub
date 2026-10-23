@@ -80,6 +80,8 @@ async function sendConfirmation(supabase: Supabase, user: SignedInUser, bookingI
 async function bookingError(error: { code?: string; message?: string }, what: "court" | "coach") {
   const t = await getTranslations("bookingErrors");
   const message = error.message ?? "";
+  // The club's free trial has ended (see 20261025_trial_lock.sql).
+  if (message.includes("club_locked")) return t("clubPaused");
   if (error.code === "23P01") {
     // For a lesson the clash can be the coach or the court it was given.
     if (what === "coach") return message.includes("coach") ? t("coachTaken") : t("noCourtFree");

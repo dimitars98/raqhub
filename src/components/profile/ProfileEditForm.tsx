@@ -21,19 +21,28 @@ export default function ProfileEditForm({
   const t = useTranslations("profilePage");
   const [form, setForm] = useState<FormValues>(defaultValues);
   const [saved, setSaved] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const supabase = createClient();
 
   const handleSave = () => {
+    setFailed(false);
     startTransition(async () => {
-      await supabase
-        .from("profiles")
-        .update({
-          full_name: form.full_name || null,
-          phone: form.phone || null,
-        } as unknown as never)
-        .eq("id", userId);
+      try {
+        const { error } = await supabase
+          .from("profiles")
+          .update({
+            full_name: form.full_name || null,
+            phone: form.phone || null,
+          } as unknown as never)
+          .eq("id", userId);
+        if (error) throw error;
+      } catch (e) {
+        console.error("[profile]", e);
+        setFailed(true);
+        return;
+      }
 
       setSaved(true);
       setTimeout(() => setSaved(false), 2500);
@@ -69,6 +78,11 @@ export default function ProfileEditForm({
         />
       </div>
       <div className="flex items-center justify-end gap-3 pt-1">
+        {failed && (
+          <span role="alert" className="text-xs text-red-600">
+            {t("saveFailed")}
+          </span>
+        )}
         {saved && (
           <span className="flex items-center gap-1 text-xs text-brand-600">
             <Check size={12} strokeWidth={2.5} />

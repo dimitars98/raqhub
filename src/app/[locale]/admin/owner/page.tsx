@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { clubAccess, PLANS } from "@/lib/plans";
+import { clubAccess, PLANS, readOnlyFrom } from "@/lib/plans";
 import { clubNow } from "@/lib/automation/time";
 import OwnerClient, { type OwnerClub, type OwnerPayment } from "@/components/admin/OwnerClient";
 
@@ -19,6 +20,22 @@ export default async function OwnerPage() {
   if (!user) notFound();
   const { data: me } = await supabase.from("profiles").select("role").eq("id", user.id).single();
   if (me?.role !== "super_admin") notFound();
+
+  // This page reads every club with the service-role key. If the deployment
+  // doesn't have it, say so instead of crashing the whole page.
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const t = await getTranslations("owner.missingKey");
+    return (
+      <div className="mx-auto max-w-xl rounded-2xl border border-amber-200 bg-amber-50 p-6">
+        <h1 className="text-lg font-semibold text-ink-900">{t("title")}</h1>
+        <p className="mt-2 text-sm leading-relaxed text-ink-600">{t("body")}</p>
+        <code className="mt-4 inline-block rounded-lg bg-white px-3 py-1.5 font-mono text-sm text-ink-900 ring-1 ring-amber-200">
+          SUPABASE_SERVICE_ROLE_KEY
+        </code>
+        <p className="mt-4 text-sm leading-relaxed text-ink-600">{t("where")}</p>
+      </div>
+    );
+  }
 
   // Checked above; from here on the service-role key reads every club.
   const db = createAdminClient();
@@ -75,6 +92,7 @@ export default async function OwnerPage() {
       createdAt: c.created_at,
       plan: access.plan,
       status: access.status,
+      readOnlyFrom: access.status === "grace" || access.status === "locked" ? readOnlyFrom(c) : null,
       trialEndsAt: c.trial_ends_at,
       paidUntil: c.paid_until,
       ownerName: owner?.name ?? null,
@@ -101,7 +119,7 @@ export default async function OwnerPage() {
     clubs: rows.length,
     trial: rows.filter((r) => r.status === "trial").length,
     paying: rows.filter((r) => r.status === "active").length,
-    unpaid: rows.filter((r) => r.status === "unpaid").length,
+    unpaid: rows.filter((r) => r.status === "grace" || r.status === "locked").length,
     // What paying clubs are worth per month, at the monthly price.
     monthly: rows
       .filter((r) => r.status === "active")

@@ -95,17 +95,34 @@ export function useNotifications({
       const now = new Date().toISOString();
       setItems((prev) => prev.map((n) => (n.id === id && !n.read_at ? { ...n, read_at: now } : n)));
       setUnread((u) => Math.max(0, u - 1));
-      await supabase.from("notifications").update({ read_at: now }).eq("id", id).is("read_at", null);
+      const { error } = await supabase
+        .from("notifications")
+        .update({ read_at: now })
+        .eq("id", id)
+        .is("read_at", null);
+      // The list changed before saving; if saving failed, show the real state again.
+      if (error) {
+        console.error("[notifications] mark read", error);
+        load();
+      }
     },
-    [supabase],
+    [supabase, load],
   );
 
   const markAllRead = useCallback(async () => {
     const now = new Date().toISOString();
     setItems((prev) => (unreadOnly ? [] : prev.map((n) => (n.read_at ? n : { ...n, read_at: now }))));
     setUnread(0);
-    await supabase.from("notifications").update({ read_at: now }).eq("user_id", userId).is("read_at", null);
-  }, [supabase, userId, unreadOnly]);
+    const { error } = await supabase
+      .from("notifications")
+      .update({ read_at: now })
+      .eq("user_id", userId)
+      .is("read_at", null);
+    if (error) {
+      console.error("[notifications] mark all read", error);
+      load();
+    }
+  }, [supabase, userId, unreadOnly, load]);
 
   return {
     items,

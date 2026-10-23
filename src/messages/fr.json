@@ -1,4 +1,19 @@
 {
+  "paused": {
+    "bodyNamed": "{club} ne prend pas de réservations ni d’inscriptions en ligne pour le moment. Contactez directement le club.",
+    "body": "Ce club ne prend pas de réservations ni d’inscriptions en ligne pour le moment. Contactez directement le club.",
+    "title": "Les réservations en ligne sont suspendues"
+  },
+  "errorPage": {
+    "title": "Une erreur s’est produite",
+    "body": "Cette page ne s’est pas chargée. C’est généralement passager, veuillez réessayer dans un instant.",
+    "retry": "Réessayer",
+    "home": "Aller à l’accueil",
+    "backToApp": "Retour à mon tableau de bord",
+    "reference": "Référence : {code}",
+    "notFoundTitle": "Page introuvable",
+    "notFoundBody": "Cette page n’existe pas ou a été déplacée. Vérifiez l’adresse ou repartez de l’accueil."
+  },
   "nav": {
     "features": "Fonctionnalités",
     "pricing": "Tarifs",
@@ -10,6 +25,7 @@
     "language": "Langue"
   },
   "auth": {
+    "callbackFailed": "La connexion avec Google n’a pas fonctionné. Veuillez réessayer ou vous connecter avec votre e-mail et votre mot de passe.",
     "signIn": "Connectez-vous à votre compte",
     "continueGoogle": "Continuer avec Google",
     "or": "ou",
@@ -172,6 +188,7 @@
     "cancelBooking": "Annuler"
   },
   "adminBookings": {
+    "statusFailed": "Impossible de modifier la réservation. Veuillez réessayer.",
     "title": "Réservations",
     "total": "total",
     "addBooking": "Ajouter une réservation",
@@ -353,6 +370,13 @@
     "myGroups": "Mes groupes"
   },
   "members": {
+    "errors": {
+      "duplicateEmail": "Un membre avec cet e-mail existe déjà.",
+      "duplicatePhone": "Un membre avec ce numéro de téléphone existe déjà.",
+      "saveFailed": "Impossible d’enregistrer le membre. Veuillez réessayer.",
+      "cancelFailed": "Impossible d’annuler l’adhésion. Veuillez réessayer."
+    },
+    "total": "{count, plural, one {# membre} other {# membres}}",
     "title": "Membres",
     "addMember": "Ajouter un membre",
     "searchPlaceholder": "Rechercher par nom, e-mail ou téléphone...",
@@ -469,6 +493,7 @@
     "coachEmailPlaceholder": "entraineur@exemple.fr"
   },
   "clubPage": {
+    "pausedCta": "Les réservations en ligne sont suspendues pour le moment. Contactez directement le club.",
     "signIn": "Se connecter",
     "signUpToBook": "S’inscrire pour réserver",
     "bookCourt": "Réserver un court",
@@ -531,6 +556,10 @@
     "cancelNote": "Annulation en ligne possible jusqu’à {hours} heures avant le début."
   },
   "profilePage": {
+    "saveFailed": "Impossible d’enregistrer. Veuillez réessayer.",
+    "photoFailed": "La photo n’a pas pu être envoyée. Veuillez réessayer.",
+    "photoType": "Veuillez choisir une image (JPG, PNG ou similaire).",
+    "photoTooBig": "Cette photo est trop lourde. Choisissez-en une de moins de {mb} Mo.",
     "title": "Mon profil",
     "yourName": "Votre nom",
     "sessions": "Séances",
@@ -571,6 +600,8 @@
     "changePlan": "Pour changer de formule, contactez l’administrateur du club."
   },
   "plansAdmin": {
+    "deleteFailed": "Impossible de supprimer la formule. Veuillez réessayer.",
+    "saveFailed": "Impossible d’enregistrer la formule. Veuillez réessayer.",
     "title": "Formules d’adhésion",
     "count": "{n, plural, one {# formule} other {# formules}}",
     "addPlan": "Ajouter une formule",
@@ -658,9 +689,9 @@
     "footerOwner": "Vous recevez ce résumé hebdomadaire parce que vous gérez un club sur Kortello.",
     "trial": {
       "endingSubject": "Votre essai Kortello pour {club} se termine le {date}",
-      "endingIntro": "Votre mois gratuit pour {club} se termine le {date}. Pour continuer à utiliser Kortello, répondez simplement à cet e-mail et nous vous enverrons une facture. Si vous souhaitez une autre formule, dites-le-nous.",
+      "endingIntro": "Votre mois gratuit pour {club} se termine le {date}. Trois jours plus tard, le compte passe en lecture seule : vous pourrez toujours tout consulter et exporter, mais rien de nouveau ne pourra être ajouté et les réservations en ligne seront suspendues. Rien n’est jamais facturé automatiquement. Pour continuer, répondez à cet e-mail et nous vous enverrons une facture.",
       "endedSubject": "Votre essai Kortello pour {club} est terminé",
-      "endedIntro": "Votre mois gratuit pour {club} est terminé. Répondez à cet e-mail et nous vous enverrons la facture de votre formule, pour continuer à prendre des réservations sans interruption.",
+      "endedIntro": "Votre mois gratuit pour {club} est terminé. Dans trois jours, le compte passe en lecture seule et les réservations en ligne sont suspendues. Vos données restent en sécurité et rien n’est facturé. Pour continuer à prendre des réservations, répondez à cet e-mail et nous vous enverrons une facture.",
       "price": "{monthly} € / mois ou {yearly} € / an",
       "trialEnds": "Gratuit jusqu’au",
       "seePlan": "Voir votre formule",
@@ -698,6 +729,14 @@
     }
   },
   "billing": {
+    "readOnlySince": "Lecture seule depuis le {date}",
+    "readOnlyFrom": "Essai terminé · lecture seule à partir du {date}",
+    "readOnlyBody": "L’essai gratuit est terminé. Vous pouvez toujours tout consulter et exporter vos données. Écrivez-nous pour continuer.",
+    "readOnlyTitle": "Ce compte est en lecture seule",
+    "readOnlyHint": "Lecture seule : l’essai gratuit est terminé",
+    "staffLockedBanner": "Le compte de ce club est en lecture seule pour le moment : rien ne peut être ajouté ni modifié.",
+    "lockedBanner": "Votre essai gratuit est terminé : le compte est en lecture seule et les réservations en ligne sont suspendues. Vos données sont en sécurité et rien n’est facturé. Écrivez-nous pour continuer.",
+    "graceBanner": "Votre essai gratuit est terminé. Dans {days, plural, one {# jour} other {# jours}}, le compte passe en lecture seule : vous verrez toujours tout, mais rien de nouveau ne pourra être ajouté et les réservations en ligne seront suspendues.",
     "trialBanner": "Essai gratuit : encore {days, plural, one {# jour} other {# jours}}. Tout est débloqué.",
     "unpaidBanner": "Votre essai gratuit est terminé. Écrivez-nous pour continuer avec votre formule.",
     "seePlan": "Voir votre formule",
@@ -1236,6 +1275,7 @@
     "perHour": "/ h"
   },
   "bookingErrors": {
+    "clubPaused": "Ce club ne prend pas de réservations en ligne pour le moment. Contactez directement le club.",
     "coachTaken": "Cet entraîneur est déjà réservé à cette heure",
     "slotTaken": "Ce créneau est déjà réservé",
     "closedDay": "Le club est fermé ce jour-là",
@@ -1501,6 +1541,11 @@
     }
   },
   "owner": {
+    "missingKey": {
+      "title": "Ce déploiement n’a pas la clé de service",
+      "body": "La page propriétaire lit tous les clubs, elle a donc besoin de la clé service-role de Supabase. Ajoutez-la dans les réglages de votre hébergement sous ce nom, puis redéployez :",
+      "where": "Vous la trouverez dans Supabase, sous Project Settings → API keys (la clé secret ou service_role). Sans elle, les alertes de nouveaux clubs et les rappels programmés ne fonctionnent pas non plus."
+    },
     "title": "Clubs et paiements",
     "subtitle": "Vous seul voyez cette page. Enregistrez les paiements, changez les formules et suivez chaque club.",
     "stats": {
@@ -1526,6 +1571,8 @@
       "usage": "Activité"
     },
     "status": {
+      "readOnlySince": "Lecture seule depuis le {date}",
+      "readOnlyFrom": "Lecture seule à partir du {date}",
       "trialUntil": "Essai jusqu’au {date}",
       "paidUntil": "Payé jusqu’au {date}",
       "unpaid": "Non payé"
@@ -1699,6 +1746,7 @@
       "upcoming": "Tournois"
     },
     "errors": {
+      "paused": "Ce club ne prend pas d’inscriptions en ligne pour le moment.",
       "name": "Donnez un nom au tournoi.",
       "date": "Choisissez une date.",
       "maxEntries": "Le nombre de places doit être entre 2 et 64.",
@@ -2091,6 +2139,7 @@
       "savedRemoved": "{n} retirées",
       "savedSkipped": "{n, plural, one {# jour sauté} other {# jours sautés}}",
       "errors": {
+        "readOnly": "Lecture seule : l’essai gratuit est terminé.",
         "failed": "Une erreur s'est produite. Veuillez réessayer.",
         "times": "Vérifiez les horaires.",
         "busy": "Le terrain ou l'entraîneur est pris à ce moment-là.",
@@ -2168,6 +2217,7 @@
       "awayButton": "Absent",
       "removeName": "Retirer {name}",
       "errors": {
+        "readOnly": "Lecture seule : l’essai gratuit du club est terminé.",
         "notAllowed": "Seuls le club et l'entraîneur du groupe peuvent relever les présences.",
         "failed": "Une erreur s'est produite. Veuillez réessayer."
       }
@@ -2216,6 +2266,7 @@
     "unbook": "Annuler",
     "unbookConfirm": "Libérer votre place pour cette séance ?",
     "errors": {
+      "paused": "Ce club ne prend pas de réservations en ligne pour le moment.",
       "notAllowed": "Vous ne pouvez pas faire cela pour ce joueur.",
       "started": "Cette séance a déjà commencé.",
       "failed": "Une erreur s'est produite. Veuillez réessayer."
@@ -2265,6 +2316,7 @@
       "waiting": "{name} est en liste d'attente pour {group}."
     },
     "errors": {
+      "paused": "Ce club ne prend pas d’inscriptions en ligne pour le moment. Contactez directement le club.",
       "notSignedIn": "Veuillez d'abord vous connecter.",
       "confirmEmail": "Veuillez d'abord confirmer votre adresse e-mail : regardez dans votre boîte de réception.",
       "already": "Déjà inscrit à ce groupe.",
@@ -2296,6 +2348,7 @@
     "expiredBody": "Les 48 heures sont passées, la place est allée à la personne suivante. Pour vous réinscrire, contactez {club}.",
     "toClub": "Aller sur {club}",
     "errors": {
+      "paused": "Ce club ne prend pas de nouveaux joueurs en ligne pour le moment. Contactez directement le club.",
       "closed": "Cette offre est close.",
       "expired": "Cette offre a expiré.",
       "failed": "Une erreur s'est produite. Veuillez réessayer."
@@ -2423,7 +2476,7 @@
       },
       "trial_ended": {
         "title": "Votre essai gratuit est <b>terminé</b>",
-        "detail": "Choisissez une formule pour continuer avec Kortello"
+        "detail": "Le compte passe en lecture seule dans 3 jours. Écrivez-nous pour continuer"
       },
       "club_booked": {
         "title": "<b>{club}</b> a réservé un terrain pour vous",

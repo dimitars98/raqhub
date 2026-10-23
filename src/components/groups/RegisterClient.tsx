@@ -8,6 +8,7 @@ import { CancelModal, type DetailSession } from "@/components/groups/GroupClient
 import { clubDay, clubFormat, clubTime } from "@/lib/groups";
 import { saveRegister, type RegisterRow } from "@/app/actions/groups";
 import type { AttendanceStatus, GroupAttendance, GroupPlayer } from "@/types/database";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 type Mark = "present" | "absent" | null;
 
@@ -40,6 +41,7 @@ export default function RegisterClient({
   total: number;
 }) {
   const t = useTranslations("groups.register");
+  const { readOnly, hint } = useReadOnly();
   const locale = useLocale();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
@@ -111,6 +113,7 @@ export default function RegisterClient({
       ...removed.map((id) => ({ attendance_id: id, remove: true })),
       ...guests.map((g) => ({ guest_name: g.name, status: (g.mark ?? "present") as AttendanceStatus, paid: g.paid })),
     ];
+    if (readOnly) return setError(hint ?? null);
     startTransition(async () => {
       const r = await saveRegister(session.id, rows, note);
       if (r.error) {
@@ -293,7 +296,7 @@ export default function RegisterClient({
       </label>
 
       {!cancelled && new Date(session.ends_at) > new Date() && (
-        <button type="button" onClick={() => setCancelling(true)} className="self-center p-2 text-[13px] text-red-700 underline underline-offset-2">
+        <button title={hint} disabled={readOnly} type="button" onClick={() => setCancelling(true)} className="self-center p-2 text-[13px] text-red-700 underline underline-offset-2">
           {isToday ? t("cancelToday") : t("cancelThis")}
         </button>
       )}

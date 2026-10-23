@@ -20,7 +20,10 @@ export async function GET(request: Request) {
   if (clubId) query = query.eq('club_id', clubId)
 
   const { data: courtsData, error } = await query.order('price_per_hour')
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  if (error) {
+    console.error('[courts]', error)
+    return NextResponse.json({ error: 'failed' }, { status: 500 })
+  }
 
   const courts = (courtsData ?? []) as (Court & { club?: { name: string; city: string; address: string } | null })[]
 
@@ -29,13 +32,19 @@ export async function GET(request: Request) {
   const dayStart = new Date(date); dayStart.setHours(0, 0, 0, 0)
   const dayEnd   = new Date(date); dayEnd.setHours(23, 59, 59, 999)
 
-  const { data: bookingsData } = await supabase
+  const { data: bookingsData, error: bookingsError } = await supabase
     .from('bookings')
     .select('court_id, starts_at, ends_at')
     .in('court_id', courts.map(c => c.id))
     .eq('status', 'confirmed')
     .gte('starts_at', dayStart.toISOString())
     .lte('ends_at', dayEnd.toISOString())
+
+  // Without the bookings every slot would look free, so better to say it failed.
+  if (bookingsError) {
+    console.error('[courts] bookings', bookingsError)
+    return NextResponse.json({ error: 'failed' }, { status: 500 })
+  }
 
   const bookings = (bookingsData ?? []) as { court_id: string; starts_at: string; ends_at: string }[]
   const bookedMap: Record<string, { starts_at: string; ends_at: string }[]> = {}

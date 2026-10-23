@@ -153,7 +153,14 @@ export async function makeDraw(tournamentId: string): Promise<Result> {
     return { error: "failed" };
   }
 
-  await supabase.from("tournaments").update({ status: "started" }).eq("id", tournamentId);
+  const { error: statusError } = await supabase
+    .from("tournaments")
+    .update({ status: "started" })
+    .eq("id", tournamentId);
+  if (statusError) {
+    console.error("[tournaments] start", statusError);
+    return { error: "failed" };
+  }
   refresh(tournamentId);
   return {};
 }
@@ -166,7 +173,14 @@ export async function undoDraw(tournamentId: string): Promise<Result> {
     .delete()
     .eq("tournament_id", tournamentId);
   if (error) return { error: "failed" };
-  await supabase.from("tournaments").update({ status: "closed" }).eq("id", tournamentId);
+  const { error: statusError } = await supabase
+    .from("tournaments")
+    .update({ status: "closed" })
+    .eq("id", tournamentId);
+  if (statusError) {
+    console.error("[tournaments] undo draw", statusError);
+    return { error: "failed" };
+  }
   refresh(tournamentId);
   return {};
 }
@@ -206,18 +220,28 @@ export async function setResult(
   if (error) return { error: "failed" };
 
   if (next) {
-    await supabase
+    const { error: nextError } = await supabase
       .from("tournament_matches")
       .update(slot.slot === "entry1_id" ? { entry1_id: winnerId } : { entry2_id: winnerId })
       .eq("id", next.id);
+    if (nextError) {
+      console.error("[tournaments] move winner on", nextError);
+      refresh(tournamentId);
+      return { error: "failed" };
+    }
   }
 
   // The final decides whether the tournament is finished.
   if (match.round === rounds) {
-    await supabase
+    const { error: statusError } = await supabase
       .from("tournaments")
       .update({ status: winnerId ? "finished" : "started" })
       .eq("id", tournamentId);
+    if (statusError) {
+      console.error("[tournaments] finish", statusError);
+      refresh(tournamentId);
+      return { error: "failed" };
+    }
   }
   refresh(tournamentId);
   return {};

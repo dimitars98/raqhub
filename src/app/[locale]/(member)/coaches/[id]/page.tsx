@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { normalizeHours } from "@/lib/openingHours";
 import { normalizeRules } from "@/lib/bookingRules";
 import CoachBookingForm from "@/components/member/CoachBookingForm";
+import BookingPaused from "@/components/ui/BookingPaused";
 import Avatar from "@/components/ui/Avatar";
 import { getLabels } from "@/lib/getLabels";
 import type { Coach, Club, Profile } from "@/types/database";
@@ -31,7 +32,7 @@ export default async function CoachPage({
   const { data } = await supabase
     .from("coaches")
     .select(
-      "id, bio, levels, specializations, price_per_hour, club_id, profile:profiles(full_name, avatar_url), club:clubs(name, city, opening_hours, booking_rules)",
+      "id, bio, levels, specializations, price_per_hour, club_id, profile:profiles(full_name, avatar_url), club:clubs(name, city, phone, email, opening_hours, booking_rules)",
     )
     .eq("id", id)
     .eq("is_active", true)
@@ -41,6 +42,11 @@ export default async function CoachPage({
   if (!coach) notFound();
 
   const name = coach.profile?.full_name ?? t("coach");
+  // Lessons at a club whose free trial has ended can't be booked online.
+  const { data: paused } = coach.club_id
+    ? await supabase.rpc("club_locked", { p_club: coach.club_id })
+    : { data: false };
+  const club = coach.club as { name?: string; phone?: string | null; email?: string | null } | null;
   const levels = coach.levels ?? [];
   const specializations = coach.specializations ?? [];
 
@@ -105,14 +111,18 @@ export default async function CoachPage({
         </div>
       </div>
 
-      <CoachBookingForm
-        coachId={coach.id}
-        coachName={name}
-        clubId={coach.club_id}
-        pricePerHour={coach.price_per_hour}
-        hours={normalizeHours(coach.club?.opening_hours)}
-        rules={normalizeRules(coach.club?.booking_rules)}
-      />
+      {paused ? (
+        <BookingPaused clubName={club?.name} phone={club?.phone} email={club?.email} />
+      ) : (
+        <CoachBookingForm
+          coachId={coach.id}
+          coachName={name}
+          clubId={coach.club_id}
+          pricePerHour={coach.price_per_hour}
+          hours={normalizeHours(coach.club?.opening_hours)}
+          rules={normalizeRules(coach.club?.booking_rules)}
+        />
+      )}
     </div>
   );
 }

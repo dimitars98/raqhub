@@ -1,4 +1,19 @@
 {
+  "paused": {
+    "bodyNamed": "{club} nuk pranon rezervime apo regjistrime online për momentin. Kontaktoni drejtpërdrejt klubin.",
+    "body": "Ky klub nuk pranon rezervime apo regjistrime online për momentin. Kontaktoni drejtpërdrejt klubin.",
+    "title": "Rezervimet online janë pezulluar"
+  },
+  "errorPage": {
+    "title": "Diçka shkoi keq",
+    "body": "Faqja nuk u ngarkua. Zakonisht është një ndërprerje e shkurtër, provoni përsëri pas pak.",
+    "retry": "Provo përsëri",
+    "home": "Te faqja kryesore",
+    "backToApp": "Kthehu te paneli im",
+    "reference": "Referenca: {code}",
+    "notFoundTitle": "Faqja nuk u gjet",
+    "notFoundBody": "Kjo faqe nuk ekziston ose është zhvendosur. Kontrolloni adresën ose filloni nga faqja kryesore."
+  },
   "nav": {
     "features": "Veçoritë",
     "pricing": "Çmimet",
@@ -10,6 +25,7 @@
     "language": "Gjuha"
   },
   "auth": {
+    "callbackFailed": "Hyrja me Google nuk funksionoi. Provoni përsëri ose hyni me email dhe fjalëkalim.",
     "signIn": "Hyni në llogarinë tuaj",
     "continueGoogle": "Vazhdoni me Google",
     "or": "ose",
@@ -172,6 +188,7 @@
     "cancelBooking": "Anulo"
   },
   "adminBookings": {
+    "statusFailed": "Rezervimi nuk u ndryshua. Provoni përsëri.",
     "title": "Rezervimet",
     "total": "gjithsej",
     "addBooking": "Shto rezervim",
@@ -353,6 +370,13 @@
     "myGroups": "Grupet e mia"
   },
   "members": {
+    "errors": {
+      "duplicateEmail": "Ekziston tashmë një anëtar me këtë email.",
+      "duplicatePhone": "Ekziston tashmë një anëtar me këtë numër telefoni.",
+      "saveFailed": "Anëtari nuk u ruajt. Provoni përsëri.",
+      "cancelFailed": "Anëtarësia nuk u anulua. Provoni përsëri."
+    },
+    "total": "{count, plural, one {# anëtar} other {# anëtarë}}",
     "title": "Anëtarë",
     "addMember": "Shto anëtar",
     "searchPlaceholder": "Kërko sipas emrit, emailit ose telefonit...",
@@ -469,6 +493,7 @@
     "coachEmailPlaceholder": "trajner@shembull.al"
   },
   "clubPage": {
+    "pausedCta": "Rezervimet online janë pezulluar për momentin. Kontaktoni drejtpërdrejt klubin.",
     "signIn": "Hyr",
     "signUpToBook": "Regjistrohu për të rezervuar",
     "bookCourt": "Rezervo një fushë",
@@ -531,6 +556,10 @@
     "cancelNote": "Mund ta anuloni online deri në {hours} orë para fillimit."
   },
   "profilePage": {
+    "saveFailed": "Nuk u ruajt. Provoni përsëri.",
+    "photoFailed": "Fotoja nuk u ngarkua. Provoni përsëri.",
+    "photoType": "Zgjidhni një skedar imazhi (JPG, PNG ose të ngjashëm).",
+    "photoTooBig": "Fotoja është shumë e madhe. Zgjidhni një nën {mb} MB.",
     "title": "Profili im",
     "yourName": "Emri juaj",
     "sessions": "Seanca",
@@ -571,6 +600,8 @@
     "changePlan": "Për të ndryshuar planin, kontaktoni administratorin e klubit."
   },
   "plansAdmin": {
+    "deleteFailed": "Plani nuk u fshi. Provoni përsëri.",
+    "saveFailed": "Plani nuk u ruajt. Provoni përsëri.",
     "title": "Planet e anëtarësisë",
     "count": "{n, plural, one {# plan} other {# plane}}",
     "addPlan": "Shto plan",
@@ -658,9 +689,9 @@
     "footerOwner": "E merrni këtë përmbledhje javore sepse drejtoni një klub në Kortello.",
     "trial": {
       "endingSubject": "Prova juaj në Kortello për {club} mbaron më {date}",
-      "endingIntro": "Muaji falas për {club} mbaron më {date}. Për të vazhduar me Kortello, përgjigjuni këtij email-i dhe do t’ju dërgojmë një faturë. Nëse doni një paketë tjetër, thjesht na shkruani.",
+      "endingIntro": "Muaji falas për {club} mbaron më {date}. Tri ditë më pas llogaria bëhet vetëm për lexim: mund të shihni dhe eksportoni gjithçka, por nuk mund të shtohet asgjë e re dhe rezervimet online pezullohen. Asgjë nuk tarifohet automatikisht. Për të vazhduar, përgjigjuni këtij email-i dhe do t’ju dërgojmë faturën.",
       "endedSubject": "Prova në Kortello për {club} ka mbaruar",
-      "endedIntro": "Muaji falas për {club} ka mbaruar. Përgjigjuni këtij email-i dhe do t’ju dërgojmë faturën për paketën tuaj, që të vazhdoni të merrni rezervime pa ndërprerje.",
+      "endedIntro": "Muaji falas për {club} ka mbaruar. Pas tri ditësh llogaria bëhet vetëm për lexim dhe rezervimet online pezullohen. Të dhënat tuaja mbeten të sigurta dhe nuk tarifohet asgjë. Për të vazhduar të merrni rezervime, përgjigjuni këtij email-i dhe do t’ju dërgojmë faturën.",
       "price": "€{monthly} në muaj ose €{yearly} në vit",
       "trialEnds": "Falas deri më",
       "seePlan": "Shikoni paketën",
@@ -698,6 +729,14 @@
     }
   },
   "billing": {
+    "readOnlySince": "Vetëm për lexim që nga {date}",
+    "readOnlyFrom": "Prova përfundoi · vetëm për lexim nga {date}",
+    "readOnlyBody": "Prova falas ka përfunduar. Mund të shihni ende gjithçka dhe të eksportoni të dhënat. Na shkruani për të vazhduar.",
+    "readOnlyTitle": "Kjo llogari është vetëm për lexim",
+    "readOnlyHint": "Vetëm për lexim: prova falas ka përfunduar",
+    "staffLockedBanner": "Llogaria e klubit është për momentin vetëm për lexim, prandaj asgjë nuk mund të shtohet apo ndryshohet.",
+    "lockedBanner": "Prova juaj falas ka përfunduar, prandaj llogaria është vetëm për lexim dhe rezervimet online janë pezulluar. Të dhënat tuaja janë të sigurta dhe nuk tarifohet asgjë. Na shkruani për të vazhduar.",
+    "graceBanner": "Prova juaj falas ka përfunduar. Pas {days, plural, one {# dite} other {# ditësh}} llogaria bëhet vetëm për lexim: do të shihni gjithçka, por nuk mund të shtohet asgjë e re dhe rezervimet online pezullohen.",
     "trialBanner": "Provë falas: {days, plural, one {edhe # ditë} other {edhe # ditë}}. Gjithçka është e hapur.",
     "unpaidBanner": "Prova juaj falas ka përfunduar. Na shkruani për të vazhduar me paketën tuaj.",
     "seePlan": "Shihni paketën tuaj",
@@ -1236,6 +1275,7 @@
     "perHour": "/ orë"
   },
   "bookingErrors": {
+    "clubPaused": "Ky klub nuk pranon rezervime online për momentin. Kontaktoni drejtpërdrejt klubin.",
     "coachTaken": "Ky trajner është i rezervuar tashmë në atë orë",
     "slotTaken": "Ky orar është i rezervuar tashmë",
     "closedDay": "Klubi është i mbyllur atë ditë",
@@ -1501,6 +1541,11 @@
     }
   },
   "owner": {
+    "missingKey": {
+      "title": "Këtij versioni i mungon çelësi i shërbimit",
+      "body": "Faqja e pronarit lexon të gjitha klubet, prandaj i duhet çelësi service-role i Supabase. Shtojeni te cilësimet e hostimit me këtë emër, pastaj publikojeni përsëri:",
+      "where": "E gjeni në Supabase te Project Settings → API keys (çelësi secret ose service_role). Pa të nuk funksionojnë as njoftimet për klube të reja dhe kujtesat e planifikuara."
+    },
     "title": "Klubet dhe pagesat",
     "subtitle": "Këtë faqe e shihni vetëm ju. Regjistroni pagesa, ndryshoni paketa dhe shihni si shkon çdo klub.",
     "stats": {
@@ -1526,6 +1571,8 @@
       "usage": "Aktiviteti"
     },
     "status": {
+      "readOnlySince": "Vetëm për lexim që nga {date}",
+      "readOnlyFrom": "Vetëm për lexim nga {date}",
       "trialUntil": "Provë deri më {date}",
       "paidUntil": "Paguar deri më {date}",
       "unpaid": "Pa paguar"
@@ -1699,6 +1746,7 @@
       "upcoming": "Turnetë"
     },
     "errors": {
+      "paused": "Ky klub nuk pranon regjistrime online për momentin.",
       "name": "Jepini turneut një emër.",
       "date": "Zgjidhni një datë.",
       "maxEntries": "Vendet duhet të jenë nga 2 deri në 64.",
@@ -2091,6 +2139,7 @@
       "savedRemoved": "u hoqën {n}",
       "savedSkipped": "{n, plural, one {u kapërce # ditë} other {u kapërcyen # ditë}}",
       "errors": {
+        "readOnly": "Vetëm për lexim: prova falas ka përfunduar.",
         "failed": "Diçka shkoi keq. Ju lutemi provoni sërish.",
         "times": "Kontrolloni oraret.",
         "busy": "Fusha ose trajneri janë të zënë atëherë.",
@@ -2168,6 +2217,7 @@
       "awayButton": "Mungon",
       "removeName": "Hiq {name}",
       "errors": {
+        "readOnly": "Vetëm për lexim: prova falas e klubit ka përfunduar.",
         "notAllowed": "Vetëm klubi dhe trajneri i grupit mund ta mbajnë regjistrin.",
         "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
       }
@@ -2216,6 +2266,7 @@
     "unbook": "Anulo",
     "unbookConfirm": "Ta lironi vendin tuaj në këtë seancë?",
     "errors": {
+      "paused": "Ky klub nuk pranon rezervime online për momentin.",
       "notAllowed": "Nuk mund ta bëni këtë për këtë lojtar.",
       "started": "Ajo seancë ka filluar tashmë.",
       "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
@@ -2265,6 +2316,7 @@
       "waiting": "{name} është në listën e pritjes për {group}."
     },
     "errors": {
+      "paused": "Ky klub nuk pranon regjistrime online për momentin. Kontaktoni drejtpërdrejt klubin.",
       "notSignedIn": "Ju lutemi hyni fillimisht.",
       "confirmEmail": "Ju lutemi konfirmoni fillimisht adresën email: kontrolloni kutinë postare.",
       "already": "Jeni regjistruar tashmë në këtë grup.",
@@ -2296,6 +2348,7 @@
     "expiredBody": "Kaluan 48 orët, prandaj vendi i kaloi tjetrit. Për t'u regjistruar sërish, kontaktoni {club}.",
     "toClub": "Shko te {club}",
     "errors": {
+      "paused": "Ky klub nuk pranon lojtarë të rinj online për momentin. Kontaktoni drejtpërdrejt klubin.",
       "closed": "Kjo ofertë është e mbyllur.",
       "expired": "Kjo ofertë ka skaduar.",
       "failed": "Diçka shkoi keq. Ju lutemi provoni sërish."
@@ -2423,7 +2476,7 @@
       },
       "trial_ended": {
         "title": "Prova juaj falas <b>mbaroi</b>",
-        "detail": "Zgjidhni një plan për të vazhduar me Kortello"
+        "detail": "Pas 3 ditësh llogaria bëhet vetëm për lexim. Na shkruani për të vazhduar"
       },
       "club_booked": {
         "title": "<b>{club}</b> rezervoi një fushë për ju",

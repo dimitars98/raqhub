@@ -54,35 +54,66 @@ export type ClubBilling = {
   paid_until?: string | null;
 };
 
+/** Days after the trial (or the paid period) ends before the club becomes read-only. */
+export const GRACE_DAYS = 3;
+
 export type ClubAccess = {
   plan: PlanId;
-  /** trial: inside the free month · active: paid · unpaid: trial over, not paid */
-  status: "trial" | "active" | "unpaid";
+  /**
+   * trial: inside the free month · active: paid
+   * grace: just ended, everything still works for GRACE_DAYS
+   * locked: read-only, online booking paused (see 20261025_trial_lock.sql)
+   */
+  status: "trial" | "grace" | "active" | "locked";
   trialDaysLeft: number;
+  /** Days until read-only, while in grace. */
+  graceDaysLeft: number;
+  /** Nothing can be added or changed; players can't book. */
+  readOnly: boolean;
   /** Null = no limit. */
   maxCourts: number | null;
   has: (feature: Feature) => boolean;
 };
 
+const DAY = 86_400_000;
+
+// Mirrors public.club_locked() in the database.
 export function clubAccess(club: ClubBilling | null | undefined, now = new Date()): ClubAccess {
   const plan: PlanId =
     club?.plan === "starter" || club?.plan === "academy" ? club.plan : "club";
   const trialEnd = club?.trial_ends_at ? new Date(club.trial_ends_at) : null;
+  // paid_until is a date: paid through the end of that day (UTC, like the database).
+  const paidEnd = club?.paid_until ? new Date(new Date(`${club.paid_until}T00:00:00Z`).getTime() + DAY) : null;
   const inTrial = !!trialEnd && trialEnd > now;
-  // paid_until is a date: paid through the end of that day.
-  const paid = !!club?.paid_until && new Date(`${club.paid_until}T23:59:59`) >= now;
+  const paid = !!paidEnd && paidEnd > now;
 
-  const status = inTrial ? "trial" : paid ? "active" : "unpaid";
+  // Grace runs from whichever ended last.
+  const ended = Math.max(trialEnd?.getTime() ?? 0, paidEnd?.getTime() ?? 0);
+  const graceEnd = ended ? ended + GRACE_DAYS * DAY : 0;
+  const inGrace = !inTrial && !paid && graceEnd > now.getTime();
+
+  const status = inTrial ? "trial" : paid ? "active" : inGrace ? "grace" : "locked";
   const limits = PLANS[plan];
+  // The grace days after the trial are still the trial: everything unlocked.
+  const allOpen = inTrial || (inGrace && !paidEnd);
 
   return {
     plan,
     status,
-    trialDaysLeft: inTrial ? Math.ceil((trialEnd!.getTime() - now.getTime()) / 86_400_000) : 0,
-    // Everything is unlocked during the trial.
-    maxCourts: inTrial ? null : limits.maxCourts,
-    has: (feature) => inTrial || limits.features.includes(feature),
+    trialDaysLeft: inTrial ? Math.ceil((trialEnd!.getTime() - now.getTime()) / DAY) : 0,
+    graceDaysLeft: inGrace ? Math.max(1, Math.ceil((graceEnd - now.getTime()) / DAY)) : 0,
+    readOnly: status === "locked",
+    maxCourts: allOpen ? null : limits.maxCourts,
+    // A locked club can still open every page it had, to look at its data.
+    has: (feature) => allOpen || limits.features.includes(feature),
   };
+}
+
+/** When the club becomes (or became) read-only: GRACE_DAYS after the trial or payment ran out. */
+export function readOnlyFrom(club: ClubBilling): string {
+  const trialEnd = club.trial_ends_at ? new Date(club.trial_ends_at).getTime() : 0;
+  const paidEnd = club.paid_until ? new Date(`${club.paid_until}T00:00:00Z`).getTime() + DAY : 0;
+  return new Date(Math.max(trialEnd, paidEnd) + GRACE_DAYS * DAY).toISOString();
 }
 
 export const BILLING_COLUMNS = "plan, trial_ends_at, paid_until";

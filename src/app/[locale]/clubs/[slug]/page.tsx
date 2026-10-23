@@ -21,6 +21,7 @@ import { dateLocale } from "@/lib/dateLocale";
 import { format } from "date-fns";
 import type { Tournament } from "@/types/database";
 import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
+import BookingPaused from "@/components/ui/BookingPaused";
 
 // The public page of one club: what a visitor sees before they have an account.
 // Everything read here is allowed for logged-out visitors by the database
@@ -150,6 +151,9 @@ export default async function ClubPublicPage({ params }: PageProps) {
     supabase.rpc("public_groups", { p_club: club.id }),
   ]);
   const groups = (groupsData ?? []) as unknown as PublicGroup[];
+  // After the club's free trial ends, online booking pauses (20261025_trial_lock.sql).
+  const { data: pausedData } = await supabase.rpc("paused_clubs", { p_clubs: [club.id] });
+  const paused = (pausedData ?? []).length > 0;
 
   const courts = (courtsData ?? []) as unknown as PublicCourt[];
   const coaches = (coachesData ?? []) as unknown as PublicCoach[];
@@ -179,9 +183,11 @@ export default async function ClubPublicPage({ params }: PageProps) {
   const action =
     viewer === "admin"
       ? { href: "/admin/timetable", label: t("backToDashboard") }
-      : viewer === "player"
-        ? { href: `/book?club=${club.slug}`, label: t("bookCourt") }
-        : { href: "/signup?role=player", label: t("signUpToBook") };
+      : paused
+        ? null
+        : viewer === "player"
+          ? { href: `/book?club=${club.slug}`, label: t("bookCourt") }
+          : { href: "/signup?role=player", label: t("signUpToBook") };
 
   const website = safeWebsite(club.website);
   const location = [club.address, club.city].filter(Boolean).join(", ");
@@ -208,12 +214,14 @@ export default async function ClubPublicPage({ params }: PageProps) {
               </Link>
             )}
             {/* On phones the same button is at the bottom of the page. */}
-            <Link
-              href={action.href}
-              className="btn-primary hidden whitespace-nowrap sm:inline-flex"
-            >
-              {action.label}
-            </Link>
+            {action && (
+              <Link
+                href={action.href}
+                className="btn-primary hidden whitespace-nowrap sm:inline-flex"
+              >
+                {action.label}
+              </Link>
+            )}
           </div>
         </div>
       </header>
@@ -293,6 +301,11 @@ export default async function ClubPublicPage({ params }: PageProps) {
           </div>
         </section>
 
+        {paused && (
+          // The club's phone and email are right above, in the header.
+          <BookingPaused className="mb-12" />
+        )}
+
         {/* Courts */}
         <section className="mb-12">
           <h2 className="mb-5 text-xl font-bold tracking-tight text-ink-900">
@@ -334,7 +347,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
         </section>
 
         {/* Groups and clinics: only shown when the club has any open */}
-        {groups.length > 0 && (
+        {groups.length > 0 && !paused && (
           <ClubGroups
             groups={groups}
             viewer={viewer}
@@ -469,17 +482,21 @@ export default async function ClubPublicPage({ params }: PageProps) {
           <h2 className="mb-2 text-2xl font-bold tracking-tight text-white">
             {t("ctaTitle", { club: club.name })}
           </h2>
-          {viewer === "visitor" && (
+          {viewer === "visitor" && !paused && (
             <p className="mx-auto mb-6 max-w-xl text-sm text-ink-200">
               {t("ctaText")}
             </p>
           )}
-          <Link
-            href={action.href}
-            className={`inline-flex items-center rounded-full bg-brand-400 px-6 py-3 text-sm font-semibold text-ink-900 transition-colors hover:bg-brand-200 ${viewer === "visitor" ? "" : "mt-4"}`}
-          >
-            {action.label}
-          </Link>
+          {action ? (
+            <Link
+              href={action.href}
+              className={`inline-flex items-center rounded-full bg-brand-400 px-6 py-3 text-sm font-semibold text-ink-900 transition-colors hover:bg-brand-200 ${viewer === "visitor" ? "" : "mt-4"}`}
+            >
+              {action.label}
+            </Link>
+          ) : (
+            <p className="mx-auto mt-2 max-w-md text-sm text-ink-200">{t("pausedCta")}</p>
+          )}
         </section>
       </main>
     </>

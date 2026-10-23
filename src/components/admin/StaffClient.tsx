@@ -9,6 +9,7 @@ import Avatar from "@/components/ui/Avatar";
 import { inviteStaff, removeStaff } from "@/app/[locale]/admin/staff/actions";
 import { BADGE, NEUTRAL_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type StaffRow = {
   id: string;
@@ -23,6 +24,7 @@ export type StaffRow = {
 
 export default function StaffClient({ staff }: { staff: StaffRow[] }) {
   const t = useTranslations("staff");
+  const { readOnly, hint } = useReadOnly();
   const locale = useLocale();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
@@ -101,7 +103,8 @@ export default function StaffClient({ staff }: { staff: StaffRow[] }) {
           />
           <button
             type="submit"
-            disabled={pending}
+            disabled={readOnly || pending}
+            title={hint}
             className="btn-primary inline-flex items-center justify-center gap-2 disabled:opacity-40"
           >
             <UserPlus size={16} aria-hidden="true" />
@@ -152,10 +155,10 @@ export default function StaffClient({ staff }: { staff: StaffRow[] }) {
               >
                 {t(s.active ? "active" : "pending")}
               </span>
-              <button
+              <button title={hint}
                 type="button"
                 onClick={() => setRemoving(s)}
-                disabled={pending}
+                disabled={readOnly || pending}
                 className="shrink-0 rounded-lg px-2.5 py-1.5 text-xs font-medium text-red-700 transition-colors hover:bg-red-50 disabled:opacity-40"
               >
                 {t("remove")}

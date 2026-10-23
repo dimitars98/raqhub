@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_rethrow } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { addDays, format, setHours, setMinutes, startOfDay } from "date-fns";
@@ -30,6 +31,7 @@ export default function CoachBookingForm({
   rules: BookingRules;
 }) {
   const t = useTranslations("coachBooking");
+  const tb = useTranslations("bookingErrors");
   const locale = useLocale();
   const days = useMemo(
     () =>
@@ -122,17 +124,24 @@ export default function CoachBookingForm({
     setSubmitting(true);
     setError(null);
     const startsAt = setMinutes(setHours(day, hour), 0);
-    const result = await createCoachBooking({
-      coach_id: coachId,
-      starts_at: startsAt.toISOString(),
-      duration_min: duration,
-    });
-    // Only reached when something went wrong; on success the redirect takes over.
-    if (result?.error) {
-      setError(result.error);
+    try {
+      const result = await createCoachBooking({
+        coach_id: coachId,
+        starts_at: startsAt.toISOString(),
+        duration_min: duration,
+      });
+      // Only reached when something went wrong; on success the redirect takes over.
+      if (result?.error) {
+        setError(result.error);
+        setSubmitting(false);
+        setHour(null);
+        setRefresh((r) => r + 1);
+      }
+    } catch (e) {
+      unstable_rethrow(e); // the redirect after booking
+      console.error("[coach booking]", e);
+      setError(tb("failed"));
       setSubmitting(false);
-      setHour(null);
-      setRefresh((r) => r + 1);
     }
   };
 

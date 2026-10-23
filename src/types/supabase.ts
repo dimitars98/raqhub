@@ -1222,6 +1222,7 @@ export type Database = {
       expire_group_offers: { Args: never; Returns: string[] }
       book_group_session: { Args: { p_session: string; p_name?: string | null }; Returns: undefined }
       unbook_group_session: { Args: { p_session: string }; Returns: undefined }
+      paused_clubs: { Args: { p_clubs: string[] }; Returns: string[] }
       public_groups: {
         Args: { p_club: string }
         Returns: {
@@ -1264,6 +1265,7 @@ export type Database = {
           month: string
         }[]
       }
+      club_locked: { Args: { p_club: string }; Returns: boolean }
       club_max_courts: { Args: { p_club_id: string }; Returns: number | null }
       find_profile_by_email: {
         Args: { lookup_email: string }

@@ -13,13 +13,25 @@ export async function POST(request: Request) {
   if (!user)
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { court_id, coach_id, starts_at, duration_min, notes } =
-    await request.json();
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid booking details" }, { status: 400 });
+  }
+  const { court_id, coach_id, starts_at, duration_min, notes } = body as {
+    court_id?: string;
+    coach_id?: string | null;
+    starts_at?: string;
+    duration_min?: number;
+    notes?: string | null;
+  };
 
-  const start = new Date(starts_at);
+  const start = new Date(starts_at ?? "");
   if (
     !court_id ||
     Number.isNaN(start.getTime()) ||
+    typeof duration_min !== "number" ||
     !ALLOWED_DURATIONS.includes(duration_min)
   )
     return NextResponse.json(
@@ -93,7 +105,9 @@ export async function GET() {
     .eq("player_id", user.id)
     .order("starts_at", { ascending: false });
 
-  if (error)
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("[bookings] list", error);
+    return NextResponse.json({ error: "failed" }, { status: 500 });
+  }
   return NextResponse.json(data);
 }

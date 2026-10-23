@@ -23,6 +23,13 @@ export const maxDuration = 60;
 
 const EMAILS_PER_RUN = Number(process.env.EMAILS_PER_RUN ?? 40);
 
+/** A readable message for the run summary. Database errors are plain objects, not Errors. */
+function describe(e: unknown) {
+  if (e instanceof Error) return e.message;
+  if (e && typeof e === "object" && "message" in e) return String((e as { message: unknown }).message);
+  return String(e);
+}
+
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET;
   if (!secret) {
@@ -32,7 +39,13 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const db = createAdminClient();
+  let db: ReturnType<typeof createAdminClient>;
+  try {
+    db = createAdminClient();
+  } catch (e) {
+    console.error("[cron]", e);
+    return NextResponse.json({ error: describe(e) }, { status: 503 });
+  }
   const budget = new Budget(EMAILS_PER_RUN);
   const result: Record<string, unknown> = { provider: emailProvider() };
 
@@ -50,7 +63,7 @@ export async function GET(request: Request) {
       result[name] = await job(db, budget);
     } catch (e) {
       console.error(`[cron] ${name} failed`, e);
-      result[name] = { error: e instanceof Error ? e.message : String(e) };
+      result[name] = { error: describe(e) };
     }
   }
 
@@ -60,7 +73,7 @@ export async function GET(request: Request) {
     result.notifications = error ? { error: error.message } : data;
   } catch (e) {
     console.error("[cron] notifications failed", e);
-    result.notifications = { error: e instanceof Error ? e.message : String(e) };
+    result.notifications = { error: describe(e) };
   }
 
   result.budgetLeft = budget.left;

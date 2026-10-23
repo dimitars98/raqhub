@@ -8,6 +8,7 @@ import { MAX_ENTRIES_CHOICES } from "@/lib/tournament";
 import { useLabels } from "@/hooks/useLabels";
 import type { Tournament } from "@/types/database";
 import type { TournamentInput } from "@/app/[locale]/admin/tournaments/actions";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 /** Create or edit a tournament. `onSave` returns an error key, if any. */
 export default function TournamentForm({
@@ -20,6 +21,7 @@ export default function TournamentForm({
   onClose: () => void;
 }) {
   const t = useTranslations("tournaments");
+  const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +42,7 @@ export default function TournamentForm({
 
   const save = () => {
     setError(null);
+    if (readOnly) return setError(hint ?? null);
     startTransition(async () => {
       const result = await onSave({
         name: form.name,

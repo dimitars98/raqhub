@@ -16,6 +16,7 @@ import { BADGE, memberStatusTone } from "@/lib/badges";
 import { MEMBER_STATUSES } from "@/lib/labels";
 import { createClient } from "@/lib/supabase/client";
 import { toCsv } from "@/lib/csv";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type MemberWithPlan = Member & { plan?: MembershipPlan | null };
 
@@ -129,6 +130,7 @@ export default function MembersClient({
   const bar = useRef<HTMLDivElement>(null);
   const [barHeight, setBarHeight] = useState(0);
   const t = useTranslations("members");
+  const { readOnly, hint } = useReadOnly();
   const te = useTranslations("export");
   const labels = useLabels();
 
@@ -137,7 +139,7 @@ export default function MembersClient({
     handleSubmit,
     reset,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     defaultValues: {
       full_name: "",
@@ -393,57 +395,49 @@ export default function MembersClient({
       status: values.status,
     };
 
-    if (editing) {
+    try {
       const res = await fetch("/api/members", {
-        method: "PATCH",
+        method: editing ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editing.id, ...payload }),
+        body: JSON.stringify(editing ? { id: editing.id, ...payload } : payload),
       });
-      const data = await res.json();
-      if (res.status === 409) {
-        setError(data.field as "email" | "phone", {
+      const data = await res.json().catch(() => null);
+      if (res.status === 409 && (data?.field === "email" || data?.field === "phone")) {
+        const field = data.field as "email" | "phone";
+        setError(field, {
           type: "manual",
-          message: data.message,
+          message: t(field === "email" ? "errors.duplicateEmail" : "errors.duplicatePhone"),
         });
         return;
       }
-      if (res.ok) {
-        setMembers((prev) => prev.map((m) => (m.id === editing.id ? data : m)));
-        setShowModal(false);
-      }
-    } else {
-      const res = await fetch("/api/members", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
-      if (res.status === 409) {
-        setError(data.field as "email" | "phone", {
-          type: "manual",
-          message: data.message,
-        });
-        return;
-      }
-      if (res.ok) {
-        setMembers((prev) => [data, ...prev]);
-        setShowModal(false);
-      }
+      if (!res.ok || !data) throw new Error(`members ${res.status}`);
+
+      if (editing) setMembers((prev) => prev.map((m) => (m.id === editing.id ? data : m)));
+      else setMembers((prev) => [data, ...prev]);
+      setShowModal(false);
+    } catch (e) {
+      console.error("[members] save", e);
+      setError("root", { type: "manual", message: readOnly && hint ? hint : t("errors.saveFailed") });
     }
   };
 
   const handleCancel = async (id: string) => {
-    const res = await fetch("/api/members", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
-    });
-    if (res.ok) {
+    setNotice(null);
+    try {
+      const res = await fetch("/api/members", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      if (!res.ok) throw new Error(`members ${res.status}`);
       setMembers((prev) =>
         prev.map((m) =>
           m.id === id ? { ...m, status: "cancelled" as MemberStatus } : m,
         ),
       );
+    } catch (e) {
+      console.error("[members] cancel", e);
+      setNotice({ ok: false, text: readOnly && hint ? hint : t("errors.cancelFailed") });
     }
   };
 
@@ -483,7 +477,7 @@ export default function MembersClient({
           >
             <Download size={14} aria-hidden="true" /> {t("export")}
           </button>
-          <button onClick={openAdd} className="btn-primary">
+          <button onClick={openAdd} disabled={readOnly} title={hint} className="btn-primary">
             {t("addMember")}
           </button>
         </div>
@@ -594,7 +588,7 @@ export default function MembersClient({
                     <button
                       key={months}
                       type="button"
-                      disabled={busy}
+                      disabled={busy || readOnly}
                       onClick={() => extend(months)}
                       className={MENU_ITEM}
                     >
@@ -615,14 +609,14 @@ export default function MembersClient({
                   mobileBottom={barHeight + 20}
                 >
                   {plans.map((p) => (
-                    <button key={p.id} type="button" disabled={busy} onClick={() => changePlan(p.id)} className={MENU_ITEM}>
+                    <button key={p.id} type="button" disabled={busy || readOnly} onClick={() => changePlan(p.id)} className={MENU_ITEM}>
                       <span className="block font-medium">{p.name}</span>
                       <span className="block text-xs text-[#55664c]">
                         €{p.price} {labels.billingPeriod(p.billing_period)}
                       </span>
                     </button>
                   ))}
-                  <button type="button" disabled={busy} onClick={() => changePlan(null)} className={MENU_ITEM}>
+                  <button type="button" disabled={busy || readOnly} onClick={() => changePlan(null)} className={MENU_ITEM}>
                     {t("modal.noPlan")}
                   </button>
                 </Dropdown>
@@ -632,7 +626,8 @@ export default function MembersClient({
                     setMenu(null);
                     setConfirmCancel(true);
                   }}
-                  disabled={busy}
+                  disabled={busy || readOnly}
+                  title={hint}
                   className={`${BAR_BUTTON} text-[#fecaca]`}
                 >
                   {t("bulk.cancel")}
@@ -809,7 +804,7 @@ export default function MembersClient({
                               {t("actions.edit")}
                             </button>
                             {m.status === "active" && (
-                              <button
+                              <button title={hint} disabled={readOnly}
                                 type="button"
                                 onClick={() => handleCancel(m.id)}
                                 className="rounded-lg px-2.5 py-1.5 text-xs text-red-600 transition-colors hover:bg-red-50"
@@ -868,8 +863,10 @@ export default function MembersClient({
           </Modal.Header>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
-              <Modal.Field label={t("modal.fullName")} required>
+              <Modal.Field label={t("modal.fullName")} htmlFor="member-name" required>
                 <input
+                  id="member-name"
+                  aria-invalid={!!errors.full_name}
                   className="input"
                   placeholder={t("modal.fullNamePlaceholder")}
                   {...register("full_name", {
@@ -877,41 +874,45 @@ export default function MembersClient({
                   })}
                 />
                 {errors.full_name && (
-                  <p className="text-xs text-red-500 mt-1">
+                  <p role="alert" className="text-xs text-red-500 mt-1">
                     {errors.full_name.message}
                   </p>
                 )}
               </Modal.Field>
               <Modal.Grid>
-                <Modal.Field label={t("modal.email")}>
+                <Modal.Field label={t("modal.email")} htmlFor="member-email">
                   <input
+                    id="member-email"
+                    aria-invalid={!!errors.email}
                     className="input"
                     type="email"
                     placeholder={t("modal.emailPlaceholder")}
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p className="text-xs text-red-500 mt-1">
+                    <p role="alert" className="text-xs text-red-500 mt-1">
                       {errors.email.message}
                     </p>
                   )}
                 </Modal.Field>
-                <Modal.Field label={t("modal.phone")}>
+                <Modal.Field label={t("modal.phone")} htmlFor="member-phone">
                   <input
+                    id="member-phone"
+                    aria-invalid={!!errors.phone}
                     className="input"
                     placeholder={t("modal.phonePlaceholder")}
                     {...register("phone")}
                   />
                   {errors.phone && (
-                    <p className="text-xs text-red-500 mt-1">
+                    <p role="alert" className="text-xs text-red-500 mt-1">
                       {errors.phone.message}
                     </p>
                   )}
                 </Modal.Field>
               </Modal.Grid>
               <Modal.Grid>
-                <Modal.Field label={t("modal.plan")}>
-                  <select className="input" {...register("plan_id")}>
+                <Modal.Field label={t("modal.plan")} htmlFor="member-plan">
+                  <select id="member-plan" className="input" {...register("plan_id")}>
                     <option value="">{t("modal.noPlan")}</option>
                     {plans.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -920,8 +921,9 @@ export default function MembersClient({
                     ))}
                   </select>
                 </Modal.Field>
-                <Modal.Field label={t("modal.expires")}>
+                <Modal.Field label={t("modal.expires")} htmlFor="member-ends">
                   <input
+                    id="member-ends"
                     className="input"
                     type="date"
                     {...register("ends_at")}
@@ -929,8 +931,8 @@ export default function MembersClient({
                 </Modal.Field>
               </Modal.Grid>
               {editing && (
-                <Modal.Field label={t("modal.status")}>
-                  <select className="input" {...register("status")}>
+                <Modal.Field label={t("modal.status")} htmlFor="member-status">
+                  <select id="member-status" className="input" {...register("status")}>
                     {MEMBER_STATUSES.map((s) => (
                       <option key={s} value={s}>
                         {labels.memberStatus(s)}
@@ -939,14 +941,23 @@ export default function MembersClient({
                   </select>
                 </Modal.Field>
               )}
-              <Modal.Field label={t("modal.notes")}>
+              <Modal.Field label={t("modal.notes")} htmlFor="member-notes">
                 <textarea
+                  id="member-notes"
                   className="input resize-none"
                   rows={2}
                   placeholder={t("modal.notesPlaceholder")}
                   {...register("notes")}
                 />
               </Modal.Field>
+              {readOnly && (
+                <p className="rounded-xl bg-ink-50 px-3 py-2.5 text-sm text-ink-600">{hint}</p>
+              )}
+              {errors.root && (
+                <p role="alert" className="rounded-xl bg-[#fff5f5] px-3 py-2.5 text-sm text-[#b91c1c]">
+                  {errors.root.message}
+                </p>
+              )}
             </Modal.Body>
             <Modal.Footer>
               <button
@@ -959,6 +970,8 @@ export default function MembersClient({
               <SubmitButton
                 label={editing ? t("modal.saveBtn") : t("modal.addBtn")}
                 loadingLabel={t("modal.saving")}
+                pending={isSubmitting}
+                disabled={readOnly}
                 className="flex-1"
               />
             </Modal.Footer>

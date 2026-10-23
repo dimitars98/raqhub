@@ -11,11 +11,13 @@ import { useLabels } from "@/hooks/useLabels";
 import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import type { Tournament } from "@/types/database";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type TournamentRow = Tournament & { entryCount: number };
 
 export default function TournamentsClient({ tournaments }: { tournaments: TournamentRow[] }) {
   const t = useTranslations("tournaments");
+  const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const locale = useLocale();
   const router = useRouter();
@@ -28,7 +30,7 @@ export default function TournamentsClient({ tournaments }: { tournaments: Tourna
           <h1 className="font-display text-2xl font-bold text-ink-900">{t("title")}</h1>
           <p className="mt-1 text-sm text-ink-400">{t("subtitle")}</p>
         </div>
-        <button type="button" onClick={() => setCreating(true)} className="btn-primary inline-flex items-center gap-2">
+        <button title={hint} disabled={readOnly} type="button" onClick={() => setCreating(true)} className="btn-primary inline-flex items-center gap-2">
           <Plus size={16} aria-hidden="true" />
           {t("new")}
         </button>

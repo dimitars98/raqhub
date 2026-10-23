@@ -24,8 +24,10 @@ export type OwnerClub = {
   country: string | null;
   createdAt: string | null;
   plan: PlanId;
-  status: "trial" | "active" | "unpaid";
+  status: "trial" | "grace" | "active" | "locked";
   trialEndsAt: string | null;
+  /** When the club becomes / became read-only (grace and locked only). */
+  readOnlyFrom: string | null;
   paidUntil: string | null;
   ownerName: string | null;
   ownerEmail: string | null;
@@ -59,7 +61,8 @@ const PLAN_IDS = Object.keys(PLANS) as PlanId[];
 const STATUS_STYLE: Record<OwnerClub["status"], string> = {
   trial: "bg-court-50 text-court-800",
   active: "bg-brand-100 text-brand-900",
-  unpaid: "bg-amber-50 text-amber-800",
+  grace: "bg-red-50 text-red-800",
+  locked: "bg-ink-900 text-white",
 };
 
 const money = (n: number) => `€${n.toLocaleString("en", { maximumFractionDigits: 2 })}`;
@@ -92,7 +95,12 @@ export default function OwnerClient({
   }, [locale]);
 
   const shown = clubs
-    .filter((c) => filter === "all" || c.status === filter)
+    // "Not paid" covers both the grace days and read-only clubs.
+    .filter((c) =>
+      filter === "all" ||
+      c.status === filter ||
+      (filter === "unpaid" && (c.status === "grace" || c.status === "locked")),
+    )
     .filter((c) => {
       const q = query.trim().toLowerCase();
       if (!q) return true;
@@ -106,7 +114,11 @@ export default function OwnerClient({
       ? t("status.trialUntil", { date: day(c.trialEndsAt) })
       : c.status === "active" && c.paidUntil
         ? t("status.paidUntil", { date: day(c.paidUntil) })
-        : t("status.unpaid");
+        : c.readOnlyFrom
+          ? t(c.status === "grace" ? "status.readOnlyFrom" : "status.readOnlySince", {
+              date: day(c.readOnlyFrom),
+            })
+          : t("status.unpaid");
 
   const tiles: [string, string, string?][] = [
     [t("stats.clubs"), String(stats.clubs)],

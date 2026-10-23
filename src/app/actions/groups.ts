@@ -22,8 +22,10 @@ function refresh() {
 }
 
 /** Maps a database error to a short key the screens translate. */
-function errorKey(message: string | undefined) {
+function errorKey(message: string | undefined, locked: "readOnly" | "paused" = "readOnly") {
   const m = message ?? "";
+  // The club's free trial has ended (see 20261025_trial_lock.sql).
+  if (m.includes("club_locked")) return locked;
   if (m.includes("sign in")) return "notSignedIn";
   if (m.includes("confirm your email")) return "confirmEmail";
   if (m.includes("Already") || m.includes("already have")) return "already";
@@ -164,8 +166,8 @@ export async function joinGroup(
     p_trial: input.trial,
   });
   if (error) {
-    if (errorKey(error.message) === "failed") console.error("[groups] join", error);
-    return { error: errorKey(error.message) };
+    if (errorKey(error.message, "paused") === "failed") console.error("[groups] join", error);
+    return { error: errorKey(error.message, "paused") };
   }
   refresh();
   return { status: (data as { status: string }).status };
@@ -174,7 +176,7 @@ export async function joinGroup(
 export async function leaveGroup(playerId: string): Promise<Result> {
   const supabase = await createClient();
   const { error } = await supabase.rpc("leave_group", { p_player: playerId });
-  if (error) return { error: errorKey(error.message) };
+  if (error) return { error: errorKey(error.message, "paused") };
   refresh();
   return {};
 }
@@ -187,7 +189,7 @@ export async function setAbsence(sessionId: string, playerId: string, absent: bo
     p_player: playerId,
     p_absent: absent,
   });
-  if (error) return { error: errorKey(error.message) };
+  if (error) return { error: errorKey(error.message, "paused") };
   refresh();
   return {};
 }
@@ -203,8 +205,8 @@ export async function bookSession(sessionId: string, name: string): Promise<Resu
     p_name: name.trim().slice(0, 80) || null,
   });
   if (error) {
-    if (errorKey(error.message) === "failed") console.error("[groups] book", error);
-    return { error: errorKey(error.message) };
+    if (errorKey(error.message, "paused") === "failed") console.error("[groups] book", error);
+    return { error: errorKey(error.message, "paused") };
   }
   refresh();
   return {};
@@ -213,7 +215,7 @@ export async function bookSession(sessionId: string, name: string): Promise<Resu
 export async function unbookSession(sessionId: string): Promise<Result> {
   const supabase = await createClient();
   const { error } = await supabase.rpc("unbook_group_session", { p_session: sessionId });
-  if (error) return { error: errorKey(error.message) };
+  if (error) return { error: errorKey(error.message, "paused") };
   refresh();
   return {};
 }
@@ -223,7 +225,7 @@ export async function respondOffer(token: string, accept: boolean): Promise<Resu
   if (!/^[0-9a-f-]{36}$/i.test(token)) return { error: "closed" };
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("respond_group_offer", { p_token: token, p_accept: accept });
-  if (error) return { error: errorKey(error.message) };
+  if (error) return { error: errorKey(error.message, "paused") };
   refresh();
   return { status: data as string };
 }

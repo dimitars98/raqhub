@@ -64,6 +64,8 @@ export default async function TournamentPage({ params }: { params: Promise<{ id:
     defaultName = profile?.full_name ?? "";
   }
   const mine = user ? entries.find((e) => e.player_id === user.id) : undefined;
+  // No new sign-ups while the club's account is paused after its free trial.
+  const { data: paused } = await supabase.rpc("club_locked", { p_club: tournament.club_id });
   const date = format(new Date(`${tournament.starts_on}T12:00:00`), "EEEE, d MMMM yyyy", {
     locale: dateLocale(locale),
   });
@@ -140,7 +142,7 @@ export default async function TournamentPage({ params }: { params: Promise<{ id:
                 signedIn={!!user}
                 myEntryName={mine?.name ?? null}
                 defaultName={defaultName}
-                open={tournament.status === "open"}
+                open={tournament.status === "open" && !paused}
                 full={entries.length >= tournament.max_entries}
               />
             </aside>

@@ -36,6 +36,7 @@ import ProfileAvatarUpload from "@/components/profile/ProfileAvatarUpload";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { initials } from "@/lib/avatar";
 import { SALES_EMAIL } from "@/lib/plans";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type SettingsClub = Pick<
   Club,
@@ -77,6 +78,7 @@ const SECTIONS = [
 
 export default function SettingsClient({ club, profile, initialTab }: Props) {
   const t = useTranslations("settingsPage");
+const { readOnly, hint } = useReadOnly();
   const dayNames = t.raw("days") as string[];
   // ?tab=hours (from the getting-started checklist) opens that section.
   const [active, setActive] = useState(
@@ -190,10 +192,10 @@ export default function SettingsClient({ club, profile, initialTab }: Props) {
                     <Building2 size={24} className="text-[#6e7f65]" />
                   </div>
                 )}
-                <button
+                <button title={hint}
                   type="button"
                   onClick={() => logoInput.current?.click()}
-                  disabled={logoPending}
+                  disabled={readOnly || logoPending}
                   className="btn-secondary flex items-center gap-1.5 text-[13px] disabled:opacity-50"
                 >
                   <Upload size={13} /> {logoPending ? t("uploading") : t("uploadLogo")}
@@ -580,6 +582,7 @@ function ToggleSwitch({
 
 function SaveButton({ onSave }: { onSave: () => Promise<SaveResult> }) {
   const t = useTranslations("settingsPage");
+  const { readOnly, hint } = useReadOnly();
   const [result, setResult] = useState<SaveResult | null>(null);
   const [pending, start] = useTransition();
 
@@ -593,7 +596,8 @@ function SaveButton({ onSave }: { onSave: () => Promise<SaveResult> }) {
       <button
         type="button"
         onClick={click}
-        disabled={pending}
+        disabled={readOnly || pending}
+        title={hint}
         className="btn-primary flex items-center gap-1.5 text-[13px] disabled:cursor-not-allowed disabled:opacity-40"
       >
         <Save size={13} /> {pending ? t("saving") : t("saveChanges")}

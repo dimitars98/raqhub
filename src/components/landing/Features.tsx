@@ -228,7 +228,7 @@ function MembershipPanel() {
         <table className="w-full table-fixed border-t border-[#e8ede4] text-[13px]">
           <thead className="bg-[#f8f9f7]">
             <tr>
-              <th className={`${th} w-[38%]`}>{tm("columns.name")}</th>
+              <th className={`${th} w-[38%]`}>{tm("columns.member")}</th>
               <th className={`${th} hidden sm:table-cell`}>{tm("columns.plan")}</th>
               <th className={th}>{tm("columns.status")}</th>
               <th className={th}>{tm("columns.expires")}</th>

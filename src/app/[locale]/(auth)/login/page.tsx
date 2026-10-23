@@ -198,6 +198,15 @@ export default function LoginPage() {
                 )}
               </div>
 
+              {/* Google sign-in came back without a session (see api/auth/callback) */}
+              {!errors.root && params.get("error") === "auth_callback_failed" && (
+                <p
+                  role="alert"
+                  className="rounded-2xl bg-red-50 px-5 py-3.5 text-sm text-red-700"
+                >
+                  {t("callbackFailed")}
+                </p>
+              )}
               {errors.root && (
                 <p
                   role="alert"

@@ -20,6 +20,7 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error) console.error("[auth callback] code exchange", error.message);
 
     if (!error) {
       const {
@@ -30,7 +31,9 @@ export async function GET(request: Request) {
         // Only has an effect on accounts created in the last few minutes
         if (wantsClubAccount) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          await (supabase as any).rpc("claim_club_admin_role");
+          const { error: claimError } = await (supabase as any).rpc("claim_club_admin_role");
+          // They can still sign in; the log shows why they ended up as a player.
+          if (claimError) console.error("[auth callback] claim_club_admin_role", claimError);
         }
 
         const { data } = await supabase

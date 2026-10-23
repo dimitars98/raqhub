@@ -13,7 +13,7 @@ import {
 import { appUrl, bookingEmailData, clubEmailOf, type BookingEmailRow } from "@/lib/email/bookings";
 import { normalizeHours } from "@/lib/openingHours";
 import { addDays, clubMidnight, clubNow } from "./time";
-import { clubAccess, SALES_EMAIL, type ClubBilling } from "@/lib/plans";
+import { BILLING_COLUMNS, clubAccess, SALES_EMAIL, type ClubBilling } from "@/lib/plans";
 
 type Db = SupabaseClient<Database>;
 
@@ -76,8 +76,22 @@ export async function sendBookingReminders(db: Db, budget: Budget, now = new Dat
     // Reminder emails come with the Club and Academy plans.
     const club = row.court?.club ?? row.coach?.club ?? null;
     const remindersOn = !club || clubAccess(club).has("reminders");
-    const markDone = () =>
-      db.from("bookings").update({ reminder_sent_at: new Date().toISOString() }).eq("id", row.id);
+    // Marked before sending, so a failed mark can never mean the same email
+    // every hour; un-marked again if the email doesn't go out.
+    const markDone = async () => {
+      const { data: claimed, error } = await db
+        .from("bookings")
+        .update({ reminder_sent_at: new Date().toISOString() })
+        .eq("id", row.id)
+        .is("reminder_sent_at", null)
+        .select("id");
+      if (error) throw error;
+      return !!claimed?.length;
+    };
+    const unmark = async () => {
+      const { error } = await db.from("bookings").update({ reminder_sent_at: null }).eq("id", row.id);
+      if (error) console.error("[reminders] couldn't un-mark", row.id, error);
+    };
 
     const lastMinute =
       row.created_at &&
@@ -96,11 +110,10 @@ export async function sendBookingReminders(db: Db, budget: Budget, now = new Dat
     }
     if (!budget.take()) break;
 
+    if (!(await markDone())) continue; // another run got it first
     const email = bookingReminderEmail(bookingEmailData(row, to.name));
-    if (await sendEmail({ to: to.email, replyTo: clubEmailOf(row), ...email })) {
-      await markDone();
-      sent++;
-    }
+    if (await sendEmail({ to: to.email, replyTo: clubEmailOf(row), ...email })) sent++;
+    else await unmark();
   }
   return { sent, skipped };
 }
@@ -137,11 +150,17 @@ export async function sendRenewalReminders(db: Db, budget: Budget, now = new Dat
     if (!m.club) continue;
     // Renewal reminders come with the Club and Academy plans. Marked as
     // handled so the same rows don't come back every hour.
-    if (!clubAccess(m.club).has("reminders")) {
-      await db
+    const mark = async (value: string | null) => {
+      const { error } = await db
         .from("members")
-        .update({ renewal_reminder_sent_at: new Date().toISOString() })
+        .update({ renewal_reminder_sent_at: value })
         .eq("id", m.id);
+      if (error) throw error;
+    };
+    // Off on plans without reminders, and while the club is read-only.
+    const access = clubAccess(m.club);
+    if (!access.has("reminders") || access.readOnly) {
+      await mark(new Date().toISOString());
       continue;
     }
     if (!budget.take()) break;
@@ -155,13 +174,10 @@ export async function sendRenewalReminders(db: Db, budget: Budget, now = new Dat
       clubEmail: m.club.email,
       clubPhone: m.club.phone,
     });
-    if (await sendEmail({ to: m.email, replyTo: m.club.email, ...email })) {
-      await db
-        .from("members")
-        .update({ renewal_reminder_sent_at: new Date().toISOString() })
-        .eq("id", m.id);
-      sent++;
-    }
+    // Marked first (see sendBookingReminders), un-marked if sending fails.
+    await mark(new Date().toISOString());
+    if (await sendEmail({ to: m.email, replyTo: m.club.email, ...email })) sent++;
+    else await mark(null).catch((e) => console.error("[renewals] couldn't un-mark", m.id, e));
   }
   return { sent };
 }
@@ -199,7 +215,8 @@ export async function sendWeeklyReports(db: Db, budget: Budget, now = new Date()
   for (const club of clubs ?? []) {
     if (alreadySent.has(club.id) || !club.owner_id) continue;
     // The weekly report comes with the Club and Academy plans.
-    if (!clubAccess(club).has("weeklyReport")) continue;
+    const access = clubAccess(club);
+    if (!access.has("weeklyReport") || access.readOnly) continue;
     const owner = await accountOf(db, club.owner_id);
     if (!owner) continue;
     if (!budget.take()) break;
@@ -274,9 +291,20 @@ export async function sendWeeklyReports(db: Db, budget: Budget, now = new Date()
       appUrl: appUrl(),
     });
 
-    if (await sendEmail({ to: owner.email, ...email })) {
-      await db.from("club_weekly_reports").insert({ club_id: club.id, week_start: weekStart });
-      sent++;
+    // Claimed first (one row per club and week), released if sending fails.
+    const { error: claimError } = await db
+      .from("club_weekly_reports")
+      .insert({ club_id: club.id, week_start: weekStart });
+    if (claimError?.code === "23505") continue; // already sent this week
+    if (claimError) throw claimError;
+    if (await sendEmail({ to: owner.email, ...email })) sent++;
+    else {
+      const { error } = await db
+        .from("club_weekly_reports")
+        .delete()
+        .eq("club_id", club.id)
+        .eq("week_start", weekStart);
+      if (error) console.error("[weekly reports] couldn't release", club.id, error);
     }
   }
   return { sent, waiting: false };
@@ -301,7 +329,8 @@ async function claimNotice(db: Db, clubId: string, kind: string) {
 
 /** Undoes claimNotice when sending failed, so the next run tries again. */
 async function releaseNotice(db: Db, clubId: string, kind: string) {
-  await db.from("club_notices").delete().eq("club_id", clubId).eq("kind", kind);
+  const { error } = await db.from("club_notices").delete().eq("club_id", clubId).eq("kind", kind);
+  if (error) console.error("[club notices] couldn't release", clubId, kind, error);
 }
 
 // ---------------------------------------------------------------------------
@@ -451,7 +480,7 @@ export async function sendGroupOffers(db: Db, budget: Budget) {
   for (const groupId of groupIds) {
     const { data: group } = await db
       .from("groups")
-      .select("name, days, start_time, end_time, archived_at, club:clubs(name, country, phone, email)")
+      .select(`name, days, start_time, end_time, archived_at, club:clubs(name, country, phone, email, ${BILLING_COLUMNS})`)
       .eq("id", groupId)
       .maybeSingle();
     const g = group as unknown as {
@@ -460,10 +489,15 @@ export async function sendGroupOffers(db: Db, budget: Budget) {
       start_time: string;
       end_time: string;
       archived_at: string | null;
-      club: { name: string; country: string | null; phone: string | null; email: string | null } | null;
+      club: ({ name: string; country: string | null; phone: string | null; email: string | null } & ClubBilling) | null;
     } | null;
-    if (!g?.club || g.archived_at) continue;
-    const { data: offers } = await db.rpc("offer_group_places", { p_group: groupId });
+    // No new places offered while the club is read-only after its trial.
+    if (!g?.club || g.archived_at || clubAccess(g.club).readOnly) continue;
+    const { data: offers, error: offerError } = await db.rpc("offer_group_places", { p_group: groupId });
+    if (offerError) {
+      console.error("[group offers]", groupId, offerError);
+      continue;
+    }
     if (!offers?.length) continue;
     offered += offers.length;
     // Offers are made either way; the email may wait for the next run's budget.
@@ -482,13 +516,17 @@ export async function sendGroupFeeReminders(db: Db, budget: Budget) {
   if (!rows.length) return { sent: 0 };
 
   const clubIds = [...new Set(rows.map((r) => r.club_id))];
-  const { data: clubs } = await db.from("clubs").select("id, name, country, phone, email").in("id", clubIds);
+  const { data: clubs } = await db
+    .from("clubs")
+    .select(`id, name, country, phone, email, ${BILLING_COLUMNS}`)
+    .in("id", clubIds);
   const clubOf = new Map((clubs ?? []).map((c) => [c.id, c]));
 
   let sent = 0;
   for (const r of rows) {
     const club = clubOf.get(r.club_id);
-    if (!club || !r.email || !budget.take()) continue;
+    // Fees can't be marked paid while the club is read-only, so no reminders either.
+    if (!club || clubAccess(club).readOnly || !r.email || !budget.take()) continue;
     if (await emailFeeDue(club, r.group_name, r.month, { ...r, amount: Number(r.amount) })) sent++;
   }
   return { sent, due: rows.length };

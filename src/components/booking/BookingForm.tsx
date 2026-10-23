@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { unstable_rethrow, useRouter } from "next/navigation";
+import { createBooking } from "@/app/actions/bookings";
 import { createClient } from "@/lib/supabase/client";
 import { addDays, format, setHours, setMinutes, startOfDay } from "date-fns";
 import { useTranslations, useLocale } from "next-intl";
@@ -10,7 +11,6 @@ interface Props {
   courtId: string;
   pricePerHour: number;
   courtName: string;
-  coachId?: string;
 }
 
 interface BusySlot {
@@ -25,7 +25,6 @@ export default function BookingForm({
   courtId,
   pricePerHour,
   courtName,
-  coachId,
 }: Props) {
   const today = startOfDay(new Date());
   const days = Array.from({ length: 7 }, (_, i) => addDays(today, i));
@@ -97,41 +96,36 @@ export default function BookingForm({
     setLoading(true);
     setError(null);
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      router.push(`/${locale}/login`);
-      return;
-    }
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push(`/${locale}/login`);
+        return;
+      }
 
-    const { start: startsAt, end: endsAt } = slotRange(selectedHour, duration);
-
-    const res = await fetch("/api/bookings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+      const { start: startsAt } = slotRange(selectedHour, duration);
+      // The same booking as the main booking page: member discount,
+      // confirmation email, translated errors. On success it redirects.
+      const result = await createBooking({
         court_id: courtId,
-        coach_id: coachId ?? null,
         starts_at: startsAt.toISOString(),
-        ends_at: endsAt.toISOString(),
         duration_min: duration,
-        total_price: total,
-      }),
-    });
-
-    const json = await res.json();
-    if (!res.ok) {
-      setError(json.error ?? t("bookingFailed"));
-      setLoading(false);
-      // Someone else took the slot first: clear the pick and reload taken times.
-      if (res.status === 409) {
+      });
+      if (result?.error) {
+        setError(result.error);
+        // Maybe someone else took the slot: clear the pick and reload taken times.
         setSelectedHour(null);
         setRefreshKey((k) => k + 1);
       }
-      return;
+    } catch (e) {
+      unstable_rethrow(e); // let the redirect after booking through
+      console.error("[booking]", e);
+      setError(t("bookingFailed"));
+    } finally {
+      setLoading(false);
     }
-    router.push(`/${locale}/dashboard?booked=1`);
   };
 
   return (

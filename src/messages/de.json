@@ -1,4 +1,19 @@
 {
+  "paused": {
+    "bodyNamed": "{club} nimmt gerade keine Online-Buchungen oder Anmeldungen an. Bitte wenden Sie sich direkt an den Club.",
+    "body": "Dieser Club nimmt gerade keine Online-Buchungen oder Anmeldungen an. Bitte wenden Sie sich direkt an den Club.",
+    "title": "Online-Buchungen sind pausiert"
+  },
+  "errorPage": {
+    "title": "Etwas ist schiefgelaufen",
+    "body": "Diese Seite wurde nicht geladen. Meist ist es nur eine kurze Störung, also bitte gleich noch einmal versuchen.",
+    "retry": "Erneut versuchen",
+    "home": "Zur Startseite",
+    "backToApp": "Zurück zum Dashboard",
+    "reference": "Referenz: {code}",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundBody": "Diese Seite gibt es nicht oder sie wurde verschoben. Bitte die Adresse prüfen oder auf der Startseite neu beginnen."
+  },
   "nav": {
     "features": "Funktionen",
     "pricing": "Preise",
@@ -10,6 +25,7 @@
     "language": "Sprache"
   },
   "auth": {
+    "callbackFailed": "Die Anmeldung mit Google hat nicht geklappt. Bitte versuche es erneut oder melde dich mit E-Mail und Passwort an.",
     "signIn": "Bei Ihrem Konto anmelden",
     "continueGoogle": "Mit Google fortfahren",
     "or": "oder",
@@ -172,6 +188,7 @@
     "cancelBooking": "Abbrechen"
   },
   "adminBookings": {
+    "statusFailed": "Die Buchung konnte nicht geändert werden. Bitte versuchen Sie es erneut.",
     "title": "Buchungen",
     "total": "gesamt",
     "addBooking": "Buchung hinzufügen",
@@ -353,6 +370,13 @@
     "myGroups": "Meine Gruppen"
   },
   "members": {
+    "errors": {
+      "duplicateEmail": "Es gibt bereits ein Mitglied mit dieser E-Mail-Adresse.",
+      "duplicatePhone": "Es gibt bereits ein Mitglied mit dieser Telefonnummer.",
+      "saveFailed": "Das Mitglied konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+      "cancelFailed": "Die Mitgliedschaft konnte nicht gekündigt werden. Bitte versuchen Sie es erneut."
+    },
+    "total": "{count, plural, one {# Mitglied} other {# Mitglieder}}",
     "title": "Mitglieder",
     "addMember": "Mitglied hinzufügen",
     "searchPlaceholder": "Nach Name, E-Mail oder Telefon suchen...",
@@ -469,6 +493,7 @@
     "coachEmailPlaceholder": "trainer@beispiel.de"
   },
   "clubPage": {
+    "pausedCta": "Online-Buchungen sind im Moment pausiert. Bitte wenden Sie sich direkt an den Club.",
     "signIn": "Anmelden",
     "signUpToBook": "Registrieren und buchen",
     "bookCourt": "Platz buchen",
@@ -531,6 +556,10 @@
     "cancelNote": "Online-Stornierung bis {hours} Stunden vor Beginn möglich."
   },
   "profilePage": {
+    "saveFailed": "Speichern fehlgeschlagen. Bitte versuche es erneut.",
+    "photoFailed": "Das Foto konnte nicht hochgeladen werden. Bitte versuche es erneut.",
+    "photoType": "Bitte wähle eine Bilddatei (JPG, PNG o. Ä.).",
+    "photoTooBig": "Das Foto ist zu groß. Bitte wähle eines unter {mb} MB.",
     "title": "Mein Profil",
     "yourName": "Dein Name",
     "sessions": "Einheiten",
@@ -571,6 +600,8 @@
     "changePlan": "Um den Tarif zu wechseln, wende dich an die Clubverwaltung."
   },
   "plansAdmin": {
+    "deleteFailed": "Der Tarif konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.",
+    "saveFailed": "Der Tarif konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
     "title": "Mitgliedstarife",
     "count": "{n, plural, one {# Tarif} other {# Tarife}}",
     "addPlan": "Tarif hinzufügen",
@@ -658,9 +689,9 @@
     "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf Kortello führst.",
     "trial": {
       "endingSubject": "Ihre Kortello-Testphase für {club} endet am {date}",
-      "endingIntro": "Ihr kostenloser Monat für {club} endet am {date}. Um Kortello danach weiter zu nutzen, antworten Sie einfach auf diese E-Mail, und wir schicken Ihnen eine Rechnung. Wenn Sie einen anderen Tarif möchten, schreiben Sie es uns.",
+      "endingIntro": "Ihr kostenloser Monat für {club} endet am {date}. Drei Tage später wird das Konto schreibgeschützt: Sie können weiterhin alles ansehen und exportieren, aber nichts Neues hinzufügen, und Online-Buchungen werden pausiert. Es wird nie automatisch etwas berechnet. Um weiterzumachen, antworten Sie auf diese E-Mail, und wir schicken Ihnen eine Rechnung.",
       "endedSubject": "Ihre Kortello-Testphase für {club} ist abgelaufen",
-      "endedIntro": "Ihr kostenloser Monat für {club} ist vorbei. Antworten Sie auf diese E-Mail, und wir schicken Ihnen die Rechnung für Ihren Tarif, damit Sie ohne Unterbrechung weiter Buchungen annehmen können.",
+      "endedIntro": "Ihr kostenloser Monat für {club} ist vorbei. In drei Tagen wird das Konto schreibgeschützt, und Online-Buchungen werden pausiert. Ihre Daten bleiben sicher, und es wird nichts berechnet. Um weiter Buchungen anzunehmen, antworten Sie auf diese E-Mail, und wir schicken Ihnen eine Rechnung.",
       "price": "{monthly} € pro Monat oder {yearly} € pro Jahr",
       "trialEnds": "Kostenlos bis",
       "seePlan": "Tarif ansehen",
@@ -698,6 +729,14 @@
     }
   },
   "billing": {
+    "readOnlySince": "Schreibgeschützt seit {date}",
+    "readOnlyFrom": "Testphase beendet · schreibgeschützt ab {date}",
+    "readOnlyBody": "Die kostenlose Testphase ist beendet. Sie können weiterhin alles ansehen und Ihre Daten exportieren. Schreiben Sie uns, um weiterzumachen.",
+    "readOnlyTitle": "Dieses Konto ist schreibgeschützt",
+    "readOnlyHint": "Schreibgeschützt: Die kostenlose Testphase ist beendet",
+    "staffLockedBanner": "Das Konto dieses Clubs ist vorerst schreibgeschützt, daher kann nichts hinzugefügt oder geändert werden.",
+    "lockedBanner": "Ihre kostenlose Testphase ist beendet, daher ist das Konto schreibgeschützt und Online-Buchungen sind pausiert. Ihre Daten sind sicher, und es wird nichts berechnet. Schreiben Sie uns, um weiterzumachen.",
+    "graceBanner": "Ihre kostenlose Testphase ist beendet. In {days, plural, one {# Tag} other {# Tagen}} wird das Konto schreibgeschützt: Sie sehen weiterhin alles, können aber nichts Neues hinzufügen, und Online-Buchungen werden pausiert.",
     "trialBanner": "Kostenlose Testphase: noch {days, plural, one {# Tag} other {# Tage}}. Alles ist freigeschaltet.",
     "unpaidBanner": "Ihre kostenlose Testphase ist beendet. Schreiben Sie uns, um Ihren Plan weiterzuführen.",
     "seePlan": "Ihren Plan ansehen",
@@ -1236,6 +1275,7 @@
     "perHour": "/ Std."
   },
   "bookingErrors": {
+    "clubPaused": "Dieser Club nimmt gerade keine Online-Buchungen an. Bitte wende dich direkt an den Club.",
     "coachTaken": "Dieser Trainer ist zu dieser Zeit bereits gebucht",
     "slotTaken": "Dieser Termin ist bereits gebucht",
     "closedDay": "An diesem Tag ist der Club geschlossen",
@@ -1501,6 +1541,11 @@
     }
   },
   "owner": {
+    "missingKey": {
+      "title": "In dieser Bereitstellung fehlt der Service-Schlüssel",
+      "body": "Die Inhaberseite liest alle Clubs und braucht dafür den Service-Role-Schlüssel von Supabase. Fügen Sie ihn in den Hosting-Einstellungen unter diesem Namen hinzu und stellen Sie neu bereit:",
+      "where": "Sie finden ihn in Supabase unter Project Settings → API keys (Secret- bzw. service_role-Schlüssel). Ohne ihn laufen auch die Hinweise auf neue Clubs und die geplanten Erinnerungen nicht."
+    },
     "title": "Clubs & Zahlungen",
     "subtitle": "Nur Sie sehen diese Seite. Zahlungen erfassen, Tarife ändern und sehen, wie es jedem Club geht.",
     "stats": {
@@ -1526,6 +1571,8 @@
       "usage": "Aktivität"
     },
     "status": {
+      "readOnlySince": "Schreibgeschützt seit {date}",
+      "readOnlyFrom": "Schreibgeschützt ab {date}",
       "trialUntil": "Testphase bis {date}",
       "paidUntil": "Bezahlt bis {date}",
       "unpaid": "Nicht bezahlt"
@@ -1699,6 +1746,7 @@
       "upcoming": "Turniere"
     },
     "errors": {
+      "paused": "Dieser Club nimmt gerade keine Online-Anmeldungen an.",
       "name": "Geben Sie dem Turnier einen Namen.",
       "date": "Wählen Sie ein Datum.",
       "maxEntries": "Es müssen 2 bis 64 Plätze sein.",
@@ -2091,6 +2139,7 @@
       "savedRemoved": "{n} entfernt",
       "savedSkipped": "{n, plural, one {# Tag ausgelassen} other {# Tage ausgelassen}}",
       "errors": {
+        "readOnly": "Schreibgeschützt: Die kostenlose Testphase ist beendet.",
         "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
         "times": "Prüfen Sie die Uhrzeiten.",
         "busy": "Der Platz oder der Trainer ist dann belegt.",
@@ -2168,6 +2217,7 @@
       "awayButton": "Fehlt",
       "removeName": "{name} entfernen",
       "errors": {
+        "readOnly": "Schreibgeschützt: Die kostenlose Testphase des Clubs ist beendet.",
         "notAllowed": "Nur der Club und der Trainer der Gruppe können die Anwesenheit erfassen.",
         "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
       }
@@ -2216,6 +2266,7 @@
     "unbook": "Stornieren",
     "unbookConfirm": "Ihren Platz in dieser Einheit freigeben?",
     "errors": {
+      "paused": "Dieser Club nimmt gerade keine Online-Buchungen an.",
       "notAllowed": "Das können Sie für diesen Spieler nicht tun.",
       "started": "Diese Einheit hat schon begonnen.",
       "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
@@ -2265,6 +2316,7 @@
       "waiting": "{name} steht auf der Warteliste für {group}."
     },
     "errors": {
+      "paused": "Dieser Club nimmt gerade keine Online-Anmeldungen an. Bitte wende dich direkt an den Club.",
       "notSignedIn": "Bitte loggen Sie sich zuerst ein.",
       "confirmEmail": "Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse: Schauen Sie in Ihr Postfach.",
       "already": "Für diese Gruppe schon angemeldet.",
@@ -2296,6 +2348,7 @@
     "expiredBody": "Die 48 Stunden sind vorbei, der Platz ging an die nächste Person. Für eine neue Anmeldung wenden Sie sich an {club}.",
     "toClub": "Zu {club}",
     "errors": {
+      "paused": "Dieser Club nimmt gerade keine neuen Spieler online auf. Bitte wenden Sie sich direkt an den Club.",
       "closed": "Dieses Angebot ist geschlossen.",
       "expired": "Dieses Angebot ist abgelaufen.",
       "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
@@ -2423,7 +2476,7 @@
       },
       "trial_ended": {
         "title": "Ihre kostenlose Testphase ist <b>beendet</b>",
-        "detail": "Wählen Sie einen Tarif, um Kortello weiter zu nutzen"
+        "detail": "In 3 Tagen wird das Konto schreibgeschützt. Schreiben Sie uns, um weiterzumachen"
       },
       "club_booked": {
         "title": "<b>{club}</b> hat einen Platz für Sie gebucht",

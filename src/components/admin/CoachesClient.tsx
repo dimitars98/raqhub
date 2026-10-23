@@ -7,6 +7,7 @@ import type { Coach, Level } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import { LEVELS } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 const EMPTY_FORM = {
   email: "",
@@ -37,6 +38,7 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
   const [pageError, setPageError] = useState<string | null>(null);
   const supabase = createClient();
   const t = useTranslations("adminCoaches");
+  const { readOnly, hint } = useReadOnly();
 
   const labels = useLabels();
 
@@ -200,7 +202,7 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
             {coaches.length} {t("total")}
           </p>
         </div>
-        <button onClick={openAdd} className="btn-primary">
+        <button title={hint} disabled={readOnly} onClick={openAdd} className="btn-primary">
           {t("addCoach")}
         </button>
       </div>
@@ -308,13 +310,13 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                   </td>
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3 justify-end">
-                      <button
+                      <button title={hint} disabled={readOnly}
                         onClick={() => openEdit(c)}
                         className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
                       >
                         {t("edit")}
                       </button>
-                      <button
+                      <button title={hint} disabled={readOnly}
                         onClick={() => handleToggle(c)}
                         className={`text-xs transition-colors ${
                           c.is_active

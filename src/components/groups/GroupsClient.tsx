@@ -8,6 +8,7 @@ import { useLabels } from "@/hooks/useLabels";
 import { initials } from "@/lib/avatar";
 import { ISO_DAYS, clubFormat, clubDay, money, monthName, scheduleText, weekdayName } from "@/lib/groups";
 import type { Group } from "@/types/database";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type GroupCard = Pick<
   Group,
@@ -50,6 +51,7 @@ export default function GroupsClient({
   month: string;
 }) {
   const t = useTranslations("groups");
+  const { readOnly, hint } = useReadOnly();
   const locale = useLocale();
   const [tab, setTab] = useState<Tab>("all");
   const [coach, setCoach] = useState("");
@@ -101,10 +103,17 @@ export default function GroupsClient({
           </h1>
           <p className="mt-1 text-sm text-ink-600">{clubName}</p>
         </div>
-        <Link href="/admin/groups/new" className="btn-primary">
-          <Plus size={16} aria-hidden="true" />
-          {t("new")}
-        </Link>
+        {readOnly ? (
+          <button type="button" disabled title={hint} className="btn-primary">
+            <Plus size={16} aria-hidden="true" />
+            {t("new")}
+          </button>
+        ) : (
+          <Link href="/admin/groups/new" className="btn-primary">
+            <Plus size={16} aria-hidden="true" />
+            {t("new")}
+          </Link>
+        )}
       </div>
 
       {groups.length === 0 ? (
@@ -114,9 +123,11 @@ export default function GroupsClient({
           </div>
           <h2 className="text-lg font-semibold text-ink-900">{t("empty")}</h2>
           <p className="mt-1 max-w-md text-sm text-ink-600">{t("emptyHint")}</p>
-          <Link href="/admin/groups/new" className="btn-primary mt-6">
-            {t("new")}
-          </Link>
+          {!readOnly && (
+            <Link href="/admin/groups/new" className="btn-primary mt-6">
+              {t("new")}
+            </Link>
+          )}
         </div>
       ) : (
         <>

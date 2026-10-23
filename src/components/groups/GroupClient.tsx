@@ -44,6 +44,7 @@ import {
 } from "@/app/[locale]/admin/groups/actions";
 import { cancelSession, markFee, restoreSession, unmarkFee } from "@/app/actions/groups";
 import type { FeeMethod, Group, GroupAttendance, GroupFee, GroupPlayer, GroupSession } from "@/types/database";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export type DetailGroup = Group & { coachName: string | null; courtName: string | null };
 export type DetailSession = GroupSession & { courtName: string | null };
@@ -77,6 +78,7 @@ export default function GroupClient({
 }) {
   const t = useTranslations("groups");
   const td = useTranslations("groups.detail");
+  const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const locale = useLocale();
   const router = useRouter();
@@ -95,13 +97,15 @@ export default function GroupClient({
   const [menu, setMenu] = useState<string | null>(null);
 
   type Done = { error?: string; sent?: number; offered?: number };
-  const run = (task: () => Promise<Done | void>, ok?: string | ((r: Done) => string)) =>
+  const run = (task: () => Promise<Done | void>, ok?: string | ((r: Done) => string)) => {
+    if (readOnly) return setNotice({ ok: false, text: hint ?? "" });
     startTransition(async () => {
       const result: Done = (await task()) ?? {};
       if (result.error) setNotice({ ok: false, text: td(`errors.${result.error}`) });
       else if (ok) setNotice({ ok: true, text: typeof ok === "function" ? ok(result) : ok });
       router.refresh();
     });
+  };
 
   const onList = players.filter((p) => ON_LIST.includes(p.status));
   const requests = players.filter((p) => p.status === "requested");
@@ -216,18 +220,25 @@ export default function GroupClient({
           )}
           {admin && (
             <>
+              {readOnly ? (
+                <button type="button" disabled title={hint} className="btn-secondary inline-flex items-center gap-2">
+                <Pencil size={15} aria-hidden="true" />
+                {td("edit")}
+              </button>
+              ) : (
               <Link href={`${base}/edit`} className="btn-secondary inline-flex items-center gap-2">
                 <Pencil size={15} aria-hidden="true" />
                 {td("edit")}
               </Link>
+              )}
               {season && !group.archived_at && (
-                <button type="button" onClick={() => setPlayerModal("new")} className="btn-primary">
+                <button type="button" disabled={readOnly} title={hint} onClick={() => setPlayerModal("new")} className="btn-primary">
                   <UserPlus size={15} aria-hidden="true" />
                   {td("addPlayer")}
                 </button>
               )}
               <span className="relative">
-                <button
+                <button title={hint} disabled={readOnly}
                   type="button"
                   aria-label={td("more")}
                   aria-expanded={menu === "group"}
@@ -394,7 +405,7 @@ export default function GroupClient({
                   <p className="font-semibold text-ink-900">{td("noPlayers")}</p>
                   <p className="mt-1 text-sm text-ink-600">{group.online_signup ? td("noPlayersOnline") : td("noPlayersHint")}</p>
                   {admin && (
-                    <button type="button" onClick={() => setPlayerModal("new")} className="btn-primary mt-5">
+                    <button type="button" disabled={readOnly} title={hint} onClick={() => setPlayerModal("new")} className="btn-primary mt-5">
                       <UserPlus size={15} aria-hidden="true" />
                       {td("addPlayer")}
                     </button>
@@ -476,7 +487,7 @@ export default function GroupClient({
                             <td className="border-b border-ink-50 py-3 pl-3 pr-5 text-right align-top">
                               {admin && (
                                 <span className="relative inline-block">
-                                  <button
+                                  <button title={hint} disabled={readOnly}
                                     type="button"
                                     aria-label={td("moreFor", { name: p.name })}
                                     aria-expanded={menu === p.id}
@@ -533,8 +544,8 @@ export default function GroupClient({
               dropin={!season}
               maxPlayers={group.max_players}
               busy={pending}
-              onCancel={setCancelling}
-              onMove={setMoving}
+              onCancel={(x) => (readOnly ? setNotice({ ok: false, text: hint ?? "" }) : setCancelling(x))}
+              onMove={(x) => (readOnly ? setNotice({ ok: false, text: hint ?? "" }) : setMoving(x))}
               onRestore={(s) => run(() => restoreSession(s.id), td("restored"))}
             />
           )}

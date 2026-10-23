@@ -23,6 +23,7 @@ import { useLabels } from "@/hooks/useLabels";
 import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import type { Tournament, TournamentEntry, TournamentMatch } from "@/types/database";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 export default function TournamentClient({
   tournament,
@@ -36,6 +37,7 @@ export default function TournamentClient({
   publicUrl: string;
 }) {
   const t = useTranslations("tournaments");
+const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const locale = useLocale();
   const router = useRouter();
@@ -52,6 +54,7 @@ export default function TournamentClient({
   // Runs a server action, shows its error, and reloads the data.
   const run = (action: () => Promise<{ error?: string }>, after?: () => void) => {
     setError(null);
+    if (readOnly) return setError(hint ?? null);
     startTransition(async () => {
       const result = await action();
       if (result.error) setError(t(`errors.${result.error}`));
@@ -102,7 +105,7 @@ export default function TournamentClient({
             <ExternalLink size={15} aria-hidden="true" />
             {t("manage.publicPage")}
           </Link>
-          <button type="button" onClick={() => setEditing(true)} className="btn-secondary">
+          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary">
             {t("edit")}
           </button>
         </div>

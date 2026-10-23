@@ -13,6 +13,7 @@ import {
 import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
 import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 const EMPTY_FORM = {
   name: "",
@@ -35,6 +36,7 @@ interface Props {
 
 export default function CourtsClient({ courts: initial, maxCourts }: Props) {
   const t = useTranslations("adminCourts");
+  const { readOnly, hint } = useReadOnly();
   const tb = useTranslations("billing");
   const tc = useTranslations("common");
   const [courts, setCourts] = useState(initial);
@@ -171,7 +173,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
         </div>
         <button
           onClick={openAdd}
-          disabled={atLimit}
+          disabled={readOnly || atLimit}
           title={atLimit ? tb("courtLimit", { max: maxCourts! }) : undefined}
           className="btn-primary disabled:cursor-not-allowed disabled:opacity-50"
         >
@@ -286,7 +288,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                   </td>
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3 justify-end">
-                      <button
+                      <button title={hint} disabled={readOnly}
                         onClick={(e) => {
                           e.stopPropagation();
                           openEdit(c);
@@ -295,7 +297,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                       >
                         {t("edit")}
                       </button>
-                      <button
+                      <button title={hint} disabled={readOnly}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleToggle(c);

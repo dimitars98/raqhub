@@ -1,4 +1,19 @@
 {
+  "paused": {
+    "bodyNamed": "{club} isn't taking online bookings or sign-ups right now. Please contact the club directly.",
+    "body": "This club isn't taking online bookings or sign-ups right now. Please contact the club directly.",
+    "title": "Online booking is paused"
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "body": "This page didn't load. It's usually a short hiccup, so please try again in a moment.",
+    "retry": "Try again",
+    "home": "Go to the home page",
+    "backToApp": "Back to my dashboard",
+    "reference": "Reference: {code}",
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "This page doesn't exist or has moved. Check the address, or start again from the home page."
+  },
   "nav": {
     "features": "Features",
     "pricing": "Pricing",
@@ -10,6 +25,7 @@
     "language": "Language"
   },
   "auth": {
+    "callbackFailed": "Signing in with Google didn't work. Please try again, or sign in with your email and password.",
     "signIn": "Sign in to your account",
     "continueGoogle": "Continue with Google",
     "or": "or",
@@ -172,6 +188,7 @@
     "cancelBooking": "Cancel"
   },
   "adminBookings": {
+    "statusFailed": "Couldn't change the booking. Please try again.",
     "title": "Bookings",
     "total": "total",
     "addBooking": "Add booking",
@@ -353,6 +370,13 @@
     "myGroups": "My groups"
   },
   "members": {
+    "errors": {
+      "duplicateEmail": "A member with this email already exists.",
+      "duplicatePhone": "A member with this phone number already exists.",
+      "saveFailed": "Couldn't save the member. Please try again.",
+      "cancelFailed": "Couldn't cancel the membership. Please try again."
+    },
+    "total": "{count, plural, one {# member} other {# members}}",
     "title": "Members",
     "addMember": "Add member",
     "searchPlaceholder": "Search by name, email or phone...",
@@ -469,6 +493,7 @@
     "alreadyCoach": "This person is already a coach at your club."
   },
   "clubPage": {
+    "pausedCta": "Online booking is paused at the moment. Please contact the club directly.",
     "signIn": "Sign in",
     "signUpToBook": "Sign up to book",
     "bookCourt": "Book a court",
@@ -531,6 +556,10 @@
     "cancelNote": "You can cancel online up to {hours} hours before the start."
   },
   "profilePage": {
+    "saveFailed": "Couldn't save. Please try again.",
+    "photoFailed": "The photo couldn't be uploaded. Please try again.",
+    "photoType": "Please choose an image file (JPG, PNG or similar).",
+    "photoTooBig": "This photo is too large. Please choose one under {mb} MB.",
     "title": "My profile",
     "yourName": "Your name",
     "sessions": "Sessions",
@@ -571,6 +600,8 @@
     "changePlan": "To change plans, contact your club admin."
   },
   "plansAdmin": {
+    "deleteFailed": "Couldn't delete the plan. Please try again.",
+    "saveFailed": "Couldn't save the plan. Please try again.",
     "title": "Membership plans",
     "count": "{n, plural, one {# plan} other {# plans}}",
     "addPlan": "Add plan",
@@ -658,9 +689,9 @@
     "footerOwner": "You get this weekly summary because you run a club on Kortello.",
     "trial": {
       "endingSubject": "Your Kortello trial for {club} ends on {date}",
-      "endingIntro": "Your free month for {club} ends on {date}. To keep using Kortello after that, reply to this email and we’ll send you an invoice. If you’d like a different plan, just tell us.",
+      "endingIntro": "Your free month for {club} ends on {date}. Three days later the account becomes read-only: you can still see and export everything, but nothing new can be added and online booking pauses. Nothing is ever charged automatically. To keep going, reply to this email and we’ll send you an invoice.",
       "endedSubject": "Your Kortello trial for {club} has ended",
-      "endedIntro": "Your free month for {club} has ended. Reply to this email and we’ll send you an invoice for your plan, so you can keep taking bookings without interruption.",
+      "endedIntro": "Your free month for {club} has ended. In three days the account becomes read-only and online booking pauses. Your data stays safe and nothing is charged. To keep taking bookings, reply to this email and we’ll send you an invoice.",
       "price": "€{monthly} / month or €{yearly} / year",
       "trialEnds": "Free trial until",
       "seePlan": "See your plan",
@@ -698,6 +729,14 @@
     }
   },
   "billing": {
+    "readOnlySince": "Read-only since {date}",
+    "readOnlyFrom": "Trial ended · read-only from {date}",
+    "readOnlyBody": "The free trial has ended. You can still look at everything and export your data. Write to us to continue.",
+    "readOnlyTitle": "This account is read-only",
+    "readOnlyHint": "Read-only: the free trial has ended",
+    "staffLockedBanner": "This club's account is read-only for now, so nothing can be added or changed.",
+    "lockedBanner": "Your free trial has ended, so the account is read-only and online booking is paused. Your data is safe and nothing is charged. Write to us to continue.",
+    "graceBanner": "Your free trial has ended. In {days, plural, one {# day} other {# days}} the account becomes read-only: you'll still see everything, but nothing new can be added and online booking pauses.",
     "trialBanner": "Free trial: {days, plural, one {# day} other {# days}} left. Everything is unlocked.",
     "unpaidBanner": "Your free trial has ended. Write to us to keep your plan going.",
     "seePlan": "See your plan",
@@ -1236,6 +1275,7 @@
     "perHour": "/ hr"
   },
   "bookingErrors": {
+    "clubPaused": "This club isn't taking online bookings right now. Please contact the club directly.",
     "coachTaken": "This coach is already booked at that time",
     "slotTaken": "This slot is already booked",
     "closedDay": "The club is closed on that day",
@@ -1501,6 +1541,11 @@
     }
   },
   "owner": {
+    "missingKey": {
+      "title": "This deployment is missing the service key",
+      "body": "The owner page reads every club, so it needs Supabase's service-role key. Add it in your hosting settings under this name, then redeploy:",
+      "where": "Find it in Supabase under Project Settings → API keys (the secret or service_role key). Without it, new-club alerts and scheduled reminders don't run either."
+    },
     "title": "Clubs & payments",
     "subtitle": "Only you see this page. Record payments, change plans and see how every club is doing.",
     "stats": {
@@ -1526,6 +1571,8 @@
       "usage": "Activity"
     },
     "status": {
+      "readOnlySince": "Read-only since {date}",
+      "readOnlyFrom": "Read-only from {date}",
       "trialUntil": "Trial until {date}",
       "paidUntil": "Paid until {date}",
       "unpaid": "Not paid"
@@ -1699,6 +1746,7 @@
       "upcoming": "Tournaments"
     },
     "errors": {
+      "paused": "This club isn't taking online sign-ups right now.",
       "name": "Give the tournament a name.",
       "date": "Pick a date.",
       "maxEntries": "Places must be between 2 and 64.",
@@ -2091,6 +2139,7 @@
       "savedRemoved": "{n} removed",
       "savedSkipped": "{n, plural, one {# day skipped} other {# days skipped}}",
       "errors": {
+        "readOnly": "Read-only: the free trial has ended.",
         "failed": "Something went wrong. Please try again.",
         "times": "Check the times.",
         "busy": "The court or the coach is busy then.",
@@ -2168,6 +2217,7 @@
       "awayButton": "Away",
       "removeName": "Remove {name}",
       "errors": {
+        "readOnly": "Read-only: the club's free trial has ended.",
         "notAllowed": "Only the club and the group's coach can take the register.",
         "failed": "Something went wrong. Please try again."
       }
@@ -2216,6 +2266,7 @@
     "unbook": "Cancel",
     "unbookConfirm": "Give back your place in this session?",
     "errors": {
+      "paused": "This club isn't taking online bookings right now.",
       "notAllowed": "You can't do that for this player.",
       "started": "That session has already started.",
       "failed": "Something went wrong. Please try again."
@@ -2265,6 +2316,7 @@
       "waiting": "{name} is on the waiting list for {group}."
     },
     "errors": {
+      "paused": "This club isn't taking online sign-ups right now. Please contact the club directly.",
       "notSignedIn": "Please sign in first.",
       "confirmEmail": "Please confirm your email address first: check your inbox.",
       "already": "Already signed up for this group.",
@@ -2296,6 +2348,7 @@
     "expiredBody": "The 48 hours have passed, so the place went to the next person. To join again, contact {club}.",
     "toClub": "Go to {club}",
     "errors": {
+      "paused": "This club isn't taking new players online right now. Please contact the club directly.",
       "closed": "This offer is closed.",
       "expired": "This offer has run out.",
       "failed": "Something went wrong. Please try again."
@@ -2423,7 +2476,7 @@
       },
       "trial_ended": {
         "title": "Your free trial has <b>ended</b>",
-        "detail": "Choose a plan to keep using Kortello"
+        "detail": "The account becomes read-only in 3 days. Write to us to keep going"
       },
       "club_booked": {
         "title": "<b>{club}</b> booked a court for you",

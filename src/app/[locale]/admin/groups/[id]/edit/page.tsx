@@ -1,6 +1,8 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getMyClub } from "@/lib/myClub";
+import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
+import { ReadOnlyNotice } from "@/components/admin/PlanNotices";
 import GroupForm from "@/components/groups/GroupForm";
 import { groupFormOptions } from "@/lib/groupForm";
 import { clubDay } from "@/lib/groups";
@@ -13,8 +15,9 @@ export default async function EditGroupPage({ params }: { params: Promise<{ id: 
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
-  const { club } = await getMyClub<{ id: string }>(supabase, user.id, "id");
+  const { club } = await getMyClub<{ id: string } & ClubBilling>(supabase, user.id, `id, ${BILLING_COLUMNS}`);
   if (!club) redirect("/admin/setup");
+  if (clubAccess(club).readOnly) return <ReadOnlyNotice />;
 
   const { data: group } = await supabase.from("groups").select("*").eq("id", id).eq("club_id", club.id).maybeSingle();
   if (!group) notFound();

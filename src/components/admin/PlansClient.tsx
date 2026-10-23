@@ -8,6 +8,7 @@ import Modal from "@/components/ui/Modal";
 import { useTranslations } from "next-intl";
 import { BILLING_PERIODS } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
+import { useReadOnly } from "@/components/admin/ReadOnly";
 
 
 type FormValues = {
@@ -26,17 +27,20 @@ export default function PlansClient({
   clubId: string;
 }) {
   const t = useTranslations("plansAdmin");
+  const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const [plans, setPlans] = useState(initial);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState<MembershipPlan | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const supabase = createClient();
 
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { isSubmitting, errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -79,23 +83,20 @@ export default function PlansClient({
       club_id: clubId,
     } as unknown as never;
 
-    if (editing) {
-      const { data } = (await supabase
-        .from("membership_plans")
-        .update(payload)
-        .eq("id", editing.id)
-        .select()
-        .single()) as { data: MembershipPlan | null };
-      if (data)
-        setPlans((prev) => prev.map((p) => (p.id === editing.id ? data : p)));
-    } else {
-      const { data } = (await supabase
-        .from("membership_plans")
-        .insert(payload)
-        .select()
-        .single()) as { data: MembershipPlan | null };
-      if (data) setPlans((prev) => [...prev, data]);
+    const query = editing
+      ? supabase.from("membership_plans").update(payload).eq("id", editing.id)
+      : supabase.from("membership_plans").insert(payload);
+    const { data, error } = (await query.select().single()) as {
+      data: MembershipPlan | null;
+      error: unknown;
+    };
+    if (error || !data) {
+      console.error("[plans] save", error);
+      setError("root", { type: "manual", message: readOnly ? hint : t("saveFailed") });
+      return;
     }
+    if (editing) setPlans((prev) => prev.map((p) => (p.id === editing.id ? data : p)));
+    else setPlans((prev) => [...prev, data]);
     setShowModal(false);
   };
 
@@ -105,10 +106,15 @@ export default function PlansClient({
     )
       return;
     setDeleting(id);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase.from("membership_plans") as any).delete().eq("id", id);
-    setPlans((prev) => prev.filter((p) => p.id !== id));
+    setNotice(null);
+    const { error } = await supabase.from("membership_plans").delete().eq("id", id);
     setDeleting(null);
+    if (error) {
+      console.error("[plans] delete", error);
+      setNotice(readOnly ? hint ?? null : t("deleteFailed"));
+      return;
+    }
+    setPlans((prev) => prev.filter((p) => p.id !== id));
   };
 
   return (
@@ -120,17 +126,23 @@ export default function PlansClient({
           </h1>
           <p className="text-sm text-brand-600 mt-1">{t("count", { n: plans.length })}</p>
         </div>
-        <button onClick={openAdd} className="btn-primary">
+        <button onClick={openAdd} disabled={readOnly} title={hint} className="btn-primary">
           {t("addPlan")}
         </button>
       </div>
+
+      {notice && (
+        <p role="alert" className="mb-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+          {notice}
+        </p>
+      )}
 
       {!plans.length ? (
         <div className="card p-12 text-center">
           <p className="text-sm text-ink-400 mb-4">
             {t("empty")}
           </p>
-          <button onClick={openAdd} className="btn-primary">
+          <button onClick={openAdd} disabled={readOnly} title={hint} className="btn-primary">
             {t("addFirst")}
           </button>
         </div>
@@ -160,15 +172,15 @@ export default function PlansClient({
                 </div>
               )}
               <div className="flex gap-3 mt-4 pt-4 border-t border-ink-100">
-                <button
+                <button title={hint} disabled={readOnly}
                   onClick={() => openEdit(p)}
                   className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
                 >
                   {t("edit")}
                 </button>
-                <button
+                <button title={hint}
                   onClick={() => handleDelete(p.id)}
-                  disabled={deleting === p.id}
+                  disabled={readOnly || deleting === p.id}
                   className="text-xs text-red-400 hover:text-red-600 transition-colors disabled:opacity-40"
                 >
                   {deleting === p.id ? t("deleting") : t("delete")}
@@ -243,6 +255,11 @@ export default function PlansClient({
                   {...register("description")}
                 />
               </Modal.Field>
+              {errors.root && (
+                <p role="alert" className="rounded-xl bg-red-50 px-3 py-2.5 text-sm text-red-700">
+                  {errors.root.message}
+                </p>
+              )}
             </Modal.Body>
             <Modal.Footer>
               <button

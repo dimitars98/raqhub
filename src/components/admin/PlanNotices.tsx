@@ -5,6 +5,7 @@ import {
   PLANS,
   SALES_EMAIL,
   planFor,
+  readOnlyFrom,
   type ClubAccess,
   type ClubBilling,
   type Feature,
@@ -12,33 +13,73 @@ import {
 import { PAYMENT, paymentReference } from "@/lib/payment";
 import { intlLocale } from "@/lib/dateLocale";
 
-/** Strip above every admin page: trial days left, or "trial is over". */
-export async function PlanBanner({ access }: { access: ClubAccess }) {
+/** Strip above every admin page: trial days left, the grace days, or read-only. */
+export async function PlanBanner({ access, staff = false }: { access: ClubAccess; staff?: boolean }) {
   if (access.status === "active") return null;
+  // Staff only hear about it once it affects them.
+  if (staff && access.status !== "locked") return null;
   const t = await getTranslations("billing");
-  const unpaid = access.status === "unpaid";
 
-  return (
-    <div
-      className={`mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm ${
-        unpaid
-          ? "border-amber-200 bg-amber-50 text-amber-900"
-          : "border-brand-100 bg-brand-100/40 text-ink-800"
-      }`}
-    >
-      <span className="flex items-center gap-2">
-        <Sparkles size={15} className="shrink-0" aria-hidden="true" />
-        {unpaid ? t("unpaidBanner") : t("trialBanner", { days: access.trialDaysLeft })}
-      </span>
-      {unpaid ? (
-        <a href={`mailto:${SALES_EMAIL}`} className="font-semibold underline underline-offset-2">
-          {t("contact")}
-        </a>
-      ) : (
+  if (access.status === "trial") {
+    return (
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-100 bg-brand-100/40 px-4 py-3 text-sm text-ink-800">
+        <span className="flex items-center gap-2">
+          <Sparkles size={15} className="shrink-0" aria-hidden="true" />
+          {t("trialBanner", { days: access.trialDaysLeft })}
+        </span>
         <Link href="/admin/settings" className="font-semibold underline underline-offset-2">
           {t("seePlan")}
         </Link>
+      </div>
+    );
+  }
+
+  const locked = access.status === "locked";
+  return (
+    <div
+      role="status"
+      className={`mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm ${
+        locked ? "border-ink-200 bg-ink-900 text-white" : "border-red-200 bg-red-50 text-red-900"
+      }`}
+    >
+      <span className="flex items-start gap-2.5">
+        <Lock size={15} className="mt-0.5 shrink-0" aria-hidden="true" />
+        <span>
+          {staff
+            ? t("staffLockedBanner")
+            : locked
+              ? t("lockedBanner")
+              : t("graceBanner", { days: access.graceDaysLeft })}
+        </span>
+      </span>
+      {!staff && (
+        <a
+          href={`mailto:${SALES_EMAIL}`}
+          className={`shrink-0 rounded-full px-4 py-1.5 font-semibold ${
+            locked ? "bg-brand-400 text-ink-900 hover:bg-brand-200" : "bg-red-600 text-white hover:bg-red-700"
+          }`}
+        >
+          {t("contact")}
+        </a>
       )}
+    </div>
+  );
+}
+
+/** Instead of a page that only exists to add or change things (new group…). */
+export async function ReadOnlyNotice() {
+  const t = await getTranslations("billing");
+  return (
+    <div className="mx-auto mt-10 max-w-md rounded-2xl border border-ink-100 bg-white p-8 text-center">
+      <div className="mx-auto mb-4 grid size-11 place-items-center rounded-xl bg-ink-900 text-white">
+        <Lock size={18} aria-hidden="true" />
+      </div>
+      <h1 className="text-lg font-semibold text-ink-900">{t("readOnlyTitle")}</h1>
+      <p className="mt-2 text-sm text-ink-600">{t("readOnlyBody")}</p>
+      <a href={`mailto:${SALES_EMAIL}`} className="btn-primary mt-6 inline-flex items-center gap-2">
+        <Mail size={15} aria-hidden="true" />
+        {t("contact")}
+      </a>
     </div>
   );
 }
@@ -87,7 +128,9 @@ export async function PlanCard({
       ? t("trialUntil", { date: day(club.trial_ends_at) })
       : access.status === "active" && club.paid_until
         ? t("paidUntil", { date: day(club.paid_until) })
-        : t("unpaid");
+        : access.status === "grace"
+          ? t("readOnlyFrom", { date: day(readOnlyFrom(club)) })
+          : t("readOnlySince", { date: day(readOnlyFrom(club)) });
 
   return (
     <div className="mx-auto mb-6 max-w-[900px] rounded-2xl border border-ink-100 bg-white p-5">
@@ -104,7 +147,7 @@ export async function PlanCard({
           </p>
           <p
             className={`mt-1 text-sm ${
-              access.status === "unpaid" ? "text-amber-700" : "text-brand-600"
+              access.status === "grace" || access.status === "locked" ? "text-red-700" : "text-brand-600"
             }`}
           >
             {status}
