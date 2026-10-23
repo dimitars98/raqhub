@@ -31,6 +31,8 @@ export default function Navbar() {
   const links = [
     { label: t("features"), href: `/${locale}#features` },
     { label: t("pricing"), href: `/${locale}#pricing` },
+    { label: t("how"), href: `/${locale}#how` },
+    { label: t("faq"), href: `/${locale}#faq` },
   ];
 
   const mobileLinks = [
@@ -79,7 +81,10 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <nav ref={navRef} className="border-b border-brand-200 bg-white sticky top-0 z-50">
+    <nav
+      ref={navRef}
+      className="border-b border-brand-200 bg-white sticky top-0 z-50"
+    >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative">
         {/* Logo */}
         <Link
@@ -221,10 +226,17 @@ export default function Navbar() {
 
               {/* Language: all options on view, one tap to switch */}
               <div className="py-5">
-                <p id="mobile-language" className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-400">
+                <p
+                  id="mobile-language"
+                  className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-400"
+                >
                   {t("language")}
                 </p>
-                <div role="radiogroup" aria-labelledby="mobile-language" className="grid grid-cols-7 gap-1.5">
+                <div
+                  role="radiogroup"
+                  aria-labelledby="mobile-language"
+                  className="grid grid-cols-7 gap-1.5"
+                >
                   {LOCALES.map((l) => {
                     const active = l.code === locale;
                     return (
