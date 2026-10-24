@@ -41,7 +41,7 @@ function Modal({
   return (
     <ModalContext.Provider value={{ onClose }}>
       <div
-        className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 px-4"
+        className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 px-4 py-4 overflow-y-auto"
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
         }}
@@ -62,7 +62,7 @@ function Content({
 }) {
   return (
     <div
-      className={`bg-white rounded-2xl border border-ink-100 p-6 w-full max-w-md ${className}`}
+      className={`bg-white rounded-2xl border border-ink-100 p-6 w-full max-w-md max-h-[calc(100dvh-2rem)] flex flex-col overflow-hidden ${className}`}
     >
       {children}
     </div>
@@ -73,7 +73,7 @@ function Content({
 function Header({ children }: { children: React.ReactNode }) {
   const { onClose } = useContext(ModalContext);
   return (
-    <div className="flex items-center justify-between mb-5">
+    <div className="flex items-center justify-between mb-5 shrink-0">
       <h2 className="text-base font-medium text-ink-900">{children}</h2>
       <button
         onClick={onClose}
@@ -87,12 +87,16 @@ function Header({ children }: { children: React.ReactNode }) {
 
 // Body
 function Body({ children }: { children: React.ReactNode }) {
-  return <div className="flex flex-col gap-3">{children}</div>;
+  return (
+    <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto overscroll-contain">
+      {children}
+    </div>
+  );
 }
 
 // Footer
 function Footer({ children }: { children: React.ReactNode }) {
-  return <div className="flex gap-3 mt-5">{children}</div>;
+  return <div className="flex gap-3 mt-5 shrink-0">{children}</div>;
 }
 
 // Field

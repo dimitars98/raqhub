@@ -202,7 +202,12 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
             {coaches.length} {t("total")}
           </p>
         </div>
-        <button title={hint} disabled={readOnly} onClick={openAdd} className="btn-primary">
+        <button
+          title={hint}
+          disabled={readOnly}
+          onClick={openAdd}
+          className="btn-primary"
+        >
           {t("addCoach")}
         </button>
       </div>
@@ -213,7 +218,7 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
         </div>
       )}
 
-      <div className="bg-white border border-ink-100 rounded-2xl overflow-hidden">
+      <div className="bg-white border border-ink-100 rounded-2xl overflow-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-ink-100 bg-ink-50">
@@ -310,13 +315,17 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                   </td>
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3 justify-end">
-                      <button title={hint} disabled={readOnly}
+                      <button
+                        title={hint}
+                        disabled={readOnly}
                         onClick={() => openEdit(c)}
                         className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
                       >
                         {t("edit")}
                       </button>
-                      <button title={hint} disabled={readOnly}
+                      <button
+                        title={hint}
+                        disabled={readOnly}
                         onClick={() => handleToggle(c)}
                         className={`text-xs transition-colors ${
                           c.is_active

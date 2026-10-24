@@ -7,7 +7,7 @@ export default async function Footer() {
 
   return (
     <footer className="bg-ink-900 text-white overflow-hidden">
-      <div className="max-w-[1180px] mx-auto px-6 lg:px-10 pt-16 lg:pt-20">
+      <div className="max-w-[1180px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
         <div className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-20">
           {/* Statement + main action */}
           <div className="max-w-sm">
@@ -74,16 +74,16 @@ export default async function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-6 text-sm text-white/40">
-          © {new Date().getFullYear()} Kortello
+          © {new Date().getFullYear()} Kortello. All rights reserved
         </div>
 
         {/* Oversized wordmark, cropped by the bottom edge */}
-        <div
+        {/* <div
           aria-hidden="true"
           className="mt-10 -mb-[0.14em] select-none whitespace-nowrap font-extrabold leading-[0.8] tracking-tighter text-brand-400 text-[length:min(15vw,190px)]"
         >
           Kortello
-        </div>
+        </div> */}
       </div>
     </footer>
   );
