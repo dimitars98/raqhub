@@ -9,6 +9,8 @@ import {
   Clock,
   CreditCard,
   GraduationCap,
+  ShieldCheck,
+  Swords,
   Trophy,
   UserPlus,
   Users,
@@ -41,6 +43,17 @@ const ICONS: Record<string, LucideIcon> = {
   group_added: UsersRound,
   group_offer: UsersRound,
   group_fee_due: CreditCard,
+  match_joined: Swords,
+  match_request: Swords,
+  match_left: Swords,
+  match_full: Swords,
+  match_answer: Swords,
+  match_removed: Swords,
+  match_cancelled: CalendarX,
+  match_keep_ask: Clock,
+  match_released: CalendarX,
+  level_check: ShieldCheck,
+  level_confirmed: ShieldCheck,
 };
 
 const str = (v: unknown) => (typeof v === "string" ? v : v == null ? "" : String(v));
@@ -183,6 +196,53 @@ export function useDescribe() {
           detail: [str(d.name), d.amount != null ? `€${num(d.amount).toFixed(2).replace(/\.00$/, "")}` : ""]
             .filter(Boolean)
             .join(" · "),
+        };
+      case "match_joined":
+      case "match_left":
+      case "match_full":
+        return {
+          title: t.rich(`${n.kind}.title`, { who, b: bold }),
+          detail: [court || str(d.club), when(d), d.max ? t("players", { count: num(d.count), max: num(d.max) }) : ""]
+            .filter(Boolean)
+            .join(" · "),
+        };
+      case "match_request":
+        return {
+          title: t.rich("match_request.title", { who, level: num(d.level).toFixed(1), b: bold }),
+          detail: [when(d), t("match_request.detail")].filter(Boolean).join(" · "),
+        };
+      case "match_answer":
+        return {
+          title: t.rich(d.accepted ? "match_answer.yes" : "match_answer.no", { b: bold }),
+          detail: [court, str(d.club), when(d)].filter(Boolean).join(" · "),
+        };
+      case "match_removed":
+      case "match_cancelled":
+        return {
+          title: t.rich(`${n.kind}.title`, { b: bold }),
+          detail: [court, str(d.club), when(d)].filter(Boolean).join(" · "),
+        };
+      case "match_keep_ask":
+        return {
+          title: t.rich("match_keep_ask.title", { count: num(d.count), max: num(d.max), b: bold }),
+          detail: d.release_at
+            ? t("match_keep_ask.detail", { time: format(new Date(str(d.release_at)), "EEE d MMM, HH:mm", { locale: df }) })
+            : "",
+        };
+      case "match_released":
+        return {
+          title: t.rich("match_released.title", { b: bold }),
+          detail: [court, when(d)].filter(Boolean).join(" · "),
+        };
+      case "level_check":
+        return {
+          title: t.rich("level_check.title", { who, sport: str(d.sport), level: num(d.level).toFixed(1), b: bold }),
+          detail: t("level_check.detail"),
+        };
+      case "level_confirmed":
+        return {
+          title: t.rich("level_confirmed.title", { club: str(d.club), level: num(d.level).toFixed(1), b: bold }),
+          detail: "",
         };
       default:
         return { title: t("unknown"), detail: "" };

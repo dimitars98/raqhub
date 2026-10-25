@@ -22,6 +22,9 @@ import { format } from "date-fns";
 import type { Tournament } from "@/types/database";
 import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
 import BookingPaused from "@/components/ui/BookingPaused";
+import MatchCard from "@/components/matches/MatchCard";
+import { loadMyLevels } from "@/lib/myLevels";
+import type { MatchCard as OpenMatch, MyLevel } from "@/lib/openMatches";
 
 // The public page of one club: what a visitor sees before they have an account.
 // Everything read here is allowed for logged-out visitors by the database
@@ -118,6 +121,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
       data: { user },
     },
     { data: groupsData },
+    { data: matchesData },
   ] = await Promise.all([
     supabase
       .from("courts")
@@ -149,7 +153,12 @@ export default async function ClubPublicPage({ params }: PageProps) {
     supabase.auth.getUser(),
     // Groups and drop-in clinics open to sign up online.
     supabase.rpc("public_groups", { p_club: club.id }),
+    // Open matches looking for players.
+    supabase.rpc("open_match_feed", { p_club: club.id, p_sport: null }),
   ]);
+  const openMatches = ((matchesData ?? []) as unknown as OpenMatch[]).filter(
+    (m) => m.mine || m.taken < m.max_players,
+  );
   const groups = (groupsData ?? []) as unknown as PublicGroup[];
   // After the club's free trial ends, online booking pauses (20261025_trial_lock.sql).
   const { data: pausedData } = await supabase.rpc("paused_clubs", { p_clubs: [club.id] });
@@ -179,6 +188,8 @@ export default async function ClubPublicPage({ params }: PageProps) {
     myName = (profile as Pick<Profile, "full_name"> | null)?.full_name ?? null;
     viewer = role === "club_admin" || role === "super_admin" ? "admin" : "player";
   }
+  const myLevels: MyLevel[] = viewer === "player" && user ? await loadMyLevels(supabase, user.id) : [];
+  const tm = await getTranslations("matches");
 
   const action =
     viewer === "admin"
@@ -354,6 +365,35 @@ export default async function ClubPublicPage({ params }: PageProps) {
             myName={myName}
             loginHref={`/login?redirectTo=${encodeURIComponent(`/${locale}/clubs/${club.slug}#groups`)}`}
           />
+        )}
+
+        {/* Open matches: only shown when some are looking for players */}
+        {openMatches.length > 0 && !paused && viewer !== "admin" && (
+          <section id="matches" className="mb-12">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 className="text-xl font-bold tracking-tight text-ink-900">{tm("clubSection")}</h2>
+                <p className="mt-1 text-sm text-ink-600">{tm("clubSectionHint")}</p>
+              </div>
+              {viewer === "player" && (
+                <Link href={`/matches?club=${club.slug}`} className="btn-secondary">
+                  {tm("seeAll")}
+                </Link>
+              )}
+            </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {openMatches.slice(0, 4).map((m) => (
+                <MatchCard
+                  key={m.id}
+                  match={m}
+                  myLevel={myLevels.find((l) => l.sport === m.sport)?.level ?? null}
+                  viewer={viewer === "player" ? "player" : "visitor"}
+                  showClub={false}
+                  loginHref={`/login?redirectTo=${encodeURIComponent(`/${locale}/matches/${m.id}`)}`}
+                />
+              ))}
+            </div>
+          </section>
         )}
 
         {/* Tournaments: only shown when the club has any coming up */}

@@ -338,6 +338,7 @@ export type Database = {
         Row: {
           address: string | null
           booking_rules: Json | null
+          open_matches: Json | null
           city: string | null
           country: string | null
           cover_url: string | null
@@ -363,6 +364,7 @@ export type Database = {
         Insert: {
           address?: string | null
           booking_rules?: Json | null
+          open_matches?: Json | null
           city?: string | null
           country?: string | null
           cover_url?: string | null
@@ -388,6 +390,7 @@ export type Database = {
         Update: {
           address?: string | null
           booking_rules?: Json | null
+          open_matches?: Json | null
           city?: string | null
           country?: string | null
           cover_url?: string | null
@@ -1143,11 +1146,76 @@ export type Database = {
           },
         ]
       }
+      player_levels: {
+        Row: {
+          profile_id: string
+          sport: string
+          level: number
+          confirmed_by_club: string | null
+          confirmed_at: string | null
+          check_club: string | null
+          check_requested_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          profile_id: string
+          sport: string
+          level: number
+          confirmed_by_club?: string | null
+          confirmed_at?: string | null
+          check_club?: string | null
+          check_requested_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          profile_id?: string
+          sport?: string
+          level?: number
+          confirmed_by_club?: string | null
+          confirmed_at?: string | null
+          check_club?: string | null
+          check_requested_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      set_my_level: { Args: { p_sport: string; p_level: number }; Returns: undefined }
+      request_level_check: { Args: { p_sport: string; p_club: string }; Returns: undefined }
+      confirm_player_level: {
+        Args: { p_profile: string; p_sport: string; p_level: number }
+        Returns: undefined
+      }
+      dismiss_level_check: { Args: { p_profile: string; p_sport: string }; Returns: undefined }
+      create_open_match: {
+        Args: {
+          p_booking: string
+          p_level_min: number
+          p_level_max: number
+          p_competitive: boolean
+          p_max_players: number
+          p_note?: string | null
+        }
+        Returns: string
+      }
+      join_open_match: { Args: { p_match: string; p_team?: number | null }; Returns: string }
+      answer_match_request: {
+        Args: { p_match: string; p_profile: string; p_accept: boolean }
+        Returns: undefined
+      }
+      leave_open_match: { Args: { p_match: string }; Returns: undefined }
+      remove_match_player: { Args: { p_match: string; p_profile: string }; Returns: undefined }
+      keep_match_court: { Args: { p_match: string; p_keep: boolean }; Returns: undefined }
+      post_match_message: { Args: { p_match: string; p_body: string }; Returns: undefined }
+      open_match_feed: { Args: { p_club?: string | null; p_sport?: string | null }; Returns: Json }
+      open_match_detail: { Args: { p_match: string }; Returns: Json }
+      open_match_clubs: { Args: never; Returns: Json }
+      club_open_matches: { Args: { p_club: string }; Returns: Json }
+      run_open_match_jobs: { Args: never; Returns: Json }
       claim_club_admin_role: { Args: never; Returns: undefined }
       run_scheduled_notifications: { Args: never; Returns: Json }
       preview_group_sessions: {

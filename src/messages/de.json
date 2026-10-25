@@ -356,7 +356,8 @@
       "tournaments": "Turniere",
       "staff": "Mitarbeiter",
       "notifications": "Benachrichtigungen",
-      "groups": "Gruppen"
+      "groups": "Gruppen",
+      "matches": "Offene Matches"
     },
     "share": "Teilen",
     "ownerGroup": "Kortello",
@@ -367,7 +368,8 @@
     "superAdmin": "Super-Admin",
     "clubAdmin": "Admin",
     "groups": "Gruppen",
-    "myGroups": "Meine Gruppen"
+    "myGroups": "Meine Gruppen",
+    "openMatches": "Offene Matches"
   },
   "members": {
     "errors": {
@@ -1053,6 +1055,7 @@
         "Eigene Buchungsseite und QR-Poster",
         "Wöchentliche Buchungen und No-Show-Limit",
         "Turniere mit automatischer Auslosung",
+        "Offene Matches mit Spielerniveaus",
         "Datenexport nach Excel"
       ]
     }
@@ -2375,7 +2378,8 @@
       "members": "Mitglieder",
       "tournaments": "Turniere",
       "membership": "Mitgliedschaft",
-      "groups": "Gruppen"
+      "groups": "Gruppen",
+      "matches": "Offene Matches"
     },
     "settings": {
       "title": "Was Sie bekommen",
@@ -2415,6 +2419,10 @@
         "groups": {
           "title": "Gruppen",
           "desc": "Anmeldungen, Antworten von der Warteliste und wer nicht kommen kann"
+        },
+        "matches": {
+          "title": "Offene Matches",
+          "desc": "Wenn ein Spieler Sie bittet, sein Niveau zu prüfen"
         }
       },
       "member": {
@@ -2437,6 +2445,10 @@
         "groups": {
           "title": "Gruppen",
           "desc": "Abgesagte Einheiten, angebotene Plätze, Zahlungserinnerungen"
+        },
+        "matches": {
+          "title": "Offene Matches",
+          "desc": "Spieler, die bei Ihren Matches mitspielen, austreten oder anfragen"
         }
       }
     },
@@ -2529,7 +2541,279 @@
       },
       "group_fee_due": {
         "title": "Der Beitrag für <b>{month}</b> für {group} ist noch offen"
+      },
+      "players": "{count} von {max} Spielern",
+      "match_joined": {
+        "title": "<b>{who}</b> spielt bei Ihrem Match mit"
+      },
+      "match_left": {
+        "title": "<b>{who}</b> hat Ihr Match verlassen"
+      },
+      "match_full": {
+        "title": "Ihr Match ist <b>voll</b>"
+      },
+      "match_request": {
+        "title": "<b>{who}</b> (Niveau {level}) möchte bei Ihrem Match mitspielen",
+        "detail": "Zulassen oder ablehnen"
+      },
+      "match_answer": {
+        "yes": "Sie sind <b>im Match</b>",
+        "no": "Der Organisator hat Ihre Anfrage <b>abgelehnt</b>"
+      },
+      "match_removed": {
+        "title": "Der Organisator hat Sie aus einem Match <b>entfernt</b>"
+      },
+      "match_cancelled": {
+        "title": "Ein Match, bei dem Sie dabei waren, wurde <b>abgesagt</b>"
+      },
+      "match_keep_ask": {
+        "title": "Ihr Match hat <b>{count} von {max}</b> Spielern. Platz behalten?",
+        "detail": "Wenn Sie ihn nicht behalten, geht er am {time} an den Club zurück"
+      },
+      "match_released": {
+        "title": "Ein Match <b>wurde nicht rechtzeitig voll</b>, der Platz ging an den Club zurück"
+      },
+      "level_check": {
+        "title": "<b>{who}</b> bittet Sie, das {sport, select, padel {Padel} tennis {Tennis} other {Pickleball}}-Niveau zu prüfen ({level})",
+        "detail": "Bestätigen Sie es auf der Seite Offene Matches"
+      },
+      "level_confirmed": {
+        "title": "<b>{club}</b> hat Ihr Niveau geprüft: {level}"
       }
+    }
+  },
+  "matches": {
+    "title": "Offene Matches",
+    "titleAt": "Offene Matches bei {club}",
+    "subtitle": "Finden Sie Spieler auf Ihrem Niveau, oder öffnen Sie Ihren Platz für andere.",
+    "allClubs": "Alle Clubs",
+    "start": "Match starten",
+    "sport": "Sportart",
+    "allSports": "Alle",
+    "club": "Club",
+    "you": "Sie",
+    "youName": "{name} (Sie)",
+    "checkedShort": "Von einem Club bestätigt",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "youreIn": "Sie sind dabei",
+    "asked": "Anfrage gesendet",
+    "full": "Voll",
+    "signInToJoin": "Anmelden und mitspielen",
+    "joining": "Wird gesendet…",
+    "join": "Mitspielen",
+    "askToJoin": "Anfragen",
+    "each": "pro Person",
+    "levelRange": "Niveau {range}",
+    "competitive": "Wettkampf",
+    "friendly": "Freundschaftlich",
+    "freePlace": "Freier Platz",
+    "placesLeft": "{n, plural, one {noch # Platz frei} other {noch # Plätze frei}}",
+    "outsideRange": "Ihr Niveau ist {level}, daher entscheidet der Organisator.",
+    "membersOnlyNote": "Nur Mitglieder des Clubs können mitspielen.",
+    "yourLevel": "Ihr Niveau im {sport}",
+    "checkedBy": "Bestätigt von {club}",
+    "selfRated": "Selbst eingeschätzt",
+    "noLevelTitle": "Ihr Niveau im {sport} festlegen",
+    "noLevelHint": "Dauert ein paar Sekunden und findet die passenden Spieler.",
+    "change": "Ändern",
+    "setLevel": "Niveau festlegen",
+    "atMyLevel": "Mein Niveau",
+    "days": {
+      "any": "Jeder Tag",
+      "today": "Heute",
+      "tomorrow": "Morgen",
+      "week": "Diese Woche"
+    },
+    "yourMatches": "Ihre Matches",
+    "lookingForPlayers": "Suchen Spieler",
+    "count": "{n, plural, =0 {Keine Matches} one {# Match} other {# Matches}}",
+    "empty": "Gerade keine offenen Matches",
+    "emptyHint": "Buchen Sie einen Platz und öffnen Sie ihn: Spieler auf Ihrem Niveau können mitspielen, und jeder zahlt seinen Anteil im Club.",
+    "back": "Offene Matches",
+    "share": "Teilen",
+    "copied": "Link kopiert",
+    "shareText": "Spiel mit: {when} bei {club}",
+    "statusOpen": "Platz gebucht · {n, plural, one {noch # Platz frei} other {noch # Plätze frei}}",
+    "statusFull": "Voll · bis bald auf dem Platz",
+    "statusCancelled": "Vom Organisator abgesagt",
+    "statusReleased": "Nicht rechtzeitig voll · der Platz ging an den Club zurück",
+    "statusStarted": "Dieses Match hat begonnen",
+    "justOpened": "Ihr Match ist offen. Teilen Sie den Link in Ihren Gruppenchats, damit es schneller voll wird.",
+    "releaseNote": "Ist das Match bis {time} nicht voll, geht der Platz an den Club zurück. Wir fragen Sie ein paar Stunden vorher.",
+    "keepingCourt": "Sie behalten den Platz, auch wenn das Match nicht voll wird. Kommt niemand sonst, zahlen Sie dem Club den ganzen Platz.",
+    "keepCourt": "Platz trotzdem behalten",
+    "dontKeep": "Zurückgeben, wenn nicht voll",
+    "players": "Spieler",
+    "teamA": "Team A",
+    "teamB": "Team B",
+    "side1": "Spieler 1",
+    "side2": "Spieler 2",
+    "takePlace": "Diesen Platz nehmen",
+    "askPlace": "Diesen Platz anfragen",
+    "organiser": "Organisator",
+    "remove": "Entfernen",
+    "removeName": "{name} entfernen",
+    "requests": "Anfragen",
+    "requestsHint": "Ihr Niveau liegt außerhalb Ihres Bereichs. Lassen Sie sie mitspielen, wenn es für Sie passt.",
+    "letIn": "Zulassen",
+    "turnDown": "Ablehnen",
+    "details": "Details",
+    "price": "Preis",
+    "priceValue": "{each} pro Person · Platz {court}",
+    "payment": "Bezahlung",
+    "paymentValue": "An der Rezeption des Clubs",
+    "type": "Art",
+    "friendlyLong": "Freundschaftlich · zum Spaß",
+    "competitiveLong": "Wettkampf · es geht um den Sieg",
+    "leaveUntil": "Austreten bis",
+    "leaveRule": "Sie können bis {time} online austreten. Danach sagen Sie bitte dem Organisator Bescheid, sonst kann der Club es als Nichterscheinen zählen.",
+    "address": "Adresse",
+    "clubPhone": "Telefon des Clubs",
+    "cancelCourt": "Platz stornieren",
+    "keepIt": "Behalten",
+    "yesCancel": "Ja, stornieren",
+    "leave": "Match verlassen",
+    "tooLateToLeave": "Für ein Austreten online ist es zu spät. Bitte sagen Sie dem Organisator Bescheid.",
+    "waitingForOrganiser": "Sie haben angefragt. Der Organisator meldet sich.",
+    "withdraw": "Zurückziehen",
+    "matchFull": "Dieses Match ist voll.",
+    "setLevelToJoin": "Niveau festlegen und mitspielen",
+    "joinPrice": "Mitspielen · {price} im Club",
+    "joinNote": "Die anderen Spieler werden benachrichtigt, wenn Sie mitspielen.",
+    "messages": "Nachrichten",
+    "playersOnly": "nur für die Spieler",
+    "noMessages": "Noch keine Nachrichten.",
+    "message": "Nachricht",
+    "messagePlaceholder": "Den anderen Spielern schreiben",
+    "send": "Senden",
+    "chatPrivacy": "Nur die Spieler dieses Matches sehen diese Nachrichten.",
+    "noClubs": "Noch kein Club bietet offene Matches an",
+    "noClubsHint": "Sobald Ihr Club sie einschaltet, können Sie hier eins starten.",
+    "step1": "1 · Club und Sportart",
+    "membersOnlyStart": "Hier können nur Mitglieder des Clubs Matches starten.",
+    "levelFirst": "Spieler sehen es neben Ihrem Namen, und es entscheidet, wer bei Ihrem Match mitspielen kann.",
+    "step2": "2 · Platz und Uhrzeit",
+    "minutes": "{n} Min.",
+    "freeSlots": "Freie Zeiten für {n} Minuten",
+    "loadingSlots": "Freie Zeiten werden geladen…",
+    "noSlots": "An diesem Tag ist kein Platz frei. Versuchen Sie einen anderen Tag oder eine andere Dauer.",
+    "step3": "3 · Wer mitspielen kann",
+    "yoursIs": "Ihres: {level}",
+    "from": "Von",
+    "to": "Bis",
+    "lower": "{label}: niedriger",
+    "raise": "{label}: höher",
+    "doubles": "Doppel · 4 Spieler",
+    "singles": "Einzel · 2 Spieler",
+    "outsideCanAsk": "Spieler außerhalb des Bereichs können anfragen, und Sie entscheiden.",
+    "step4": "4 · Eine Notiz (freiwillig)",
+    "note": "Notiz",
+    "notePlaceholder": "z. B. Ich bringe neue Bälle mit",
+    "court": "Platz",
+    "eachAtClub": "{price} pro Person im Club",
+    "bookedNow": "Der Platz wird jetzt für Sie gebucht. Ist das Match ein paar Stunden vor Beginn nicht voll, fragen wir Sie, ob Sie ihn behalten oder dem Club zurückgeben.",
+    "opening": "Wird gebucht…",
+    "bookAndOpen": "Platz buchen und Match öffnen",
+    "pickTime": "Uhrzeit wählen",
+    "levelTitle": "Ihr Niveau",
+    "levelIntro": "Wählen Sie, was am besten zu Ihnen passt. Es dient nur dazu, Sie mit Spielern auf ähnlichem Niveau zusammenzubringen, und Sie können es jederzeit ändern.",
+    "notSet": "nicht festgelegt",
+    "bandFromUp": "ab {from}",
+    "bands": {
+      "starting": {
+        "name": "Ganz am Anfang",
+        "desc": "Erst ein paar Spiele. Sie lernen noch die Grundschläge."
+      },
+      "beginner": {
+        "name": "Anfänger",
+        "desc": "Sie halten einen Ballwechsel in ruhigem Tempo."
+      },
+      "intermediate": {
+        "name": "Fortgeschritten",
+        "desc": "Sie spielen jede Woche, kontrollieren Ihre Schläge und wissen, wo Sie stehen müssen."
+      },
+      "advanced": {
+        "name": "Stark",
+        "desc": "Kräftige, vielseitige Schläge. Sie spielen lokale Turniere."
+      },
+      "competition": {
+        "name": "Wettkampf",
+        "desc": "Sie gewinnen lokale Turniere oder spielen national."
+      }
+    },
+    "fineTune": "Feinabstimmung",
+    "checkHint": "Ein Trainer Ihres Clubs kann Ihr Niveau bestätigen. Andere Spieler sehen dann, dass es geprüft ist.",
+    "askCheck": "Club um Prüfung bitten",
+    "askCheckAt": "{club} um Prüfung bitten",
+    "checkPending": "{club} prüft Ihr Niveau noch",
+    "levelSaved": "Gespeichert.",
+    "saveLevel": "{sport}-Niveau {level} speichern",
+    "clubSection": "Offene Matches",
+    "clubSectionHint": "Spieler, die in diesem Club Partner suchen. Spielen Sie mit und zahlen Sie Ihren Anteil im Club.",
+    "seeAll": "Alle ansehen und eins starten",
+    "errors": {
+      "notSignedIn": "Bitte melden Sie sich zuerst an.",
+      "needLevel": "Legen Sie zuerst Ihr Niveau für diese Sportart fest.",
+      "membersOnly": "Offene Matches in diesem Club sind nur für Mitglieder.",
+      "full": "Dieses Match ist schon voll.",
+      "already": "Sie sind bereits in diesem Match.",
+      "closed": "Dieses Match ist nicht mehr offen.",
+      "tooLate": "Für ein Austreten online ist es zu spät. Bitte sagen Sie dem Organisator Bescheid.",
+      "sportOff": "Dieser Club bietet für diese Sportart keine offenen Matches an.",
+      "levels": "Die Niveaus gehen von 1.0 bis 7.0.",
+      "tooManyMessages": "Dieses Match hat zu viele Nachrichten.",
+      "notAllowed": "Das können Sie nicht tun.",
+      "paused": "Online-Buchungen sind in diesem Club pausiert.",
+      "readOnly": "Das Konto ist schreibgeschützt, bis der Plan verlängert wird.",
+      "cancelDeadline": "Der Club erlaubt Stornierungen nur bis {hours} Stunden vor Beginn. Bitte rufen Sie den Club an.",
+      "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es noch einmal."
+    },
+    "admin": {
+      "title": "Offene Matches",
+      "subtitle": "Spieler buchen einen Platz und öffnen ihn für andere auf ihrem Niveau.",
+      "seeAsPlayer": "Öffentliche Seite ansehen",
+      "statOpened": "Geöffnet",
+      "last7": "in den letzten 7 Tagen",
+      "statFilled": "Voll geworden",
+      "statFilledSub": "Matches mit allen Spielern",
+      "statPlayers": "Spieler",
+      "statPlayersSub": "verschiedene Spieler in Matches",
+      "statReleased": "Zurückgegebene Plätze",
+      "statReleasedSub": "wieder buchbar, weil nicht voll",
+      "comingUp": "Demnächst",
+      "next14": "Nächste 14 Tage",
+      "none": "Noch keine offenen Matches geplant. Spieler starten sie auf der Seite Offene Matches.",
+      "when": "Wann",
+      "court": "Platz",
+      "level": "Niveau",
+      "players": "Spieler",
+      "status": "Status",
+      "released": "Platz zurückgegeben",
+      "full": "Voll",
+      "needs": "Fehlen {n}",
+      "kept": "Platz behalten",
+      "settings": "Einstellungen",
+      "enabled": "Offene Matches erlauben",
+      "enabledHint": "Spieler können ihre Buchungen für andere öffnen",
+      "sports": "Sportarten",
+      "release": "Wenn ein Match nicht voll ist, Platz zurückgeben",
+      "releaseOption": "{hours} Stunden vor Beginn",
+      "releaseHint": "Der Organisator wird ein paar Stunden früher gefragt. Behält er ihn nicht, ist der Platz wieder buchbar.",
+      "who": "Wer mitspielen kann",
+      "anyone": "Alle mit einem Kortello-Konto",
+      "membersOnly": "Nur Clubmitglieder",
+      "save": "Speichern",
+      "saving": "Wird gespeichert…",
+      "saved": "Gespeichert.",
+      "noSports": "Wählen Sie mindestens eine Sportart.",
+      "checks": "Niveau-Prüfungen",
+      "checksHint": "Spieler, die Ihre Trainer gebeten haben, ihr Niveau zu bestätigen. Andere sehen dann, dass es geprüft ist.",
+      "noChecks": "Gerade keine Anfragen.",
+      "says": "sagt {level}",
+      "confirm": "Bestätigen",
+      "confirmAt": "Mit {level} bestätigen",
+      "dismiss": "Verwerfen"
     }
   }
 }

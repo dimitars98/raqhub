@@ -16,8 +16,8 @@ export type Area = "admin" | "member";
 
 /** On/off switches, in the order they're shown. "plan" is always on. */
 export const CATEGORIES: Record<Area, string[]> = {
-  admin: ["bookings", "lessons", "cancellations", "groups", "tournaments", "members", "staff"],
-  member: ["club_changes", "reminders", "groups", "tournaments", "membership"],
+  admin: ["bookings", "lessons", "cancellations", "groups", "matches", "tournaments", "members", "staff"],
+  member: ["club_changes", "reminders", "matches", "groups", "tournaments", "membership"],
 };
 /** Switches only the club owner sees. */
 export const OWNER_ONLY = ["staff"];
@@ -28,11 +28,24 @@ export const FILTERS: Record<Area, Record<string, string[]>> = {
     bookings: ["booking_new", "lesson_new", "booking_cancelled"],
     members: ["members_ending", "staff_joined"],
     groups: ["group_signup", "group_left", "group_offer_answer", "group_absence"],
+    matches: ["level_check"],
     tournaments: ["tournament_joined", "tournament_left"],
   },
   member: {
     bookings: ["club_booked", "club_cancelled", "reminder", "lesson_new", "booking_new", "booking_cancelled"],
     groups: ["group_cancelled", "group_added", "group_fee_due", "group_offer", "group_signup", "group_absence"],
+    matches: [
+      "match_joined",
+      "match_request",
+      "match_left",
+      "match_full",
+      "match_answer",
+      "match_removed",
+      "match_cancelled",
+      "match_keep_ask",
+      "match_released",
+      "level_confirmed",
+    ],
     tournaments: ["draw"],
     membership: ["membership_ending"],
   },
@@ -53,6 +66,17 @@ export const KIND_TONE: Record<string, Tone> = {
   group_cancelled: "amber",
   group_fee_due: "amber",
   group_added: "blue",
+  match_joined: "lime",
+  match_full: "lime",
+  match_request: "blue",
+  match_answer: "lime",
+  match_left: "amber",
+  match_removed: "amber",
+  match_cancelled: "amber",
+  match_keep_ask: "dark",
+  match_released: "amber",
+  level_check: "blue",
+  level_confirmed: "lime",
   trial_ending: "dark",
   trial_ended: "dark",
 };

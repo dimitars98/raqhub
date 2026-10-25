@@ -356,7 +356,8 @@
       "tournaments": "Turnetë",
       "staff": "Stafi",
       "notifications": "Njoftimet",
-      "groups": "Grupet"
+      "groups": "Grupet",
+      "matches": "Ndeshje të hapura"
     },
     "share": "Ndaj",
     "ownerGroup": "Kortello",
@@ -367,7 +368,8 @@
     "superAdmin": "Super admin",
     "clubAdmin": "Admin",
     "groups": "Grupet",
-    "myGroups": "Grupet e mia"
+    "myGroups": "Grupet e mia",
+    "openMatches": "Ndeshje të hapura"
   },
   "members": {
     "errors": {
@@ -1053,6 +1055,7 @@
         "Faqja juaj e rezervimeve dhe posteri QR",
         "Rezervime javore dhe kufi për mosparaqitjet",
         "Turne me short automatik",
+        "Ndeshje të hapura me nivele lojtarësh",
         "Eksportoni të dhënat në Excel"
       ]
     }
@@ -2375,7 +2378,8 @@
       "members": "Anëtarët",
       "tournaments": "Turnetë",
       "membership": "Anëtarësimi",
-      "groups": "Grupet"
+      "groups": "Grupet",
+      "matches": "Ndeshje të hapura"
     },
     "settings": {
       "title": "Çfarë merrni",
@@ -2415,6 +2419,10 @@
         "groups": {
           "title": "Grupet",
           "desc": "Regjistrime, përgjigje nga lista e pritjes dhe kush nuk mund të vijë"
+        },
+        "matches": {
+          "title": "Ndeshje të hapura",
+          "desc": "Kur një lojtar ju kërkon t'ia verifikoni nivelin"
         }
       },
       "member": {
@@ -2437,6 +2445,10 @@
         "groups": {
           "title": "Grupet",
           "desc": "Seanca të anuluara, vende të ofruara, kujtesa për pagesë"
+        },
+        "matches": {
+          "title": "Ndeshje të hapura",
+          "desc": "Lojtarë që bashkohen, largohen ose kërkojnë të hyjnë në ndeshjet tuaja"
         }
       }
     },
@@ -2529,7 +2541,279 @@
       },
       "group_fee_due": {
         "title": "Pagesa e <b>{month}</b> për {group} ende nuk është bërë"
+      },
+      "players": "{count} nga {max} lojtarë",
+      "match_joined": {
+        "title": "<b>{who}</b> u bashkua në ndeshjen tuaj"
+      },
+      "match_left": {
+        "title": "<b>{who}</b> u largua nga ndeshja juaj"
+      },
+      "match_full": {
+        "title": "Ndeshja juaj është <b>plot</b>"
+      },
+      "match_request": {
+        "title": "<b>{who}</b> (niveli {level}) kërkon të hyjë në ndeshjen tuaj",
+        "detail": "Lëreni të hyjë ose refuzojeni"
+      },
+      "match_answer": {
+        "yes": "<b>Jeni brenda</b> në ndeshje",
+        "no": "Organizatori e <b>refuzoi</b> kërkesën tuaj"
+      },
+      "match_removed": {
+        "title": "Organizatori ju <b>hoqi</b> nga një ndeshje"
+      },
+      "match_cancelled": {
+        "title": "Një ndeshje ku ishit bashkuar u <b>anulua</b>"
+      },
+      "match_keep_ask": {
+        "title": "Ndeshja juaj ka <b>{count} nga {max}</b> lojtarë. Ta mbani fushën?",
+        "detail": "Nëse nuk e mbani, i kthehet klubit më {time}"
+      },
+      "match_released": {
+        "title": "Një ndeshje <b>nuk u mbush në kohë</b>, ndaj fusha iu kthye klubit"
+      },
+      "level_check": {
+        "title": "<b>{who}</b> ju kërkon t'ia verifikoni nivelin në {sport, select, padel {padel} tennis {tenis} other {pickleball}} ({level})",
+        "detail": "Konfirmojeni në faqen Ndeshje të hapura"
+      },
+      "level_confirmed": {
+        "title": "<b>{club}</b> e verifikoi nivelin tuaj: {level}"
       }
+    }
+  },
+  "matches": {
+    "title": "Ndeshje të hapura",
+    "titleAt": "Ndeshje të hapura te {club}",
+    "subtitle": "Gjeni lojtarë në nivelin tuaj, ose hapni fushën tuaj për të tjerët.",
+    "allClubs": "Të gjitha klubet",
+    "start": "Nisni një ndeshje",
+    "sport": "Sporti",
+    "allSports": "Të gjitha",
+    "club": "Klubi",
+    "you": "Ju",
+    "youName": "{name} (ju)",
+    "checkedShort": "Verifikuar nga një klub",
+    "today": "Sot",
+    "tomorrow": "Nesër",
+    "youreIn": "Jeni brenda",
+    "asked": "Kërkuat të hyni",
+    "full": "Plot",
+    "signInToJoin": "Hyni për t'u bashkuar",
+    "joining": "Duke u bashkuar…",
+    "join": "Bashkohu",
+    "askToJoin": "Kërko të hysh",
+    "each": "për lojtar",
+    "levelRange": "Niveli {range}",
+    "competitive": "Garuese",
+    "friendly": "Miqësore",
+    "freePlace": "Vend i lirë",
+    "placesLeft": "{n, plural, one {edhe # vend} other {edhe # vende}}",
+    "outsideRange": "Niveli juaj është {level}, ndaj vendos organizatori.",
+    "membersOnlyNote": "Mund të bashkohen vetëm anëtarët e klubit.",
+    "yourLevel": "Niveli juaj në {sport}",
+    "checkedBy": "Verifikuar nga {club}",
+    "selfRated": "Vendosur nga ju",
+    "noLevelTitle": "Vendosni nivelin tuaj në {sport}",
+    "noLevelHint": "Zgjat pak sekonda dhe ju gjen lojtarët e duhur.",
+    "change": "Ndrysho",
+    "setLevel": "Vendos nivelin",
+    "atMyLevel": "Në nivelin tim",
+    "days": {
+      "any": "Çdo ditë",
+      "today": "Sot",
+      "tomorrow": "Nesër",
+      "week": "Këtë javë"
+    },
+    "yourMatches": "Ndeshjet tuaja",
+    "lookingForPlayers": "Kërkojnë lojtarë",
+    "count": "{n, plural, =0 {Asnjë ndeshje} one {# ndeshje} other {# ndeshje}}",
+    "empty": "Tani për tani nuk ka ndeshje të hapura",
+    "emptyHint": "Rezervoni një fushë dhe hapeni: lojtarët në nivelin tuaj mund të bashkohen, dhe secili paguan pjesën e vet në klub.",
+    "back": "Ndeshje të hapura",
+    "share": "Ndaj",
+    "copied": "Lidhja u kopjua",
+    "shareText": "Bashkohu në ndeshjen time: {when} te {club}",
+    "statusOpen": "Fusha është rezervuar · {n, plural, one {edhe # vend} other {edhe # vende}}",
+    "statusFull": "Plot · shihemi në fushë",
+    "statusCancelled": "Anuluar nga organizatori",
+    "statusReleased": "Nuk u mbush në kohë · fusha iu kthye klubit",
+    "statusStarted": "Kjo ndeshje ka filluar",
+    "justOpened": "Ndeshja juaj është e hapur. Ndani lidhjen në grupet tuaja për ta mbushur më shpejt.",
+    "releaseNote": "Nëse ndeshja nuk është plot deri më {time}, fusha i kthehet klubit. Do t'ju pyesim disa orë më parë.",
+    "keepingCourt": "E mbani fushën edhe nëse ndeshja nuk mbushet. Nëse nuk vjen askush tjetër, i paguani klubit të gjithë fushën.",
+    "keepCourt": "Mbaje fushën gjithsesi",
+    "dontKeep": "Le të kthehet nëse nuk mbushet",
+    "players": "Lojtarët",
+    "teamA": "Ekipi A",
+    "teamB": "Ekipi B",
+    "side1": "Lojtari 1",
+    "side2": "Lojtari 2",
+    "takePlace": "Merre këtë vend",
+    "askPlace": "Kërko këtë vend",
+    "organiser": "organizatori",
+    "remove": "Hiq",
+    "removeName": "Hiq {name}",
+    "requests": "Kërkojnë të hyjnë",
+    "requestsHint": "Niveli i tyre është jashtë intervalit që vendosët. Lërini të hyjnë nëse ju pëlqen të luani me ta.",
+    "letIn": "Lëre të hyjë",
+    "turnDown": "Refuzo",
+    "details": "Detajet",
+    "price": "Çmimi",
+    "priceValue": "{each} për lojtar · fusha {court}",
+    "payment": "Pagesa",
+    "paymentValue": "Në recepsionin e klubit",
+    "type": "Lloji",
+    "friendlyLong": "Miqësore · për qejf",
+    "competitiveLong": "Garuese · luhet për fitore",
+    "leaveUntil": "Mund të largoheni deri",
+    "leaveRule": "Mund të largoheni online deri më {time}. Pas kësaj, njoftoni organizatorin, përndryshe klubi mund ta llogarisë si mosparaqitje.",
+    "address": "Adresa",
+    "clubPhone": "Telefoni i klubit",
+    "cancelCourt": "Anulo fushën",
+    "keepIt": "Mbaje",
+    "yesCancel": "Po, anuloje",
+    "leave": "Largohu nga ndeshja",
+    "tooLateToLeave": "Është vonë për t'u larguar online. Njoftoni organizatorin.",
+    "waitingForOrganiser": "Kërkuat të hyni. Organizatori do t'ju njoftojë.",
+    "withdraw": "Tërhiqu",
+    "matchFull": "Kjo ndeshje është plot.",
+    "setLevelToJoin": "Vendosni nivelin për t'u bashkuar",
+    "joinPrice": "Bashkohu · {price} në klub",
+    "joinNote": "Lojtarët e tjerë marrin njoftim kur bashkoheni.",
+    "messages": "Mesazhet",
+    "playersOnly": "vetëm për lojtarët",
+    "noMessages": "Ende nuk ka mesazhe.",
+    "message": "Mesazh",
+    "messagePlaceholder": "Shkruajuni lojtarëve të tjerë",
+    "send": "Dërgo",
+    "chatPrivacy": "Këto mesazhe i shohin vetëm lojtarët e kësaj ndeshjeje.",
+    "noClubs": "Ende asnjë klub nuk ka ndeshje të hapura",
+    "noClubsHint": "Kur klubi juaj t'i aktivizojë, mund të nisni një këtu.",
+    "step1": "1 · Klubi dhe sporti",
+    "membersOnlyStart": "Këtu ndeshje mund të nisin vetëm anëtarët e klubit.",
+    "levelFirst": "Lojtarët e shohin pranë emrit tuaj, dhe ai vendos kush mund të bashkohet në ndeshjen tuaj.",
+    "step2": "2 · Fusha dhe ora",
+    "minutes": "{n} min",
+    "freeSlots": "Orare të lira prej {n} minutash",
+    "loadingSlots": "Po ngarkohen oraret e lira…",
+    "noSlots": "Nuk ka fusha të lira atë ditë. Provoni një ditë ose kohëzgjatje tjetër.",
+    "step3": "3 · Kush mund të bashkohet",
+    "yoursIs": "Juaji është {level}",
+    "from": "Nga",
+    "to": "Deri",
+    "lower": "{label}: më ulët",
+    "raise": "{label}: më lart",
+    "doubles": "Dyshe · 4 lojtarë",
+    "singles": "Teke · 2 lojtarë",
+    "outsideCanAsk": "Lojtarët jashtë intervalit mund të kërkojnë të hyjnë, dhe vendosni ju.",
+    "step4": "4 · Një shënim (opsional)",
+    "note": "Shënim",
+    "notePlaceholder": "p.sh. Do të sjell topa të rinj",
+    "court": "Fusha",
+    "eachAtClub": "{price} për lojtar në klub",
+    "bookedNow": "Fusha rezervohet për ju tani. Nëse ndeshja nuk mbushet disa orë para fillimit, do t'ju pyesim nëse ta mbani apo t'ia ktheni klubit.",
+    "opening": "Duke rezervuar…",
+    "bookAndOpen": "Rezervo fushën dhe hap ndeshjen",
+    "pickTime": "Zgjidhni një orë",
+    "levelTitle": "Niveli juaj",
+    "levelIntro": "Zgjidhni atë që ju përngjan më shumë. Përdoret vetëm për t'ju lidhur me lojtarë të një niveli të ngjashëm, dhe mund ta ndryshoni kurdo.",
+    "notSet": "pa vendosur",
+    "bandFromUp": "{from} e lart",
+    "bands": {
+      "starting": {
+        "name": "Sapo fillova",
+        "desc": "Disa lojëra deri tani. Ende po mësoni goditjet bazë."
+      },
+      "beginner": {
+        "name": "Fillestar",
+        "desc": "Mund ta mbani topin në lojë me ritëm të lehtë."
+      },
+      "intermediate": {
+        "name": "Mesatar",
+        "desc": "Luani çdo javë, i kontrolloni goditjet dhe dini ku të qëndroni."
+      },
+      "advanced": {
+        "name": "I avancuar",
+        "desc": "Goditje të forta dhe të larmishme. Luani në turne vendore."
+      },
+      "competition": {
+        "name": "Garues",
+        "desc": "Fitoni turne vendore ose luani në nivel kombëtar."
+      }
+    },
+    "fineTune": "Përshtatje e imët",
+    "checkHint": "Një trajner në klubin tuaj mund ta konfirmojë nivelin tuaj. Atëherë lojtarët e tjerë shohin që është verifikuar.",
+    "askCheck": "Kërko verifikim nga klubi",
+    "askCheckAt": "Kërkoji {club} ta verifikojë",
+    "checkPending": "Në pritje që {club} të verifikojë nivelin tuaj",
+    "levelSaved": "U ruajt.",
+    "saveLevel": "Ruaj nivelin {level} në {sport}",
+    "clubSection": "Ndeshje të hapura",
+    "clubSectionHint": "Lojtarë që kërkojnë partnerë në këtë klub. Bashkohuni dhe paguani pjesën tuaj në klub.",
+    "seeAll": "Shihni të gjitha dhe nisni një",
+    "errors": {
+      "notSignedIn": "Ju lutemi hyni fillimisht.",
+      "needLevel": "Fillimisht vendosni nivelin tuaj për këtë sport.",
+      "membersOnly": "Ndeshjet e hapura në këtë klub janë vetëm për anëtarët.",
+      "full": "Kjo ndeshje është tashmë plot.",
+      "already": "Jeni tashmë në këtë ndeshje.",
+      "closed": "Kjo ndeshje nuk është më e hapur.",
+      "tooLate": "Është vonë për t'u larguar online. Njoftoni organizatorin.",
+      "sportOff": "Ky klub nuk ka ndeshje të hapura për këtë sport.",
+      "levels": "Nivelet shkojnë nga 1.0 deri në 7.0.",
+      "tooManyMessages": "Kjo ndeshje ka shumë mesazhe.",
+      "notAllowed": "Këtë nuk mund ta bëni.",
+      "paused": "Rezervimet online në këtë klub janë pezulluar.",
+      "readOnly": "Llogaria është vetëm për lexim derisa të rinovohet plani.",
+      "cancelDeadline": "Klubi lejon anulimin deri në {hours} orë para fillimit. Ju lutemi telefononi klubin.",
+      "failed": "Diçka shkoi keq. Provoni përsëri."
+    },
+    "admin": {
+      "title": "Ndeshje të hapura",
+      "subtitle": "Lojtarët rezervojnë një fushë dhe e hapin për të tjerë në nivelin e tyre.",
+      "seeAsPlayer": "Shihni faqen publike",
+      "statOpened": "Të hapura",
+      "last7": "në 7 ditët e fundit",
+      "statFilled": "Të mbushura",
+      "statFilledSub": "ndeshje që morën të gjithë lojtarët",
+      "statPlayers": "Lojtarë",
+      "statPlayersSub": "lojtarë të ndryshëm në ndeshje",
+      "statReleased": "Fusha të kthyera",
+      "statReleasedSub": "sërish në shitje sepse nuk u mbushën",
+      "comingUp": "Së shpejti",
+      "next14": "14 ditët e ardhshme",
+      "none": "Ende nuk ka ndeshje të hapura të ardhshme. Lojtarët i nisin nga faqja Ndeshje të hapura.",
+      "when": "Kur",
+      "court": "Fusha",
+      "level": "Niveli",
+      "players": "Lojtarë",
+      "status": "Statusi",
+      "released": "Fusha u kthye",
+      "full": "Plot",
+      "needs": "Mungojnë {n}",
+      "kept": "fusha u mbajt",
+      "settings": "Cilësimet",
+      "enabled": "Lejo ndeshje të hapura",
+      "enabledHint": "Lojtarët mund t'i hapin rezervimet e tyre për të tjerët",
+      "sports": "Sportet",
+      "release": "Nëse ndeshja nuk mbushet, ktheje fushën",
+      "releaseOption": "{hours} orë para fillimit",
+      "releaseHint": "Organizatori pyetet disa orë më herët. Nëse nuk e mban, fusha del sërish në shitje.",
+      "who": "Kush mund të bashkohet",
+      "anyone": "Kushdo me llogari Kortello",
+      "membersOnly": "Vetëm anëtarët e klubit",
+      "save": "Ruaj",
+      "saving": "Duke ruajtur…",
+      "saved": "U ruajt.",
+      "noSports": "Zgjidhni të paktën një sport.",
+      "checks": "Verifikime niveli",
+      "checksHint": "Lojtarë që u kërkuan trajnerëve tuaj t'u konfirmojnë nivelin. Pastaj të tjerët shohin që është verifikuar.",
+      "noChecks": "Tani për tani nuk ka kërkesa.",
+      "says": "thotë {level}",
+      "confirm": "Konfirmo",
+      "confirmAt": "Konfirmo {level}",
+      "dismiss": "Hidh poshtë"
     }
   }
 }

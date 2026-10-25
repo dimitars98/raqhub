@@ -356,7 +356,8 @@
       "tournaments": "Tournois",
       "staff": "Équipe",
       "notifications": "Notifications",
-      "groups": "Groupes"
+      "groups": "Groupes",
+      "matches": "Matchs ouverts"
     },
     "share": "Partager",
     "ownerGroup": "Kortello",
@@ -367,7 +368,8 @@
     "superAdmin": "Super admin",
     "clubAdmin": "Admin",
     "groups": "Groupes",
-    "myGroups": "Mes groupes"
+    "myGroups": "Mes groupes",
+    "openMatches": "Matchs ouverts"
   },
   "members": {
     "errors": {
@@ -1053,6 +1055,7 @@
         "Votre page de réservation et affiche QR",
         "Réservations hebdomadaires et limite d’absences",
         "Tournois avec tirage automatique",
+        "Matchs ouverts avec niveaux des joueurs",
         "Export de vos données vers Excel"
       ]
     }
@@ -2375,7 +2378,8 @@
       "members": "Membres",
       "tournaments": "Tournois",
       "membership": "Adhésion",
-      "groups": "Groupes"
+      "groups": "Groupes",
+      "matches": "Matchs ouverts"
     },
     "settings": {
       "title": "Ce que vous recevez",
@@ -2415,6 +2419,10 @@
         "groups": {
           "title": "Groupes",
           "desc": "Inscriptions, réponses de la liste d'attente et absences prévues"
+        },
+        "matches": {
+          "title": "Matchs ouverts",
+          "desc": "Quand un joueur vous demande de vérifier son niveau"
         }
       },
       "member": {
@@ -2437,6 +2445,10 @@
         "groups": {
           "title": "Groupes",
           "desc": "Séances annulées, places proposées, rappels de paiement"
+        },
+        "matches": {
+          "title": "Matchs ouverts",
+          "desc": "Les joueurs qui rejoignent, quittent ou demandent à jouer dans vos matchs"
         }
       }
     },
@@ -2529,7 +2541,279 @@
       },
       "group_fee_due": {
         "title": "La cotisation de <b>{month}</b> pour {group} n'est pas encore payée"
+      },
+      "players": "{count} joueurs sur {max}",
+      "match_joined": {
+        "title": "<b>{who}</b> a rejoint votre match"
+      },
+      "match_left": {
+        "title": "<b>{who}</b> a quitté votre match"
+      },
+      "match_full": {
+        "title": "Votre match est <b>complet</b>"
+      },
+      "match_request": {
+        "title": "<b>{who}</b> (niveau {level}) demande à jouer dans votre match",
+        "detail": "Acceptez ou refusez"
+      },
+      "match_answer": {
+        "yes": "Vous êtes <b>dans le match</b>",
+        "no": "L'organisateur a <b>refusé</b> votre demande"
+      },
+      "match_removed": {
+        "title": "L'organisateur vous a <b>retiré</b> d'un match"
+      },
+      "match_cancelled": {
+        "title": "Un match que vous aviez rejoint est <b>annulé</b>"
+      },
+      "match_keep_ask": {
+        "title": "Votre match a <b>{count} joueurs sur {max}</b>. Garder le terrain ?",
+        "detail": "Si vous ne le gardez pas, il revient au club le {time}"
+      },
+      "match_released": {
+        "title": "Un match <b>n'a pas été complet à temps</b>, le terrain est revenu au club"
+      },
+      "level_check": {
+        "title": "<b>{who}</b> vous demande de vérifier son niveau en {sport, select, padel {padel} tennis {tennis} other {pickleball}} ({level})",
+        "detail": "Confirmez-le sur la page Matchs ouverts"
+      },
+      "level_confirmed": {
+        "title": "<b>{club}</b> a vérifié votre niveau : {level}"
       }
+    }
+  },
+  "matches": {
+    "title": "Matchs ouverts",
+    "titleAt": "Matchs ouverts à {club}",
+    "subtitle": "Trouvez des joueurs de votre niveau, ou ouvrez votre terrain à d'autres.",
+    "allClubs": "Tous les clubs",
+    "start": "Lancer un match",
+    "sport": "Sport",
+    "allSports": "Tous",
+    "club": "Club",
+    "you": "Vous",
+    "youName": "{name} (vous)",
+    "checkedShort": "Vérifié par un club",
+    "today": "Aujourd'hui",
+    "tomorrow": "Demain",
+    "youreIn": "Vous jouez",
+    "asked": "Demande envoyée",
+    "full": "Complet",
+    "signInToJoin": "Connectez-vous pour jouer",
+    "joining": "Envoi…",
+    "join": "Rejoindre",
+    "askToJoin": "Demander à jouer",
+    "each": "par personne",
+    "levelRange": "Niveau {range}",
+    "competitive": "Compétition",
+    "friendly": "Amical",
+    "freePlace": "Place libre",
+    "placesLeft": "{n, plural, one {encore # place} other {encore # places}}",
+    "outsideRange": "Votre niveau est {level}, l'organisateur décide donc.",
+    "membersOnlyNote": "Seuls les membres du club peuvent rejoindre.",
+    "yourLevel": "Votre niveau en {sport}",
+    "checkedBy": "Vérifié par {club}",
+    "selfRated": "Indiqué par vous",
+    "noLevelTitle": "Indiquez votre niveau en {sport}",
+    "noLevelHint": "Cela prend quelques secondes et vous trouve les bons joueurs.",
+    "change": "Modifier",
+    "setLevel": "Indiquer mon niveau",
+    "atMyLevel": "À mon niveau",
+    "days": {
+      "any": "Tous les jours",
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain",
+      "week": "Cette semaine"
+    },
+    "yourMatches": "Vos matchs",
+    "lookingForPlayers": "Cherchent des joueurs",
+    "count": "{n, plural, =0 {Aucun match} one {# match} other {# matchs}}",
+    "empty": "Aucun match ouvert pour le moment",
+    "emptyHint": "Réservez un terrain et ouvrez-le : les joueurs de votre niveau peuvent rejoindre, et chacun paie sa part au club.",
+    "back": "Matchs ouverts",
+    "share": "Partager",
+    "copied": "Lien copié",
+    "shareText": "Rejoins mon match : {when} à {club}",
+    "statusOpen": "Terrain réservé · {n, plural, one {encore # place} other {encore # places}}",
+    "statusFull": "Complet · à bientôt sur le terrain",
+    "statusCancelled": "Annulé par l'organisateur",
+    "statusReleased": "Pas complet à temps · le terrain est revenu au club",
+    "statusStarted": "Ce match a commencé",
+    "justOpened": "Votre match est ouvert. Partagez le lien dans vos groupes pour le remplir plus vite.",
+    "releaseNote": "Si le match n'est pas complet le {time}, le terrain revient au club. Nous vous demanderons quelques heures avant.",
+    "keepingCourt": "Vous gardez le terrain même si le match n'est pas complet. Si personne d'autre ne vient, vous payez le terrain entier au club.",
+    "keepCourt": "Garder le terrain quand même",
+    "dontKeep": "Le rendre s'il n'est pas complet",
+    "players": "Joueurs",
+    "teamA": "Équipe A",
+    "teamB": "Équipe B",
+    "side1": "Joueur 1",
+    "side2": "Joueur 2",
+    "takePlace": "Prendre cette place",
+    "askPlace": "Demander cette place",
+    "organiser": "organisateur",
+    "remove": "Retirer",
+    "removeName": "Retirer {name}",
+    "requests": "Demandent à jouer",
+    "requestsHint": "Leur niveau est hors de la fourchette choisie. Acceptez-les si vous êtes d'accord pour jouer avec eux.",
+    "letIn": "Accepter",
+    "turnDown": "Refuser",
+    "details": "Détails",
+    "price": "Prix",
+    "priceValue": "{each} par personne · terrain {court}",
+    "payment": "Paiement",
+    "paymentValue": "À l'accueil du club",
+    "type": "Type",
+    "friendlyLong": "Amical · pour le plaisir",
+    "competitiveLong": "Compétition · on joue pour gagner",
+    "leaveUntil": "Désistement jusqu'au",
+    "leaveRule": "Vous pouvez vous désister en ligne jusqu'au {time}. Ensuite, prévenez l'organisateur, sinon le club peut le compter comme une absence.",
+    "address": "Adresse",
+    "clubPhone": "Téléphone du club",
+    "cancelCourt": "Annuler le terrain",
+    "keepIt": "Le garder",
+    "yesCancel": "Oui, annuler",
+    "leave": "Quitter ce match",
+    "tooLateToLeave": "Il est trop tard pour se désister en ligne. Prévenez l'organisateur.",
+    "waitingForOrganiser": "Vous avez demandé à jouer. L'organisateur vous répondra.",
+    "withdraw": "Retirer ma demande",
+    "matchFull": "Ce match est complet.",
+    "setLevelToJoin": "Indiquez votre niveau pour jouer",
+    "joinPrice": "Rejoindre · {price} au club",
+    "joinNote": "Les autres joueurs reçoivent une notification quand vous rejoignez.",
+    "messages": "Messages",
+    "playersOnly": "réservé aux joueurs",
+    "noMessages": "Pas encore de messages.",
+    "message": "Message",
+    "messagePlaceholder": "Écrivez aux autres joueurs",
+    "send": "Envoyer",
+    "chatPrivacy": "Seuls les joueurs de ce match voient ces messages.",
+    "noClubs": "Aucun club ne propose encore de matchs ouverts",
+    "noClubsHint": "Quand votre club les activera, vous pourrez en lancer un ici.",
+    "step1": "1 · Club et sport",
+    "membersOnlyStart": "Ici, seuls les membres du club peuvent lancer des matchs.",
+    "levelFirst": "Les joueurs le voient à côté de votre nom, et il décide qui peut rejoindre votre match.",
+    "step2": "2 · Terrain et horaire",
+    "minutes": "{n} min",
+    "freeSlots": "Créneaux libres de {n} minutes",
+    "loadingSlots": "Chargement des créneaux libres…",
+    "noSlots": "Aucun terrain libre ce jour-là. Essayez un autre jour ou une autre durée.",
+    "step3": "3 · Qui peut rejoindre",
+    "yoursIs": "Le vôtre : {level}",
+    "from": "De",
+    "to": "À",
+    "lower": "{label} : plus bas",
+    "raise": "{label} : plus haut",
+    "doubles": "Double · 4 joueurs",
+    "singles": "Simple · 2 joueurs",
+    "outsideCanAsk": "Les joueurs hors de la fourchette peuvent demander à jouer, et vous décidez.",
+    "step4": "4 · Un mot (facultatif)",
+    "note": "Note",
+    "notePlaceholder": "ex. J'apporte des balles neuves",
+    "court": "Terrain",
+    "eachAtClub": "{price} par personne au club",
+    "bookedNow": "Le terrain est réservé pour vous dès maintenant. Si le match n'est pas complet quelques heures avant, nous vous demanderons s'il faut le garder ou le rendre au club.",
+    "opening": "Réservation…",
+    "bookAndOpen": "Réserver le terrain et ouvrir le match",
+    "pickTime": "Choisissez un horaire",
+    "levelTitle": "Votre niveau",
+    "levelIntro": "Choisissez ce qui vous ressemble le plus. Cela sert seulement à vous associer à des joueurs de niveau proche, et vous pouvez le changer à tout moment.",
+    "notSet": "non indiqué",
+    "bandFromUp": "{from} et plus",
+    "bands": {
+      "starting": {
+        "name": "Tout débutant",
+        "desc": "Quelques parties jusqu'ici. Vous apprenez encore les coups de base."
+      },
+      "beginner": {
+        "name": "Débutant",
+        "desc": "Vous tenez un échange à rythme tranquille."
+      },
+      "intermediate": {
+        "name": "Intermédiaire",
+        "desc": "Vous jouez chaque semaine, contrôlez vos coups et savez où vous placer."
+      },
+      "advanced": {
+        "name": "Confirmé",
+        "desc": "Des coups solides et variés. Vous jouez des tournois locaux."
+      },
+      "competition": {
+        "name": "Compétiteur",
+        "desc": "Vous gagnez des tournois locaux ou jouez au niveau national."
+      }
+    },
+    "fineTune": "Ajuster",
+    "checkHint": "Un entraîneur de votre club peut confirmer votre niveau. Les autres joueurs voient alors qu'il a été vérifié.",
+    "askCheck": "Demander une vérification au club",
+    "askCheckAt": "Demander à {club} de le vérifier",
+    "checkPending": "En attente de la vérification par {club}",
+    "levelSaved": "Enregistré.",
+    "saveLevel": "Enregistrer le niveau {level} en {sport}",
+    "clubSection": "Matchs ouverts",
+    "clubSectionHint": "Des joueurs qui cherchent des partenaires dans ce club. Rejoignez-en un et payez votre part au club.",
+    "seeAll": "Tout voir et en lancer un",
+    "errors": {
+      "notSignedIn": "Veuillez d'abord vous connecter.",
+      "needLevel": "Indiquez d'abord votre niveau pour ce sport.",
+      "membersOnly": "Les matchs ouverts de ce club sont réservés aux membres.",
+      "full": "Ce match est déjà complet.",
+      "already": "Vous êtes déjà dans ce match.",
+      "closed": "Ce match n'est plus ouvert.",
+      "tooLate": "Il est trop tard pour se désister en ligne. Prévenez l'organisateur.",
+      "sportOff": "Ce club ne propose pas de matchs ouverts pour ce sport.",
+      "levels": "Les niveaux vont de 1.0 à 7.0.",
+      "tooManyMessages": "Ce match a trop de messages.",
+      "notAllowed": "Vous ne pouvez pas faire cela.",
+      "paused": "Les réservations en ligne sont suspendues dans ce club.",
+      "readOnly": "Le compte est en lecture seule jusqu'au renouvellement de la formule.",
+      "cancelDeadline": "Le club n'autorise l'annulation que jusqu'à {hours} heures avant le début. Veuillez appeler le club.",
+      "failed": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "admin": {
+      "title": "Matchs ouverts",
+      "subtitle": "Les joueurs réservent un terrain et l'ouvrent à d'autres de leur niveau.",
+      "seeAsPlayer": "Voir votre page publique",
+      "statOpened": "Ouverts",
+      "last7": "ces 7 derniers jours",
+      "statFilled": "Complets",
+      "statFilledSub": "matchs qui ont eu tous leurs joueurs",
+      "statPlayers": "Joueurs",
+      "statPlayersSub": "joueurs différents dans des matchs",
+      "statReleased": "Terrains rendus",
+      "statReleasedSub": "remis en vente faute d'être complets",
+      "comingUp": "À venir",
+      "next14": "14 prochains jours",
+      "none": "Pas encore de match ouvert à venir. Les joueurs les lancent depuis la page Matchs ouverts.",
+      "when": "Quand",
+      "court": "Terrain",
+      "level": "Niveau",
+      "players": "Joueurs",
+      "status": "Statut",
+      "released": "Terrain rendu",
+      "full": "Complet",
+      "needs": "Manque {n}",
+      "kept": "terrain gardé",
+      "settings": "Réglages",
+      "enabled": "Autoriser les matchs ouverts",
+      "enabledHint": "Les joueurs peuvent ouvrir leurs réservations à d'autres",
+      "sports": "Sports",
+      "release": "Si un match n'est pas complet, rendre le terrain",
+      "releaseOption": "{hours} heures avant le début",
+      "releaseHint": "L'organisateur est consulté quelques heures plus tôt. S'il ne le garde pas, le terrain est remis en vente.",
+      "who": "Qui peut rejoindre",
+      "anyone": "Toute personne avec un compte Kortello",
+      "membersOnly": "Membres du club uniquement",
+      "save": "Enregistrer",
+      "saving": "Enregistrement…",
+      "saved": "Enregistré.",
+      "noSports": "Choisissez au moins un sport.",
+      "checks": "Vérifications de niveau",
+      "checksHint": "Des joueurs ont demandé à vos entraîneurs de confirmer leur niveau. Les autres voient ensuite qu'il a été vérifié.",
+      "noChecks": "Aucune demande pour le moment.",
+      "says": "indique {level}",
+      "confirm": "Confirmer",
+      "confirmAt": "Confirmer à {level}",
+      "dismiss": "Ignorer"
     }
   }
 }

@@ -356,7 +356,8 @@
       "tournaments": "Tournaments",
       "staff": "Staff",
       "notifications": "Notifications",
-      "groups": "Groups"
+      "groups": "Groups",
+      "matches": "Open matches"
     },
     "share": "Share",
     "ownerGroup": "Kortello",
@@ -367,7 +368,8 @@
     "superAdmin": "Super admin",
     "clubAdmin": "Admin",
     "groups": "Groups",
-    "myGroups": "My groups"
+    "myGroups": "My groups",
+    "openMatches": "Open matches"
   },
   "members": {
     "errors": {
@@ -1053,6 +1055,7 @@
         "Your booking page and QR poster",
         "Weekly bookings and no-show limits",
         "Tournaments with automatic draws",
+        "Open matches with player levels",
         "Export your data to Excel"
       ]
     }
@@ -2375,7 +2378,8 @@
       "members": "Members",
       "tournaments": "Tournaments",
       "membership": "Membership",
-      "groups": "Groups"
+      "groups": "Groups",
+      "matches": "Open matches"
     },
     "settings": {
       "title": "What you get",
@@ -2415,6 +2419,10 @@
         "groups": {
           "title": "Groups",
           "desc": "Sign-ups, answers from the waiting list, and who can't come"
+        },
+        "matches": {
+          "title": "Open matches",
+          "desc": "When a player asks you to check their level"
         }
       },
       "member": {
@@ -2437,6 +2445,10 @@
         "groups": {
           "title": "Groups",
           "desc": "Cancelled sessions, places offered, fee reminders"
+        },
+        "matches": {
+          "title": "Open matches",
+          "desc": "Players joining, leaving and asking to join your matches"
         }
       }
     },
@@ -2529,7 +2541,279 @@
       },
       "group_fee_due": {
         "title": "The <b>{month}</b> fee for {group} isn't paid yet"
+      },
+      "players": "{count} of {max} players",
+      "match_joined": {
+        "title": "<b>{who}</b> joined your match"
+      },
+      "match_left": {
+        "title": "<b>{who}</b> left your match"
+      },
+      "match_full": {
+        "title": "Your match is <b>full</b>"
+      },
+      "match_request": {
+        "title": "<b>{who}</b> (level {level}) asked to join your match",
+        "detail": "Let them in or turn them down"
+      },
+      "match_answer": {
+        "yes": "You're <b>in the match</b>",
+        "no": "The organiser <b>turned down</b> your request"
+      },
+      "match_removed": {
+        "title": "The organiser <b>took you off</b> a match"
+      },
+      "match_cancelled": {
+        "title": "A match you joined was <b>cancelled</b>"
+      },
+      "match_keep_ask": {
+        "title": "Your match has <b>{count} of {max}</b> players. Keep the court?",
+        "detail": "If you don't keep it, it goes back to the club at {time}"
+      },
+      "match_released": {
+        "title": "A match <b>wasn't full in time</b>, so the court went back to the club"
+      },
+      "level_check": {
+        "title": "<b>{who}</b> asks you to check their {sport, select, padel {padel} tennis {tennis} other {pickleball}} level ({level})",
+        "detail": "Confirm it on the Open matches page"
+      },
+      "level_confirmed": {
+        "title": "<b>{club}</b> checked your level: {level}"
       }
+    }
+  },
+  "matches": {
+    "title": "Open matches",
+    "titleAt": "Open matches at {club}",
+    "subtitle": "Find players at your level, or open your court to others.",
+    "allClubs": "All clubs",
+    "start": "Start a match",
+    "sport": "Sport",
+    "allSports": "All",
+    "club": "Club",
+    "you": "You",
+    "youName": "{name} (you)",
+    "checkedShort": "Checked by a club",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "youreIn": "You're in",
+    "asked": "Asked to join",
+    "full": "Full",
+    "signInToJoin": "Sign in to join",
+    "joining": "Joining…",
+    "join": "Join",
+    "askToJoin": "Ask to join",
+    "each": "each",
+    "levelRange": "Level {range}",
+    "competitive": "Competitive",
+    "friendly": "Friendly",
+    "freePlace": "Free place",
+    "placesLeft": "{n, plural, one {# place left} other {# places left}}",
+    "outsideRange": "Your level is {level}, so the organiser decides.",
+    "membersOnlyNote": "Only the club's members can join.",
+    "yourLevel": "Your {sport} level",
+    "checkedBy": "Checked by {club}",
+    "selfRated": "Set by you",
+    "noLevelTitle": "Set your {sport} level",
+    "noLevelHint": "It takes a few seconds and finds you the right players.",
+    "change": "Change",
+    "setLevel": "Set level",
+    "atMyLevel": "At my level",
+    "days": {
+      "any": "Any day",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "week": "This week"
+    },
+    "yourMatches": "Your matches",
+    "lookingForPlayers": "Looking for players",
+    "count": "{n, plural, =0 {No matches} one {# match} other {# matches}}",
+    "empty": "No open matches right now",
+    "emptyHint": "Book a court and open it: players at your level can join, and everyone pays their share at the club.",
+    "back": "Open matches",
+    "share": "Share",
+    "copied": "Link copied",
+    "shareText": "Join my match: {when} at {club}",
+    "statusOpen": "Court booked · {n, plural, one {# place left} other {# places left}}",
+    "statusFull": "Full · see you on court",
+    "statusCancelled": "Cancelled by the organiser",
+    "statusReleased": "Not full in time · the court went back to the club",
+    "statusStarted": "This match has started",
+    "justOpened": "Your match is open. Share the link in your group chats to fill it faster.",
+    "releaseNote": "If the match isn't full by {time}, the court goes back to the club. We'll ask you a few hours before.",
+    "keepingCourt": "You're keeping the court even if the match isn't full. You pay the club for the whole court if nobody else comes.",
+    "keepCourt": "Keep the court anyway",
+    "dontKeep": "Let it go back if not full",
+    "players": "Players",
+    "teamA": "Team A",
+    "teamB": "Team B",
+    "side1": "Player 1",
+    "side2": "Player 2",
+    "takePlace": "Take this place",
+    "askPlace": "Ask for this place",
+    "organiser": "organiser",
+    "remove": "Remove",
+    "removeName": "Remove {name}",
+    "requests": "Asking to join",
+    "requestsHint": "Their level is outside the range you set. Let them in if you're happy to play with them.",
+    "letIn": "Let in",
+    "turnDown": "Turn down",
+    "details": "Details",
+    "price": "Price",
+    "priceValue": "{each} each · court {court}",
+    "payment": "Payment",
+    "paymentValue": "At the club reception",
+    "type": "Type",
+    "friendlyLong": "Friendly · just for fun",
+    "competitiveLong": "Competitive · play to win",
+    "leaveUntil": "Leave until",
+    "leaveRule": "You can leave online until {time}. After that, tell the organiser, or the club may count it as a no-show.",
+    "address": "Address",
+    "clubPhone": "Club phone",
+    "cancelCourt": "Cancel the court",
+    "keepIt": "Keep it",
+    "yesCancel": "Yes, cancel",
+    "leave": "Leave this match",
+    "tooLateToLeave": "It's too late to leave online. Please tell the organiser.",
+    "waitingForOrganiser": "You asked to join. The organiser will let you know.",
+    "withdraw": "Withdraw",
+    "matchFull": "This match is full.",
+    "setLevelToJoin": "Set your level to join",
+    "joinPrice": "Join · {price} at the club",
+    "joinNote": "The other players get a notification when you join.",
+    "messages": "Messages",
+    "playersOnly": "players only",
+    "noMessages": "No messages yet.",
+    "message": "Message",
+    "messagePlaceholder": "Write to the other players",
+    "send": "Send",
+    "chatPrivacy": "Only the players in this match see these messages.",
+    "noClubs": "No club takes open matches yet",
+    "noClubsHint": "When your club turns them on, you can start one here.",
+    "step1": "1 · Club and sport",
+    "membersOnlyStart": "Only members of this club can start matches here.",
+    "levelFirst": "Players see it next to your name, and it decides who can join your match.",
+    "step2": "2 · Court and time",
+    "minutes": "{n} min",
+    "freeSlots": "Free {n}-minute slots",
+    "loadingSlots": "Loading free times…",
+    "noSlots": "No free courts that day. Try another day or length.",
+    "step3": "3 · Who can join",
+    "yoursIs": "Yours is {level}",
+    "from": "From",
+    "to": "To",
+    "lower": "{label}: lower",
+    "raise": "{label}: higher",
+    "doubles": "Doubles · 4 players",
+    "singles": "Singles · 2 players",
+    "outsideCanAsk": "Players outside the range can ask to join, and you decide.",
+    "step4": "4 · A note (optional)",
+    "note": "Note",
+    "notePlaceholder": "e.g. I'll bring new balls",
+    "court": "Court",
+    "eachAtClub": "{price} each at the club",
+    "bookedNow": "The court is booked for you now. If the match isn't full a few hours before, we'll ask whether to keep it or give it back to the club.",
+    "opening": "Booking…",
+    "bookAndOpen": "Book the court and open the match",
+    "pickTime": "Pick a time",
+    "levelTitle": "Your level",
+    "levelIntro": "Pick what sounds most like you. It's only used to match you with players at a similar level, and you can change it any time.",
+    "notSet": "not set",
+    "bandFromUp": "{from} and up",
+    "bands": {
+      "starting": {
+        "name": "Just starting",
+        "desc": "A few games so far. Still learning the basic shots."
+      },
+      "beginner": {
+        "name": "Beginner",
+        "desc": "You can keep a rally going at an easy pace."
+      },
+      "intermediate": {
+        "name": "Intermediate",
+        "desc": "You play every week, control your shots and know where to stand."
+      },
+      "advanced": {
+        "name": "Advanced",
+        "desc": "Strong, varied shots. You play local tournaments."
+      },
+      "competition": {
+        "name": "Competition",
+        "desc": "You win local tournaments or play nationally."
+      }
+    },
+    "fineTune": "Fine-tune",
+    "checkHint": "A coach at your club can confirm your level. Other players then see that it was checked.",
+    "askCheck": "Ask the club to check",
+    "askCheckAt": "Ask {club} to check it",
+    "checkPending": "Waiting for {club} to check your level",
+    "levelSaved": "Saved.",
+    "saveLevel": "Save {sport} level {level}",
+    "clubSection": "Open matches",
+    "clubSectionHint": "Players looking for partners at this club. Join one and pay your share at the club.",
+    "seeAll": "See all and start one",
+    "errors": {
+      "notSignedIn": "Please sign in first.",
+      "needLevel": "Set your level for this sport first.",
+      "membersOnly": "Open matches at this club are for members only.",
+      "full": "This match is already full.",
+      "already": "You're already in this match.",
+      "closed": "This match is no longer open.",
+      "tooLate": "It's too late to leave online. Please tell the organiser.",
+      "sportOff": "This club doesn't take open matches for this sport.",
+      "levels": "Levels go from 1.0 to 7.0.",
+      "tooManyMessages": "This match has too many messages.",
+      "notAllowed": "You can't do that.",
+      "paused": "Online booking is paused at this club.",
+      "readOnly": "The account is read-only until the plan is renewed.",
+      "cancelDeadline": "The club only allows cancelling up to {hours} hours before the start. Please call the club.",
+      "failed": "Something went wrong. Please try again."
+    },
+    "admin": {
+      "title": "Open matches",
+      "subtitle": "Players book a court and open it to others at their level.",
+      "seeAsPlayer": "See your public page",
+      "statOpened": "Opened",
+      "last7": "in the last 7 days",
+      "statFilled": "Filled",
+      "statFilledSub": "matches that got all their players",
+      "statPlayers": "Players",
+      "statPlayersSub": "different players in matches",
+      "statReleased": "Courts given back",
+      "statReleasedSub": "back on sale because they weren't full",
+      "comingUp": "Coming up",
+      "next14": "Next 14 days",
+      "none": "No open matches coming up yet. Players start them from the Open matches page.",
+      "when": "When",
+      "court": "Court",
+      "level": "Level",
+      "players": "Players",
+      "status": "Status",
+      "released": "Court given back",
+      "full": "Full",
+      "needs": "Needs {n}",
+      "kept": "court kept",
+      "settings": "Settings",
+      "enabled": "Allow open matches",
+      "enabledHint": "Players can open their bookings to others",
+      "sports": "Sports",
+      "release": "If a match isn't full, give the court back",
+      "releaseOption": "{hours} hours before the start",
+      "releaseHint": "The organiser is asked a few hours earlier. If they don't keep it, the court goes on sale again.",
+      "who": "Who can join",
+      "anyone": "Anyone with a Kortello account",
+      "membersOnly": "Club members only",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved.",
+      "noSports": "Pick at least one sport.",
+      "checks": "Level checks",
+      "checksHint": "Players who asked your coaches to confirm their level. Others then see it was checked.",
+      "noChecks": "No requests right now.",
+      "says": "says {level}",
+      "confirm": "Confirm",
+      "confirmAt": "Confirm at {level}",
+      "dismiss": "Dismiss"
     }
   }
 }

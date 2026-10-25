@@ -356,7 +356,8 @@
       "tournaments": "Turniri",
       "staff": "Osoblje",
       "notifications": "Obaveštenja",
-      "groups": "Grupe"
+      "groups": "Grupe",
+      "matches": "Otvoreni mečevi"
     },
     "share": "Podeli",
     "ownerGroup": "Kortello",
@@ -367,7 +368,8 @@
     "superAdmin": "Super admin",
     "clubAdmin": "Admin",
     "groups": "Grupe",
-    "myGroups": "Moje grupe"
+    "myGroups": "Moje grupe",
+    "openMatches": "Otvoreni mečevi"
   },
   "members": {
     "errors": {
@@ -1053,6 +1055,7 @@
         "Vaša stranica za rezervacije i QR poster",
         "Nedeljne rezervacije i ograničenje nedolazaka",
         "Turniri sa automatskim žrebom",
+        "Otvoreni mečevi sa nivoima igrača",
         "Izvoz vaših podataka u Excel"
       ]
     }
@@ -2375,7 +2378,8 @@
       "members": "Članovi",
       "tournaments": "Turniri",
       "membership": "Članstvo",
-      "groups": "Grupe"
+      "groups": "Grupe",
+      "matches": "Otvoreni mečevi"
     },
     "settings": {
       "title": "Šta dobijate",
@@ -2415,6 +2419,10 @@
         "groups": {
           "title": "Grupe",
           "desc": "Prijave, odgovori sa liste čekanja i najavljeni izostanci"
+        },
+        "matches": {
+          "title": "Otvoreni mečevi",
+          "desc": "Kada vas igrač zamoli da mu proverite nivo"
         }
       },
       "member": {
@@ -2437,6 +2445,10 @@
         "groups": {
           "title": "Grupe",
           "desc": "Otkazani treninzi, ponuđena mesta, podsetnici za plaćanje"
+        },
+        "matches": {
+          "title": "Otvoreni mečevi",
+          "desc": "Igrači koji se pridružuju, izlaze ili traže mesto u vašim mečevima"
         }
       }
     },
@@ -2529,7 +2541,279 @@
       },
       "group_fee_due": {
         "title": "Članarina za <b>{month}</b> u grupi {group} još nije plaćena"
+      },
+      "players": "{count} od {max} igrača",
+      "match_joined": {
+        "title": "<b>{who}</b> se pridružio vašem meču"
+      },
+      "match_left": {
+        "title": "<b>{who}</b> je izašao iz vašeg meča"
+      },
+      "match_full": {
+        "title": "Vaš meč je <b>popunjen</b>"
+      },
+      "match_request": {
+        "title": "<b>{who}</b> (nivo {level}) traži mesto u vašem meču",
+        "detail": "Pustite ga ili odbijte"
+      },
+      "match_answer": {
+        "yes": "<b>Igrate</b> u meču",
+        "no": "Organizator je <b>odbio</b> vaš zahtev"
+      },
+      "match_removed": {
+        "title": "Organizator vas je <b>uklonio</b> iz meča"
+      },
+      "match_cancelled": {
+        "title": "Meč kom ste se pridružili je <b>otkazan</b>"
+      },
+      "match_keep_ask": {
+        "title": "Vaš meč ima <b>{count} od {max}</b> igrača. Zadržati teren?",
+        "detail": "Ako ga ne zadržite, vraća se klubu ({time})"
+      },
+      "match_released": {
+        "title": "Jedan meč <b>nije popunjen na vreme</b>, pa je teren vraćen klubu"
+      },
+      "level_check": {
+        "title": "<b>{who}</b> vas moli da proverite nivo u sportu {sport, select, padel {padel} tennis {tenis} other {pikleball}} ({level})",
+        "detail": "Potvrdite ga na stranici Otvoreni mečevi"
+      },
+      "level_confirmed": {
+        "title": "<b>{club}</b> je proverio vaš nivo: {level}"
       }
+    }
+  },
+  "matches": {
+    "title": "Otvoreni mečevi",
+    "titleAt": "Otvoreni mečevi u klubu {club}",
+    "subtitle": "Pronađite igrače na vašem nivou ili otvorite svoj teren drugima.",
+    "allClubs": "Svi klubovi",
+    "start": "Započnite meč",
+    "sport": "Sport",
+    "allSports": "Svi",
+    "club": "Klub",
+    "you": "Vi",
+    "youName": "{name} (vi)",
+    "checkedShort": "Potvrdio klub",
+    "today": "Danas",
+    "tomorrow": "Sutra",
+    "youreIn": "Igrate",
+    "asked": "Zahtev poslat",
+    "full": "Popunjeno",
+    "signInToJoin": "Prijavite se da biste igrali",
+    "joining": "Šalje se…",
+    "join": "Pridruži se",
+    "askToJoin": "Zatraži mesto",
+    "each": "po igraču",
+    "levelRange": "Nivo {range}",
+    "competitive": "Takmičarski",
+    "friendly": "Prijateljski",
+    "freePlace": "Slobodno mesto",
+    "placesLeft": "{n, plural, one {još # mesto} few {još # mesta} other {još # mesta}}",
+    "outsideRange": "Vaš nivo je {level}, pa odlučuje organizator.",
+    "membersOnlyNote": "Mogu da se pridruže samo članovi kluba.",
+    "yourLevel": "Vaš nivo u sportu {sport}",
+    "checkedBy": "Potvrdio {club}",
+    "selfRated": "Postavili ste sami",
+    "noLevelTitle": "Postavite svoj nivo u sportu {sport}",
+    "noLevelHint": "Traje nekoliko sekundi i pronalazi vam prave igrače.",
+    "change": "Promeni",
+    "setLevel": "Postavi nivo",
+    "atMyLevel": "Na mom nivou",
+    "days": {
+      "any": "Svaki dan",
+      "today": "Danas",
+      "tomorrow": "Sutra",
+      "week": "Ove nedelje"
+    },
+    "yourMatches": "Vaši mečevi",
+    "lookingForPlayers": "Traže igrače",
+    "count": "{n, plural, =0 {Nema mečeva} one {# meč} few {# meča} other {# mečeva}}",
+    "empty": "Trenutno nema otvorenih mečeva",
+    "emptyHint": "Rezervišite teren i otvorite ga: igrači na vašem nivou mogu da se pridruže, a svako plaća svoj deo u klubu.",
+    "back": "Otvoreni mečevi",
+    "share": "Podeli",
+    "copied": "Link je kopiran",
+    "shareText": "Pridruži se mom meču: {when} u klubu {club}",
+    "statusOpen": "Teren je rezervisan · {n, plural, one {još # mesto} few {još # mesta} other {još # mesta}}",
+    "statusFull": "Popunjeno · vidimo se na terenu",
+    "statusCancelled": "Otkazao organizator",
+    "statusReleased": "Nije popunjen na vreme · teren je vraćen klubu",
+    "statusStarted": "Ovaj meč je počeo",
+    "justOpened": "Vaš meč je otvoren. Podelite link u svojim grupama da se brže popuni.",
+    "releaseNote": "Ako meč ne bude popunjen do {time}, teren se vraća klubu. Pitaćemo vas nekoliko sati ranije.",
+    "keepingCourt": "Zadržavate teren i ako meč ne bude popunjen. Ako niko drugi ne dođe, klubu plaćate ceo teren.",
+    "keepCourt": "Ipak zadrži teren",
+    "dontKeep": "Neka se vrati ako nije popunjen",
+    "players": "Igrači",
+    "teamA": "Tim A",
+    "teamB": "Tim B",
+    "side1": "Igrač 1",
+    "side2": "Igrač 2",
+    "takePlace": "Uzmi ovo mesto",
+    "askPlace": "Zatraži ovo mesto",
+    "organiser": "organizator",
+    "remove": "Ukloni",
+    "removeName": "Ukloni: {name}",
+    "requests": "Traže da uđu",
+    "requestsHint": "Njihov nivo je van opsega koji ste postavili. Pustite ih ako vam odgovara da igrate s njima.",
+    "letIn": "Pusti",
+    "turnDown": "Odbij",
+    "details": "Detalji",
+    "price": "Cena",
+    "priceValue": "{each} po igraču · teren {court}",
+    "payment": "Plaćanje",
+    "paymentValue": "Na recepciji kluba",
+    "type": "Vrsta",
+    "friendlyLong": "Prijateljski · iz zabave",
+    "competitiveLong": "Takmičarski · igra se za pobedu",
+    "leaveUntil": "Izlazak do",
+    "leaveRule": "Možete da izađete onlajn do {time}. Posle toga javite organizatoru, inače klub to može da računa kao nedolazak.",
+    "address": "Adresa",
+    "clubPhone": "Telefon kluba",
+    "cancelCourt": "Otkaži teren",
+    "keepIt": "Zadrži",
+    "yesCancel": "Da, otkaži",
+    "leave": "Izađi iz meča",
+    "tooLateToLeave": "Prekasno je za izlazak onlajn. Javite organizatoru.",
+    "waitingForOrganiser": "Zatražili ste mesto. Organizator će vam javiti.",
+    "withdraw": "Povuci zahtev",
+    "matchFull": "Ovaj meč je popunjen.",
+    "setLevelToJoin": "Postavite nivo da biste se pridružili",
+    "joinPrice": "Pridruži se · {price} u klubu",
+    "joinNote": "Ostali igrači dobijaju obaveštenje kada se pridružite.",
+    "messages": "Poruke",
+    "playersOnly": "samo za igrače",
+    "noMessages": "Još nema poruka.",
+    "message": "Poruka",
+    "messagePlaceholder": "Pišite ostalim igračima",
+    "send": "Pošalji",
+    "chatPrivacy": "Ove poruke vide samo igrači u ovom meču.",
+    "noClubs": "Još nijedan klub nema otvorene mečeve",
+    "noClubsHint": "Kada ih vaš klub uključi, ovde ćete moći da započnete meč.",
+    "step1": "1 · Klub i sport",
+    "membersOnlyStart": "Ovde mečeve mogu da započnu samo članovi kluba.",
+    "levelFirst": "Igrači ga vide pored vašeg imena, i on određuje ko može da se pridruži vašem meču.",
+    "step2": "2 · Teren i vreme",
+    "minutes": "{n} min",
+    "freeSlots": "Slobodni termini od {n} minuta",
+    "loadingSlots": "Učitavaju se slobodni termini…",
+    "noSlots": "Tog dana nema slobodnih terena. Probajte drugi dan ili trajanje.",
+    "step3": "3 · Ko može da se pridruži",
+    "yoursIs": "Vaš je {level}",
+    "from": "Od",
+    "to": "Do",
+    "lower": "{label}: niže",
+    "raise": "{label}: više",
+    "doubles": "Dubl · 4 igrača",
+    "singles": "Singl · 2 igrača",
+    "outsideCanAsk": "Igrači van opsega mogu da zatraže mesto, a vi odlučujete.",
+    "step4": "4 · Napomena (nije obavezno)",
+    "note": "Napomena",
+    "notePlaceholder": "npr. Doneću nove loptice",
+    "court": "Teren",
+    "eachAtClub": "{price} po igraču u klubu",
+    "bookedNow": "Teren se odmah rezerviše za vas. Ako meč ne bude popunjen nekoliko sati pre početka, pitaćemo vas da li da ga zadržite ili vratite klubu.",
+    "opening": "Rezerviše se…",
+    "bookAndOpen": "Rezerviši teren i otvori meč",
+    "pickTime": "Izaberite vreme",
+    "levelTitle": "Vaš nivo",
+    "levelIntro": "Izaberite ono što vam najviše liči. Služi samo da vas spoji sa igračima sličnog nivoa, i možete ga promeniti u bilo kom trenutku.",
+    "notSet": "nije postavljen",
+    "bandFromUp": "{from} i više",
+    "bands": {
+      "starting": {
+        "name": "Tek počinjem",
+        "desc": "Nekoliko partija do sada. Još učite osnovne udarce."
+      },
+      "beginner": {
+        "name": "Početnik",
+        "desc": "Možete da održite razmenu laganim tempom."
+      },
+      "intermediate": {
+        "name": "Srednji nivo",
+        "desc": "Igrate svake nedelje, kontrolišete udarce i znate gde da stojite."
+      },
+      "advanced": {
+        "name": "Napredni",
+        "desc": "Jaki i raznovrsni udarci. Igrate lokalne turnire."
+      },
+      "competition": {
+        "name": "Takmičar",
+        "desc": "Pobeđujete na lokalnim turnirima ili igrate na nacionalnom nivou."
+      }
+    },
+    "fineTune": "Precizno",
+    "checkHint": "Trener u vašem klubu može da potvrdi vaš nivo. Ostali igrači tada vide da je proveren.",
+    "askCheck": "Zatraži proveru od kluba",
+    "askCheckAt": "Zatraži od kluba {club} da ga proveri",
+    "checkPending": "Čeka se da {club} proveri vaš nivo",
+    "levelSaved": "Sačuvano.",
+    "saveLevel": "Sačuvaj nivo {level} ({sport})",
+    "clubSection": "Otvoreni mečevi",
+    "clubSectionHint": "Igrači koji traže partnere u ovom klubu. Pridružite se i platite svoj deo u klubu.",
+    "seeAll": "Pogledaj sve i započni meč",
+    "errors": {
+      "notSignedIn": "Prvo se prijavite.",
+      "needLevel": "Prvo postavite svoj nivo za ovaj sport.",
+      "membersOnly": "Otvoreni mečevi u ovom klubu su samo za članove.",
+      "full": "Ovaj meč je već popunjen.",
+      "already": "Već ste u ovom meču.",
+      "closed": "Ovaj meč više nije otvoren.",
+      "tooLate": "Prekasno je za izlazak onlajn. Javite organizatoru.",
+      "sportOff": "Ovaj klub nema otvorene mečeve za ovaj sport.",
+      "levels": "Nivoi idu od 1.0 do 7.0.",
+      "tooManyMessages": "Ovaj meč ima previše poruka.",
+      "notAllowed": "To ne možete da uradite.",
+      "paused": "Onlajn rezervacije u ovom klubu su pauzirane.",
+      "readOnly": "Nalog je samo za čitanje dok se plan ne obnovi.",
+      "cancelDeadline": "Klub dozvoljava otkazivanje najkasnije {hours} sati pre početka. Pozovite klub.",
+      "failed": "Nešto nije u redu. Pokušajte ponovo."
+    },
+    "admin": {
+      "title": "Otvoreni mečevi",
+      "subtitle": "Igrači rezervišu teren i otvaraju ga drugima na svom nivou.",
+      "seeAsPlayer": "Pogledajte javnu stranicu",
+      "statOpened": "Otvoreno",
+      "last7": "u poslednjih 7 dana",
+      "statFilled": "Popunjeno",
+      "statFilledSub": "mečevi koji su dobili sve igrače",
+      "statPlayers": "Igrači",
+      "statPlayersSub": "različiti igrači u mečevima",
+      "statReleased": "Vraćeni tereni",
+      "statReleasedSub": "ponovo u prodaji jer nisu bili popunjeni",
+      "comingUp": "Uskoro",
+      "next14": "Narednih 14 dana",
+      "none": "Još nema predstojećih otvorenih mečeva. Igrači ih započinju sa stranice Otvoreni mečevi.",
+      "when": "Kada",
+      "court": "Teren",
+      "level": "Nivo",
+      "players": "Igrači",
+      "status": "Status",
+      "released": "Teren vraćen",
+      "full": "Popunjeno",
+      "needs": "Fali {n}",
+      "kept": "teren zadržan",
+      "settings": "Podešavanja",
+      "enabled": "Dozvoli otvorene mečeve",
+      "enabledHint": "Igrači mogu da otvore svoje rezervacije drugima",
+      "sports": "Sportovi",
+      "release": "Ako meč nije popunjen, vrati teren",
+      "releaseOption": "{hours} sati pre početka",
+      "releaseHint": "Organizator se pita nekoliko sati ranije. Ako ga ne zadrži, teren se ponovo prodaje.",
+      "who": "Ko može da se pridruži",
+      "anyone": "Svako sa Kortello nalogom",
+      "membersOnly": "Samo članovi kluba",
+      "save": "Sačuvaj",
+      "saving": "Čuva se…",
+      "saved": "Sačuvano.",
+      "noSports": "Izaberite bar jedan sport.",
+      "checks": "Provere nivoa",
+      "checksHint": "Igrači koji su zamolili vaše trenere da im potvrde nivo. Ostali onda vide da je proveren.",
+      "noChecks": "Trenutno nema zahteva.",
+      "says": "kaže {level}",
+      "confirm": "Potvrdi",
+      "confirmAt": "Potvrdi {level}",
+      "dismiss": "Odbaci"
     }
   }
 }

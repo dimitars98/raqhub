@@ -107,6 +107,24 @@ everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts
 - When the trial ends unpaid nothing is switched off: the club drops to its plan's
   limits and sees a "trial has ended" banner until `paid_until` is set.
 
+## Open matches
+
+Players book a court and open it to others at their level ("we need two more
+for padel at 19:00"). Everyone pays their share at the club; Kortello takes
+nothing. Included in every plan.
+
+- **Database:** run `supabase/migrations/20261026_open_matches.sql` once in the
+  SQL Editor. The court is the organiser's ordinary booking, so booking rules,
+  opening hours, no-shows and the timetable work as before.
+- **Levels:** each player sets a level per sport (1.0 to 7.0). A club can confirm
+  it from Admin > Open matches, and players then see "Checked by <club>".
+- **Courts that don't fill:** a few hours before the start (6, 12 or 24, set by
+  the club) the organiser is asked whether to keep the court. With no answer it
+  is given back and goes on sale again. The hourly job (`/api/cron`) does this.
+- **Pages:** `/matches` (list), `/matches/new`, `/matches/[id]`, `/matches/level`
+  for players, `/admin/matches` for the club. Clubs' public pages list matches
+  that still need players.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts

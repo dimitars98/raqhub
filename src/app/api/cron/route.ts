@@ -15,7 +15,8 @@ import {
 // Called every hour by Supabase Cron (see supabase/cron_http_job.sql).
 // Sends booking reminders, membership renewal reminders, free-trial emails
 // to club owners, new-club emails to you and, on Monday mornings, the weekly
-// report to club owners. Also makes the day's in-app notifications. Safe to call more often:
+// report to club owners. Also makes the day's in-app notifications and gives
+// back open match courts nobody filled. Safe to call more often:
 // nothing is ever sent twice.
 
 export const dynamic = "force-dynamic";
@@ -74,6 +75,15 @@ export async function GET(request: Request) {
   } catch (e) {
     console.error("[cron] notifications failed", e);
     result.notifications = { error: describe(e) };
+  }
+
+  // Open matches: ask organisers about courts that aren't full, give back the ones nobody kept.
+  try {
+    const { data, error } = await db.rpc("run_open_match_jobs");
+    result.openMatches = error ? { error: error.message } : data;
+  } catch (e) {
+    console.error("[cron] open matches failed", e);
+    result.openMatches = { error: describe(e) };
   }
 
   result.budgetLeft = budget.left;

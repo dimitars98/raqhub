@@ -12,6 +12,7 @@ import Help from "./Help";
 type TitleKey =
   | "dashboard"
   | "groups"
+  | "matches"
   | "timetable"
   | "bookings"
   | "members"
@@ -34,6 +35,7 @@ type TitleKey =
 const TITLE_KEYS: Record<string, TitleKey> = {
   dashboard: "dashboard",
   groups: "groups",
+  matches: "matches",
   timetable: "timetable",
   bookings: "bookings",
   members: "members",
