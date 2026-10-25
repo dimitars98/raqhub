@@ -2813,7 +2813,8 @@
       "says": "indique {level}",
       "confirm": "Confirmer",
       "confirmAt": "Confirmer à {level}",
-      "dismiss": "Ignorer"
+      "dismiss": "Ignorer",
+      "levelFor": "Niveau de {name}"
     }
   }
 }

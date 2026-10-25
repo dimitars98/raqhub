@@ -2813,7 +2813,8 @@
       "says": "вели {level}",
       "confirm": "Потврди",
       "confirmAt": "Потврди {level}",
-      "dismiss": "Отфрли"
+      "dismiss": "Отфрли",
+      "levelFor": "Ниво за {name}"
     }
   }
 }

@@ -2813,7 +2813,8 @@
       "says": "says {level}",
       "confirm": "Confirm",
       "confirmAt": "Confirm at {level}",
-      "dismiss": "Dismiss"
+      "dismiss": "Dismiss",
+      "levelFor": "Level for {name}"
     }
   }
 }

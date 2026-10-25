@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import SelectField from "@/components/ui/SelectField";
 import { useTranslations } from "next-intl";
 import { ChevronLeft, Clock, ShieldCheck } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -160,23 +161,14 @@ export default function LevelClient({
               </p>
               <div className="flex flex-wrap gap-2">
                 {clubsForSport.length > 1 && (
-                  <>
-                    <label htmlFor="check-club" className="sr-only">
-                      {t("club")}
-                    </label>
-                    <select
-                      id="check-club"
+                  <div className="min-w-[180px] flex-1">
+                    <SelectField
+                      ariaLabel={t("club")}
                       value={checkClub || clubsForSport[0].id}
-                      onChange={(e) => setCheckClub(e.target.value)}
-                      className="input w-auto flex-1"
-                    >
-                      {clubsForSport.map((c) => (
-                        <option key={c.id} value={c.id}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </>
+                      onChange={setCheckClub}
+                      options={clubsForSport.map((c) => ({ value: c.id, label: c.name }))}
+                    />
+                  </div>
                 )}
                 <button type="button" disabled={pending} onClick={askClub} className="btn-secondary">
                   {clubsForSport.length > 1 ? t("askCheck") : t("askCheckAt", { club: clubsForSport[0].name })}

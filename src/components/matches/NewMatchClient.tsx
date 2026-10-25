@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
+import SelectField from "@/components/ui/SelectField";
 import { useLocale, useTranslations } from "next-intl";
 import { addDays } from "date-fns";
 import { fromZonedTime } from "date-fns-tz";
@@ -206,26 +207,15 @@ export default function NewMatchClient({
           </p>
         )}
         {clubs.length > 1 && (
-          <div>
-            <label htmlFor="club" className="sr-only">
-              {t("club")}
-            </label>
-            <select
-              id="club"
-              value={clubId}
-              onChange={(e) => {
-                setClubId(e.target.value);
-                setPick(null);
-              }}
-              className="input"
-            >
-              {clubs.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.city ? `${c.name} · ${c.city}` : c.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <SelectField
+            ariaLabel={t("club")}
+            value={clubId}
+            onChange={(v) => {
+              setClubId(v);
+              setPick(null);
+            }}
+            options={clubs.map((c) => ({ value: c.id, label: c.city ? `${c.name} · ${c.city}` : c.name }))}
+          />
         )}
         {sports.length > 1 && (
           <div role="radiogroup" aria-label={t("sport")} className="grid grid-cols-3 gap-1 rounded-[14px] bg-ink-50 p-1">

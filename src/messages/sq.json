@@ -2813,7 +2813,8 @@
       "says": "thotë {level}",
       "confirm": "Konfirmo",
       "confirmAt": "Konfirmo {level}",
-      "dismiss": "Hidh poshtë"
+      "dismiss": "Hidh poshtë",
+      "levelFor": "Niveli për {name}"
     }
   }
 }

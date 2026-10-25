@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import SelectField from "@/components/ui/SelectField";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { confirmLevel, dismissLevelCheck, saveMatchSettings } from "@/app/actions/openMatches";
@@ -189,18 +190,12 @@ export default function AdminMatchesClient({
                 <label htmlFor="release" className="text-[13px] font-semibold text-ink-900">
                   {t("release")}
                 </label>
-                <select
+                <SelectField
                   id="release"
-                  value={settings.release_hours}
-                  onChange={(e) => setSettings({ ...settings, release_hours: Number(e.target.value) })}
-                  className="input"
-                >
-                  {RELEASE_HOUR_CHOICES.map((h) => (
-                    <option key={h} value={h}>
-                      {t("releaseOption", { hours: h })}
-                    </option>
-                  ))}
-                </select>
+                  value={String(settings.release_hours)}
+                  onChange={(v) => setSettings({ ...settings, release_hours: Number(v) })}
+                  options={RELEASE_HOUR_CHOICES.map((h) => ({ value: String(h), label: t("releaseOption", { hours: h }) }))}
+                />
                 <span className="text-xs leading-relaxed text-ink-600">{t("releaseHint")}</span>
               </div>
 
@@ -208,15 +203,15 @@ export default function AdminMatchesClient({
                 <label htmlFor="who" className="text-[13px] font-semibold text-ink-900">
                   {t("who")}
                 </label>
-                <select
+                <SelectField
                   id="who"
                   value={settings.members_only ? "members" : "anyone"}
-                  onChange={(e) => setSettings({ ...settings, members_only: e.target.value === "members" })}
-                  className="input"
-                >
-                  <option value="anyone">{t("anyone")}</option>
-                  <option value="members">{t("membersOnly")}</option>
-                </select>
+                  onChange={(v) => setSettings({ ...settings, members_only: v === "members" })}
+                  options={[
+                    { value: "anyone", label: t("anyone") },
+                    { value: "members", label: t("membersOnly") },
+                  ]}
+                />
               </div>
             </fieldset>
 
@@ -280,21 +275,15 @@ function CheckRow({ check: c }: { check: ClubMatchesView["checks"][number] }) {
         </span>
       </span>
       <div className="flex flex-wrap items-center gap-2">
-        <label htmlFor={`lvl-${c.id}-${c.sport}`} className="sr-only">
-          {t("level")}
-        </label>
-        <select
-          id={`lvl-${c.id}-${c.sport}`}
-          value={level}
-          onChange={(e) => setLevel(Number(e.target.value))}
-          className="input w-24 py-2"
-        >
-          {LEVELS.map((l) => (
-            <option key={l} value={l}>
-              {levelText(l)}
-            </option>
-          ))}
-        </select>
+        <div className="w-24">
+          <SelectField
+            ariaLabel={t("levelFor", { name: c.name })}
+            value={String(level)}
+            onChange={(v) => setLevel(Number(v))}
+            options={LEVELS.map((l) => ({ value: String(l), label: levelText(l) }))}
+            size="sm"
+          />
+        </div>
         <button
           type="button"
           disabled={readOnly || pending}

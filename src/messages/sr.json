@@ -2813,7 +2813,8 @@
       "says": "kaže {level}",
       "confirm": "Potvrdi",
       "confirmAt": "Potvrdi {level}",
-      "dismiss": "Odbaci"
+      "dismiss": "Odbaci",
+      "levelFor": "Nivo za {name}"
     }
   }
 }

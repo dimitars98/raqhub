@@ -2813,7 +2813,8 @@
       "says": "dice {level}",
       "confirm": "Conferma",
       "confirmAt": "Conferma a {level}",
-      "dismiss": "Ignora"
+      "dismiss": "Ignora",
+      "levelFor": "Livello di {name}"
     }
   }
 }

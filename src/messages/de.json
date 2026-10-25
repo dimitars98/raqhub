@@ -2813,7 +2813,8 @@
       "says": "sagt {level}",
       "confirm": "Bestätigen",
       "confirmAt": "Mit {level} bestätigen",
-      "dismiss": "Verwerfen"
+      "dismiss": "Verwerfen",
+      "levelFor": "Niveau für {name}"
     }
   }
 }
