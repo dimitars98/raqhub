@@ -12,6 +12,7 @@
     "@radix-ui/react-select": "^2.3.8",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.3",
+    "country-flag-icons": "^1.6.20",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "framer-motion": "^12.38.0",

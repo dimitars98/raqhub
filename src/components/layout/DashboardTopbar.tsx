@@ -7,6 +7,7 @@ import LocaleSwitcher from "../ui/LocaleSwitcher";
 import { useSidebar } from "./SidebarContext";
 import NotificationBell from "../notifications/NotificationBell";
 import type { Area } from "@/lib/notifications";
+import Help from "./Help";
 
 type TitleKey =
   | "dashboard"
@@ -55,7 +56,13 @@ const TITLE_KEYS: Record<string, TitleKey> = {
 const iconButton =
   "grid size-9 place-items-center rounded-lg text-ink-400 transition-colors hover:bg-ink-50 hover:text-ink-900";
 
-export default function DashboardTopbar({ userId, area }: { userId: string; area: Area }) {
+export default function DashboardTopbar({
+  userId,
+  area,
+}: {
+  userId: string;
+  area: Area;
+}) {
   const pathname = usePathname();
   const t = useTranslations("dashboard.titles");
   const tc = useTranslations("common");
@@ -90,6 +97,7 @@ export default function DashboardTopbar({ userId, area }: { userId: string; area
       <div className="flex items-center gap-2">
         <LocaleSwitcher size="sm" />
         <NotificationBell userId={userId} area={area} />
+        <Help />
       </div>
     </header>
   );

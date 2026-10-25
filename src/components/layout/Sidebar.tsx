@@ -299,7 +299,7 @@ function MobileDrawer({
     <AnimatePresence>
       {open && (
         <div
-          className="fixed inset-0 z-50 flex lg:hidden"
+          className="fixed inset-0 z-999 flex lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label={tc("menu")}
@@ -423,12 +423,22 @@ export default function Sidebar({
     {
       group: t("overview"),
       items: [
-        { label: t("timetable"), href: "/admin/timetable", icon: CalendarRange },
+        {
+          label: t("timetable"),
+          href: "/admin/timetable",
+          icon: CalendarRange,
+        },
         { label: t("bookings"), href: "/admin/bookings", icon: CalendarDays },
         { label: t("members"), href: "/admin/members", icon: Users },
         { label: t("groups"), href: "/admin/groups", icon: UsersRound },
         ...(clubSlug
-          ? [{ label: t("publicPage"), href: `/clubs/${clubSlug}`, icon: Globe }]
+          ? [
+              {
+                label: t("publicPage"),
+                href: `/clubs/${clubSlug}`,
+                icon: Globe,
+              },
+            ]
           : []),
       ],
     },
@@ -456,7 +466,11 @@ export default function Sidebar({
           {
             group: t("club"),
             items: [
-              { label: t("manageClub"), href: "/admin/timetable", icon: CalendarRange },
+              {
+                label: t("manageClub"),
+                href: "/admin/timetable",
+                icon: CalendarRange,
+              },
             ],
           },
         ]

@@ -5,12 +5,22 @@ import { useTranslations } from "next-intl";
 import { Bell } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { BELL_SIZE, type Area, type NotificationRow } from "@/lib/notifications";
+import {
+  BELL_SIZE,
+  type Area,
+  type NotificationRow,
+} from "@/lib/notifications";
 import NotificationItem, { splitByDay } from "./NotificationItem";
 import { useNotifications } from "./useNotifications";
 
 /** The bell in the top bar: unread count, and the latest notifications under it. */
-export default function NotificationBell({ userId, area }: { userId: string; area: Area }) {
+export default function NotificationBell({
+  userId,
+  area,
+}: {
+  userId: string;
+  area: Area;
+}) {
   const t = useTranslations("notifications");
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -41,7 +51,9 @@ export default function NotificationBell({ userId, area }: { userId: string; are
   const group = (label: string, list: NotificationRow[]) =>
     list.length > 0 && (
       <div>
-        <p className="px-4 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6e7f65]">{label}</p>
+        <p className="px-4 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6e7f65]">
+          {label}
+        </p>
         <ul>
           {list.map((n) => (
             <li key={n.id}>
@@ -61,10 +73,14 @@ export default function NotificationBell({ userId, area }: { userId: string; are
         aria-haspopup="dialog"
         aria-label={t("bell", { n: unread })}
         className={`relative grid size-9 place-items-center rounded-lg transition-colors ${
-          open ? "bg-[#f3fbde] text-ink-900" : "text-ink-400 hover:bg-ink-50 hover:text-ink-900"
+          open ? "bg-[#f3fbde] text-ink-900" : "text-ink-400 hover:bg-ink-50"
         }`}
       >
-        <Bell className="size-[18px]" strokeWidth={1.75} aria-hidden="true" />
+        <Bell
+          className="size-[18px] fill-ink-400"
+          strokeWidth={1.75}
+          aria-hidden="true"
+        />
         {unread > 0 && (
           <span
             aria-hidden="true"
@@ -93,7 +109,11 @@ export default function NotificationBell({ userId, area }: { userId: string; are
               </button>
             )}
           </div>
-          <div role="tablist" aria-label={t("title")} className="flex gap-1.5 border-b border-[#e8ede4] px-4 pb-3">
+          <div
+            role="tablist"
+            aria-label={t("title")}
+            className="flex gap-1.5 border-b border-[#e8ede4] px-4 pb-3"
+          >
             {[false, true].map((only) => (
               <button
                 key={String(only)}
@@ -108,7 +128,9 @@ export default function NotificationBell({ userId, area }: { userId: string; are
                 }`}
               >
                 {only ? t("unread") : t("all")}
-                {only && unread > 0 && <span className="ml-1 font-bold">{unread}</span>}
+                {only && unread > 0 && (
+                  <span className="ml-1 font-bold">{unread}</span>
+                )}
               </button>
             ))}
           </div>
