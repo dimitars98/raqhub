@@ -37,6 +37,7 @@ import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { initials } from "@/lib/avatar";
 import { SALES_EMAIL } from "@/lib/plans";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 export type SettingsClub = Pick<
   Club,
@@ -401,55 +402,38 @@ const { readOnly, hint } = useReadOnly();
                 />
               </Field>
               <Field label={t("bookingsPerPlayerPerDay")}>
-                <select
-                  className="input"
-                  value={rules.max_per_day}
-                  onChange={(e) =>
-                    setRules((r) => ({ ...r, max_per_day: Number(e.target.value) }))
-                  }
-                >
-                  {PER_DAY_CHOICES.map((n) => (
-                    <option key={n} value={n}>
-                      {n === 0 ? t("noLimit") : n}
-                    </option>
-                  ))}
-                </select>
+                <SelectField
+                  ariaLabel={t("bookingsPerPlayerPerDay")}
+                  value={String(rules.max_per_day)}
+                  onChange={(v) => setRules((r) => ({ ...r, max_per_day: Number(v) }))}
+                  options={PER_DAY_CHOICES.map((n) => ({ value: String(n), label: n === 0 ? t("noLimit") : String(n) }))}
+                />
               </Field>
               <div className="sm:col-span-2">
                 <Field label={t("cancellingOnline")}>
-                  <select
-                    className="input"
-                    value={rules.cancel_hours}
-                    onChange={(e) =>
-                      setRules((r) => ({ ...r, cancel_hours: Number(e.target.value) }))
-                    }
-                  >
-                    {CANCEL_HOUR_CHOICES.map((h) => (
-                      <option key={h} value={h}>
-                        {h === 0 ? t("cancelAnyTime") : t("cancelUntil", { h })}
-                      </option>
-                    ))}
-                  </select>
+                  <SelectField
+                    ariaLabel={t("cancellingOnline")}
+                    value={String(rules.cancel_hours)}
+                    onChange={(v) => setRules((r) => ({ ...r, cancel_hours: Number(v) }))}
+                    options={CANCEL_HOUR_CHOICES.map((h) => ({
+                      value: String(h),
+                      label: h === 0 ? t("cancelAnyTime") : t("cancelUntil", { h }),
+                    }))}
+                  />
                 </Field>
               </div>
             </div>
 
             <Field label={t("repeatNoShows")}>
-              <select
-                className="input"
-                value={rules.max_no_shows}
-                onChange={(e) =>
-                  setRules((r) => ({ ...r, max_no_shows: Number(e.target.value) }))
-                }
-              >
-                {NO_SHOW_CHOICES.map((n) => (
-                  <option key={n} value={n}>
-                    {n === 0
-                      ? t("neverPause")
-                      : t("pauseAfter", { n })}
-                  </option>
-                ))}
-              </select>
+              <SelectField
+                ariaLabel={t("repeatNoShows")}
+                value={String(rules.max_no_shows)}
+                onChange={(v) => setRules((r) => ({ ...r, max_no_shows: Number(v) }))}
+                options={NO_SHOW_CHOICES.map((n) => ({
+                  value: String(n),
+                  label: n === 0 ? t("neverPause") : t("pauseAfter", { n }),
+                }))}
+              />
               <p className="mt-1.5 text-[12px] text-[#6e7f65]">
                 {t("noShowHelp", { days: NO_SHOW_DAYS })}
               </p>

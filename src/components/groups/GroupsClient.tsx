@@ -9,6 +9,7 @@ import { initials } from "@/lib/avatar";
 import { ISO_DAYS, clubFormat, clubDay, money, monthName, scheduleText, weekdayName } from "@/lib/groups";
 import type { Group } from "@/types/database";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import FilterSelect from "@/components/ui/FilterSelect";
 
 export type GroupCard = Pick<
   Group,
@@ -174,33 +175,26 @@ export default function GroupsClient({
             </div>
             <div className="flex flex-wrap gap-2">
               {coaches.length > 1 && (
-                <select
-                  aria-label={t("filters.coach")}
-                  className="input h-10 w-auto py-0 text-[13px]"
-                  value={coach}
-                  onChange={(e) => setCoach(e.target.value)}
-                >
-                  <option value="">{t("filters.anyCoach")}</option>
-                  {coaches.map(([id, name]) => (
-                    <option key={id} value={id}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
+                <FilterSelect
+                  label={t("filters.coach")}
+                  value={coach || "all"}
+                  onChange={(v) => setCoach(v === "all" ? "" : v)}
+                  options={[
+                    { value: "all", label: t("filters.anyCoach") },
+                    ...coaches.map(([id, name]) => ({ value: id, label: name })),
+                  ]}
+                />
               )}
-              <select
-                aria-label={t("filters.day")}
-                className="input h-10 w-auto py-0 text-[13px]"
-                value={day}
-                onChange={(e) => setDay(Number(e.target.value))}
-              >
-                <option value={0}>{t("filters.anyDay")}</option>
-                {ISO_DAYS.map((d) => (
-                  <option key={d} value={d}>
-                    {weekdayName(d, locale, "long")}
-                  </option>
-                ))}
-              </select>
+              <FilterSelect
+                label={t("filters.day")}
+                value={String(day)}
+                onChange={(v) => setDay(Number(v))}
+                align="end"
+                options={[
+                  { value: "0", label: t("filters.anyDay") },
+                  ...ISO_DAYS.map((d) => ({ value: String(d), label: weekdayName(d, locale, "long") })),
+                ]}
+              />
             </div>
           </div>
 

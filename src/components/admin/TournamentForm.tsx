@@ -9,6 +9,7 @@ import { useLabels } from "@/hooks/useLabels";
 import type { Tournament } from "@/types/database";
 import type { TournamentInput } from "@/app/[locale]/admin/tournaments/actions";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 /** Create or edit a tournament. `onSave` returns an error key, if any. */
 export default function TournamentForm({
@@ -75,13 +76,12 @@ export default function TournamentForm({
           </Modal.Field>
           <Modal.Grid>
             <Modal.Field label={t("fields.sport")}>
-              <select className="input" value={form.sport} onChange={(e) => set("sport")(e.target.value)}>
-                {SPORTS.map((s) => (
-                  <option key={s} value={s}>
-                    {labels.sport(s)}
-                  </option>
-                ))}
-              </select>
+              <SelectField
+                ariaLabel={t("fields.sport")}
+                value={form.sport}
+                onChange={(v) => set("sport")(v)}
+                options={SPORTS.map((s) => ({ value: s, label: labels.sport(s) }))}
+              />
             </Modal.Field>
             <Modal.Field label={t("fields.date")} required>
               <input
@@ -94,17 +94,12 @@ export default function TournamentForm({
           </Modal.Grid>
           <Modal.Grid>
             <Modal.Field label={t("fields.maxEntries")}>
-              <select
-                className="input"
-                value={form.max_entries}
-                onChange={(e) => set("max_entries")(e.target.value)}
-              >
-                {placeChoices.map((n) => (
-                  <option key={n} value={n}>
-                    {n}
-                  </option>
-                ))}
-              </select>
+              <SelectField
+                ariaLabel={t("fields.maxEntries")}
+                value={String(form.max_entries)}
+                onChange={(v) => set("max_entries")(v)}
+                options={placeChoices.map((n) => ({ value: String(n), label: String(n) }))}
+              />
             </Modal.Field>
             <Modal.Field label={t("fields.entryFee")}>
               <input

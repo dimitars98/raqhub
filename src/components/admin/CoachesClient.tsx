@@ -8,6 +8,7 @@ import Modal from "@/components/ui/Modal";
 import { LEVELS } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 const EMPTY_FORM = {
   email: "",
@@ -389,19 +390,15 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                 />
               </Modal.Field>
               <Modal.Field label={t("status")}>
-                <select
-                  className="input"
+                <SelectField
+                  ariaLabel={t("status")}
                   value={form.is_active ? "active" : "inactive"}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      is_active: e.target.value === "active",
-                    }))
-                  }
-                >
-                  <option value="active">{t("active")}</option>
-                  <option value="inactive">{t("inactive")}</option>
-                </select>
+                  onChange={(v) => setForm((f) => ({ ...f, is_active: v === "active" }))}
+                  options={[
+                    { value: "active", label: t("active") },
+                    { value: "inactive", label: t("inactive") },
+                  ]}
+                />
               </Modal.Field>
             </Modal.Grid>
 

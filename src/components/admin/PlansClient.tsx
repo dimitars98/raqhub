@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { createClient } from "@/lib/supabase/client";
 import type { MembershipPlan, BillingPeriod } from "@/types/database";
 import Modal from "@/components/ui/Modal";
@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { BILLING_PERIODS } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 
 type FormValues = {
@@ -38,6 +39,7 @@ export default function PlansClient({
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     setError,
@@ -224,13 +226,18 @@ export default function PlansClient({
                   />
                 </Modal.Field>
                 <Modal.Field label={t("billingPeriod")}>
-                  <select className="input" {...register("billing_period")}>
-                    {BILLING_PERIODS.map((b) => (
-                      <option key={b} value={b}>
-                        {labels.billingPeriod(b)}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="billing_period"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        ariaLabel={t("billingPeriod")}
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={BILLING_PERIODS.map((b) => ({ value: b, label: labels.billingPeriod(b) }))}
+                      />
+                    )}
+                  />
                 </Modal.Field>
               </Modal.Grid>
               <Modal.Field label={t("discountField")}>

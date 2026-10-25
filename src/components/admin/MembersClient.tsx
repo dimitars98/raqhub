@@ -2,7 +2,7 @@
 
 import { dateLocale } from "@/lib/dateLocale";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
 import { addMonths, differenceInCalendarDays, format, parseISO, startOfDay } from "date-fns";
 import { ChevronDown, Download, Mail, RotateCw, Search, X } from "lucide-react";
@@ -17,6 +17,7 @@ import { MEMBER_STATUSES } from "@/lib/labels";
 import { createClient } from "@/lib/supabase/client";
 import { toCsv } from "@/lib/csv";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 export type MemberWithPlan = Member & { plan?: MembershipPlan | null };
 
@@ -136,6 +137,7 @@ export default function MembersClient({
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     setError,
@@ -912,14 +914,21 @@ export default function MembersClient({
               </Modal.Grid>
               <Modal.Grid>
                 <Modal.Field label={t("modal.plan")} htmlFor="member-plan">
-                  <select id="member-plan" className="input" {...register("plan_id")}>
-                    <option value="">{t("modal.noPlan")}</option>
-                    {plans.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name} — €{p.price}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="plan_id"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        id="member-plan"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                        options={[
+                          { value: "", label: t("modal.noPlan") },
+                          ...plans.map((p) => ({ value: p.id, label: `${p.name} — €${p.price}` })),
+                        ]}
+                      />
+                    )}
+                  />
                 </Modal.Field>
                 <Modal.Field label={t("modal.expires")} htmlFor="member-ends">
                   <input
@@ -932,13 +941,18 @@ export default function MembersClient({
               </Modal.Grid>
               {editing && (
                 <Modal.Field label={t("modal.status")} htmlFor="member-status">
-                  <select id="member-status" className="input" {...register("status")}>
-                    {MEMBER_STATUSES.map((s) => (
-                      <option key={s} value={s}>
-                        {labels.memberStatus(s)}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="status"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        id="member-status"
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={MEMBER_STATUSES.map((s) => ({ value: s, label: labels.memberStatus(s) }))}
+                      />
+                    )}
+                  />
                 </Modal.Field>
               )}
               <Modal.Field label={t("modal.notes")} htmlFor="member-notes">

@@ -23,6 +23,7 @@ import { DAY_HOURS } from "@/lib/openingHours";
 import { REPEAT_CHOICES, weeklyStarts } from "@/lib/recurring";
 import { Repeat, X } from "lucide-react";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
@@ -464,23 +465,21 @@ const { readOnly, hint } = useReadOnly();
                     </span>
                   </td>
                   <td className="px-5 py-3.5">
-                    <select
-                      disabled={readOnly}
-                      title={hint}
-                      value={b.status}
-                      onChange={(e) => {
-                        const status = e.target.value as BookingStatus;
-                        if (status === "cancelled" && b.series_id) setCancelling(b);
-                        else handleStatus(b.id, status);
-                      }}
-                      className="text-xs border border-[#e8ede4] rounded-lg px-2 py-1 text-[#3d4f35] bg-white focus:outline-none focus:ring-1 focus:ring-[#d6f09a]"
-                    >
-                      {BOOKING_STATUSES.map((s) => (
-                        <option key={s} value={s}>
-                          {labels.bookingStatus(s)}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="w-32">
+                      <SelectField
+                        size="xs"
+                        ariaLabel={t("status")}
+                        disabled={readOnly}
+                        title={hint}
+                        value={b.status}
+                        onChange={(v) => {
+                          const status = v as BookingStatus;
+                          if (status === "cancelled" && b.series_id) setCancelling(b);
+                          else handleStatus(b.id, status);
+                        }}
+                        options={BOOKING_STATUSES.map((s) => ({ value: s, label: labels.bookingStatus(s) }))}
+                      />
+                    </div>
                   </td>
                 </tr>
               ))
@@ -495,17 +494,23 @@ const { readOnly, hint } = useReadOnly();
           <form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
               <Modal.Field label={t("court")} required>
-                <select
-                  className="input"
-                  {...register("court_id", { required: true })}
-                >
-                  <option value="">{t("selectCourt")}</option>
-                  {courts.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name} — €{c.price_per_hour}/hr
-                    </option>
-                  ))}
-                </select>
+                <Controller
+                  name="court_id"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field, fieldState }) => (
+                    <SelectField
+                      ariaLabel={t("court")}
+                      value={field.value}
+                      onChange={field.onChange}
+                      invalid={!!fieldState.error}
+                      options={[
+                        { value: "", label: t("selectCourt") },
+                        ...courts.map((c) => ({ value: c.id, label: `${c.name} — €${c.price_per_hour}/hr` })),
+                      ]}
+                    />
+                  )}
+                />
               </Modal.Field>
 
               <div>
@@ -533,14 +538,21 @@ const { readOnly, hint } = useReadOnly();
                   ))}
                 </div>
                 {watchedType === "member" ? (
-                  <select className="input" {...register("member_id")}>
-                    <option value="">{t("selectMember")}</option>
-                    {members.map((m) => (
-                      <option key={m.id} value={m.id}>
-                        {m.full_name}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="member_id"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        ariaLabel={t("member")}
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={[
+                          { value: "", label: t("selectMember") },
+                          ...members.map((m) => ({ value: m.id, label: m.full_name })),
+                        ]}
+                      />
+                    )}
+                  />
                 ) : (
                   <input
                     className="input"
@@ -583,42 +595,51 @@ const { readOnly, hint } = useReadOnly();
 
               <Modal.Grid>
                 <Modal.Field label={t("startTime")}>
-                  <select
-                    className="input"
-                    {...register("hour", { valueAsNumber: true })}
-                  >
-                    {DAY_HOURS.map((h) => (
-                      <option key={h} value={h}>
-                        {String(h).padStart(2, "0")}:00
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="hour"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        ariaLabel={t("startTime")}
+                        value={String(field.value)}
+                        onChange={(v) => field.onChange(Number(v))}
+                        options={DAY_HOURS.map((h) => ({ value: String(h), label: `${String(h).padStart(2, "0")}:00` }))}
+                      />
+                    )}
+                  />
                 </Modal.Field>
                 <Modal.Field label={t("duration")}>
-                  <select
-                    className="input"
-                    {...register("duration", { valueAsNumber: true })}
-                  >
-                    {DURATIONS.map((d) => (
-                      <option key={d} value={d}>
-                        {d} {t("min")}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="duration"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        ariaLabel={t("duration")}
+                        value={String(field.value)}
+                        onChange={(v) => field.onChange(Number(v))}
+                        options={DURATIONS.map((d) => ({ value: String(d), label: `${d} ${t("min")}` }))}
+                      />
+                    )}
+                  />
                 </Modal.Field>
               </Modal.Grid>
 
               <Modal.Field label={t("repeat")}>
-                <select
-                  className="input"
-                  {...register("repeat", { valueAsNumber: true })}
-                >
-                  {REPEAT_CHOICES.map((n) => (
-                    <option key={n} value={n}>
-                      {n === 1 ? t("repeatOnce") : t("repeatWeeks", { n })}
-                    </option>
-                  ))}
-                </select>
+                <Controller
+                  name="repeat"
+                  control={control}
+                  render={({ field }) => (
+                    <SelectField
+                      ariaLabel={t("repeat")}
+                      value={String(field.value)}
+                      onChange={(v) => field.onChange(Number(v))}
+                      options={REPEAT_CHOICES.map((n) => ({
+                        value: String(n),
+                        label: n === 1 ? t("repeatOnce") : t("repeatWeeks", { n }),
+                      }))}
+                    />
+                  )}
+                />
                 {watchedRepeat > 1 && (
                   <p className="mt-1.5 text-xs text-[#6e7f65]">{t("repeatHint")}</p>
                 )}

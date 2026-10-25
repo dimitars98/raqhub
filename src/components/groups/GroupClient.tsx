@@ -45,6 +45,7 @@ import {
 import { cancelSession, markFee, restoreSession, unmarkFee } from "@/app/actions/groups";
 import type { FeeMethod, Group, GroupAttendance, GroupFee, GroupPlayer, GroupSession } from "@/types/database";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 export type DetailGroup = Group & { coachName: string | null; courtName: string | null };
 export type DetailSession = GroupSession & { courtName: string | null };
@@ -554,16 +555,17 @@ export default function GroupClient({
           {tab === "fees" && (
             <section className="flex flex-col gap-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <label className="flex items-center gap-2 text-sm font-medium text-ink-900">
-                  {td("month")}
-                  <select className="input w-auto" value={feeMonth} onChange={(e) => setFeeMonth(e.target.value)}>
-                    {months.map((m) => (
-                      <option key={m} value={m}>
-                        {monthName(m, locale)}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <div className="flex items-center gap-2 text-sm font-medium text-ink-900">
+                  <span aria-hidden="true">{td("month")}</span>
+                  <div className="w-48">
+                    <SelectField
+                      ariaLabel={td("month")}
+                      value={feeMonth}
+                      onChange={setFeeMonth}
+                      options={months.map((m) => ({ value: m, label: monthName(m, locale) }))}
+                    />
+                  </div>
+                </div>
                 {admin && feeMonth === month && unpaidThisMonth.some((p) => p.email) && (
                   <button
                     type="button"
@@ -1245,13 +1247,12 @@ function MoveModal({
             </Modal.Field>
           </Modal.Grid>
           <Modal.Field label={td("court")} htmlFor="gs-court">
-            <select id="gs-court" className="input" value={court} onChange={(e) => setCourt(e.target.value)}>
-              {courts.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
+            <SelectField
+              id="gs-court"
+              value={court}
+              onChange={setCourt}
+              options={courts.map((c) => ({ value: c.id, label: c.name }))}
+            />
           </Modal.Field>
           <p className="text-xs text-ink-600">{td("moveHint")}</p>
         </Modal.Body>

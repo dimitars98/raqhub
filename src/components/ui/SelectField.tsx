@@ -14,26 +14,56 @@ type Props = {
   /** When there is no visible label. */
   ariaLabel?: string;
   disabled?: boolean;
-  /** "sm": 36px tall, for short lists inside a row. */
-  size?: "md" | "sm";
+  /** md: a form field · sm: 36px, inside a row · xs: 32px, small text, in a table */
+  size?: "md" | "sm" | "xs";
+  /** Tooltip on the button (e.g. why it's disabled). */
+  title?: string;
+  /** Shows the field in red, for a missing required choice. */
+  invalid?: boolean;
+};
+
+// Radix doesn't allow "" as an item value, but forms often use it for
+// "none" ("No plan", "Select a court"). It's swapped for this inside.
+const EMPTY = "__empty__";
+const toRadix = (v: string) => (v === "" ? EMPTY : v);
+const fromRadix = (v: string) => (v === EMPTY ? "" : v);
+
+const SIZES = {
+  md: "h-11 rounded-xl pl-4 pr-3 text-sm",
+  sm: "h-9 rounded-xl pl-3 pr-2.5 text-sm",
+  xs: "h-8 rounded-lg pl-2.5 pr-2 text-xs",
 };
 
 // A form field that opens a styled list: the field-sized sibling of
 // FilterSelect. Radix handles keyboard, typeahead and screen readers.
-export default function SelectField({ id, value, options, onChange, ariaLabel, disabled, size = "md" }: Props) {
+export default function SelectField({
+  id,
+  value,
+  options,
+  onChange,
+  ariaLabel,
+  disabled,
+  size = "md",
+  title,
+  invalid,
+}: Props) {
   return (
-    <Select.Root value={value} onValueChange={onChange} disabled={disabled}>
+    <Select.Root value={toRadix(value)} onValueChange={(v) => onChange(fromRadix(v))} disabled={disabled}>
       <Select.Trigger
         id={id}
         aria-label={ariaLabel}
-        className={`group flex ${size === "sm" ? "h-9" : "h-11"} w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-ink-200 bg-white pr-3 pl-4 text-left text-sm text-ink-900 outline-none transition-colors hover:border-ink-400 focus-visible:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50 data-[state=open]:border-ink-900`}
+        aria-invalid={invalid || undefined}
+        title={title}
+        className={`group flex w-full cursor-pointer items-center justify-between gap-2 border bg-white text-left text-ink-900 outline-none transition-colors hover:border-ink-400 focus-visible:border-brand-400 focus-visible:ring-2 focus-visible:ring-brand-400 disabled:cursor-not-allowed disabled:opacity-50 data-[state=open]:border-ink-900 ${
+          invalid ? "border-red-400" : "border-ink-200"
+        } ${SIZES[size]}`}
       >
         <span className="min-w-0 truncate">
           <Select.Value />
         </span>
         <Select.Icon asChild>
           <ChevronDown
-            size={16}
+            size={size === "xs" ? 14 : 16}
             aria-hidden="true"
             className="shrink-0 text-ink-400 transition-transform duration-150 group-data-[state=open]:rotate-180"
           />
@@ -53,8 +83,10 @@ export default function SelectField({ id, value, options, onChange, ariaLabel, d
             {options.map((o) => (
               <Select.Item
                 key={o.value}
-                value={o.value}
-                className="relative flex min-h-10 cursor-pointer items-center rounded-lg py-2 pr-9 pl-3 text-sm text-ink-600 outline-none select-none data-[highlighted]:bg-ink-50 data-[highlighted]:text-ink-900 data-[state=checked]:font-medium data-[state=checked]:text-ink-900"
+                value={toRadix(o.value)}
+                className={`relative flex cursor-pointer items-center rounded-lg pr-9 pl-3 text-ink-600 ${
+                  size === "xs" ? "min-h-8 py-1.5 text-xs" : "min-h-10 py-2 text-sm"
+                } outline-none select-none data-[highlighted]:bg-ink-50 data-[highlighted]:text-ink-900 data-[state=checked]:font-medium data-[state=checked]:text-ink-900`}
               >
                 <Select.ItemText>{o.label}</Select.ItemText>
                 <Select.ItemIndicator className="absolute right-3 inline-flex">

@@ -14,6 +14,7 @@ import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
 import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import SelectField from "@/components/ui/SelectField";
 
 const EMPTY_FORM = {
   name: "",
@@ -365,36 +366,21 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
             <Modal.Grid>
               {/* Sport selector */}
               <Modal.Field label={tc("sport")}>
-                <select
-                  className="input"
+                <SelectField
+                  ariaLabel={tc("sport")}
                   value={form.sport}
-                  onChange={(e) => handleSportChange(e.target.value as Sport)}
-                >
-                  {SPORTS.map((s) => (
-                    <option key={s} value={s}>
-                      {labels.sport(s)}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => handleSportChange(v as Sport)}
+                  options={SPORTS.map((s) => ({ value: s, label: labels.sport(s) }))}
+                />
               </Modal.Field>
               {/* Surface — filtered by sport */}
               <Modal.Field label={t("surface")}>
-                <select
-                  className="input"
+                <SelectField
+                  ariaLabel={t("surface")}
                   value={form.surface}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      surface: e.target.value as Surface,
-                    }))
-                  }
-                >
-                  {SURFACES_BY_SPORT[form.sport].map((s) => (
-                    <option key={s} value={s}>
-                      {labels.surface(s)}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => setForm((f) => ({ ...f, surface: v as Surface }))}
+                  options={SURFACES_BY_SPORT[form.sport].map((s) => ({ value: s, label: labels.surface(s) }))}
+                />
               </Modal.Field>
             </Modal.Grid>
             <Modal.Grid>
@@ -412,36 +398,28 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                 />
               </Modal.Field>
               <Modal.Field label={t("type")}>
-                <select
-                  className="input"
+                <SelectField
+                  ariaLabel={t("type")}
                   value={form.is_indoor ? "indoor" : "outdoor"}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      is_indoor: e.target.value === "indoor",
-                    }))
-                  }
-                >
-                  <option value="outdoor">{labels.inOut(false)}</option>
-                  <option value="indoor">{labels.inOut(true)}</option>
-                </select>
+                  onChange={(v) => setForm((f) => ({ ...f, is_indoor: v === "indoor" }))}
+                  options={[
+                    { value: "outdoor", label: labels.inOut(false) },
+                    { value: "indoor", label: labels.inOut(true) },
+                  ]}
+                />
               </Modal.Field>
             </Modal.Grid>
             <Modal.Grid>
               <Modal.Field label={t("status")}>
-                <select
-                  className="input"
+                <SelectField
+                  ariaLabel={t("status")}
                   value={form.is_active ? "active" : "inactive"}
-                  onChange={(e) =>
-                    setForm((f) => ({
-                      ...f,
-                      is_active: e.target.value === "active",
-                    }))
-                  }
-                >
-                  <option value="active">{t("active")}</option>
-                  <option value="inactive">{t("inactive")}</option>
-                </select>
+                  onChange={(v) => setForm((f) => ({ ...f, is_active: v === "active" }))}
+                  options={[
+                    { value: "active", label: t("active") },
+                    { value: "inactive", label: t("inactive") },
+                  ]}
+                />
               </Modal.Field>
             </Modal.Grid>
             <Modal.Field label={t("description")}>

@@ -15,6 +15,7 @@ import { normalizeRules } from "@/lib/bookingRules";
 import { Link } from "@/i18n/navigation";
 import { useLabels } from "@/hooks/useLabels";
 import { surfaceTone } from "@/lib/badges";
+import SelectField from "@/components/ui/SelectField";
 
 export type CourtWithClub = Court & {
   club?: {
@@ -55,7 +56,6 @@ export default function BookCourtsClient({
   );
 
   const {
-    register,
     handleSubmit,
     watch,
     setValue,
@@ -294,30 +294,37 @@ export default function BookCourtsClient({
               {/* Time + duration */}
               <Modal.Grid>
                 <Modal.Field label={t("startTime")}>
-                  <select
-                    className="input"
-                    disabled={isClosed}
-                    {...register("hour", { valueAsNumber: true })}
-                  >
-                    {isClosed && <option>{t("closed")}</option>}
-                    {hourOptions.map((h) => (
-                      <option key={h} value={h}>
-                        {String(h).padStart(2, "0")}:00
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="hour"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        ariaLabel={t("startTime")}
+                        disabled={isClosed}
+                        value={isClosed ? "closed" : String(field.value)}
+                        onChange={(v) => field.onChange(Number(v))}
+                        options={
+                          isClosed
+                            ? [{ value: "closed", label: t("closed") }]
+                            : hourOptions.map((h) => ({ value: String(h), label: `${String(h).padStart(2, "0")}:00` }))
+                        }
+                      />
+                    )}
+                  />
                 </Modal.Field>
                 <Modal.Field label={t("duration")}>
-                  <select
-                    className="input"
-                    {...register("duration", { valueAsNumber: true })}
-                  >
-                    {rules.durations.map((d) => (
-                      <option key={d} value={d}>
-                        {t("minutes", { n: d })}
-                      </option>
-                    ))}
-                  </select>
+                  <Controller
+                    name="duration"
+                    control={control}
+                    render={({ field }) => (
+                      <SelectField
+                        ariaLabel={t("duration")}
+                        value={String(field.value)}
+                        onChange={(v) => field.onChange(Number(v))}
+                        options={rules.durations.map((d) => ({ value: String(d), label: t("minutes", { n: d }) }))}
+                      />
+                    )}
+                  />
                 </Modal.Field>
               </Modal.Grid>
 

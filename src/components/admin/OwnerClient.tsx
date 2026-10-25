@@ -15,6 +15,7 @@ import {
   setPaidUntil,
   setPlan,
 } from "@/app/[locale]/admin/owner/actions";
+import SelectField from "@/components/ui/SelectField";
 
 export type OwnerClub = {
   id: string;
@@ -356,21 +357,16 @@ function ManageClub({
           <p className="text-sm font-semibold text-ink-900">{t("pay.title")}</p>
           <Modal.Grid>
             <Modal.Field label={t("cols.plan")}>
-              <select
-                className="input"
+              <SelectField
+                ariaLabel={t("cols.plan")}
                 value={plan}
-                onChange={(e) => {
-                  const p = e.target.value as PlanId;
+                onChange={(v) => {
+                  const p = v as PlanId;
                   setPlanChoice(p);
                   setAmount(String(priceFor(p, period)));
                 }}
-              >
-                {PLAN_IDS.map((p) => (
-                  <option key={p} value={p}>
-                    {tPlan(p)}
-                  </option>
-                ))}
-              </select>
+                options={PLAN_IDS.map((p) => ({ value: p, label: tPlan(p) }))}
+              />
             </Modal.Field>
             <Modal.Field label={t("payments.amount")}>
               <input
@@ -429,17 +425,14 @@ function ManageClub({
 
           <Modal.Field label={t("other.planOnly")}>
             <div className="flex gap-2">
-              <select
-                className="input flex-1"
-                value={plan}
-                onChange={(e) => setPlanChoice(e.target.value as PlanId)}
-              >
-                {PLAN_IDS.map((p) => (
-                  <option key={p} value={p}>
-                    {tPlan(p)}
-                  </option>
-                ))}
-              </select>
+              <div className="min-w-0 flex-1">
+                <SelectField
+                  ariaLabel={t("other.planOnly")}
+                  value={plan}
+                  onChange={(v) => setPlanChoice(v as PlanId)}
+                  options={PLAN_IDS.map((p) => ({ value: p, label: tPlan(p) }))}
+                />
+              </div>
               <button
                 type="button"
                 disabled={pending || plan === club.plan}

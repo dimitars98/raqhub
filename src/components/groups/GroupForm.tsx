@@ -16,6 +16,7 @@ import {
   type PreviewRow,
 } from "@/app/[locale]/admin/groups/actions";
 import type { Group, GroupBreak, Sport } from "@/types/database";
+import SelectField from "@/components/ui/SelectField";
 
 export type FormCourt = { id: string; name: string; sport: Sport };
 export type FormCoach = { id: string; name: string };
@@ -227,18 +228,11 @@ export default function GroupForm({
                 />
               </Field>
               <Field label={tf("coach")}>
-                <select
-                  className="input"
+                <SelectField
                   value={form.coach_id ?? ""}
-                  onChange={(e) => set("coach_id", e.target.value || null)}
-                >
-                  <option value="">{tf("noCoach")}</option>
-                  {coaches.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => set("coach_id", v || null)}
+                  options={[{ value: "", label: tf("noCoach") }, ...coaches.map((c) => ({ value: c.id, label: c.name }))]}
+                />
               </Field>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -378,17 +372,11 @@ export default function GroupForm({
                 />
               </Field>
               <Field label={tf("court")}>
-                <select
-                  className="input"
+                <SelectField
                   value={form.court_id ?? ""}
-                  onChange={(e) => set("court_id", e.target.value || null)}
-                >
-                  {courtChoices.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(v) => set("court_id", v || null)}
+                  options={courtChoices.map((c) => ({ value: c.id, label: c.name }))}
+                />
               </Field>
             </div>
 
@@ -559,18 +547,12 @@ export default function GroupForm({
                   <span className="text-[13px] font-medium text-ink-900">{tf("memberPrice")}</span>
                   <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-2">
                     <Money value={memberPriceText} onChange={setMemberPriceText} placeholder={tf("optional")} />
-                    <select
-                      aria-label={tf("memberPlan")}
-                      className="input min-w-0"
+                    <SelectField
+                      ariaLabel={tf("memberPlan")}
                       value={form.member_plan_id ?? ""}
-                      onChange={(e) => set("member_plan_id", e.target.value || null)}
-                    >
-                      {plans.map((p) => (
-                        <option key={p.id} value={p.id}>
-                          {p.name}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={(v) => set("member_plan_id", v || null)}
+                      options={plans.map((p) => ({ value: p.id, label: p.name }))}
+                    />
                   </div>
                 </div>
               )}

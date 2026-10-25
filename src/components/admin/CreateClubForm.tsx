@@ -1,13 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
 import { Building2 } from "lucide-react";
 import { useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { announceNewClub } from "@/app/actions/clubs";
 import { intlLocale } from "@/lib/dateLocale";
+import SelectField from "@/components/ui/SelectField";
 
 type CreateClubValues = {
   name: string;
@@ -60,6 +61,7 @@ export default function CreateClubForm({
   const router = useRouter();
   const {
     register,
+    control,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
@@ -171,19 +173,18 @@ export default function CreateClubForm({
             <label htmlFor="club-country" className={labelClass}>
               {t("country")}
             </label>
-            <select
-              id="club-country"
-              autoComplete="country"
-              className="input"
-              {...register("country")}
-            >
-              {countries.map(([code, label]) => (
-                // Server and browser may word a country slightly differently.
-                <option key={code} value={code} suppressHydrationWarning>
-                  {label}
-                </option>
-              ))}
-            </select>
+            <Controller
+              name="country"
+              control={control}
+              render={({ field }) => (
+                <SelectField
+                  id="club-country"
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                  options={countries.map(([code, label]) => ({ value: code, label }))}
+                />
+              )}
+            />
           </div>
         </div>
 
