@@ -23,6 +23,7 @@ import {
   Users,
   X,
   UsersRound,
+  CalendarCheck,
 } from "lucide-react";
 import {
   AnimatePresence,
@@ -32,7 +33,7 @@ import {
 } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import { useSidebar } from "./SidebarContext";
-import { TONES, type AreaRole } from "@/types/tones";
+import type { AreaRole } from "@/types/tones";
 import { LogoMark } from "@/components/ui/Logo";
 import { initials } from "@/lib/avatar";
 
@@ -47,11 +48,16 @@ interface NavGroup {
   items: NavItem[];
 }
 
-/**
- * All role-specific colors in one place.
- * `text` is darker than the brand color on purpose: lime (#7aad12) on a pale
- * background is too faint to read, so lime is used only for the bar and icon.
- */
+// The sidebar is dark: the page's darkest green with a soft lime glow at the
+// top and darker green at the bottom, so it reads like a gradient. Faint
+// court lines sit in the bottom corner, like on the featured pricing card.
+const SIDEBAR_BG = {
+  backgroundColor: "#111c0a",
+  backgroundImage: [
+    "radial-gradient(120% 55% at 0% 0%, rgba(168,216,50,0.16), transparent 60%)",
+    "linear-gradient(180deg, rgba(17,28,10,0) 40%, #0a1205 100%)",
+  ].join(", "),
+};
 
 /** A link is active on its own page and on anything below it (/admin/members/42). */
 const isActive = (pathname: string, href: string) =>
@@ -94,7 +100,6 @@ function SidebarContent({
   layoutGroupId,
 }: SidebarContentProps) {
   const tc = useTranslations("common");
-  const tone = TONES[role];
   const userInitials = initials(userName);
 
   // Labels are never removed when collapsing. The sidebar gets narrower and
@@ -106,11 +111,29 @@ function SidebarContent({
     <aside
       className={`${
         collapsed ? "w-16" : "w-60"
-      } flex h-full flex-col overflow-hidden border-r border-[#e8ede4] bg-white transition-[width] duration-200`}
+      } relative isolate flex h-full flex-col overflow-hidden border-r border-white/5 text-white transition-[width] duration-200`}
+      style={SIDEBAR_BG}
+      data-role={role}
     >
+      {/* Faint court lines in the bottom corner */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 200 200"
+        fill="none"
+        className="pointer-events-none absolute -right-16 -bottom-14 -z-10 size-64 -rotate-12 text-[#a8d832] opacity-[0.07]"
+      >
+        <g stroke="currentColor" strokeWidth="3">
+          <rect x="20" y="20" width="160" height="160" />
+          <line x1="50" y1="20" x2="50" y2="180" />
+          <line x1="150" y1="20" x2="150" y2="180" />
+          <line x1="50" y1="100" x2="150" y2="100" />
+          <line x1="100" y1="100" x2="100" y2="180" />
+        </g>
+      </svg>
+
       {/* Logo */}
       <div
-        className={`flex h-[60px] shrink-0 items-center border-b border-[#e8ede4] px-4 ${
+        className={`flex h-[60px] shrink-0 items-center border-b border-white/10 px-4 ${
           collapsed ? "justify-center" : "justify-between"
         }`}
       >
@@ -119,18 +142,23 @@ function SidebarContent({
             href={homeHref}
             onClick={onNavClick}
             aria-label="Kortello"
-            className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-[#111c0a]"
+            className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-white"
           >
             <LogoMark className="size-7" />
             {!collapsed && (
               <span>
-                Kort<span className="text-[#7aad12]">ello</span>
+                Kort<span className="text-[#a8d832]">ello</span>
               </span>
             )}
           </Link>
           {!collapsed && (
             <span
-              className={`whitespace-nowrap rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${tone.badge}`}
+              className={`whitespace-nowrap rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${
+                role === "member"
+                  ? // Players: blue, so the two sides of the app are told apart at a glance.
+                    "border-[#378add]/40 bg-[#378add]/15 text-[#8cc8f5]"
+                  : "border-white/10 bg-white/[0.08] text-[#a8d832]"
+              }`}
             >
               {badgeLabel}
             </span>
@@ -142,7 +170,7 @@ function SidebarContent({
             onClick={onClose}
             data-drawer-close
             aria-label={tc("closeMenu")}
-            className="grid size-9 place-items-center rounded-lg text-[#6e7f65] transition-colors hover:bg-[#f8f9f7] hover:text-[#111c0a] lg:hidden"
+            className="grid size-9 place-items-center rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-white lg:hidden"
           >
             <X size={18} aria-hidden="true" />
           </button>
@@ -158,7 +186,7 @@ function SidebarContent({
           {nav.map((group) => (
             <div key={group.group} className="mb-2">
               <div
-                className={`px-2 py-2 text-[11px] font-bold tracking-[.08em] whitespace-nowrap text-[#6e7f65] uppercase ${fade}`}
+                className={`px-2 py-2 text-[11px] font-bold tracking-[.08em] whitespace-nowrap text-white/40 uppercase ${fade}`}
               >
                 {group.group}
               </div>
@@ -172,21 +200,21 @@ function SidebarContent({
                     onClick={onNavClick}
                     aria-current={active ? "page" : undefined}
                     title={collapsed ? label : undefined}
-                    className={`relative mb-0.5 flex h-10 items-center gap-3 rounded-lg border px-3.5 text-sm whitespace-nowrap transition-colors duration-150 ${
+                    className={`group relative mb-0.5 flex h-10 items-center gap-3 rounded-lg px-3.5 text-sm whitespace-nowrap transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#a8d832]/60 focus-visible:outline-none ${
                       active
-                        ? `${tone.active} font-medium`
-                        : // The transparent border keeps the text from shifting 1px when a link becomes active.
-                          "border-transparent text-[#55664c] hover:bg-[#f8f9f7] hover:text-[#111c0a]"
+                        ? "font-semibold text-[#111c0a]"
+                        : "text-white/65 hover:bg-white/[0.07] hover:text-white"
                     }`}
                   >
+                    {/* The lime pill slides to the page you open. */}
                     {active && (
                       <motion.span
-                        layoutId="active-bar"
-                        className={`absolute top-1/2 -left-px h-[60%] w-[3px] -translate-y-1/2 rounded-r-full ${tone.bar}`}
+                        layoutId="active-pill"
+                        className="absolute inset-0 -z-10 rounded-lg bg-[#a8d832] shadow-[0_6px_18px_-8px_rgba(168,216,50,0.7)]"
                         transition={{
                           type: "spring",
                           stiffness: 400,
-                          damping: 30,
+                          damping: 34,
                         }}
                       />
                     )}
@@ -194,7 +222,7 @@ function SidebarContent({
                       size={18}
                       strokeWidth={2}
                       aria-hidden="true"
-                      className={`shrink-0 ${active ? tone.accent : ""}`}
+                      className={`shrink-0 ${active ? "" : "text-white/50 transition-colors group-hover:text-[#a8d832]"}`}
                     />
                     <span className={fade}>{label}</span>
                   </Link>
@@ -206,21 +234,19 @@ function SidebarContent({
       </nav>
 
       {/* Footer */}
-      <div className="shrink-0 border-t border-[#e8ede4] p-2">
+      <div className="shrink-0 border-t border-white/10 p-2">
         <div
           className={`flex items-center gap-2.5 px-2 py-2 ${collapsed ? "flex-col" : ""}`}
         >
-          <div
-            className={`flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${tone.avatar}`}
-          >
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-[#a8d832] ring-1 ring-white/15">
             {userInitials}
           </div>
           {!collapsed && (
             <div className="min-w-0 flex-1">
-              <div className="truncate text-[13px] font-medium text-[#111c0a]">
+              <div className="truncate text-[13px] font-medium text-white">
                 {userName}
               </div>
-              <div className="truncate text-[11px] text-[#6e7f65]">
+              <div className="truncate text-[11px] text-white/50">
                 {clubName ?? playerLabel}
               </div>
             </div>
@@ -230,7 +256,7 @@ function SidebarContent({
             onClick={onSignOut}
             title={signOutLabel}
             aria-label={signOutLabel}
-            className="grid size-8 shrink-0 place-items-center rounded-lg text-[#6e7f65] transition-colors hover:bg-[#f8f9f7] hover:text-[#111c0a]"
+            className="grid size-8 shrink-0 place-items-center rounded-lg text-white/50 transition-colors hover:bg-white/10 hover:text-white"
           >
             <LogOut size={16} strokeWidth={2} aria-hidden="true" />
           </button>
@@ -451,7 +477,7 @@ export default function Sidebar({
       group: t("play"),
       items: [
         { label: t("myBookings"), href: "/my-bookings", icon: CalendarDays },
-        { label: t("bookACourt"), href: "/book", icon: BookOpen },
+        { label: t("bookACourt"), href: "/book", icon: CalendarCheck },
         { label: t("openMatches"), href: "/matches", icon: Swords },
         { label: t("findACoach"), href: "/coaches", icon: Trophy },
         { label: t("myGroups"), href: "/groups", icon: UsersRound },

@@ -1277,7 +1277,18 @@
   "showAll": "Voir tous les clubs",
   "closedDay": "Le club est fermé ce jour-là. Choisissez un autre jour.",
   "cancel": "Annuler",
-  "book": "Réserver"
+  "book": "Réserver",
+  "search": "Rechercher des courts",
+  "searchPlaceholder": "Court, club ou ville",
+  "sport": "Sport",
+  "allSports": "Tous",
+  "empty": "Aucun court ne peut encore être réservé en ligne.",
+  "noMatch": "Aucun court ne correspond. Essayez une autre recherche ou un autre sport.",
+  "clubPage": "Page du club",
+  "perHour": "/ heure",
+  "today": "Auj.",
+  "noTimes": "Tout est pris ce jour-là. Essayez un autre jour ou une réservation plus courte.",
+  "payAtClub": "Vous payez au club."
  },
  "coachesList": {
   "title": "Entraîneurs",

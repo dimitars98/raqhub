@@ -1277,7 +1277,18 @@
   "showAll": "Show all clubs",
   "closedDay": "The club is closed on this day. Pick another day.",
   "cancel": "Cancel",
-  "book": "Book"
+  "book": "Book",
+  "search": "Search courts",
+  "searchPlaceholder": "Court, club or city",
+  "sport": "Sport",
+  "allSports": "All",
+  "empty": "No courts can be booked online yet.",
+  "noMatch": "No courts match. Try another search or sport.",
+  "clubPage": "Club page",
+  "perHour": "/ hour",
+  "today": "Today",
+  "noTimes": "Every time is taken on this day. Try another day or a shorter booking.",
+  "payAtClub": "You pay at the club."
  },
  "coachesList": {
   "title": "Coaches",

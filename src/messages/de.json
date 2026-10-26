@@ -1277,7 +1277,18 @@
   "showAll": "Alle Clubs anzeigen",
   "closedDay": "An diesem Tag ist der Club geschlossen. Bitte wählen Sie einen anderen Tag.",
   "cancel": "Abbrechen",
-  "book": "Buchen"
+  "book": "Buchen",
+  "search": "Plätze suchen",
+  "searchPlaceholder": "Platz, Club oder Stadt",
+  "sport": "Sportart",
+  "allSports": "Alle",
+  "empty": "Noch keine Plätze online buchbar.",
+  "noMatch": "Keine passenden Plätze. Versuchen Sie eine andere Suche oder Sportart.",
+  "clubPage": "Club-Seite",
+  "perHour": "/ Stunde",
+  "today": "Heute",
+  "noTimes": "An diesem Tag ist alles belegt. Versuchen Sie einen anderen Tag oder eine kürzere Buchung.",
+  "payAtClub": "Sie bezahlen im Club."
  },
  "coachesList": {
   "title": "Trainer",

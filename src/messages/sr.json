@@ -1277,7 +1277,18 @@
   "showAll": "Prikaži sve klubove",
   "closedDay": "Klub ne radi tog dana. Izaberite drugi dan.",
   "cancel": "Otkaži",
-  "book": "Rezerviši"
+  "book": "Rezerviši",
+  "search": "Pretraži terene",
+  "searchPlaceholder": "Teren, klub ili grad",
+  "sport": "Sport",
+  "allSports": "Svi",
+  "empty": "Još nema terena za onlajn rezervaciju.",
+  "noMatch": "Nema odgovarajućih terena. Probajte drugu pretragu ili sport.",
+  "clubPage": "Stranica kluba",
+  "perHour": "/ sat",
+  "today": "Danas",
+  "noTimes": "Svi termini su zauzeti tog dana. Probajte drugi dan ili kraću rezervaciju.",
+  "payAtClub": "Plaćate u klubu."
  },
  "coachesList": {
   "title": "Treneri",

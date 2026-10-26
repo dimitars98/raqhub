@@ -1277,7 +1277,18 @@
   "showAll": "Shfaq të gjitha klubet",
   "closedDay": "Klubi është i mbyllur këtë ditë. Zgjidhni një ditë tjetër.",
   "cancel": "Anulo",
-  "book": "Rezervo"
+  "book": "Rezervo",
+  "search": "Kërko fusha",
+  "searchPlaceholder": "Fushë, klub ose qytet",
+  "sport": "Sporti",
+  "allSports": "Të gjitha",
+  "empty": "Ende nuk ka fusha për rezervim online.",
+  "noMatch": "Asnjë fushë nuk përputhet. Provoni një kërkim ose sport tjetër.",
+  "clubPage": "Faqja e klubit",
+  "perHour": "/ orë",
+  "today": "Sot",
+  "noTimes": "Të gjitha oraret janë të zëna këtë ditë. Provoni një ditë tjetër ose një rezervim më të shkurtër.",
+  "payAtClub": "Paguani në klub."
  },
  "coachesList": {
   "title": "Trajnerët",

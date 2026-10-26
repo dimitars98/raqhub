@@ -1277,7 +1277,18 @@
   "showAll": "Mostra tutti i club",
   "closedDay": "Il club è chiuso in questo giorno. Scegli un altro giorno.",
   "cancel": "Annulla",
-  "book": "Prenota"
+  "book": "Prenota",
+  "search": "Cerca campi",
+  "searchPlaceholder": "Campo, club o città",
+  "sport": "Sport",
+  "allSports": "Tutti",
+  "empty": "Non ci sono ancora campi prenotabili online.",
+  "noMatch": "Nessun campo corrisponde. Prova un’altra ricerca o un altro sport.",
+  "clubPage": "Pagina del club",
+  "perHour": "/ ora",
+  "today": "Oggi",
+  "noTimes": "Questo giorno è tutto occupato. Prova un altro giorno o una prenotazione più breve.",
+  "payAtClub": "Paghi al club."
  },
  "coachesList": {
   "title": "Maestri",
