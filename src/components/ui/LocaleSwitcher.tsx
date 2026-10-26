@@ -147,7 +147,7 @@ export default function LocaleSwitcher({
               : "border-ink-200 text-ink-600 hover:border-brand-600 hover:bg-brand-50"
           }`}
         >
-          <Globe className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+          {/* <Globe className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" /> */}
           {/* <span>{current.label}</span> */}
           <span className="relative h-5 w-5 shrink-0 overflow-hidden rounded-full">
             {(() => {

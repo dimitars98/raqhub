@@ -99,7 +99,7 @@ export default function DashboardTopbar({
       <div className="flex items-center gap-2">
         <LocaleSwitcher size="sm" />
         <NotificationBell userId={userId} area={area} />
-        <Help />
+        <Help area={area} />
       </div>
     </header>
   );
