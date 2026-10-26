@@ -1179,6 +1179,42 @@ export type Database = {
         }
         Relationships: []
       }
+      court_closures: {
+        Row: {
+          id: string
+          club_id: string
+          court_ids: string[] | null
+          starts_at: string
+          ends_at: string
+          reason: string
+          note: string | null
+          created_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          club_id: string
+          court_ids?: string[] | null
+          starts_at: string
+          ends_at: string
+          reason?: string
+          note?: string | null
+          created_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          club_id?: string
+          court_ids?: string[] | null
+          starts_at?: string
+          ends_at?: string
+          reason?: string
+          note?: string | null
+          created_by?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -1358,7 +1394,25 @@ export type Database = {
         Returns: {
           ends_at: string
           starts_at: string
+          closed: boolean
         }[]
+      }
+      close_courts: {
+        Args: {
+          p_club: string
+          p_courts: string[] | null
+          p_starts: string
+          p_ends: string
+          p_reason: string
+          p_note?: string | null
+          p_reason_text?: string | null
+        }
+        Returns: Json
+      }
+      reopen_courts: { Args: { p_closure: string }; Returns: undefined }
+      upcoming_club_closures: {
+        Args: { p_club: string }
+        Returns: { starts_at: string; ends_at: string; reason: string; courts: string[] | null }[]
       }
     }
     Enums: {

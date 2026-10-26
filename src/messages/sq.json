@@ -237,7 +237,8 @@
   "cancelSeriesTitle": "Anulo një rezervim javor",
   "cancelSeriesText": "Rezervimi më {date} përsëritet çdo javë. Të anulohet vetëm ky, apo ky dhe të gjitha javët pas tij?",
   "cancelOnlyThis": "Vetëm këtë",
-  "cancelThisAndLater": "Këtë dhe javët pas"
+  "cancelThisAndLater": "Këtë dhe javët pas",
+  "courtClosed": "Fusha është e mbyllur në këtë orë."
  },
  "booking": {
   "bookThisCourt": "Rezervo këtë fushë",
@@ -728,6 +729,19 @@
    "feeSubject": "{group}: pagesa për {month}",
    "feeIntro": "Një kujtesë miqësore: pagesa e {name} për {month} për {group} ende nuk është shënuar si e paguar.",
    "feeFooter": "Dërguar nga Kortello në emër të {club}. E keni paguar tashmë? Atëherë nuk keni asgjë për të bërë: klubi do ta shënojë."
+  },
+  "closed": {
+   "subject": "Anuluar: {what}, {date}. Fusha është e mbyllur",
+   "intro": "{club} e ka mbyllur fushën në këtë orë, prandaj rezervimi juaj u anulua. Mund të rezervoni një orë tjetër në aplikacion.",
+   "reason": "Arsyeja",
+   "reasons": {
+    "maintenance": "Riparime",
+    "weather": "Moti",
+    "tournament": "Turne",
+    "event": "Event",
+    "holiday": "Festë",
+    "other": "Tjetër"
+   }
   }
  },
  "billing": {
@@ -1295,7 +1309,8 @@
   "rulePerDay": "Mund të bëni deri në {n} rezervime në ditë në këtë klub.",
   "ruleCancel": "Ky klub lejon anulimin vetëm deri {n} orë para fillimit. Ju lutemi telefononi klubin.",
   "ruleNoShows": "Rezervimi online është pezulluar pas {n} rezervimeve të humbura. Ju lutemi kontaktoni klubin.",
-  "noCourtFree": "Të gjitha fushat janë të zëna në atë orë. Zgjidhni një orë tjetër."
+  "noCourtFree": "Të gjitha fushat janë të zëna në atë orë. Zgjidhni një orë tjetër.",
+  "courtClosed": "Kjo fushë është e mbyllur në atë orë. Zgjidhni një orë ose fushë tjetër."
  },
  "settingsErrors": {
   "sevenDays": "Nevojiten shtatë ditë",
@@ -2579,6 +2594,9 @@
    },
    "level_confirmed": {
     "title": "<b>{club}</b> e verifikoi nivelin tuaj: {level}"
+   },
+   "court_closed": {
+    "title": "<b>{club}</b> mbylli {court}. Rezervimi juaj u anulua"
    }
   }
  },
@@ -2837,6 +2855,11 @@
    "items": [
     {
      "date": "tet 2026",
+     "title": "Mbyllja e fushave",
+     "body": "Mbyllni fushat për riparime, shi ose festë. Rezervimet në atë kohë anulohen dhe lojtarët mësojnë arsyen."
+    },
+    {
+     "date": "tet 2026",
      "title": "Ndeshje të hapura",
      "body": "Gjeni lojtarë në nivelin tuaj, ose hapni fushën tuaj për të tjerët."
     },
@@ -3089,7 +3112,70 @@
    "pgen_language": {
     "q": "Si ta ndryshoj gjuhën?",
     "a": "Përdorni butonin e gjuhës në krye të faqes. Emailet për rezervimet e ardhshme do t'ju vijnë në atë gjuhë."
+   },
+   "ct_close": {
+    "q": "Si ta mbyll një fushë për riparime, shi ose festë?",
+    "a": "Shtypni Mbyll fushat te faqja Fushat ose te Orari. Zgjidhni fushat, ditët ose orët dhe arsyen. Rezervimet e bëra për atë kohë anulohen dhe lojtarët marrin njoftim dhe email me arsyen. Askush nuk mund të rezervojë derisa të mbarojë mbyllja ose të shtypni Rihap."
    }
+  }
+ },
+ "closures": {
+  "button": "Mbyll fushat",
+  "title": "Mbyll fushat",
+  "intro": "Askush nuk mund t'i rezervojë fushat sa janë të mbyllura. Rezervimet e bëra për atë kohë anulohen dhe lojtarët njoftohen për arsyen.",
+  "courts": "Fushat",
+  "allCourts": "Të gjitha fushat",
+  "removedCourt": "Një fushë e fshirë",
+  "when": "Kur",
+  "wholeDays": "Ditë të plota",
+  "someHours": "Disa orë",
+  "fromDay": "Nga",
+  "toDay": "Deri (përfshirë)",
+  "date": "Dita",
+  "fromTime": "Nga",
+  "toTime": "Deri",
+  "reason": "Arsyeja",
+  "reasons": {
+   "maintenance": "Riparime",
+   "weather": "Moti",
+   "tournament": "Turne",
+   "event": "Event",
+   "holiday": "Festë",
+   "other": "Tjetër"
+  },
+  "note": "Shënim për lojtarët (opsional)",
+  "notePlaceholder": "p.sh. Po rilyhen vijat",
+  "checking": "Po kontrollojmë rezervimet…",
+  "previewFailed": "Nuk i kontrolluam dot rezervimet. Fushat mund t'i mbyllni gjithsesi.",
+  "previewNone": "Nuk ka asgjë të rezervuar në atë kohë.",
+  "previewBookings": "{n, plural, one {# rezervim do të anulohet} other {# rezervime do të anulohen}}",
+  "previewGroups": "{n, plural, one {# seancë grupi do të anulohet} other {# seanca grupi do të anulohen}}",
+  "previewTold": "Të gjithë njoftohen me njoftim dhe email, me arsyen.",
+  "cancel": "Anulo",
+  "confirm": "Mbyll fushat",
+  "confirmCancel": "Mbyll dhe anulo {n}",
+  "saving": "Po mbyllet…",
+  "doneCancelled": "{n, plural, =0 {Fushat u mbyllën. Nuk kishte rezervime në atë kohë.} one {Fushat u mbyllën. U anulua # rezervim.} other {Fushat u mbyllën. U anuluan # rezervime.}}",
+  "doneEmailed": "{n, plural, one {U dërgua # email.} other {U dërguan # email-e.}}",
+  "reopened": "Fushat janë sërish të hapura. Rezervimet e anuluara mbeten të anuluara.",
+  "closed": "Mbyllur",
+  "now": "Tani",
+  "listTitle": "Fusha të mbyllura",
+  "listHint": "Riparime, shi, turne, festë: mbyllni fushat që askush të mos i rezervojë.",
+  "listEmpty": "Asnjë fushë nuk është e mbyllur.",
+  "reopen": "Rihap",
+  "reopening": "Po rihapet…",
+  "reopenHint": "Hapni sërish fushat. Rezervimet e anuluara mbeten të anuluara.",
+  "publicTitle": "Fusha të mbyllura",
+  "wholeClub": "I gjithë klubi",
+  "errors": {
+   "notAllowed": "Nuk mund të mbyllni fusha në këtë klub.",
+   "locked": "Llogaria juaj është vetëm për lexim. Zgjidhni një plan për të bërë ndryshime.",
+   "order": "Fundi duhet të jetë pas fillimit.",
+   "passed": "Ajo kohë ka kaluar tashmë.",
+   "tooLong": "Një mbyllje mund të zgjasë deri në një vit.",
+   "noCourts": "Zgjidhni të paktën një fushë.",
+   "failed": "Fushat nuk u mbyllën. Provoni përsëri."
   }
  }
 }

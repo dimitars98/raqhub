@@ -237,7 +237,8 @@
   "cancelSeriesTitle": "Otkazivanje nedeljne rezervacije",
   "cancelSeriesText": "Rezervacija za {date} se ponavlja svake nedelje. Da otkažete samo ovu, ili ovu i sve kasnije nedelje?",
   "cancelOnlyThis": "Samo ovu",
-  "cancelThisAndLater": "Ovu i kasnije nedelje"
+  "cancelThisAndLater": "Ovu i kasnije nedelje",
+  "courtClosed": "Teren je zatvoren u ovom terminu."
  },
  "booking": {
   "bookThisCourt": "Rezerviši ovaj teren",
@@ -728,6 +729,19 @@
    "feeSubject": "{group}: članarina za {month}",
    "feeIntro": "Podsetnik: članarina za {month} za {name} u grupi {group} još nije evidentirana kao plaćena.",
    "feeFooter": "Poslao Kortello u ime kluba {club}. Već ste platili? Onda ne morate ništa da radite, klub će to označiti."
+  },
+  "closed": {
+   "subject": "Otkazano: {what}, {date}. Teren je zatvoren",
+   "intro": "{club} je zatvorio teren u ovo vreme, pa je vaša rezervacija otkazana. Drugi termin možete da rezervišete u aplikaciji.",
+   "reason": "Razlog",
+   "reasons": {
+    "maintenance": "Popravke",
+    "weather": "Vreme",
+    "tournament": "Turnir",
+    "event": "Događaj",
+    "holiday": "Praznik",
+    "other": "Drugo"
+   }
   }
  },
  "billing": {
@@ -1295,7 +1309,8 @@
   "rulePerDay": "U ovom klubu možete napraviti najviše {n} rezervacija dnevno.",
   "ruleCancel": "Ovaj klub dozvoljava otkazivanje najkasnije {n} h pre početka. Pozovite klub.",
   "ruleNoShows": "Onlajn rezervisanje je pauzirano posle {n} propuštenih rezervacija. Javite se klubu.",
-  "noCourtFree": "Svi tereni su zauzeti u to vreme. Izaberite drugo vreme."
+  "noCourtFree": "Svi tereni su zauzeti u to vreme. Izaberite drugo vreme.",
+  "courtClosed": "Ovaj teren je zatvoren u to vreme. Izaberite drugo vreme ili teren."
  },
  "settingsErrors": {
   "sevenDays": "Potrebno je sedam dana",
@@ -2579,6 +2594,9 @@
    },
    "level_confirmed": {
     "title": "<b>{club}</b> je proverio vaš nivo: {level}"
+   },
+   "court_closed": {
+    "title": "<b>{club}</b> je zatvorio {court}. Vaša rezervacija je otkazana"
    }
   }
  },
@@ -2837,6 +2855,11 @@
    "items": [
     {
      "date": "okt 2026",
+     "title": "Zatvaranje terena",
+     "body": "Zatvorite terene zbog popravki, kiše ili praznika. Rezervacije u to vreme se otkazuju, a igrači saznaju razlog."
+    },
+    {
+     "date": "okt 2026",
      "title": "Otvoreni mečevi",
      "body": "Pronađite igrače svog nivoa ili otvorite svoj teren za druge."
     },
@@ -3089,7 +3112,70 @@
    "pgen_language": {
     "q": "Kako da promenim jezik?",
     "a": "Dugmetom za jezik na vrhu stranice. E-poruke za vaše sledeće rezervacije stižu na tom jeziku."
+   },
+   "ct_close": {
+    "q": "Kako da zatvorim teren zbog popravki, kiše ili praznika?",
+    "a": "Dodirnite Zatvori terene na stranici Tereni ili u Rasporedu. Izaberite terene, dane ili sate i razlog. Rezervacije koje već postoje za to vreme se otkazuju, a igrači dobijaju obaveštenje i e-poruku sa razlogom. Niko ne može da rezerviše dok zatvaranje ne istekne ili dok ne dodirnete Ponovo otvori."
    }
+  }
+ },
+ "closures": {
+  "button": "Zatvori terene",
+  "title": "Zatvori terene",
+  "intro": "Dok su tereni zatvoreni, niko ne može da ih rezerviše. Rezervacije koje već postoje za to vreme se otkazuju, a igrači saznaju razlog.",
+  "courts": "Tereni",
+  "allCourts": "Svi tereni",
+  "removedCourt": "Uklonjen teren",
+  "when": "Kada",
+  "wholeDays": "Celi dani",
+  "someHours": "Nekoliko sati",
+  "fromDay": "Od",
+  "toDay": "Do (uključujući)",
+  "date": "Dan",
+  "fromTime": "Od",
+  "toTime": "Do",
+  "reason": "Razlog",
+  "reasons": {
+   "maintenance": "Popravke",
+   "weather": "Vreme",
+   "tournament": "Turnir",
+   "event": "Događaj",
+   "holiday": "Praznik",
+   "other": "Drugo"
+  },
+  "note": "Poruka igračima (opciono)",
+  "notePlaceholder": "npr. Linije se ponovo farbaju",
+  "checking": "Proveravamo rezervacije…",
+  "previewFailed": "Nismo mogli da proverimo rezervacije. Ipak možete da zatvorite terene.",
+  "previewNone": "U to vreme ništa nije rezervisano.",
+  "previewBookings": "{n, plural, one {# rezervacija će biti otkazana} few {# rezervacije će biti otkazane} other {# rezervacija će biti otkazano}}",
+  "previewGroups": "{n, plural, one {# grupni termin će biti otkazan} few {# grupna termina će biti otkazana} other {# grupnih termina će biti otkazano}}",
+  "previewTold": "Svi dobijaju obaveštenje i e-poruku sa razlogom.",
+  "cancel": "Otkaži",
+  "confirm": "Zatvori terene",
+  "confirmCancel": "Zatvori i otkaži {n}",
+  "saving": "Zatvaranje…",
+  "doneCancelled": "{n, plural, =0 {Tereni su zatvoreni. U to vreme ništa nije bilo rezervisano.} one {Tereni su zatvoreni. Otkazana je # rezervacija.} few {Tereni su zatvoreni. Otkazane su # rezervacije.} other {Tereni su zatvoreni. Otkazano je # rezervacija.}}",
+  "doneEmailed": "{n, plural, one {Poslata je # e-poruka.} few {Poslate su # e-poruke.} other {Poslato je # e-poruka.}}",
+  "reopened": "Tereni su ponovo otvoreni. Otkazane rezervacije ostaju otkazane.",
+  "closed": "Zatvoreno",
+  "now": "Sada",
+  "listTitle": "Zatvoreni tereni",
+  "listHint": "Popravke, kiša, turnir, praznik: zatvorite terene da ih niko ne rezerviše.",
+  "listEmpty": "Nijedan teren nije zatvoren.",
+  "reopen": "Ponovo otvori",
+  "reopening": "Otvaranje…",
+  "reopenHint": "Ponovo otvorite terene. Otkazane rezervacije ostaju otkazane.",
+  "publicTitle": "Zatvoreni tereni",
+  "wholeClub": "Ceo klub",
+  "errors": {
+   "notAllowed": "Ne možete da zatvarate terene u ovom klubu.",
+   "locked": "Vaš nalog je samo za čitanje. Izaberite plan da biste pravili izmene.",
+   "order": "Kraj mora biti posle početka.",
+   "passed": "To vreme je već prošlo.",
+   "tooLong": "Zatvaranje može trajati najviše godinu dana.",
+   "noCourts": "Izaberite bar jedan teren.",
+   "failed": "Tereni nisu mogli da se zatvore. Pokušajte ponovo."
   }
  }
 }

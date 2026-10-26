@@ -6,7 +6,7 @@ import type { Area } from "@/lib/notifications";
 
 /** Admin pages, by the part of the path after /admin/. */
 const ADMIN_PAGES: Record<string, string[]> = {
-  timetable: ["tt_read", "tt_add", "tt_days", "bk_weekly"],
+  timetable: ["tt_read", "tt_add", "ct_close", "tt_days", "bk_weekly"],
   bookings: ["tt_add", "bk_weekly", "bk_cancel", "bk_noshow", "bk_export"],
   dashboard: ["db_numbers", "db_share", "ga_plan"],
   members: ["mb_add", "mb_discount", "mb_bulk", "mb_ending"],
@@ -14,7 +14,7 @@ const ADMIN_PAGES: Record<string, string[]> = {
   coaches: ["co_add", "co_lessons"],
   groups: ["gr_create", "gr_register", "gr_fees", "gr_waiting"],
   matches: ["om_what", "om_release", "om_levels"],
-  courts: ["ct_add", "ct_off", "ct_price"],
+  courts: ["ct_add", "ct_close", "ct_off", "ct_price"],
   tournaments: ["tn_create", "tn_draw"],
   analytics: ["an_read"],
   settings: ["st_hours", "st_rules", "bk_noshow", "st_delete"],

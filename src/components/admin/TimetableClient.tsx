@@ -2,13 +2,18 @@
 
 import { dateLocale } from "@/lib/dateLocale";
 import { useLocale, useTranslations } from "next-intl";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useTransition } from "react";
 import { format, addDays, startOfDay } from "date-fns";
 import type { Booking, Court, Member, Profile } from "@/types/database";
-import { CalendarRange } from "lucide-react";
+import { Ban, CalendarRange } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useLabels } from "@/hooks/useLabels";
 import { DAY_HOURS } from "@/lib/openingHours";
+import { closuresOnDay, type Closure } from "@/lib/closures";
+import { reopenCourts } from "@/app/actions/closures";
+import { useReadOnly } from "@/components/admin/ReadOnly";
+import CloseCourtsModal from "./CloseCourtsModal";
+import { closedNotice, useClosureCourts, useClosureWhen } from "./ClosuresPanel";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "id" | "name"> | null;
@@ -22,6 +27,8 @@ export type CourtRow = Pick<Court, "id" | "name" | "surface" | "is_indoor" | "sp
 interface Props {
   courts: CourtRow[];
   bookings: BookingWithJoins[];
+  /** Closed courts (20261027_court_closures.sql). */
+  closures?: Closure[];
 }
 
 const HOURS = DAY_HOURS;
@@ -71,6 +78,13 @@ const GROUP_STYLE = {
 };
 const GROUP_TEXT = { name: "text-white", time: "text-[#d6f09a]" };
 
+// A closed court: grey stripes, under the bookings' colours.
+const CLOSED_BG = {
+  backgroundColor: "#f4f6f2",
+  backgroundImage:
+    "repeating-linear-gradient(135deg, rgba(110,127,101,0.16) 0 6px, transparent 6px 12px)",
+};
+
 const HALF_SLOTS = HOURS.flatMap((h) => [
   { hour: h, half: 0, label: `${String(h).padStart(2, "0")}:00` },
   { hour: h, half: 1, label: `${String(h).padStart(2, "0")}:30` },
@@ -97,8 +111,16 @@ function timeToMinutes(date: Date) {
   return date.getHours() * 60 + date.getMinutes();
 }
 
-export default function TimetableClient({ courts, bookings }: Props) {
+export default function TimetableClient({ courts, bookings, closures = [] }: Props) {
   const t = useTranslations("timetable");
+  const tc = useTranslations("closures");
+  const closureWhen = useClosureWhen();
+  const closureCourts = useClosureCourts(courts);
+  const { readOnly, hint } = useReadOnly();
+  const [closing, setClosing] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [closureTip, setClosureTip] = useState<{ closure: Closure; x: number; y: number } | null>(null);
+  const [reopening, startReopen] = useTransition();
   const dfLocale = dateLocale(useLocale());
   const tCommon = useTranslations("common");
   const labels = useLabels();
@@ -210,6 +232,19 @@ export default function TimetableClient({ courts, bookings }: Props) {
         </div>
         <div className="flex items-center gap-2">
           <button
+            type="button"
+            onClick={() => {
+              setNotice(null);
+              setClosing(true);
+            }}
+            disabled={readOnly}
+            title={hint}
+            className="mr-1 inline-flex h-[34px] items-center gap-1.5 rounded-lg border border-[0.5px] border-[#d0d9c9] bg-white px-3 text-[13px] font-medium text-[#3d4f35] transition-colors hover:bg-[#f4f6f2] disabled:opacity-50"
+          >
+            <Ban size={14} aria-hidden="true" />
+            <span className="hidden sm:inline">{tc("button")}</span>
+          </button>
+          <button
             onClick={() => setOffset(0)}
             className={`text-[13px] font-medium px-4 py-[7px] rounded-lg border border-[0.5px] cursor-pointer transition-colors ${
               offset === 0
@@ -251,7 +286,17 @@ export default function TimetableClient({ courts, bookings }: Props) {
           <div className="w-2.5 h-2.5 rounded-[3px] bg-[#111c0a]" />
           <span>{t("group")}</span>
         </div>
+        <div className="flex items-center gap-1.5 text-xs text-[#3d4f35]">
+          <div className="w-2.5 h-2.5 rounded-[3px] border border-[#9aa893]" style={CLOSED_BG} />
+          <span>{tc("closed")}</span>
+        </div>
       </div>
+
+      {notice && (
+        <p role="status" className="mb-4 rounded-lg bg-[#f3fbde] px-4 py-2.5 text-sm text-[#2e4d03]">
+          {notice}
+        </p>
+      )}
 
       {!dayHasBookings && (
         <p className="mb-4 rounded-lg bg-[#f4f6f2] px-4 py-2.5 text-sm text-[#3d4f35]">
@@ -263,7 +308,10 @@ export default function TimetableClient({ courts, bookings }: Props) {
       <div
         ref={wrapRef}
         className="bg-white border border-[0.5px] border-[#e8ede4] rounded-2xl overflow-hidden relative"
-        onClick={() => setTooltip(null)}
+        onClick={() => {
+          setTooltip(null);
+          setClosureTip(null);
+        }}
       >
         {/* Column headers */}
         <div
@@ -348,6 +396,44 @@ export default function TimetableClient({ courts, bookings }: Props) {
                       style={{ top: i * SLOT_H, height: SLOT_H }}
                     />
                   ))}
+
+                  {/* Closed times */}
+                  {closuresOnDay(closures, court.id, date).map((c) => {
+                    const gridStart = DAY_START_MIN;
+                    const gridEnd = DAY_START_MIN + totalSlots * 30;
+                    const dayMs = date.getTime();
+                    const from = Math.max((new Date(c.starts_at).getTime() - dayMs) / 60_000, gridStart);
+                    const to = Math.min((new Date(c.ends_at).getTime() - dayMs) / 60_000, gridEnd);
+                    if (to <= from) return null;
+                    const topPx = ((from - gridStart) / 30) * SLOT_H;
+                    const heightPx = ((to - from) / 30) * SLOT_H;
+                    return (
+                      <button
+                        key={c.id}
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setTooltip(null);
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const wrapRect = wrapRef.current?.getBoundingClientRect();
+                          if (!wrapRect) return;
+                          setClosureTip({
+                            closure: c,
+                            x: rect.left - wrapRect.left + rect.width / 2,
+                            y: e.clientY - wrapRect.top,
+                          });
+                        }}
+                        className="absolute inset-x-0 z-0 flex cursor-pointer flex-col items-center justify-start gap-1 overflow-hidden pt-3 text-center"
+                        style={{ top: topPx, height: heightPx, ...CLOSED_BG }}
+                        aria-label={`${tc("closed")}: ${tc(`reasons.${c.reason}`)}`}
+                      >
+                        <span className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-[#3d4f35] shadow-sm">
+                          <Ban size={11} aria-hidden="true" />
+                          {tc(`reasons.${c.reason}`)}
+                        </span>
+                      </button>
+                    );
+                  })}
 
                   {/* Bookings */}
                   {courtBookings.map((b) => {
@@ -444,6 +530,59 @@ export default function TimetableClient({ courts, bookings }: Props) {
           </div>
         </div>
       )}
+
+      {/* A closed time: what and why, and reopen */}
+      {closureTip && (
+        <div
+          className="absolute z-10 w-[240px] -translate-y-full -mt-2 rounded-xl border border-[0.5px] border-[#e8ede4] bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+          style={{
+            left: Math.min(Math.max(closureTip.x - 120, 0), wrapWidth - 240),
+            top: closureTip.y - 8,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="mb-1 text-sm font-semibold text-[#111c0a]">
+            {tc("closed")} · {tc(`reasons.${closureTip.closure.reason}`)}
+          </div>
+          <div className="flex flex-col gap-1 text-xs text-[#3d4f35]">
+            <span>{closureCourts(closureTip.closure)}</span>
+            <span>{closureWhen(closureTip.closure)}</span>
+            {closureTip.closure.note && <span className="italic">{closureTip.closure.note}</span>}
+          </div>
+          <button
+            type="button"
+            disabled={readOnly || reopening}
+            title={hint ?? tc("reopenHint")}
+            onClick={() =>
+              startReopen(async () => {
+                const r = await reopenCourts(closureTip.closure.id);
+                if (r.error) {
+                  setNotice(tc(`errors.${r.error}`));
+                  return;
+                }
+                setClosureTip(null);
+                setNotice(tc("reopened"));
+                router.refresh();
+              })
+            }
+            className="btn-secondary mt-3 w-full px-3 py-2 text-[13px]"
+          >
+            {reopening ? tc("reopening") : tc("reopen")}
+          </button>
+        </div>
+      )}
+
+      <CloseCourtsModal
+        open={closing}
+        onClose={() => setClosing(false)}
+        courts={courts}
+        day={format(date, "yyyy-MM-dd")}
+        onDone={(r) => {
+          setClosing(false);
+          setNotice(closedNotice(tc, r));
+          router.refresh();
+        }}
+      />
     </div>
   );
 }

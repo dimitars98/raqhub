@@ -237,7 +237,8 @@
   "cancelSeriesTitle": "Cancel a weekly booking",
   "cancelSeriesText": "The booking on {date} repeats every week. Cancel only this one, or this one and every later week?",
   "cancelOnlyThis": "Only this one",
-  "cancelThisAndLater": "This and later weeks"
+  "cancelThisAndLater": "This and later weeks",
+  "courtClosed": "The court is closed at this time."
  },
  "booking": {
   "bookThisCourt": "Book this court",
@@ -728,6 +729,19 @@
    "feeSubject": "{group}: {month} fee",
    "feeIntro": "A friendly reminder: {name}'s {month} fee for {group} hasn't been marked as paid yet.",
    "feeFooter": "Sent by Kortello on behalf of {club}. Already paid? Then there's nothing to do: the club will mark it."
+  },
+  "closed": {
+   "subject": "Cancelled: {what}, {date}. The court is closed",
+   "intro": "{club} has closed the court at this time, so your booking is cancelled. You can book another time in the app.",
+   "reason": "Reason",
+   "reasons": {
+    "maintenance": "Repairs",
+    "weather": "Weather",
+    "tournament": "Tournament",
+    "event": "Event",
+    "holiday": "Holiday",
+    "other": "Other"
+   }
   }
  },
  "billing": {
@@ -1295,7 +1309,8 @@
   "rulePerDay": "You can make up to {n} bookings a day at this club.",
   "ruleCancel": "This club only allows cancelling up to {n} hours before the start. Please call the club.",
   "ruleNoShows": "Online booking is paused after {n} missed bookings. Please contact the club.",
-  "noCourtFree": "Every court is taken at that time. Please pick another time."
+  "noCourtFree": "Every court is taken at that time. Please pick another time.",
+  "courtClosed": "This court is closed at that time. Pick another time or court."
  },
  "settingsErrors": {
   "sevenDays": "Seven days are needed",
@@ -2579,6 +2594,9 @@
    },
    "level_confirmed": {
     "title": "<b>{club}</b> checked your level: {level}"
+   },
+   "court_closed": {
+    "title": "<b>{club}</b> closed {court}. Your booking is cancelled"
    }
   }
  },
@@ -2837,6 +2855,11 @@
    "items": [
     {
      "date": "Oct 2026",
+     "title": "Closing courts",
+     "body": "Close courts for repairs, rain or a holiday. Bookings then are cancelled and the players are told why."
+    },
+    {
+     "date": "Oct 2026",
      "title": "Open matches",
      "body": "Find players at your level, or open your court to others."
     },
@@ -3089,7 +3112,70 @@
    "pgen_language": {
     "q": "How do I change the language?",
     "a": "Use the language button at the top of the page. Your emails switch to that language for your next bookings."
+   },
+   "ct_close": {
+    "q": "How do I close a court for repairs, rain or a holiday?",
+    "a": "Tap Close courts on the Courts page or in the timetable. Pick the courts, the days or hours, and a reason. Bookings already made for that time are cancelled, and the players get a notification and an email saying why. Nobody can book until the closure ends or you tap Reopen."
    }
+  }
+ },
+ "closures": {
+  "button": "Close courts",
+  "title": "Close courts",
+  "intro": "Nobody can book the courts while they're closed. Bookings already made for that time are cancelled, and the players are told why.",
+  "courts": "Courts",
+  "allCourts": "All courts",
+  "removedCourt": "A removed court",
+  "when": "When",
+  "wholeDays": "Whole days",
+  "someHours": "Some hours",
+  "fromDay": "From",
+  "toDay": "To (included)",
+  "date": "Day",
+  "fromTime": "From",
+  "toTime": "Until",
+  "reason": "Reason",
+  "reasons": {
+   "maintenance": "Repairs",
+   "weather": "Weather",
+   "tournament": "Tournament",
+   "event": "Event",
+   "holiday": "Holiday",
+   "other": "Other"
+  },
+  "note": "Note for players (optional)",
+  "notePlaceholder": "e.g. The lines are being repainted",
+  "checking": "Checking what's booked…",
+  "previewFailed": "Couldn't check the bookings. You can still close the courts.",
+  "previewNone": "Nothing is booked then.",
+  "previewBookings": "{n, plural, one {# booking} other {# bookings}} will be cancelled",
+  "previewGroups": "{n, plural, one {# group session} other {# group sessions}} will be cancelled",
+  "previewTold": "Everyone is told by notification and email, with the reason.",
+  "cancel": "Cancel",
+  "confirm": "Close courts",
+  "confirmCancel": "Close and cancel {n}",
+  "saving": "Closing…",
+  "doneCancelled": "{n, plural, =0 {Courts closed. Nothing was booked then.} one {Courts closed. # booking cancelled.} other {Courts closed. # bookings cancelled.}}",
+  "doneEmailed": "{n, plural, one {# email sent.} other {# emails sent.}}",
+  "reopened": "The courts are open again. Bookings that were cancelled stay cancelled.",
+  "closed": "Closed",
+  "now": "Now",
+  "listTitle": "Closed courts",
+  "listHint": "Repairs, rain, a tournament, a holiday: close courts so nobody books them.",
+  "listEmpty": "No courts are closed.",
+  "reopen": "Reopen",
+  "reopening": "Reopening…",
+  "reopenHint": "Open the courts again. Bookings that were cancelled stay cancelled.",
+  "publicTitle": "Courts closed",
+  "wholeClub": "Whole club",
+  "errors": {
+   "notAllowed": "You can't close courts at this club.",
+   "locked": "Your account is read-only. Choose a plan to make changes.",
+   "order": "The end must be after the start.",
+   "passed": "That time has already passed.",
+   "tooLong": "A closure can be up to a year.",
+   "noCourts": "Pick at least one court.",
+   "failed": "Couldn't close the courts. Please try again."
   }
  }
 }

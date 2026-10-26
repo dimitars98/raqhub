@@ -9,6 +9,7 @@ import sr from "@/messages/sr.json";
 import type { Locale } from "./locale";
 import { PLANS, type PlanId } from "@/lib/plans";
 import { intlLocale } from "@/lib/dateLocale";
+import type { ClosureReason } from "@/lib/closures";
 
 const MESSAGES = { en, mk, sq, de, fr, it, sr } as const;
 const TIME_ZONE = "Europe/Skopje";
@@ -170,6 +171,35 @@ function bookingParts(kind: "confirmed" | "cancelled" | "reminder", b: BookingEm
 export const bookingConfirmedEmail = (b: BookingEmailData) => bookingParts("confirmed", b);
 export const bookingCancelledEmail = (b: BookingEmailData) => bookingParts("cancelled", b);
 export const bookingReminderEmail = (b: BookingEmailData) => bookingParts("reminder", b);
+
+/** The club closed the court at the booking's time, so the booking is cancelled. */
+export function courtClosedEmail(
+  b: BookingEmailData & { reason: ClosureReason; note: string | null },
+): Rendered {
+  const t = translator(b.locale);
+  const f = formatters(b.locale);
+  const what = b.coachName
+    ? [t("lessonWith", { name: b.coachName }), b.courtName].filter(Boolean).join(" · ")
+    : (b.courtName ?? "");
+  const when = `${f.date(b.startsAt)}, ${f.time(b.startsAt)}–${f.time(b.endsAt)}`;
+  const heading = b.name ? t("greeting", { name: b.name }) : t("greetingNoName");
+  const intro = t("closed.intro", { club: b.clubName });
+  const reason = [t(`closed.reasons.${b.reason}`), b.note].filter(Boolean).join(": ");
+  const rows: [string, string][] = [
+    [t("labels.what"), what],
+    [t("labels.club"), b.clubName],
+    [t("labels.when"), when],
+    [t("closed.reason"), reason],
+    [t("labels.reference"), b.reference],
+  ];
+  const url = `${b.appUrl}/${b.locale}/my-bookings`;
+  const footer = t("footerPlayer", { club: b.clubName });
+  return {
+    subject: t("closed.subject", { what, date: f.date(b.startsAt) }),
+    html: layout({ heading, intro, rows, button: { label: t("viewBookings"), url }, footer }),
+    text: plainText(heading, intro, rows, url, footer),
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Membership renewal

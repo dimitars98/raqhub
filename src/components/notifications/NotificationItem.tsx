@@ -3,6 +3,7 @@
 import { format, formatDistanceToNowStrict, isToday, isYesterday } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 import {
+  Ban,
   CalendarCheck,
   CalendarPlus,
   CalendarX,
@@ -19,12 +20,14 @@ import {
 } from "lucide-react";
 import { dateLocale } from "@/lib/dateLocale";
 import { KIND_TONE, TONE_CLASS, type NotificationRow } from "@/lib/notifications";
+import { isReason } from "@/lib/closures";
 
 const ICONS: Record<string, LucideIcon> = {
   booking_new: CalendarPlus,
   lesson_new: GraduationCap,
   booking_cancelled: CalendarX,
   club_cancelled: CalendarX,
+  court_closed: Ban,
   club_booked: CalendarCheck,
   tournament_joined: Trophy,
   tournament_left: Trophy,
@@ -63,6 +66,7 @@ const bold = (chunks: React.ReactNode) => <strong className="font-semibold text-
 /** Turns a notification's kind and data into a title and a detail line. */
 export function useDescribe() {
   const t = useTranslations("notifications.kinds");
+  const tClosed = useTranslations("closures");
   const df = dateLocale(useLocale());
 
   const when = (d: Record<string, unknown>) => {
@@ -133,6 +137,13 @@ export function useDescribe() {
             .filter(Boolean)
             .join(". "),
         };
+      case "court_closed": {
+        const why = isReason(d.reason) ? tClosed(`reasons.${d.reason}`) : "";
+        return {
+          title: t.rich("court_closed.title", { club: str(d.club), court: what, b: bold }),
+          detail: [when(d), [why, str(d.note)].filter(Boolean).join(": ")].filter(Boolean).join(" · "),
+        };
+      }
       case "reminder":
         return { title: t.rich("reminder.title", { what, b: bold }), detail: when(d) };
       case "draw":

@@ -125,6 +125,22 @@ nothing. Included in every plan.
   for players, `/admin/matches` for the club. Clubs' public pages list matches
   that still need players.
 
+## Closing courts
+
+A club closes one or more courts (or the whole club) for a time: repairs, rain,
+a tournament, a holiday. Nobody can book them then, from any screen.
+
+- **Database:** run `supabase/migrations/20261027_court_closures.sql` once in the
+  SQL Editor, after the open matches file.
+- **Where:** "Close courts" on Admin > Courts (with the list of closures) and on
+  the timetable, where closed times show as grey stripes. Clubs' public pages
+  list closures in the next 30 days.
+- **What it cancels:** bookings already in that time are cancelled. Players get a
+  notification and an email with the reason; a group's session is cancelled the
+  usual way, so parents hear too. A lesson moves to another free court only when
+  it's booked; existing lessons on a closed court are cancelled.
+- **Reopening** deletes the closure. Cancelled bookings stay cancelled.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts

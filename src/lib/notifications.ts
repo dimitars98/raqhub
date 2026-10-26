@@ -32,7 +32,7 @@ export const FILTERS: Record<Area, Record<string, string[]>> = {
     tournaments: ["tournament_joined", "tournament_left"],
   },
   member: {
-    bookings: ["club_booked", "club_cancelled", "reminder", "lesson_new", "booking_new", "booking_cancelled"],
+    bookings: ["club_booked", "club_cancelled", "court_closed", "reminder", "lesson_new", "booking_new", "booking_cancelled"],
     groups: ["group_cancelled", "group_added", "group_fee_due", "group_offer", "group_signup", "group_absence"],
     matches: [
       "match_joined",
@@ -59,6 +59,7 @@ export const KIND_TONE: Record<string, Tone> = {
   lesson_new: "blue",
   booking_cancelled: "amber",
   club_cancelled: "amber",
+  court_closed: "amber",
   club_booked: "blue",
   group_signup: "lime",
   group_offer: "lime",

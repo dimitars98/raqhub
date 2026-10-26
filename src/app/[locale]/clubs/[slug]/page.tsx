@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Globe, Mail, MapPin, Phone } from "lucide-react";
+import { Ban, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import LocaleSwitcher from "@/components/ui/LocaleSwitcher";
 import { createClient } from "@/lib/supabase/server";
@@ -17,7 +17,8 @@ import Avatar from "@/components/ui/Avatar";
 import { initials } from "@/lib/avatar";
 import { getLabels } from "@/lib/getLabels";
 import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
-import { dateLocale } from "@/lib/dateLocale";
+import { dateLocale, intlLocale } from "@/lib/dateLocale";
+import { closureWhen, type PublicClosure } from "@/lib/closures";
 import { format } from "date-fns";
 import type { Tournament } from "@/types/database";
 import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
@@ -163,6 +164,10 @@ export default async function ClubPublicPage({ params }: PageProps) {
   // After the club's free trial ends, online booking pauses (20261025_trial_lock.sql).
   const { data: pausedData } = await supabase.rpc("paused_clubs", { p_clubs: [club.id] });
   const paused = (pausedData ?? []).length > 0;
+  // Courts closed now or soon (20261027_court_closures.sql).
+  const { data: closuresData } = await supabase.rpc("upcoming_club_closures", { p_club: club.id });
+  const closures = (closuresData ?? []) as PublicClosure[];
+  const tClosed = await getTranslations("closures");
 
   const courts = (courtsData ?? []) as unknown as PublicCourt[];
   const coaches = (coachesData ?? []) as unknown as PublicCoach[];
@@ -315,6 +320,33 @@ export default async function ClubPublicPage({ params }: PageProps) {
         {paused && (
           // The club's phone and email are right above, in the header.
           <BookingPaused className="mb-12" />
+        )}
+
+        {closures.length > 0 && !paused && (
+          <section
+            aria-labelledby="closures-title"
+            className="mb-12 flex gap-4 rounded-2xl border border-amber-200 bg-amber-50 p-5 sm:p-6"
+          >
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white text-amber-900 ring-1 ring-amber-200">
+              <Ban size={18} aria-hidden="true" />
+            </span>
+            <div className="min-w-0">
+              <h2 id="closures-title" className="text-base font-semibold text-amber-950">
+                {tClosed("publicTitle")}
+              </h2>
+              <ul className="mt-2 flex flex-col gap-1 text-sm leading-relaxed text-amber-900">
+                {closures.map((c) => (
+                  <li key={`${c.starts_at}-${c.ends_at}-${(c.courts ?? []).join()}`}>
+                    <span className="font-semibold">{closureWhen(c, intlLocale(locale))}</span>
+                    {" · "}
+                    {c.courts?.length ? c.courts.join(", ") : tClosed("wholeClub")}
+                    {" · "}
+                    {tClosed(`reasons.${c.reason}`)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
         )}
 
         {/* Courts */}

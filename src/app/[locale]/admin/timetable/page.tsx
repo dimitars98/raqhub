@@ -6,6 +6,10 @@ import TimetableClient, {
 import { createClient } from "@/lib/supabase/server";
 import type { Club } from "@/types/database";
 import { getMyClub } from "@/lib/myClub";
+import { CLOSURE_COLUMNS, type Closure } from "@/lib/closures";
+
+/** A week ago, so closures from the last few days still show. */
+const weekAgo = () => new Date(Date.now() - 7 * 86_400_000).toISOString();
 
 export default async function TimetablePage() {
   const supabase = await createClient();
@@ -45,5 +49,14 @@ export default async function TimetablePage() {
     bookings = (bookingsData ?? []) as BookingWithJoins[];
   }
 
-  return <TimetableClient courts={courts} bookings={bookings} />;
+  // Closed courts, from a week back (20261027_court_closures.sql).
+  const { data: closuresData } = await supabase
+    .from("court_closures")
+    .select(CLOSURE_COLUMNS)
+    .eq("club_id", club.id)
+    .gt("ends_at", weekAgo())
+    .order("starts_at");
+  const closures = (closuresData ?? []) as Closure[];
+
+  return <TimetableClient courts={courts} bookings={bookings} closures={closures} />;
 }

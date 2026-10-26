@@ -237,7 +237,8 @@
   "cancelSeriesTitle": "Wöchentliche Buchung stornieren",
   "cancelSeriesText": "Die Buchung am {date} wiederholt sich jede Woche. Nur diese stornieren oder diese und alle späteren Wochen?",
   "cancelOnlyThis": "Nur diese",
-  "cancelThisAndLater": "Diese und spätere Wochen"
+  "cancelThisAndLater": "Diese und spätere Wochen",
+  "courtClosed": "Der Platz ist zu dieser Zeit gesperrt."
  },
  "booking": {
   "bookThisCourt": "Diesen Platz buchen",
@@ -728,6 +729,19 @@
    "feeSubject": "{group}: Beitrag für {month}",
    "feeIntro": "Eine freundliche Erinnerung: Der Beitrag von {name} für {month} in {group} ist noch nicht als bezahlt markiert.",
    "feeFooter": "Von Kortello im Auftrag von {club} gesendet. Schon bezahlt? Dann ist nichts zu tun: Der Club trägt es ein."
+  },
+  "closed": {
+   "subject": "Storniert: {what}, {date}. Der Platz ist gesperrt",
+   "intro": "{club} hat den Platz zu dieser Zeit gesperrt, deshalb ist Ihre Buchung storniert. In der App können Sie eine andere Zeit buchen.",
+   "reason": "Grund",
+   "reasons": {
+    "maintenance": "Reparatur",
+    "weather": "Wetter",
+    "tournament": "Turnier",
+    "event": "Veranstaltung",
+    "holiday": "Feiertag",
+    "other": "Sonstiges"
+   }
   }
  },
  "billing": {
@@ -1295,7 +1309,8 @@
   "rulePerDay": "Sie können in diesem Club bis zu {n} Buchungen pro Tag machen.",
   "ruleCancel": "Dieser Club erlaubt Stornierungen nur bis {n} Stunden vor Beginn. Bitte rufen Sie den Club an.",
   "ruleNoShows": "Die Online-Buchung ist nach {n} verpassten Buchungen pausiert. Bitte kontaktieren Sie den Club.",
-  "noCourtFree": "Zu dieser Zeit sind alle Plätze belegt. Bitte wählen Sie eine andere Zeit."
+  "noCourtFree": "Zu dieser Zeit sind alle Plätze belegt. Bitte wählen Sie eine andere Zeit.",
+  "courtClosed": "Dieser Platz ist zu dieser Zeit gesperrt. Wählen Sie eine andere Zeit oder einen anderen Platz."
  },
  "settingsErrors": {
   "sevenDays": "Es werden sieben Tage benötigt",
@@ -2579,6 +2594,9 @@
    },
    "level_confirmed": {
     "title": "<b>{club}</b> hat Ihr Niveau geprüft: {level}"
+   },
+   "court_closed": {
+    "title": "<b>{club}</b> hat {court} gesperrt. Ihre Buchung ist storniert"
    }
   }
  },
@@ -2837,6 +2855,11 @@
    "items": [
     {
      "date": "Okt. 2026",
+     "title": "Plätze sperren",
+     "body": "Sperren Sie Plätze wegen Reparatur, Regen oder Feiertag. Buchungen in dieser Zeit werden storniert, und die Spieler erfahren den Grund."
+    },
+    {
+     "date": "Okt. 2026",
      "title": "Offene Matches",
      "body": "Finden Sie Spieler auf Ihrem Niveau, oder öffnen Sie Ihren Platz für andere."
     },
@@ -3089,7 +3112,70 @@
    "pgen_language": {
     "q": "Wie ändere ich die Sprache?",
     "a": "Mit dem Sprachknopf oben auf der Seite. E-Mails zu Ihren nächsten Buchungen kommen dann in dieser Sprache."
+   },
+   "ct_close": {
+    "q": "Wie sperre ich einen Platz wegen Reparatur, Regen oder Feiertag?",
+    "a": "Tippen Sie auf der Seite Plätze oder im Belegungsplan auf Plätze sperren. Wählen Sie die Plätze, die Tage oder Stunden und einen Grund. Buchungen, die es für diese Zeit schon gibt, werden storniert, und die Spieler bekommen eine Benachrichtigung und eine E-Mail mit dem Grund. Niemand kann buchen, bis die Sperre endet oder Sie auf Freigeben tippen."
    }
+  }
+ },
+ "closures": {
+  "button": "Plätze sperren",
+  "title": "Plätze sperren",
+  "intro": "Gesperrte Plätze kann niemand buchen. Buchungen, die es für diese Zeit schon gibt, werden storniert, und die Spieler erfahren den Grund.",
+  "courts": "Plätze",
+  "allCourts": "Alle Plätze",
+  "removedCourt": "Ein entfernter Platz",
+  "when": "Wann",
+  "wholeDays": "Ganze Tage",
+  "someHours": "Einige Stunden",
+  "fromDay": "Von",
+  "toDay": "Bis (einschließlich)",
+  "date": "Tag",
+  "fromTime": "Von",
+  "toTime": "Bis",
+  "reason": "Grund",
+  "reasons": {
+   "maintenance": "Reparatur",
+   "weather": "Wetter",
+   "tournament": "Turnier",
+   "event": "Veranstaltung",
+   "holiday": "Feiertag",
+   "other": "Sonstiges"
+  },
+  "note": "Hinweis für Spieler (optional)",
+  "notePlaceholder": "z. B. Die Linien werden neu gezogen",
+  "checking": "Buchungen werden geprüft…",
+  "previewFailed": "Die Buchungen konnten nicht geprüft werden. Sie können die Plätze trotzdem sperren.",
+  "previewNone": "In dieser Zeit ist nichts gebucht.",
+  "previewBookings": "{n, plural, one {# Buchung wird storniert} other {# Buchungen werden storniert}}",
+  "previewGroups": "{n, plural, one {# Gruppentermin wird abgesagt} other {# Gruppentermine werden abgesagt}}",
+  "previewTold": "Alle bekommen eine Benachrichtigung und eine E-Mail mit dem Grund.",
+  "cancel": "Abbrechen",
+  "confirm": "Plätze sperren",
+  "confirmCancel": "Sperren und {n} stornieren",
+  "saving": "Wird gesperrt…",
+  "doneCancelled": "{n, plural, =0 {Plätze gesperrt. In dieser Zeit war nichts gebucht.} one {Plätze gesperrt. # Buchung storniert.} other {Plätze gesperrt. # Buchungen storniert.}}",
+  "doneEmailed": "{n, plural, one {# E-Mail gesendet.} other {# E-Mails gesendet.}}",
+  "reopened": "Die Plätze sind wieder frei. Stornierte Buchungen bleiben storniert.",
+  "closed": "Gesperrt",
+  "now": "Jetzt",
+  "listTitle": "Gesperrte Plätze",
+  "listHint": "Reparatur, Regen, Turnier, Feiertag: Sperren Sie Plätze, damit niemand sie bucht.",
+  "listEmpty": "Keine Plätze gesperrt.",
+  "reopen": "Freigeben",
+  "reopening": "Wird freigegeben…",
+  "reopenHint": "Die Plätze wieder freigeben. Stornierte Buchungen bleiben storniert.",
+  "publicTitle": "Gesperrte Plätze",
+  "wholeClub": "Ganzer Club",
+  "errors": {
+   "notAllowed": "Sie können in diesem Club keine Plätze sperren.",
+   "locked": "Ihr Konto ist schreibgeschützt. Wählen Sie einen Plan, um Änderungen vorzunehmen.",
+   "order": "Das Ende muss nach dem Beginn liegen.",
+   "passed": "Diese Zeit ist schon vorbei.",
+   "tooLong": "Eine Sperre kann bis zu einem Jahr dauern.",
+   "noCourts": "Wählen Sie mindestens einen Platz.",
+   "failed": "Die Plätze konnten nicht gesperrt werden. Bitte versuchen Sie es erneut."
   }
  }
 }

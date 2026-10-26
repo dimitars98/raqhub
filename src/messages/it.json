@@ -237,7 +237,8 @@
   "cancelSeriesTitle": "Disdici una prenotazione settimanale",
   "cancelSeriesText": "La prenotazione del {date} si ripete ogni settimana. Disdire solo questa, o questa e tutte le settimane successive?",
   "cancelOnlyThis": "Solo questa",
-  "cancelThisAndLater": "Questa e le successive"
+  "cancelThisAndLater": "Questa e le successive",
+  "courtClosed": "Il campo è chiuso in questo orario."
  },
  "booking": {
   "bookThisCourt": "Prenota questo campo",
@@ -728,6 +729,19 @@
    "feeSubject": "{group}: quota di {month}",
    "feeIntro": "Un promemoria: la quota di {month} di {name} per {group} non risulta ancora pagata.",
    "feeFooter": "Inviata da Kortello per conto di {club}. Hai già pagato? Allora non devi fare nulla: il club lo segnerà."
+  },
+  "closed": {
+   "subject": "Annullata: {what}, {date}. Il campo è chiuso",
+   "intro": "{club} ha chiuso il campo in questo orario, quindi la tua prenotazione è annullata. Puoi prenotare un altro orario nell’app.",
+   "reason": "Motivo",
+   "reasons": {
+    "maintenance": "Lavori",
+    "weather": "Meteo",
+    "tournament": "Torneo",
+    "event": "Evento",
+    "holiday": "Festività",
+    "other": "Altro"
+   }
   }
  },
  "billing": {
@@ -1295,7 +1309,8 @@
   "rulePerDay": "Puoi fare fino a {n} prenotazioni al giorno in questo club.",
   "ruleCancel": "Questo club consente di annullare solo fino a {n} ore prima dell’inizio. Chiama il club.",
   "ruleNoShows": "La prenotazione online è sospesa dopo {n} assenze. Contatta il club.",
-  "noCourtFree": "Tutti i campi sono occupati a quell’ora. Scegli un altro orario."
+  "noCourtFree": "Tutti i campi sono occupati a quell’ora. Scegli un altro orario.",
+  "courtClosed": "Questo campo è chiuso in quell’orario. Scegli un altro orario o un altro campo."
  },
  "settingsErrors": {
   "sevenDays": "Servono sette giorni",
@@ -2579,6 +2594,9 @@
    },
    "level_confirmed": {
     "title": "<b>{club}</b> ha verificato il tuo livello: {level}"
+   },
+   "court_closed": {
+    "title": "<b>{club}</b> ha chiuso {court}. La tua prenotazione è annullata"
    }
   }
  },
@@ -2837,6 +2855,11 @@
    "items": [
     {
      "date": "ott 2026",
+     "title": "Chiusura dei campi",
+     "body": "Chiudi i campi per lavori, pioggia o una festività. Le prenotazioni di quel periodo vengono annullate e i giocatori sanno perché."
+    },
+    {
+     "date": "ott 2026",
      "title": "Partite aperte",
      "body": "Trova giocatori del tuo livello, o apri il tuo campo ad altri."
     },
@@ -3089,7 +3112,70 @@
    "pgen_language": {
     "q": "Come cambio lingua?",
     "a": "Con il pulsante lingua in alto nella pagina. Le e-mail delle prossime prenotazioni arriveranno in quella lingua."
+   },
+   "ct_close": {
+    "q": "Come chiudo un campo per lavori, pioggia o una festività?",
+    "a": "Tocca Chiudi campi nella pagina Campi o nel Calendario. Scegli i campi, i giorni o le ore e un motivo. Le prenotazioni già fatte per quel periodo vengono annullate e i giocatori ricevono una notifica e un’e-mail con il motivo. Nessuno può prenotare finché la chiusura non finisce o finché non tocchi Riapri."
    }
+  }
+ },
+ "closures": {
+  "button": "Chiudi campi",
+  "title": "Chiudi campi",
+  "intro": "Nessuno può prenotare un campo chiuso. Le prenotazioni già fatte per quel periodo vengono annullate e i giocatori sapranno il motivo.",
+  "courts": "Campi",
+  "allCourts": "Tutti i campi",
+  "removedCourt": "Un campo eliminato",
+  "when": "Quando",
+  "wholeDays": "Giorni interi",
+  "someHours": "Alcune ore",
+  "fromDay": "Dal",
+  "toDay": "Al (incluso)",
+  "date": "Giorno",
+  "fromTime": "Dalle",
+  "toTime": "Alle",
+  "reason": "Motivo",
+  "reasons": {
+   "maintenance": "Lavori",
+   "weather": "Meteo",
+   "tournament": "Torneo",
+   "event": "Evento",
+   "holiday": "Festività",
+   "other": "Altro"
+  },
+  "note": "Messaggio per i giocatori (facoltativo)",
+  "notePlaceholder": "es. Si ridipingono le linee",
+  "checking": "Controllo delle prenotazioni…",
+  "previewFailed": "Non è stato possibile controllare le prenotazioni. Puoi comunque chiudere i campi.",
+  "previewNone": "In quel periodo non c’è niente di prenotato.",
+  "previewBookings": "{n, plural, one {# prenotazione sarà annullata} other {# prenotazioni saranno annullate}}",
+  "previewGroups": "{n, plural, one {# sessione di gruppo sarà annullata} other {# sessioni di gruppo saranno annullate}}",
+  "previewTold": "Tutti ricevono una notifica e un’e-mail con il motivo.",
+  "cancel": "Annulla",
+  "confirm": "Chiudi campi",
+  "confirmCancel": "Chiudi e annulla {n}",
+  "saving": "Chiusura…",
+  "doneCancelled": "{n, plural, =0 {Campi chiusi. In quel periodo non c’era niente di prenotato.} one {Campi chiusi. # prenotazione annullata.} other {Campi chiusi. # prenotazioni annullate.}}",
+  "doneEmailed": "{n, plural, one {# e-mail inviata.} other {# e-mail inviate.}}",
+  "reopened": "I campi sono di nuovo aperti. Le prenotazioni annullate restano annullate.",
+  "closed": "Chiuso",
+  "now": "Ora",
+  "listTitle": "Campi chiusi",
+  "listHint": "Lavori, pioggia, un torneo, una festività: chiudi i campi così nessuno li prenota.",
+  "listEmpty": "Nessun campo è chiuso.",
+  "reopen": "Riapri",
+  "reopening": "Riapertura…",
+  "reopenHint": "Riapri i campi. Le prenotazioni annullate restano annullate.",
+  "publicTitle": "Campi chiusi",
+  "wholeClub": "Tutto il club",
+  "errors": {
+   "notAllowed": "Non puoi chiudere campi in questo club.",
+   "locked": "Il tuo account è in sola lettura. Scegli un piano per fare modifiche.",
+   "order": "La fine deve essere dopo l’inizio.",
+   "passed": "Quel periodo è già passato.",
+   "tooLong": "Una chiusura può durare al massimo un anno.",
+   "noCourts": "Scegli almeno un campo.",
+   "failed": "Non è stato possibile chiudere i campi. Riprova."
   }
  }
 }

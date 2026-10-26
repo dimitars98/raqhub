@@ -3,6 +3,8 @@ import type { Court, Club } from "@/types/database";
 import CourtsClient from "@/components/admin/CourtsClient";
 import { redirect } from "next/navigation";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
+import ClosuresPanel from "@/components/admin/ClosuresPanel";
+import { CLOSURE_COLUMNS, type Closure } from "@/lib/closures";
 
 export default async function AdminCourtsPage() {
   const supabase = await createClient();
@@ -30,11 +32,26 @@ export default async function AdminCourtsPage() {
 
   const courts = (courtsData ?? []) as Court[];
 
+  // Closures on now or coming up (20261027_court_closures.sql).
+  const { data: closuresData } = await supabase
+    .from("court_closures")
+    .select(CLOSURE_COLUMNS)
+    .eq("club_id", club.id)
+    .gt("ends_at", new Date().toISOString())
+    .order("starts_at");
+  const closures = (closuresData ?? []) as Closure[];
+
   return (
-    <CourtsClient
-      courts={courts}
-      clubId={club.id}
-      maxCourts={clubAccess(club).maxCourts}
-    />
+    <>
+      <CourtsClient
+        courts={courts}
+        clubId={club.id}
+        maxCourts={clubAccess(club).maxCourts}
+      />
+      <ClosuresPanel
+        closures={closures}
+        courts={courts.filter((c) => c.is_active).map((c) => ({ id: c.id, name: c.name }))}
+      />
+    </>
   );
 }

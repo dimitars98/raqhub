@@ -82,6 +82,8 @@ export async function bookingError(error: { code?: string; message?: string }, w
   const message = error.message ?? "";
   // The club's free trial has ended (see 20261025_trial_lock.sql).
   if (message.includes("club_locked")) return t("clubPaused");
+  // The club closed the court then (see 20261027_court_closures.sql).
+  if (message.includes("court_closed")) return t("courtClosed");
   if (error.code === "23P01") {
     // For a lesson the clash can be the coach or the court it was given.
     if (what === "coach") return message.includes("coach") ? t("coachTaken") : t("noCourtFree");

@@ -168,6 +168,8 @@ const { readOnly, hint } = useReadOnly();
     const added: BookingWithJoins[] = [];
     const skipped: Date[] = [];
     let failed = false;
+    // A week that falls on a closed court (20261027_court_closures.sql).
+    let closed = 0;
     for (const startsAt of weeklyStarts(first, weeks)) {
       const { data, error } = (await supabase
         .from("bookings")
@@ -175,10 +177,14 @@ const { readOnly, hint } = useReadOnly();
         .select("*, court:courts(name), member:members(full_name)")
         .single()) as {
         data: BookingWithJoins | null;
-        error: { code?: string } | null;
+        error: { code?: string; message?: string } | null;
       };
       // 23P01 is the database's code for "overlaps an existing booking"
-      if (error?.code === "23P01") skipped.push(startsAt);
+      // (and for a closed court, with "court_closed" in the message).
+      if (error?.code === "23P01") {
+        skipped.push(startsAt);
+        if (error.message?.includes("court_closed")) closed++;
+      }
       else if (error || !data) {
         failed = true;
         break;
@@ -187,7 +193,13 @@ const { readOnly, hint } = useReadOnly();
 
     if (added.length === 0) {
       setSubmitError(
-        failed ? t("saveError") : weeks > 1 ? t("allWeeksTaken") : t("slotTaken"),
+        failed
+          ? t("saveError")
+          : weeks > 1
+            ? t("allWeeksTaken")
+            : closed
+              ? t("courtClosed")
+              : t("slotTaken"),
       );
       return;
     }

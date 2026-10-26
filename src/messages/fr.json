@@ -237,7 +237,8 @@
   "cancelSeriesTitle": "Annuler une réservation hebdomadaire",
   "cancelSeriesText": "La réservation du {date} se répète chaque semaine. Annuler seulement celle-ci, ou celle-ci et toutes les semaines suivantes ?",
   "cancelOnlyThis": "Seulement celle-ci",
-  "cancelThisAndLater": "Celle-ci et les suivantes"
+  "cancelThisAndLater": "Celle-ci et les suivantes",
+  "courtClosed": "Le court est fermé à cette heure."
  },
  "booking": {
   "bookThisCourt": "Réserver ce court",
@@ -728,6 +729,19 @@
    "feeSubject": "{group} : cotisation de {month}",
    "feeIntro": "Petit rappel : la cotisation de {month} de {name} pour {group} n'est pas encore marquée comme payée.",
    "feeFooter": "Envoyé par Kortello pour le compte de {club}. Déjà payé ? Rien à faire : le club le notera."
+  },
+  "closed": {
+   "subject": "Annulée : {what}, {date}. Le court est fermé",
+   "intro": "{club} a fermé le court à cette heure, votre réservation est donc annulée. Vous pouvez réserver un autre créneau dans l’application.",
+   "reason": "Raison",
+   "reasons": {
+    "maintenance": "Travaux",
+    "weather": "Météo",
+    "tournament": "Tournoi",
+    "event": "Événement",
+    "holiday": "Jour férié",
+    "other": "Autre"
+   }
   }
  },
  "billing": {
@@ -1295,7 +1309,8 @@
   "rulePerDay": "Vous pouvez faire jusqu’à {n} réservations par jour dans ce club.",
   "ruleCancel": "Ce club n’autorise l’annulation que jusqu’à {n} heures avant le début. Veuillez appeler le club.",
   "ruleNoShows": "La réservation en ligne est suspendue après {n} absences. Veuillez contacter le club.",
-  "noCourtFree": "Tous les terrains sont pris à cette heure. Choisissez une autre heure."
+  "noCourtFree": "Tous les terrains sont pris à cette heure. Choisissez une autre heure.",
+  "courtClosed": "Ce court est fermé à cette heure-là. Choisissez une autre heure ou un autre court."
  },
  "settingsErrors": {
   "sevenDays": "Sept jours sont nécessaires",
@@ -2579,6 +2594,9 @@
    },
    "level_confirmed": {
     "title": "<b>{club}</b> a vérifié votre niveau : {level}"
+   },
+   "court_closed": {
+    "title": "<b>{club}</b> a fermé {court}. Votre réservation est annulée"
    }
   }
  },
@@ -2837,6 +2855,11 @@
    "items": [
     {
      "date": "oct. 2026",
+     "title": "Fermer des courts",
+     "body": "Fermez des courts pour des travaux, la pluie ou un jour férié. Les réservations de cette période sont annulées et les joueurs savent pourquoi."
+    },
+    {
+     "date": "oct. 2026",
      "title": "Matchs ouverts",
      "body": "Trouvez des joueurs de votre niveau, ou ouvrez votre court à d’autres."
     },
@@ -3089,7 +3112,70 @@
    "pgen_language": {
     "q": "Comment changer de langue ?",
     "a": "Avec le bouton de langue en haut de la page. Les e-mails de vos prochaines réservations arriveront dans cette langue."
+   },
+   "ct_close": {
+    "q": "Comment fermer un court pour des travaux, la pluie ou un jour férié ?",
+    "a": "Touchez Fermer des courts sur la page Courts ou dans le Planning. Choisissez les courts, les jours ou les heures, et une raison. Les réservations déjà faites pour cette période sont annulées, et les joueurs reçoivent une notification et un e-mail avec la raison. Personne ne peut réserver avant la fin de la fermeture ou avant que vous touchiez Rouvrir."
    }
+  }
+ },
+ "closures": {
+  "button": "Fermer des courts",
+  "title": "Fermer des courts",
+  "intro": "Personne ne peut réserver un court fermé. Les réservations déjà faites pour cette période sont annulées, et les joueurs sont prévenus de la raison.",
+  "courts": "Courts",
+  "allCourts": "Tous les courts",
+  "removedCourt": "Un court supprimé",
+  "when": "Quand",
+  "wholeDays": "Journées entières",
+  "someHours": "Quelques heures",
+  "fromDay": "Du",
+  "toDay": "Au (inclus)",
+  "date": "Jour",
+  "fromTime": "De",
+  "toTime": "Jusqu’à",
+  "reason": "Raison",
+  "reasons": {
+   "maintenance": "Travaux",
+   "weather": "Météo",
+   "tournament": "Tournoi",
+   "event": "Événement",
+   "holiday": "Jour férié",
+   "other": "Autre"
+  },
+  "note": "Message aux joueurs (facultatif)",
+  "notePlaceholder": "ex. Les lignes sont repeintes",
+  "checking": "Vérification des réservations…",
+  "previewFailed": "Impossible de vérifier les réservations. Vous pouvez quand même fermer les courts.",
+  "previewNone": "Rien n’est réservé pendant cette période.",
+  "previewBookings": "{n, plural, one {# réservation sera annulée} other {# réservations seront annulées}}",
+  "previewGroups": "{n, plural, one {# séance de groupe sera annulée} other {# séances de groupe seront annulées}}",
+  "previewTold": "Tout le monde est prévenu par notification et par e-mail, avec la raison.",
+  "cancel": "Annuler",
+  "confirm": "Fermer les courts",
+  "confirmCancel": "Fermer et annuler {n}",
+  "saving": "Fermeture…",
+  "doneCancelled": "{n, plural, =0 {Courts fermés. Rien n’était réservé pendant cette période.} one {Courts fermés. # réservation annulée.} other {Courts fermés. # réservations annulées.}}",
+  "doneEmailed": "{n, plural, one {# e-mail envoyé.} other {# e-mails envoyés.}}",
+  "reopened": "Les courts sont rouverts. Les réservations annulées le restent.",
+  "closed": "Fermé",
+  "now": "En cours",
+  "listTitle": "Courts fermés",
+  "listHint": "Travaux, pluie, tournoi, jour férié : fermez des courts pour que personne ne les réserve.",
+  "listEmpty": "Aucun court n’est fermé.",
+  "reopen": "Rouvrir",
+  "reopening": "Réouverture…",
+  "reopenHint": "Rouvrir les courts. Les réservations annulées le restent.",
+  "publicTitle": "Courts fermés",
+  "wholeClub": "Tout le club",
+  "errors": {
+   "notAllowed": "Vous ne pouvez pas fermer de courts dans ce club.",
+   "locked": "Votre compte est en lecture seule. Choisissez une formule pour faire des modifications.",
+   "order": "La fin doit être après le début.",
+   "passed": "Cette période est déjà passée.",
+   "tooLong": "Une fermeture peut durer jusqu’à un an.",
+   "noCourts": "Choisissez au moins un court.",
+   "failed": "Impossible de fermer les courts. Réessayez."
   }
  }
 }
