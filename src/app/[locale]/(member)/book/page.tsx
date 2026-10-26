@@ -7,9 +7,9 @@ import BookingPaused from "@/components/ui/BookingPaused";
 export default async function BookPage({
   searchParams,
 }: {
-  searchParams: Promise<{ club?: string }>;
+  searchParams: Promise<{ club?: string; court?: string }>;
 }) {
-  const { club: clubSlug } = await searchParams;
+  const { club: clubSlug, court: courtId } = await searchParams;
   const supabase = await createClient();
 
   // ?club=<slug> comes from a club's public page: show only that club.
@@ -49,7 +49,7 @@ export default async function BookPage({
 
   return (
     <Suspense fallback={<Spinner />}>
-      <BookCourtsClient courts={courts} clubName={clubName} />
+      <BookCourtsClient courts={courts} clubName={clubName} openCourtId={courtId} />
     </Suspense>
   );
 }

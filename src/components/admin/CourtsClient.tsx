@@ -15,7 +15,7 @@ import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
-import { COURT_COLORS, COURT_COLOR_HEX, SURFACE_DEFAULT_COLOR, courtColor, type CourtColor } from "@/lib/courtColors";
+import { SURFACE_DEFAULT_COLOR, colorsFor, courtColor, swatchStyle, type CourtColor } from "@/lib/courtColors";
 
 const EMPTY_FORM = {
   name: "",
@@ -277,7 +277,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                       <span
                         aria-hidden="true"
                         className="size-3 shrink-0 rounded-full ring-1 ring-black/10"
-                        style={{ backgroundColor: COURT_COLOR_HEX[courtColor(c)].court }}
+                        style={swatchStyle(courtColor(c))}
                       />
                       {labels.surface(c.surface)} · {labels.courtColor(courtColor(c))}
                     </span>
@@ -401,7 +401,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
             <fieldset>
               <legend className="mb-1 block text-xs text-ink-400">{t("color")}</legend>
               <div role="radiogroup" aria-label={t("color")} className="flex flex-wrap gap-2">
-                {COURT_COLORS.map((c) => {
+                {colorsFor(form.surface).map((c) => {
                   const on = form.color === c;
                   return (
                     <button
@@ -417,7 +417,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                       <span
                         aria-hidden="true"
                         className="size-6 rounded-full ring-1 ring-black/10"
-                        style={{ backgroundColor: COURT_COLOR_HEX[c].court }}
+                        style={swatchStyle(c)}
                       />
                       {labels.courtColor(c)}
                     </button>

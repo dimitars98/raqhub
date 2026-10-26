@@ -513,7 +513,8 @@
   "website": "Website",
   "ctaTitle": "Ready to play at {club}?",
   "ctaText": "Create a free account to see free slots and book in seconds.",
-  "metaDescription": "Courts, coaches and membership plans at {club}. Book online with Kortello."
+  "metaDescription": "Courts, coaches and membership plans at {club}. Book online with Kortello.",
+  "bookThisCourt": "Book"
  },
  "myBookings": {
   "title": "My bookings",
@@ -1694,6 +1695,7 @@
   "outdoor": "Outdoor",
   "courtColors": {
    "blue": "Blue",
+   "blue_green": "Blue-green",
    "green": "Green",
    "terracotta": "Terracotta",
    "red": "Red",

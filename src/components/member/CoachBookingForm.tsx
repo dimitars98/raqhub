@@ -1,17 +1,16 @@
 "use client";
 
 import { unstable_rethrow } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { addDays, format, setHours, setMinutes, startOfDay } from "date-fns";
-import { createClient } from "@/lib/supabase/client";
+import { useCoachBusySlots, useMemberDiscount, useRefreshBusy } from "@/hooks/useBookingData";
 import { dateLocale } from "@/lib/dateLocale";
 import { createCoachBooking } from "@/app/actions/bookings";
 import { startHoursFor } from "@/lib/openingHours";
-import type { MyMembership, OpeningHours } from "@/types/database";
+import type { OpeningHours } from "@/types/database";
 import type { BookingRules } from "@/lib/bookingRules";
 
-type BusySlot = { starts_at: string; ends_at: string };
 
 
 export default function CoachBookingForm({
@@ -44,67 +43,24 @@ export default function CoachBookingForm({
     rules.durations.includes(60) ? 60 : rules.durations[0],
   );
   const [hour, setHour] = useState<number | null>(null);
-  const [busy, setBusy] = useState<{ key: string; slots: BusySlot[] } | null>(null);
-  const [discount, setDiscount] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  // Bumped to reload the taken times after a clash.
-  const [refresh, setRefresh] = useState(0);
 
   const dayKey = format(day, "yyyy-MM-dd");
 
-  // Taken times of this coach on the chosen day.
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      let slots: BusySlot[] = [];
-      try {
-        const { data, error: rpcError } = await createClient().rpc(
-          "get_coach_busy_slots",
-          { p_coach_id: coachId, p_day: dayKey },
-        );
-        if (rpcError) console.error("[get_coach_busy_slots]", rpcError);
-        else slots = (data as BusySlot[]) ?? [];
-      } catch (e) {
-        console.error("[get_coach_busy_slots]", e);
-      }
-      // If loading fails every time stays open; the database still refuses clashes.
-      if (!cancelled) setBusy({ key: dayKey, slots });
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [coachId, dayKey, refresh]);
-
-  // Member discount, only for a membership at the coach's club.
-  useEffect(() => {
-    if (!clubId) return;
-    let cancelled = false;
-    (async () => {
-      try {
-        const { data } = await createClient().rpc("my_memberships");
-        if (cancelled) return;
-        const membership = ((data ?? []) as unknown as MyMembership[]).find(
-          (m) => m.club_id === clubId && m.status === "active",
-        );
-        setDiscount(membership?.plan?.discount_pct ?? 0);
-      } catch {
-        // No discount shown; the database still applies it when booking.
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [clubId]);
+  // Taken times of this coach on the chosen day, and the member discount
+  // (only for a membership at the coach's club).
+  const { slots: busySlots, ready } = useCoachBusySlots(coachId, dayKey);
+  const refreshBusy = useRefreshBusy();
+  const discount = useMemberDiscount(clubId);
 
   const startHours = startHoursFor(hours, day, duration);
-  const ready = busy?.key === dayKey;
 
   const isTaken = (h: number) => {
     const start = setMinutes(setHours(day, h), 0);
     const end = new Date(start.getTime() + duration * 60_000);
     if (start < new Date()) return true;
-    return (busy?.slots ?? []).some(
+    return busySlots.some(
       (b) => start < new Date(b.ends_at) && end > new Date(b.starts_at),
     );
   };
@@ -135,7 +91,7 @@ export default function CoachBookingForm({
         setError(result.error);
         setSubmitting(false);
         setHour(null);
-        setRefresh((r) => r + 1);
+        refreshBusy();
       }
     } catch (e) {
       unstable_rethrow(e); // the redirect after booking

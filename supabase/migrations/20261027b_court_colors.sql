@@ -14,4 +14,9 @@ alter table public.courts
 alter table public.courts drop constraint if exists courts_color_check;
 alter table public.courts
   add constraint courts_color_check
-  check (color is null or color in ('blue', 'green', 'terracotta', 'red', 'purple', 'grey'));
+  check (color is null or color in ('blue', 'blue_green', 'green', 'terracotta', 'red', 'purple', 'grey'));
+
+-- Visitors who aren't signed in may only read the courts columns they were
+-- given one by one; the new column has to be given too, or the club's
+-- public page shows no courts.
+grant select (color) on public.courts to anon;

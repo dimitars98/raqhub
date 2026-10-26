@@ -513,7 +513,8 @@
   "website": "Faqja e internetit",
   "ctaTitle": "Gati për të luajtur te {club}?",
   "ctaText": "Krijo një llogari falas, shiko oraret e lira dhe rezervo në pak sekonda.",
-  "metaDescription": "Fusha, trajnerë dhe anëtarësime te {club}. Rezervo online me Kortello."
+  "metaDescription": "Fusha, trajnerë dhe anëtarësime te {club}. Rezervo online me Kortello.",
+  "bookThisCourt": "Rezervo"
  },
  "myBookings": {
   "title": "Rezervimet e mia",
@@ -1694,6 +1695,7 @@
   "outdoor": "Hapur",
   "courtColors": {
    "blue": "Blu",
+   "blue_green": "Blu-jeshile",
    "green": "E gjelbër",
    "terracotta": "Terrakotë",
    "red": "E kuqe",

@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
+import { useBusySlotsForCourts, useRefreshBusy } from "@/hooks/useBookingData";
 import SelectField from "@/components/ui/SelectField";
 import { useLocale, useTranslations } from "next-intl";
 import { addDays } from "date-fns";
 import { fromZonedTime } from "date-fns-tz";
 import { ChevronLeft } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
-import { createClient } from "@/lib/supabase/client";
 import { createOpenMatch } from "@/app/actions/openMatches";
 import { useLabels } from "@/hooks/useLabels";
 import { GROUP_TIME_ZONE, clubDay, clubFormat, noon } from "@/lib/groups";
@@ -34,7 +34,6 @@ export type NewMatchCourt = {
 
 export type NewMatchClubInfo = { id: string; opening_hours: unknown; booking_rules: unknown };
 
-type Busy = { starts_at: string; ends_at: string };
 
 /** How far ahead the day buttons go, at most. */
 const MAX_DAYS_SHOWN = 14;
@@ -86,36 +85,18 @@ export default function NewMatchClient({
   const sportCourts = courts.filter((k) => k.club_id === clubId && k.sport === sport);
   const myLevel = sport ? (levels.find((l) => l.sport === sport)?.level ?? null) : null;
 
-  // Taken times on each court that day.
-  const [busy, setBusy] = useState<{ key: string; byCourt: Record<string, Busy[]> } | null>(null);
-  // Bumped to load the times again (after someone else took a slot).
-  const [reload, setReload] = useState(0);
-  const busyKey = `${clubId}|${sport}|${day}|${reload}`;
-  useEffect(() => {
-    let cancelled = false;
-    const supabase = createClient();
-    const ids = courts.filter((k) => k.club_id === clubId && k.sport === sport).map((k) => k.id);
-    Promise.all(
-      ids.map((id) =>
-        supabase.rpc("get_busy_slots", { p_court_id: id, p_day: day }).then(({ data, error }) => {
-          if (error) console.error("[get_busy_slots]", error);
-          return [id, (data ?? []) as Busy[]] as const;
-        }),
-      ),
-    ).then((pairs) => {
-      if (!cancelled) setBusy({ key: `${clubId}|${sport}|${day}|${reload}`, byCourt: Object.fromEntries(pairs) });
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [courts, clubId, sport, day, reload]);
-  const ready = busy?.key === busyKey;
+  // Taken (and closed) times on each court that day.
+  const { byCourt, ready } = useBusySlotsForCourts(
+    sportCourts.map((k) => k.id),
+    day,
+  );
+  const refreshBusy = useRefreshBusy();
 
   // Free start times: whole hours inside the opening hours, per court.
   const startOf = (h: number) => fromZonedTime(`${day}T${pad(h)}:00:00`, GROUP_TIME_ZONE);
   const now = new Date();
   const slots =
-    !ready || !busy
+    !ready
       ? []
       : startHoursFor(hours, noon(day), duration).flatMap((h) => {
           const start = startOf(h);
@@ -124,7 +105,7 @@ export default function NewMatchClient({
           return sportCourts.map((k) => ({
             hour: h,
             court: k,
-            taken: (busy.byCourt[k.id] ?? []).some(
+            taken: (byCourt[k.id] ?? []).some(
               (b) => start < new Date(b.ends_at) && end > new Date(b.starts_at),
             ),
           }));
@@ -165,7 +146,7 @@ export default function NewMatchClient({
         setError(r.error === "booking" ? (r.message ?? t("errors.failed")) : t(`errors.${r.error}`));
         // Someone may have taken the slot meanwhile: load the times again.
         setPick(null);
-        setReload((n) => n + 1);
+        refreshBusy();
         return;
       }
       router.push(`/matches/${r.id}?new=1`);

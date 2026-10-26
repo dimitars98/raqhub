@@ -23,6 +23,8 @@ import { format } from "date-fns";
 import type { Tournament } from "@/types/database";
 import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
 import BookingPaused from "@/components/ui/BookingPaused";
+import CourtArt from "@/components/courts/CourtArt";
+import { courtColor } from "@/lib/courtColors";
 import MatchCard from "@/components/matches/MatchCard";
 import { loadMyLevels } from "@/lib/myLevels";
 import type { MatchCard as OpenMatch, MyLevel } from "@/lib/openMatches";
@@ -51,7 +53,7 @@ type PublicClub = Pick<
 
 type PublicCourt = Pick<
   Court,
-  "id" | "name" | "sport" | "surface" | "is_indoor" | "price_per_hour"
+  "id" | "name" | "sport" | "surface" | "is_indoor" | "price_per_hour" | "color"
 >;
 
 type PublicCoach = Pick<Coach, "id" | "bio" | "levels" | "price_per_hour"> & {
@@ -126,7 +128,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
   ] = await Promise.all([
     supabase
       .from("courts")
-      .select("id, name, sport, surface, is_indoor, price_per_hour")
+      .select("id, name, sport, surface, is_indoor, price_per_hour, color")
       .eq("club_id", club.id)
       .eq("is_active", true)
       .order("name"),
@@ -360,31 +362,66 @@ export default async function ClubPublicPage({ params }: PageProps) {
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {courts.map((court) => (
-                <div key={court.id} className="card flex flex-col p-6">
-                  <div className="mb-3 text-lg font-semibold leading-snug text-ink-900">
-                    {court.name}
+              {courts.map((court) => {
+                // Players open the booking window for this court; visitors
+                // sign in first and come back to it; the club's own admin
+                // goes to the courts screen.
+                const bookHref = `/book?club=${club.slug}&court=${court.id}`;
+                const href = paused
+                  ? null
+                  : viewer === "admin"
+                    ? "/admin/courts"
+                    : viewer === "player"
+                      ? bookHref
+                      : `/login?redirectTo=${encodeURIComponent(`/${locale}${bookHref}`)}`;
+                const inner = (
+                  <>
+                    <div className="relative h-24 w-full overflow-hidden">
+                      <CourtArt court={court} />
+                      <span className="absolute top-2.5 left-2.5 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+                        {labels.sport(court.sport)}
+                      </span>
+                      <span className="absolute top-2.5 right-2.5 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-ink-900">
+                        {labels.inOut(court.is_indoor)}
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-3 p-5">
+                      <div>
+                        <p className="text-lg font-semibold leading-snug text-ink-900">{court.name}</p>
+                        <p className="text-sm text-ink-600">
+                          {labels.surface(court.surface)} · {labels.courtColor(courtColor(court))}
+                        </p>
+                      </div>
+                      <div className="mt-auto flex items-center justify-between gap-3">
+                        <p className="text-xl font-bold tracking-tight text-ink-900">
+                          €{court.price_per_hour}
+                          <span className="text-sm font-normal tracking-normal text-ink-600"> {t("perHour")}</span>
+                        </p>
+                        {href && viewer !== "admin" && (
+                          <span className="inline-flex h-9 items-center rounded-full bg-ink-900 px-4 text-[13px] font-semibold text-white transition-colors group-hover:bg-brand-600">
+                            {t("bookThisCourt")} →
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                );
+                const box =
+                  "group flex h-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white";
+                return href ? (
+                  <Link
+                    key={court.id}
+                    href={href}
+                    className={`${box} transition-all hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_12px_28px_-14px_rgba(17,28,10,0.35)] focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:outline-none`}
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  <div key={court.id} className={box}>
+                    {inner}
                   </div>
-                  <div className="mb-5 flex flex-wrap gap-1.5">
-                    <span className="badge-brand">
-                      {labels.sport(court.sport)}
-                    </span>
-                    <span className="badge bg-ink-50 text-ink-800">
-                      {labels.surface(court.surface)}
-                    </span>
-                    <span className="badge-blue">
-                      {labels.inOut(court.is_indoor)}
-                    </span>
-                  </div>
-                  <div className="mt-auto border-t border-ink-100 pt-4 text-xl font-bold tracking-tight text-ink-900">
-                    €{court.price_per_hour}
-                    <span className="text-sm font-normal tracking-normal text-ink-600">
-                      {" "}
-                      {t("perHour")}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </section>

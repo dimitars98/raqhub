@@ -513,7 +513,8 @@
   "website": "Sito web",
   "ctaTitle": "Vuoi giocare al {club}?",
   "ctaText": "Crea un account gratuito, guarda gli orari liberi e prenota in pochi secondi.",
-  "metaDescription": "Campi, allenatori e abbonamenti al {club}. Prenota online con Kortello."
+  "metaDescription": "Campi, allenatori e abbonamenti al {club}. Prenota online con Kortello.",
+  "bookThisCourt": "Prenota"
  },
  "myBookings": {
   "title": "Le mie prenotazioni",
@@ -1694,6 +1695,7 @@
   "outdoor": "Esterno",
   "courtColors": {
    "blue": "Blu",
+   "blue_green": "Blu e verde",
    "green": "Verde",
    "terracotta": "Terracotta",
    "red": "Rosso",

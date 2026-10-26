@@ -18,6 +18,8 @@ export default function CourtArt({ court }: { court: { color?: string | null; su
       }}
     >
       <svg viewBox="0 0 200 96" aria-hidden="true" className="h-full w-full">
+        {/* Two-colour court: the playing area in its own colour */}
+        {c.inner && <rect x={x} y="14" width={w} height="68" fill={c.inner} />}
         <g stroke={c.lines} strokeWidth="1.6" fill="none" opacity="0.9">
           <rect x={x} y="14" width={w} height="68" />
           {sport === "tennis" && (

@@ -12,8 +12,8 @@ import {
   setMinutes,
   isToday,
 } from "date-fns";
-import { createClient } from "@/lib/supabase/client";
-import type { Court, MyMembership, Sport } from "@/types/database";
+import type { Court, Sport } from "@/types/database";
+import { useBusySlots, useMemberDiscount, useRefreshBusy } from "@/hooks/useBookingData";
 import CourtArt from "@/components/courts/CourtArt";
 import { courtColor } from "@/lib/courtColors";
 import Modal from "@/components/ui/Modal";
@@ -40,7 +40,6 @@ type FormValues = {
   duration: number;
 };
 
-type Busy = { starts_at: string; ends_at: string };
 
 const money = (n: number) => `€${n.toFixed(2).replace(/\.00$/, "")}`;
 const hh = (h: number) => `${String(h).padStart(2, "0")}:00`;
@@ -48,25 +47,24 @@ const hh = (h: number) => `${String(h).padStart(2, "0")}:00`;
 export default function BookCourtsClient({
   courts,
   clubName,
+  openCourtId,
 }: {
   courts: CourtWithClub[];
   /** Set when the list is filtered to one club (from its public page). */
   clubName?: string;
+  /** A court picked on the club's page: its booking window opens straight away. */
+  openCourtId?: string;
 }) {
   const t = useTranslations("bookCourts");
   const dfLocale = dateLocale(useLocale());
   const labels = useLabels();
   const tCoach = useTranslations("coachBooking");
-  const [selected, setSelected] = useState<CourtWithClub | null>(null);
+  const [selected, setSelected] = useState<CourtWithClub | null>(
+    () => courts.find((c) => c.id === openCourtId) ?? null,
+  );
   const [error, setError] = useState<string | null>(null);
-  const [discount, setDiscount] = useState(0);
   const [sport, setSport] = useState<Sport | "all">("all");
   const [query, setQuery] = useState("");
-  // Taken times for one court + day. `key` records which court/day they belong to.
-  const [busy, setBusy] = useState<{ key: string; slots: Busy[] } | null>(null);
-  // Bumped to load the taken times again (e.g. after someone else took a time).
-  const [reload, setReload] = useState(0);
-  const supabase = createClient();
 
   // The selected court's club decides lengths, how far ahead, and cancelling.
   const rules = normalizeRules(selected?.club?.booking_rules);
@@ -103,24 +101,9 @@ export default function BookCourtsClient({
   const isClosed = !!selected && hourOptions.length === 0;
 
   // The taken (and closed) times for the selected court and day.
-  const busyKey = selected ? `${selected.id}|${watchedDate}|${reload}` : "";
-  useEffect(() => {
-    if (!selected) return;
-    let cancelled = false;
-    const key = `${selected.id}|${watchedDate}|${reload}`;
-    createClient()
-      .rpc("get_busy_slots", { p_court_id: selected.id, p_day: watchedDate })
-      .then(({ data, error }) => {
-        if (cancelled) return;
-        if (error) console.error("[get_busy_slots]", error);
-        // If loading fails, every time stays open; the server still refuses clashes.
-        setBusy({ key, slots: error ? [] : ((data as Busy[]) ?? []) });
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [selected, watchedDate, reload]);
-  const slotsReady = busy?.key === busyKey;
+  const { slots: busySlots, ready: slotsReady } = useBusySlots(selected?.id, watchedDate);
+  const refreshBusy = useRefreshBusy();
+  const discount = useMemberDiscount(selected?.club_id);
 
   /** Can this start time be booked for the chosen length? */
   const free = (hour: number) => {
@@ -131,7 +114,7 @@ export default function BookCourtsClient({
     const end = new Date(start.getTime() + watchedDuration * 60_000);
     if (start < new Date()) return false;
     if (!slotsReady) return true;
-    return !busy!.slots.some(
+    return !busySlots.some(
       (b) => start < new Date(b.ends_at) && end > new Date(b.starts_at),
     );
   };
@@ -161,22 +144,6 @@ export default function BookCourtsClient({
     : 0;
   const finalTotal = baseTotal * (1 - discount / 100);
 
-  // The member discount at the selected court's club.
-  useEffect(() => {
-    if (!selected) return;
-    let cancelled = false;
-    (async () => {
-      const { data } = await supabase.rpc("my_memberships");
-      if (cancelled) return;
-      const membership = ((data ?? []) as unknown as MyMembership[]).find(
-        (m) => m.club_id === selected.club_id && m.status === "active",
-      );
-      setDiscount(membership?.plan?.discount_pct ?? 0);
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [selected, supabase]);
 
   const onSubmit = async (values: FormValues) => {
     if (!selected || !free(values.hour)) return;
@@ -195,7 +162,7 @@ export default function BookCourtsClient({
     if (result?.error) {
       setError(result.error);
       // Someone may have just taken it: load the taken times again.
-      setReload((r) => r + 1);
+      refreshBusy();
     }
   };
 
@@ -344,7 +311,6 @@ export default function BookCourtsClient({
                       type="button"
                       onClick={() => {
                         setSelected(court);
-                        setDiscount(0);
                         setError(null);
                       }}
                       className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white text-left transition-all hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_12px_28px_-14px_rgba(17,28,10,0.35)] focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:outline-none"

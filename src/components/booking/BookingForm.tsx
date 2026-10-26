@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useBusySlots, useRefreshBusy } from "@/hooks/useBookingData";
 import { unstable_rethrow, useRouter } from "next/navigation";
 import { createBooking } from "@/app/actions/bookings";
 import { createClient } from "@/lib/supabase/client";
@@ -11,11 +12,6 @@ interface Props {
   courtId: string;
   pricePerHour: number;
   courtName: string;
-}
-
-interface BusySlot {
-  starts_at: string;
-  ends_at: string;
 }
 
 const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
@@ -34,12 +30,6 @@ export default function BookingForm({
   const [duration, setDuration] = useState(60);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // Taken times for one court + day. `key` records which court/day they belong to.
-  const [busy, setBusy] = useState<{ key: string; slots: BusySlot[] } | null>(
-    null,
-  );
-  // Bumped to reload the taken times (e.g. after someone else grabs a slot).
-  const [refreshKey, setRefreshKey] = useState(0);
   const router = useRouter();
   const supabase = createClient();
   const t = useTranslations("booking");
@@ -47,29 +37,10 @@ export default function BookingForm({
 
   const total = (pricePerHour * duration) / 60;
   const dayKey = format(selectedDay, "yyyy-MM-dd");
-  const busyKey = `${courtId}|${dayKey}`;
 
-  // Load the taken times whenever the court or the selected day changes.
-  useEffect(() => {
-    let cancelled = false;
-    const key = `${courtId}|${dayKey}`;
-
-    createClient()
-      .rpc("get_busy_slots", { p_court_id: courtId, p_day: dayKey })
-      .then(({ data, error }) => {
-        if (cancelled) return;
-        if (error) console.error("[get_busy_slots]", error);
-        // If loading fails, leave every slot open; the server still rejects clashes.
-        setBusy({ key, slots: error ? [] : ((data as BusySlot[]) ?? []) });
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [courtId, dayKey, refreshKey]);
-
-  // True once the taken times shown belong to the currently selected court + day.
-  const slotsReady = busy?.key === busyKey;
+  // Taken (and closed) times for this court on the selected day.
+  const { slots: busySlots, ready: slotsReady } = useBusySlots(courtId, dayKey);
+  const refreshBusy = useRefreshBusy();
 
   const slotRange = (hour: number, dur: number) => {
     const start = setMinutes(setHours(selectedDay, hour), 0);
@@ -80,10 +51,10 @@ export default function BookingForm({
   // A slot can't be picked if it's still loading, already in the past,
   // or overlaps an existing booking for the chosen duration.
   const isUnavailable = (hour: number, dur: number) => {
-    if (!slotsReady || !busy) return true;
+    if (!slotsReady) return true;
     const { start, end } = slotRange(hour, dur);
     if (start < new Date()) return true;
-    return busy.slots.some(
+    return busySlots.some(
       (b) => start < new Date(b.ends_at) && end > new Date(b.starts_at),
     );
   };
@@ -117,7 +88,7 @@ export default function BookingForm({
         setError(result.error);
         // Maybe someone else took the slot: clear the pick and reload taken times.
         setSelectedHour(null);
-        setRefreshKey((k) => k + 1);
+        refreshBusy();
       }
     } catch (e) {
       unstable_rethrow(e); // let the redirect after booking through

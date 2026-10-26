@@ -513,7 +513,8 @@
   "website": "Site web",
   "ctaTitle": "Envie de jouer à {club} ?",
   "ctaText": "Créez un compte gratuit, consultez les créneaux libres et réservez en quelques secondes.",
-  "metaDescription": "Courts, entraîneurs et adhésions à {club}. Réservez en ligne avec Kortello."
+  "metaDescription": "Courts, entraîneurs et adhésions à {club}. Réservez en ligne avec Kortello.",
+  "bookThisCourt": "Réserver"
  },
  "myBookings": {
   "title": "Mes réservations",
@@ -1694,6 +1695,7 @@
   "outdoor": "Extérieur",
   "courtColors": {
    "blue": "Bleu",
+   "blue_green": "Bleu et vert",
    "green": "Vert",
    "terracotta": "Terre cuite",
    "red": "Rouge",

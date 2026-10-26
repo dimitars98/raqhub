@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import type { ReactNode } from "react";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 // Description for search engines and link previews, in the page's language.
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +24,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   return (
     <NextIntlClientProvider messages={messages}>
-      {children}
+      <QueryProvider>{children}</QueryProvider>
     </NextIntlClientProvider>
   );
 }

@@ -513,7 +513,8 @@
   "website": "Sajt",
   "ctaTitle": "Spremni za igru u klubu {club}?",
   "ctaText": "Napravite besplatan nalog da vidite slobodne termine i rezervišete za nekoliko sekundi.",
-  "metaDescription": "Tereni, treneri i članarine u klubu {club}. Rezervišite onlajn uz Kortello."
+  "metaDescription": "Tereni, treneri i članarine u klubu {club}. Rezervišite onlajn uz Kortello.",
+  "bookThisCourt": "Rezerviši"
  },
  "myBookings": {
   "title": "Moje rezervacije",
@@ -1694,6 +1695,7 @@
   "outdoor": "Otvoreni",
   "courtColors": {
    "blue": "Plav",
+   "blue_green": "Plavo-zelen",
    "green": "Zelen",
    "terracotta": "Terakota",
    "red": "Crven",

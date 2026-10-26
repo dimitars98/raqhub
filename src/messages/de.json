@@ -513,7 +513,8 @@
   "website": "Website",
   "ctaTitle": "Lust, bei {club} zu spielen?",
   "ctaText": "Erstelle ein kostenloses Konto, sieh freie Zeiten und buche in Sekunden.",
-  "metaDescription": "Plätze, Trainer und Mitgliedschaften bei {club}. Online buchen mit Kortello."
+  "metaDescription": "Plätze, Trainer und Mitgliedschaften bei {club}. Online buchen mit Kortello.",
+  "bookThisCourt": "Buchen"
  },
  "myBookings": {
   "title": "Meine Buchungen",
@@ -1694,6 +1695,7 @@
   "outdoor": "Außen",
   "courtColors": {
    "blue": "Blau",
+   "blue_green": "Blau-grün",
    "green": "Grün",
    "terracotta": "Terrakotta",
    "red": "Rot",
