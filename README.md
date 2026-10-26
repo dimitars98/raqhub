@@ -141,6 +141,13 @@ a tournament, a holiday. Nobody can book them then, from any screen.
   it's booked; existing lessons on a closed court are cancelled.
 - **Reopening** deletes the closure. Cancelled bookings stay cancelled.
 
+## Court colours
+
+Each court can have its real colour (blue, green, terracotta, red, purple, grey),
+picked in Admin > Courts. The booking page draws the court in that colour and
+says it ("Hard · Blue"). Run `supabase/migrations/20261027b_court_colors.sql`
+once; courts without a colour use their surface's usual one.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts

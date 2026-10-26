@@ -276,7 +276,8 @@
   "saveError": "Impossibile salvare il campo. Riprova.",
   "howMany": "Quanti",
   "howManyHint": "Aggiunge da {first} a {last}.",
-  "namePlaceholderMany": "Campo in terra"
+  "namePlaceholderMany": "Campo in terra",
+  "color": "Colore"
  },
  "dashboard": {
   "dashboard": "Dashboard",
@@ -1690,7 +1691,15 @@
    "one_time": "una tantum"
   },
   "indoor": "Coperto",
-  "outdoor": "Esterno"
+  "outdoor": "Esterno",
+  "courtColors": {
+   "blue": "Blu",
+   "green": "Verde",
+   "terracotta": "Terracotta",
+   "red": "Rosso",
+   "purple": "Viola",
+   "grey": "Grigio"
+  }
  },
  "tournaments": {
   "title": "Tornei",

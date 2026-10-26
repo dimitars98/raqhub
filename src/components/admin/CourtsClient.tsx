@@ -15,6 +15,7 @@ import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { COURT_COLORS, COURT_COLOR_HEX, SURFACE_DEFAULT_COLOR, courtColor, type CourtColor } from "@/lib/courtColors";
 
 const EMPTY_FORM = {
   name: "",
@@ -24,6 +25,7 @@ const EMPTY_FORM = {
   price_per_hour: "",
   description: "",
   is_active: true,
+  color: "terracotta" as CourtColor,
   /** How many identical courts to add (new courts only). */
   count: "1",
 };
@@ -84,6 +86,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       price_per_hour: String(c.price_per_hour),
       description: c.description ?? "",
       is_active: c.is_active,
+      color: courtColor(c),
       count: "1",
     });
     setShowModal(true);
@@ -95,6 +98,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       ...f,
       sport,
       surface: SURFACES_BY_SPORT[sport][0],
+      color: SURFACE_DEFAULT_COLOR[SURFACES_BY_SPORT[sport][0]],
     }));
   };
 
@@ -111,6 +115,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       price_per_hour: parseFloat(form.price_per_hour),
       description: form.description || null,
       is_active: form.is_active,
+      color: form.color,
     };
 
     try {
@@ -268,7 +273,14 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                     {labels.sport(c.sport)}
                   </td>
                   <td className="px-5 py-3.5 text-ink-600">
-                    {labels.surface(c.surface)}
+                    <span className="inline-flex items-center gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="size-3 shrink-0 rounded-full ring-1 ring-black/10"
+                        style={{ backgroundColor: COURT_COLOR_HEX[courtColor(c)].court }}
+                      />
+                      {labels.surface(c.surface)} · {labels.courtColor(courtColor(c))}
+                    </span>
                   </td>
                   <td className="px-5 py-3.5 text-ink-600">
                     {labels.inOut(c.is_indoor)}
@@ -378,11 +390,41 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                 <SelectField
                   ariaLabel={t("surface")}
                   value={form.surface}
-                  onChange={(v) => setForm((f) => ({ ...f, surface: v as Surface }))}
+                  onChange={(v) =>
+                    setForm((f) => ({ ...f, surface: v as Surface, color: SURFACE_DEFAULT_COLOR[v as Surface] }))
+                  }
                   options={SURFACES_BY_SPORT[form.sport].map((s) => ({ value: s, label: labels.surface(s) }))}
                 />
               </Modal.Field>
             </Modal.Grid>
+            {/* The court's real colour: drawn on the booking page */}
+            <fieldset>
+              <legend className="mb-1 block text-xs text-ink-400">{t("color")}</legend>
+              <div role="radiogroup" aria-label={t("color")} className="flex flex-wrap gap-2">
+                {COURT_COLORS.map((c) => {
+                  const on = form.color === c;
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      role="radio"
+                      aria-checked={on}
+                      onClick={() => setForm((f) => ({ ...f, color: c }))}
+                      className={`inline-flex h-9 items-center gap-2 rounded-full border pr-3 pl-1.5 text-[13px] transition-colors ${
+                        on ? "border-ink-900 bg-ink-50 font-medium text-ink-900" : "border-ink-200 text-ink-600 hover:border-ink-400"
+                      }`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="size-6 rounded-full ring-1 ring-black/10"
+                        style={{ backgroundColor: COURT_COLOR_HEX[c].court }}
+                      />
+                      {labels.courtColor(c)}
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
             <Modal.Grid>
               <Modal.Field label={t("pricePerHour")}>
                 <input

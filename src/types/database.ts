@@ -113,6 +113,8 @@ export interface Court {
   is_active: boolean;
   price_per_hour: number;
   description: string | null;
+  /** The real colour (src/lib/courtColors.ts). Null: the surface's usual one. */
+  color?: string | null;
   created_at: string;
   updated_at: string;
   club?: Club;

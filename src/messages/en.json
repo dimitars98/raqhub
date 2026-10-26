@@ -276,7 +276,8 @@
   "saveError": "We couldn't save the court. Please try again.",
   "howMany": "How many",
   "howManyHint": "Adds {first} to {last}.",
-  "namePlaceholderMany": "Clay court"
+  "namePlaceholderMany": "Clay court",
+  "color": "Colour"
  },
  "dashboard": {
   "dashboard": "Dashboard",
@@ -1690,7 +1691,15 @@
    "one_time": "one-time"
   },
   "indoor": "Indoor",
-  "outdoor": "Outdoor"
+  "outdoor": "Outdoor",
+  "courtColors": {
+   "blue": "Blue",
+   "green": "Green",
+   "terracotta": "Terracotta",
+   "red": "Red",
+   "purple": "Purple",
+   "grey": "Grey"
+  }
  },
  "tournaments": {
   "title": "Tournaments",

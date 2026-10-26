@@ -276,7 +276,8 @@
   "saveError": "Fusha nuk mund të ruhej. Ju lutemi provoni përsëri.",
   "howMany": "Sa",
   "howManyHint": "Shton nga {first} deri te {last}.",
-  "namePlaceholderMany": "Fushë me dhe"
+  "namePlaceholderMany": "Fushë me dhe",
+  "color": "Ngjyra"
  },
  "dashboard": {
   "dashboard": "Paneli kryesor",
@@ -1690,7 +1691,15 @@
    "one_time": "një herë"
   },
   "indoor": "Mbyllur",
-  "outdoor": "Hapur"
+  "outdoor": "Hapur",
+  "courtColors": {
+   "blue": "Blu",
+   "green": "E gjelbër",
+   "terracotta": "Terrakotë",
+   "red": "E kuqe",
+   "purple": "Vjollcë",
+   "grey": "Gri"
+  }
  },
  "tournaments": {
   "title": "Turnetë",

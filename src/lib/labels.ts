@@ -73,6 +73,8 @@ export function makeLabels(t: LabelsTranslator) {
   return {
     sport: name("sports"),
     surface: name("surfaces"),
+    /** "Blue", "Terracotta" … (src/lib/courtColors.ts) */
+    courtColor: name("courtColors"),
     level: name("levels"),
     bookingStatus: name("bookingStatus"),
     memberStatus: name("memberStatus"),

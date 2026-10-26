@@ -276,7 +276,8 @@
   "saveError": "Teren nije sačuvan. Pokušajte ponovo.",
   "howMany": "Koliko",
   "howManyHint": "Dodaje od {first} do {last}.",
-  "namePlaceholderMany": "Teren na šljaci"
+  "namePlaceholderMany": "Teren na šljaci",
+  "color": "Boja"
  },
  "dashboard": {
   "dashboard": "Kontrolna tabla",
@@ -1690,7 +1691,15 @@
    "one_time": "jednokratno"
   },
   "indoor": "U hali",
-  "outdoor": "Otvoreni"
+  "outdoor": "Otvoreni",
+  "courtColors": {
+   "blue": "Plav",
+   "green": "Zelen",
+   "terracotta": "Terakota",
+   "red": "Crven",
+   "purple": "Ljubičast",
+   "grey": "Siv"
+  }
  },
  "tournaments": {
   "title": "Turniri",

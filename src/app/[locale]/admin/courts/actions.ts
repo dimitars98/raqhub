@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import type { Court, Sport, Surface } from "@/types/database";
 import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
+import { isCourtColor } from "@/lib/courtColors";
 
 // club_id is deliberately not accepted from the browser. The server works out
 // which club the signed-in user owns, so nobody can write to another club.
@@ -14,6 +15,8 @@ export type CourtInput = {
   price_per_hour: number;
   description: string | null;
   is_active: boolean;
+  /** The court's real colour (src/lib/courtColors.ts). */
+  color: string | null;
 };
 
 // reason "limit": the club's plan doesn't allow another active court.
@@ -57,6 +60,7 @@ function cleanInput(input: CourtInput): CourtInput | null {
     price_per_hour: price,
     description: input.description?.trim() || null,
     is_active: Boolean(input.is_active),
+    color: isCourtColor(input.color) ? input.color : null,
   };
 }
 

@@ -4,18 +4,25 @@ import { dateLocale } from "@/lib/dateLocale";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
+import {
+  format,
+  addDays,
+  startOfDay,
+  setHours,
+  setMinutes,
+  isToday,
+} from "date-fns";
 import { createClient } from "@/lib/supabase/client";
-import type { Court, MyMembership } from "@/types/database";
+import type { Court, MyMembership, Sport } from "@/types/database";
+import CourtArt from "@/components/courts/CourtArt";
+import { courtColor } from "@/lib/courtColors";
 import Modal from "@/components/ui/Modal";
-import { MapPin } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, MapPin, Search } from "lucide-react";
 import { createBooking } from "@/app/actions/bookings";
 import { normalizeHours, startHoursFor } from "@/lib/openingHours";
 import { normalizeRules } from "@/lib/bookingRules";
 import { Link } from "@/i18n/navigation";
 import { useLabels } from "@/hooks/useLabels";
-import { surfaceTone } from "@/lib/badges";
-import SelectField from "@/components/ui/SelectField";
 
 export type CourtWithClub = Court & {
   club?: {
@@ -33,6 +40,11 @@ type FormValues = {
   duration: number;
 };
 
+type Busy = { starts_at: string; ends_at: string };
+
+const money = (n: number) => `€${n.toFixed(2).replace(/\.00$/, "")}`;
+const hh = (h: number) => `${String(h).padStart(2, "0")}:00`;
+
 export default function BookCourtsClient({
   courts,
   clubName,
@@ -48,7 +60,14 @@ export default function BookCourtsClient({
   const [selected, setSelected] = useState<CourtWithClub | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
+  const [sport, setSport] = useState<Sport | "all">("all");
+  const [query, setQuery] = useState("");
+  // Taken times for one court + day. `key` records which court/day they belong to.
+  const [busy, setBusy] = useState<{ key: string; slots: Busy[] } | null>(null);
+  // Bumped to load the taken times again (e.g. after someone else took a time).
+  const [reload, setReload] = useState(0);
   const supabase = createClient();
+
   // The selected court's club decides lengths, how far ahead, and cancelling.
   const rules = normalizeRules(selected?.club?.booking_rules);
   const days = Array.from({ length: rules.max_days_ahead }, (_, i) =>
@@ -83,32 +102,70 @@ export default function BookCourtsClient({
     : [];
   const isClosed = !!selected && hourOptions.length === 0;
 
+  // The taken (and closed) times for the selected court and day.
+  const busyKey = selected ? `${selected.id}|${watchedDate}|${reload}` : "";
+  useEffect(() => {
+    if (!selected) return;
+    let cancelled = false;
+    const key = `${selected.id}|${watchedDate}|${reload}`;
+    createClient()
+      .rpc("get_busy_slots", { p_court_id: selected.id, p_day: watchedDate })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+        if (error) console.error("[get_busy_slots]", error);
+        // If loading fails, every time stays open; the server still refuses clashes.
+        setBusy({ key, slots: error ? [] : ((data as Busy[]) ?? []) });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [selected, watchedDate, reload]);
+  const slotsReady = busy?.key === busyKey;
+
+  /** Can this start time be booked for the chosen length? */
+  const free = (hour: number) => {
+    const start = setMinutes(
+      setHours(new Date(`${watchedDate}T00:00`), hour),
+      0,
+    );
+    const end = new Date(start.getTime() + watchedDuration * 60_000);
+    if (start < new Date()) return false;
+    if (!slotsReady) return true;
+    return !busy!.slots.some(
+      (b) => start < new Date(b.ends_at) && end > new Date(b.starts_at),
+    );
+  };
+  const freeHours = hourOptions.filter(free);
+  const noTimes =
+    !!selected && !isClosed && slotsReady && freeHours.length === 0;
+
   // Keep the picked length and day allowed by the selected club's rules.
   const lastDay = format(days[days.length - 1], "yyyy-MM-dd");
   useEffect(() => {
     if (!rules.durations.includes(watchedDuration)) {
       setValue("duration", rules.durations[0]);
     }
-    if (watchedDate > lastDay) setValue("date", format(new Date(), "yyyy-MM-dd"));
+    if (watchedDate > lastDay)
+      setValue("date", format(new Date(), "yyyy-MM-dd"));
   }, [rules.durations, watchedDuration, watchedDate, lastDay, setValue]);
 
-  // Keep the picked hour valid when the day, duration or court changes.
+  // Keep the picked hour on a free time when the day, length or court changes.
   useEffect(() => {
-    if (hourOptions.length && !hourOptions.includes(watchedHour)) {
-      setValue("hour", hourOptions[0]);
+    if (freeHours.length && !freeHours.includes(watchedHour)) {
+      setValue("hour", freeHours[0]);
     }
-  }, [hourOptions, watchedHour, setValue]);
+  }, [freeHours, watchedHour, setValue]);
+
   const baseTotal = selected
     ? (selected.price_per_hour * watchedDuration) / 60
     : 0;
   const finalTotal = baseTotal * (1 - discount / 100);
 
-  // Fetch member discount when modal opens
+  // The member discount at the selected court's club.
   useEffect(() => {
     if (!selected) return;
     let cancelled = false;
     (async () => {
-      // Only a membership at this court's club gives a discount.
       const { data } = await supabase.rpc("my_memberships");
       if (cancelled) return;
       const membership = ((data ?? []) as unknown as MyMembership[]).find(
@@ -122,103 +179,224 @@ export default function BookCourtsClient({
   }, [selected, supabase]);
 
   const onSubmit = async (values: FormValues) => {
-    if (!selected) return;
+    if (!selected || !free(values.hour)) return;
     setError(null);
-
-    // "T00:00" makes this the customer's local midnight (see note below)
+    // "T00:00" makes this the player's local midnight.
     const startsAt = setMinutes(
       setHours(new Date(`${values.date}T00:00`), values.hour),
       0,
     );
-
     const result = await createBooking({
       court_id: selected.id,
       starts_at: startsAt.toISOString(),
       duration_min: values.duration,
     });
     // Only reached when something went wrong; on success the redirect takes over.
-    if (result?.error) setError(result.error);
+    if (result?.error) {
+      setError(result.error);
+      // Someone may have just taken it: load the taken times again.
+      setReload((r) => r + 1);
+    }
+  };
+
+  // Filters: sport (when there's more than one) and a search over court, club and city.
+  const sports = [...new Set(courts.map((c) => c.sport))];
+  const q = query.trim().toLowerCase();
+  const shown = courts.filter(
+    (c) =>
+      (sport === "all" || c.sport === sport) &&
+      (!q ||
+        [c.name, c.club?.name, c.club?.city].some((v) =>
+          v?.toLowerCase().includes(q),
+        )),
+  );
+  // Grouped by club, in the order the clubs first appear (cheapest court first).
+  const groups = shown.reduce<
+    { key: string; club: CourtWithClub["club"]; courts: CourtWithClub[] }[]
+  >((acc, c) => {
+    const key = c.club_id ?? "none";
+    const g = acc.find((x) => x.key === key);
+    if (g) g.courts.push(c);
+    else acc.push({ key, club: c.club, courts: [c] });
+    return acc;
+  }, []);
+  const oneClub = !!clubName || new Set(courts.map((c) => c.club_id)).size <= 1;
+
+  const pill = (on: boolean) =>
+    `h-9 shrink-0 rounded-full border px-4 text-[13px] font-medium transition-colors ${
+      on
+        ? "border-ink-900 bg-ink-900 text-white"
+        : "border-ink-200 bg-white text-ink-600 hover:border-ink-400 hover:text-ink-900"
+    }`;
+
+  const endHour = (h: number) => {
+    const end = new Date(
+      setMinutes(setHours(new Date(`${watchedDate}T00:00`), h), 0).getTime() +
+        watchedDuration * 60_000,
+    );
+    return format(end, "HH:mm");
   };
 
   return (
-    <div className="max-w-[800px] mx-auto">
+    <div className="mx-auto max-w-[1040px]">
       {/* Header */}
-      <div className="mb-7">
-        <h1 className="text-2xl font-medium text-brand-900 mb-1">
-          {clubName ? t("titleAtClub", { club: clubName }) : t("title")}
-        </h1>
-        <p className="text-sm text-brand-400">
-          {t("available", { n: courts.length })}
-          {clubName && (
-            <>
-              {" · "}
-              <Link href="/book" className="underline hover:text-brand-600">
-                {t("showAll")}
-              </Link>
-            </>
-          )}
-        </p>
-      </div>
-
-      {/* Court list */}
-      <div className="flex flex-col gap-3">
-        {courts.map((court) => (
-          <div
-            key={court.id}
-            className="card px-5 py-4 flex items-center gap-4 hover:border-brand-300 transition-colors"
-          >
-            {/* Availability dot */}
-            <div className="w-2 h-2 rounded-full bg-brand-400 flex-shrink-0" />
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-sm font-medium text-brand-900">
-                  {court.name}
-                </span>
-                <span
-                  className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                    surfaceTone(court.surface)
-                  }`}
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-[28px] font-extrabold tracking-tight text-ink-900">
+            {clubName ? t("titleAtClub", { club: clubName }) : t("title")}
+          </h1>
+          <p className="mt-1 text-sm text-ink-600">
+            {t("available", { n: courts.length })}
+            {clubName && (
+              <>
+                {" · "}
+                <Link
+                  href="/book"
+                  className="font-medium text-ink-900 underline-offset-2 hover:underline"
                 >
-                  {labels.surface(court.surface)}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-xs text-brand-400">
-                {court.club?.city && (
-                  <>
-                    <MapPin size={11} />
-                    <span>{court.club.city}</span>
-                    <span>·</span>
-                  </>
-                )}
-                <span>{court.club?.name}</span>
-                <span>·</span>
-                <span>{labels.inOut(court.is_indoor)}</span>
-              </div>
-            </div>
-
-            {/* Price + CTA */}
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <span className="text-sm font-medium text-brand-800">
-                €{court.price_per_hour}/hr
-              </span>
-              <button
-                onClick={() => {
-                  setSelected(court);
-                  setDiscount(0);
-                  setError(null);
-                }}
-                className="btn-primary text-xs py-1.5 px-4"
-              >
-                {t("book")}
-              </button>
-            </div>
-          </div>
-        ))}
+                  {t("showAll")}
+                </Link>
+              </>
+            )}
+          </p>
+        </div>
+        {courts.length > 3 && (
+          <label className="relative w-full sm:w-64">
+            <span className="sr-only">{t("search")}</span>
+            <Search
+              size={16}
+              aria-hidden="true"
+              className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-400"
+            />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t("searchPlaceholder")}
+              className="input h-10 rounded-full pl-10"
+            />
+          </label>
+        )}
       </div>
 
-      {/* Booking modal */}
+      {sports.length > 1 && (
+        <div
+          className="-mx-1 mb-6 flex gap-2 overflow-x-auto px-1 pb-1"
+          role="group"
+          aria-label={t("sport")}
+        >
+          <button
+            type="button"
+            aria-pressed={sport === "all"}
+            onClick={() => setSport("all")}
+            className={pill(sport === "all")}
+          >
+            {t("allSports")}
+          </button>
+          {sports.map((s) => (
+            <button
+              key={s}
+              type="button"
+              aria-pressed={sport === s}
+              onClick={() => setSport(s)}
+              className={pill(sport === s)}
+            >
+              {labels.sport(s)}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {shown.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-ink-200 bg-white px-6 py-14 text-center text-sm text-ink-600">
+          {courts.length === 0 ? t("empty") : t("noMatch")}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-10">
+          {groups.map((g) => (
+            <section key={g.key} aria-label={g.club?.name ?? undefined}>
+              {!oneClub && g.club && (
+                <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                  <h2 className="text-lg font-bold tracking-tight text-ink-900">
+                    {g.club.name}
+                    {g.club.city && (
+                      <span className="ml-2 inline-flex items-center gap-1 text-sm font-normal text-ink-600">
+                        <MapPin size={13} aria-hidden="true" />
+                        {g.club.city}
+                      </span>
+                    )}
+                  </h2>
+                  {g.club.slug && (
+                    <Link
+                      href={`/clubs/${g.club.slug}`}
+                      className="inline-flex items-center gap-1 text-[13px] font-medium text-ink-600 hover:text-ink-900"
+                    >
+                      {t("clubPage")}
+                      <ArrowRight size={14} aria-hidden="true" />
+                    </Link>
+                  )}
+                </div>
+              )}
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {g.courts.map((court) => (
+                  <li key={court.id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelected(court);
+                        setDiscount(0);
+                        setError(null);
+                      }}
+                      className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white text-left transition-all hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_12px_28px_-14px_rgba(17,28,10,0.35)] focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:outline-none"
+                    >
+                      <div className="relative h-24 w-full overflow-hidden">
+                        <CourtArt court={court} />
+                        <span className="absolute top-2.5 left-2.5 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+                          {labels.sport(court.sport)}
+                        </span>
+                        <span className="absolute top-2.5 right-2.5 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-ink-900">
+                          {labels.inOut(court.is_indoor)}
+                        </span>
+                      </div>
+                      <div className="flex flex-1 flex-col gap-3 p-4">
+                        <div className="min-w-0">
+                          <p className="truncate text-[15px] font-bold text-ink-900">
+                            {court.name}
+                          </p>
+                          <p className="truncate text-[13px] text-ink-600">
+                            {labels.surface(court.surface)} · {labels.courtColor(courtColor(court))}
+                          </p>
+                        </div>
+                        <div className="mt-auto flex items-center justify-between gap-3">
+                          <p className="text-ink-900">
+                            <span className="text-lg font-extrabold">
+                              {money(court.price_per_hour)}
+                            </span>
+                            <span className="text-[13px] text-ink-600">
+                              {" "}
+                              {t("perHour")}
+                            </span>
+                          </p>
+                          <span className="inline-flex h-9 items-center gap-1.5 rounded-full bg-ink-900 px-4 text-[13px] font-semibold text-white transition-colors group-hover:bg-brand-600">
+                            {t("book")}
+                            <ArrowRight
+                              size={14}
+                              aria-hidden="true"
+                              className="transition-transform group-hover:translate-x-0.5"
+                            />
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      )}
+
+      {/* Booking */}
       <Modal
         open={!!selected}
         onClose={() => {
@@ -226,149 +404,224 @@ export default function BookCourtsClient({
           setError(null);
         }}
       >
-        <Modal.Content>
-          <Modal.Header>{selected?.name ?? t("bookCourt")}</Modal.Header>
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Modal.Body>
-              {/* Court meta */}
-              <div className="flex items-center gap-2 mb-5">
-                {selected && (
-                  <span
-                    className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                      surfaceTone(selected.surface)
-                    }`}
-                  >
-                    {labels.surface(selected.surface)}
-                  </span>
-                )}
-                <span className="text-xs text-brand-400">
-                  {selected?.club?.name}
-                  {selected?.club?.city ? ` · ${selected.club.city}` : ""}
-                </span>
-                <span className="text-xs text-brand-400">·</span>
-                <span className="text-xs text-brand-400">
-                  {labels.inOut(selected?.is_indoor)}
-                </span>
+        <Modal.Content className="max-w-lg p-0!">
+          {selected && (
+            <div className="relative h-20 w-full shrink-0 overflow-hidden">
+              <CourtArt court={selected} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+              <div className="absolute bottom-2.5 left-5 text-white">
+                <p className="text-base font-bold leading-tight">
+                  {selected.name}
+                </p>
+                <p className="text-xs text-white/85">
+                  {[
+                    selected.club?.name,
+                    selected.club?.city,
+                    labels.surface(selected.surface),
+                    labels.courtColor(courtColor(selected)),
+                    labels.inOut(selected.is_indoor),
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </p>
               </div>
+              <button
+                type="button"
+                onClick={() => setSelected(null)}
+                aria-label={t("cancel")}
+                className="absolute top-2.5 right-2.5 grid size-8 place-items-center rounded-full bg-black/35 text-white backdrop-blur-sm hover:bg-black/50"
+              >
+                ×
+              </button>
+            </div>
+          )}
 
-              {/* Date picker */}
-              <Modal.Field label={t("date")}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex min-h-0 flex-1 flex-col p-5 sm:p-6"
+          >
+            <Modal.Body>
+              {/* Day */}
+              <div>
+                <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-ink-600">
+                  <CalendarDays size={13} aria-hidden="true" />
+                  {t("date")}
+                </p>
                 <Controller
                   name="date"
                   control={control}
                   render={({ field }) => (
-                    <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+                    <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
                       {days.map((day) => {
                         const val = format(day, "yyyy-MM-dd");
-                        const isSelected = field.value === val;
+                        const on = field.value === val;
                         return (
                           <button
                             key={val}
                             type="button"
+                            aria-pressed={on}
                             onClick={() => field.onChange(val)}
-                            className={`flex-shrink-0 text-center px-3 py-2 rounded-xl border text-xs transition-colors ${
-                              isSelected
-                                ? "bg-brand-600 text-white border-brand-600"
-                                : "border-brand-200 text-brand-700 hover:bg-brand-50 hover:border-brand-300"
+                            className={`flex w-14 shrink-0 flex-col items-center rounded-xl border py-2 transition-colors ${
+                              on
+                                ? "border-ink-900 bg-ink-900 text-white"
+                                : "border-ink-100 bg-white text-ink-900 hover:border-ink-300"
                             }`}
                           >
-                            <div className="font-medium">
-                              {format(day, "EEE", { locale: dfLocale })}
-                            </div>
-                            <div
-                              className={
-                                isSelected ? "opacity-80" : "opacity-60"
-                              }
+                            <span
+                              className={`text-[11px] font-medium uppercase ${on ? "text-white/70" : "text-ink-400"}`}
                             >
+                              {isToday(day)
+                                ? t("today")
+                                : format(day, "EEE", { locale: dfLocale })}
+                            </span>
+                            <span className="text-lg leading-tight font-bold">
                               {format(day, "d")}
-                            </div>
+                            </span>
+                            <span
+                              className={`text-[10px] ${on ? "text-white/70" : "text-ink-400"}`}
+                            >
+                              {format(day, "MMM", { locale: dfLocale })}
+                            </span>
                           </button>
                         );
                       })}
                     </div>
                   )}
                 />
-              </Modal.Field>
+              </div>
 
-              {/* Time + duration */}
-              <Modal.Grid>
-                <Modal.Field label={t("startTime")}>
-                  <Controller
-                    name="hour"
-                    control={control}
-                    render={({ field }) => (
-                      <SelectField
-                        ariaLabel={t("startTime")}
-                        disabled={isClosed}
-                        value={isClosed ? "closed" : String(field.value)}
-                        onChange={(v) => field.onChange(Number(v))}
-                        options={
-                          isClosed
-                            ? [{ value: "closed", label: t("closed") }]
-                            : hourOptions.map((h) => ({ value: String(h), label: `${String(h).padStart(2, "0")}:00` }))
-                        }
-                      />
-                    )}
-                  />
-                </Modal.Field>
-                <Modal.Field label={t("duration")}>
+              {/* Length */}
+              {rules.durations.length > 1 && (
+                <div>
+                  <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-ink-600">
+                    <Clock size={13} aria-hidden="true" />
+                    {t("duration")}
+                  </p>
                   <Controller
                     name="duration"
                     control={control}
                     render={({ field }) => (
-                      <SelectField
-                        ariaLabel={t("duration")}
-                        value={String(field.value)}
-                        onChange={(v) => field.onChange(Number(v))}
-                        options={rules.durations.map((d) => ({ value: String(d), label: t("minutes", { n: d }) }))}
-                      />
+                      <div
+                        role="radiogroup"
+                        aria-label={t("duration")}
+                        className="flex gap-1 rounded-xl bg-ink-50 p-1"
+                      >
+                        {rules.durations.map((d) => (
+                          <button
+                            key={d}
+                            type="button"
+                            role="radio"
+                            aria-checked={field.value === d}
+                            onClick={() => field.onChange(d)}
+                            className={`h-9 flex-1 rounded-lg text-[13px] font-medium transition-colors ${
+                              field.value === d
+                                ? "bg-white text-ink-900 shadow-sm"
+                                : "text-ink-600 hover:text-ink-900"
+                            }`}
+                          >
+                            {t("minutes", { n: d })}
+                          </button>
+                        ))}
+                      </div>
                     )}
                   />
-                </Modal.Field>
-              </Modal.Grid>
+                </div>
+              )}
 
-              {/* Price summary */}
-              {selected && (
-                <div className="bg-brand-50 border border-brand-100 rounded-xl px-4 py-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-brand-600">
-                      {t("minutes", { n: watchedDuration })} · {selected.name}
+              {/* Start time */}
+              <div>
+                <p className="mb-2 text-xs font-semibold text-ink-600">
+                  {t("startTime")}
+                </p>
+                {isClosed ? (
+                  <p className="rounded-xl bg-ink-50 px-4 py-3 text-sm text-ink-600">
+                    {t("closedDay")}
+                  </p>
+                ) : noTimes ? (
+                  <p className="rounded-xl bg-ink-50 px-4 py-3 text-sm text-ink-600">
+                    {t("noTimes")}
+                  </p>
+                ) : (
+                  <Controller
+                    name="hour"
+                    control={control}
+                    render={({ field }) => (
+                      <div
+                        role="radiogroup"
+                        aria-label={t("startTime")}
+                        aria-busy={!slotsReady}
+                        className={`grid grid-cols-4 gap-2 sm:grid-cols-5 ${slotsReady ? "" : "animate-pulse"}`}
+                      >
+                        {hourOptions.map((h) => {
+                          const ok = free(h);
+                          const on = ok && field.value === h;
+                          return (
+                            <button
+                              key={h}
+                              type="button"
+                              role="radio"
+                              aria-checked={on}
+                              disabled={!ok || !slotsReady}
+                              onClick={() => field.onChange(h)}
+                              className={`h-10 rounded-lg border text-[13px] font-semibold tabular-nums transition-colors ${
+                                on
+                                  ? "border-brand-600 bg-brand-600 text-white"
+                                  : ok
+                                    ? "border-ink-100 bg-white text-ink-900 hover:border-brand-400 hover:bg-brand-50"
+                                    : "cursor-not-allowed border-transparent bg-ink-50 text-ink-400 line-through"
+                              }`}
+                            >
+                              {hh(h)}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  />
+                )}
+              </div>
+
+              {/* Summary */}
+              {selected && !isClosed && !noTimes && (
+                <div className="rounded-xl border border-ink-100 bg-[#f8f9f7] px-4 py-3">
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-ink-600">
+                      {format(new Date(`${watchedDate}T00:00`), "EEE d MMM", {
+                        locale: dfLocale,
+                      })}
+                      {freeHours.includes(watchedHour) &&
+                        `, ${hh(watchedHour)}–${endHour(watchedHour)}`}
                     </span>
-                    <span
-                      className={
-                        discount > 0
-                          ? "text-sm line-through text-brand-400"
-                          : "text-sm font-medium text-brand-900"
-                      }
-                    >
-                      €{baseTotal.toFixed(2)}
+                    <span className="flex items-baseline gap-2">
+                      {discount > 0 && (
+                        <span className="text-[13px] text-ink-400 line-through">
+                          {money(baseTotal)}
+                        </span>
+                      )}
+                      <span className="text-base font-extrabold text-ink-900">
+                        {money(finalTotal)}
+                      </span>
                     </span>
                   </div>
                   {discount > 0 && (
-                    <div className="flex justify-between items-center mt-2 pt-2 border-t border-brand-100">
-                      <span className="text-xs text-brand-600 font-medium">
-                        {t("memberDiscount", { pct: discount })}
-                      </span>
-                      <span className="text-sm font-medium text-brand-900">
-                        €{finalTotal.toFixed(2)}
-                      </span>
-                    </div>
+                    <p className="mt-1 text-xs font-medium text-brand-800">
+                      {t("memberDiscount", { pct: discount })}
+                    </p>
                   )}
+                  <p className="mt-1 text-xs text-ink-400">{t("payAtClub")}</p>
                 </div>
               )}
 
               {selected && rules.cancel_hours > 0 && (
-                <p className="text-xs text-brand-600 mt-1">
+                <p className="text-xs text-ink-600">
                   {tCoach("cancelNote", { hours: rules.cancel_hours })}
                 </p>
               )}
-              {isClosed && (
-                <p className="text-xs text-brand-600 mt-1">
-                  {t("closedDay")}
+              {error && (
+                <p role="alert" className="text-sm text-red-600">
+                  {error}
                 </p>
               )}
-              {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
             </Modal.Body>
 
             <Modal.Footer>
@@ -381,7 +634,13 @@ export default function BookCourtsClient({
               </button>
               <button
                 type="submit"
-                disabled={isSubmitting || isClosed}
+                disabled={
+                  isSubmitting ||
+                  isClosed ||
+                  noTimes ||
+                  !slotsReady ||
+                  !freeHours.includes(watchedHour)
+                }
                 className="btn-primary flex-1 disabled:opacity-40"
               >
                 {isSubmitting

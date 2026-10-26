@@ -276,7 +276,8 @@
   "saveError": "Impossible d’enregistrer le court. Veuillez réessayer.",
   "howMany": "Combien",
   "howManyHint": "Ajoute {first} à {last}.",
-  "namePlaceholderMany": "Terre battue"
+  "namePlaceholderMany": "Terre battue",
+  "color": "Couleur"
  },
  "dashboard": {
   "dashboard": "Tableau de bord",
@@ -1690,7 +1691,15 @@
    "one_time": "paiement unique"
   },
   "indoor": "Couvert",
-  "outdoor": "Extérieur"
+  "outdoor": "Extérieur",
+  "courtColors": {
+   "blue": "Bleu",
+   "green": "Vert",
+   "terracotta": "Terre cuite",
+   "red": "Rouge",
+   "purple": "Violet",
+   "grey": "Gris"
+  }
  },
  "tournaments": {
   "title": "Tournois",

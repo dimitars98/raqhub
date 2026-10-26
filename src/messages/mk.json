@@ -276,7 +276,8 @@
   "saveError": "Теренот не можеше да се зачува. Обидете се повторно.",
   "howMany": "Колку",
   "howManyHint": "Додава од {first} до {last}.",
-  "namePlaceholderMany": "Шљака терен"
+  "namePlaceholderMany": "Шљака терен",
+  "color": "Боја"
  },
  "dashboard": {
   "dashboard": "Контролна табла",
@@ -1690,7 +1691,15 @@
    "one_time": "еднократно"
   },
   "indoor": "Затворен",
-  "outdoor": "Отворен"
+  "outdoor": "Отворен",
+  "courtColors": {
+   "blue": "Син",
+   "green": "Зелен",
+   "terracotta": "Теракота",
+   "red": "Црвен",
+   "purple": "Виолетов",
+   "grey": "Сив"
+  }
  },
  "tournaments": {
   "title": "Турнири",

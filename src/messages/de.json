@@ -276,7 +276,8 @@
   "saveError": "Der Platz konnte nicht gespeichert werden. Bitte versuche es erneut.",
   "howMany": "Anzahl",
   "howManyHint": "Fügt {first} bis {last} hinzu.",
-  "namePlaceholderMany": "Sandplatz"
+  "namePlaceholderMany": "Sandplatz",
+  "color": "Farbe"
  },
  "dashboard": {
   "dashboard": "Dashboard",
@@ -1690,7 +1691,15 @@
    "one_time": "einmalig"
   },
   "indoor": "Halle",
-  "outdoor": "Außen"
+  "outdoor": "Außen",
+  "courtColors": {
+   "blue": "Blau",
+   "green": "Grün",
+   "terracotta": "Terrakotta",
+   "red": "Rot",
+   "purple": "Lila",
+   "grey": "Grau"
+  }
  },
  "tournaments": {
   "title": "Turniere",

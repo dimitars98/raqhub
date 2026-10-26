@@ -480,6 +480,7 @@ export type Database = {
       courts: {
         Row: {
           club_id: string
+          color: string | null
           created_at: string | null
           description: string | null
           id: string
@@ -493,6 +494,7 @@ export type Database = {
         }
         Insert: {
           club_id: string
+          color?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
@@ -506,6 +508,7 @@ export type Database = {
         }
         Update: {
           club_id?: string
+          color?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
