@@ -170,12 +170,20 @@ export default function LoginPage() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="password"
-                  className="text-sm font-medium text-ink-800"
-                >
-                  {t("password")}
-                </label>
+                <div className="flex items-baseline justify-between gap-3">
+                  <label
+                    htmlFor="password"
+                    className="text-sm font-medium text-ink-800"
+                  >
+                    {t("password")}
+                  </label>
+                  <Link
+                    href={`/${locale}/forgot-password`}
+                    className="text-sm font-medium text-ink-600 underline-offset-4 hover:text-ink-900 hover:underline"
+                  >
+                    {t("forgotLink")}
+                  </Link>
+                </div>
                 <input
                   id="password"
                   type="password"

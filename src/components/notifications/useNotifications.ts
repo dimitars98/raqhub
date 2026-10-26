@@ -16,9 +16,14 @@ const COLUMNS = "id, kind, data, link, read_at, created_at";
 // Query keys. Everything for one person starts with ["notifications", userId],
 // so one invalidate refreshes the bell, the page and the unread count together.
 const allKey = (userId: string) => ["notifications", userId] as const;
-const countKey = (userId: string) => ["notifications", userId, "unread"] as const;
-const listKey = (userId: string, limit: number, unreadOnly: boolean, kinds: string) =>
-  ["notifications", userId, "list", { limit, unreadOnly, kinds }] as const;
+const countKey = (userId: string) =>
+  ["notifications", userId, "unread"] as const;
+const listKey = (
+  userId: string,
+  limit: number,
+  unreadOnly: boolean,
+  kinds: string,
+) => ["notifications", userId, "list", { limit, unreadOnly, kinds }] as const;
 
 type List = { rows: NotificationRow[]; hasMore: boolean };
 
@@ -36,7 +41,12 @@ function listen(userId: string, client: QueryClient) {
       .channel(`notifications:${userId}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "notifications", filter: `user_id=eq.${userId}` },
+        {
+          event: "*",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${userId}`,
+        },
         () => client.invalidateQueries({ queryKey: allKey(userId) }),
       )
       .subscribe();
@@ -70,11 +80,11 @@ export function useNotifications({
   unreadOnly?: boolean;
   kinds?: string[] | null;
 }) {
-  const client = useQueryClient();
+  const queryClient = useQueryClient();
   const [limit, setLimit] = useState(size);
   const kindsKey = kinds?.join(",") ?? "";
 
-  useEffect(() => listen(userId, client), [userId, client]);
+  useEffect(() => listen(userId, queryClient), [userId, queryClient]);
 
   const list = useQuery({
     queryKey: listKey(userId, limit, unreadOnly, kindsKey),
@@ -114,21 +124,31 @@ export function useNotifications({
    */
   const markOptimistic = (ids: "all" | string) => {
     const now = new Date().toISOString();
-    const hit = (n: NotificationRow) => !n.read_at && (ids === "all" || n.id === ids);
+    const hit = (n: NotificationRow) =>
+      !n.read_at && (ids === "all" || n.id === ids);
     // A load already on its way would bring the old state back.
-    client.cancelQueries({ queryKey: allKey(userId) });
-    for (const [key, old] of client.getQueriesData<List>({ queryKey: [...allKey(userId), "list"] })) {
+    queryClient.cancelQueries({ queryKey: allKey(userId) });
+    for (const [key, old] of queryClient.getQueriesData<List>({
+      queryKey: [...allKey(userId), "list"],
+    })) {
       if (!old) continue;
-      const onlyUnread = (key[3] as { unreadOnly?: boolean } | undefined)?.unreadOnly;
-      client.setQueryData<List>(key, {
+      const onlyUnread = (key[3] as { unreadOnly?: boolean } | undefined)
+        ?.unreadOnly;
+      queryClient.setQueryData<List>(key, {
         ...old,
         rows: old.rows.flatMap((n) =>
           // "Mark all read" empties an unread-only list.
-          !hit(n) ? [n] : onlyUnread && ids === "all" ? [] : [{ ...n, read_at: now }],
+          !hit(n)
+            ? [n]
+            : onlyUnread && ids === "all"
+              ? []
+              : [{ ...n, read_at: now }],
         ),
       });
     }
-    client.setQueryData<number>(countKey(userId), (c) => (ids === "all" ? 0 : Math.max(0, (c ?? 0) - 1)));
+    queryClient.setQueryData<number>(countKey(userId), (c) =>
+      ids === "all" ? 0 : Math.max(0, (c ?? 0) - 1),
+    );
     return now;
   };
 
@@ -142,7 +162,8 @@ export function useNotifications({
       if (error) throw error;
     },
     onError: (e) => console.error("[notifications] mark read", e),
-    onSettled: () => client.invalidateQueries({ queryKey: allKey(userId) }),
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: allKey(userId) }),
   });
 
   const readAll = useMutation({
@@ -155,7 +176,8 @@ export function useNotifications({
       if (error) throw error;
     },
     onError: (e) => console.error("[notifications] mark all read", e),
-    onSettled: () => client.invalidateQueries({ queryKey: allKey(userId) }),
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: allKey(userId) }),
   });
 
   return {

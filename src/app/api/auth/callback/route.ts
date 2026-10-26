@@ -49,6 +49,10 @@ export async function GET(request: Request) {
     }
   }
 
+  // A password reset link that expired or was already used: ask for a new one.
+  if (next?.endsWith("/reset-password")) {
+    return NextResponse.redirect(`${origin}${prefix}/forgot-password?expired=1`);
+  }
   return NextResponse.redirect(
     `${origin}${prefix}/login?error=auth_callback_failed`,
   );
