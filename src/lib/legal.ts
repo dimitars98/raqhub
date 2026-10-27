@@ -6,9 +6,9 @@ import { SALES_EMAIL } from "@/lib/plans";
 // name as a sole trader, or your company's registered name) before going
 // live. Lines left as null are simply not shown.
 export const LEGAL = {
-  operator: null as string | null, // e.g. "Dimitar Stoilov" or "Kortello DOOEL"
-  address: null as string | null, // e.g. "Street 1, 1000 Skopje, North Macedonia"
+  operator: "Dimitar Stoilov" as string | null, // or a company name once registered, e.g. "Kortello DOOEL"
+  address: "Partizanska 14, 2310 Vinica, North Macedonia" as string | null,
   email: SALES_EMAIL,
   /** Change this whenever the wording of either page changes. */
-  updated: "2026-10-14",
+  updated: "2026-10-27",
 };
