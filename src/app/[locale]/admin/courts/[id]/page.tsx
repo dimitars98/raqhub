@@ -6,6 +6,7 @@ import type { Booking, Court, Member, Profile } from "@/types/database";
 import { getLabels } from "@/lib/getLabels";
 import { intlLocale } from "@/lib/dateLocale";
 import { BADGE, bookingStatusTone } from "@/lib/badges";
+import { bookingName } from "@/lib/bookingName";
 
 type CourtWithClub = Court & {
   club?: { name: string; city: string | null } | null;
@@ -136,11 +137,7 @@ export default async function AdminCourtPage({
       ) : (
         <div className="flex flex-col gap-2">
           {bookings.map((b) => {
-            const name =
-              b.member?.full_name ??
-              b.player?.full_name ??
-              b.walk_in_name ??
-              t("unknown");
+            const name = bookingName(b, t("unknown"));
             return (
               <div
                 key={b.id}

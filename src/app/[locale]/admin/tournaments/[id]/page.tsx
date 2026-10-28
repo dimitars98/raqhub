@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { appUrl } from "@/lib/email/bookings";
+import { requestOrigin } from "@/lib/requestOrigin";
 import TournamentClient from "@/components/admin/TournamentClient";
 import type { Tournament, TournamentEntry, TournamentMatch } from "@/types/database";
 
@@ -35,7 +35,7 @@ export default async function AdminTournamentPage({
       tournament={tournament as unknown as Tournament}
       entries={(entries ?? []) as TournamentEntry[]}
       matches={(matches ?? []) as TournamentMatch[]}
-      publicUrl={`${appUrl()}/${locale}/tournaments/${id}`}
+      publicUrl={`${await requestOrigin()}/${locale}/tournaments/${id}`}
     />
   );
 }

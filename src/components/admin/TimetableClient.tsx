@@ -16,6 +16,7 @@ import { reopenCourts } from "@/app/actions/closures";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import CloseCourtsModal from "./CloseCourtsModal";
 import { closedNotice, useClosureCourts, useClosureWhen } from "./ClosuresPanel";
+import { bookingName } from "@/lib/bookingName";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "id" | "name"> | null;
@@ -145,7 +146,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
 
   // ---- What each booking is -----------------------------------------------
   const nameOf = (b: BookingWithJoins) =>
-    b.member?.full_name ?? b.player?.full_name ?? b.walk_in_name ?? tCommon("walkIn");
+    bookingName(b, tCommon("walkIn"));
   const matchOf = (b: BookingWithJoins) =>
     matches.find((m) => m.court === b.court?.name && new Date(m.starts_at).getTime() === new Date(b.starts_at).getTime());
   const kindOf = (b: BookingWithJoins): Kind =>

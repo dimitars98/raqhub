@@ -24,6 +24,7 @@ import { useLabels } from "@/hooks/useLabels";
 import { BOOKING_STATUS_DOT, bookingStatusTone } from "@/lib/badges";
 import { initials } from "@/lib/avatar";
 import type { BookingStatus, Sport } from "@/types/database";
+import { bookingName } from "@/lib/bookingName";
 
 // ── Props ──────────────────────────────────────────────────────────────────
 
@@ -45,13 +46,6 @@ interface Props {
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 // ── Helpers ────────────────────────────────────────────────────────────────
-
-function getGuestName(walkIn: string, b: {
-  walk_in_name?: string | null;
-  member?: { full_name: string } | null;
-}) {
-  return b.member?.full_name ?? b.walk_in_name ?? walkIn;
-}
 
 function isNowBetween(starts_at: string, ends_at: string) {
   const now = new Date();
@@ -317,7 +311,7 @@ export default function DashboardClient({
                     <div className="w-px h-8 bg-[#e8ede4] flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="text-[13px] font-medium text-[#111c0a] truncate">
-                        {getGuestName(tc("walkIn"), b)}
+                        {bookingName(b, tc("walkIn"))}
                       </div>
                       <div className="text-[11px] text-[#6e7f65] truncate">
                         {b.court?.name} · {b.duration_min} min
@@ -377,7 +371,7 @@ export default function DashboardClient({
                     />
                     <div className="flex-1 min-w-0">
                       <div className="text-[13px] font-medium text-[#111c0a] truncate">
-                        {getGuestName(tc("walkIn"), b)}
+                        {bookingName(b, tc("walkIn"))}
                       </div>
                       <div className="text-[11px] text-[#6e7f65]">
                         {b.court?.name} ·{" "}

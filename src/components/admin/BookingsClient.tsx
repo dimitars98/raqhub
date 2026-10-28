@@ -24,6 +24,7 @@ import { REPEAT_CHOICES, weeklyStarts } from "@/lib/recurring";
 import { Repeat, X } from "lucide-react";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { bookingName } from "@/lib/bookingName";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
@@ -279,8 +280,7 @@ const { readOnly, hint } = useReadOnly();
   const filtered = bookings
     .filter((b) => filter === "all" || b.status === filter)
     .filter((b) => {
-      const name =
-        b.member?.full_name ?? b.player?.full_name ?? b.walk_in_name ?? "";
+      const name = bookingName(b, "");
       return (
         name.toLowerCase().includes(search.toLowerCase()) ||
         b.reference.toLowerCase().includes(search.toLowerCase()) ||
@@ -434,10 +434,7 @@ const { readOnly, hint } = useReadOnly();
                   </td>
                   <td className="px-5 py-3.5">
                     <div className="font-medium text-[#111c0a]">
-                      {b.member?.full_name ??
-                        b.player?.full_name ??
-                        b.walk_in_name ??
-                        "—"}
+                      {bookingName(b, "—")}
                     </div>
                     {b.walk_in_name && (
                       <div className="text-xs text-[#6e7f65]">

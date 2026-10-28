@@ -5,7 +5,7 @@ import { getMyClub } from "@/lib/myClub";
 import GroupClient from "@/components/groups/GroupClient";
 import { loadGroupDetail } from "@/lib/groupDetail";
 import { monthOf } from "@/lib/groups";
-import { appUrl } from "@/lib/email/bookings";
+import { requestOrigin } from "@/lib/requestOrigin";
 
 export default async function AdminGroupPage({
   params,
@@ -14,7 +14,7 @@ export default async function AdminGroupPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ created?: string; removed?: string; skipped?: string }>;
 }) {
-  const [{ id }, q, locale] = await Promise.all([params, searchParams, getLocale()]);
+  const [{ id }, q, locale, origin] = await Promise.all([params, searchParams, getLocale(), requestOrigin()]);
   const supabase = await createClient();
   const {
     data: { user },
@@ -52,7 +52,7 @@ export default async function AdminGroupPage({
       fees={detail.fees}
       courts={courts ?? []}
       month={monthOf()}
-      signupUrl={detail.club ? `${appUrl()}/${locale}/clubs/${detail.club.slug}#groups` : null}
+      signupUrl={detail.club ? `${origin}/${locale}/clubs/${detail.club.slug}#groups` : null}
       notice={notice}
     />
   );

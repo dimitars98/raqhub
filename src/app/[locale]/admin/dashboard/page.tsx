@@ -21,6 +21,7 @@ export type TodayBooking = {
   duration_min: number;
   walk_in_name: string | null;
   member: { full_name: string } | null;
+  player: { full_name: string | null } | null;
   court: { id: string; name: string } | null;
 };
 
@@ -34,6 +35,7 @@ export type RecentBooking = {
   reference: string;
   duration_min: number;
   member: { full_name: string } | null;
+  player: { full_name: string | null } | null;
   court: { id: string; name: string } | null;
 };
 
@@ -107,7 +109,7 @@ export default async function AdminDashboardPage() {
       supabase
         .from("bookings")
         .select(
-          "id, status, total_price, starts_at, ends_at, duration_min, walk_in_name, member:members(full_name), court:courts!inner(id, name, club_id)",
+          "id, status, total_price, starts_at, ends_at, duration_min, walk_in_name, member:members(full_name), player:profiles(full_name), court:courts!inner(id, name, club_id)",
         )
         .eq("court.club_id", club.id)
         .is("group_id", null)
@@ -160,7 +162,7 @@ export default async function AdminDashboardPage() {
       supabase
         .from("bookings")
         .select(
-          "id, starts_at, ends_at, status, total_price, walk_in_name, reference, duration_min, member:members(full_name), court:courts!inner(id, name, club_id)",
+          "id, starts_at, ends_at, status, total_price, walk_in_name, reference, duration_min, member:members(full_name), player:profiles(full_name), court:courts!inner(id, name, club_id)",
         )
         .eq("court.club_id", club.id)
         .is("group_id", null)
