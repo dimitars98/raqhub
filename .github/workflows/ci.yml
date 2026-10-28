@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # The same npm as on the developer's PC (11), so package-lock.json
+      # is read exactly as it was written.
+      - run: npm install -g npm@11
       - run: npm ci
       - name: Types
         run: npm run typecheck
