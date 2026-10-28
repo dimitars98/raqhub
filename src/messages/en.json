@@ -73,7 +73,9 @@
   "samePassword": "That's your current password. Choose a different one.",
   "savePassword": "Save and sign in",
   "savingPassword": "Saving…",
-  "requestNewLink": "Send me a new link"
+  "requestNewLink": "Send me a new link",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password"
  },
  "landing": {
   "badge": "Built for tennis, padel and pickleball clubs",

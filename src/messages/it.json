@@ -73,7 +73,9 @@
   "samePassword": "È la tua password attuale. Scegline un’altra.",
   "savePassword": "Salva e accedi",
   "savingPassword": "Salvataggio…",
-  "requestNewLink": "Mandami un nuovo link"
+  "requestNewLink": "Mandami un nuovo link",
+  "showPassword": "Mostra password",
+  "hidePassword": "Nascondi password"
  },
  "landing": {
   "badge": "Pensato per i circoli di tennis, padel e pickleball",

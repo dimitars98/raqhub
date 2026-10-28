@@ -73,7 +73,9 @@
   "samePassword": "Ky është fjalëkalimi juaj aktual. Zgjidhni një tjetër.",
   "savePassword": "Ruaj dhe hyr",
   "savingPassword": "Po ruhet…",
-  "requestNewLink": "Më dërgoni një lidhje të re"
+  "requestNewLink": "Më dërgoni një lidhje të re",
+  "showPassword": "Shfaq fjalëkalimin",
+  "hidePassword": "Fshih fjalëkalimin"
  },
  "landing": {
   "badge": "Ndërtuar për klube tenisi, padeli dhe pickleball-i",

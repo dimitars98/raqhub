@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useTranslations, useLocale } from "next-intl";
 import { Check } from "lucide-react";
 import AuthShell from "@/components/layout/AuthShell";
+import PasswordInput from "@/components/ui/PasswordInput";
 
 type SignupValues = {
   fullName: string;
@@ -231,9 +232,8 @@ export default function SignupPage() {
           >
             {t("password")}
           </label>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
             autoComplete="new-password"
             aria-invalid={!!errors.password}
             aria-describedby="password-hint"

@@ -73,7 +73,9 @@
   "samePassword": "C’est votre mot de passe actuel. Choisissez-en un autre.",
   "savePassword": "Enregistrer et se connecter",
   "savingPassword": "Enregistrement…",
-  "requestNewLink": "M’envoyer un nouveau lien"
+  "requestNewLink": "M’envoyer un nouveau lien",
+  "showPassword": "Afficher le mot de passe",
+  "hidePassword": "Masquer le mot de passe"
  },
  "landing": {
   "badge": "Conçu pour les clubs de tennis, padel et pickleball",

@@ -73,7 +73,9 @@
   "samePassword": "Das ist Ihr aktuelles Passwort. Wählen Sie ein anderes.",
   "savePassword": "Speichern und anmelden",
   "savingPassword": "Wird gespeichert…",
-  "requestNewLink": "Neuen Link senden"
+  "requestNewLink": "Neuen Link senden",
+  "showPassword": "Passwort anzeigen",
+  "hidePassword": "Passwort verbergen"
  },
  "landing": {
   "badge": "Für Tennis-, Padel- und Pickleball-Clubs entwickelt",

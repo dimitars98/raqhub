@@ -9,6 +9,7 @@ import { createClient } from "@/lib/supabase/client";
 import AuthShell from "@/components/layout/AuthShell";
 import { homeFor } from "@/lib/roles";
 import type { Profile } from "@/types/database";
+import PasswordInput from "@/components/ui/PasswordInput";
 
 type Values = { password: string; confirm: string };
 
@@ -79,9 +80,8 @@ export default function ResetPasswordPage() {
               <label htmlFor="password" className="text-sm font-medium text-ink-800">
                 {t("newPassword")}
               </label>
-              <input
+              <PasswordInput
                 id="password"
-                type="password"
                 autoComplete="new-password"
                 autoFocus
                 aria-invalid={!!errors.password}
@@ -107,9 +107,8 @@ export default function ResetPasswordPage() {
               <label htmlFor="confirm" className="text-sm font-medium text-ink-800">
                 {t("confirmPassword")}
               </label>
-              <input
+              <PasswordInput
                 id="confirm"
-                type="password"
                 autoComplete="new-password"
                 aria-invalid={!!errors.confirm}
                 aria-describedby={errors.confirm ? "confirm-error" : undefined}

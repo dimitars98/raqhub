@@ -73,7 +73,9 @@
   "samePassword": "Тоа е вашата сегашна лозинка. Изберете друга.",
   "savePassword": "Зачувај и најави се",
   "savingPassword": "Се зачувува…",
-  "requestNewLink": "Испратете ми нов линк"
+  "requestNewLink": "Испратете ми нов линк",
+  "showPassword": "Прикажи лозинка",
+  "hidePassword": "Сокриј лозинка"
  },
  "landing": {
   "badge": "Направено за тенис, падел и пиклбол клубови",

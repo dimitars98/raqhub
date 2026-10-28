@@ -9,6 +9,7 @@ import type { Profile } from "@/types/database";
 import { LogoMark } from "@/components/ui/Logo";
 import { getSafeRedirect } from "@/lib/safeRedirect";
 import { homeFor } from "@/lib/roles";
+import PasswordInput from "@/components/ui/PasswordInput";
 
 type LoginValues = {
   email: string;
@@ -184,9 +185,8 @@ export default function LoginPage() {
                     {t("forgotLink")}
                   </Link>
                 </div>
-                <input
+                <PasswordInput
                   id="password"
-                  type="password"
                   autoComplete="current-password"
                   aria-invalid={!!errors.password}
                   aria-describedby={

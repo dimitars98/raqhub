@@ -73,7 +73,9 @@
   "samePassword": "To je vaša trenutna lozinka. Izaberite drugu.",
   "savePassword": "Sačuvaj i prijavi se",
   "savingPassword": "Čuvanje…",
-  "requestNewLink": "Pošaljite mi novi link"
+  "requestNewLink": "Pošaljite mi novi link",
+  "showPassword": "Prikaži lozinku",
+  "hidePassword": "Sakrij lozinku"
  },
  "landing": {
   "badge": "Napravljeno za klubove za tenis, padel i pikleball",
