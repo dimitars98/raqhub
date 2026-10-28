@@ -1,0 +1,2 @@
+# Shell scripts must keep Linux line endings (the tests run them on Linux).
+*.sh text eol=lf

@@ -260,6 +260,42 @@ partners change every round, and each player keeps the points their side wins.
   (or a walkover) undoes it exactly. A player choosing a new level by hand
   restarts the rating from there.
 
+## Tests and CI
+
+Every push to GitHub runs `.github/workflows/ci.yml`: types, lint, unit
+tests and a build, plus the database tests on a fresh Postgres. The result
+shows as ✓ or ✗ next to the commit (click it to see what failed).
+
+- **Unit tests** (`tests/unit`, [Vitest](https://vitest.dev)): the app's own
+  logic, such as Americano rounds, tournament draws, booking rules, plan and
+  trial status, CSV export, and all 7 translation files (same texts, valid
+  `{placeholders}`). Run them with `npm test`, or `npm run test:watch` to
+  re-run on every save.
+- **Database tests** (`tests/db/*.test.sql`): build the whole database from
+  `supabase/schema.sql` and every migration, then act as different people to
+  check the security rules and functions: a player can't read others'
+  bookings or mark a booking paid, clubs can't see each other's data, closing
+  courts cancels the right bookings, league and Americano scores move levels,
+  and so on. They need a Postgres, so they run in CI
+  (`npm run test:db` works on a machine with Postgres 16+).
+- **Writing a check:** see the comment at the top of `tests/db/helpers.sql`,
+  e.g. `select test.login('eli');` then
+  `select test.fails($$...$$, 'what must not work');`.
+
+`tests/db/setup/dashboard.sql` recreates what was once set up by hand in the
+Supabase dashboard (the members tables, owner booking rules, the "no double
+booking" rule), since no migration has it. To compare it with the live
+database, run this in the Supabase SQL Editor:
+
+```sql
+select tablename, policyname, cmd, qual, with_check from pg_policies
+where tablename in ('members', 'membership_plans', 'bookings') order by 1, 2;
+select relname, relrowsecurity from pg_class
+where relname in ('members', 'membership_plans', 'bookings');
+select conname, pg_get_constraintdef(oid) from pg_constraint
+where conrelid = 'public.bookings'::regclass and contype = 'x';
+```
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts

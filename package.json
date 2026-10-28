@@ -6,14 +6,17 @@
     "dev": "cross-env NODE_OPTIONS='--max-old-space-size=4096' next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:db": "bash tests/db/run.sh"
   },
   "dependencies": {
     "@polar-sh/sdk": "^1.0.2",
     "@radix-ui/react-select": "^2.3.8",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.3",
-    "@tanstack/react-query": "^5.105.0",
     "@tanstack/react-query": "^5.105.0",
     "country-flag-icons": "^1.6.20",
     "date-fns": "^4.1.0",
@@ -33,6 +36,7 @@
     "stripe": "^23.0.1"
   },
   "devDependencies": {
+    "@formatjs/icu-messageformat-parser": "^3.5.22",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.2",
@@ -43,6 +47,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }
