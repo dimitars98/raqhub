@@ -1281,7 +1281,52 @@
   "noCourtsHint": "Dodajte prvi teren i pojaviće se ovde kao kolona, spreman za rezervacije.",
   "lessonWith": "Čas sa: {coach}",
   "group": "Grupa",
-  "groupWith": "sa: {coach}"
+  "groupWith": "sa: {coach}",
+  "summary": "{n, plural, one {# rezervacija} few {# rezervacije} other {# rezervacija}} · {pct}% zauzeto · {revenue} očekivano",
+  "addBooking": "Dodaj rezervaciju",
+  "prevWeek": "Prethodna nedelja",
+  "nextWeek": "Sledeća nedelja",
+  "booked": "{pct}% zauzeto",
+  "sport": "Sport",
+  "allCourts": "Svi tereni",
+  "courts": "Tereni",
+  "freeUntil": "Slobodno do {time}",
+  "failed": "Nije sačuvano. Pokušajte ponovo.",
+  "tags": {
+   "pending": "Na čekanju",
+   "match": "Otvoren meč · {taken}/{max}",
+   "member": "Član",
+   "online": "Rezervisano onlajn"
+  },
+  "legend": {
+   "booking": "Rezervacija",
+   "lesson": "Čas",
+   "match": "Otvoren meč"
+  },
+  "details": {
+   "title": "Detalji rezervacije",
+   "close": "Zatvori",
+   "member": "Član kluba",
+   "online": "Rezervisano onlajn",
+   "checkedIn": "Došao u {time}",
+   "when": "Kada",
+   "court": "Teren",
+   "price": "Cena",
+   "repeats": "Ponavlja se",
+   "weeklyUntil": "Nedeljno do {date}",
+   "once": "Ne",
+   "phone": "Telefon",
+   "notes": "Beleške",
+   "reference": "Broj",
+   "checkIn": "Označi dolazak",
+   "openBookings": "Sve rezervacije",
+   "noShowLater": "Može se označiti kad počne",
+   "cancel": "Otkaži rezervaciju",
+   "cancelAsk": "Ova rezervacija se ponavlja nedeljno. Otkaži:",
+   "cancelThis": "Samo ovu",
+   "cancelLater": "Ovu i naredne nedelje",
+   "keep": "Zadrži je"
+  }
  },
  "bookCourts": {
   "titleAtClub": "Rezervišite teren u klubu {club}",

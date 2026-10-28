@@ -1281,7 +1281,52 @@
   "noCourtsHint": "Add your first court and it will appear here as a column, ready for bookings.",
   "lessonWith": "Lesson with {coach}",
   "group": "Group",
-  "groupWith": "with {coach}"
+  "groupWith": "with {coach}",
+  "summary": "{n, plural, one {# booking} other {# bookings}} · {pct}% booked · {revenue} expected",
+  "addBooking": "Add booking",
+  "prevWeek": "Previous week",
+  "nextWeek": "Next week",
+  "booked": "{pct}% booked",
+  "sport": "Sport",
+  "allCourts": "All courts",
+  "courts": "Courts",
+  "freeUntil": "Free until {time}",
+  "failed": "That didn't save. Please try again.",
+  "tags": {
+   "pending": "Pending",
+   "match": "Open match · {taken}/{max}",
+   "member": "Member",
+   "online": "Booked online"
+  },
+  "legend": {
+   "booking": "Booking",
+   "lesson": "Lesson",
+   "match": "Open match"
+  },
+  "details": {
+   "title": "Booking details",
+   "close": "Close",
+   "member": "Club member",
+   "online": "Booked online",
+   "checkedIn": "Checked in {time}",
+   "when": "When",
+   "court": "Court",
+   "price": "Price",
+   "repeats": "Repeats",
+   "weeklyUntil": "Weekly until {date}",
+   "once": "No",
+   "phone": "Phone",
+   "notes": "Notes",
+   "reference": "Reference",
+   "checkIn": "Check in",
+   "openBookings": "All bookings",
+   "noShowLater": "Can be marked once it starts",
+   "cancel": "Cancel booking",
+   "cancelAsk": "This booking repeats weekly. Cancel:",
+   "cancelThis": "Just this one",
+   "cancelLater": "This and the later weeks",
+   "keep": "Keep it"
+  }
  },
  "bookCourts": {
   "titleAtClub": "Book a court at {club}",

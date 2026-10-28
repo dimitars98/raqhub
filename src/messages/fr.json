@@ -1266,7 +1266,52 @@
   "noCourtsHint": "Ajoutez votre premier terrain : il apparaîtra ici en colonne, prêt pour les réservations.",
   "lessonWith": "Cours avec {coach}",
   "group": "Groupe",
-  "groupWith": "avec {coach}"
+  "groupWith": "avec {coach}",
+  "summary": "{n, plural, one {# réservation} other {# réservations}} · {pct} % occupé · {revenue} attendus",
+  "addBooking": "Ajouter une réservation",
+  "prevWeek": "Semaine précédente",
+  "nextWeek": "Semaine suivante",
+  "booked": "{pct} % occupé",
+  "sport": "Sport",
+  "allCourts": "Tous les terrains",
+  "courts": "Terrains",
+  "freeUntil": "Libre jusqu'à {time}",
+  "failed": "Cela n'a pas été enregistré. Veuillez réessayer.",
+  "tags": {
+   "pending": "En attente",
+   "match": "Match ouvert · {taken}/{max}",
+   "member": "Membre",
+   "online": "Réservé en ligne"
+  },
+  "legend": {
+   "booking": "Réservation",
+   "lesson": "Cours",
+   "match": "Match ouvert"
+  },
+  "details": {
+   "title": "Détails de la réservation",
+   "close": "Fermer",
+   "member": "Membre du club",
+   "online": "Réservé en ligne",
+   "checkedIn": "Arrivé à {time}",
+   "when": "Quand",
+   "court": "Terrain",
+   "price": "Prix",
+   "repeats": "Répétition",
+   "weeklyUntil": "Chaque semaine jusqu'au {date}",
+   "once": "Non",
+   "phone": "Téléphone",
+   "notes": "Notes",
+   "reference": "Référence",
+   "checkIn": "Enregistrer l'arrivée",
+   "openBookings": "Toutes les réservations",
+   "noShowLater": "Possible une fois commencée",
+   "cancel": "Annuler la réservation",
+   "cancelAsk": "Cette réservation se répète chaque semaine. Annuler :",
+   "cancelThis": "Seulement celle-ci",
+   "cancelLater": "Celle-ci et les semaines suivantes",
+   "keep": "La garder"
+  }
  },
  "common": {
   "closeMenu": "Fermer le menu",

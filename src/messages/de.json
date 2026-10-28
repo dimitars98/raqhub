@@ -1266,7 +1266,52 @@
   "noCourtsHint": "Fügen Sie Ihren ersten Platz hinzu – er erscheint hier als Spalte, bereit für Buchungen.",
   "lessonWith": "Trainerstunde mit {coach}",
   "group": "Gruppe",
-  "groupWith": "mit {coach}"
+  "groupWith": "mit {coach}",
+  "summary": "{n, plural, one {# Buchung} other {# Buchungen}} · {pct}% belegt · {revenue} erwartet",
+  "addBooking": "Buchung hinzufügen",
+  "prevWeek": "Vorige Woche",
+  "nextWeek": "Nächste Woche",
+  "booked": "{pct}% belegt",
+  "sport": "Sportart",
+  "allCourts": "Alle Plätze",
+  "courts": "Plätze",
+  "freeUntil": "Frei bis {time}",
+  "failed": "Das wurde nicht gespeichert. Bitte erneut versuchen.",
+  "tags": {
+   "pending": "Ausstehend",
+   "match": "Offenes Match · {taken}/{max}",
+   "member": "Mitglied",
+   "online": "Online gebucht"
+  },
+  "legend": {
+   "booking": "Buchung",
+   "lesson": "Training",
+   "match": "Offenes Match"
+  },
+  "details": {
+   "title": "Buchungsdetails",
+   "close": "Schließen",
+   "member": "Clubmitglied",
+   "online": "Online gebucht",
+   "checkedIn": "Eingecheckt {time}",
+   "when": "Wann",
+   "court": "Platz",
+   "price": "Preis",
+   "repeats": "Wiederholung",
+   "weeklyUntil": "Wöchentlich bis {date}",
+   "once": "Nein",
+   "phone": "Telefon",
+   "notes": "Notizen",
+   "reference": "Referenz",
+   "checkIn": "Einchecken",
+   "openBookings": "Alle Buchungen",
+   "noShowLater": "Möglich, sobald sie beginnt",
+   "cancel": "Buchung stornieren",
+   "cancelAsk": "Diese Buchung wiederholt sich wöchentlich. Stornieren:",
+   "cancelThis": "Nur diese",
+   "cancelLater": "Diese und die folgenden Wochen",
+   "keep": "Behalten"
+  }
  },
  "common": {
   "closeMenu": "Menü schließen",

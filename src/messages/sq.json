@@ -1266,7 +1266,52 @@
   "noCourtsHint": "Shtoni fushën e parë dhe ajo do të shfaqet këtu si kolonë, gati për rezervime.",
   "lessonWith": "Stërvitje me {coach}",
   "group": "Grup",
-  "groupWith": "me {coach}"
+  "groupWith": "me {coach}",
+  "summary": "{n, plural, one {# rezervim} other {# rezervime}} · {pct}% e zënë · {revenue} të pritura",
+  "addBooking": "Shto rezervim",
+  "prevWeek": "Java e kaluar",
+  "nextWeek": "Java tjetër",
+  "booked": "{pct}% e zënë",
+  "sport": "Sporti",
+  "allCourts": "Të gjitha fushat",
+  "courts": "Fushat",
+  "freeUntil": "E lirë deri në {time}",
+  "failed": "Nuk u ruajt. Provoni përsëri.",
+  "tags": {
+   "pending": "Në pritje",
+   "match": "Ndeshje e hapur · {taken}/{max}",
+   "member": "Anëtar",
+   "online": "Rezervuar online"
+  },
+  "legend": {
+   "booking": "Rezervim",
+   "lesson": "Mësim",
+   "match": "Ndeshje e hapur"
+  },
+  "details": {
+   "title": "Detajet e rezervimit",
+   "close": "Mbyll",
+   "member": "Anëtar i klubit",
+   "online": "Rezervuar online",
+   "checkedIn": "Erdhi në {time}",
+   "when": "Kur",
+   "court": "Fusha",
+   "price": "Çmimi",
+   "repeats": "Përsëritet",
+   "weeklyUntil": "Çdo javë deri më {date}",
+   "once": "Jo",
+   "phone": "Telefoni",
+   "notes": "Shënime",
+   "reference": "Referenca",
+   "checkIn": "Shëno ardhjen",
+   "openBookings": "Të gjitha rezervimet",
+   "noShowLater": "Mund të shënohet pasi të fillojë",
+   "cancel": "Anulo rezervimin",
+   "cancelAsk": "Ky rezervim përsëritet çdo javë. Anulo:",
+   "cancelThis": "Vetëm këtë",
+   "cancelLater": "Këtë dhe javët në vijim",
+   "keep": "Mbaje"
+  }
  },
  "common": {
   "closeMenu": "Mbyll menunë",

@@ -3,7 +3,7 @@
 import { dateLocale } from "@/lib/dateLocale";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useRouter, useSearchParams } from "next/navigation";
+import { type ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
 import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations, useLocale } from "next-intl";
@@ -74,7 +74,9 @@ export default function BookingsClient({
   maxNoShows,
 }: Props) {
   const [bookings, setBookings] = useState(initial);
-  const [showModal, setShowModal] = useState(false);
+  const searchParams = useSearchParams();
+  // The timetable's "+" opens the form straight away (?new=1&court=&date=&hour=).
+  const [showModal, setShowModal] = useState(() => searchParams.get("new") === "1");
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [notice, setNotice] = useState<SeriesNotice | null>(null);
   // A status change or cancellation that didn't save.
@@ -83,7 +85,6 @@ export default function BookingsClient({
   const [cancelling, setCancelling] = useState<BookingWithJoins | null>(null);
   const [search, setSearch] = useState("");
   const router = useRouter();
-  const searchParams = useSearchParams();
   const supabase = createClient();
   const t = useTranslations("adminBookings");
 const { readOnly, hint } = useReadOnly();
@@ -101,17 +102,7 @@ const { readOnly, hint } = useReadOnly();
     reset,
     formState: { isSubmitting },
   } = useForm<FormValues>({
-    defaultValues: {
-      court_id: "",
-      player_type: "member",
-      member_id: "",
-      walk_in_name: "",
-      date: format(new Date(), "yyyy-MM-dd"),
-      hour: 9,
-      duration: 60,
-      repeat: 1,
-      notes: "",
-    },
+    defaultValues: prefill(searchParams, courts),
   });
 
   const watchedCourt = watch("court_id");
@@ -125,6 +116,17 @@ const { readOnly, hint } = useReadOnly();
   const days = Array.from({ length: 14 }, (_, i) =>
     addDays(startOfDay(new Date()), i),
   );
+
+  /** Closes the form and drops the timetable's ?new=1 so a reload doesn't reopen it. */
+  const closeModal = () => {
+    setShowModal(false);
+    if (searchParams.get("new")) {
+      const params = new URLSearchParams(searchParams.toString());
+      for (const k of ["new", "court", "date", "hour"]) params.delete(k);
+      const q = params.toString();
+      router.replace(`/${locale}/admin/bookings${q ? `?${q}` : ""}`);
+    }
+  };
 
   const setFilter = (status: BookingStatus | "all") => {
     const params = new URLSearchParams(searchParams.toString());
@@ -212,8 +214,8 @@ const { readOnly, hint } = useReadOnly();
       setSubmitError(t("saveError"));
       return;
     }
-    setShowModal(false);
-    reset();
+    closeModal();
+    reset(prefill(null, courts));
   };
 
   /** Cancels a weekly booking and, if asked, every later week of it. */
@@ -301,7 +303,7 @@ const { readOnly, hint } = useReadOnly();
           disabled={readOnly}
           title={hint}
           onClick={() => {
-            reset();
+            reset(prefill(null, courts));
             setShowModal(true);
           }}
           className="btn-primary"
@@ -409,7 +411,7 @@ const { readOnly, hint } = useReadOnly();
                       title={hint}
                       type="button"
                       onClick={() => {
-                        reset();
+                        reset(prefill(null, courts));
                         setShowModal(true);
                       }}
                       className="btn-primary mt-4"
@@ -500,7 +502,7 @@ const { readOnly, hint } = useReadOnly();
         </table>
       </div>
 
-      <Modal open={showModal} onClose={() => setShowModal(false)}>
+      <Modal open={showModal} onClose={closeModal}>
         <Modal.Content className="max-w-lg">
           <Modal.Header>{t("addBooking")}</Modal.Header>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -696,7 +698,7 @@ const { readOnly, hint } = useReadOnly();
             <Modal.Footer>
               <button
                 type="button"
-                onClick={() => setShowModal(false)}
+                onClick={closeModal}
                 className="btn-secondary flex-1"
               >
                 {t("cancel")}
@@ -763,4 +765,26 @@ function NoShowBadge({ count, paused }: { count: number; paused: boolean }) {
       {paused && <> · {t("paused")}</>}
     </div>
   );
+}
+
+/** The booking form's starting values, taken from the timetable's link when there is one. */
+function prefill(params: URLSearchParams | ReadonlyURLSearchParams | null, courts: { id: string }[]): FormValues {
+  const today = startOfDay(new Date());
+  const date = params?.get("date") ?? "";
+  const day = /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(`${date}T00:00`) : null;
+  // Only days the form offers: today and the next 13.
+  const inRange = day && day >= today && day < addDays(today, 14);
+  const hour = Number(params?.get("hour"));
+  const court = params?.get("court") ?? "";
+  return {
+    court_id: courts.some((c) => c.id === court) ? court : "",
+    player_type: "member",
+    member_id: "",
+    walk_in_name: "",
+    date: inRange ? date : format(today, "yyyy-MM-dd"),
+    hour: DAY_HOURS.includes(hour) ? hour : 9,
+    duration: 60,
+    repeat: 1,
+    notes: "",
+  };
 }

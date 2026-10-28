@@ -1266,7 +1266,52 @@
   "noCourtsHint": "Aggiungi il tuo primo campo: comparirà qui come colonna, pronto per le prenotazioni.",
   "lessonWith": "Lezione con {coach}",
   "group": "Gruppo",
-  "groupWith": "con {coach}"
+  "groupWith": "con {coach}",
+  "summary": "{n, plural, one {# prenotazione} other {# prenotazioni}} · {pct}% occupato · {revenue} previsti",
+  "addBooking": "Aggiungi prenotazione",
+  "prevWeek": "Settimana precedente",
+  "nextWeek": "Settimana successiva",
+  "booked": "{pct}% occupato",
+  "sport": "Sport",
+  "allCourts": "Tutti i campi",
+  "courts": "Campi",
+  "freeUntil": "Libero fino alle {time}",
+  "failed": "Non è stato salvato. Riprova.",
+  "tags": {
+   "pending": "In attesa",
+   "match": "Partita aperta · {taken}/{max}",
+   "member": "Socio",
+   "online": "Prenotato online"
+  },
+  "legend": {
+   "booking": "Prenotazione",
+   "lesson": "Lezione",
+   "match": "Partita aperta"
+  },
+  "details": {
+   "title": "Dettagli prenotazione",
+   "close": "Chiudi",
+   "member": "Socio del club",
+   "online": "Prenotato online",
+   "checkedIn": "Arrivato alle {time}",
+   "when": "Quando",
+   "court": "Campo",
+   "price": "Prezzo",
+   "repeats": "Si ripete",
+   "weeklyUntil": "Ogni settimana fino al {date}",
+   "once": "No",
+   "phone": "Telefono",
+   "notes": "Note",
+   "reference": "Riferimento",
+   "checkIn": "Registra arrivo",
+   "openBookings": "Tutte le prenotazioni",
+   "noShowLater": "Si può segnare dopo l'inizio",
+   "cancel": "Annulla prenotazione",
+   "cancelAsk": "Questa prenotazione si ripete ogni settimana. Annulla:",
+   "cancelThis": "Solo questa",
+   "cancelLater": "Questa e le settimane successive",
+   "keep": "Mantienila"
+  }
  },
  "common": {
   "closeMenu": "Chiudi menu",
