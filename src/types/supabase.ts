@@ -1069,6 +1069,7 @@ export type Database = {
       }
       tournaments: {
         Row: {
+          team_size: number
           id: string
           club_id: string
           name: string
@@ -1081,6 +1082,7 @@ export type Database = {
           created_at: string
         }
         Insert: {
+          team_size?: number
           id?: string
           club_id: string
           name: string
@@ -1093,6 +1095,7 @@ export type Database = {
           created_at?: string
         }
         Update: {
+          team_size?: number
           id?: string
           club_id?: string
           name?: string
@@ -1116,6 +1119,7 @@ export type Database = {
       }
       tournament_entries: {
         Row: {
+          partner_name: string | null
           id: string
           tournament_id: string
           name: string
@@ -1123,6 +1127,7 @@ export type Database = {
           created_at: string
         }
         Insert: {
+          partner_name?: string | null
           id?: string
           tournament_id: string
           name: string
@@ -1130,6 +1135,7 @@ export type Database = {
           created_at?: string
         }
         Update: {
+          partner_name?: string | null
           id?: string
           tournament_id?: string
           name?: string
@@ -1199,6 +1205,8 @@ export type Database = {
           profile_id: string
           sport: string
           level: number
+          rating: number | null
+          rated_matches: number
           confirmed_by_club: string | null
           confirmed_at: string | null
           check_club: string | null
@@ -1209,6 +1217,8 @@ export type Database = {
           profile_id: string
           sport: string
           level: number
+          rating?: number | null
+          rated_matches?: number
           confirmed_by_club?: string | null
           confirmed_at?: string | null
           check_club?: string | null
@@ -1219,11 +1229,45 @@ export type Database = {
           profile_id?: string
           sport?: string
           level?: number
+          rating?: number | null
+          rated_matches?: number
           confirmed_by_club?: string | null
           confirmed_at?: string | null
           check_club?: string | null
           check_requested_at?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      level_changes: {
+        Row: {
+          id: string
+          profile_id: string
+          sport: string
+          source: string
+          source_id: string
+          parent_id: string | null
+          delta: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          sport: string
+          source: string
+          source_id: string
+          delta: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          sport?: string
+          source?: string
+          source_id?: string
+          parent_id?: string | null
+          delta?: number
+          created_at?: string
         }
         Relationships: []
       }
@@ -1371,6 +1415,159 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      social_events: {
+        Row: {
+          id: string
+          club_id: string
+          name: string
+          sport: string
+          format: string
+          starts_at: string
+          ends_at: string
+          court_ids: string[]
+          points_per_match: number
+          max_players: number
+          entry_fee: number | null
+          level_min: number | null
+          level_max: number | null
+          description: string | null
+          status: string
+          booking_ids: string[]
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          club_id: string
+          name: string
+          sport?: string
+          format?: string
+          starts_at: string
+          ends_at: string
+          court_ids?: string[]
+          points_per_match?: number
+          max_players?: number
+          entry_fee?: number | null
+          level_min?: number | null
+          level_max?: number | null
+          description?: string | null
+          status?: string
+          booking_ids?: string[]
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          club_id?: string
+          name?: string
+          sport?: string
+          format?: string
+          starts_at?: string
+          ends_at?: string
+          court_ids?: string[]
+          points_per_match?: number
+          max_players?: number
+          entry_fee?: number | null
+          level_min?: number | null
+          level_max?: number | null
+          description?: string | null
+          status?: string
+          booking_ids?: string[]
+          created_at?: string
+        }
+        Relationships: []
+      }
+      social_players: {
+        Row: {
+          id: string
+          event_id: string
+          name: string
+          player_id: string | null
+          level: number | null
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          event_id: string
+          name: string
+          player_id?: string | null
+          level?: number | null
+          status?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          event_id?: string
+          name?: string
+          player_id?: string | null
+          level?: number | null
+          status?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      social_matches: {
+        Row: {
+          id: string
+          event_id: string
+          round: number
+          court_index: number
+          a1: string
+          a2: string
+          b1: string
+          b2: string
+          score_a: number | null
+          score_b: number | null
+          reported_by: string | null
+          reported_at: string | null
+        }
+        Insert: {
+          id?: string
+          event_id: string
+          round: number
+          court_index: number
+          a1: string
+          a2: string
+          b1: string
+          b2: string
+          score_a?: number | null
+          score_b?: number | null
+          reported_by?: string | null
+          reported_at?: string | null
+        }
+        Update: {
+          id?: string
+          event_id?: string
+          round?: number
+          court_index?: number
+          a1?: string
+          a2?: string
+          b1?: string
+          b2?: string
+          score_a?: number | null
+          score_b?: number | null
+          reported_by?: string | null
+          reported_at?: string | null
+        }
+        Relationships: []
+      }
+      social_byes: {
+        Row: {
+          event_id: string
+          round: number
+          player: string
+        }
+        Insert: {
+          event_id: string
+          round: number
+          player: string
+        }
+        Update: {
+          event_id?: string
+          round?: number
+          player?: string
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -1572,6 +1769,10 @@ export type Database = {
         Returns: { starts_at: string; ends_at: string; reason: string; courts: string[] | null }[]
       }
       league_view: { Args: { p_league: string }; Returns: Json }
+      social_view: { Args: { p_event: string }; Returns: Json }
+      social_sign_up: { Args: { p_event: string; p_name: string }; Returns: string }
+      social_withdraw: { Args: { p_event: string }; Returns: undefined }
+      social_save_score: { Args: { p_match: string; p_score_a: number | null }; Returns: undefined }
       club_payment_mode: { Args: { p_club: string }; Returns: string }
       confirm_online_payment: {
         Args: { p_booking: string; p_session: string; p_payment_intent: string; p_amount: number; p_account: string }

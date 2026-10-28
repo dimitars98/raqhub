@@ -16,6 +16,7 @@ export default function SignUpBox({
   defaultName,
   open,
   full,
+  pairs = false,
 }: {
   tournamentId: string;
   signedIn: boolean;
@@ -24,11 +25,14 @@ export default function SignUpBox({
   defaultName: string;
   open: boolean;
   full: boolean;
+  /** A pairs tournament: ask for the partner too. */
+  pairs?: boolean;
 }) {
   const t = useTranslations("tournaments");
   const locale = useLocale();
   const router = useRouter();
   const [name, setName] = useState(defaultName);
+  const [partner, setPartner] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -89,7 +93,7 @@ export default function SignUpBox({
       className={box}
       onSubmit={(e) => {
         e.preventDefault();
-        run(() => signUpForTournament(tournamentId, name));
+        run(() => signUpForTournament(tournamentId, name, pairs ? partner : ""));
       }}
     >
       <p className="mb-3 text-sm font-semibold text-ink-900">{t("public.signUpTitle")}</p>
@@ -97,11 +101,21 @@ export default function SignUpBox({
         {t("public.nameOnDraw")}
       </label>
       <input id="entry-name" className="input" value={name} onChange={(e) => setName(e.target.value)} />
-      <p className="mt-1.5 text-xs text-ink-400">{t("public.nameHint")}</p>
+      {pairs ? (
+        <>
+          <label className="mb-1 mt-3 block text-xs text-ink-400" htmlFor="entry-partner">
+            {t("public.partnerName")}
+          </label>
+          <input id="entry-partner" className="input" value={partner} onChange={(e) => setPartner(e.target.value)} />
+          <p className="mt-1.5 text-xs text-ink-400">{t("public.partnerHint")}</p>
+        </>
+      ) : (
+        <p className="mt-1.5 text-xs text-ink-400">{t("public.nameHint")}</p>
+      )}
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
       <button
         type="submit"
-        disabled={pending || !name.trim()}
+        disabled={pending || !name.trim() || (pairs && !partner.trim())}
         className="btn-primary mt-4 w-full justify-center disabled:opacity-50"
       >
         {t("public.signUp")}

@@ -19,6 +19,7 @@ import {
   updateTournament,
 } from "@/app/[locale]/admin/tournaments/actions";
 import { useCopy } from "@/hooks/useCopy";
+import { entryName } from "@/lib/tournament";
 import { useLabels } from "@/hooks/useLabels";
 import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
@@ -45,6 +46,8 @@ const { readOnly, hint } = useReadOnly();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [newEntry, setNewEntry] = useState("");
+  const [newPartner, setNewPartner] = useState("");
+  const pairs = tournament.team_size === 2;
   const [editing, setEditing] = useState(false);
   const [match, setMatch] = useState<TournamentMatch | null>(null);
 
@@ -163,17 +166,34 @@ const { readOnly, hint } = useReadOnly();
             className="mb-4 flex gap-2"
             onSubmit={(e) => {
               e.preventDefault();
-              run(() => addEntry(tournament.id, newEntry), () => setNewEntry(""));
+              run(
+                () => addEntry(tournament.id, newEntry, pairs ? newPartner : ""),
+                () => {
+                  setNewEntry("");
+                  setNewPartner("");
+                },
+              );
             }}
           >
             <input
               className="input flex-1"
-              placeholder={t("manage.addPlaceholder")}
+              placeholder={pairs ? t("manage.addName") : t("manage.addPlaceholder")}
+              aria-label={pairs ? t("manage.addName") : t("manage.addPlaceholder")}
               value={newEntry}
               onChange={(e) => setNewEntry(e.target.value)}
               disabled={full}
             />
-            <button type="submit" disabled={pending || full || !newEntry.trim()} className="btn-primary disabled:opacity-50">
+            {pairs && (
+              <input
+                className="input flex-1"
+                placeholder={t("manage.addPartner")}
+                aria-label={t("manage.addPartner")}
+                value={newPartner}
+                onChange={(e) => setNewPartner(e.target.value)}
+                disabled={full}
+              />
+            )}
+            <button type="submit" disabled={pending || full || !newEntry.trim() || (pairs && !newPartner.trim())} className="btn-primary disabled:opacity-50">
               {t("manage.addEntry")}
             </button>
           </form>
@@ -185,7 +205,7 @@ const { readOnly, hint } = useReadOnly();
               {entries.map((e, i) => (
                 <li key={e.id} className="flex items-center gap-3 px-4 py-2.5 text-sm">
                   <span className="w-6 tabular-nums text-ink-400">{i + 1}.</span>
-                  <span className="flex-1 font-medium text-ink-900">{e.name}</span>
+                  <span className="flex-1 font-medium text-ink-900">{entryName(e)}</span>
                   {e.player_id && <span className="text-xs text-ink-400">{t("manage.signedUpOnline")}</span>}
                   <button
                     type="button"
@@ -276,7 +296,10 @@ function ResultModal({
   const t = useTranslations("tournaments");
   const [winner, setWinner] = useState<string | null>(match.winner_id);
   const [score, setScore] = useState(match.score ?? "");
-  const nameOf = (id: string | null) => entries.find((e) => e.id === id)?.name ?? "–";
+  const nameOf = (id: string | null) => {
+    const e = entries.find((x) => x.id === id);
+    return e ? entryName(e) : "–";
+  };
 
   return (
     <Modal open onClose={onClose}>

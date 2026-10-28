@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Trophy } from "lucide-react";
-import { roundName } from "@/lib/tournament";
+import { entryName, roundName } from "@/lib/tournament";
 import type { TournamentEntry, TournamentMatch } from "@/types/database";
 
 /**
@@ -20,7 +20,7 @@ export default function Bracket({
   onMatchClick?: (match: TournamentMatch) => void;
 }) {
   const t = useTranslations("tournaments");
-  const nameOf = new Map(entries.map((e) => [e.id, e.name]));
+  const nameOf = new Map(entries.map((e) => [e.id, entryName(e)]));
   const rounds = Math.max(0, ...matches.map((m) => m.round));
   const columns = Array.from({ length: rounds }, (_, i) =>
     matches.filter((m) => m.round === i + 1).sort((a, b) => a.position - b.position),

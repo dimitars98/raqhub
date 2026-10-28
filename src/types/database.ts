@@ -222,14 +222,18 @@ export interface Tournament {
   max_entries: number;
   entry_fee: number | null;
   status: "open" | "closed" | "started" | "finished";
+  /** 1: singles · 2: pairs */
+  team_size?: number;
   created_at: string;
 }
 
 export interface TournamentEntry {
   id: string;
   tournament_id: string;
-  /** Player's name, or "Ana / Marko" for doubles. */
+  /** Player's name (in old singles tournaments, maybe "Ana / Marko"). */
   name: string;
+  /** Pairs tournaments: the partner (20261030b_tournament_pairs.sql). */
+  partner_name?: string | null;
   /** Set when a player signed up themselves. */
   player_id: string | null;
   created_at: string;

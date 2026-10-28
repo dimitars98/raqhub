@@ -2,8 +2,10 @@
 
 import { useState, useTransition } from "react";
 import SelectField from "@/components/ui/SelectField";
-import { useTranslations } from "next-intl";
-import { ChevronLeft, Clock, ShieldCheck } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { format } from "date-fns";
+import { dateLocale } from "@/lib/dateLocale";
+import { ChevronLeft, Clock, ShieldCheck, TrendingDown, TrendingUp } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { requestLevelCheck, setLevel } from "@/app/actions/openMatches";
 import { useLabels } from "@/hooks/useLabels";
@@ -25,6 +27,7 @@ export default function LevelClient({
 }) {
   const t = useTranslations("matches");
   const labels = useLabels();
+  const df = dateLocale(useLocale());
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -106,6 +109,44 @@ export default function LevelClient({
         })}
       </div>
 
+      {/* What results have done to it */}
+      {current && current.rated_matches > 0 && (
+        <section className="rounded-2xl border border-ink-100 bg-white p-4">
+          <div className="flex items-end justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold text-ink-900">{t("fromResults")}</h2>
+              <p className="mt-0.5 text-xs text-ink-400">{t("ratedGames", { n: current.rated_matches })}</p>
+            </div>
+            <span className="font-display text-3xl font-bold tabular-nums text-ink-900">{current.rating.toFixed(2)}</span>
+          </div>
+          <p className="mt-2 text-xs leading-relaxed text-ink-600">{t("ratingHint")}</p>
+          {current.changes.length > 0 && (
+            <ul className="mt-3 flex flex-col divide-y divide-ink-50 border-t border-ink-50">
+              {current.changes.map((c, i) => {
+                const up = c.delta >= 0;
+                return (
+                  <li key={i} className="flex items-center gap-3 py-2 text-[13px]">
+                    {up ? (
+                      <TrendingUp size={15} className="shrink-0 text-brand-700" aria-hidden="true" />
+                    ) : (
+                      <TrendingDown size={15} className="shrink-0 text-red-500" aria-hidden="true" />
+                    )}
+                    <span className="min-w-0 flex-1 truncate text-ink-800">
+                      {t(c.source === "league" ? "changeLeague" : "changeAmericano", { name: c.name ?? "—" })}
+                    </span>
+                    <span className="text-xs text-ink-400">{format(new Date(c.at), "d MMM", { locale: df })}</span>
+                    <span className={`w-12 text-right font-semibold tabular-nums ${up ? "text-brand-800" : "text-red-600"}`}>
+                      {up ? "+" : "−"}
+                      {Math.abs(c.delta).toFixed(2)}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </section>
+      )}
+
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">{t("levelTitle")}</legend>
         {LEVEL_BANDS.map((b) => {
@@ -183,6 +224,9 @@ export default function LevelClient({
         <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}
         </p>
+      )}
+      {current && current.rated_matches > 0 && value !== current.level && (
+        <p className="text-xs leading-relaxed text-ink-600">{t("resetWarning")}</p>
       )}
       {saved && <p className="text-sm font-semibold text-brand-900">{t("levelSaved")}</p>}
 

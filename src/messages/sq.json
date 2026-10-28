@@ -392,7 +392,8 @@
   "groups": "Grupet",
   "myGroups": "Grupet e mia",
   "openMatches": "Ndeshje të hapura",
-  "leagues": "Ligat"
+  "leagues": "Ligat",
+  "americano": "Americano"
  },
  "members": {
   "errors": {
@@ -852,7 +853,8 @@
     "failed": "Diçka shkoi keq. Provoni përsëri."
    }
   },
-  "questions": "Pyetje, apo ju duhet një faturë për kompaninë? Shkruani në {email}."
+  "questions": "Pyetje, apo ju duhet një faturë për kompaninë? Shkruani në {email}.",
+  "trialBannerPaid": "Periudha falas: {days, plural, one {# ditë} other {# ditë}} të mbetura. Karta është konfiguruar, ndaj plani vazhdon automatikisht më {date}."
  },
  "setup": {
   "title": "Krijoni klubin tuaj",
@@ -1824,7 +1826,11 @@
    "entryFee": "Tarifa e pjesëmarrjes (€)",
    "entryFeeHint": "Lëreni bosh nëse është falas. Lojtarët paguajnë në klub.",
    "description": "Detaje për lojtarët",
-   "descriptionPlaceholder": "Formati, çmimet, çfarë të sjellin…"
+   "descriptionPlaceholder": "Formati, çmimet, çfarë të sjellin…",
+   "format": "Formati",
+   "singles": "Teke",
+   "pairs": "Çifte",
+   "maxPairs": "Vende (çifte)"
   },
   "status": {
    "open": "Regjistrimet të hapura",
@@ -1861,7 +1867,9 @@
    "scorePlaceholder": "6-4 6-3",
    "saveResult": "Ruaj rezultatin",
    "clearResult": "Fshi",
-   "champion": "Fituesi: {name}"
+   "champion": "Fituesi: {name}",
+   "addName": "Emri",
+   "addPartner": "Partneri"
   },
   "rounds": {
    "final": "Finalja",
@@ -1883,7 +1891,9 @@
    "closedNote": "Regjistrimet janë mbyllur.",
    "players": "Lojtarët ({n})",
    "noPlayers": "Ende nuk është regjistruar askush. Bëhuni i pari!",
-   "upcoming": "Turnetë"
+   "upcoming": "Turnetë",
+   "partnerName": "Partneri juaj",
+   "partnerHint": "Emri siç duhet të shfaqet në short."
   },
   "errors": {
    "paused": "Ky klub nuk pranon regjistrime online për momentin.",
@@ -1898,7 +1908,8 @@
    "notSignedIn": "Ju lutemi hyni më parë.",
    "closed": "Regjistrimet janë mbyllur.",
    "full": "Ky turne është plot.",
-   "already": "Jeni regjistruar tashmë."
+   "already": "Jeni regjistruar tashmë.",
+   "partner": "Shtoni emrin e partnerit."
   }
  },
  "export": {
@@ -2955,7 +2966,13 @@
    "confirmAt": "Konfirmo {level}",
    "dismiss": "Hidh poshtë",
    "levelFor": "Niveli për {name}"
-  }
+  },
+  "fromResults": "Nga rezultatet tuaja",
+  "ratedGames": "{n, plural, one {# lojë} other {# lojëra}} të llogaritura",
+  "ratingHint": "Çdo ndeshje lige dhe çdo lojë Americano me rezultat e ndryshon pak nivelin tuaj. Fitorja ndaj lojtarëve më të fortë e ndryshon më shumë. Lojtarët e shohin të rrumbullakosur në gjysmën më të afërt.",
+  "changeLeague": "Liga · {name}",
+  "changeAmericano": "Americano · {name}",
+  "resetWarning": "Nëse ruani një nivel tjetër, ai zëvendëson nivelin që kanë ndërtuar rezultatet tuaja."
  },
  "help": {
   "open": "Ndihmë",
@@ -3527,6 +3544,149 @@
    "paid": "Paguar online",
    "refundDue": "Rimbursim në pritje",
    "refunded": "Rimbursuar"
+  }
+ },
+ "americano": {
+  "title": "Americano & Mexicano",
+  "subtitle": "Mbrëmje shoqërore: secili regjistrohet vetë, partnerët ndryshojnë çdo raund dhe çdo lojtar mban pikët që fiton pala e tij.",
+  "new": "Mbrëmje e re",
+  "edit": "Ndrysho",
+  "delete": "Fshi mbrëmjen",
+  "deleteConfirm": "Të fshihet kjo mbrëmje me lojtarët dhe rezultatet? Fushat lirohen.",
+  "save": "Ruaj",
+  "cancel": "Anulo",
+  "saving": "Duke ruajtur…",
+  "back": "Të gjitha mbrëmjet",
+  "empty": "Ende nuk ka mbrëmje.",
+  "emptyHint": "Krijoni një, ndani lidhjen dhe lojtarët regjistrohen. Atë mbrëmje Kortello bën çdo raund dhe mban tabelën.",
+  "copyLink": "Kopjo lidhjen",
+  "copied": "U kopjua",
+  "publicPage": "Faqja publike",
+  "status": {
+   "open": "Regjistrimet të hapura",
+   "running": "Po luhet",
+   "finished": "Përfundoi"
+  },
+  "formats": {
+   "americano": "Americano",
+   "americanoHint": "Partnerët ndryshojnë që secili të luajë me sa më shumë njerëz.",
+   "mexicano": "Mexicano",
+   "mexicanoHint": "Pas raundit 1 lojtarët grupohen sipas pikëve: ndeshje të barabarta gjithë mbrëmjen."
+  },
+  "form": {
+   "name": "Emri",
+   "namePlaceholder": "Americano e premte",
+   "format": "Formati",
+   "sport": "Sporti",
+   "date": "Data",
+   "from": "Nga",
+   "to": "Deri",
+   "courts": "Fushat",
+   "courtsHint": "Këto fusha rezervohen për mbrëmjen, që askush tjetër të mos i marrë.",
+   "noCourts": "Ende nuk ka fusha për këtë sport.",
+   "points": "Pikë për ndeshje",
+   "pointsOption": "{n} pikë",
+   "maxPlayers": "Më së shumti lojtarë",
+   "playersHint": "{n} lojtarë mbushin të gjitha fushat; mund të jenë edhe më shumë, pushojnë me radhë.",
+   "levelMin": "Niveli më i ulët",
+   "levelMax": "Niveli më i lartë",
+   "anyLevel": "Çdo nivel",
+   "entryFee": "Pagesa (€)",
+   "description": "Detaje për lojtarët",
+   "descriptionPlaceholder": "Çmime, pije pas, çfarë të sjellin…"
+  },
+  "playersCount": "{n} nga {max} lojtarë",
+  "players": "Lojtarë",
+  "pointsEach": "ndeshje deri në {n} pikë",
+  "fee": "Pagesa €{fee}",
+  "free": "Pjesëmarrje falas",
+  "levelRange": "Niveli {min}–{max}",
+  "readyTitle": "Gati kur të vijnë lojtarët",
+  "readyHint": "{players} lojtarë: {games, plural, one {# ndeshje} other {# ndeshje}} për raund{byes, plural, =0 {} one {, # pushon} other {, # pushojnë}}. Nisni raundin 1 kur të jenë të gjithë.",
+  "tooFewHint": "Duhen të paktën 4 lojtarë. Ndani lidhjen ose shtoni emra më poshtë.",
+  "start": "Nis raundin 1",
+  "nextRound": "Nis raundin {n}",
+  "nextConfirmUnplayed": "{left, plural, one {# ndeshje} other {# ndeshje}} e këtij raundi ende nuk {left, plural, one {ka} other {kanë}} rezultat. Të niset gjithsesi raundi tjetër?",
+  "roundLive": "Raundi {n} po luhet",
+  "roundProgress": "{n} nga {total} rezultate të shënuara",
+  "suggested": "rreth {n} raunde që secili të luajë me të gjithë",
+  "undoRound": "Zhbëj raundin",
+  "undoConfirm": "Të zhbëhet raundi {n}?",
+  "finish": "Përfundo",
+  "finishConfirm": "Të përfundojë mbrëmja? Tabela bëhet përfundimtare.",
+  "finishedTitle": "Përfundoi: tabela është përfundimtare.",
+  "reopen": "Rihap",
+  "noRounds": "Raundi 1 shfaqet këtu sapo të nisë.",
+  "roundTitle": "Raundi {n}",
+  "rounds": "Raundet",
+  "court": "Fusha {n}",
+  "sittingOut": "Pushojnë: {names} (nga {points} pikë)",
+  "table": "Tabela",
+  "finalTable": "Tabela përfundimtare",
+  "player": "Lojtari",
+  "played": "L",
+  "playedLong": "Ndeshje të luajtura",
+  "won": "F",
+  "wonLong": "Ndeshje të fituara",
+  "points": "Pikë",
+  "you": "ju",
+  "done": "Rezultati u shënua",
+  "editScore": "Ndrysho rezultatin",
+  "saveScore": "Ruaj",
+  "clear": "Fshi",
+  "scoreFirst": "Pikët e çiftit të parë",
+  "scoreSecond": "Pikët e çiftit të dytë",
+  "scoreHint": "Të dy rezultatet bashkë bëjnë {n}.",
+  "addName": "Emri",
+  "level": "Niveli",
+  "add": "Shto",
+  "remove": "Hiq",
+  "addLaterHint": "lojtarët e shtuar tani luajnë nga raundi tjetër",
+  "withdrawConfirm": "Të hiqet {name}? Pikët deri tani mbeten.",
+  "noPlayers": "Ende nuk është regjistruar askush. Ndani lidhjen ose shtoni emra këtu.",
+  "public": {
+   "clubTitle": "Mbrëmje Americano",
+   "how": {
+    "americano": "Si funksionon: regjistroheni vetë. Çdo raund merrni partner dhe kundërshtarë të rinj dhe luani një ndeshje deri në {points} pikë. Mbani pikët që fiton pala juaj; fiton kush ka më shumë pikë në fund. Pushimi i një raundi jep {bye} pikë.",
+    "mexicano": "Si funksionon: regjistroheni vetë. Raundi 1 është i përzier; pastaj lojtarët me pikë të ngjashme luajnë mes tyre, me partner të ri çdo raund. Ndeshjet janë deri në {points} pikë dhe mbani pikët e palës suaj. Pushimi i një raundi jep {bye} pikë."
+   },
+   "signUpTitle": "Bashkohuni në këtë mbrëmje",
+   "yourName": "Emri juaj",
+   "aloneHint": "Regjistroheni vetë: partnerët hidhen në short çdo raund.",
+   "signUp": "Regjistrohu",
+   "signInToSignUp": "Hyni për t’u regjistruar",
+   "youreIn": "Jeni regjistruar si {name}.",
+   "withdraw": "Tërhiqu",
+   "withdrawConfirm": "Të largoheni nga mbrëmja? Pikët tuaja deri tani mbeten.",
+   "full": "Kjo mbrëmje është plot.",
+   "closedNote": "Regjistrimet janë mbyllur.",
+   "playersTitle": "Lojtarë ({n})",
+   "noPlayers": "Ende nuk është regjistruar askush. Bëhuni i pari!"
+  },
+  "errors": {
+   "name": "Jepini mbrëmjes një emër.",
+   "date": "Zgjidhni datën.",
+   "times": "Fundi duhet të jetë pas fillimit.",
+   "courts": "Zgjidhni të paktën një fushë.",
+   "maxPlayers": "Lojtarët duhet të jenë midis 4 dhe 64.",
+   "points": "Pikët për ndeshje duhet të jenë midis 8 dhe 64.",
+   "fee": "Pagesa nuk mund të jetë negative.",
+   "levels": "Niveli më i ulët është mbi më të lartin.",
+   "entryName": "Shkruani një emër.",
+   "closed": "Regjistrimet për këtë mbrëmje janë mbyllur.",
+   "full": "Kjo mbrëmje është plot.",
+   "already": "Jeni regjistruar tashmë.",
+   "level": "Niveli juaj nuk i përshtatet kësaj mbrëmjeje.",
+   "score": "Shkruani pikët e njërës palë, nga 0 deri te totali i ndeshjes.",
+   "roundDone": "Ai raund ka përfunduar, vetëm klubi mund ta ndryshojë.",
+   "alreadyReported": "Pala tjetër e ka shënuar tashmë rezultatin. Nëse është gabim, pyesni klubin.",
+   "notSignedIn": "Hyni fillimisht.",
+   "paused": "Ky klub aktualisht nuk pranon regjistrime online.",
+   "courtTaken": "Një fushë është tashmë e rezervuar në atë orë, prandaj mbrëmja nuk mban fusha. Ndryshoni orën ose fushat.",
+   "tooFew": "Duhen të paktën 4 lojtarë dhe një fushë.",
+   "hasScores": "Ky raund ka rezultate, prandaj nuk mund të zhbëhet.",
+   "finished": "Kjo mbrëmje ka përfunduar.",
+   "failed": "Diçka shkoi keq. Provoni përsëri."
   }
  }
 }

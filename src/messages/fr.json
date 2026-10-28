@@ -392,7 +392,8 @@
   "groups": "Groupes",
   "myGroups": "Mes groupes",
   "openMatches": "Matchs ouverts",
-  "leagues": "Ligues"
+  "leagues": "Ligues",
+  "americano": "Americano"
  },
  "members": {
   "errors": {
@@ -852,7 +853,8 @@
     "failed": "Un problème est survenu. Veuillez réessayer."
    }
   },
-  "questions": "Des questions, ou besoin d’une facture pour votre entreprise ? Écrivez à {email}."
+  "questions": "Des questions, ou besoin d’une facture pour votre entreprise ? Écrivez à {email}.",
+  "trialBannerPaid": "Essai gratuit : encore {days, plural, one {# jour} other {# jours}}. Votre carte est enregistrée : votre formule continue automatiquement le {date}."
  },
  "setup": {
   "title": "Créez votre club",
@@ -1824,7 +1826,11 @@
    "entryFee": "Droit d’inscription (€)",
    "entryFeeHint": "Laissez vide si c’est gratuit. Les joueurs paient au club.",
    "description": "Infos pour les joueurs",
-   "descriptionPlaceholder": "Format, lots, quoi apporter…"
+   "descriptionPlaceholder": "Format, lots, quoi apporter…",
+   "format": "Format",
+   "singles": "Simple",
+   "pairs": "Paires",
+   "maxPairs": "Places (paires)"
   },
   "status": {
    "open": "Inscriptions ouvertes",
@@ -1861,7 +1867,9 @@
    "scorePlaceholder": "6-4 6-3",
    "saveResult": "Enregistrer le résultat",
    "clearResult": "Effacer",
-   "champion": "Vainqueur : {name}"
+   "champion": "Vainqueur : {name}",
+   "addName": "Nom",
+   "addPartner": "Partenaire"
   },
   "rounds": {
    "final": "Finale",
@@ -1883,7 +1891,9 @@
    "closedNote": "Les inscriptions sont fermées.",
    "players": "Joueurs ({n})",
    "noPlayers": "Personne n’est encore inscrit. Soyez le premier !",
-   "upcoming": "Tournois"
+   "upcoming": "Tournois",
+   "partnerName": "Votre partenaire",
+   "partnerHint": "Son nom tel qu’il doit apparaître sur le tableau."
   },
   "errors": {
    "paused": "Ce club ne prend pas d’inscriptions en ligne pour le moment.",
@@ -1898,7 +1908,8 @@
    "notSignedIn": "Veuillez d’abord vous connecter.",
    "closed": "Les inscriptions sont fermées.",
    "full": "Ce tournoi est complet.",
-   "already": "Vous êtes déjà inscrit."
+   "already": "Vous êtes déjà inscrit.",
+   "partner": "Ajoutez le nom de votre partenaire."
   }
  },
  "export": {
@@ -2955,7 +2966,13 @@
    "confirmAt": "Confirmer à {level}",
    "dismiss": "Ignorer",
    "levelFor": "Niveau de {name}"
-  }
+  },
+  "fromResults": "D'après vos résultats",
+  "ratedGames": "{n, plural, one {# match compté} other {# matchs comptés}}",
+  "ratingHint": "Chaque match de ligue et chaque partie d'Americano avec un score fait un peu bouger votre niveau. Battre des joueurs plus forts compte le plus. Les autres le voient arrondi au demi-point le plus proche.",
+  "changeLeague": "Ligue · {name}",
+  "changeAmericano": "Americano · {name}",
+  "resetWarning": "Enregistrer un autre niveau remplace celui que vos résultats ont construit."
  },
  "help": {
   "open": "Aide",
@@ -3527,6 +3544,149 @@
    "paid": "Payé en ligne",
    "refundDue": "Remboursement à faire",
    "refunded": "Remboursé"
+  }
+ },
+ "americano": {
+  "title": "Americano & Mexicano",
+  "subtitle": "Soirées conviviales : chacun s’inscrit seul, les partenaires changent à chaque tour et chaque joueur garde les points gagnés par son camp.",
+  "new": "Nouvelle soirée",
+  "edit": "Modifier",
+  "delete": "Supprimer la soirée",
+  "deleteConfirm": "Supprimer cette soirée avec ses joueurs et ses scores ? Ses terrains sont libérés.",
+  "save": "Enregistrer",
+  "cancel": "Annuler",
+  "saving": "Enregistrement…",
+  "back": "Toutes les soirées",
+  "empty": "Aucune soirée pour l’instant.",
+  "emptyHint": "Créez-en une, partagez le lien et les joueurs s’inscrivent. Le soir venu, Kortello fait chaque tour et tient le classement.",
+  "copyLink": "Copier le lien",
+  "copied": "Copié",
+  "publicPage": "Page publique",
+  "status": {
+   "open": "Inscriptions ouvertes",
+   "running": "En cours",
+   "finished": "Terminée"
+  },
+  "formats": {
+   "americano": "Americano",
+   "americanoHint": "Les partenaires tournent pour que chacun joue avec le plus de monde possible.",
+   "mexicano": "Mexicano",
+   "mexicanoHint": "Après le 1er tour, les joueurs sont regroupés par points : des matchs serrés toute la soirée."
+  },
+  "form": {
+   "name": "Nom",
+   "namePlaceholder": "Americano du vendredi",
+   "format": "Format",
+   "sport": "Sport",
+   "date": "Date",
+   "from": "De",
+   "to": "À",
+   "courts": "Terrains",
+   "courtsHint": "Ces terrains sont réservés pour la soirée : personne d’autre ne peut les prendre.",
+   "noCourts": "Pas encore de terrain pour ce sport.",
+   "points": "Points par match",
+   "pointsOption": "{n} points",
+   "maxPlayers": "Joueurs au maximum",
+   "playersHint": "{n} joueurs remplissent tous les terrains ; plus, c’est possible : ils se reposent à tour de rôle.",
+   "levelMin": "Niveau minimum",
+   "levelMax": "Niveau maximum",
+   "anyLevel": "Tous",
+   "entryFee": "Inscription (€)",
+   "description": "Détails pour les joueurs",
+   "descriptionPlaceholder": "Lots, verre après, quoi apporter…"
+  },
+  "playersCount": "{n} joueurs sur {max}",
+  "players": "Joueurs",
+  "pointsEach": "matchs en {n} points",
+  "fee": "Inscription {fee} €",
+  "free": "Inscription gratuite",
+  "levelRange": "Niveau {min}–{max}",
+  "readyTitle": "Prêt quand les joueurs le sont",
+  "readyHint": "{players} joueurs : {games, plural, one {# match} other {# matchs}} par tour{byes, plural, =0 {} one {, # au repos} other {, # au repos}}. Lancez le 1er tour quand tout le monde est là.",
+  "tooFewHint": "Il faut au moins 4 joueurs. Partagez le lien ou ajoutez des noms ci-dessous.",
+  "start": "Lancer le 1er tour",
+  "nextRound": "Lancer le tour {n}",
+  "nextConfirmUnplayed": "{left, plural, one {# match} other {# matchs}} de ce tour {left, plural, one {n’a} other {n’ont}} pas encore de score. Lancer quand même le tour suivant ?",
+  "roundLive": "Tour {n} en cours",
+  "roundProgress": "{n} scores saisis sur {total}",
+  "suggested": "environ {n} tours pour que chacun joue avec tout le monde",
+  "undoRound": "Annuler le tour",
+  "undoConfirm": "Annuler le tour {n} ?",
+  "finish": "Terminer",
+  "finishConfirm": "Terminer la soirée ? Le classement devient définitif.",
+  "finishedTitle": "Terminée : le classement est définitif.",
+  "reopen": "Rouvrir",
+  "noRounds": "Le 1er tour s’affichera ici dès qu’il commence.",
+  "roundTitle": "Tour {n}",
+  "rounds": "Tours",
+  "court": "Terrain {n}",
+  "sittingOut": "Au repos : {names} ({points} points chacun)",
+  "table": "Classement",
+  "finalTable": "Classement final",
+  "player": "Joueur",
+  "played": "J",
+  "playedLong": "Matchs joués",
+  "won": "V",
+  "wonLong": "Matchs gagnés",
+  "points": "Pts",
+  "you": "vous",
+  "done": "Score saisi",
+  "editScore": "Modifier le score",
+  "saveScore": "Enregistrer",
+  "clear": "Effacer",
+  "scoreFirst": "Points de la première paire",
+  "scoreSecond": "Points de la seconde paire",
+  "scoreHint": "Les deux scores font {n} au total.",
+  "addName": "Nom",
+  "level": "Niveau",
+  "add": "Ajouter",
+  "remove": "Retirer",
+  "addLaterHint": "les joueurs ajoutés maintenant jouent dès le tour suivant",
+  "withdrawConfirm": "Retirer {name} ? Ses points restent.",
+  "noPlayers": "Personne n’est encore inscrit. Partagez le lien ou ajoutez des noms ici.",
+  "public": {
+   "clubTitle": "Soirées Americano",
+   "how": {
+    "americano": "Comment ça marche : vous vous inscrivez seul. À chaque tour, nouveau partenaire et nouveaux adversaires, pour un match en {points} points. Vous gardez les points de votre camp ; le plus de points à la fin l’emporte. Un tour au repos rapporte {bye} points.",
+    "mexicano": "Comment ça marche : vous vous inscrivez seul. Le 1er tour est mélangé ; ensuite, les joueurs aux points proches jouent ensemble, avec un nouveau partenaire à chaque tour. Les matchs se jouent en {points} points et vous gardez les points de votre camp. Un tour au repos rapporte {bye} points."
+   },
+   "signUpTitle": "Rejoindre cette soirée",
+   "yourName": "Votre nom",
+   "aloneHint": "Vous vous inscrivez seul : les partenaires sont tirés à chaque tour.",
+   "signUp": "S’inscrire",
+   "signInToSignUp": "Se connecter pour s’inscrire",
+   "youreIn": "Vous êtes inscrit sous le nom {name}.",
+   "withdraw": "Se retirer",
+   "withdrawConfirm": "Quitter la soirée ? Vos points restent.",
+   "full": "Cette soirée est complète.",
+   "closedNote": "Les inscriptions sont closes.",
+   "playersTitle": "Joueurs ({n})",
+   "noPlayers": "Personne n’est encore inscrit. Soyez le premier !"
+  },
+  "errors": {
+   "name": "Donnez un nom à la soirée.",
+   "date": "Choisissez la date.",
+   "times": "La fin doit être après le début.",
+   "courts": "Choisissez au moins un terrain.",
+   "maxPlayers": "Le nombre de joueurs doit être entre 4 et 64.",
+   "points": "Les points par match doivent être entre 8 et 64.",
+   "fee": "L’inscription ne peut pas être négative.",
+   "levels": "Le niveau minimum est au-dessus du maximum.",
+   "entryName": "Saisissez un nom.",
+   "closed": "Les inscriptions à cette soirée sont closes.",
+   "full": "Cette soirée est complète.",
+   "already": "Vous êtes déjà inscrit.",
+   "level": "Votre niveau ne correspond pas à cette soirée.",
+   "score": "Saisissez les points d’un camp, de 0 au total du match.",
+   "roundDone": "Ce tour est terminé, seul le club peut le modifier.",
+   "alreadyReported": "L’autre camp a déjà saisi ce score. Contactez le club s’il est faux.",
+   "notSignedIn": "Connectez-vous d’abord.",
+   "paused": "Ce club n’accepte pas d’inscriptions en ligne pour le moment.",
+   "courtTaken": "Un terrain est déjà réservé à cette heure, la soirée ne bloque donc aucun terrain. Changez l’horaire ou les terrains.",
+   "tooFew": "Il faut au moins 4 joueurs et un terrain.",
+   "hasScores": "Ce tour a déjà des scores, il ne peut pas être annulé.",
+   "finished": "Cette soirée est terminée.",
+   "failed": "Un problème est survenu. Veuillez réessayer."
   }
  }
 }

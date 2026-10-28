@@ -10,7 +10,10 @@ import type { Club, Profile } from "@/types/database";
 import { usesAdminArea } from "@/lib/roles";
 
 type LayoutProfile = Pick<Profile, "full_name" | "role">;
-type LayoutClub = Pick<Club, "name" | "slug"> & ClubBilling;
+type LayoutClub = Pick<Club, "name" | "slug"> & ClubBilling & {
+  subscription_status?: string | null;
+  subscription_ends?: boolean | null;
+};
 
 export default async function AdminLayout({
   children,
@@ -37,7 +40,7 @@ export default async function AdminLayout({
       .single(),
     supabase
       .from("clubs")
-      .select(`name, slug, ${BILLING_COLUMNS}`)
+      .select(`name, slug, subscription_status, subscription_ends, ${BILLING_COLUMNS}`)
       .eq("owner_id", user.id)
       .limit(1)
       .maybeSingle(),
@@ -57,7 +60,7 @@ export default async function AdminLayout({
     if (!staffClubId) redirect(`/${locale}/book`);
     const { data } = await supabase
       .from("clubs")
-      .select(`name, slug, ${BILLING_COLUMNS}`)
+      .select(`name, slug, subscription_status, subscription_ends, ${BILLING_COLUMNS}`)
       .eq("id", staffClubId)
       .maybeSingle();
     club = data as LayoutClub | null;
@@ -81,7 +84,20 @@ export default async function AdminLayout({
       isSuperAdmin={profile.role === "super_admin"}
       isStaff={isStaff}
       // The plan and trial are the owner's business, not the staff's.
-      notice={club ? <PlanBanner access={access} staff={isStaff} /> : undefined}
+      notice={
+        club ? (
+          <PlanBanner
+            access={access}
+            staff={isStaff}
+            // Paying by card already: the trial just runs into the paid plan.
+            renewsOn={
+              ["active", "trialing"].includes(club.subscription_status ?? "") && !club.subscription_ends
+                ? club.paid_until
+                : null
+            }
+          />
+        ) : undefined
+      }
     >
       <ReadOnlyProvider value={readOnly}>
         {staffLocked ? <UpgradeNotice feature="staff" /> : children}

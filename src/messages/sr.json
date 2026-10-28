@@ -392,7 +392,8 @@
   "groups": "Grupe",
   "myGroups": "Moje grupe",
   "openMatches": "Otvoreni mečevi",
-  "leagues": "Lige"
+  "leagues": "Lige",
+  "americano": "Americano"
  },
  "members": {
   "errors": {
@@ -852,7 +853,8 @@
     "failed": "Nešto nije u redu. Pokušajte ponovo."
    }
   },
-  "questions": "Pitanja ili vam treba faktura za firmu? Pišite na {email}."
+  "questions": "Pitanja ili vam treba faktura za firmu? Pišite na {email}.",
+  "trialBannerPaid": "Besplatni period: još {days, plural, one {# dan} few {# dana} other {# dana}}. Kartica je podešena, pa se paket automatski nastavlja {date}."
  },
  "setup": {
   "title": "Podesite svoj klub",
@@ -1824,7 +1826,11 @@
    "entryFee": "Kotizacija (€)",
    "entryFeeHint": "Ostavite prazno ako je besplatno. Igrači plaćaju u klubu.",
    "description": "Informacije za igrače",
-   "descriptionPlaceholder": "Format, nagrade, šta da ponesu…"
+   "descriptionPlaceholder": "Format, nagrade, šta da ponesu…",
+   "format": "Format",
+   "singles": "Pojedinačno",
+   "pairs": "Parovi",
+   "maxPairs": "Mesta (parovi)"
   },
   "status": {
    "open": "Prijave otvorene",
@@ -1861,7 +1867,9 @@
    "scorePlaceholder": "6-4 6-3",
    "saveResult": "Sačuvaj rezultat",
    "clearResult": "Obriši",
-   "champion": "Pobednik: {name}"
+   "champion": "Pobednik: {name}",
+   "addName": "Ime",
+   "addPartner": "Partner"
   },
   "rounds": {
    "final": "Finale",
@@ -1883,7 +1891,9 @@
    "closedNote": "Prijave su zatvorene.",
    "players": "Igrači ({n})",
    "noPlayers": "Još se niko nije prijavio. Budite prvi!",
-   "upcoming": "Turniri"
+   "upcoming": "Turniri",
+   "partnerName": "Vaš partner",
+   "partnerHint": "Ime kako treba da stoji na žrebu."
   },
   "errors": {
    "paused": "Ovaj klub trenutno ne prima onlajn prijave.",
@@ -1898,7 +1908,8 @@
    "notSignedIn": "Prvo se prijavite.",
    "closed": "Prijave su zatvorene.",
    "full": "Ovaj turnir je popunjen.",
-   "already": "Već ste prijavljeni."
+   "already": "Već ste prijavljeni.",
+   "partner": "Dodajte ime partnera."
   }
  },
  "export": {
@@ -2955,7 +2966,13 @@
    "confirmAt": "Potvrdi {level}",
    "dismiss": "Odbaci",
    "levelFor": "Nivo za {name}"
-  }
+  },
+  "fromResults": "Iz vaših rezultata",
+  "ratedGames": "{n, plural, one {# igra uračunata} few {# igre uračunate} other {# igara uračunato}}",
+  "ratingHint": "Svaki meč u ligi i svaka Americano igra sa rezultatom malo pomera vaš nivo. Pobeda nad jačim igračima ga pomera najviše. Ostali ga vide zaokruženo na najbližu polovinu.",
+  "changeLeague": "Liga · {name}",
+  "changeAmericano": "Americano · {name}",
+  "resetWarning": "Ako sačuvate drugi nivo, on zamenjuje onaj koji su izgradili vaši rezultati."
  },
  "help": {
   "open": "Pomoć",
@@ -3527,6 +3544,149 @@
    "paid": "Plaćeno onlajn",
    "refundDue": "Povraćaj u toku",
    "refunded": "Vraćeno"
+  }
+ },
+ "americano": {
+  "title": "Americano i Mexicano",
+  "subtitle": "Druženja uz igru: svako se prijavljuje sam, partneri se menjaju svako kolo, a svaki igrač zadržava poene koje osvoji njegova strana.",
+  "new": "Novo veče",
+  "edit": "Izmeni",
+  "delete": "Obriši veče",
+  "deleteConfirm": "Obrisati ovo veče sa igračima i rezultatima? Tereni se oslobađaju.",
+  "save": "Sačuvaj",
+  "cancel": "Otkaži",
+  "saving": "Čuvanje…",
+  "back": "Sve večeri",
+  "empty": "Još nema večeri.",
+  "emptyHint": "Napravite jedno, podelite link i igrači se prijavljuju. Te večeri Kortello pravi svako kolo i vodi tabelu.",
+  "copyLink": "Kopiraj link",
+  "copied": "Kopirano",
+  "publicPage": "Javna stranica",
+  "status": {
+   "open": "Prijave otvorene",
+   "running": "Igra se",
+   "finished": "Završeno"
+  },
+  "formats": {
+   "americano": "Americano",
+   "americanoHint": "Partneri se menjaju da bi svako igrao sa što više ljudi.",
+   "mexicano": "Mexicano",
+   "mexicanoHint": "Posle 1. kola igrači se grupišu po poenima: izjednačeni mečevi celo veče."
+  },
+  "form": {
+   "name": "Naziv",
+   "namePlaceholder": "Americano petkom",
+   "format": "Format",
+   "sport": "Sport",
+   "date": "Datum",
+   "from": "Od",
+   "to": "Do",
+   "courts": "Tereni",
+   "courtsHint": "Ovi tereni se rezervišu za veče, pa niko drugi ne može da ih uzme.",
+   "noCourts": "Još nema terena za ovaj sport.",
+   "points": "Poena po meču",
+   "pointsOption": "{n} poena",
+   "maxPlayers": "Najviše igrača",
+   "playersHint": "{n} igrača popunjava sve terene; može i više, onda pauziraju naizmenično.",
+   "levelMin": "Najniži nivo",
+   "levelMax": "Najviši nivo",
+   "anyLevel": "Bilo koji",
+   "entryFee": "Kotizacija (€)",
+   "description": "Detalji za igrače",
+   "descriptionPlaceholder": "Nagrade, piće posle, šta da ponesu…"
+  },
+  "playersCount": "{n} od {max} igrača",
+  "players": "Igrači",
+  "pointsEach": "mečevi do {n} poena",
+  "fee": "Kotizacija €{fee}",
+  "free": "Besplatno učešće",
+  "levelRange": "Nivo {min}–{max}",
+  "readyTitle": "Spremno kad stignu igrači",
+  "readyHint": "{players} igrača: {games, plural, one {# meč} few {# meča} other {# mečeva}} po kolu{byes, plural, =0 {} one {, # pauzira} other {, # pauziraju}}. Pokrenite 1. kolo kad svi budu tu.",
+  "tooFewHint": "Potrebna su najmanje 4 igrača. Podelite link ili dodajte imena ispod.",
+  "start": "Pokreni 1. kolo",
+  "nextRound": "Pokreni {n}. kolo",
+  "nextConfirmUnplayed": "{left, plural, one {# meč} few {# meča} other {# mečeva}} ovog kola još nema rezultat. Ipak pokrenuti sledeće kolo?",
+  "roundLive": "{n}. kolo je u toku",
+  "roundProgress": "Uneto {n} od {total} rezultata",
+  "suggested": "oko {n} kola da svako igra sa svakim",
+  "undoRound": "Poništi kolo",
+  "undoConfirm": "Poništiti {n}. kolo?",
+  "finish": "Završi",
+  "finishConfirm": "Završiti veče? Tabela postaje konačna.",
+  "finishedTitle": "Završeno: tabela je konačna.",
+  "reopen": "Ponovo otvori",
+  "noRounds": "1. kolo će se pojaviti ovde kada počne.",
+  "roundTitle": "{n}. kolo",
+  "rounds": "Kola",
+  "court": "Teren {n}",
+  "sittingOut": "Pauziraju: {names} (po {points} poena)",
+  "table": "Tabela",
+  "finalTable": "Konačna tabela",
+  "player": "Igrač",
+  "played": "O",
+  "playedLong": "Odigrani mečevi",
+  "won": "P",
+  "wonLong": "Dobijeni mečevi",
+  "points": "Bod",
+  "you": "vi",
+  "done": "Rezultat unet",
+  "editScore": "Izmeni rezultat",
+  "saveScore": "Sačuvaj",
+  "clear": "Obriši",
+  "scoreFirst": "Poeni prvog para",
+  "scoreSecond": "Poeni drugog para",
+  "scoreHint": "Dva rezultata zajedno daju {n}.",
+  "addName": "Ime",
+  "level": "Nivo",
+  "add": "Dodaj",
+  "remove": "Ukloni",
+  "addLaterHint": "dodati sada igraju od sledećeg kola",
+  "withdrawConfirm": "Izbaciti {name}? Dosadašnji poeni ostaju.",
+  "noPlayers": "Još se niko nije prijavio. Podelite link ili dodajte imena ovde.",
+  "public": {
+   "clubTitle": "Americano večeri",
+   "how": {
+    "americano": "Kako funkcioniše: prijavljujete se sami. Svako kolo dobijate novog partnera i nove protivnike i igrate jedan meč do {points} poena. Zadržavate poene svoje strane; pobeđuje ko na kraju ima najviše. Pauza u kolu donosi {bye} poena.",
+    "mexicano": "Kako funkcioniše: prijavljujete se sami. 1. kolo je izmešano; posle toga igrači sa sličnim brojem poena igraju međusobno, sa novim partnerom svako kolo. Mečevi su do {points} poena i zadržavate poene svoje strane. Pauza u kolu donosi {bye} poena."
+   },
+   "signUpTitle": "Prijavite se za ovo veče",
+   "yourName": "Vaše ime",
+   "aloneHint": "Prijavljujete se sami: partneri se izvlače svako kolo.",
+   "signUp": "Prijavi se",
+   "signInToSignUp": "Prijavite se na nalog za učešće",
+   "youreIn": "Prijavljeni ste kao {name}.",
+   "withdraw": "Povuci se",
+   "withdrawConfirm": "Napustiti veče? Vaši dosadašnji poeni ostaju.",
+   "full": "Ovo veče je popunjeno.",
+   "closedNote": "Prijave su zatvorene.",
+   "playersTitle": "Igrači ({n})",
+   "noPlayers": "Još se niko nije prijavio. Budite prvi!"
+  },
+  "errors": {
+   "name": "Dajte večeri naziv.",
+   "date": "Izaberite datum.",
+   "times": "Kraj mora biti posle početka.",
+   "courts": "Izaberite bar jedan teren.",
+   "maxPlayers": "Broj igrača mora biti između 4 i 64.",
+   "points": "Poeni po meču moraju biti između 8 i 64.",
+   "fee": "Kotizacija ne može biti negativna.",
+   "levels": "Najniži nivo je iznad najvišeg.",
+   "entryName": "Upišite ime.",
+   "closed": "Prijave za ovo veče su zatvorene.",
+   "full": "Ovo veče je popunjeno.",
+   "already": "Već ste prijavljeni.",
+   "level": "Vaš nivo ne odgovara ovoj večeri.",
+   "score": "Unesite poene jedne strane, od 0 do ukupnog broja meča.",
+   "roundDone": "To kolo je završeno, samo klub može da ga menja.",
+   "alreadyReported": "Druga strana je već unela rezultat. Ako je pogrešan, javite se klubu.",
+   "notSignedIn": "Prvo se prijavite.",
+   "paused": "Ovaj klub trenutno ne prima onlajn prijave.",
+   "courtTaken": "Neki teren je već rezervisan u to vreme, pa veče ne drži terene. Promenite vreme ili terene.",
+   "tooFew": "Potrebna su najmanje 4 igrača i jedan teren.",
+   "hasScores": "Ovo kolo ima rezultate, pa ne može da se poništi.",
+   "finished": "Ovo veče je završeno.",
+   "failed": "Nešto nije u redu. Pokušajte ponovo."
   }
  }
 }

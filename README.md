@@ -228,6 +228,38 @@ Bank transfers and cash still work, recorded on the owner page as before.
 - **Testing on your computer:** Polar can't reach localhost; use a tunnel
   (e.g. `ngrok http 3000`) for the webhook, or test on a Vercel preview.
 
+## Americano and Mexicano evenings
+
+Social padel (or pickleball, tennis doubles) evenings: everyone signs up alone,
+partners change every round, and each player keeps the points their side wins.
+
+- **Database:** run `supabase/migrations/20261030_americano.sql` once.
+- **Where:** Admin > Americano. Pick the courts and times: they're booked for the
+  evening so nobody else takes them. Share the link (`/americano/<id>`);
+  players sign up there and, on the night, follow the rounds and table live
+  (the page reloads every 20 seconds, good on a TV at the club too).
+- **Rounds:** "Start round" makes the next round. Americano keeps partners and
+  opponents as varied as possible (8 players on 2 courts: everyone partners
+  everyone once in 7 rounds); Mexicano groups players by points after round 1
+  (1st and 3rd against 2nd and 4th on the top court). With more players than
+  places, players take turns sitting out and get half a game's points.
+- **Scores:** the club, or a player in the game, enters one side's points; the
+  other side gets the rest. The logic is in `src/lib/americano.ts`.
+
+## Levels that move with results
+
+- **Database:** run `supabase/migrations/20261030c_levels_from_results.sql` once
+  (after the Americano and tournament pairs migrations).
+- Each player level (1.0–7.0) has a precise rating behind it. Every league
+  match and Americano game with a score moves the rating of the players who
+  have a level for that sport, Elo-style: beating a stronger side moves it
+  most; a side 1.0 better is expected to win 3 games in 4. Others see the level
+  rounded to the nearest half; the player sees the rating and the latest
+  changes on their level page.
+- Every change is kept in `level_changes`, so correcting or clearing a score
+  (or a walkover) undoes it exactly. A player choosing a new level by hand
+  restarts the rating from there.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts

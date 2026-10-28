@@ -150,6 +150,20 @@ export type MyLevel = {
   confirmed_club: string | null;
   check_club: string | null;
   check_club_name: string | null;
+  /** The precise level that results move (e.g. 3.62); `level` is it rounded to a half. */
+  rating: number;
+  /** Games that moved it. */
+  rated_matches: number;
+  /** The latest changes from results, newest first. */
+  changes: LevelChange[];
+};
+
+export type LevelChange = {
+  delta: number;
+  at: string;
+  /** What it came from: "league" or "americano", and its name. */
+  source: "league" | "americano";
+  name: string | null;
 };
 
 export type ClubMatchesView = {

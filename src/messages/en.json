@@ -392,7 +392,8 @@
   "groups": "Groups",
   "myGroups": "My groups",
   "openMatches": "Open matches",
-  "leagues": "Leagues"
+  "leagues": "Leagues",
+  "americano": "Americano"
  },
  "members": {
   "errors": {
@@ -852,7 +853,8 @@
     "failed": "Something went wrong. Please try again."
    }
   },
-  "questions": "Questions, or need an invoice for your company? Write to {email}."
+  "questions": "Questions, or need an invoice for your company? Write to {email}.",
+  "trialBannerPaid": "Free trial: {days, plural, one {# day} other {# days}} left. Your card is set up, so your plan continues automatically on {date}."
  },
  "setup": {
   "title": "Set up your club",
@@ -1824,7 +1826,11 @@
    "entryFee": "Entry fee (€)",
    "entryFeeHint": "Leave empty if it’s free. Players pay at the club.",
    "description": "Details for players",
-   "descriptionPlaceholder": "Format, prizes, what to bring…"
+   "descriptionPlaceholder": "Format, prizes, what to bring…",
+   "format": "Format",
+   "singles": "Singles",
+   "pairs": "Pairs",
+   "maxPairs": "Places (pairs)"
   },
   "status": {
    "open": "Sign-ups open",
@@ -1861,7 +1867,9 @@
    "scorePlaceholder": "6-4 6-3",
    "saveResult": "Save result",
    "clearResult": "Clear",
-   "champion": "Winner: {name}"
+   "champion": "Winner: {name}",
+   "addName": "Name",
+   "addPartner": "Partner"
   },
   "rounds": {
    "final": "Final",
@@ -1883,7 +1891,9 @@
    "closedNote": "Sign-ups are closed.",
    "players": "Players ({n})",
    "noPlayers": "No one has signed up yet. Be the first!",
-   "upcoming": "Tournaments"
+   "upcoming": "Tournaments",
+   "partnerName": "Your partner",
+   "partnerHint": "Their name as it should show on the draw."
   },
   "errors": {
    "paused": "This club isn't taking online sign-ups right now.",
@@ -1898,7 +1908,8 @@
    "notSignedIn": "Please sign in first.",
    "closed": "Sign-ups are closed.",
    "full": "This tournament is full.",
-   "already": "You’re already signed up."
+   "already": "You’re already signed up.",
+   "partner": "Add your partner’s name."
   }
  },
  "export": {
@@ -2955,7 +2966,13 @@
    "confirmAt": "Confirm at {level}",
    "dismiss": "Dismiss",
    "levelFor": "Level for {name}"
-  }
+  },
+  "fromResults": "From your results",
+  "ratedGames": "{n, plural, one {# game} other {# games}} counted",
+  "ratingHint": "Every league match and Americano game with a score moves your level a little. Beating stronger players moves it most. Players see it rounded to the nearest half.",
+  "changeLeague": "League · {name}",
+  "changeAmericano": "Americano · {name}",
+  "resetWarning": "Saving a different level replaces the one your results have built up."
  },
  "help": {
   "open": "Help",
@@ -3527,6 +3544,149 @@
    "paid": "Paid online",
    "refundDue": "Refund pending",
    "refunded": "Refunded"
+  }
+ },
+ "americano": {
+  "title": "Americano & Mexicano",
+  "subtitle": "Social evenings: everyone signs up alone, partners change every round, and each player keeps the points their side wins.",
+  "new": "New evening",
+  "edit": "Edit",
+  "delete": "Delete evening",
+  "deleteConfirm": "Delete this evening with its players and scores? Its courts are freed.",
+  "save": "Save",
+  "cancel": "Cancel",
+  "saving": "Saving…",
+  "back": "All evenings",
+  "empty": "No evenings yet.",
+  "emptyHint": "Create one, share the link, and players sign up. On the night, Kortello makes every round and keeps the table.",
+  "copyLink": "Copy link",
+  "copied": "Copied",
+  "publicPage": "Public page",
+  "status": {
+   "open": "Sign-ups open",
+   "running": "Playing now",
+   "finished": "Finished"
+  },
+  "formats": {
+   "americano": "Americano",
+   "americanoHint": "Partners rotate so everyone plays with as many people as possible.",
+   "mexicano": "Mexicano",
+   "mexicanoHint": "After round 1, players are grouped by points: closer games all evening."
+  },
+  "form": {
+   "name": "Name",
+   "namePlaceholder": "Friday Americano",
+   "format": "Format",
+   "sport": "Sport",
+   "date": "Date",
+   "from": "From",
+   "to": "To",
+   "courts": "Courts",
+   "courtsHint": "These courts are booked for the evening, so nobody else can take them.",
+   "noCourts": "No courts for this sport yet.",
+   "points": "Points per game",
+   "pointsOption": "{n} points",
+   "maxPlayers": "Most players",
+   "playersHint": "{n} players fill every court; more is fine, they take turns sitting out.",
+   "levelMin": "Lowest level",
+   "levelMax": "Highest level",
+   "anyLevel": "Any",
+   "entryFee": "Entry fee (€)",
+   "description": "Details for players",
+   "descriptionPlaceholder": "Prizes, drinks after, what to bring…"
+  },
+  "playersCount": "{n} of {max} players",
+  "players": "Players",
+  "pointsEach": "games to {n} points",
+  "fee": "€{fee} entry",
+  "free": "Free entry",
+  "levelRange": "Level {min}–{max}",
+  "readyTitle": "Ready when the players are",
+  "readyHint": "{players} players: {games, plural, one {# game} other {# games}} a round{byes, plural, =0 {} one {, # sits out} other {, # sit out}}. Start round 1 when everyone's there.",
+  "tooFewHint": "At least 4 players are needed. Share the link, or add names below.",
+  "start": "Start round 1",
+  "nextRound": "Start round {n}",
+  "nextConfirmUnplayed": "{left, plural, one {# game} other {# games}} of this round still {left, plural, one {has} other {have}} no score. Start the next round anyway?",
+  "roundLive": "Round {n} is on",
+  "roundProgress": "{n} of {total} scores in",
+  "suggested": "about {n} rounds for everyone to partner everyone",
+  "undoRound": "Undo round",
+  "undoConfirm": "Take back round {n}?",
+  "finish": "Finish",
+  "finishConfirm": "Finish the evening? The table becomes final.",
+  "finishedTitle": "Finished: the table is final.",
+  "reopen": "Reopen",
+  "noRounds": "Round 1 shows here once it starts.",
+  "roundTitle": "Round {n}",
+  "rounds": "Rounds",
+  "court": "Court {n}",
+  "sittingOut": "Sitting out: {names} ({points} points each)",
+  "table": "Table",
+  "finalTable": "Final table",
+  "player": "Player",
+  "played": "P",
+  "playedLong": "Games played",
+  "won": "W",
+  "wonLong": "Games won",
+  "points": "Pts",
+  "you": "you",
+  "done": "Score in",
+  "editScore": "Change score",
+  "saveScore": "Save",
+  "clear": "Clear",
+  "scoreFirst": "First pair's points",
+  "scoreSecond": "Second pair's points",
+  "scoreHint": "The two scores add up to {n}.",
+  "addName": "Name",
+  "level": "Level",
+  "add": "Add",
+  "remove": "Remove",
+  "addLaterHint": "players added now join from the next round",
+  "withdrawConfirm": "Take {name} out? Their points so far stay.",
+  "noPlayers": "No one has signed up yet. Share the link, or add names here.",
+  "public": {
+   "clubTitle": "Americano evenings",
+   "how": {
+    "americano": "How it works: sign up alone. Every round you get a new partner and new opponents, and play one game to {points} points. You keep the points your side wins; the most points at the end wins. Sitting a round out earns {bye} points.",
+    "mexicano": "How it works: sign up alone. Round 1 is mixed; after that, players with similar points play each other, with a new partner every round. Games go to {points} points, and you keep the points your side wins. Sitting a round out earns {bye} points."
+   },
+   "signUpTitle": "Join this evening",
+   "yourName": "Your name",
+   "aloneHint": "You sign up alone: partners are drawn every round.",
+   "signUp": "Sign up",
+   "signInToSignUp": "Sign in to join",
+   "youreIn": "You’re in as {name}.",
+   "withdraw": "Withdraw",
+   "withdrawConfirm": "Leave the evening? Your points so far stay.",
+   "full": "This evening is full.",
+   "closedNote": "Sign-ups are closed.",
+   "playersTitle": "Players ({n})",
+   "noPlayers": "No one has signed up yet. Be the first!"
+  },
+  "errors": {
+   "name": "Give the evening a name.",
+   "date": "Pick the date.",
+   "times": "The end has to be after the start.",
+   "courts": "Pick at least one court.",
+   "maxPlayers": "Players must be between 4 and 64.",
+   "points": "Points per game must be between 8 and 64.",
+   "fee": "The entry fee can’t be negative.",
+   "levels": "The lowest level is above the highest.",
+   "entryName": "Type a name.",
+   "closed": "Sign-ups for this evening are closed.",
+   "full": "This evening is full.",
+   "already": "You’re already signed up.",
+   "level": "Your level doesn’t fit this evening.",
+   "score": "Enter the points of one side, from 0 up to the game’s total.",
+   "roundDone": "That round is over, so only the club can change it.",
+   "alreadyReported": "The other side already entered this score. Ask the club if it’s wrong.",
+   "notSignedIn": "Sign in first.",
+   "paused": "This club isn’t taking online sign-ups right now.",
+   "courtTaken": "A court is already booked at that time, so the evening holds no courts. Change the time or courts.",
+   "tooFew": "At least 4 players and one court are needed.",
+   "hasScores": "This round has scores, so it can’t be undone.",
+   "finished": "This evening has finished.",
+   "failed": "Something went wrong. Please try again."
   }
  }
 }

@@ -1,7 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import PaymentsSettings, { type PaymentsInfo } from "@/components/admin/PaymentsSettings";
+import PaymentsSettings, {
+  type PaymentsInfo,
+} from "@/components/admin/PaymentsSettings";
 import { useEffect, useRef, useState, useTransition } from "react";
 import {
   Building2,
@@ -72,7 +74,6 @@ interface Props {
   initialTab?: string;
 }
 
-
 const SECTIONS = [
   { id: "club", icon: Building2 },
   { id: "hours", icon: Clock },
@@ -82,9 +83,14 @@ const SECTIONS = [
   { id: "data", icon: Database },
 ];
 
-export default function SettingsClient({ club, profile, payments, initialTab }: Props) {
+export default function SettingsClient({
+  club,
+  profile,
+  payments,
+  initialTab,
+}: Props) {
   const t = useTranslations("settingsPage");
-const { readOnly, hint } = useReadOnly();
+  const { readOnly, hint } = useReadOnly();
   const dayNames = t.raw("days") as string[];
   // ?tab=hours (from the getting-started checklist) opens that section.
   const [active, setActive] = useState(
@@ -161,7 +167,7 @@ const { readOnly, hint } = useReadOnly();
             data-tab={id}
             onClick={() => setActive(id)}
             aria-current={active === id ? "page" : undefined}
-            className={`flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-xl px-3 py-2.5 text-[13px] transition-colors md:mb-0.5 md:w-full ${
+            className={`flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-xl px-3 py-2.5 text-[13px] transition-colors md:mb-0.5 md:w-full cursor-pointer ${
               active === id
                 ? "bg-[#f3fbde] text-[#2e4d03] font-medium"
                 : "text-[#3d4f35] hover:bg-[#f4f6f2]"
@@ -170,7 +176,10 @@ const { readOnly, hint } = useReadOnly();
             <Icon size={14} strokeWidth={2} className="shrink-0" />
             <span className="flex-1 text-left">{t(`sections.${id}`)}</span>
             {active === id && (
-              <ChevronRight size={13} className="hidden text-[#7aad12] md:block" />
+              <ChevronRight
+                size={13}
+                className="hidden text-[#7aad12] md:block"
+              />
             )}
           </button>
         ))}
@@ -198,13 +207,15 @@ const { readOnly, hint } = useReadOnly();
                     <Building2 size={24} className="text-[#6e7f65]" />
                   </div>
                 )}
-                <button title={hint}
+                <button
+                  title={hint}
                   type="button"
                   onClick={() => logoInput.current?.click()}
                   disabled={readOnly || logoPending}
                   className="btn-secondary flex items-center gap-1.5 text-[13px] disabled:opacity-50"
                 >
-                  <Upload size={13} /> {logoPending ? t("uploading") : t("uploadLogo")}
+                  <Upload size={13} />{" "}
+                  {logoPending ? t("uploading") : t("uploadLogo")}
                 </button>
                 <input
                   ref={logoInput}
@@ -218,28 +229,53 @@ const { readOnly, hint } = useReadOnly();
             </Field>
 
             <Field label={t("clubName")}>
-              <input className="input" value={info.name} onChange={setField("name")} />
+              <input
+                className="input"
+                value={info.name}
+                onChange={setField("name")}
+              />
             </Field>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label={t("email")}>
-                <input className="input" type="email" value={info.email} onChange={setField("email")} />
+                <input
+                  className="input"
+                  type="email"
+                  value={info.email}
+                  onChange={setField("email")}
+                />
               </Field>
               <Field label={t("phone")}>
-                <input className="input" value={info.phone} onChange={setField("phone")} />
+                <input
+                  className="input"
+                  value={info.phone}
+                  onChange={setField("phone")}
+                />
               </Field>
             </div>
 
             <Field label={t("address")}>
-              <input className="input" value={info.address} onChange={setField("address")} />
+              <input
+                className="input"
+                value={info.address}
+                onChange={setField("address")}
+              />
             </Field>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label={t("city")}>
-                <input className="input" value={info.city} onChange={setField("city")} />
+                <input
+                  className="input"
+                  value={info.city}
+                  onChange={setField("city")}
+                />
               </Field>
               <Field label={t("country")}>
-                <input className="input" value={info.country} onChange={setField("country")} />
+                <input
+                  className="input"
+                  value={info.country}
+                  onChange={setField("country")}
+                />
               </Field>
             </div>
 
@@ -303,7 +339,9 @@ const { readOnly, hint } = useReadOnly();
                           )
                         }
                       />
-                      <span className="text-[13px] text-[#6e7f65]">{t("to")}</span>
+                      <span className="text-[13px] text-[#6e7f65]">
+                        {t("to")}
+                      </span>
                       <input
                         type="time"
                         className="input min-w-0 flex-1 sm:w-[136px] sm:flex-none"
@@ -318,14 +356,18 @@ const { readOnly, hint } = useReadOnly();
                       />
                     </div>
                   ) : (
-                    <span className="col-span-2 text-[13px] text-[#6e7f65] sm:col-span-1">{t("closed")}</span>
+                    <span className="col-span-2 text-[13px] text-[#6e7f65] sm:col-span-1">
+                      {t("closed")}
+                    </span>
                   )}
                 </div>
               ))}
             </div>
             <SaveButton
               onSave={() =>
-                saveOpeningHours(hours.map(({ open, from, to }) => ({ open, from, to })))
+                saveOpeningHours(
+                  hours.map(({ open, from, to }) => ({ open, from, to })),
+                )
               }
             />
           </Section>
@@ -349,7 +391,10 @@ const { readOnly, hint } = useReadOnly();
             </div>
             <ProfileEditForm
               userId={profile.userId}
-              defaultValues={{ full_name: profile.full_name, phone: profile.phone }}
+              defaultValues={{
+                full_name: profile.full_name,
+                phone: profile.phone,
+              }}
             />
           </Section>
         )}
@@ -402,7 +447,10 @@ const { readOnly, hint } = useReadOnly();
                   max={MAX_DAYS_AHEAD}
                   value={rules.max_days_ahead}
                   onChange={(e) =>
-                    setRules((r) => ({ ...r, max_days_ahead: Number(e.target.value) }))
+                    setRules((r) => ({
+                      ...r,
+                      max_days_ahead: Number(e.target.value),
+                    }))
                   }
                 />
               </Field>
@@ -410,8 +458,13 @@ const { readOnly, hint } = useReadOnly();
                 <SelectField
                   ariaLabel={t("bookingsPerPlayerPerDay")}
                   value={String(rules.max_per_day)}
-                  onChange={(v) => setRules((r) => ({ ...r, max_per_day: Number(v) }))}
-                  options={PER_DAY_CHOICES.map((n) => ({ value: String(n), label: n === 0 ? t("noLimit") : String(n) }))}
+                  onChange={(v) =>
+                    setRules((r) => ({ ...r, max_per_day: Number(v) }))
+                  }
+                  options={PER_DAY_CHOICES.map((n) => ({
+                    value: String(n),
+                    label: n === 0 ? t("noLimit") : String(n),
+                  }))}
                 />
               </Field>
               <div className="sm:col-span-2">
@@ -419,10 +472,13 @@ const { readOnly, hint } = useReadOnly();
                   <SelectField
                     ariaLabel={t("cancellingOnline")}
                     value={String(rules.cancel_hours)}
-                    onChange={(v) => setRules((r) => ({ ...r, cancel_hours: Number(v) }))}
+                    onChange={(v) =>
+                      setRules((r) => ({ ...r, cancel_hours: Number(v) }))
+                    }
                     options={CANCEL_HOUR_CHOICES.map((h) => ({
                       value: String(h),
-                      label: h === 0 ? t("cancelAnyTime") : t("cancelUntil", { h }),
+                      label:
+                        h === 0 ? t("cancelAnyTime") : t("cancelUntil", { h }),
                     }))}
                   />
                 </Field>
@@ -433,7 +489,9 @@ const { readOnly, hint } = useReadOnly();
               <SelectField
                 ariaLabel={t("repeatNoShows")}
                 value={String(rules.max_no_shows)}
-                onChange={(v) => setRules((r) => ({ ...r, max_no_shows: Number(v) }))}
+                onChange={(v) =>
+                  setRules((r) => ({ ...r, max_no_shows: Number(v) }))
+                }
                 options={NO_SHOW_CHOICES.map((n) => ({
                   value: String(n),
                   label: n === 0 ? t("neverPause") : t("pauseAfter", { n }),
@@ -444,9 +502,7 @@ const { readOnly, hint } = useReadOnly();
               </p>
             </Field>
 
-            <p className="text-[12px] text-[#6e7f65]">
-              {t("playersSeeOnly")}
-            </p>
+            <p className="text-[12px] text-[#6e7f65]">{t("playersSeeOnly")}</p>
 
             <SaveButton onSave={() => saveBookingRules(rules)} />
           </Section>
@@ -461,7 +517,11 @@ const { readOnly, hint } = useReadOnly();
               title={t("data.bookings")}
               description={t("data.bookingsDesc")}
               action={
-                <a href="/api/export?type=bookings" download className={DATA_BUTTON}>
+                <a
+                  href="/api/export?type=bookings"
+                  download
+                  className={DATA_BUTTON}
+                >
                   <Download size={13} /> {t("data.download")}
                 </a>
               }
@@ -470,7 +530,11 @@ const { readOnly, hint } = useReadOnly();
               title={t("data.members")}
               description={t("data.membersDesc")}
               action={
-                <a href="/api/export?type=members" download className={DATA_BUTTON}>
+                <a
+                  href="/api/export?type=members"
+                  download
+                  className={DATA_BUTTON}
+                >
                   <Download size={13} /> {t("data.download")}
                 </a>
               }

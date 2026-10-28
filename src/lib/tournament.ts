@@ -104,3 +104,7 @@ export function roundName(round: number, rounds: number): { key: string; n?: num
   if (fromEnd === 2) return { key: "quarter" };
   return { key: "roundOf", n: 2 ** (fromEnd + 1) };
 }
+
+/** "Ana / Marko" for a pair, the name alone otherwise. */
+export const entryName = (e: { name: string; partner_name?: string | null }) =>
+  e.partner_name ? `${e.name} / ${e.partner_name}` : e.name;

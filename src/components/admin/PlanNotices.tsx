@@ -15,7 +15,16 @@ import { intlLocale } from "@/lib/dateLocale";
 import CardSubscription, { type CardSubscriptionInfo } from "@/components/admin/CardSubscription";
 
 /** Strip above every admin page: trial days left, the grace days, or read-only. */
-export async function PlanBanner({ access, staff = false }: { access: ClubAccess; staff?: boolean }) {
+export async function PlanBanner({
+  access,
+  staff = false,
+  renewsOn = null,
+}: {
+  access: ClubAccess;
+  staff?: boolean;
+  /** Set when the club already pays by card: the paid plan starts then. */
+  renewsOn?: string | null;
+}) {
   if (access.status === "active") return null;
   // Staff only hear about it once it affects them.
   if (staff && access.status !== "locked") return null;
@@ -26,7 +35,16 @@ export async function PlanBanner({ access, staff = false }: { access: ClubAccess
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-100 bg-brand-100/40 px-4 py-3 text-sm text-ink-800">
         <span className="flex items-center gap-2">
           <Sparkles size={15} className="shrink-0" aria-hidden="true" />
-          {t("trialBanner", { days: access.trialDaysLeft })}
+          {renewsOn
+            ? t("trialBannerPaid", {
+                days: access.trialDaysLeft,
+                date: new Intl.DateTimeFormat(intlLocale(await getLocale()), {
+                  day: "numeric",
+                  month: "long",
+                  timeZone: "Europe/Skopje",
+                }).format(new Date(`${renewsOn}T12:00:00Z`)),
+              })
+            : t("trialBanner", { days: access.trialDaysLeft })}
         </span>
         <Link href="/admin/settings" className="font-semibold underline underline-offset-2">
           {t("seePlan")}

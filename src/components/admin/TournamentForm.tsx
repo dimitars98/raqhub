@@ -29,12 +29,19 @@ export default function TournamentForm({
   const [form, setForm] = useState({
     name: initial?.name ?? "",
     sport: initial?.sport ?? "tennis",
+    team_size: String(initial?.team_size ?? 1),
     starts_on: initial?.starts_on ?? "",
     max_entries: String(initial?.max_entries ?? 16),
     entry_fee: initial?.entry_fee != null ? String(initial.entry_fee) : "",
     description: initial?.description ?? "",
   });
-  const set = (key: keyof typeof form) => (value: string) => setForm((f) => ({ ...f, [key]: value }));
+  const set = (key: keyof typeof form) => (value: string) =>
+    setForm((f) => {
+      const next = { ...f, [key]: value };
+      // Padel is played in pairs: a sensible default for a new tournament.
+      if (key === "sport" && !initial) next.team_size = value === "tennis" ? "1" : "2";
+      return next;
+    });
 
   // Keep a custom number of places that isn't in the usual list.
   const placeChoices = Array.from(new Set([...MAX_ENTRIES_CHOICES, Number(form.max_entries)])).sort(
@@ -52,6 +59,7 @@ export default function TournamentForm({
         max_entries: Number(form.max_entries),
         entry_fee: form.entry_fee === "" ? null : Number(form.entry_fee),
         description: form.description,
+        team_size: Number(form.team_size),
       });
       if (result.error) setError(t(`errors.${result.error}`));
       else onClose();
@@ -92,8 +100,19 @@ export default function TournamentForm({
               />
             </Modal.Field>
           </Modal.Grid>
+          <Modal.Field label={t("fields.format")}>
+            <SelectField
+              ariaLabel={t("fields.format")}
+              value={form.team_size}
+              onChange={(v) => set("team_size")(v)}
+              options={[
+                { value: "1", label: t("fields.singles") },
+                { value: "2", label: t("fields.pairs") },
+              ]}
+            />
+          </Modal.Field>
           <Modal.Grid>
-            <Modal.Field label={t("fields.maxEntries")}>
+            <Modal.Field label={form.team_size === "2" ? t("fields.maxPairs") : t("fields.maxEntries")}>
               <SelectField
                 ariaLabel={t("fields.maxEntries")}
                 value={String(form.max_entries)}

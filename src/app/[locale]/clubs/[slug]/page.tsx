@@ -24,6 +24,7 @@ import type { Tournament } from "@/types/database";
 import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
 import { LEAGUE_STATUS_TONE } from "@/components/leagues/LeagueStatus";
 import type { League } from "@/lib/leagues";
+import type { SocialEvent } from "@/lib/americano";
 import BookingPaused from "@/components/ui/BookingPaused";
 import CourtArt from "@/components/courts/CourtArt";
 import { courtColor } from "@/lib/courtColors";
@@ -35,6 +36,9 @@ import type { MatchCard as OpenMatch, MyLevel } from "@/lib/openMatches";
 // Everything read here is allowed for logged-out visitors by the database
 // rules (active clubs, active courts, active coaches with name and photo,
 // plans). Booking itself always happens after signing in.
+
+/** A moment some hours ago, for evenings that are still being played. */
+const hoursAgo = (h: number) => new Date(Date.now() - h * 3_600_000).toISOString();
 
 /** yyyy-mm-dd two weeks ago, for "recent" tournaments. */
 const recentDate = () => new Date(Date.now() - 14 * 86_400_000).toISOString().slice(0, 10);
@@ -191,6 +195,17 @@ export default async function ClubPublicPage({ params }: PageProps) {
     .limit(6);
   const leagues = (leaguesData ?? []) as Pick<League, "id" | "name" | "sport" | "team_size" | "starts_on" | "status">[];
   const tLeague = await getTranslations("leagues");
+  // Americano evenings taking sign-ups or being played (20261030_americano.sql).
+  const { data: socialsData } = await supabase
+    .from("social_events")
+    .select("id, name, format, sport, starts_at, status")
+    .eq("club_id", club.id)
+    .neq("status", "finished")
+    .gte("ends_at", hoursAgo(6))
+    .order("starts_at")
+    .limit(6);
+  const socials = (socialsData ?? []) as Pick<SocialEvent, "id" | "name" | "format" | "sport" | "starts_at" | "status">[];
+  const tSocial = await getTranslations("americano");
   const locale = await getLocale();
   const dfLocale = dateLocale(locale);
 
@@ -522,6 +537,25 @@ export default async function ClubPublicPage({ params }: PageProps) {
                   <span className="mt-1 text-sm text-ink-600">
                     {labels.sport(l.sport)} · {l.team_size === 2 ? tLeague("form.pairs") : tLeague("form.singles")} ·{" "}
                     {format(new Date(`${l.starts_on}T12:00:00`), "d MMM yyyy", { locale: dfLocale })}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Americano evenings: only shown when the club has one coming up */}
+        {socials.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-5 text-xl font-bold tracking-tight text-ink-900">{tSocial("public.clubTitle")}</h2>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {socials.map((e) => (
+                <Link key={e.id} href={`/americano/${e.id}`} className="card flex flex-col p-5 transition-colors hover:border-ink-900">
+                  <span className={`${BADGE} w-fit ${LEAGUE_STATUS_TONE[e.status]}`}>{tSocial(`status.${e.status}`)}</span>
+                  <span className="mt-3 text-lg font-semibold text-ink-900">{e.name}</span>
+                  <span className="mt-1 text-sm text-ink-600">
+                    {tSocial(`formats.${e.format}`)} · {labels.sport(e.sport)} ·{" "}
+                    {format(new Date(e.starts_at), "EEE d MMM, HH:mm", { locale: dfLocale })}
                   </span>
                 </Link>
               ))}

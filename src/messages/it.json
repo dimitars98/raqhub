@@ -392,7 +392,8 @@
   "groups": "Gruppi",
   "myGroups": "I miei gruppi",
   "openMatches": "Partite aperte",
-  "leagues": "Leghe"
+  "leagues": "Leghe",
+  "americano": "Americano"
  },
  "members": {
   "errors": {
@@ -852,7 +853,8 @@
     "failed": "Qualcosa è andato storto. Riprova."
    }
   },
-  "questions": "Domande o ti serve una fattura per la tua azienda? Scrivi a {email}."
+  "questions": "Domande o ti serve una fattura per la tua azienda? Scrivi a {email}.",
+  "trialBannerPaid": "Prova gratuita: {days, plural, one {manca # giorno} other {mancano # giorni}}. La carta è registrata, quindi il piano continua automaticamente il {date}."
  },
  "setup": {
   "title": "Configura il tuo club",
@@ -1824,7 +1826,11 @@
    "entryFee": "Quota d’iscrizione (€)",
    "entryFeeHint": "Lascia vuoto se è gratis. I giocatori pagano al club.",
    "description": "Dettagli per i giocatori",
-   "descriptionPlaceholder": "Formula, premi, cosa portare…"
+   "descriptionPlaceholder": "Formula, premi, cosa portare…",
+   "format": "Formato",
+   "singles": "Singolare",
+   "pairs": "Coppie",
+   "maxPairs": "Posti (coppie)"
   },
   "status": {
    "open": "Iscrizioni aperte",
@@ -1861,7 +1867,9 @@
    "scorePlaceholder": "6-4 6-3",
    "saveResult": "Salva risultato",
    "clearResult": "Cancella",
-   "champion": "Vincitore: {name}"
+   "champion": "Vincitore: {name}",
+   "addName": "Nome",
+   "addPartner": "Compagno"
   },
   "rounds": {
    "final": "Finale",
@@ -1883,7 +1891,9 @@
    "closedNote": "Le iscrizioni sono chiuse.",
    "players": "Giocatori ({n})",
    "noPlayers": "Ancora nessun iscritto. Sii il primo!",
-   "upcoming": "Tornei"
+   "upcoming": "Tornei",
+   "partnerName": "Il tuo compagno",
+   "partnerHint": "Il nome come deve apparire nel tabellone."
   },
   "errors": {
    "paused": "Questo circolo al momento non accetta iscrizioni online.",
@@ -1898,7 +1908,8 @@
    "notSignedIn": "Accedi prima.",
    "closed": "Le iscrizioni sono chiuse.",
    "full": "Questo torneo è al completo.",
-   "already": "Sei già iscritto."
+   "already": "Sei già iscritto.",
+   "partner": "Aggiungi il nome del tuo compagno."
   }
  },
  "export": {
@@ -2955,7 +2966,13 @@
    "confirmAt": "Conferma a {level}",
    "dismiss": "Ignora",
    "levelFor": "Livello di {name}"
-  }
+  },
+  "fromResults": "Dai tuoi risultati",
+  "ratedGames": "{n, plural, one {# partita contata} other {# partite contate}}",
+  "ratingHint": "Ogni partita di lega e ogni partita di Americano con un punteggio sposta un po' il tuo livello. Battere giocatori più forti lo sposta di più. Gli altri lo vedono arrotondato al mezzo punto più vicino.",
+  "changeLeague": "Lega · {name}",
+  "changeAmericano": "Americano · {name}",
+  "resetWarning": "Se salvi un livello diverso, sostituisce quello costruito dai tuoi risultati."
  },
  "help": {
   "open": "Aiuto",
@@ -3527,6 +3544,149 @@
    "paid": "Pagato online",
    "refundDue": "Rimborso da fare",
    "refunded": "Rimborsato"
+  }
+ },
+ "americano": {
+  "title": "Americano & Mexicano",
+  "subtitle": "Serate in compagnia: ognuno si iscrive da solo, i compagni cambiano a ogni turno e ogni giocatore tiene i punti vinti dalla sua coppia.",
+  "new": "Nuova serata",
+  "edit": "Modifica",
+  "delete": "Elimina serata",
+  "deleteConfirm": "Eliminare questa serata con giocatori e punteggi? I campi tornano liberi.",
+  "save": "Salva",
+  "cancel": "Annulla",
+  "saving": "Salvataggio…",
+  "back": "Tutte le serate",
+  "empty": "Ancora nessuna serata.",
+  "emptyHint": "Creane una, condividi il link e i giocatori si iscrivono. La sera stessa Kortello prepara ogni turno e tiene la classifica.",
+  "copyLink": "Copia link",
+  "copied": "Copiato",
+  "publicPage": "Pagina pubblica",
+  "status": {
+   "open": "Iscrizioni aperte",
+   "running": "In corso",
+   "finished": "Conclusa"
+  },
+  "formats": {
+   "americano": "Americano",
+   "americanoHint": "I compagni ruotano così ognuno gioca con più persone possibile.",
+   "mexicano": "Mexicano",
+   "mexicanoHint": "Dopo il 1° turno i giocatori sono raggruppati per punti: partite equilibrate tutta la sera."
+  },
+  "form": {
+   "name": "Nome",
+   "namePlaceholder": "Americano del venerdì",
+   "format": "Formato",
+   "sport": "Sport",
+   "date": "Data",
+   "from": "Dalle",
+   "to": "Alle",
+   "courts": "Campi",
+   "courtsHint": "Questi campi vengono prenotati per la serata, così nessun altro li prende.",
+   "noCourts": "Ancora nessun campo per questo sport.",
+   "points": "Punti per partita",
+   "pointsOption": "{n} punti",
+   "maxPlayers": "Giocatori al massimo",
+   "playersHint": "{n} giocatori riempiono tutti i campi; anche di più va bene, riposano a turno.",
+   "levelMin": "Livello minimo",
+   "levelMax": "Livello massimo",
+   "anyLevel": "Qualsiasi",
+   "entryFee": "Iscrizione (€)",
+   "description": "Dettagli per i giocatori",
+   "descriptionPlaceholder": "Premi, aperitivo dopo, cosa portare…"
+  },
+  "playersCount": "{n} giocatori su {max}",
+  "players": "Giocatori",
+  "pointsEach": "partite a {n} punti",
+  "fee": "Iscrizione €{fee}",
+  "free": "Iscrizione gratuita",
+  "levelRange": "Livello {min}–{max}",
+  "readyTitle": "Pronto quando lo sono i giocatori",
+  "readyHint": "{players} giocatori: {games, plural, one {# partita} other {# partite}} per turno{byes, plural, =0 {} one {, # riposa} other {, # riposano}}. Avvia il 1° turno quando ci sono tutti.",
+  "tooFewHint": "Servono almeno 4 giocatori. Condividi il link o aggiungi i nomi qui sotto.",
+  "start": "Avvia il 1° turno",
+  "nextRound": "Avvia il turno {n}",
+  "nextConfirmUnplayed": "{left, plural, one {# partita} other {# partite}} di questo turno non {left, plural, one {ha} other {hanno}} ancora un punteggio. Avviare comunque il turno successivo?",
+  "roundLive": "Turno {n} in corso",
+  "roundProgress": "{n} punteggi su {total} inseriti",
+  "suggested": "circa {n} turni perché ognuno giochi con tutti",
+  "undoRound": "Annulla turno",
+  "undoConfirm": "Annullare il turno {n}?",
+  "finish": "Concludi",
+  "finishConfirm": "Concludere la serata? La classifica diventa definitiva.",
+  "finishedTitle": "Conclusa: la classifica è definitiva.",
+  "reopen": "Riapri",
+  "noRounds": "Il 1° turno comparirà qui quando inizia.",
+  "roundTitle": "Turno {n}",
+  "rounds": "Turni",
+  "court": "Campo {n}",
+  "sittingOut": "A riposo: {names} ({points} punti ciascuno)",
+  "table": "Classifica",
+  "finalTable": "Classifica finale",
+  "player": "Giocatore",
+  "played": "G",
+  "playedLong": "Partite giocate",
+  "won": "V",
+  "wonLong": "Partite vinte",
+  "points": "Pt",
+  "you": "tu",
+  "done": "Punteggio inserito",
+  "editScore": "Modifica punteggio",
+  "saveScore": "Salva",
+  "clear": "Cancella",
+  "scoreFirst": "Punti della prima coppia",
+  "scoreSecond": "Punti della seconda coppia",
+  "scoreHint": "I due punteggi sommati fanno {n}.",
+  "addName": "Nome",
+  "level": "Livello",
+  "add": "Aggiungi",
+  "remove": "Rimuovi",
+  "addLaterHint": "chi viene aggiunto ora gioca dal turno successivo",
+  "withdrawConfirm": "Togliere {name}? I punti finora restano.",
+  "noPlayers": "Ancora nessun iscritto. Condividi il link o aggiungi i nomi qui.",
+  "public": {
+   "clubTitle": "Serate Americano",
+   "how": {
+    "americano": "Come funziona: ti iscrivi da solo. A ogni turno hai un nuovo compagno e nuovi avversari e giochi una partita a {points} punti. Tieni i punti vinti dalla tua coppia; vince chi ne ha di più alla fine. Un turno a riposo vale {bye} punti.",
+    "mexicano": "Come funziona: ti iscrivi da solo. Il 1° turno è misto; poi giocano tra loro i giocatori con punti simili, con un nuovo compagno a ogni turno. Le partite sono a {points} punti e tieni i punti della tua coppia. Un turno a riposo vale {bye} punti."
+   },
+   "signUpTitle": "Partecipa a questa serata",
+   "yourName": "Il tuo nome",
+   "aloneHint": "Ti iscrivi da solo: i compagni vengono sorteggiati a ogni turno.",
+   "signUp": "Iscriviti",
+   "signInToSignUp": "Accedi per iscriverti",
+   "youreIn": "Sei iscritto come {name}.",
+   "withdraw": "Ritirati",
+   "withdrawConfirm": "Lasciare la serata? I tuoi punti finora restano.",
+   "full": "Questa serata è al completo.",
+   "closedNote": "Le iscrizioni sono chiuse.",
+   "playersTitle": "Giocatori ({n})",
+   "noPlayers": "Ancora nessun iscritto. Sii il primo!"
+  },
+  "errors": {
+   "name": "Dai un nome alla serata.",
+   "date": "Scegli la data.",
+   "times": "La fine deve essere dopo l’inizio.",
+   "courts": "Scegli almeno un campo.",
+   "maxPlayers": "I giocatori devono essere tra 4 e 64.",
+   "points": "I punti per partita devono essere tra 8 e 64.",
+   "fee": "L’iscrizione non può essere negativa.",
+   "levels": "Il livello minimo è sopra quello massimo.",
+   "entryName": "Scrivi un nome.",
+   "closed": "Le iscrizioni a questa serata sono chiuse.",
+   "full": "Questa serata è al completo.",
+   "already": "Sei già iscritto.",
+   "level": "Il tuo livello non è adatto a questa serata.",
+   "score": "Inserisci i punti di una coppia, da 0 al totale della partita.",
+   "roundDone": "Quel turno è finito, solo il circolo può modificarlo.",
+   "alreadyReported": "L’altra coppia ha già inserito il punteggio. Se è sbagliato, chiedi al circolo.",
+   "notSignedIn": "Accedi prima.",
+   "paused": "Questo circolo al momento non accetta iscrizioni online.",
+   "courtTaken": "Un campo è già prenotato a quell’ora, quindi la serata non blocca campi. Cambia orario o campi.",
+   "tooFew": "Servono almeno 4 giocatori e un campo.",
+   "hasScores": "Questo turno ha già punteggi, quindi non si può annullare.",
+   "finished": "Questa serata è conclusa.",
+   "failed": "Qualcosa è andato storto. Riprova."
   }
  }
 }

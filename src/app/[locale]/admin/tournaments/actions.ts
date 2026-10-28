@@ -18,6 +18,8 @@ export type TournamentInput = {
   max_entries: number;
   entry_fee: number | null;
   description: string;
+  /** 1: singles · 2: pairs */
+  team_size: number;
 };
 
 const refresh = (id?: string) => {
@@ -44,6 +46,7 @@ function clean(input: TournamentInput) {
       max_entries: max,
       entry_fee: fee,
       description: input.description.trim() || null,
+      team_size: input.team_size === 2 ? 2 : 1,
     },
   };
 }
@@ -110,13 +113,15 @@ export async function setSignups(id: string, open: boolean): Promise<Result> {
   return {};
 }
 
-export async function addEntry(tournamentId: string, name: string): Promise<Result> {
+export async function addEntry(tournamentId: string, name: string, partner = ""): Promise<Result> {
   const clean = name.trim();
   if (!clean) return { error: "entryName" };
   const supabase = await createClient();
-  const { error } = await supabase
-    .from("tournament_entries")
-    .insert({ tournament_id: tournamentId, name: clean.slice(0, 120) });
+  const { error } = await supabase.from("tournament_entries").insert({
+    tournament_id: tournamentId,
+    name: clean.slice(0, 120),
+    partner_name: partner.trim().slice(0, 120) || null,
+  });
   if (error) return { error: "failed" };
   refresh(tournamentId);
   return {};

@@ -12,6 +12,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLabels } from "@/lib/getLabels";
 import { dateLocale } from "@/lib/dateLocale";
 import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
+import { entryName } from "@/lib/tournament";
 import type { Tournament, TournamentEntry, TournamentMatch } from "@/types/database";
 
 type TournamentWithClub = Tournament & {
@@ -130,7 +131,7 @@ export default async function TournamentPage({ params }: { params: Promise<{ id:
                   {entries.map((e, i) => (
                     <li key={e.id} className="rounded-xl border border-ink-100 bg-white px-4 py-2.5 text-sm">
                       <span className="mr-2 tabular-nums text-ink-400">{i + 1}.</span>
-                      <span className="font-medium text-ink-900">{e.name}</span>
+                      <span className="font-medium text-ink-900">{entryName(e)}</span>
                     </li>
                   ))}
                 </ol>
@@ -140,7 +141,8 @@ export default async function TournamentPage({ params }: { params: Promise<{ id:
               <SignUpBox
                 tournamentId={tournament.id}
                 signedIn={!!user}
-                myEntryName={mine?.name ?? null}
+                myEntryName={mine ? entryName(mine) : null}
+                pairs={tournament.team_size === 2}
                 defaultName={defaultName}
                 open={tournament.status === "open" && !paused}
                 full={entries.length >= tournament.max_entries}

@@ -6,9 +6,9 @@ import { createClient } from "@/lib/supabase/server";
 // Player side of tournaments: sign up and withdraw. The database checks that
 // sign-ups are open and there is a place left (20261018_tournaments.sql).
 
-type Result = { error?: "notSignedIn" | "closed" | "full" | "already" | "name" | "failed" | "paused" };
+type Result = { error?: "notSignedIn" | "closed" | "full" | "already" | "name" | "partner" | "failed" | "paused" };
 
-export async function signUpForTournament(tournamentId: string, name: string): Promise<Result> {
+export async function signUpForTournament(tournamentId: string, name: string, partner = ""): Promise<Result> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -20,11 +20,18 @@ export async function signUpForTournament(tournamentId: string, name: string): P
 
   const { error } = await supabase
     .from("tournament_entries")
-    .insert({ tournament_id: tournamentId, name: clean, player_id: user.id });
+    .insert({
+      tournament_id: tournamentId,
+      name: clean,
+      // Pairs (20261030b_tournament_pairs.sql): the database asks for a partner.
+      partner_name: partner.trim().slice(0, 120) || null,
+      player_id: user.id,
+    });
 
   if (error) {
     // The club's free trial has ended (see 20261025_trial_lock.sql).
     if (error.message?.includes("club_locked")) return { error: "paused" };
+    if (error.message?.includes("tournament_partner")) return { error: "partner" };
     if (error.code === "23505") return { error: "already" };
     if (error.message?.includes("full")) return { error: "full" };
     if (error.message?.includes("closed")) return { error: "closed" };
