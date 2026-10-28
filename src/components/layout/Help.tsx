@@ -4,7 +4,14 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
-import { ChevronDown, CircleQuestionMark, Mail, Search, Sparkles, X } from "lucide-react";
+import {
+  ChevronDown,
+  CircleQuestionMark,
+  Mail,
+  Search,
+  Sparkles,
+  X,
+} from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { reportProblem } from "@/app/actions/help";
 import { SALES_EMAIL } from "@/lib/plans";
@@ -37,7 +44,10 @@ export default function Help({ area }: { area: Area }) {
         title={t("open")}
         className="relative grid size-9 place-items-center rounded-lg text-ink-400 transition-colors hover:bg-ink-50 hover:text-ink-900"
       >
-        <CircleQuestionMark className="fill-ink-400 stroke-white" aria-hidden="true" />
+        <CircleQuestionMark
+          className="fill-ink-400 stroke-white"
+          aria-hidden="true"
+        />
       </button>
       <MotionConfig reducedMotion="user">
         <AnimatePresence>
@@ -57,7 +67,15 @@ export default function Help({ area }: { area: Area }) {
   );
 }
 
-function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onClose: () => void }) {
+function Panel({
+  area,
+  pathname,
+  onClose,
+}: {
+  area: Area;
+  pathname: string;
+  onClose: () => void;
+}) {
   const t = useTranslations("help");
   const panelRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
@@ -94,10 +112,20 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
   const q = fold(query.trim());
   const results = q
     ? allTopics(area).filter((id) =>
-        q.split(/\s+/).every((word) => fold(`${t(`topics.${id}.q`)} ${t(`topics.${id}.a`)}`).includes(word)),
+        q
+          .split(/\s+/)
+          .every((word) =>
+            fold(`${t(`topics.${id}.q`)} ${t(`topics.${id}.a`)}`).includes(
+              word,
+            ),
+          ),
       )
     : [];
-  const news = t.raw("news.items") as { date: string; title: string; body: string }[];
+  const news = t.raw("news.items") as {
+    date: string;
+    title: string;
+    body: string;
+  }[];
 
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
@@ -122,7 +150,10 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
         transition={{ type: "spring", stiffness: 320, damping: 34 }}
       >
         <div className="flex h-[60px] shrink-0 items-center justify-between border-b border-ink-100 bg-white px-5">
-          <h2 id="help-title" className="font-display text-base font-bold text-ink-900">
+          <h2
+            id="help-title"
+            className="font-display text-base font-bold text-ink-900"
+          >
             {t("title")}
           </h2>
           <button
@@ -142,7 +173,11 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
               <label htmlFor="help-search" className="sr-only">
                 {t("search")}
               </label>
-              <Search size={16} aria-hidden="true" className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-400" />
+              <Search
+                size={16}
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-ink-400"
+              />
               <input
                 id="help-search"
                 type="search"
@@ -156,7 +191,11 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
 
             {q ? (
               <Section title={t("results", { n: results.length })} live>
-                {results.length ? <Topics ids={results} /> : <p className="text-sm text-ink-600">{t("noResults")}</p>}
+                {results.length ? (
+                  <Topics ids={results} />
+                ) : (
+                  <p className="text-sm text-ink-600">{t("noResults")}</p>
+                )}
               </Section>
             ) : (
               <>
@@ -171,9 +210,15 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
                     href="/admin/dashboard"
                     className="flex flex-col gap-1 rounded-2xl bg-ink-900 p-4 text-white transition-colors hover:bg-ink-800"
                   >
-                    <span className="text-[15px] font-bold">{t("gettingStarted.title")}</span>
-                    <span className="text-[13px] leading-relaxed text-ink-200">{t("gettingStarted.body")}</span>
-                    <span className="mt-1 text-[13px] font-semibold text-brand-400">{t("gettingStarted.cta")} →</span>
+                    <span className="text-[15px] font-bold">
+                      {t("gettingStarted.title")}
+                    </span>
+                    <span className="text-[13px] leading-relaxed text-ink-200">
+                      {t("gettingStarted.body")}
+                    </span>
+                    <span className="mt-1 text-[13px] font-semibold text-brand-400">
+                      {t("gettingStarted.cta")} →
+                    </span>
                   </Link>
                 )}
 
@@ -187,15 +232,23 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
                   <Section title={t("news.title")}>
                     <ul className="flex flex-col gap-2">
                       {news.map((n) => (
-                        <li key={n.title} className="flex gap-3 rounded-2xl border border-ink-100 bg-white p-3.5">
+                        <li
+                          key={n.title}
+                          className="flex gap-3 rounded-2xl border border-ink-100 bg-white p-3.5"
+                        >
                           <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-800">
                             <Sparkles size={15} aria-hidden="true" />
                           </span>
                           <span className="flex flex-col gap-0.5">
                             <span className="text-[13px] font-semibold text-ink-900">
-                              {n.title} <span className="font-normal text-ink-400">· {n.date}</span>
+                              {n.title}{" "}
+                              <span className="font-normal text-ink-400">
+                                · {n.date}
+                              </span>
                             </span>
-                            <span className="text-[13px] leading-relaxed text-ink-600">{n.body}</span>
+                            <span className="text-[13px] leading-relaxed text-ink-600">
+                              {n.body}
+                            </span>
                           </span>
                         </li>
                       ))}
@@ -213,10 +266,21 @@ function Panel({ area, pathname, onClose }: { area: Area; pathname: string; onCl
   );
 }
 
-function Section({ title, children, live }: { title: string; children: React.ReactNode; live?: boolean }) {
+function Section({
+  title,
+  children,
+  live,
+}: {
+  title: string;
+  children: React.ReactNode;
+  live?: boolean;
+}) {
   return (
     <section className="flex flex-col gap-2.5">
-      <h3 className="text-[11px] font-bold tracking-[.08em] text-ink-600 uppercase" aria-live={live ? "polite" : undefined}>
+      <h3
+        className="text-[11px] font-bold tracking-[.08em] text-ink-600 uppercase"
+        aria-live={live ? "polite" : undefined}
+      >
         {title}
       </h3>
       {children}
@@ -225,7 +289,13 @@ function Section({ title, children, live }: { title: string; children: React.Rea
 }
 
 /** Questions that open to show their answer. */
-function Topics({ ids, openFirst = false }: { ids: string[]; openFirst?: boolean }) {
+function Topics({
+  ids,
+  openFirst = false,
+}: {
+  ids: string[];
+  openFirst?: boolean;
+}) {
   const t = useTranslations("help.topics");
   return (
     <div className="divide-y divide-ink-100 overflow-hidden rounded-2xl border border-ink-100 bg-white">
@@ -239,7 +309,9 @@ function Topics({ ids, openFirst = false }: { ids: string[]; openFirst?: boolean
               className="mt-0.5 shrink-0 text-ink-400 transition-transform group-open:rotate-180"
             />
           </summary>
-          <p className="px-4 pb-4 text-[13px] leading-relaxed text-ink-600">{t(`${id}.a`)}</p>
+          <p className="px-4 pb-4 text-[13px] leading-relaxed text-ink-600">
+            {t(`${id}.a`)}
+          </p>
         </details>
       ))}
     </div>
@@ -249,7 +321,9 @@ function Topics({ ids, openFirst = false }: { ids: string[]; openFirst?: boolean
 function Contact({ area, pathname }: { area: Area; pathname: string }) {
   const t = useTranslations("help.contact");
   const [text, setText] = useState("");
-  const [state, setState] = useState<"idle" | "sent" | "failed" | "short">("idle");
+  const [state, setState] = useState<"idle" | "sent" | "failed" | "short">(
+    "idle",
+  );
   const [pending, startTransition] = useTransition();
 
   const send = (e: React.FormEvent) => {
@@ -268,18 +342,32 @@ function Contact({ area, pathname }: { area: Area; pathname: string }) {
   return (
     <section className="flex flex-col gap-3 rounded-2xl border border-ink-100 bg-white p-4">
       <h3 className="text-[15px] font-bold text-ink-900">{t("title")}</h3>
-      <p className="-mt-1 text-[13px] leading-relaxed text-ink-600">{area === "admin" ? t("adminBody") : t("memberBody")}</p>
-      <a href={`mailto:${SALES_EMAIL}`} className="btn-secondary w-fit gap-2 px-4 py-2 text-[13px]">
+      <p className="-mt-1 text-[13px] leading-relaxed text-ink-600">
+        {area === "admin" ? t("adminBody") : t("memberBody")}
+      </p>
+      <a
+        href={`mailto:${SALES_EMAIL}`}
+        className="btn-secondary flex w-fit gap-2 px-4 py-2 text-[13px]"
+      >
         <Mail size={15} aria-hidden="true" />
         {t("email")}
       </a>
 
-      <form onSubmit={send} className="mt-1 flex flex-col gap-2 border-t border-ink-100 pt-3">
-        <label htmlFor="help-report" className="text-[13px] font-semibold text-ink-900">
+      <form
+        onSubmit={send}
+        className="mt-1 flex flex-col gap-2 border-t border-ink-100 pt-3"
+      >
+        <label
+          htmlFor="help-report"
+          className="text-[13px] font-semibold text-ink-900"
+        >
           {t("reportTitle")}
         </label>
         {state === "sent" ? (
-          <p role="status" className="rounded-xl bg-brand-50 px-3 py-2.5 text-[13px] text-brand-900">
+          <p
+            role="status"
+            className="rounded-xl bg-brand-50 px-3 py-2.5 text-[13px] text-brand-900"
+          >
             {t("sent")}
           </p>
         ) : (
@@ -302,7 +390,11 @@ function Contact({ area, pathname }: { area: Area; pathname: string }) {
                 {state === "failed" ? t("failed") : t("tooShort")}
               </p>
             )}
-            <button type="submit" disabled={pending} className="btn-primary w-fit px-4 py-2 text-[13px]">
+            <button
+              type="submit"
+              disabled={pending}
+              className="btn-primary w-fit px-4 py-2 text-[13px]"
+            >
               {pending ? t("sending") : t("send")}
             </button>
           </>

@@ -22,6 +22,8 @@ import { closureWhen, type PublicClosure } from "@/lib/closures";
 import { format } from "date-fns";
 import type { Tournament } from "@/types/database";
 import ClubGroups, { type PublicGroup } from "@/components/groups/ClubGroups";
+import { LEAGUE_STATUS_TONE } from "@/components/leagues/LeagueStatus";
+import type { League } from "@/lib/leagues";
 import BookingPaused from "@/components/ui/BookingPaused";
 import CourtArt from "@/components/courts/CourtArt";
 import { courtColor } from "@/lib/courtColors";
@@ -179,6 +181,16 @@ export default async function ClubPublicPage({ params }: PageProps) {
     "id" | "name" | "sport" | "starts_on" | "status"
   >[];
   const tTour = await getTranslations("tournaments");
+  // Leagues taking sign-ups or being played (20261028_leagues.sql).
+  const { data: leaguesData } = await supabase
+    .from("leagues")
+    .select("id, name, sport, team_size, starts_on, status")
+    .eq("club_id", club.id)
+    .neq("status", "finished")
+    .order("starts_on")
+    .limit(6);
+  const leagues = (leaguesData ?? []) as Pick<League, "id" | "name" | "sport" | "team_size" | "starts_on" | "status">[];
+  const tLeague = await getTranslations("leagues");
   const locale = await getLocale();
   const dfLocale = dateLocale(locale);
 
@@ -487,6 +499,29 @@ export default async function ClubPublicPage({ params }: PageProps) {
                     {format(new Date(`${tour.starts_on}T12:00:00`), "d MMM yyyy", {
                       locale: dfLocale,
                     })}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Leagues: only shown when the club has one open or running */}
+        {leagues.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-5 text-xl font-bold tracking-tight text-ink-900">{tLeague("public.clubTitle")}</h2>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {leagues.map((l) => (
+                <Link
+                  key={l.id}
+                  href={`/leagues/${l.id}`}
+                  className="card flex flex-col p-5 transition-colors hover:border-ink-900"
+                >
+                  <span className={`${BADGE} w-fit ${LEAGUE_STATUS_TONE[l.status]}`}>{tLeague(`status.${l.status}`)}</span>
+                  <span className="mt-3 text-lg font-semibold text-ink-900">{l.name}</span>
+                  <span className="mt-1 text-sm text-ink-600">
+                    {labels.sport(l.sport)} · {l.team_size === 2 ? tLeague("form.pairs") : tLeague("form.singles")} ·{" "}
+                    {format(new Date(`${l.starts_on}T12:00:00`), "d MMM yyyy", { locale: dfLocale })}
                   </span>
                 </Link>
               ))}

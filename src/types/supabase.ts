@@ -1218,6 +1218,115 @@ export type Database = {
         }
         Relationships: []
       }
+      leagues: {
+        Row: {
+          id: string
+          club_id: string
+          name: string
+          sport: string
+          team_size: number
+          box_size: number
+          round_weeks: number
+          move_count: number
+          starts_on: string
+          max_entries: number
+          entry_fee: number | null
+          level_min: number | null
+          level_max: number | null
+          description: string | null
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          club_id: string
+          name: string
+          sport?: string
+          team_size?: number
+          box_size?: number
+          round_weeks?: number
+          move_count?: number
+          starts_on: string
+          max_entries?: number
+          entry_fee?: number | null
+          level_min?: number | null
+          level_max?: number | null
+          description?: string | null
+          status?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          club_id?: string
+          name?: string
+          sport?: string
+          team_size?: number
+          box_size?: number
+          round_weeks?: number
+          move_count?: number
+          starts_on?: string
+          max_entries?: number
+          entry_fee?: number | null
+          level_min?: number | null
+          level_max?: number | null
+          description?: string | null
+          status?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leagues_club_id_fkey"
+            columns: ["club_id"]
+            isOneToOne: false
+            referencedRelation: "clubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      league_entries: {
+        Row: {
+          id: string
+          league_id: string
+          name: string
+          partner_name: string | null
+          player_id: string | null
+          level: number | null
+          seed: number
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          league_id: string
+          name: string
+          partner_name?: string | null
+          player_id?: string | null
+          level?: number | null
+          seed?: number
+          status?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          league_id?: string
+          name?: string
+          partner_name?: string | null
+          player_id?: string | null
+          level?: number | null
+          seed?: number
+          status?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "league_entries_league_id_fkey"
+            columns: ["league_id"]
+            isOneToOne: false
+            referencedRelation: "leagues"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -1417,6 +1526,14 @@ export type Database = {
         Args: { p_club: string }
         Returns: { starts_at: string; ends_at: string; reason: string; courts: string[] | null }[]
       }
+      league_view: { Args: { p_league: string }; Returns: Json }
+      my_leagues: { Args: never; Returns: Json }
+      league_sign_up: { Args: { p_league: string; p_name: string; p_partner: string }; Returns: string }
+      league_withdraw: { Args: { p_league: string }; Returns: undefined }
+      league_next_round: { Args: { p_league: string }; Returns: string }
+      league_undo_round: { Args: { p_league: string }; Returns: undefined }
+      league_finish: { Args: { p_league: string }; Returns: undefined }
+      league_save_score: { Args: { p_match: string; p_sets: Json | null; p_walkover: string | null }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
