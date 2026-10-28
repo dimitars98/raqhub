@@ -851,7 +851,8 @@
     "notOwner": "Solo il proprietario del circolo può farlo.",
     "failed": "Qualcosa è andato storto. Riprova."
    }
-  }
+  },
+  "questions": "Domande o ti serve una fattura per la tua azienda? Scrivi a {email}."
  },
  "setup": {
   "title": "Configura il tuo club",

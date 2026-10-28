@@ -851,7 +851,8 @@
     "notOwner": "Seul le propriétaire du club peut le faire.",
     "failed": "Un problème est survenu. Veuillez réessayer."
    }
-  }
+  },
+  "questions": "Des questions, ou besoin d’une facture pour votre entreprise ? Écrivez à {email}."
  },
  "setup": {
   "title": "Créez votre club",

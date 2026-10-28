@@ -851,7 +851,8 @@
     "notOwner": "Nur der Inhaber des Clubs kann das tun.",
     "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
    }
-  }
+  },
+  "questions": "Fragen oder eine Rechnung für Ihre Firma? Schreiben Sie an {email}."
  },
  "setup": {
   "title": "Club einrichten",

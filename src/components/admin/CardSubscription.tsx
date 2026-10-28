@@ -38,7 +38,12 @@ export default function CardSubscription({ info }: { info: CardSubscriptionInfo 
   const [pending, start] = useTransition();
 
   const day = (iso: string) =>
-    new Intl.DateTimeFormat(intlLocale(locale), { day: "numeric", month: "long", year: "numeric" }).format(
+    new Intl.DateTimeFormat(intlLocale(locale), {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "Europe/Skopje",
+    }).format(
       new Date(iso.length === 10 ? `${iso}T12:00:00Z` : iso),
     );
 

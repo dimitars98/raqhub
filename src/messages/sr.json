@@ -851,7 +851,8 @@
     "notOwner": "Samo vlasnik kluba može to da uradi.",
     "failed": "Nešto nije u redu. Pokušajte ponovo."
    }
-  }
+  },
+  "questions": "Pitanja ili vam treba faktura za firmu? Pišite na {email}."
  },
  "setup": {
   "title": "Podesite svoj klub",

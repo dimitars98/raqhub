@@ -119,10 +119,12 @@ export async function PlanCard({
   card?: CardSubscriptionInfo | null;
 }) {
   const t = await getTranslations("billing");
+  // Club time, so the trial's last day matches what Polar's checkout says.
   const dayFormat = new Intl.DateTimeFormat(intlLocale(await getLocale()), {
     day: "numeric",
     month: "long",
     year: "numeric",
+    timeZone: "Europe/Skopje",
   });
   const plan = PLANS[access.plan];
   const day = (iso: string) => dayFormat.format(new Date(iso));
@@ -168,11 +170,14 @@ export async function PlanCard({
         <p className="mt-3 text-sm text-ink-600">{t("trialNote")}</p>
       )}
       <p className="mt-3 text-sm text-ink-600">
-        {t("changePlan", { email: PAYMENT.email })}
+        {card ? t("questions", { email: PAYMENT.email }) : t("changePlan", { email: PAYMENT.email })}
       </p>
 
       {card && <CardSubscription info={card} />}
-      <HowToPay planId={access.plan} slug={club.slug ?? null} other={!!card} />
+      {/* Already paying by card: no need for the bank details. */}
+      {!(card && ["active", "trialing", "past_due"].includes(card.status ?? "")) && (
+        <HowToPay planId={access.plan} slug={club.slug ?? null} other={!!card} />
+      )}
     </div>
   );
 }

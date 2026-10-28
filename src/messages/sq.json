@@ -851,7 +851,8 @@
     "notOwner": "Vetëm pronari i klubit mund ta bëjë këtë.",
     "failed": "Diçka shkoi keq. Provoni përsëri."
    }
-  }
+  },
+  "questions": "Pyetje, apo ju duhet një faturë për kompaninë? Shkruani në {email}."
  },
  "setup": {
   "title": "Krijoni klubin tuaj",

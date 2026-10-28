@@ -851,7 +851,8 @@
     "notOwner": "Only the club's owner can do this.",
     "failed": "Something went wrong. Please try again."
    }
-  }
+  },
+  "questions": "Questions, or need an invoice for your company? Write to {email}."
  },
  "setup": {
   "title": "Set up your club",
