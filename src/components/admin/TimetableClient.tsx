@@ -17,6 +17,8 @@ import { useReadOnly } from "@/components/admin/ReadOnly";
 import CloseCourtsModal from "./CloseCourtsModal";
 import { closedNotice, useClosureCourts, useClosureWhen } from "./ClosuresPanel";
 import { bookingName } from "@/lib/bookingName";
+import PaymentTag from "@/components/admin/PaymentTag";
+import { settleClubRefunds } from "@/app/[locale]/admin/settings/payments";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "id" | "name"> | null;
@@ -95,6 +97,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
   const t = useTranslations("timetable");
   const tc = useTranslations("closures");
   const tCommon = useTranslations("common");
+  const tPay = useTranslations("payments");
   const locale = useLocale();
   const df = dateLocale(locale);
   const labels = useLabels();
@@ -153,7 +156,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
     b.group_id ? "group" : b.coach_id ? "lesson" : matchOf(b) ? "match" : "booking";
   const tagOf = (b: BookingWithJoins) => {
     const k = kindOf(b);
-    if (b.status === "pending") return t("tags.pending");
+    if (b.status === "pending") return b.payment_status === "pending" ? tPay("tag.pending") : t("tags.pending");
     if (k === "group")
       return b.coach?.profile?.full_name
         ? `${t("group")} · ${t("groupWith", { coach: b.coach.profile.full_name })}`
@@ -215,6 +218,8 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
       });
       setAskSeries(false);
       if (patch.status === "cancelled" || patch.status === "no_show") setSelected(null);
+      // Paid online: the money goes back (20261029_online_payments.sql).
+      if (patch.status === "cancelled") await settleClubRefunds();
       router.refresh();
     });
 
@@ -403,6 +408,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
             >
               {labels.bookingStatus(sel.status)}
             </span>
+            <PaymentTag status={sel.payment_status} className="py-1 text-xs" />
             {sel.checked_in_at && (
               <span className="inline-flex items-center gap-1 rounded-full bg-[#eaf4fd] px-2.5 py-1 text-xs font-semibold text-[#0c4478]">
                 <Check size={12} aria-hidden="true" />

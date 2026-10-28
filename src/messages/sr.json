@@ -1147,7 +1147,8 @@
    "hours": "Radno vreme",
    "profile": "Vaš profil",
    "booking": "Pravila rezervacija",
-   "data": "Vaši podaci"
+   "data": "Vaši podaci",
+   "payments": "Plaćanja"
   },
   "days": [
    "Ponedeljak",
@@ -1389,7 +1390,8 @@
   "ruleCancel": "Ovaj klub dozvoljava otkazivanje najkasnije {n} h pre početka. Pozovite klub.",
   "ruleNoShows": "Onlajn rezervisanje je pauzirano posle {n} propuštenih rezervacija. Javite se klubu.",
   "noCourtFree": "Svi tereni su zauzeti u to vreme. Izaberite drugo vreme.",
-  "courtClosed": "Ovaj teren je zatvoren u to vreme. Izaberite drugo vreme ili teren."
+  "courtClosed": "Ovaj teren je zatvoren u to vreme. Izaberite drugo vreme ili teren.",
+  "paymentUnavailable": "Onlajn plaćanje trenutno ne radi, pa teren nije rezervisan. Pokušajte ponovo za trenutak."
  },
  "settingsErrors": {
   "sevenDays": "Potrebno je sedam dana",
@@ -3432,6 +3434,67 @@
    "notSignedIn": "Prvo se prijavite.",
    "paused": "Ovaj klub trenutno ne prima onlajn prijave.",
    "failed": "Nešto nije u redu. Pokušajte ponovo."
+  }
+ },
+ "payments": {
+  "settings": {
+   "title": "Onlajn plaćanje",
+   "description": "Igrači plaćaju teren kada rezervišu. Novac ide direktno na Stripe nalog vašeg kluba.",
+   "notConfigured": "Onlajn plaćanje još nije dostupno.",
+   "testMode": "Test režim: ne kreće se pravi novac. Platite test karticom 4242 4242 4242 4242, bilo kojim budućim datumom i bilo kojim CVC-om.",
+   "notConnected": "Još nije povezano",
+   "notConnectedHint": "Stripe prima plaćanja karticom i isplaćuje ih na vaš račun u banci. Podatke o klubu i računu unosite na Stripe stranici; traje oko 10 minuta.",
+   "unfinished": "Stripe-u treba još nekoliko podataka",
+   "unfinishedHint": "Završite podešavanje na Stripe stranici. Kada Stripe proveri podatke, igrači mogu da plaćaju onlajn.",
+   "ready": "Spremno za plaćanja",
+   "readyHint": "Plaćanja, isplate, povraćaji i Stripe provizije su na vašoj Stripe kontrolnoj tabli.",
+   "connect": "Poveži Stripe",
+   "continue": "Nastavi podešavanje",
+   "checkAgain": "Proveri ponovo",
+   "openStripe": "Otvori Stripe",
+   "howTitle": "Kako igrači plaćaju teren",
+   "modes": {
+    "club": "U klubu",
+    "clubHint": "Igrači rezervišu onlajn i plaćaju na recepciji, kao do sada.",
+    "online": "Onlajn, pri rezervaciji",
+    "onlineHint": "Rezervacija je potvrđena kada plate. Teren se čuva 30 minuta dok plaćaju; ako ne plate, ponovo je slobodan. Otkazivanje na vreme automatski vraća novac.",
+    "either": "Igrač bira",
+    "eitherHint": "Igrači biraju: da plate onlajn sada ili u klubu."
+   },
+   "modesAfterConnect": "Moći ćete da izaberete kada Stripe bude spreman.",
+   "saved": "Sačuvano.",
+   "notes": "Časovi i grupni termini se i dalje plaćaju u klubu, kao i rezervacije koje sami pravite (bez naloga, članovi).",
+   "ownerOnly": "Samo vlasnik kluba može da menja plaćanja.",
+   "errors": {
+    "notConfigured": "Onlajn plaćanje još nije dostupno.",
+    "notOwner": "Samo vlasnik kluba može to da uradi.",
+    "country": "Stripe još ne prima firme iz zemlje vašeg kluba. Proverite zemlju u Podacima o klubu ili pogledajte stripe.com/global.",
+    "failed": "Nešto nije u redu. Pokušajte ponovo.",
+    "notReady": "Stripe još nije spreman."
+   }
+  },
+  "book": {
+   "how": "Kako želite da platite?",
+   "payNow": "Plati onlajn sada",
+   "payAtClub": "Plati u klubu",
+   "onlineNote": "Plaćate onlajn na sledećoj stranici. Teren se čuva za vas {min} minuta.",
+   "payButton": "Plati €{price}",
+   "cancelled": "Plaćanje je otkazano: teren nije rezervisan."
+  },
+  "mine": {
+   "pending": "Čeka se plaćanje",
+   "finish": "Završi plaćanje",
+   "paid": "Plaćeno onlajn",
+   "refundDue": "Novac se vraća",
+   "refunded": "Vraćeno",
+   "late": "Vaša uplata je stigla nakon što je teren oslobođen, pa se novac vraća. Molimo rezervišite ponovo.",
+   "check": "Još nismo uspeli da potvrdimo plaćanje. Ako ste platili, rezervacija će se ovde prikazati kao potvrđena za minut."
+  },
+  "tag": {
+   "pending": "Čeka se plaćanje",
+   "paid": "Plaćeno onlajn",
+   "refundDue": "Povraćaj u toku",
+   "refunded": "Vraćeno"
   }
  }
 }

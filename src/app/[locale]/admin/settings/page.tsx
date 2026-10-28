@@ -5,13 +5,16 @@ import { normalizeRules } from "@/lib/bookingRules";
 import SettingsClient, { type SettingsClub } from "@/components/admin/SettingsClient";
 import { PlanCard } from "@/components/admin/PlanNotices";
 import { BILLING_COLUMNS, clubAccess } from "@/lib/plans";
+import { getStripe, stripeConfigured, stripeTestMode } from "@/lib/stripe";
+import { syncStripeAccount } from "@/lib/payments";
+import { payModeOf } from "@/lib/paymentMode";
 
 export default async function SettingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; stripe?: string }>;
 }) {
-  const { tab } = await searchParams;
+  const { tab, stripe } = await searchParams;
   const supabase = await createClient();
 
   const {
@@ -23,7 +26,7 @@ export default async function SettingsPage({
     supabase
       .from("clubs")
       .select(
-        `id, name, slug, email, phone, address, city, country, website, description, logo_url, opening_hours, booking_rules, ${BILLING_COLUMNS}`,
+        `id, name, slug, email, phone, address, city, country, website, description, logo_url, opening_hours, booking_rules, payment_mode, stripe_account_id, stripe_charges_enabled, ${BILLING_COLUMNS}`,
       )
       .eq("owner_id", user.id)
       .limit(1)
@@ -37,6 +40,17 @@ export default async function SettingsPage({
 
   if (!clubData) redirect("/admin/setup");
 
+  // Back from Stripe's setup pages: ask Stripe whether the account is ready.
+  let ready = !!clubData.stripe_charges_enabled;
+  if (stripe && clubData.stripe_account_id && stripeConfigured()) {
+    try {
+      const account = await getStripe().accounts.retrieve(clubData.stripe_account_id);
+      ready = (await syncStripeAccount(account)).chargesEnabled;
+    } catch (e) {
+      console.error("[settings] stripe", e);
+    }
+  }
+
   const club: SettingsClub = {
     ...clubData,
     country: clubData.country ?? "MK",
@@ -49,7 +63,16 @@ export default async function SettingsPage({
       <PlanCard club={clubData} access={clubAccess(clubData)} />
       <SettingsClient
         club={club}
-        initialTab={tab}
+        initialTab={stripe ? "payments" : tab}
+        payments={{
+          configured: stripeConfigured(),
+          testMode: stripeTestMode(),
+          connected: !!clubData.stripe_account_id,
+          ready,
+          mode: payModeOf({ payment_mode: clubData.payment_mode, stripe_charges_enabled: true }),
+          // Only the owner's own club comes back here (staff use another query).
+          isOwner: true,
+        }}
         profile={{
           userId: user.id,
           full_name: profile?.full_name ?? "",

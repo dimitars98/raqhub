@@ -84,6 +84,11 @@ export default function BookingForm({
         starts_at: startsAt.toISOString(),
         duration_min: duration,
       });
+      // The club takes payment online: on to Stripe's payment page.
+      if (result?.checkoutUrl) {
+        window.location.assign(result.checkoutUrl);
+        return;
+      }
       if (result?.error) {
         setError(result.error);
         // Maybe someone else took the slot: clear the pick and reload taken times.

@@ -149,6 +149,11 @@ export default function NewMatchClient({
         refreshBusy();
         return;
       }
+      // The club takes payment online: pay for the court first (Stripe), then back to the match.
+      if (r.checkoutUrl) {
+        window.location.assign(r.checkoutUrl);
+        return;
+      }
       router.push(`/matches/${r.id}?new=1`);
     });
   };

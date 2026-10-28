@@ -1147,7 +1147,8 @@
    "hours": "Orari",
    "profile": "Profili juaj",
    "booking": "Rregullat e rezervimit",
-   "data": "Të dhënat tuaja"
+   "data": "Të dhënat tuaja",
+   "payments": "Pagesat"
   },
   "days": [
    "E hënë",
@@ -1389,7 +1390,8 @@
   "ruleCancel": "Ky klub lejon anulimin vetëm deri {n} orë para fillimit. Ju lutemi telefononi klubin.",
   "ruleNoShows": "Rezervimi online është pezulluar pas {n} rezervimeve të humbura. Ju lutemi kontaktoni klubin.",
   "noCourtFree": "Të gjitha fushat janë të zëna në atë orë. Zgjidhni një orë tjetër.",
-  "courtClosed": "Kjo fushë është e mbyllur në atë orë. Zgjidhni një orë ose fushë tjetër."
+  "courtClosed": "Kjo fushë është e mbyllur në atë orë. Zgjidhni një orë ose fushë tjetër.",
+  "paymentUnavailable": "Pagesa online nuk po funksionon tani, prandaj fusha nuk u rezervua. Provoni përsëri pas pak."
  },
  "settingsErrors": {
   "sevenDays": "Nevojiten shtatë ditë",
@@ -3432,6 +3434,67 @@
    "notSignedIn": "Hyni fillimisht.",
    "paused": "Ky klub aktualisht nuk pranon regjistrime online.",
    "failed": "Diçka shkoi keq. Provoni përsëri."
+  }
+ },
+ "payments": {
+  "settings": {
+   "title": "Pagesa online",
+   "description": "Lojtarët e paguajnë fushën kur rezervojnë. Paratë shkojnë drejt e në llogarinë Stripe të klubit tuaj.",
+   "notConfigured": "Pagesa online nuk është ende e disponueshme.",
+   "testMode": "Mënyrë testimi: nuk lëvizin para të vërteta. Paguani me kartën testuese 4242 4242 4242 4242, çdo datë të ardhshme dhe çdo CVC.",
+   "notConnected": "Ende e palidhur",
+   "notConnectedHint": "Stripe pranon pagesat me kartë dhe ia kalon bankës suaj. Të dhënat e klubit dhe të llogarisë bankare i plotësoni në faqen e Stripe; zgjat rreth 10 minuta.",
+   "unfinished": "Stripe ka nevojë për disa të dhëna të tjera",
+   "unfinishedHint": "Përfundoni konfigurimin në faqen e Stripe. Pasi Stripe t’i kontrollojë të dhënat, lojtarët mund të paguajnë online.",
+   "ready": "Gati për pagesa",
+   "readyHint": "Pagesat, transfertat, rimbursimet dhe tarifat e Stripe janë në panelin tuaj të Stripe.",
+   "connect": "Lidh Stripe",
+   "continue": "Vazhdo konfigurimin",
+   "checkAgain": "Kontrollo përsëri",
+   "openStripe": "Hap Stripe",
+   "howTitle": "Si e paguajnë lojtarët një fushë",
+   "modes": {
+    "club": "Në klub",
+    "clubHint": "Lojtarët rezervojnë online dhe paguajnë në recepsion, si tani.",
+    "online": "Online, gjatë rezervimit",
+    "onlineHint": "Rezervimi konfirmohet pasi të paguajnë. Fusha mbahet 30 minuta ndërsa paguajnë; përndryshe lirohet përsëri. Anulimi në kohë i kthen paratë automatikisht.",
+    "either": "Zgjedh lojtari",
+    "eitherHint": "Lojtarët zgjedhin: të paguajnë online tani ose në klub."
+   },
+   "modesAfterConnect": "Mund të zgjidhni kur Stripe të jetë gati.",
+   "saved": "U ruajt.",
+   "notes": "Orët me trajner dhe seancat në grup ende paguhen në klub, po ashtu rezervimet që bëni vetë (pa llogari, anëtarë).",
+   "ownerOnly": "Vetëm pronari i klubit mund t’i ndryshojë pagesat.",
+   "errors": {
+    "notConfigured": "Pagesa online nuk është ende e disponueshme.",
+    "notOwner": "Vetëm pronari i klubit mund ta bëjë këtë.",
+    "country": "Stripe ende nuk pranon biznese nga vendi i klubit tuaj. Kontrolloni vendin te Të dhënat e klubit ose shihni stripe.com/global.",
+    "failed": "Diçka shkoi keq. Provoni përsëri.",
+    "notReady": "Stripe nuk është ende gati."
+   }
+  },
+  "book": {
+   "how": "Si dëshironi të paguani?",
+   "payNow": "Paguaj online tani",
+   "payAtClub": "Paguaj në klub",
+   "onlineNote": "Paguani online në faqen tjetër. Fusha mbahet për ju {min} minuta.",
+   "payButton": "Paguaj €{price}",
+   "cancelled": "Pagesa u anulua: fusha nuk u rezervua."
+  },
+  "mine": {
+   "pending": "Në pritje të pagesës",
+   "finish": "Përfundo pagesën",
+   "paid": "Paguar online",
+   "refundDue": "Rimbursimi po vjen",
+   "refunded": "Rimbursuar",
+   "late": "Pagesa juaj erdhi pasi fusha ishte liruar, prandaj po rimbursohet. Ju lutemi rezervoni përsëri.",
+   "check": "Ende nuk mundëm ta konfirmojmë pagesën. Nëse keni paguar, rezervimi do të shfaqet si i konfirmuar këtu brenda një minute."
+  },
+  "tag": {
+   "pending": "Në pritje të pagesës",
+   "paid": "Paguar online",
+   "refundDue": "Rimbursim në pritje",
+   "refunded": "Rimbursuar"
   }
  }
 }

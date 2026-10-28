@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { emailProvider } from "@/lib/email/send";
+import { runPaymentJobs } from "@/lib/payments";
+import { stripeConfigured } from "@/lib/stripe";
 import {
   Budget,
   sendBookingReminders,
@@ -84,6 +86,16 @@ export async function GET(request: Request) {
   } catch (e) {
     console.error("[cron] open matches failed", e);
     result.openMatches = { error: describe(e) };
+  }
+
+  // Online payments: let go of courts nobody paid for, retry refunds.
+  if (stripeConfigured()) {
+    try {
+      result.payments = await runPaymentJobs(db);
+    } catch (e) {
+      console.error("[cron] payments failed", e);
+      result.payments = { error: describe(e) };
+    }
   }
 
   result.budgetLeft = budget.left;

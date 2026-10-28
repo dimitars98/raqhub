@@ -23,6 +23,7 @@ import { normalizeHours, startHoursFor } from "@/lib/openingHours";
 import { normalizeRules } from "@/lib/bookingRules";
 import { Link } from "@/i18n/navigation";
 import { useLabels } from "@/hooks/useLabels";
+import { payModeOf } from "@/lib/paymentMode";
 
 export type CourtWithClub = Court & {
   club?: {
@@ -31,6 +32,8 @@ export type CourtWithClub = Court & {
     slug?: string;
     opening_hours?: unknown;
     booking_rules?: unknown;
+    payment_mode?: string | null;
+    stripe_charges_enabled?: boolean | null;
   } | null;
 };
 
@@ -47,6 +50,7 @@ const hh = (h: number) => `${String(h).padStart(2, "0")}:00`;
 export default function BookCourtsClient({
   courts,
   clubName,
+  paymentCancelled,
   openCourtId,
 }: {
   courts: CourtWithClub[];
@@ -54,11 +58,14 @@ export default function BookCourtsClient({
   clubName?: string;
   /** A court picked on the club's page: its booking window opens straight away. */
   openCourtId?: string;
+  /** Back from Stripe without paying. */
+  paymentCancelled?: boolean;
 }) {
   const t = useTranslations("bookCourts");
   const dfLocale = dateLocale(useLocale());
   const labels = useLabels();
   const tCoach = useTranslations("coachBooking");
+  const tPay = useTranslations("payments");
   const [selected, setSelected] = useState<CourtWithClub | null>(
     () => courts.find((c) => c.id === openCourtId) ?? null,
   );
@@ -143,6 +150,10 @@ export default function BookCourtsClient({
     ? (selected.price_per_hour * watchedDuration) / 60
     : 0;
   const finalTotal = baseTotal * (1 - discount / 100);
+  // How this court's club takes payment (20261029_online_payments.sql).
+  const payMode = payModeOf(selected?.club);
+  const [payOnline, setPayOnline] = useState(true);
+  const paysNow = finalTotal > 0 && (payMode === "online" || (payMode === "either" && payOnline));
 
 
   const onSubmit = async (values: FormValues) => {
@@ -157,7 +168,13 @@ export default function BookCourtsClient({
       court_id: selected.id,
       starts_at: startsAt.toISOString(),
       duration_min: values.duration,
+      payOnline: paysNow,
     });
+    // The club takes payment online: on to Stripe's payment page.
+    if (result?.checkoutUrl) {
+      window.location.assign(result.checkoutUrl);
+      return;
+    }
     // Only reached when something went wrong; on success the redirect takes over.
     if (result?.error) {
       setError(result.error);
@@ -212,6 +229,11 @@ export default function BookCourtsClient({
           <h1 className="text-[28px] font-extrabold tracking-tight text-ink-900">
             {clubName ? t("titleAtClub", { club: clubName }) : t("title")}
           </h1>
+          {paymentCancelled && (
+            <p role="status" className="mb-3 rounded-lg bg-[#fdf5df] px-3 py-2 text-sm text-[#5c4000]">
+              {tPay("book.cancelled")}
+            </p>
+          )}
           <p className="mt-1 text-sm text-ink-600">
             {t("available", { n: courts.length })}
             {clubName && (
@@ -574,7 +596,29 @@ export default function BookCourtsClient({
                       {t("memberDiscount", { pct: discount })}
                     </p>
                   )}
-                  <p className="mt-1 text-xs text-ink-400">{t("payAtClub")}</p>
+                  {payMode === "either" && finalTotal > 0 ? (
+                    <div role="radiogroup" aria-label={tPay("book.how")} className="mt-3 grid grid-cols-2 gap-2">
+                      {[true, false].map((online) => (
+                        <button
+                          key={String(online)}
+                          type="button"
+                          role="radio"
+                          aria-checked={payOnline === online}
+                          onClick={() => setPayOnline(online)}
+                          className={`rounded-lg border px-3 py-2 text-left text-[13px] ${
+                            payOnline === online
+                              ? "border-ink-900 bg-white font-semibold text-ink-900"
+                              : "border-ink-100 text-ink-600"
+                          }`}
+                        >
+                          {online ? tPay("book.payNow") : tPay("book.payAtClub")}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                  <p className="mt-1 text-xs text-ink-400">
+                    {paysNow ? tPay("book.onlineNote", { min: 30 }) : t("payAtClub")}
+                  </p>
                 </div>
               )}
 
@@ -611,7 +655,9 @@ export default function BookCourtsClient({
               >
                 {isSubmitting
                   ? t("booking")
-                  : t("confirm", { price: finalTotal.toFixed(2) })}
+                  : paysNow
+                    ? tPay("book.payButton", { price: finalTotal.toFixed(2) })
+                    : t("confirm", { price: finalTotal.toFixed(2) })}
               </button>
             </Modal.Footer>
           </form>

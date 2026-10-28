@@ -92,6 +92,9 @@ export interface Club {
   opening_hours: OpeningHours | null;
   /** Booking rules (see src/lib/bookingRules.ts). Null = defaults. */
   booking_rules: unknown;
+  /** club · online · either (20261029_online_payments.sql) */
+  payment_mode?: "club" | "online" | "either";
+  stripe_charges_enabled?: boolean;
   is_active: boolean;
   owner_id: string | null;
   /** Kortello plan: starter / club / academy. Only changed by you. */
@@ -133,6 +136,8 @@ export interface Coach {
   profile?: Profile;
   club?: Club;
 }
+export type PaymentStatus = "none" | "pending" | "paid" | "expired" | "refund_due" | "refunded";
+
 export interface Booking {
   id: string;
   player_id: string | null; // was string, now nullable
@@ -157,6 +162,14 @@ export interface Booking {
   series_id?: string | null;
   /** Set when the booking holds the court for a group's session. */
   group_id?: string | null;
+  /** Online payment (20261029_online_payments.sql); "none" = paid at the club. */
+  payment_status?: string;
+  paid_at?: string | null;
+  amount_paid?: number | null;
+  refunded_at?: string | null;
+  pay_by?: string | null;
+  stripe_checkout_session_id?: string | null;
+  stripe_account_id?: string | null;
   created_at: string;
   updated_at: string;
   player?: Profile;

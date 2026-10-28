@@ -1147,7 +1147,8 @@
    "hours": "Orari",
    "profile": "Il tuo profilo",
    "booking": "Regole di prenotazione",
-   "data": "I vostri dati"
+   "data": "I vostri dati",
+   "payments": "Pagamenti"
   },
   "days": [
    "Lunedì",
@@ -1389,7 +1390,8 @@
   "ruleCancel": "Questo club consente di annullare solo fino a {n} ore prima dell’inizio. Chiama il club.",
   "ruleNoShows": "La prenotazione online è sospesa dopo {n} assenze. Contatta il club.",
   "noCourtFree": "Tutti i campi sono occupati a quell’ora. Scegli un altro orario.",
-  "courtClosed": "Questo campo è chiuso in quell’orario. Scegli un altro orario o un altro campo."
+  "courtClosed": "Questo campo è chiuso in quell’orario. Scegli un altro orario o un altro campo.",
+  "paymentUnavailable": "Il pagamento online al momento non funziona, quindi il campo non è stato prenotato. Riprova tra poco."
  },
  "settingsErrors": {
   "sevenDays": "Servono sette giorni",
@@ -3432,6 +3434,67 @@
    "notSignedIn": "Accedi prima.",
    "paused": "Questo circolo al momento non accetta iscrizioni online.",
    "failed": "Qualcosa è andato storto. Riprova."
+  }
+ },
+ "payments": {
+  "settings": {
+   "title": "Pagamenti online",
+   "description": "I giocatori pagano il campo al momento della prenotazione. I soldi vanno direttamente sull’account Stripe del tuo circolo.",
+   "notConfigured": "I pagamenti online non sono ancora disponibili.",
+   "testMode": "Modalità test: non si muove denaro vero. Paga con la carta di prova 4242 4242 4242 4242, una data futura e un CVC qualsiasi.",
+   "notConnected": "Non ancora collegato",
+   "notConnectedHint": "Stripe incassa i pagamenti con carta e li versa sul tuo conto bancario. Inserisci i dati del circolo e del conto sulla pagina di Stripe; servono circa 10 minuti.",
+   "unfinished": "Stripe ha bisogno di qualche dato in più",
+   "unfinishedHint": "Completa la configurazione sulla pagina di Stripe. Quando Stripe avrà verificato i dati, i giocatori potranno pagare online.",
+   "ready": "Pronto per i pagamenti",
+   "readyHint": "Pagamenti, versamenti, rimborsi e commissioni di Stripe sono nella tua dashboard Stripe.",
+   "connect": "Collega Stripe",
+   "continue": "Continua la configurazione",
+   "checkAgain": "Controlla di nuovo",
+   "openStripe": "Apri Stripe",
+   "howTitle": "Come i giocatori pagano un campo",
+   "modes": {
+    "club": "Al circolo",
+    "clubHint": "I giocatori prenotano online e pagano alla reception, come ora.",
+    "online": "Online, alla prenotazione",
+    "onlineHint": "La prenotazione è confermata quando hanno pagato. Il campo resta bloccato 30 minuti mentre pagano; altrimenti torna libero. Annullare in tempo restituisce i soldi in automatico.",
+    "either": "Sceglie il giocatore",
+    "eitherHint": "I giocatori scelgono: pagare online ora o al circolo."
+   },
+   "modesAfterConnect": "Potrai scegliere quando Stripe sarà pronto.",
+   "saved": "Salvato.",
+   "notes": "Lezioni e sessioni di gruppo si pagano ancora al circolo, così come le prenotazioni che fai tu (clienti occasionali, soci).",
+   "ownerOnly": "Solo il proprietario del circolo può modificare i pagamenti.",
+   "errors": {
+    "notConfigured": "I pagamenti online non sono ancora disponibili.",
+    "notOwner": "Solo il proprietario del circolo può farlo.",
+    "country": "Stripe non accetta ancora aziende del paese del tuo circolo. Controlla il paese in Info circolo o vedi stripe.com/global.",
+    "failed": "Qualcosa è andato storto. Riprova.",
+    "notReady": "Stripe non è ancora pronto."
+   }
+  },
+  "book": {
+   "how": "Come vuoi pagare?",
+   "payNow": "Paga online ora",
+   "payAtClub": "Paga al circolo",
+   "onlineNote": "Paghi online nella pagina successiva. Il campo resta bloccato per te {min} minuti.",
+   "payButton": "Paga €{price}",
+   "cancelled": "Pagamento annullato: il campo non è stato prenotato."
+  },
+  "mine": {
+   "pending": "In attesa di pagamento",
+   "finish": "Completa il pagamento",
+   "paid": "Pagato online",
+   "refundDue": "Rimborso in arrivo",
+   "refunded": "Rimborsato",
+   "late": "Il pagamento è arrivato dopo che il campo era stato liberato, quindi viene rimborsato. Prenota di nuovo.",
+   "check": "Non siamo ancora riusciti a confermare il pagamento. Se hai pagato, la prenotazione risulterà confermata qui tra un minuto."
+  },
+  "tag": {
+   "pending": "In attesa di pagamento",
+   "paid": "Pagato online",
+   "refundDue": "Rimborso da fare",
+   "refunded": "Rimborsato"
   }
  }
 }

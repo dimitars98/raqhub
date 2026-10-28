@@ -17,6 +17,7 @@ import de from "@/messages/de.json";
 import fr from "@/messages/fr.json";
 import it from "@/messages/it.json";
 import sr from "@/messages/sr.json";
+import { settleRefunds } from "@/lib/payments";
 
 // Closing courts (supabase/migrations/20261027_court_closures.sql). The
 // database cancels the bookings in that time and notifies the players; this
@@ -175,6 +176,9 @@ export async function closeCourts(
 
   const result = (data ?? {}) as { cancelled?: number; people?: Person[]; groups?: GroupRow[] };
   let emailed = 0;
+
+  // Bookings paid online get their money back (20261029_online_payments.sql).
+  if (result.cancelled) await settleRefunds(undefined, { clubId: club.id });
 
   // Players (and members with an email): in the language they booked in.
   for (const p of result.people ?? []) {

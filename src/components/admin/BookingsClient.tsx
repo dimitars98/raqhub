@@ -25,6 +25,8 @@ import { Repeat, X } from "lucide-react";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
 import { bookingName } from "@/lib/bookingName";
+import PaymentTag from "@/components/admin/PaymentTag";
+import { settleClubRefunds } from "@/app/[locale]/admin/settings/payments";
 
 export type BookingWithJoins = Booking & {
   court?: Pick<Court, "name"> | null;
@@ -239,10 +241,11 @@ const { readOnly, hint } = useReadOnly();
         x.series_id === b.series_id &&
         x.status === "confirmed" &&
         x.starts_at >= b.starts_at
-          ? { ...x, status: "cancelled" }
+          ? { ...x, status: "cancelled", payment_status: x.payment_status === "paid" ? "refund_due" : x.payment_status }
           : x,
       ),
     );
+    void settleClubRefunds();
   };
 
   const handleStatus = async (id: string, status: BookingStatus) => {
@@ -258,8 +261,19 @@ const { readOnly, hint } = useReadOnly();
     }
     setRowError(null);
     setBookings((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, status } : b)),
+      prev.map((b) =>
+        b.id === id
+          ? {
+              ...b,
+              status,
+              // Paid online: the money goes back (20261029_online_payments.sql).
+              payment_status:
+                status === "cancelled" && b.payment_status === "paid" ? "refund_due" : b.payment_status,
+            }
+          : b,
+      ),
     );
+    if (status === "cancelled") void settleClubRefunds();
   };
 
   // No-shows per player in the last 90 days. Bookings on screen use their
@@ -469,6 +483,7 @@ const { readOnly, hint } = useReadOnly();
                   </td>
                   <td className="px-5 py-3.5 font-medium text-[#111c0a]">
                     €{b.total_price.toFixed(2)}
+                    <PaymentTag status={b.payment_status} className="ml-1.5" />
                   </td>
                   <td className="px-5 py-3.5">
                     <span className={`${BADGE} ${bookingStatusTone(b.status)}`}>

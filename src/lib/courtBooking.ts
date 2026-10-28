@@ -117,12 +117,16 @@ export async function bookingError(error: { code?: string; message?: string }, w
  * Saves a court booking for the signed-in player, at the price the database
  * works out (member discount included). Returns its id, or an error in the
  * player's language. Sends no email: the caller does, once it's sure.
+ * `pending`: the club takes payment online and the court is held until the
+ * player pays (see src/lib/payments.ts).
  */
 export async function insertCourtBooking(
   supabase: Supabase,
   userId: string,
   input: BookingInput,
-): Promise<{ id: string; error?: undefined } | { id?: undefined; error: string }> {
+  /** The player chose to pay online (a club that lets them choose). */
+  payOnline = false,
+): Promise<{ id: string; pending: boolean; error?: undefined } | { id?: undefined; error: string }> {
   const t = await getTranslations("bookingErrors");
   const { start, error: timeError } = checkTime(input.starts_at, input.duration_min);
   if (timeError) return { error: t(timeError) };
@@ -153,13 +157,16 @@ export async function insertCourtBooking(
       coach_id: null,
       notes: null,
       locale,
+      // The database decides: a club taking payment online holds the court
+      // while the player pays (20261029_online_payments.sql).
+      ...(payOnline ? { payment_status: "pending" } : {}),
     })
-    .select("id")
+    .select("id, payment_status")
     .single();
 
   if (error || !saved) {
     if (error?.code !== "23P01") console.error("[insertCourtBooking]", error);
     return { error: await bookingError(error ?? {}, "court") };
   }
-  return { id: saved.id };
+  return { id: saved.id, pending: saved.payment_status === "pending" };
 }

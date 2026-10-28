@@ -19,6 +19,7 @@ type BookingWithJoins = Booking & {
 };
 
 type T = Awaited<ReturnType<typeof getTranslations<"myBookings">>>;
+type TP = Awaited<ReturnType<typeof getTranslations<"payments">>>;
 
 // Clubs are in Skopje; times are shown in the club's time, whatever the device.
 const TIME_ZONE = "Europe/Skopje";
@@ -73,11 +74,12 @@ function calendarLink(b: BookingWithJoins, title: string) {
 export default async function MyBookingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ booked?: string }>;
+  searchParams: Promise<{ booked?: string; payment?: string }>;
 }) {
-  const { booked } = await searchParams;
+  const { booked, payment } = await searchParams;
   const supabase = await createClient();
   const t = await getTranslations("myBookings");
+  const tp = await getTranslations("payments");
   const locale = await getLocale();
   const fmt = makeFormatter(locale);
 
@@ -146,7 +148,7 @@ export default async function MyBookingsPage({
   });
 
   const labels = await getLabels();
-  const ctx = { t, fmt, userId: user.id, labels };
+  const ctx = { t, fmt, userId: user.id, labels, tp, locale };
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -160,6 +162,12 @@ export default async function MyBookingsPage({
             <p className="text-xs text-brand-800">{t("bookedText")}</p>
           </div>
         </div>
+      )}
+
+      {(payment === "late" || payment === "check") && (
+        <p role="status" className="mb-6 rounded-xl border border-[#f2dfa6] bg-[#fdf5df] px-4 py-3 text-sm text-[#5c4000]">
+          {tp(payment === "late" ? "mine.late" : "mine.check")}
+        </p>
       )}
 
       {/* Header */}
@@ -266,7 +274,7 @@ export default async function MyBookingsPage({
   );
 }
 
-type RowProps = { booking: BookingWithJoins; t: T; fmt: Fmt; userId: string; labels: Labels };
+type RowProps = { booking: BookingWithJoins; t: T; fmt: Fmt; userId: string; labels: Labels; tp: TP; locale: string };
 
 /**
  * Only bookings the player made themselves can be cancelled here, and only
@@ -298,12 +306,33 @@ function CancelButton({
   );
 }
 
+/** Paid online, waiting for payment, refunded… (20261029_online_payments.sql) */
+function PaymentNote({ b, tp, locale }: { b: BookingWithJoins; tp: TP; locale: string }) {
+  const status = b.payment_status ?? "none";
+  if (status === "none" || status === "expired") return null;
+  if (status === "pending" && b.status === "pending") {
+    return (
+      <span className="inline-flex items-center gap-2 text-xs">
+        <span className="font-medium text-[#7a5600]">{tp("mine.pending")}</span>
+        <a
+          href={`/api/stripe/resume?booking=${b.id}&locale=${locale}`}
+          className="font-semibold text-ink-900 underline underline-offset-2"
+        >
+          {tp("mine.finish")}
+        </a>
+      </span>
+    );
+  }
+  const tone = status === "paid" ? "text-brand-800" : "text-ink-600";
+  return <span className={`text-xs font-medium ${tone}`}>{tp(`mine.${status === "refund_due" ? "refundDue" : status}`)}</span>;
+}
+
 function ClubMadeNote({ b, userId, t }: { b: BookingWithJoins; userId: string; t: T }) {
   if (b.player_id === userId) return null;
   return <span className="text-xs text-ink-400">{t("madeByClub")}</span>;
 }
 
-function NextUpCard({ booking: b, t, fmt, userId, labels }: RowProps) {
+function NextUpCard({ booking: b, t, fmt, userId, labels, tp, locale }: RowProps) {
   const name = bookingName(b, t);
   const label = relativeLabel(b.starts_at, t);
 
@@ -340,6 +369,7 @@ function NextUpCard({ booking: b, t, fmt, userId, labels }: RowProps) {
               </>
             )}
             <ClubMadeNote b={b} userId={userId} t={t} />
+            <PaymentNote b={b} tp={tp} locale={locale} />
           </div>
         </div>
       </div>
@@ -371,6 +401,8 @@ function BookingRow({
   fmt,
   userId,
   labels,
+  tp,
+  locale,
   past = false,
 }: RowProps & { past?: boolean }) {
   const name = bookingName(b, t);
@@ -399,7 +431,8 @@ function BookingRow({
       <div className="flex items-center justify-between gap-3 mt-2.5 pt-2.5 border-t border-ink-100">
         <span className="text-xs text-ink-400">
           {t("ref")}: <span className="font-medium text-ink-600">{b.reference}</span>{" "}
-          <ClubMadeNote b={b} userId={userId} t={t} />
+          <ClubMadeNote b={b} userId={userId} t={t} />{" "}
+          <PaymentNote b={b} tp={tp} locale={locale} />
         </span>
         {past ? (
           <Link

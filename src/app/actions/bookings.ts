@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { checkoutOrRelease, settleRefunds } from "@/lib/payments";
 import { getLocale, getTranslations } from "next-intl/server";
 import { sendEmail } from "@/lib/email/send";
 import { bookingCancelledEmail } from "@/lib/email/templates";
@@ -27,20 +28,30 @@ import {
 // booking is saved (see supabase/migrations), so nothing here can be tampered
 // with from the browser. The values below only keep the two in step.
 
-export async function createBooking(input: BookingInput): Promise<Result> {
+/**
+ * Books a court. When the club takes payment online, returns Stripe's
+ * payment page to send the player to; the booking is confirmed (and the
+ * email sent) once they have paid.
+ */
+export async function createBooking(
+  input: BookingInput & { payOnline?: boolean },
+): Promise<{ error?: string; checkoutUrl?: string }> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return { error: (await getTranslations("bookingErrors"))("notSignedIn") };
 
-  const saved = await insertCourtBooking(supabase, user.id, input);
+  const saved = await insertCourtBooking(supabase, user.id, input, !!input.payOnline);
   if (saved.error !== undefined) return { error: saved.error };
+
+  if (saved.pending) return checkoutOrRelease(saved.id, user.email ?? null, "/my-bookings?booked=1");
 
   await sendConfirmation(supabase, user, saved.id);
 
   redirect("/my-bookings?booked=1");
 }
+
 
 /**
  * A lesson with a coach. The database gives it a free court at the coach's
@@ -116,6 +127,9 @@ export async function cancelBooking(formData: FormData) {
     .in("status", ["confirmed", "pending"])
     .select(BOOKING_EMAIL_SELECT)
     .maybeSingle();
+
+  // Paid online: the money goes back (20261029_online_payments.sql).
+  if (cancelled) await settleRefunds(undefined, { ids: [id] });
 
   // Only when this call really cancelled it (not a double click).
   if (cancelled && user.email) {

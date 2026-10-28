@@ -1147,7 +1147,8 @@
    "hours": "Opening Hours",
    "profile": "Your Profile",
    "booking": "Booking Rules",
-   "data": "Your Data"
+   "data": "Your Data",
+   "payments": "Payments"
   },
   "days": [
    "Monday",
@@ -1389,7 +1390,8 @@
   "ruleCancel": "This club only allows cancelling up to {n} hours before the start. Please call the club.",
   "ruleNoShows": "Online booking is paused after {n} missed bookings. Please contact the club.",
   "noCourtFree": "Every court is taken at that time. Please pick another time.",
-  "courtClosed": "This court is closed at that time. Pick another time or court."
+  "courtClosed": "This court is closed at that time. Pick another time or court.",
+  "paymentUnavailable": "Online payment isn't working right now, so the court wasn't booked. Please try again in a moment."
  },
  "settingsErrors": {
   "sevenDays": "Seven days are needed",
@@ -3432,6 +3434,67 @@
    "notSignedIn": "Sign in first.",
    "paused": "This club isn’t taking online sign-ups right now.",
    "failed": "Something went wrong. Please try again."
+  }
+ },
+ "payments": {
+  "settings": {
+   "title": "Online payments",
+   "description": "Let players pay for a court when they book. The money goes straight to your club's own Stripe account.",
+   "notConfigured": "Online payments aren't available yet.",
+   "testMode": "Test mode: no real money moves. Pay with the test card 4242 4242 4242 4242, any future date and any CVC.",
+   "notConnected": "Not connected yet",
+   "notConnectedHint": "Stripe takes the card payments and pays them out to your bank. You'll fill in your club's details and bank account on Stripe's page; it takes about 10 minutes.",
+   "unfinished": "Stripe needs a few more details",
+   "unfinishedHint": "Finish the setup on Stripe's page. Once Stripe has checked your details, players can pay online.",
+   "ready": "Ready to take payments",
+   "readyHint": "Payments, payouts, refunds and Stripe's fees are all in your Stripe dashboard.",
+   "connect": "Connect Stripe",
+   "continue": "Continue setup",
+   "checkAgain": "Check again",
+   "openStripe": "Open Stripe",
+   "howTitle": "How players pay for a court",
+   "modes": {
+    "club": "At the club",
+    "clubHint": "Players book online and pay at the desk, as now.",
+    "online": "Online, when booking",
+    "onlineHint": "The booking is confirmed once they've paid. The court is held for 30 minutes while they pay; if they don't, it's freed again. Cancelling in time gives the money back automatically.",
+    "either": "Player chooses",
+    "eitherHint": "Players pick: pay online now, or at the club."
+   },
+   "modesAfterConnect": "You can choose once Stripe is ready.",
+   "saved": "Saved.",
+   "notes": "Lessons and group sessions are still paid at the club. Bookings you make yourself (walk-ins, members) too.",
+   "ownerOnly": "Only the club's owner can change payments.",
+   "errors": {
+    "notConfigured": "Online payments aren't available yet.",
+    "notOwner": "Only the club's owner can do this.",
+    "country": "Stripe doesn't take businesses from your club's country yet. Check the country in Club info, or see stripe.com/global.",
+    "failed": "Something went wrong. Please try again.",
+    "notReady": "Stripe isn't ready yet."
+   }
+  },
+  "book": {
+   "how": "How do you want to pay?",
+   "payNow": "Pay online now",
+   "payAtClub": "Pay at the club",
+   "onlineNote": "You pay online on the next page. The court is held for you for {min} minutes.",
+   "payButton": "Pay €{price}",
+   "cancelled": "Payment cancelled: the court wasn't booked."
+  },
+  "mine": {
+   "pending": "Waiting for payment",
+   "finish": "Finish paying",
+   "paid": "Paid online",
+   "refundDue": "Refund on its way",
+   "refunded": "Refunded",
+   "late": "Your payment came in after the court was let go, so it's being refunded. Please book again.",
+   "check": "We couldn't confirm the payment yet. If you paid, the booking shows as confirmed here in a minute."
+  },
+  "tag": {
+   "pending": "Awaiting payment",
+   "paid": "Paid online",
+   "refundDue": "Refund pending",
+   "refunded": "Refunded"
   }
  }
 }

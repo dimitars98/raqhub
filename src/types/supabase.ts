@@ -61,6 +61,13 @@ export type Database = {
       }
       bookings: {
         Row: {
+          payment_status: string
+          pay_by: string | null
+          paid_at: string | null
+          amount_paid: number | null
+          refunded_at: string | null
+          stripe_checkout_session_id: string | null
+          stripe_account_id: string | null
           checked_in_at: string | null
           coach_id: string | null
           court_id: string | null
@@ -84,6 +91,13 @@ export type Database = {
           walk_in_name: string | null
         }
         Insert: {
+          payment_status?: string
+          pay_by?: string | null
+          paid_at?: string | null
+          amount_paid?: number | null
+          refunded_at?: string | null
+          stripe_checkout_session_id?: string | null
+          stripe_account_id?: string | null
           checked_in_at?: string | null
           coach_id?: string | null
           court_id?: string | null
@@ -107,6 +121,13 @@ export type Database = {
           walk_in_name?: string | null
         }
         Update: {
+          payment_status?: string
+          pay_by?: string | null
+          paid_at?: string | null
+          amount_paid?: number | null
+          refunded_at?: string | null
+          stripe_checkout_session_id?: string | null
+          stripe_account_id?: string | null
           checked_in_at?: string | null
           coach_id?: string | null
           court_id?: string | null
@@ -336,6 +357,9 @@ export type Database = {
       }
       clubs: {
         Row: {
+          payment_mode: string
+          stripe_account_id: string | null
+          stripe_charges_enabled: boolean
           address: string | null
           booking_rules: Json | null
           open_matches: Json | null
@@ -362,6 +386,9 @@ export type Database = {
           website: string | null
         }
         Insert: {
+          payment_mode?: string
+          stripe_account_id?: string | null
+          stripe_charges_enabled?: boolean
           address?: string | null
           booking_rules?: Json | null
           open_matches?: Json | null
@@ -388,6 +415,9 @@ export type Database = {
           website?: string | null
         }
         Update: {
+          payment_mode?: string
+          stripe_account_id?: string | null
+          stripe_charges_enabled?: boolean
           address?: string | null
           booking_rules?: Json | null
           open_matches?: Json | null
@@ -1527,6 +1557,15 @@ export type Database = {
         Returns: { starts_at: string; ends_at: string; reason: string; courts: string[] | null }[]
       }
       league_view: { Args: { p_league: string }; Returns: Json }
+      club_payment_mode: { Args: { p_club: string }; Returns: string }
+      confirm_online_payment: {
+        Args: { p_booking: string; p_session: string; p_payment_intent: string; p_amount: number; p_account: string }
+        Returns: string
+      }
+      expire_unpaid_bookings: {
+        Args: never
+        Returns: { id: string; stripe_checkout_session_id: string | null; club_account: string | null }[]
+      }
       my_leagues: { Args: never; Returns: Json }
       league_sign_up: { Args: { p_league: string; p_name: string; p_partner: string }; Returns: string }
       league_withdraw: { Args: { p_league: string }; Returns: undefined }

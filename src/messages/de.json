@@ -1147,7 +1147,8 @@
    "hours": "Öffnungszeiten",
    "profile": "Ihr Profil",
    "booking": "Buchungsregeln",
-   "data": "Ihre Daten"
+   "data": "Ihre Daten",
+   "payments": "Zahlungen"
   },
   "days": [
    "Montag",
@@ -1389,7 +1390,8 @@
   "ruleCancel": "Dieser Club erlaubt Stornierungen nur bis {n} Stunden vor Beginn. Bitte rufen Sie den Club an.",
   "ruleNoShows": "Die Online-Buchung ist nach {n} verpassten Buchungen pausiert. Bitte kontaktieren Sie den Club.",
   "noCourtFree": "Zu dieser Zeit sind alle Plätze belegt. Bitte wählen Sie eine andere Zeit.",
-  "courtClosed": "Dieser Platz ist zu dieser Zeit gesperrt. Wählen Sie eine andere Zeit oder einen anderen Platz."
+  "courtClosed": "Dieser Platz ist zu dieser Zeit gesperrt. Wählen Sie eine andere Zeit oder einen anderen Platz.",
+  "paymentUnavailable": "Die Online-Zahlung funktioniert gerade nicht, daher wurde der Platz nicht gebucht. Bitte versuchen Sie es gleich noch einmal."
  },
  "settingsErrors": {
   "sevenDays": "Es werden sieben Tage benötigt",
@@ -3432,6 +3434,67 @@
    "notSignedIn": "Bitte melden Sie sich zuerst an.",
    "paused": "Dieser Club nimmt derzeit keine Online-Anmeldungen an.",
    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  }
+ },
+ "payments": {
+  "settings": {
+   "title": "Online-Zahlung",
+   "description": "Spieler bezahlen den Platz direkt bei der Buchung. Das Geld geht direkt auf das eigene Stripe-Konto Ihres Clubs.",
+   "notConfigured": "Online-Zahlung ist noch nicht verfügbar.",
+   "testMode": "Testmodus: Es fließt kein echtes Geld. Bezahlen Sie mit der Testkarte 4242 4242 4242 4242, einem beliebigen künftigen Datum und beliebiger CVC.",
+   "notConnected": "Noch nicht verbunden",
+   "notConnectedHint": "Stripe nimmt die Kartenzahlungen an und zahlt sie auf Ihr Bankkonto aus. Die Angaben zum Club und zum Bankkonto tragen Sie auf der Seite von Stripe ein; das dauert etwa 10 Minuten.",
+   "unfinished": "Stripe braucht noch ein paar Angaben",
+   "unfinishedHint": "Schließen Sie die Einrichtung auf der Seite von Stripe ab. Sobald Stripe Ihre Angaben geprüft hat, können Spieler online bezahlen.",
+   "ready": "Bereit für Zahlungen",
+   "readyHint": "Zahlungen, Auszahlungen, Erstattungen und die Gebühren von Stripe finden Sie in Ihrem Stripe-Dashboard.",
+   "connect": "Stripe verbinden",
+   "continue": "Einrichtung fortsetzen",
+   "checkAgain": "Erneut prüfen",
+   "openStripe": "Stripe öffnen",
+   "howTitle": "Wie Spieler einen Platz bezahlen",
+   "modes": {
+    "club": "Im Club",
+    "clubHint": "Spieler buchen online und zahlen an der Rezeption, wie bisher.",
+    "online": "Online bei der Buchung",
+    "onlineHint": "Die Buchung ist bestätigt, sobald bezahlt ist. Der Platz wird 30 Minuten reserviert, während sie bezahlen; sonst wird er wieder frei. Eine rechtzeitige Stornierung erstattet das Geld automatisch.",
+    "either": "Der Spieler wählt",
+    "eitherHint": "Spieler wählen: jetzt online zahlen oder im Club."
+   },
+   "modesAfterConnect": "Die Auswahl ist möglich, sobald Stripe bereit ist.",
+   "saved": "Gespeichert.",
+   "notes": "Trainerstunden und Gruppentermine werden weiterhin im Club bezahlt, ebenso Buchungen, die Sie selbst anlegen (Laufkundschaft, Mitglieder).",
+   "ownerOnly": "Nur der Inhaber des Clubs kann die Zahlungen ändern.",
+   "errors": {
+    "notConfigured": "Online-Zahlung ist noch nicht verfügbar.",
+    "notOwner": "Nur der Inhaber des Clubs kann das tun.",
+    "country": "Stripe nimmt noch keine Unternehmen aus dem Land Ihres Clubs an. Prüfen Sie das Land unter Club-Infos oder siehe stripe.com/global.",
+    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "notReady": "Stripe ist noch nicht bereit."
+   }
+  },
+  "book": {
+   "how": "Wie möchten Sie bezahlen?",
+   "payNow": "Jetzt online zahlen",
+   "payAtClub": "Im Club zahlen",
+   "onlineNote": "Sie bezahlen auf der nächsten Seite online. Der Platz wird {min} Minuten für Sie reserviert.",
+   "payButton": "€{price} bezahlen",
+   "cancelled": "Zahlung abgebrochen: Der Platz wurde nicht gebucht."
+  },
+  "mine": {
+   "pending": "Zahlung ausstehend",
+   "finish": "Zahlung abschließen",
+   "paid": "Online bezahlt",
+   "refundDue": "Erstattung unterwegs",
+   "refunded": "Erstattet",
+   "late": "Ihre Zahlung kam an, nachdem der Platz wieder freigegeben war, und wird daher erstattet. Bitte buchen Sie erneut.",
+   "check": "Wir konnten die Zahlung noch nicht bestätigen. Wenn Sie bezahlt haben, erscheint die Buchung hier in einer Minute als bestätigt."
+  },
+  "tag": {
+   "pending": "Zahlung ausstehend",
+   "paid": "Online bezahlt",
+   "refundDue": "Erstattung offen",
+   "refunded": "Erstattet"
   }
  }
 }

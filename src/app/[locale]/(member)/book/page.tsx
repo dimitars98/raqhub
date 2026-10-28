@@ -7,9 +7,9 @@ import BookingPaused from "@/components/ui/BookingPaused";
 export default async function BookPage({
   searchParams,
 }: {
-  searchParams: Promise<{ club?: string; court?: string }>;
+  searchParams: Promise<{ club?: string; court?: string; payment?: string }>;
 }) {
-  const { club: clubSlug, court: courtId } = await searchParams;
+  const { club: clubSlug, court: courtId, payment } = await searchParams;
   const supabase = await createClient();
 
   // ?club=<slug> comes from a club's public page: show only that club.
@@ -17,8 +17,8 @@ export default async function BookPage({
     .from("courts")
     .select(
       clubSlug
-        ? "*, club:clubs!inner(name, city, slug, phone, email, opening_hours, booking_rules)"
-        : "*, club:clubs(name, city, slug, phone, email, opening_hours, booking_rules)",
+        ? "*, club:clubs!inner(name, city, slug, phone, email, opening_hours, booking_rules, payment_mode, stripe_charges_enabled)"
+        : "*, club:clubs(name, city, slug, phone, email, opening_hours, booking_rules, payment_mode, stripe_charges_enabled)",
     )
     .eq("is_active", true)
     .order("price_per_hour");
@@ -49,7 +49,12 @@ export default async function BookPage({
 
   return (
     <Suspense fallback={<Spinner />}>
-      <BookCourtsClient courts={courts} clubName={clubName} openCourtId={courtId} />
+      <BookCourtsClient
+        courts={courts}
+        clubName={clubName}
+        openCourtId={courtId}
+        paymentCancelled={payment === "cancelled"}
+      />
     </Suspense>
   );
 }

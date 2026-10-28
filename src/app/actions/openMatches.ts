@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { insertCourtBooking, sendConfirmation } from "@/lib/courtBooking";
+import { checkoutOrRelease } from "@/lib/payments";
 import {
   LEVEL_MAX,
   LEVEL_MIN,
@@ -59,7 +60,9 @@ export type NewMatchInput = {
  * Returns the match id, an error key, or (for a booking problem) the
  * booking screens' own message in the player's language.
  */
-export async function createOpenMatch(input: NewMatchInput): Promise<Result & { id?: string }> {
+export async function createOpenMatch(
+  input: NewMatchInput,
+): Promise<Result & { id?: string; checkoutUrl?: string }> {
   const { supabase, user } = await signedIn();
   if (!user) return { error: "notSignedIn" };
   if (!validLevel(input.level_min) || !validLevel(input.level_max) || input.level_min > input.level_max) {
@@ -95,8 +98,14 @@ export async function createOpenMatch(input: NewMatchInput): Promise<Result & { 
     return { error: matchErrorKey(error?.message) };
   }
 
-  await sendConfirmation(supabase, user, booking.id);
   refresh(matchId);
+  // The club takes payment online: the organiser pays for the court first.
+  if (booking.pending) {
+    const pay = await checkoutOrRelease(booking.id, user.email ?? null, `/matches/${matchId}`);
+    if (pay.error) return { error: "booking", message: pay.error };
+    return { id: matchId, checkoutUrl: pay.checkoutUrl };
+  }
+  await sendConfirmation(supabase, user, booking.id);
   return { id: matchId };
 }
 

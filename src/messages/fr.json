@@ -1147,7 +1147,8 @@
    "hours": "Horaires",
    "profile": "Votre profil",
    "booking": "Règles de réservation",
-   "data": "Vos données"
+   "data": "Vos données",
+   "payments": "Paiements"
   },
   "days": [
    "Lundi",
@@ -1389,7 +1390,8 @@
   "ruleCancel": "Ce club n’autorise l’annulation que jusqu’à {n} heures avant le début. Veuillez appeler le club.",
   "ruleNoShows": "La réservation en ligne est suspendue après {n} absences. Veuillez contacter le club.",
   "noCourtFree": "Tous les terrains sont pris à cette heure. Choisissez une autre heure.",
-  "courtClosed": "Ce court est fermé à cette heure-là. Choisissez une autre heure ou un autre court."
+  "courtClosed": "Ce court est fermé à cette heure-là. Choisissez une autre heure ou un autre court.",
+  "paymentUnavailable": "Le paiement en ligne ne fonctionne pas pour le moment, le terrain n’a donc pas été réservé. Réessayez dans un instant."
  },
  "settingsErrors": {
   "sevenDays": "Sept jours sont nécessaires",
@@ -3432,6 +3434,67 @@
    "notSignedIn": "Connectez-vous d’abord.",
    "paused": "Ce club n’accepte pas d’inscriptions en ligne pour le moment.",
    "failed": "Un problème est survenu. Veuillez réessayer."
+  }
+ },
+ "payments": {
+  "settings": {
+   "title": "Paiement en ligne",
+   "description": "Les joueurs paient le terrain au moment de réserver. L’argent va directement sur le compte Stripe de votre club.",
+   "notConfigured": "Le paiement en ligne n’est pas encore disponible.",
+   "testMode": "Mode test : aucun argent réel ne circule. Payez avec la carte de test 4242 4242 4242 4242, une date future et n’importe quel CVC.",
+   "notConnected": "Pas encore connecté",
+   "notConnectedHint": "Stripe encaisse les paiements par carte et les verse sur votre compte bancaire. Vous saisissez les informations du club et du compte bancaire sur la page de Stripe ; comptez environ 10 minutes.",
+   "unfinished": "Stripe a besoin de quelques informations de plus",
+   "unfinishedHint": "Terminez la configuration sur la page de Stripe. Une fois vos informations vérifiées par Stripe, les joueurs peuvent payer en ligne.",
+   "ready": "Prêt à encaisser",
+   "readyHint": "Paiements, virements, remboursements et frais de Stripe se trouvent dans votre tableau de bord Stripe.",
+   "connect": "Connecter Stripe",
+   "continue": "Poursuivre la configuration",
+   "checkAgain": "Vérifier à nouveau",
+   "openStripe": "Ouvrir Stripe",
+   "howTitle": "Comment les joueurs paient un terrain",
+   "modes": {
+    "club": "Au club",
+    "clubHint": "Les joueurs réservent en ligne et paient à l’accueil, comme aujourd’hui.",
+    "online": "En ligne, à la réservation",
+    "onlineHint": "La réservation est confirmée une fois payée. Le terrain est bloqué 30 minutes pendant le paiement ; sinon il est libéré. Une annulation dans les délais rembourse automatiquement.",
+    "either": "Au choix du joueur",
+    "eitherHint": "Les joueurs choisissent : payer en ligne maintenant ou au club."
+   },
+   "modesAfterConnect": "Vous pourrez choisir quand Stripe sera prêt.",
+   "saved": "Enregistré.",
+   "notes": "Les cours et les séances de groupe se paient toujours au club, de même que les réservations que vous faites vous-même (clients de passage, membres).",
+   "ownerOnly": "Seul le propriétaire du club peut modifier les paiements.",
+   "errors": {
+    "notConfigured": "Le paiement en ligne n’est pas encore disponible.",
+    "notOwner": "Seul le propriétaire du club peut le faire.",
+    "country": "Stripe n’accepte pas encore les entreprises du pays de votre club. Vérifiez le pays dans Infos du club, ou consultez stripe.com/global.",
+    "failed": "Un problème est survenu. Veuillez réessayer.",
+    "notReady": "Stripe n’est pas encore prêt."
+   }
+  },
+  "book": {
+   "how": "Comment voulez-vous payer ?",
+   "payNow": "Payer en ligne maintenant",
+   "payAtClub": "Payer au club",
+   "onlineNote": "Vous payez en ligne à la page suivante. Le terrain vous est réservé pendant {min} minutes.",
+   "payButton": "Payer {price} €",
+   "cancelled": "Paiement annulé : le terrain n’a pas été réservé."
+  },
+  "mine": {
+   "pending": "Paiement en attente",
+   "finish": "Terminer le paiement",
+   "paid": "Payé en ligne",
+   "refundDue": "Remboursement en cours",
+   "refunded": "Remboursé",
+   "late": "Votre paiement est arrivé après la libération du terrain ; il vous est donc remboursé. Merci de réserver à nouveau.",
+   "check": "Nous n’avons pas encore pu confirmer le paiement. Si vous avez payé, la réservation apparaîtra ici comme confirmée d’ici une minute."
+  },
+  "tag": {
+   "pending": "Paiement en attente",
+   "paid": "Payé en ligne",
+   "refundDue": "Remboursement à faire",
+   "refunded": "Remboursé"
   }
  }
 }

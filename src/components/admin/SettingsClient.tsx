@@ -1,11 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import PaymentsSettings, { type PaymentsInfo } from "@/components/admin/PaymentsSettings";
 import { useEffect, useRef, useState, useTransition } from "react";
 import {
   Building2,
   Clock,
   CalendarOff,
+  CreditCard,
   Database,
   Download,
   Mail,
@@ -64,6 +66,8 @@ type SettingsProfile = {
 interface Props {
   club: SettingsClub;
   profile: SettingsProfile;
+  /** Online payments (Stripe). */
+  payments: PaymentsInfo;
   /** Section to open first, e.g. "hours". */
   initialTab?: string;
 }
@@ -74,10 +78,11 @@ const SECTIONS = [
   { id: "hours", icon: Clock },
   { id: "profile", icon: User },
   { id: "booking", icon: CalendarOff },
+  { id: "payments", icon: CreditCard },
   { id: "data", icon: Database },
 ];
 
-export default function SettingsClient({ club, profile, initialTab }: Props) {
+export default function SettingsClient({ club, profile, payments, initialTab }: Props) {
   const t = useTranslations("settingsPage");
 const { readOnly, hint } = useReadOnly();
   const dayNames = t.raw("days") as string[];
@@ -448,6 +453,8 @@ const { readOnly, hint } = useReadOnly();
         )}
 
         {/* Your data */}
+        {active === "payments" && <PaymentsSettings info={payments} />}
+
         {active === "data" && (
           <Section title={t("data.title")} description={t("data.description")}>
             <DataRow

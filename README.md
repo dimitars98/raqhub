@@ -148,6 +148,48 @@ picked in Admin > Courts. The booking page draws the court in that colour and
 says it ("Hard · Blue"). Run `supabase/migrations/20261027b_court_colors.sql`
 once; courts without a colour use their surface's usual one.
 
+## Online payments (Stripe)
+
+Players can pay for a court when they book. Each club connects **its own**
+Stripe account (Stripe Connect, "direct charges"): the money goes straight to
+the club, and refunds, disputes and Stripe's fees are the club's. Kortello can
+take a cut with `KORTELLO_FEE_PERCENT` (none by default).
+
+- **Database:** run `supabase/migrations/20261029_online_payments.sql` once,
+  after the leagues file.
+- **Package:** `npm install` (adds `stripe`).
+- **Environment** (`.env.local`, and the same in Vercel):
+
+  ```env
+  STRIPE_SECRET_KEY=sk_test_...          # Stripe → Developers → API keys
+  STRIPE_WEBHOOK_SECRET=whsec_...        # from the webhook below
+  # KORTELLO_FEE_PERCENT=0               # optional: your cut of each payment
+  ```
+
+- **Webhook:** Stripe → Developers → Webhooks → Add destination → **Connected
+  accounts** → `https://<your site>/api/stripe/webhook`, with the events
+  `checkout.session.completed`, `checkout.session.async_payment_succeeded`,
+  `checkout.session.expired`, `charge.refunded` and `account.updated`. Copy its
+  signing secret into `STRIPE_WEBHOOK_SECRET`.
+- **Testing on your computer:** install the Stripe CLI and run
+  `stripe listen --forward-connect-to localhost:3000/api/stripe/webhook`; it
+  prints a `whsec_…` to use as `STRIPE_WEBHOOK_SECRET` while it runs. (Paying
+  works without it too: the page Stripe sends the player back to confirms the
+  booking. The webhook covers players who close the tab, and expiry.)
+- **Turning it on for a club:** Admin > Settings > Payments > Connect Stripe,
+  fill in Stripe's form (in test mode Stripe offers test data), then choose
+  "Online, when booking" or "Player chooses". Pay with the card
+  `4242 4242 4242 4242`.
+- **How it works:** booking at a club that takes payment online holds the court
+  for 31 minutes (status *pending*) and sends the player to Stripe's checkout.
+  Paying confirms it and tells the club; not paying frees the court (webhook,
+  "Back" on Stripe's page, or the hourly job). Cancelling a paid booking (the
+  player, the club, or a court closure) refunds it automatically. Lessons,
+  group sessions and bookings the club makes are still paid at the club.
+- **Countries:** a club's Stripe account has to be in a country Stripe supports
+  (stripe.com/global); North Macedonia isn't one yet. Your own Kortello Stripe
+  account (the platform) also needs a supported country, e.g. a US company.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts
@@ -167,7 +209,7 @@ once; courts without a colour use their surface's usual one.
 - [ ] Coach detail + booking page
 - [ ] Email confirmations via Resend
 - [ ] Club admin dashboard (manage courts, view bookings)
-- [ ] Online payments (Stripe doesn't support North Macedonia, Albania, Kosovo or Serbia)
+- [x] Online payments with Stripe Connect (test mode until Kortello has a Stripe-supported company)
 - [ ] Availability rules per court/coach
 - [ ] Real-time availability via Supabase Realtime
 - [ ] Vercel deployment
