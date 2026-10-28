@@ -820,7 +820,37 @@
    "bankAsk": "Schreiben Sie an <email></email>, und wir schicken Ihnen unsere Bankverbindung.",
    "inPersonTitle": "Persönlich",
    "inPersonText": "Lieber bar bezahlen? Melden Sie sich, und wir vereinbaren einen Termin.",
-   "afterPaying": "Sobald Ihre Zahlung eingeht, markieren wir Ihren Tarif als bezahlt, meist innerhalb eines Werktags. Sie brauchen eine Rechnung für Ihre Firma? Fragen Sie einfach."
+   "afterPaying": "Sobald Ihre Zahlung eingeht, markieren wir Ihren Tarif als bezahlt, meist innerhalb eines Werktags. Sie brauchen eine Rechnung für Ihre Firma? Fragen Sie einfach.",
+   "otherTitle": "Oder per Banküberweisung zahlen"
+  },
+  "card": {
+   "title": "Per Karte zahlen",
+   "intro": "Bezahlen Sie Kortello per Karte, monatlich oder jährlich. Verlängert sich automatisch; jederzeit kündbar.",
+   "plan": "Tarif",
+   "period": "Abrechnung",
+   "periods": {
+    "month": "Monatlich",
+    "year": "Jährlich"
+   },
+   "perMonth": "pro Monat",
+   "perYear": "pro Jahr",
+   "twoMonthsFree": "2 Monate gratis",
+   "trialNote": "Es wird nichts abgebucht, bis Ihre Testphase am {date} endet.",
+   "pay": "Weiter zur Zahlung",
+   "secure": "Sichere Zahlung über Polar, das auch die Mehrwertsteuer abwickelt und Ihre Rechnungen sendet.",
+   "sandbox": "Testmodus: Karte 4242 4242 4242 4242, beliebiges künftiges Datum und beliebige CVC.",
+   "payingTitle": "Zahlung per Karte · {period}",
+   "renewsOn": "Verlängert sich am {date}.",
+   "endsOn": "Gekündigt: Ihr Tarif gilt bis {date}.",
+   "pastDue": "Die letzte Zahlung ist fehlgeschlagen. Aktualisieren Sie Ihre Karte, damit der Tarif weiterläuft.",
+   "manage": "Abo verwalten",
+   "manageHint": "Tarif oder Karte ändern, Rechnungen herunterladen oder kündigen.",
+   "thanks": "Danke! Die Kartenzahlung ist eingerichtet. Es kann eine Minute dauern, bis sie hier erscheint.",
+   "errors": {
+    "notConfigured": "Kartenzahlung ist noch nicht verfügbar.",
+    "notOwner": "Nur der Inhaber des Clubs kann das tun.",
+    "failed": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+   }
   }
  },
  "setup": {
@@ -1696,7 +1726,8 @@
   },
   "method": {
    "bank": "Überweisung",
-   "cash": "Bar"
+   "cash": "Bar",
+   "card": "Karte"
   },
   "pay": {
    "title": "Zahlung erfassen",

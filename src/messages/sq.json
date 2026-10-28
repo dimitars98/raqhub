@@ -820,7 +820,37 @@
    "bankAsk": "Na shkruani në <email></email> dhe do t’ju dërgojmë të dhënat tona bankare.",
    "inPersonTitle": "Personalisht",
    "inPersonText": "Preferoni të paguani me para në dorë? Na kontaktoni dhe do të caktojmë një takim.",
-   "afterPaying": "Sapo të mbërrijë pagesa, e shënojmë paketën si të paguar, zakonisht brenda një dite pune. Ju duhet faturë për kompaninë? Thjesht na e kërkoni."
+   "afterPaying": "Sapo të mbërrijë pagesa, e shënojmë paketën si të paguar, zakonisht brenda një dite pune. Ju duhet faturë për kompaninë? Thjesht na e kërkoni.",
+   "otherTitle": "Ose paguani me transfertë bankare"
+  },
+  "card": {
+   "title": "Paguani me kartë",
+   "intro": "Paguani Kortello me kartë, çdo muaj ose çdo vit. Rinovohet vetë; anuloni kur të doni.",
+   "plan": "Plani",
+   "period": "Faturimi",
+   "periods": {
+    "month": "Mujor",
+    "year": "Vjetor"
+   },
+   "perMonth": "në muaj",
+   "perYear": "në vit",
+   "twoMonthsFree": "2 muaj falas",
+   "trialNote": "Nuk do t’ju tarifohet derisa të përfundojë periudha falas më {date}.",
+   "pay": "Vazhdo te pagesa",
+   "secure": "Pagesë e sigurt përmes Polar, që merret edhe me TVSH-në dhe ju dërgon faturat.",
+   "sandbox": "Mënyrë testimi: përdorni kartën 4242 4242 4242 4242, çdo datë të ardhshme dhe çdo CVC.",
+   "payingTitle": "Paguani me kartë · {period}",
+   "renewsOn": "Rinovohet më {date}.",
+   "endsOn": "Anuluar: plani vlen deri më {date}.",
+   "pastDue": "Pagesa e fundit nuk kaloi. Përditësoni kartën që plani të vazhdojë.",
+   "manage": "Menaxho abonimin",
+   "manageHint": "Ndryshoni planin ose kartën, shkarkoni faturat ose anuloni.",
+   "thanks": "Faleminderit! Pagesa me kartë u konfigurua. Mund të duhet një minutë që të shfaqet këtu.",
+   "errors": {
+    "notConfigured": "Pagesa me kartë nuk është ende e disponueshme.",
+    "notOwner": "Vetëm pronari i klubit mund ta bëjë këtë.",
+    "failed": "Diçka shkoi keq. Provoni përsëri."
+   }
   }
  },
  "setup": {
@@ -1696,7 +1726,8 @@
   },
   "method": {
    "bank": "Transfertë bankare",
-   "cash": "Para në dorë"
+   "cash": "Para në dorë",
+   "card": "Kartë"
   },
   "pay": {
    "title": "Regjistro një pagesë",

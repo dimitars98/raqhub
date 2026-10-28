@@ -820,7 +820,37 @@
    "bankAsk": "Scrivi a <email></email> e ti invieremo i nostri dati bancari.",
    "inPersonTitle": "Di persona",
    "inPersonText": "Preferisci pagare in contanti? Contattaci e fissiamo un incontro.",
-   "afterPaying": "Appena arriva il pagamento, segniamo il piano come pagato, di solito entro un giorno lavorativo. Ti serve una fattura per la tua azienda? Basta chiedere."
+   "afterPaying": "Appena arriva il pagamento, segniamo il piano come pagato, di solito entro un giorno lavorativo. Ti serve una fattura per la tua azienda? Basta chiedere.",
+   "otherTitle": "Oppure paga con bonifico"
+  },
+  "card": {
+   "title": "Paga con carta",
+   "intro": "Paga Kortello con carta, al mese o all’anno. Si rinnova da solo; puoi disdire quando vuoi.",
+   "plan": "Piano",
+   "period": "Fatturazione",
+   "periods": {
+    "month": "Mensile",
+    "year": "Annuale"
+   },
+   "perMonth": "al mese",
+   "perYear": "all’anno",
+   "twoMonthsFree": "2 mesi gratis",
+   "trialNote": "Non ti verrà addebitato nulla fino alla fine della prova gratuita, il {date}.",
+   "pay": "Continua al pagamento",
+   "secure": "Pagamento sicuro tramite Polar, che gestisce anche l’IVA e ti invia le fatture.",
+   "sandbox": "Modalità test: carta 4242 4242 4242 4242, una data futura e un CVC qualsiasi.",
+   "payingTitle": "Paghi con carta · {period}",
+   "renewsOn": "Si rinnova il {date}.",
+   "endsOn": "Disdetto: il piano resta attivo fino al {date}.",
+   "pastDue": "L’ultimo pagamento non è andato a buon fine. Aggiorna la carta per mantenere il piano.",
+   "manage": "Gestisci abbonamento",
+   "manageHint": "Cambia piano o carta, scarica le fatture o disdici.",
+   "thanks": "Grazie! Il pagamento con carta è attivo. Può volerci un minuto prima che compaia qui.",
+   "errors": {
+    "notConfigured": "Il pagamento con carta non è ancora disponibile.",
+    "notOwner": "Solo il proprietario del circolo può farlo.",
+    "failed": "Qualcosa è andato storto. Riprova."
+   }
   }
  },
  "setup": {
@@ -1696,7 +1726,8 @@
   },
   "method": {
    "bank": "Bonifico",
-   "cash": "Contanti"
+   "cash": "Contanti",
+   "card": "Carta"
   },
   "pay": {
    "title": "Registra un pagamento",

@@ -183,6 +183,7 @@ export type Database = {
       }
       club_payments: {
         Row: {
+          polar_order_id: string | null
           id: string
           club_id: string
           plan: string
@@ -193,6 +194,7 @@ export type Database = {
           created_at: string
         }
         Insert: {
+          polar_order_id?: string | null
           id?: string
           club_id: string
           plan: string
@@ -203,6 +205,7 @@ export type Database = {
           created_at?: string
         }
         Update: {
+          polar_order_id?: string | null
           id?: string
           club_id?: string
           plan?: string
@@ -357,6 +360,10 @@ export type Database = {
       }
       clubs: {
         Row: {
+          polar_subscription_id: string | null
+          subscription_status: string | null
+          subscription_period: string | null
+          subscription_ends: boolean
           payment_mode: string
           stripe_account_id: string | null
           stripe_charges_enabled: boolean
@@ -386,6 +393,10 @@ export type Database = {
           website: string | null
         }
         Insert: {
+          polar_subscription_id?: string | null
+          subscription_status?: string | null
+          subscription_period?: string | null
+          subscription_ends?: boolean
           payment_mode?: string
           stripe_account_id?: string | null
           stripe_charges_enabled?: boolean
@@ -415,6 +426,10 @@ export type Database = {
           website?: string | null
         }
         Update: {
+          polar_subscription_id?: string | null
+          subscription_status?: string | null
+          subscription_period?: string | null
+          subscription_ends?: boolean
           payment_mode?: string
           stripe_account_id?: string | null
           stripe_charges_enabled?: boolean

@@ -820,7 +820,37 @@
    "bankAsk": "Write to <email></email> and we’ll send you our bank details.",
    "inPersonTitle": "In person",
    "inPersonText": "Prefer to pay in cash? Get in touch and we’ll arrange a time to meet.",
-   "afterPaying": "Once your payment arrives, we mark your plan as paid, usually within one working day. Need an invoice for your company? Just ask."
+   "afterPaying": "Once your payment arrives, we mark your plan as paid, usually within one working day. Need an invoice for your company? Just ask.",
+   "otherTitle": "Or pay by bank transfer"
+  },
+  "card": {
+   "title": "Pay by card",
+   "intro": "Pay for Kortello by card, monthly or yearly. It renews by itself; cancel any time.",
+   "plan": "Plan",
+   "period": "Billing",
+   "periods": {
+    "month": "Monthly",
+    "year": "Yearly"
+   },
+   "perMonth": "a month",
+   "perYear": "a year",
+   "twoMonthsFree": "2 months free",
+   "trialNote": "You won't be charged until your free trial ends on {date}.",
+   "pay": "Continue to payment",
+   "secure": "Secure checkout by Polar, which also handles VAT and sends your invoices.",
+   "sandbox": "Test mode: use the card 4242 4242 4242 4242, any future date and any CVC.",
+   "payingTitle": "Paying by card · {period}",
+   "renewsOn": "Renews on {date}.",
+   "endsOn": "Cancelled: your plan stays until {date}.",
+   "pastDue": "The last payment didn't go through. Update your card to keep the plan going.",
+   "manage": "Manage subscription",
+   "manageHint": "Change plan or card, download invoices, or cancel.",
+   "thanks": "Thanks! Your card payment is set up. It can take a minute to show here.",
+   "errors": {
+    "notConfigured": "Card payment isn't available yet.",
+    "notOwner": "Only the club's owner can do this.",
+    "failed": "Something went wrong. Please try again."
+   }
   }
  },
  "setup": {
@@ -1696,7 +1726,8 @@
   },
   "method": {
    "bank": "Bank transfer",
-   "cash": "Cash"
+   "cash": "Cash",
+   "card": "Card"
   },
   "pay": {
    "title": "Record a payment",

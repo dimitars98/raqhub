@@ -820,7 +820,37 @@
    "bankAsk": "Écrivez à <email></email> et nous vous enverrons nos coordonnées bancaires.",
    "inPersonTitle": "En personne",
    "inPersonText": "Vous préférez payer en espèces ? Contactez-nous et nous conviendrons d’un rendez-vous.",
-   "afterPaying": "Dès réception de votre paiement, nous marquons votre formule comme payée, généralement sous un jour ouvré. Besoin d’une facture pour votre société ? Il suffit de demander."
+   "afterPaying": "Dès réception de votre paiement, nous marquons votre formule comme payée, généralement sous un jour ouvré. Besoin d’une facture pour votre société ? Il suffit de demander.",
+   "otherTitle": "Ou payer par virement"
+  },
+  "card": {
+   "title": "Payer par carte",
+   "intro": "Payez Kortello par carte, au mois ou à l’année. Le renouvellement est automatique ; résiliable à tout moment.",
+   "plan": "Formule",
+   "period": "Facturation",
+   "periods": {
+    "month": "Mensuelle",
+    "year": "Annuelle"
+   },
+   "perMonth": "par mois",
+   "perYear": "par an",
+   "twoMonthsFree": "2 mois offerts",
+   "trialNote": "Aucun prélèvement avant la fin de votre essai gratuit, le {date}.",
+   "pay": "Continuer vers le paiement",
+   "secure": "Paiement sécurisé par Polar, qui gère aussi la TVA et vous envoie vos factures.",
+   "sandbox": "Mode test : carte 4242 4242 4242 4242, une date future et n’importe quel CVC.",
+   "payingTitle": "Paiement par carte · {period}",
+   "renewsOn": "Renouvellement le {date}.",
+   "endsOn": "Résilié : votre formule reste active jusqu’au {date}.",
+   "pastDue": "Le dernier paiement a échoué. Mettez à jour votre carte pour garder votre formule.",
+   "manage": "Gérer l’abonnement",
+   "manageHint": "Changer de formule ou de carte, télécharger les factures ou résilier.",
+   "thanks": "Merci ! Le paiement par carte est en place. Il peut falloir une minute pour qu’il apparaisse ici.",
+   "errors": {
+    "notConfigured": "Le paiement par carte n’est pas encore disponible.",
+    "notOwner": "Seul le propriétaire du club peut le faire.",
+    "failed": "Un problème est survenu. Veuillez réessayer."
+   }
   }
  },
  "setup": {
@@ -1696,7 +1726,8 @@
   },
   "method": {
    "bank": "Virement",
-   "cash": "Espèces"
+   "cash": "Espèces",
+   "card": "Carte"
   },
   "pay": {
    "title": "Enregistrer un paiement",

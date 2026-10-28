@@ -8,13 +8,15 @@ import { BILLING_COLUMNS, clubAccess } from "@/lib/plans";
 import { getStripe, stripeConfigured, stripeTestMode } from "@/lib/stripe";
 import { syncStripeAccount } from "@/lib/payments";
 import { payModeOf } from "@/lib/paymentMode";
+import { offeredProducts, polarConfigured, polarSandbox } from "@/lib/polar";
+import { getTranslations } from "next-intl/server";
 
 export default async function SettingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string; stripe?: string }>;
+  searchParams: Promise<{ tab?: string; stripe?: string; subscribed?: string }>;
 }) {
-  const { tab, stripe } = await searchParams;
+  const { tab, stripe, subscribed } = await searchParams;
   const supabase = await createClient();
 
   const {
@@ -26,7 +28,7 @@ export default async function SettingsPage({
     supabase
       .from("clubs")
       .select(
-        `id, name, slug, email, phone, address, city, country, website, description, logo_url, opening_hours, booking_rules, payment_mode, stripe_account_id, stripe_charges_enabled, ${BILLING_COLUMNS}`,
+        `id, name, slug, email, phone, address, city, country, website, description, logo_url, opening_hours, booking_rules, payment_mode, stripe_account_id, stripe_charges_enabled, polar_subscription_id, subscription_status, subscription_period, subscription_ends, ${BILLING_COLUMNS}`,
       )
       .eq("owner_id", user.id)
       .limit(1)
@@ -60,7 +62,30 @@ export default async function SettingsPage({
 
   return (
     <>
-      <PlanCard club={clubData} access={clubAccess(clubData)} />
+      {subscribed && (
+        <p role="status" className="mx-auto mb-4 max-w-[900px] rounded-2xl border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-900">
+          {(await getTranslations("billing.card"))("thanks")}
+        </p>
+      )}
+      <PlanCard
+        club={clubData}
+        access={clubAccess(clubData)}
+        card={
+          polarConfigured()
+            ? {
+                offered: offeredProducts(),
+                currentPlan: clubAccess(clubData).plan,
+                status: clubData.subscription_status,
+                period: clubData.subscription_period,
+                ends: clubData.subscription_ends,
+                paidUntil: clubData.paid_until,
+                trialEndsAt: clubData.trial_ends_at,
+                isOwner: true,
+                sandbox: polarSandbox(),
+              }
+            : null
+        }
+      />
       <SettingsClient
         club={club}
         initialTab={stripe ? "payments" : tab}

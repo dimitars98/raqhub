@@ -820,7 +820,37 @@
    "bankAsk": "Pišite na <email></email> i poslaćemo vam podatke o računu.",
    "inPersonTitle": "Lično",
    "inPersonText": "Želite da platite gotovinom? Javite nam se i dogovorićemo sastanak.",
-   "afterPaying": "Kada uplata stigne, označavamo paket kao plaćen, obično u roku od jednog radnog dana. Treba vam račun za firmu? Samo recite."
+   "afterPaying": "Kada uplata stigne, označavamo paket kao plaćen, obično u roku od jednog radnog dana. Treba vam račun za firmu? Samo recite.",
+   "otherTitle": "Ili platite bankarskim transferom"
+  },
+  "card": {
+   "title": "Plaćanje karticom",
+   "intro": "Platite Kortello karticom, mesečno ili godišnje. Obnavlja se samo; otkažite kad god želite.",
+   "plan": "Paket",
+   "period": "Naplata",
+   "periods": {
+    "month": "Mesečno",
+    "year": "Godišnje"
+   },
+   "perMonth": "mesečno",
+   "perYear": "godišnje",
+   "twoMonthsFree": "2 meseca besplatno",
+   "trialNote": "Ništa vam se neće naplatiti dok se besplatni period ne završi {date}.",
+   "pay": "Nastavi na plaćanje",
+   "secure": "Sigurno plaćanje preko Polar-a, koji obračunava i PDV i šalje vam fakture.",
+   "sandbox": "Test režim: kartica 4242 4242 4242 4242, bilo koji budući datum i bilo koji CVC.",
+   "payingTitle": "Plaćate karticom · {period}",
+   "renewsOn": "Obnavlja se {date}.",
+   "endsOn": "Otkazano: paket važi do {date}.",
+   "pastDue": "Poslednje plaćanje nije prošlo. Ažurirajte karticu da bi paket ostao aktivan.",
+   "manage": "Upravljaj pretplatom",
+   "manageHint": "Promenite paket ili karticu, preuzmite fakture ili otkažite.",
+   "thanks": "Hvala! Plaćanje karticom je podešeno. Može potrajati minut dok se ne pojavi ovde.",
+   "errors": {
+    "notConfigured": "Plaćanje karticom još nije dostupno.",
+    "notOwner": "Samo vlasnik kluba može to da uradi.",
+    "failed": "Nešto nije u redu. Pokušajte ponovo."
+   }
   }
  },
  "setup": {
@@ -1696,7 +1726,8 @@
   },
   "method": {
    "bank": "Uplata na račun",
-   "cash": "Gotovina"
+   "cash": "Gotovina",
+   "card": "Kartica"
   },
   "pay": {
    "title": "Zabeleži uplatu",

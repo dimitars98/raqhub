@@ -190,6 +190,44 @@ take a cut with `KORTELLO_FEE_PERCENT` (none by default).
   (stripe.com/global); North Macedonia isn't one yet. Your own Kortello Stripe
   account (the platform) also needs a supported country, e.g. a US company.
 
+## Clubs paying for Kortello by card (Polar)
+
+Clubs can pay for their Kortello plan by card, monthly or yearly, in
+Settings → "Pay by card". Polar is the merchant of record: it charges the card,
+handles VAT, sends invoices, and pays out to you (North Macedonia included).
+Bank transfers and cash still work, recorded on the owner page as before.
+
+- **Database:** run `supabase/migrations/20261029b_polar_subscriptions.sql` once.
+- **Package:** `npm install` (adds `@polar-sh/sdk`).
+- **In Polar** (use sandbox.polar.sh while testing): create six recurring
+  products, Starter / Club / Academy, each monthly and yearly, at the prices in
+  `src/lib/plans.ts`. Create an organization access token, and a webhook to
+  `https://<your site>/api/polar/webhook` with the `subscription.*` and
+  `order.paid` events.
+- **Environment:**
+
+  ```env
+  POLAR_ACCESS_TOKEN=polar_oat_...
+  POLAR_WEBHOOK_SECRET=...
+  POLAR_SERVER=sandbox                  # "production" when live
+  POLAR_PRODUCT_STARTER_MONTH=...       # product ids from Polar
+  POLAR_PRODUCT_STARTER_YEAR=...
+  POLAR_PRODUCT_CLUB_MONTH=...
+  POLAR_PRODUCT_CLUB_YEAR=...
+  POLAR_PRODUCT_ACADEMY_MONTH=...
+  POLAR_PRODUCT_ACADEMY_YEAR=...
+  ```
+
+- **How it works:** the checkout is made for the club (Polar customer id = the
+  club's id). A club still in its free trial isn't charged until the trial
+  ends. The webhook sets the club's plan and `paid_until` to the end of the
+  paid period, and every payment appears on the owner page with method "Card".
+  A failed renewal leaves `paid_until` as it was, so the usual 3 grace days
+  apply. "Manage subscription" opens Polar's page to change plan or card,
+  download invoices or cancel.
+- **Testing on your computer:** Polar can't reach localhost; use a tunnel
+  (e.g. `ngrok http 3000`) for the webhook, or test on a Vercel preview.
+
 ## What's built
 
 - [x] Homepage with live court/coach/club counts

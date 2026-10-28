@@ -41,7 +41,7 @@ export type OwnerPayment = {
   clubName: string;
   plan: string;
   period: Period;
-  method: "bank" | "cash";
+  method: "bank" | "cash" | "card";
   amount: number;
   paidUntil: string;
   createdAt: string;

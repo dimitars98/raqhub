@@ -12,6 +12,7 @@ import {
 } from "@/lib/plans";
 import { PAYMENT, paymentReference } from "@/lib/payment";
 import { intlLocale } from "@/lib/dateLocale";
+import CardSubscription, { type CardSubscriptionInfo } from "@/components/admin/CardSubscription";
 
 /** Strip above every admin page: trial days left, the grace days, or read-only. */
 export async function PlanBanner({ access, staff = false }: { access: ClubAccess; staff?: boolean }) {
@@ -110,9 +111,12 @@ export async function UpgradeNotice({ feature }: { feature: Feature }) {
 export async function PlanCard({
   club,
   access,
+  card,
 }: {
   club: ClubBilling & { slug?: string | null };
   access: ClubAccess;
+  /** Paying by card through Polar, when it is set up. */
+  card?: CardSubscriptionInfo | null;
 }) {
   const t = await getTranslations("billing");
   const dayFormat = new Intl.DateTimeFormat(intlLocale(await getLocale()), {
@@ -167,13 +171,23 @@ export async function PlanCard({
         {t("changePlan", { email: PAYMENT.email })}
       </p>
 
-      <HowToPay planId={access.plan} slug={club.slug ?? null} />
+      {card && <CardSubscription info={card} />}
+      <HowToPay planId={access.plan} slug={club.slug ?? null} other={!!card} />
     </div>
   );
 }
 
 /** Bank transfer and paying in person, with this club's amounts and reference. */
-async function HowToPay({ planId, slug }: { planId: ClubAccess["plan"]; slug: string | null }) {
+async function HowToPay({
+  planId,
+  slug,
+  other = false,
+}: {
+  planId: ClubAccess["plan"];
+  slug: string | null;
+  /** Card payment is offered above: this is the other way. */
+  other?: boolean;
+}) {
   const t = await getTranslations("billing.pay");
   const plan = PLANS[planId];
   const bank = PAYMENT.bank;
@@ -194,7 +208,7 @@ async function HowToPay({ planId, slug }: { planId: ClubAccess["plan"]; slug: st
 
   return (
     <div className="mt-5 border-t border-ink-100 pt-5">
-      <p className="text-sm font-semibold text-ink-900">{t("title")}</p>
+      <p className="text-sm font-semibold text-ink-900">{other ? t("otherTitle") : t("title")}</p>
       <p className="mt-1 text-sm text-ink-600">
         {t("amounts", { monthly: plan.priceMonthly, yearly: plan.priceYearly })}
       </p>
