@@ -18,17 +18,17 @@ export default function Spinner({
   const content = (
     <div className="flex flex-col items-center justify-center gap-3">
       <div
-        className={`rounded-full border-orange-100 border-t-orange-400 animate-spin ${SIZES[size]}`}
+        className={`rounded-full border-ink-100 border-t-brand-600 animate-spin ${SIZES[size]}`}
       />
       {label && (
-        <p className="text-sm text-orange-600 animate-pulse">{label}</p>
+        <p className="text-sm text-ink-400 animate-pulse">{label}</p>
       )}
     </div>
   );
 
   if (fullPage) {
     return (
-      <div className="min-h-screen bg-[#fff8f2] flex items-center justify-center">
+      <div className="min-h-screen bg-[#f8f9f7] flex items-center justify-center">
         {content}
       </div>
     );

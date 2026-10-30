@@ -474,7 +474,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
                 type="button"
                 disabled={saving}
                 onClick={() => save(sel, { status: "cancelled" })}
-                className="h-10 rounded-full border border-[#d0d9c9] bg-white text-[13px] font-medium text-[#111c0a]"
+                className="action action-danger action-lg h-10 text-[13px]"
               >
                 {t("details.cancelThis")}
               </button>
@@ -482,7 +482,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
                 type="button"
                 disabled={saving}
                 onClick={() => save(sel, { status: "cancelled" }, true)}
-                className="h-10 rounded-full border border-[#d0d9c9] bg-white text-[13px] font-medium text-[#111c0a]"
+                className="action action-danger action-lg h-10 text-[13px]"
               >
                 {t("details.cancelLater")}
               </button>
@@ -524,7 +524,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
                   disabled={readOnly || saving}
                   title={hint}
                   onClick={() => cancel(sel)}
-                  className="col-span-2 h-10 rounded-full text-[13px] font-semibold text-[#b42318] hover:bg-red-50 disabled:opacity-50"
+                  className="action action-danger action-lg col-span-2 h-10 text-[13px]"
                 >
                   {t("details.cancel")}
                 </button>

@@ -1,4 +1,4 @@
-import type { Surface } from "@/types/database";
+import type { Sport, Surface } from "@/types/database";
 
 // The colour a court really is (courts.color, 20261027b_court_colors.sql).
 // A club picks it per court; without one, the surface's usual colour is used.
@@ -50,6 +50,13 @@ export const SURFACE_DEFAULT_COLOR: Record<Surface, CourtColor> = {
 export const isCourtColor = (v: unknown): v is CourtColor =>
   typeof v === "string" && (COURT_COLORS as readonly string[]).includes(v);
 
-/** The colour to draw: the club's choice, or the surface's usual one. */
-export const courtColor = (court: { color?: string | null; surface: Surface }): CourtColor =>
-  isCourtColor(court.color) ? court.color : (SURFACE_DEFAULT_COLOR[court.surface] ?? "blue");
+/**
+ * The usual colour of a court: most padel courts are blue, whatever the
+ * surface; otherwise the surface decides.
+ */
+export const defaultColor = (sport: Sport | string | null | undefined, surface: Surface): CourtColor =>
+  sport === "padel" ? "blue" : (SURFACE_DEFAULT_COLOR[surface] ?? "blue");
+
+/** The colour to draw: the club's choice, or the usual one for its sport and surface. */
+export const courtColor = (court: { color?: string | null; surface: Surface; sport?: Sport | string | null }): CourtColor =>
+  isCourtColor(court.color) ? court.color : defaultColor(court.sport, court.surface);

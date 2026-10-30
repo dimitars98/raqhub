@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { CalendarCheck, ClipboardCheck, UsersRound } from "lucide-react";
+import { CalendarCheck, CircleX, ClipboardCheck, UsersRound } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { clubDay, clubFormat, clubTime, feeFor, money, monthName, scheduleText } from "@/lib/groups";
 import { leaveGroup, setAbsence, unbookSession } from "@/app/actions/groups";
@@ -347,8 +347,9 @@ function PlaceCard({ p, month }: { p: MyPlace; month: string }) {
                 router.refresh();
               });
             }}
-            className="text-[13px] text-ink-600 underline underline-offset-2 hover:text-red-700"
+            className="action action-danger"
           >
+            <CircleX size={12} aria-hidden="true" />
             {status === "waiting" || status === "requested" ? t("leaveWaiting") : t("leave")}
           </button>
         </div>

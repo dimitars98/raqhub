@@ -18,6 +18,7 @@ import { createClient } from "@/lib/supabase/client";
 import { toCsv } from "@/lib/csv";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { CancelActionButton, EditButton } from "@/components/ui/ActionButton";
 
 export type MemberWithPlan = Member & { plan?: MembershipPlan | null };
 
@@ -797,22 +798,12 @@ export default function MembersClient({
                           )}
                         </td>
                         <td className="py-3 pr-5">
-                          <div className="flex items-center justify-end gap-1">
-                            <button
-                              type="button"
-                              onClick={() => openEdit(m)}
-                              className="rounded-lg px-2.5 py-1.5 text-xs font-medium text-[#4d7a08] transition-colors hover:bg-[#f3fbde]"
-                            >
-                              {t("actions.edit")}
-                            </button>
+                          <div className="flex items-center justify-end gap-2">
+                            <EditButton onClick={() => openEdit(m)}>{t("actions.edit")}</EditButton>
                             {m.status === "active" && (
-                              <button title={hint} disabled={readOnly}
-                                type="button"
-                                onClick={() => handleCancel(m.id)}
-                                className="rounded-lg px-2.5 py-1.5 text-xs text-red-600 transition-colors hover:bg-red-50"
-                              >
+                              <CancelActionButton title={hint} disabled={readOnly} onClick={() => handleCancel(m.id)}>
                                 {t("actions.cancel")}
-                              </button>
+                              </CancelActionButton>
                             )}
                           </div>
                         </td>

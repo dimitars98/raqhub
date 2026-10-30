@@ -211,6 +211,7 @@
   "statusFailed": "Impossible de modifier la réservation. Veuillez réessayer.",
   "title": "Réservations",
   "total": "total",
+  "price": "Prix",
   "addBooking": "Ajouter une réservation",
   "searchPlaceholder": "Rechercher nom, court ou réf...",
   "all": "Toutes",

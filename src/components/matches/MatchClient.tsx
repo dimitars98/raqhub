@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ChevronLeft, Link2, ShieldCheck, X } from "lucide-react";
+import { ChevronLeft, Link2, ShieldCheck } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import {
   answerRequest,
@@ -18,6 +18,7 @@ import { useLabels } from "@/hooks/useLabels";
 import { clubFormat, clubTime } from "@/lib/groups";
 import { fitsLevel, isFull, levelText, rangeText, type MatchDetail, type MatchPlayer } from "@/lib/openMatches";
 import { EmptyDot, LevelTag, PlayerDot, money, useWhen } from "./bits";
+import { DeleteButton } from "@/components/ui/ActionButton";
 
 export default function MatchClient({
   match: m,
@@ -307,13 +308,13 @@ export default function MatchClient({
                     type="button"
                     disabled={pending}
                     onClick={() => run(() => cancelMatch(m.id), () => setConfirmCancel(false))}
-                    className="btn-primary flex-1 justify-center bg-red-700 hover:bg-red-800"
+                    className="btn-danger flex-1"
                   >
                     {t("yesCancel")}
                   </button>
                 </div>
               ) : (
-                <button type="button" onClick={() => setConfirmCancel(true)} className="btn-secondary h-12 justify-center">
+                <button type="button" onClick={() => setConfirmCancel(true)} className="btn-secondary h-12 justify-center text-red-600">
                   {t("cancelCourt")}
                 </button>
               )
@@ -323,7 +324,7 @@ export default function MatchClient({
                   type="button"
                   disabled={pending}
                   onClick={() => run(() => leaveMatch(m.id))}
-                  className="btn-secondary h-12 justify-center"
+                  className="btn-secondary h-12 justify-center text-red-600"
                 >
                   {t("leave")}
                 </button>
@@ -337,7 +338,7 @@ export default function MatchClient({
                   type="button"
                   disabled={pending}
                   onClick={() => run(() => leaveMatch(m.id))}
-                  className="btn-secondary h-11 justify-center"
+                  className="btn-secondary h-11 justify-center text-red-600"
                 >
                   {t("withdraw")}
                 </button>
@@ -408,16 +409,13 @@ function PlayerRow({
         </span>
       </span>
       {canRemove && (
-        <button
-          type="button"
+        <DeleteButton
+          iconOnly
           disabled={pending}
           onClick={onRemove}
           aria-label={t("removeName", { name: p.name })}
           title={t("remove")}
-          className="grid size-8 place-items-center rounded-lg text-ink-400 hover:bg-white hover:text-red-700"
-        >
-          <X size={15} aria-hidden="true" />
-        </button>
+        />
       )}
     </div>
   );

@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { format } from "date-fns";
-import { ArrowLeft, Check, Copy, ExternalLink, Shuffle, X } from "lucide-react";
+import { ArrowLeft, Check, Copy, ExternalLink, Pencil, Shuffle } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import Modal from "@/components/ui/Modal";
 import Bracket from "@/components/tournaments/Bracket";
@@ -25,6 +25,7 @@ import { BADGE, TOURNAMENT_STATUS_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import type { Tournament, TournamentEntry, TournamentMatch } from "@/types/database";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import { DeleteButton } from "@/components/ui/ActionButton";
 
 export default function TournamentClient({
   tournament,
@@ -108,7 +109,8 @@ const { readOnly, hint } = useReadOnly();
             <ExternalLink size={15} aria-hidden="true" />
             {t("manage.publicPage")}
           </Link>
-          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary">
+          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary inline-flex items-center gap-2">
+            <Pencil size={15} aria-hidden="true" />
             {t("edit")}
           </button>
         </div>
@@ -134,8 +136,9 @@ const { readOnly, hint } = useReadOnly();
               type="button"
               disabled={pending}
               onClick={() => confirm(t("manage.redrawConfirm")) && run(() => undoDraw(tournament.id))}
-              className="text-sm font-medium text-ink-400 hover:text-red-600"
+              className="action action-danger"
             >
+              <Shuffle size={12} aria-hidden="true" />
               {t("manage.redraw")}
             </button>
           </div>
@@ -207,15 +210,12 @@ const { readOnly, hint } = useReadOnly();
                   <span className="w-6 tabular-nums text-ink-400">{i + 1}.</span>
                   <span className="flex-1 font-medium text-ink-900">{entryName(e)}</span>
                   {e.player_id && <span className="text-xs text-ink-400">{t("manage.signedUpOnline")}</span>}
-                  <button
-                    type="button"
+                  <DeleteButton
+                    iconOnly
                     disabled={pending}
                     onClick={() => run(() => removeEntry(tournament.id, e.id))}
                     aria-label={t("manage.remove")}
-                    className="grid size-7 place-items-center rounded-lg text-ink-400 hover:bg-red-50 hover:text-red-600"
-                  >
-                    <X size={14} aria-hidden="true" />
-                  </button>
+                  />
                 </li>
               ))}
             </ol>
@@ -239,17 +239,15 @@ const { readOnly, hint } = useReadOnly();
       )}
 
       <div className="mt-8 text-right">
-        <button
-          type="button"
+        <DeleteButton
           disabled={pending}
           onClick={() =>
             confirm(t("deleteConfirm")) &&
             run(() => deleteTournament(tournament.id), () => router.push("/admin/tournaments"))
           }
-          className="text-sm font-medium text-red-500 hover:text-red-700"
         >
           {t("delete")}
-        </button>
+        </DeleteButton>
       </div>
 
       {editing && (
@@ -335,7 +333,7 @@ function ResultModal({
         </Modal.Body>
         <Modal.Footer>
           {match.winner_id && (
-            <button type="button" disabled={pending} onClick={() => onSave(null, "")} className="btn-secondary">
+            <button type="button" disabled={pending} onClick={() => onSave(null, "")} className="btn-secondary text-red-600">
               {t("manage.clearResult")}
             </button>
           )}

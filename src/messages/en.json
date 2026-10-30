@@ -211,6 +211,7 @@
   "statusFailed": "Couldn't change the booking. Please try again.",
   "title": "Bookings",
   "total": "total",
+  "price": "Price",
   "addBooking": "Add booking",
   "searchPlaceholder": "Search name, court or ref...",
   "all": "All",

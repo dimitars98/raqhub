@@ -4,6 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Archive,
+  CalendarClock,
   ArrowRightLeft,
   Check,
   ClipboardCheck,
@@ -46,6 +47,7 @@ import { cancelSession, markFee, restoreSession, unmarkFee } from "@/app/actions
 import type { FeeMethod, Group, GroupAttendance, GroupFee, GroupPlayer, GroupSession } from "@/types/database";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { ActionButton, CancelActionButton } from "@/components/ui/ActionButton";
 
 export type DetailGroup = Group & { coachName: string | null; courtName: string | null };
 export type DetailSession = GroupSession & { courtName: string | null };
@@ -1108,26 +1110,28 @@ function Sessions({
               </span>
               <span className="flex flex-wrap items-center gap-1.5">
                 {!cancelled && (
-                  <Link href={`${base}/register/${s.id}`} className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 px-3 py-1.5 text-[13px] font-medium text-ink-900 hover:bg-ink-50">
-                    <ClipboardCheck size={14} aria-hidden="true" />
+                  <Link href={`${base}/register/${s.id}`} className="action action-neutral">
+                    <ClipboardCheck size={12} aria-hidden="true" />
                     {s.register_taken_at ? td("viewRegister") : td("register")}
                   </Link>
                 )}
                 {!cancelled && !isPast && admin && (
-                  <button type="button" onClick={() => onMove(s)} className="rounded-full px-3 py-1.5 text-[13px] text-ink-600 hover:bg-ink-50">
+                  <ActionButton icon={<CalendarClock size={12} aria-hidden="true" />} onClick={() => onMove(s)}>
                     {td("move")}
-                  </button>
+                  </ActionButton>
                 )}
                 {!cancelled && !isPast && (
-                  <button type="button" onClick={() => onCancel(s)} className="rounded-full px-3 py-1.5 text-[13px] text-red-700 hover:bg-red-50">
-                    {td("cancel")}
-                  </button>
+                  <CancelActionButton onClick={() => onCancel(s)}>{td("cancel")}</CancelActionButton>
                 )}
                 {cancelled && !isPast && (
-                  <button type="button" disabled={busy} onClick={() => onRestore(s)} className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-ink-800 hover:bg-ink-50">
-                    <RotateCcw size={13} aria-hidden="true" />
+                  <ActionButton
+                    tone="positive"
+                    icon={<RotateCcw size={12} aria-hidden="true" />}
+                    disabled={busy}
+                    onClick={() => onRestore(s)}
+                  >
                     {td("restore")}
-                  </button>
+                  </ActionButton>
                 )}
               </span>
             </div>
@@ -1199,7 +1203,7 @@ export function CancelModal({
                 onClose();
               })
             }
-            className="flex-1 rounded-full bg-red-700 px-5 py-2.5 text-sm font-medium text-white disabled:opacity-50"
+            className="btn-danger flex-1"
           >
             {pending ? td("working") : td("cancelSession")}
           </button>

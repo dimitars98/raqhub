@@ -3,7 +3,11 @@
 import { dateLocale } from "@/lib/dateLocale";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { type ReadonlyURLSearchParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  type ReadonlyURLSearchParams,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { format, addDays, startOfDay, setHours, setMinutes } from "date-fns";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations, useLocale } from "next-intl";
@@ -53,6 +57,8 @@ type SeriesNotice = { added: number; skipped: Date[] };
 
 const DURATIONS = [60, 90, 120];
 
+const TH = "text-left px-5 py-3 text-xs font-semibold text-[#6e7f65] whitespace-nowrap";
+
 /** A no-show from the last 90 days, used to count them per player. */
 export type NoShow = Pick<Booking, "id" | "player_id" | "member_id">;
 
@@ -79,7 +85,9 @@ export default function BookingsClient({
   const [bookings, setBookings] = useState(initial);
   const searchParams = useSearchParams();
   // The timetable's "+" opens the form straight away (?new=1&court=&date=&hour=).
-  const [showModal, setShowModal] = useState(() => searchParams.get("new") === "1");
+  const [showModal, setShowModal] = useState(
+    () => searchParams.get("new") === "1",
+  );
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [notice, setNotice] = useState<SeriesNotice | null>(null);
   // A status change or cancellation that didn't save.
@@ -90,7 +98,7 @@ export default function BookingsClient({
   const router = useRouter();
   const supabase = createClient();
   const t = useTranslations("adminBookings");
-const { readOnly, hint } = useReadOnly();
+  const { readOnly, hint } = useReadOnly();
   const labels = useLabels();
   const locale = useLocale();
   const dfLocale = dateLocale(locale);
@@ -140,7 +148,10 @@ const { readOnly, hint } = useReadOnly();
 
   const onSubmit = async (values: FormValues) => {
     // The chosen day at the chosen hour, in the admin's own time.
-    const first = setMinutes(setHours(new Date(`${values.date}T00:00`), values.hour), 0);
+    const first = setMinutes(
+      setHours(new Date(`${values.date}T00:00`), values.hour),
+      0,
+    );
     const weeks = values.repeat > 1 ? values.repeat : 1;
     const seriesId = weeks > 1 ? crypto.randomUUID() : null;
 
@@ -157,7 +168,9 @@ const { readOnly, hint } = useReadOnly();
             : null,
         player_id: null,
         starts_at: startsAt.toISOString(),
-        ends_at: new Date(startsAt.getTime() + values.duration * 60_000).toISOString(),
+        ends_at: new Date(
+          startsAt.getTime() + values.duration * 60_000,
+        ).toISOString(),
         duration_min: values.duration,
         total_price: total,
         status: "confirmed",
@@ -189,8 +202,7 @@ const { readOnly, hint } = useReadOnly();
       if (error?.code === "23P01") {
         skipped.push(startsAt);
         if (error.message?.includes("court_closed")) closed++;
-      }
-      else if (error || !data) {
+      } else if (error || !data) {
         failed = true;
         break;
       } else added.push(data);
@@ -233,7 +245,7 @@ const { readOnly, hint } = useReadOnly();
       .eq("status", "confirmed");
     if (error) {
       console.error("[bookings] cancel series", error);
-      setRowError(readOnly ? hint ?? null : t("statusFailed"));
+      setRowError(readOnly ? (hint ?? null) : t("statusFailed"));
       return;
     }
     setBookings((prev) =>
@@ -241,7 +253,12 @@ const { readOnly, hint } = useReadOnly();
         x.series_id === b.series_id &&
         x.status === "confirmed" &&
         x.starts_at >= b.starts_at
-          ? { ...x, status: "cancelled", payment_status: x.payment_status === "paid" ? "refund_due" : x.payment_status }
+          ? {
+              ...x,
+              status: "cancelled",
+              payment_status:
+                x.payment_status === "paid" ? "refund_due" : x.payment_status,
+            }
           : x,
       ),
     );
@@ -256,7 +273,7 @@ const { readOnly, hint } = useReadOnly();
     // Only show the change if it was really saved.
     if (error) {
       console.error("[bookings] status", error);
-      setRowError(readOnly ? hint ?? null : t("statusFailed"));
+      setRowError(readOnly ? (hint ?? null) : t("statusFailed"));
       return;
     }
     setRowError(null);
@@ -268,7 +285,9 @@ const { readOnly, hint } = useReadOnly();
               status,
               // Paid online: the money goes back (20261029_online_payments.sql).
               payment_status:
-                status === "cancelled" && b.payment_status === "paid" ? "refund_due" : b.payment_status,
+                status === "cancelled" && b.payment_status === "paid"
+                  ? "refund_due"
+                  : b.payment_status,
             }
           : b,
       ),
@@ -301,6 +320,67 @@ const { readOnly, hint } = useReadOnly();
         b.court?.name?.toLowerCase().includes(search.toLowerCase())
       );
     });
+
+  // Pieces shared by the phone cards and the table.
+  const courtLabel = (b: BookingWithJoins) =>
+    b.court?.name ??
+    (b.coach ? `${t("lesson")} · ${b.coach.profile?.full_name ?? ""}` : "—");
+
+  const noShowBadge = (b: BookingWithJoins) => {
+    const count = noShowCount.get(personKey(b) ?? "") ?? 0;
+    return (
+      <NoShowBadge
+        count={count}
+        paused={maxNoShows > 0 && !!b.player_id && count >= maxNoShows}
+      />
+    );
+  };
+
+  const weeklyBadge = (b: BookingWithJoins) =>
+    b.series_id ? (
+      <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#f3fbde] px-2 py-0.5 text-[11px] font-medium text-[#4d7a08] whitespace-nowrap">
+        <Repeat size={11} aria-hidden="true" /> {t("weekly")}
+      </div>
+    ) : null;
+
+  const statusSelect = (b: BookingWithJoins) => (
+    <SelectField
+      size="xs"
+      ariaLabel={t("status")}
+      disabled={readOnly}
+      title={hint}
+      value={b.status}
+      onChange={(v) => {
+        const status = v as BookingStatus;
+        if (status === "cancelled" && b.series_id) setCancelling(b);
+        else handleStatus(b.id, status);
+      }}
+      options={BOOKING_STATUSES.map((s) => ({
+        value: s,
+        label: labels.bookingStatus(s),
+      }))}
+    />
+  );
+
+  const emptyState = (
+    <>
+      <p className="text-sm text-[#6e7f65]">{t("noBookings")}</p>
+      {bookings.length === 0 && (
+        <button
+          disabled={readOnly}
+          title={hint}
+          type="button"
+          onClick={() => {
+            reset(prefill(null, courts));
+            setShowModal(true);
+          }}
+          className="btn-primary mt-4"
+        >
+          {t("addBooking")}
+        </button>
+      )}
+    </>
+  );
 
   return (
     <div>
@@ -352,7 +432,10 @@ const { readOnly, hint } = useReadOnly();
       </div>
 
       {rowError && (
-        <p role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p
+          role="alert"
+          className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
           {rowError}
         </p>
       )}
@@ -364,7 +447,9 @@ const { readOnly, hint } = useReadOnly();
         >
           <Repeat size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
           <div className="flex-1">
-            <p className="font-medium">{t("addedSeries", { n: notice.added })}</p>
+            <p className="font-medium">
+              {t("addedSeries", { n: notice.added })}
+            </p>
             {notice.skipped.length > 0 && (
               <p className="mt-0.5 text-[#4d7a08]">
                 {t("skippedWeeks", {
@@ -386,31 +471,77 @@ const { readOnly, hint } = useReadOnly();
         </div>
       )}
 
-      <div className="bg-white border border-[#e8ede4] rounded-2xl overflow-hidden">
-        <table className="w-full text-sm">
+      {/* Phones: one card per booking. */}
+      <div className="md:hidden space-y-3">
+        {!filtered.length ? (
+          <div className="bg-white border border-[#e8ede4] rounded-2xl px-6 py-12 text-center">
+            {emptyState}
+          </div>
+        ) : (
+          filtered.map((b) => (
+            <div
+              key={b.id}
+              className="bg-white border border-[#e8ede4] rounded-2xl p-4"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="font-medium text-[#111c0a] truncate">
+                    {bookingName(b, "—")}
+                  </div>
+                  <div className="text-xs text-[#6e7f65]">
+                    <span className="font-mono text-[#7aad12]">
+                      {b.reference}
+                    </span>
+                    {b.walk_in_name && <> · {t("walkIn")}</>}
+                  </div>
+                  {noShowBadge(b)}
+                </div>
+                <span
+                  className={`${BADGE} ${bookingStatusTone(b.status)} shrink-0`}
+                >
+                  {labels.bookingStatus(b.status)}
+                </span>
+              </div>
+
+              <div className="mt-3 text-sm text-[#3d4f35]">
+                <div>{courtLabel(b)}</div>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span>
+                    {format(new Date(b.starts_at), "EEE d MMM, HH:mm", {
+                      locale: dfLocale,
+                    })}{" "}
+                    · {b.duration_min} {t("min")}
+                  </span>
+                  {weeklyBadge(b)}
+                </div>
+              </div>
+
+              <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#e8ede4] pt-3">
+                <div className="font-medium text-[#111c0a] whitespace-nowrap">
+                  €{b.total_price.toFixed(2)}
+                  <PaymentTag status={b.payment_status} className="ml-1.5" />
+                </div>
+                <div className="w-36">{statusSelect(b)}</div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Tablets and up: the table. Ref and duration fold away below lg. */}
+      <div className="hidden md:block bg-white border border-[#e8ede4] rounded-2xl overflow-x-auto">
+        <table className="w-full min-w-[720px] text-sm">
           <thead>
             <tr className="border-b border-[#e8ede4] bg-[#f8f9f7]">
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
-                {t("ref")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
-                {t("player")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
-                {t("court")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
-                {t("dateTime")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
+              <th className={`${TH} hidden lg:table-cell`}>{t("ref")}</th>
+              <th className={TH}>{t("player")}</th>
+              <th className={TH}>{t("court")}</th>
+              <th className={TH}>{t("dateTime")}</th>
+              <th className={`${TH} hidden lg:table-cell`}>
                 {t("duration")}
               </th>
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
-                {t("total")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-semibold text-[#6e7f65]">
-                {t("status")}
-              </th>
+              <th className={TH}>{t("price")}</th>
+              <th className={TH}>{t("status")}</th>
               <th className="px-5 py-3" />
             </tr>
           </thead>
@@ -418,21 +549,7 @@ const { readOnly, hint } = useReadOnly();
             {!filtered.length ? (
               <tr>
                 <td colSpan={8} className="px-6 py-16 text-center">
-                  <p className="text-sm text-[#6e7f65]">{t("noBookings")}</p>
-                  {bookings.length === 0 && (
-                    <button
-                      disabled={readOnly}
-                      title={hint}
-                      type="button"
-                      onClick={() => {
-                        reset(prefill(null, courts));
-                        setShowModal(true);
-                      }}
-                      className="btn-primary mt-4"
-                    >
-                      {t("addBooking")}
-                    </button>
-                  )}
+                  {emptyState}
                 </td>
               </tr>
             ) : (
@@ -441,8 +558,8 @@ const { readOnly, hint } = useReadOnly();
                   key={b.id}
                   className={`border-b border-[#e8ede4] hover:bg-[#f8f9f7] transition-colors ${i === filtered.length - 1 ? "border-0" : ""}`}
                 >
-                  <td className="px-5 py-3.5">
-                    <span className="text-xs font-medium text-[#7aad12] font-mono">
+                  <td className="px-5 py-3.5 hidden lg:table-cell">
+                    <span className="text-xs font-medium text-[#7aad12] font-mono whitespace-nowrap">
                       {b.reference}
                     </span>
                   </td>
@@ -455,57 +572,41 @@ const { readOnly, hint } = useReadOnly();
                         {t("walkIn")}
                       </div>
                     )}
-                    <NoShowBadge
-                      count={noShowCount.get(personKey(b) ?? "") ?? 0}
-                      paused={
-                        maxNoShows > 0 &&
-                        !!b.player_id &&
-                        (noShowCount.get(personKey(b) ?? "") ?? 0) >= maxNoShows
-                      }
-                    />
+                    {/* Ref moves under the name when its column is hidden. */}
+                    <div className="lg:hidden text-xs font-mono text-[#7aad12]">
+                      {b.reference}
+                    </div>
+                    {noShowBadge(b)}
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
-                    {b.court?.name ??
-                      (b.coach
-                        ? `${t("lesson")} · ${b.coach.profile?.full_name ?? ""}`
-                        : "—")}
+                    {courtLabel(b)}
                   </td>
                   <td className="px-5 py-3.5 text-[#3d4f35]">
-                    {format(new Date(b.starts_at), "EEE d MMM, HH:mm", { locale: dfLocale })}
-                    {b.series_id && (
-                      <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#f3fbde] px-2 py-0.5 text-[11px] font-medium text-[#4d7a08]">
-                        <Repeat size={11} aria-hidden="true" /> {t("weekly")}
-                      </div>
-                    )}
+                    <div className="whitespace-nowrap">
+                      {format(new Date(b.starts_at), "EEE d MMM, HH:mm", {
+                        locale: dfLocale,
+                      })}
+                    </div>
+                    {/* Duration moves under the date when its column is hidden. */}
+                    <div className="lg:hidden text-xs text-[#6e7f65]">
+                      {b.duration_min} {t("min")}
+                    </div>
+                    {weeklyBadge(b)}
                   </td>
-                  <td className="px-5 py-3.5 text-[#3d4f35]">
+                  <td className="px-5 py-3.5 text-[#3d4f35] whitespace-nowrap hidden lg:table-cell">
                     {b.duration_min} {t("min")}
                   </td>
-                  <td className="px-5 py-3.5 font-medium text-[#111c0a]">
+                  <td className="px-5 py-3.5 font-medium text-[#111c0a] whitespace-nowrap">
                     €{b.total_price.toFixed(2)}
                     <PaymentTag status={b.payment_status} className="ml-1.5" />
                   </td>
                   <td className="px-5 py-3.5">
-                    <span className={`${BADGE} ${bookingStatusTone(b.status)}`}>
+                    <span className={`${BADGE} ${bookingStatusTone(b.status)} whitespace-nowrap`}>
                       {labels.bookingStatus(b.status)}
                     </span>
                   </td>
                   <td className="px-5 py-3.5">
-                    <div className="w-32">
-                      <SelectField
-                        size="xs"
-                        ariaLabel={t("status")}
-                        disabled={readOnly}
-                        title={hint}
-                        value={b.status}
-                        onChange={(v) => {
-                          const status = v as BookingStatus;
-                          if (status === "cancelled" && b.series_id) setCancelling(b);
-                          else handleStatus(b.id, status);
-                        }}
-                        options={BOOKING_STATUSES.map((s) => ({ value: s, label: labels.bookingStatus(s) }))}
-                      />
-                    </div>
+                    <div className="w-32">{statusSelect(b)}</div>
                   </td>
                 </tr>
               ))
@@ -532,7 +633,10 @@ const { readOnly, hint } = useReadOnly();
                       invalid={!!fieldState.error}
                       options={[
                         { value: "", label: t("selectCourt") },
-                        ...courts.map((c) => ({ value: c.id, label: `${c.name} — €${c.price_per_hour}/hr` })),
+                        ...courts.map((c) => ({
+                          value: c.id,
+                          label: `${c.name} — €${c.price_per_hour}/hr`,
+                        })),
                       ]}
                     />
                   )}
@@ -574,7 +678,10 @@ const { readOnly, hint } = useReadOnly();
                         onChange={field.onChange}
                         options={[
                           { value: "", label: t("selectMember") },
-                          ...members.map((m) => ({ value: m.id, label: m.full_name })),
+                          ...members.map((m) => ({
+                            value: m.id,
+                            label: m.full_name,
+                          })),
                         ]}
                       />
                     )}
@@ -629,7 +736,10 @@ const { readOnly, hint } = useReadOnly();
                         ariaLabel={t("startTime")}
                         value={String(field.value)}
                         onChange={(v) => field.onChange(Number(v))}
-                        options={DAY_HOURS.map((h) => ({ value: String(h), label: `${String(h).padStart(2, "0")}:00` }))}
+                        options={DAY_HOURS.map((h) => ({
+                          value: String(h),
+                          label: `${String(h).padStart(2, "0")}:00`,
+                        }))}
                       />
                     )}
                   />
@@ -643,7 +753,10 @@ const { readOnly, hint } = useReadOnly();
                         ariaLabel={t("duration")}
                         value={String(field.value)}
                         onChange={(v) => field.onChange(Number(v))}
-                        options={DURATIONS.map((d) => ({ value: String(d), label: `${d} ${t("min")}` }))}
+                        options={DURATIONS.map((d) => ({
+                          value: String(d),
+                          label: `${d} ${t("min")}`,
+                        }))}
                       />
                     )}
                   />
@@ -661,13 +774,16 @@ const { readOnly, hint } = useReadOnly();
                       onChange={(v) => field.onChange(Number(v))}
                       options={REPEAT_CHOICES.map((n) => ({
                         value: String(n),
-                        label: n === 1 ? t("repeatOnce") : t("repeatWeeks", { n }),
+                        label:
+                          n === 1 ? t("repeatOnce") : t("repeatWeeks", { n }),
                       }))}
                     />
                   )}
                 />
                 {watchedRepeat > 1 && (
-                  <p className="mt-1.5 text-xs text-[#6e7f65]">{t("repeatHint")}</p>
+                  <p className="mt-1.5 text-xs text-[#6e7f65]">
+                    {t("repeatHint")}
+                  </p>
                 )}
               </Modal.Field>
 
@@ -734,9 +850,13 @@ const { readOnly, hint } = useReadOnly();
             <p className="text-sm text-[#3d4f35]">
               {cancelling &&
                 t("cancelSeriesText", {
-                  date: format(new Date(cancelling.starts_at), "EEE d MMM, HH:mm", {
-                    locale: dfLocale,
-                  }),
+                  date: format(
+                    new Date(cancelling.starts_at),
+                    "EEE d MMM, HH:mm",
+                    {
+                      locale: dfLocale,
+                    },
+                  ),
                 })}
             </p>
           </Modal.Body>
@@ -751,7 +871,7 @@ const { readOnly, hint } = useReadOnly();
             <button
               type="button"
               onClick={() => cancelling && cancelSeries(cancelling, true)}
-              className="btn-primary flex-1"
+              className="btn-danger flex-1"
             >
               {t("cancelThisAndLater")}
             </button>
@@ -780,10 +900,15 @@ function NoShowBadge({ count, paused }: { count: number; paused: boolean }) {
 }
 
 /** The booking form's starting values, taken from the timetable's link when there is one. */
-function prefill(params: URLSearchParams | ReadonlyURLSearchParams | null, courts: { id: string }[]): FormValues {
+function prefill(
+  params: URLSearchParams | ReadonlyURLSearchParams | null,
+  courts: { id: string }[],
+): FormValues {
   const today = startOfDay(new Date());
   const date = params?.get("date") ?? "";
-  const day = /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(`${date}T00:00`) : null;
+  const day = /^\d{4}-\d{2}-\d{2}$/.test(date)
+    ? new Date(`${date}T00:00`)
+    : null;
   // Only days the form offers: today and the next 13.
   const inRange = day && day >= today && day < addDays(today, 14);
   const hour = Number(params?.get("hour"));

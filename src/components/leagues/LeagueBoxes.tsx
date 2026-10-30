@@ -2,7 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowDown, ArrowUp, Pencil } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
+import { EditButton } from "@/components/ui/ActionButton";
 import Modal from "@/components/ui/Modal";
 import { useRouter } from "@/i18n/navigation";
 import { saveLeagueScore } from "@/app/actions/leagues";
@@ -127,22 +128,27 @@ export default function LeagueBoxes({
                       ) : (
                         !editable && <span className="shrink-0 text-xs text-ink-400">{t("toPlay")}</span>
                       )}
-                      {editable && (
-                        <button
-                          type="button"
-                          disabled={!!readOnlyHint}
-                          title={readOnlyHint}
-                          onClick={() => setEditing(m)}
-                          className={
-                            m.winner_id
-                              ? "grid size-8 shrink-0 place-items-center rounded-lg text-ink-400 hover:bg-white hover:text-ink-900 disabled:opacity-50"
-                              : "shrink-0 rounded-full bg-ink-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-ink-800 disabled:opacity-50"
-                          }
-                          aria-label={m.winner_id ? t("editScore") : undefined}
-                        >
-                          {m.winner_id ? <Pencil size={14} aria-hidden="true" /> : t("enterScore")}
-                        </button>
-                      )}
+                      {editable &&
+                        (m.winner_id ? (
+                          <EditButton
+                            iconOnly
+                            className="shrink-0"
+                            disabled={!!readOnlyHint}
+                            title={readOnlyHint ?? t("editScore")}
+                            aria-label={t("editScore")}
+                            onClick={() => setEditing(m)}
+                          />
+                        ) : (
+                          <button
+                            type="button"
+                            disabled={!!readOnlyHint}
+                            title={readOnlyHint}
+                            onClick={() => setEditing(m)}
+                            className="shrink-0 rounded-full bg-ink-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-ink-800 disabled:opacity-50"
+                          >
+                            {t("enterScore")}
+                          </button>
+                        ))}
                     </li>
                   );
                 })}

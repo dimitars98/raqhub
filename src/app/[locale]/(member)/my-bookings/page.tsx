@@ -10,6 +10,7 @@ import { getLabels } from "@/lib/getLabels";
 import { intlLocale } from "@/lib/dateLocale";
 import type { Labels } from "@/lib/labels";
 import { BADGE, bookingStatusTone } from "@/lib/badges";
+import { CancelActionButton } from "@/components/ui/ActionButton";
 
 type ClubRules = { booking_rules: unknown } | null;
 
@@ -299,9 +300,7 @@ function CancelButton({
   return (
     <form action={cancelBooking}>
       <input type="hidden" name="id" value={b.id} />
-      <button type="submit" className="text-xs text-red-500 hover:text-red-700 transition-colors">
-        {label}
-      </button>
+      <CancelActionButton type="submit">{label}</CancelActionButton>
     </form>
   );
 }

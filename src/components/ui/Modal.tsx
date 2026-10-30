@@ -54,6 +54,9 @@ function Modal({
 }
 
 // Content
+// A column capped at the screen height: the header and footer keep their size
+// and Body takes the rest and scrolls. A <form> placed directly inside joins
+// the column too, so Body/Footer can sit inside one.
 function Content({
   children,
   className = "",
@@ -63,7 +66,7 @@ function Content({
 }) {
   return (
     <div
-      className={`bg-white rounded-2xl border border-ink-100 p-6 w-full max-w-md max-h-[calc(100dvh-2rem)] flex flex-col overflow-hidden ${className}`}
+      className={`bg-white rounded-2xl border border-ink-100 p-6 w-full max-w-md max-h-[calc(100dvh-2rem)] flex flex-col overflow-y-auto overscroll-contain [&>form]:flex [&>form]:flex-col [&>form]:flex-1 [&>form]:min-h-0 ${className}`}
     >
       {children}
     </div>
@@ -87,9 +90,12 @@ function Header({ children }: { children: React.ReactNode }) {
 }
 
 // Body
+// The only part that scrolls, so Header and Footer stay in view.
+// The small padding (cancelled by the negative margin) keeps input focus rings
+// from being clipped at the edges.
 function Body({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto overscroll-contain">
+    <div className="flex flex-col gap-3 flex-1 min-h-0 overflow-y-auto overscroll-contain -mx-1 px-1 -my-1 py-1">
       {children}
     </div>
   );
@@ -97,7 +103,11 @@ function Body({ children }: { children: React.ReactNode }) {
 
 // Footer
 function Footer({ children }: { children: React.ReactNode }) {
-  return <div className="flex gap-3 mt-5 shrink-0">{children}</div>;
+  return (
+    <div className="flex gap-3 mt-4 pt-4 border-t border-ink-100 shrink-0">
+      {children}
+    </div>
+  );
 }
 
 // Field
@@ -132,7 +142,16 @@ function Grid({
   children: React.ReactNode;
   cols?: number;
 }) {
-  return <div className={`grid grid-cols-${cols} gap-3`}>{children}</div>;
+  // Full class names, so Tailwind can see them (it can't read grid-cols-${cols}).
+  const COLS: Record<number, string> = {
+    1: "grid-cols-1",
+    2: "grid-cols-2",
+    3: "grid-cols-3",
+    4: "grid-cols-4",
+  };
+  return (
+    <div className={`grid ${COLS[cols] ?? "grid-cols-2"} gap-3`}>{children}</div>
+  );
 }
 
 // Attach sub-components

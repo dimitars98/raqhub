@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { format } from "date-fns";
-import { ArrowDown, ArrowLeft, ArrowUp, Check, Copy, ExternalLink, Flag, Play, Undo2, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowUp, Check, Copy, ExternalLink, Flag, Pencil, Play, Undo2 } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import LeagueForm from "@/components/leagues/LeagueForm";
 import LeagueBoxes from "@/components/leagues/LeagueBoxes";
@@ -24,6 +24,7 @@ import { BADGE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import { entryName, LEVELS, type LeagueView } from "@/lib/leagues";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import { DeleteButton } from "@/components/ui/ActionButton";
 import SelectField from "@/components/ui/SelectField";
 
 export default function LeagueClient({ view, publicUrl }: { view: LeagueView; publicUrl: string }) {
@@ -107,7 +108,8 @@ export default function LeagueClient({ view, publicUrl }: { view: LeagueView; pu
             <ExternalLink size={15} aria-hidden="true" />
             {t("publicPage")}
           </Link>
-          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary">
+          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary inline-flex items-center gap-2">
+            <Pencil size={15} aria-hidden="true" />
             {t("edit")}
           </button>
         </div>
@@ -324,18 +326,15 @@ export default function LeagueClient({ view, publicUrl }: { view: LeagueView; pu
                     </span>
                   )}
                   {!out && league.status !== "finished" && (
-                    <button
-                      type="button"
+                    <DeleteButton
+                      iconOnly
                       disabled={pending || readOnly}
                       onClick={() =>
                         (!started || confirm(t("withdrawConfirm", { name: entryName(e) }))) &&
                         run(() => removeLeagueEntry(e.id, started))
                       }
                       aria-label={t("remove")}
-                      className="grid size-7 place-items-center rounded-lg text-ink-400 hover:bg-red-50 hover:text-red-600"
-                    >
-                      <X size={14} aria-hidden="true" />
-                    </button>
+                    />
                   )}
                 </li>
               );
@@ -343,17 +342,16 @@ export default function LeagueClient({ view, publicUrl }: { view: LeagueView; pu
           </ol>
         )}
 
-        <button
-          type="button"
+        <DeleteButton
           disabled={pending || readOnly}
           onClick={() =>
             confirm(t("deleteConfirm")) &&
             run(() => deleteLeague(league.id), () => router.push("/admin/leagues"))
           }
-          className="mt-6 text-sm font-medium text-ink-400 hover:text-red-600"
+          className="mt-6"
         >
           {t("delete")}
-        </button>
+        </DeleteButton>
       </section>
 
       {editing && (

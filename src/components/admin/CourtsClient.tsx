@@ -15,7 +15,12 @@ import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { Power } from "lucide-react";
+import { ActionButton, EditButton } from "@/components/ui/ActionButton";
 import { SURFACE_DEFAULT_COLOR, colorsFor, courtColor, swatchStyle, type CourtColor } from "@/lib/courtColors";
+
+const TH =
+  "text-left px-5 py-3 text-xs font-medium text-ink-400 whitespace-nowrap";
 
 const EMPTY_FORM = {
   name: "",
@@ -161,10 +166,63 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
     );
   };
 
+  const openCourt = (c: Court) => router.push(`/admin/courts/${c.id}`);
+
+  // Pieces shared by the phone cards and the table.
+  const statusBadge = (c: Court) => (
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${
+        c.is_active
+          ? "bg-brand-100 text-brand-800"
+          : "bg-ink-100 text-ink-600"
+      }`}
+    >
+      {c.is_active ? t("active") : t("inactive")}
+    </span>
+  );
+
+  // The buttons sit inside a clickable row/card, so they stop the click
+  // from also opening the court page.
+  const actions = (c: Court, variant: "table" | "card" = "table") => {
+    const card = variant === "card";
+    return (
+      <div className={`flex items-center gap-2 ${card ? "w-full" : "justify-end"}`}>
+        <EditButton
+          title={hint}
+          disabled={readOnly}
+          large={card}
+          className={card ? "flex-1" : ""}
+          onClick={(e) => {
+            e.stopPropagation();
+            openEdit(c);
+          }}
+          onKeyDown={(e) => e.stopPropagation()}
+        >
+          {t("edit")}
+        </EditButton>
+        <ActionButton
+          tone={c.is_active ? "danger" : "positive"}
+          icon={<Power size={12} aria-hidden="true" />}
+          title={hint}
+          disabled={readOnly}
+          large={card}
+          className={card ? "flex-1" : ""}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleToggle(c);
+          }}
+          onKeyDown={(e) => e.stopPropagation()}
+        >
+          {c.is_active ? t("deactivate") : t("activate")}
+        </ActionButton>
+      </div>
+    );
+  };
+
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <div>
           <h1 className="text-2xl font-medium text-ink-900">{t("title")}</h1>
           <p className="text-sm text-brand-600 mt-1">
@@ -200,12 +258,12 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       )}
 
       {/* Sport filter tabs */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 mb-4 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 [scrollbar-width:none]">
         {(["all", ...SPORTS] as const).map((s) => (
           <button
             key={s}
             onClick={() => setSportFilter(s)}
-            className={`px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               sportFilter === s
                 ? "bg-brand-600 text-white"
                 : "bg-white border border-ink-100 text-ink-600 hover:bg-ink-50"
@@ -216,29 +274,86 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
         ))}
       </div>
 
-      {/* Table */}
-      <div className="bg-white border border-ink-100 rounded-2xl overflow-hidden">
-        <table className="w-full text-sm">
+      {/* Phones: one card per court. */}
+      <div className="md:hidden space-y-3">
+        {!filtered.length ? (
+          <div className="bg-white border border-ink-100 rounded-2xl text-center py-12 text-ink-400 text-sm">
+            {t("noCourts")}
+          </div>
+        ) : (
+          filtered.map((c) => (
+            <div
+              key={c.id}
+              role="link"
+              tabIndex={0}
+              onClick={() => openCourt(c)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") openCourt(c);
+              }}
+              className={`bg-white border border-ink-100 rounded-2xl p-4 shadow-[0_1px_2px_rgba(17,28,10,0.04)] cursor-pointer active:bg-ink-50 transition-colors ${
+                c.is_active ? "" : "opacity-75"
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <span
+                  aria-hidden="true"
+                  className="size-11 shrink-0 rounded-xl ring-1 ring-black/10"
+                  style={swatchStyle(courtColor(c))}
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="font-semibold text-ink-900 truncate">
+                      {c.name}
+                    </div>
+                    <div className="shrink-0">{statusBadge(c)}</div>
+                  </div>
+                  <div className="text-xs text-ink-400 mt-0.5">
+                    {labels.sport(c.sport)} · {labels.inOut(c.is_indoor)}
+                  </div>
+                </div>
+              </div>
+
+              {c.description && (
+                <div className="mt-2 text-xs text-ink-400 line-clamp-2">
+                  {c.description}
+                </div>
+              )}
+
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="rounded-xl bg-ink-50 px-3 py-2">
+                  <div className="text-[11px] text-ink-400">
+                    {t("pricePerHour")}
+                  </div>
+                  <div className="text-base font-semibold text-ink-900">
+                    €{c.price_per_hour}
+                  </div>
+                </div>
+                <div className="rounded-xl bg-ink-50 px-3 py-2 min-w-0">
+                  <div className="text-[11px] text-ink-400">{t("surface")}</div>
+                  <div className="text-sm text-ink-900 truncate">
+                    {labels.surface(c.surface)} ·{" "}
+                    {labels.courtColor(courtColor(c))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4">{actions(c, "card")}</div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Tablets and up: the table. */}
+      <div className="hidden md:block bg-white border border-ink-100 rounded-2xl overflow-x-auto">
+        <table className="w-full min-w-[760px] text-sm">
           <thead>
             <tr className="border-b border-ink-100 bg-ink-50">
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("name")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {tc("sport")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("surface")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("type")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("pricePerHour")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("status")}
-              </th>
+              <th className={TH}>{t("name")}</th>
+              <th className={TH}>{tc("sport")}</th>
+              <th className={TH}>{t("surface")}</th>
+              <th className={TH}>{t("type")}</th>
+              <th className={TH}>{t("pricePerHour")}</th>
+              <th className={TH}>{t("status")}</th>
               <th className="px-5 py-3" />
             </tr>
           </thead>
@@ -256,24 +371,26 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
               filtered.map((c, i) => (
                 <tr
                   key={c.id}
-                  onClick={() => router.push(`/admin/courts/${c.id}`)}
+                  onClick={() => openCourt(c)}
                   className={`border-b border-ink-100 hover:bg-ink-50 transition-colors cursor-pointer ${
                     i === filtered.length - 1 ? "border-0" : ""
                   }`}
                 >
                   <td className="px-5 py-3.5">
-                    <div className="font-medium text-ink-900">{c.name}</div>
+                    <div className="font-medium text-ink-900 whitespace-nowrap">
+                      {c.name}
+                    </div>
                     {c.description && (
                       <div className="text-xs text-ink-400 mt-0.5 truncate max-w-[180px]">
                         {c.description}
                       </div>
                     )}
                   </td>
-                  <td className="px-5 py-3.5 text-ink-600">
+                  <td className="px-5 py-3.5 text-ink-600 whitespace-nowrap">
                     {labels.sport(c.sport)}
                   </td>
                   <td className="px-5 py-3.5 text-ink-600">
-                    <span className="inline-flex items-center gap-2">
+                    <span className="inline-flex items-center gap-2 whitespace-nowrap">
                       <span
                         aria-hidden="true"
                         className="size-3 shrink-0 rounded-full ring-1 ring-black/10"
@@ -282,49 +399,14 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                       {labels.surface(c.surface)} · {labels.courtColor(courtColor(c))}
                     </span>
                   </td>
-                  <td className="px-5 py-3.5 text-ink-600">
+                  <td className="px-5 py-3.5 text-ink-600 whitespace-nowrap">
                     {labels.inOut(c.is_indoor)}
                   </td>
-                  <td className="px-5 py-3.5 font-medium text-ink-900">
+                  <td className="px-5 py-3.5 font-medium text-ink-900 whitespace-nowrap">
                     €{c.price_per_hour}
                   </td>
-                  <td className="px-5 py-3.5">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        c.is_active
-                          ? "bg-brand-100 text-brand-800"
-                          : "bg-ink-100 text-ink-600"
-                      }`}
-                    >
-                      {c.is_active ? t("active") : t("inactive")}
-                    </span>
-                  </td>
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-3 justify-end">
-                      <button title={hint} disabled={readOnly}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openEdit(c);
-                        }}
-                        className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
-                      >
-                        {t("edit")}
-                      </button>
-                      <button title={hint} disabled={readOnly}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleToggle(c);
-                        }}
-                        className={`text-xs transition-colors ${
-                          c.is_active
-                            ? "text-red-400 hover:text-red-600"
-                            : "text-brand-600 hover:text-brand-800"
-                        }`}
-                      >
-                        {c.is_active ? t("deactivate") : t("activate")}
-                      </button>
-                    </div>
-                  </td>
+                  <td className="px-5 py-3.5">{statusBadge(c)}</td>
+                  <td className="px-5 py-3.5">{actions(c)}</td>
                 </tr>
               ))
             )}

@@ -2,7 +2,8 @@
 
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
-import { Check, Pencil, Trophy } from "lucide-react";
+import { Check, Trophy } from "lucide-react";
+import { CancelActionButton, EditButton } from "@/components/ui/ActionButton";
 import { useRouter } from "@/i18n/navigation";
 import { saveSocialScore } from "@/app/actions/americano";
 import { byePoints, standings, type SocialMatch, type SocialView } from "@/lib/americano";
@@ -192,16 +193,13 @@ function GameCard({
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wider text-ink-400">{court}</span>
         {scored && editable && !editing && (
-          <button
-            type="button"
+          <EditButton
+            iconOnly
             onClick={() => setEditing(true)}
             disabled={!!readOnlyHint}
-            title={readOnlyHint}
+            title={readOnlyHint ?? t("editScore")}
             aria-label={t("editScore")}
-            className="grid size-7 place-items-center rounded-lg text-ink-400 hover:bg-ink-50 hover:text-ink-900"
-          >
-            <Pencil size={13} aria-hidden="true" />
-          </button>
+          />
         )}
         {scored && !editing && <Check size={15} className="text-brand-600" aria-label={t("done")} />}
       </div>
@@ -243,9 +241,9 @@ function GameCard({
             {t("saveScore")}
           </button>
           {manager && scored && (
-            <button type="button" disabled={pending} onClick={() => save(null)} className="h-11 px-2 text-xs text-ink-400 hover:text-red-600">
+            <CancelActionButton disabled={pending} onClick={() => save(null)}>
               {t("clear")}
-            </button>
+            </CancelActionButton>
           )}
           <span className="w-full text-xs text-ink-400">{t("scoreHint", { n: points })}</span>
           {error && (

@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { format } from "date-fns";
-import { ArrowLeft, Check, Copy, ExternalLink, Flag, Play, RotateCcw, Undo2, X } from "lucide-react";
+import { ArrowLeft, Check, Copy, ExternalLink, Flag, Pencil, Play, RotateCcw, Undo2 } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import SocialForm, { type ClubCourt } from "@/components/americano/SocialForm";
 import SocialBoard from "@/components/americano/SocialBoard";
@@ -24,6 +24,7 @@ import { dateLocale } from "@/lib/dateLocale";
 import { LEVELS } from "@/lib/leagues";
 import { roundShape, suggestedRounds, type SocialView } from "@/lib/americano";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import { DeleteButton } from "@/components/ui/ActionButton";
 import SelectField from "@/components/ui/SelectField";
 
 export default function SocialClient({
@@ -102,7 +103,8 @@ export default function SocialClient({
             <ExternalLink size={15} aria-hidden="true" />
             {t("publicPage")}
           </Link>
-          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary">
+          <button title={hint} disabled={readOnly} type="button" onClick={() => setEditing(true)} className="btn-secondary inline-flex items-center gap-2">
+            <Pencil size={15} aria-hidden="true" />
             {t("edit")}
           </button>
         </div>
@@ -251,17 +253,14 @@ export default function SocialClient({
                     </span>
                   )}
                   {!out && event.status !== "finished" && (
-                    <button
-                      type="button"
+                    <DeleteButton
+                      iconOnly
                       disabled={pending || readOnly}
                       onClick={() =>
                         (!started || confirm(t("withdrawConfirm", { name: p.name }))) && run(() => removeSocialPlayer(p.id, started))
                       }
                       aria-label={t("remove")}
-                      className="grid size-7 place-items-center rounded-lg text-ink-400 hover:bg-red-50 hover:text-red-600"
-                    >
-                      <X size={14} aria-hidden="true" />
-                    </button>
+                    />
                   )}
                 </li>
               );
@@ -269,14 +268,13 @@ export default function SocialClient({
           </ol>
         )}
 
-        <button
-          type="button"
+        <DeleteButton
           disabled={pending || readOnly}
           onClick={() => confirm(t("deleteConfirm")) && run(() => deleteSocial(event.id), () => router.push("/admin/americano"))}
-          className="mt-6 text-sm font-medium text-ink-400 hover:text-red-600"
+          className="mt-6"
         >
           {t("delete")}
-        </button>
+        </DeleteButton>
       </section>
 
       {editing && (

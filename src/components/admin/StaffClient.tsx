@@ -10,6 +10,7 @@ import { inviteStaff, removeStaff } from "@/app/[locale]/admin/staff/actions";
 import { BADGE, NEUTRAL_TONE } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import { DeleteButton } from "@/components/ui/ActionButton";
 
 export type StaffRow = {
   id: string;
@@ -155,14 +156,9 @@ export default function StaffClient({ staff }: { staff: StaffRow[] }) {
               >
                 {t(s.active ? "active" : "pending")}
               </span>
-              <button title={hint}
-                type="button"
-                onClick={() => setRemoving(s)}
-                disabled={readOnly || pending}
-                className="shrink-0 rounded-lg px-2.5 py-1.5 text-xs font-medium text-red-700 transition-colors hover:bg-red-50 disabled:opacity-40"
-              >
+              <DeleteButton title={hint} disabled={readOnly || pending} className="shrink-0" onClick={() => setRemoving(s)}>
                 {t("remove")}
-              </button>
+              </DeleteButton>
             </li>
           ))}
         </ul>
@@ -183,7 +179,7 @@ export default function StaffClient({ staff }: { staff: StaffRow[] }) {
             <button
               type="button"
               onClick={() => removing && remove(removing)}
-              className="btn-primary flex-1 !bg-red-600 hover:!bg-red-700"
+              className="btn-danger flex-1"
             >
               {t("remove")}
             </button>

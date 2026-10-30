@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signUpForTournament, withdrawFromTournament } from "@/app/actions/tournaments";
+import { CancelActionButton } from "@/components/ui/ActionButton";
 
 /**
  * Sign-up box on a tournament's public page. Visitors are sent to sign in
@@ -52,14 +53,13 @@ export default function SignUpBox({
       <div className={box}>
         <p className="text-sm font-medium text-ink-900">{t("public.youreIn", { name: myEntryName })}</p>
         {open && (
-          <button
-            type="button"
+          <CancelActionButton
             disabled={pending}
             onClick={() => run(() => withdrawFromTournament(tournamentId))}
-            className="mt-3 text-sm font-medium text-red-500 hover:text-red-700"
+            className="mt-3"
           >
             {t("public.withdraw")}
-          </button>
+          </CancelActionButton>
         )}
         {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
       </div>

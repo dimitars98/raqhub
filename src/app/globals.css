@@ -76,6 +76,40 @@
   .btn-lg {
     @apply px-6 py-3;
   }
+  /* Confirming something that can't be undone ("Yes, delete") */
+  .btn-danger {
+    @apply bg-red-600 text-white rounded-full px-5 py-2.5 text-sm font-medium
+           hover:bg-red-700 active:scale-95 transition-all duration-150 cursor-pointer border-0
+           inline-flex items-center justify-center gap-2;
+  }
+  .btn-danger:disabled {
+    @apply cursor-not-allowed opacity-40 active:scale-100 hover:bg-red-600;
+  }
+
+  /* Small pill actions on a row, card or page: Edit, Delete, Cancel,
+     Remove, Withdraw… Use them through components/ui/ActionButton.tsx. */
+  .action {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-full border px-3 py-1.5
+           text-xs font-medium whitespace-nowrap transition-colors cursor-pointer
+           disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .action-neutral {
+    @apply bg-ink-50 text-ink-900 border-ink-100 hover:bg-ink-100;
+  }
+  .action-danger {
+    @apply bg-red-50 text-red-600 border-red-100 hover:bg-red-100;
+  }
+  .action-positive {
+    @apply bg-brand-100 text-brand-800 border-brand-200 hover:bg-brand-200;
+  }
+  /* Icon only: a round button the height of the others */
+  .action-icon {
+    @apply size-8 p-0;
+  }
+  /* Bigger, e.g. full-width on phone cards */
+  .action-lg {
+    @apply px-4 py-2;
+  }
   .link {
     @apply text-ink-600 px-4 py-2 text-sm
            hover:text-brand-800 transition-colors duration-150 cursor-pointer border-0;

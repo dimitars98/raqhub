@@ -9,6 +9,8 @@ import { LEVELS } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { Power } from "lucide-react";
+import { ActionButton, EditButton } from "@/components/ui/ActionButton";
 
 const EMPTY_FORM = {
   email: "",
@@ -25,6 +27,9 @@ interface Props {
 }
 
 type FoundProfile = { id: string; full_name: string | null };
+
+const TH =
+  "text-left px-5 py-3 text-xs font-medium text-ink-400 whitespace-nowrap";
 
 const COACH_SELECT =
   "*, profile:profiles(id, full_name, avatar_url, phone, role, stripe_customer_id, created_at, updated_at)";
@@ -194,6 +199,70 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
     );
   };
 
+  // Pieces shared by the phone cards and the table.
+  const avatar = (c: Coach, size: "sm" | "lg" = "sm") => (
+    <div
+      className={`${size === "lg" ? "w-11 h-11 text-sm" : "w-8 h-8 text-xs"} rounded-full bg-ink-900 flex items-center justify-center text-white font-bold flex-shrink-0`}
+    >
+      {(c.profile?.full_name ?? "?")
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+        .slice(0, 2)}
+    </div>
+  );
+
+  const levelBadges = (c: Coach) => (
+    <div className="flex flex-wrap gap-1">
+      {c.levels.map((l) => (
+        <span key={l} className="badge-brand text-[10px] px-2 py-0.5">
+          {labels.level(l)}
+        </span>
+      ))}
+    </div>
+  );
+
+  const statusBadge = (c: Coach) => (
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${
+        c.is_active
+          ? "bg-brand-100 text-brand-800"
+          : "bg-ink-100 text-ink-600"
+      }`}
+    >
+      {c.is_active ? t("active") : t("inactive")}
+    </span>
+  );
+
+  const actions = (c: Coach, variant: "table" | "card" = "table") => {
+    const card = variant === "card";
+    return (
+      <div className={`flex items-center gap-2 ${card ? "w-full" : "justify-end"}`}>
+        <EditButton
+          title={hint}
+          disabled={readOnly}
+          large={card}
+          className={card ? "flex-1" : ""}
+          onClick={() => openEdit(c)}
+        >
+          {t("edit")}
+        </EditButton>
+        <ActionButton
+          tone={c.is_active ? "danger" : "positive"}
+          icon={<Power size={12} aria-hidden="true" />}
+          title={hint}
+          disabled={readOnly}
+          large={card}
+          className={card ? "flex-1" : ""}
+          onClick={() => handleToggle(c)}
+        >
+          {c.is_active ? t("deactivate") : t("activate")}
+        </ActionButton>
+      </div>
+    );
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -219,25 +288,78 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
         </div>
       )}
 
-      <div className="bg-white border border-ink-100 rounded-2xl overflow-auto">
-        <table className="w-full text-sm">
+      {/* Phones: one card per coach. */}
+      <div className="md:hidden space-y-3">
+        {!coaches.length ? (
+          <div className="bg-white border border-ink-100 rounded-2xl text-center py-12 text-ink-400 text-sm">
+            {t("noCoaches")}
+          </div>
+        ) : (
+          coaches.map((c) => (
+            <div
+              key={c.id}
+              className={`bg-white border border-ink-100 rounded-2xl p-4 shadow-[0_1px_2px_rgba(17,28,10,0.04)] ${
+                c.is_active ? "" : "opacity-75"
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                {avatar(c, "lg")}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="font-semibold text-ink-900 truncate">
+                      {c.profile?.full_name ?? t("unknown")}
+                    </div>
+                    <div className="shrink-0">{statusBadge(c)}</div>
+                  </div>
+                  {c.bio && (
+                    <div className="text-xs text-ink-400 mt-0.5 line-clamp-2">
+                      {c.bio}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="rounded-xl bg-ink-50 px-3 py-2">
+                  <div className="text-[11px] text-ink-400">
+                    {t("pricePerHour")}
+                  </div>
+                  <div className="text-base font-semibold text-ink-900">
+                    €{c.price_per_hour}
+                  </div>
+                </div>
+                <div className="rounded-xl bg-ink-50 px-3 py-2 min-w-0">
+                  <div className="text-[11px] text-ink-400">
+                    {t("specializations")}
+                  </div>
+                  <div className="text-sm text-ink-900 truncate">
+                    {c.specializations.length
+                      ? c.specializations.join(", ")
+                      : "—"}
+                  </div>
+                </div>
+              </div>
+
+              {c.levels.length > 0 && (
+                <div className="mt-3">{levelBadges(c)}</div>
+              )}
+
+              <div className="mt-4">{actions(c, "card")}</div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Tablets and up: the table. */}
+      <div className="hidden md:block bg-white border border-ink-100 rounded-2xl overflow-x-auto">
+        <table className="w-full min-w-[720px] text-sm">
           <thead>
             <tr className="border-b border-ink-100 bg-ink-50">
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("name")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("specializations")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("levels")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("pricePerHour")}
-              </th>
-              <th className="text-left px-5 py-3 text-xs font-medium text-ink-400">
-                {t("status")}
-              </th>
+              <th className={TH}>{t("name")}</th>
+              <th className={TH}>{t("specializations")}</th>
+              <th className={TH}>{t("levels")}</th>
+              <th className={TH}>{t("pricePerHour")}</th>
+              <th className={TH}>{t("status")}</th>
               <th className="px-5 py-3" />
             </tr>
           </thead>
@@ -261,16 +383,9 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                 >
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-ink-900 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                        {(c.profile?.full_name ?? "?")
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .toUpperCase()
-                          .slice(0, 2)}
-                      </div>
+                      {avatar(c)}
                       <div>
-                        <div className="font-medium text-ink-900">
+                        <div className="font-medium text-ink-900 whitespace-nowrap">
                           {c.profile?.full_name ?? t("unknown")}
                         </div>
                         {c.bio && (
@@ -288,56 +403,12 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
                       <span className="text-ink-300">—</span>
                     )}
                   </td>
-                  <td className="px-5 py-3.5">
-                    <div className="flex flex-wrap gap-1">
-                      {c.levels.map((l) => (
-                        <span
-                          key={l}
-                          className="badge-brand text-[10px] px-2 py-0.5"
-                        >
-                          {labels.level(l)}
-                        </span>
-                      ))}
-                    </div>
-                  </td>
-                  <td className="px-5 py-3.5 font-medium text-ink-900">
+                  <td className="px-5 py-3.5">{levelBadges(c)}</td>
+                  <td className="px-5 py-3.5 font-medium text-ink-900 whitespace-nowrap">
                     €{c.price_per_hour}
                   </td>
-                  <td className="px-5 py-3.5">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        c.is_active
-                          ? "bg-brand-100 text-brand-800"
-                          : "bg-ink-100 text-ink-600"
-                      }`}
-                    >
-                      {c.is_active ? t("active") : t("inactive")}
-                    </span>
-                  </td>
-                  <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-3 justify-end">
-                      <button
-                        title={hint}
-                        disabled={readOnly}
-                        onClick={() => openEdit(c)}
-                        className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
-                      >
-                        {t("edit")}
-                      </button>
-                      <button
-                        title={hint}
-                        disabled={readOnly}
-                        onClick={() => handleToggle(c)}
-                        className={`text-xs transition-colors ${
-                          c.is_active
-                            ? "text-red-400 hover:text-red-600"
-                            : "text-brand-600 hover:text-brand-800"
-                        }`}
-                      >
-                        {c.is_active ? t("deactivate") : t("activate")}
-                      </button>
-                    </div>
-                  </td>
+                  <td className="px-5 py-3.5">{statusBadge(c)}</td>
+                  <td className="px-5 py-3.5">{actions(c)}</td>
                 </tr>
               ))
             )}

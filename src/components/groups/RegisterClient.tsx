@@ -9,6 +9,7 @@ import { clubDay, clubFormat, clubTime } from "@/lib/groups";
 import { saveRegister, type RegisterRow } from "@/app/actions/groups";
 import type { AttendanceStatus, GroupAttendance, GroupPlayer } from "@/types/database";
 import { useReadOnly } from "@/components/admin/ReadOnly";
+import { CancelActionButton, DeleteButton } from "@/components/ui/ActionButton";
 
 type Mark = "present" | "absent" | null;
 
@@ -296,9 +297,9 @@ export default function RegisterClient({
       </label>
 
       {!cancelled && new Date(session.ends_at) > new Date() && (
-        <button title={hint} disabled={readOnly} type="button" onClick={() => setCancelling(true)} className="self-center p-2 text-[13px] text-red-700 underline underline-offset-2">
+        <CancelActionButton title={hint} disabled={readOnly} onClick={() => setCancelling(true)} className="self-center">
           {isToday ? t("cancelToday") : t("cancelThis")}
-        </button>
+        </CancelActionButton>
       )}
 
       <div className="fixed inset-x-3 bottom-4 z-20 mx-auto max-w-[536px]">
@@ -390,14 +391,7 @@ function PersonRow({
         </button>
       </span>
       {onRemove && (
-        <button
-          type="button"
-          aria-label={t("removeName", { name })}
-          onClick={onRemove}
-          className="grid size-8 shrink-0 place-items-center rounded-lg text-ink-400 hover:bg-ink-50 hover:text-ink-800"
-        >
-          <X size={14} aria-hidden="true" />
-        </button>
+        <DeleteButton iconOnly className="shrink-0" aria-label={t("removeName", { name })} onClick={onRemove} />
       )}
     </div>
   );

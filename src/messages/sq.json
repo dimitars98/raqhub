@@ -211,6 +211,7 @@
   "statusFailed": "Rezervimi nuk u ndryshua. Provoni përsëri.",
   "title": "Rezervimet",
   "total": "gjithsej",
+  "price": "Çmimi",
   "addBooking": "Shto rezervim",
   "searchPlaceholder": "Kërko emër, fushë ose ref...",
   "all": "Të gjitha",

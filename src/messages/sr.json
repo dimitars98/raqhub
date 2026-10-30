@@ -211,6 +211,7 @@
   "statusFailed": "Rezervacija nije mogla da se promeni. Pokušajte ponovo.",
   "title": "Rezervacije",
   "total": "ukupno",
+  "price": "Cena",
   "addBooking": "Dodaj rezervaciju",
   "searchPlaceholder": "Pretraga po imenu, terenu ili broju...",
   "all": "Sve",

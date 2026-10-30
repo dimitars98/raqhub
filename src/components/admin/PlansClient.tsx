@@ -10,6 +10,7 @@ import { BILLING_PERIODS } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import { DeleteButton, EditButton } from "@/components/ui/ActionButton";
 
 
 type FormValues = {
@@ -173,20 +174,13 @@ export default function PlansClient({
                   {t("discount", { pct: p.discount_pct })}
                 </div>
               )}
-              <div className="flex gap-3 mt-4 pt-4 border-t border-ink-100">
-                <button title={hint} disabled={readOnly}
-                  onClick={() => openEdit(p)}
-                  className="text-xs text-ink-400 hover:text-ink-900 transition-colors"
-                >
+              <div className="flex gap-2 mt-4 pt-4 border-t border-ink-100">
+                <EditButton title={hint} disabled={readOnly} onClick={() => openEdit(p)}>
                   {t("edit")}
-                </button>
-                <button title={hint}
-                  onClick={() => handleDelete(p.id)}
-                  disabled={readOnly || deleting === p.id}
-                  className="text-xs text-red-400 hover:text-red-600 transition-colors disabled:opacity-40"
-                >
+                </EditButton>
+                <DeleteButton title={hint} disabled={readOnly || deleting === p.id} onClick={() => handleDelete(p.id)}>
                   {deleting === p.id ? t("deleting") : t("delete")}
-                </button>
+                </DeleteButton>
               </div>
             </div>
           ))}

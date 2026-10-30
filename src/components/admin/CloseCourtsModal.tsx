@@ -320,7 +320,7 @@ function Form({
             onClick={submit}
             disabled={readOnly || saving}
             title={hint}
-            className="btn-primary flex-1 disabled:opacity-40"
+            className={count > 0 ? "btn-danger flex-1" : "btn-primary flex-1"}
           >
             {saving ? t("saving") : count > 0 ? t("confirmCancel", { n: count }) : t("confirm")}
           </button>

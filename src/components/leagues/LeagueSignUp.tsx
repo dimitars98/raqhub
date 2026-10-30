@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { signUpForLeague, withdrawFromLeague } from "@/app/actions/leagues";
+import { CancelActionButton } from "@/components/ui/ActionButton";
 
 /** Sign-up box on a league's public page. Visitors sign in first and come back. */
 export default function LeagueSignUp({
@@ -49,14 +50,13 @@ export default function LeagueSignUp({
       <div className={box}>
         <p className="text-sm font-medium text-ink-900">{t("public.youreIn", { name: myEntryName })}</p>
         {status !== "finished" && (
-          <button
-            type="button"
+          <CancelActionButton
             disabled={pending}
             onClick={() => (status === "open" || confirm(t("public.withdrawConfirm"))) && run(() => withdrawFromLeague(leagueId))}
-            className="mt-3 text-sm font-medium text-red-500 hover:text-red-700"
+            className="mt-3"
           >
             {t("public.withdraw")}
-          </button>
+          </CancelActionButton>
         )}
         {error && <p role="alert" className="mt-2 text-sm text-red-600">{error}</p>}
       </div>
