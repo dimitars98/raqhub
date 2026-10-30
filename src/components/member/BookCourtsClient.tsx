@@ -13,7 +13,11 @@ import {
   isToday,
 } from "date-fns";
 import type { Court, Sport } from "@/types/database";
-import { useBusySlots, useMemberDiscount, useRefreshBusy } from "@/hooks/useBookingData";
+import {
+  useBusySlots,
+  useMemberDiscount,
+  useRefreshBusy,
+} from "@/hooks/useBookingData";
 import CourtArt from "@/components/courts/CourtArt";
 import { courtColor } from "@/lib/courtColors";
 import Modal from "@/components/ui/Modal";
@@ -42,7 +46,6 @@ type FormValues = {
   hour: number;
   duration: number;
 };
-
 
 const money = (n: number) => `€${n.toFixed(2).replace(/\.00$/, "")}`;
 const hh = (h: number) => `${String(h).padStart(2, "0")}:00`;
@@ -108,7 +111,10 @@ export default function BookCourtsClient({
   const isClosed = !!selected && hourOptions.length === 0;
 
   // The taken (and closed) times for the selected court and day.
-  const { slots: busySlots, ready: slotsReady } = useBusySlots(selected?.id, watchedDate);
+  const { slots: busySlots, ready: slotsReady } = useBusySlots(
+    selected?.id,
+    watchedDate,
+  );
   const refreshBusy = useRefreshBusy();
   const discount = useMemberDiscount(selected?.club_id);
 
@@ -153,8 +159,9 @@ export default function BookCourtsClient({
   // How this court's club takes payment (20261029_online_payments.sql).
   const payMode = payModeOf(selected?.club);
   const [payOnline, setPayOnline] = useState(true);
-  const paysNow = finalTotal > 0 && (payMode === "online" || (payMode === "either" && payOnline));
-
+  const paysNow =
+    finalTotal > 0 &&
+    (payMode === "online" || (payMode === "either" && payOnline));
 
   const onSubmit = async (values: FormValues) => {
     if (!selected || !free(values.hour)) return;
@@ -230,7 +237,10 @@ export default function BookCourtsClient({
             {clubName ? t("titleAtClub", { club: clubName }) : t("title")}
           </h1>
           {paymentCancelled && (
-            <p role="status" className="mb-3 rounded-lg bg-[#fdf5df] px-3 py-2 text-sm text-[#5c4000]">
+            <p
+              role="status"
+              className="mb-3 rounded-lg bg-[#fdf5df] px-3 py-2 text-sm text-[#5c4000]"
+            >
               {tPay("book.cancelled")}
             </p>
           )}
@@ -352,7 +362,8 @@ export default function BookCourtsClient({
                             {court.name}
                           </p>
                           <p className="truncate text-[13px] text-ink-600">
-                            {labels.surface(court.surface)} · {labels.courtColor(courtColor(court))}
+                            {labels.surface(court.surface)} ·{" "}
+                            {labels.courtColor(courtColor(court))}
                           </p>
                         </div>
                         <div className="mt-auto flex items-center justify-between gap-3">
@@ -365,14 +376,14 @@ export default function BookCourtsClient({
                               {t("perHour")}
                             </span>
                           </p>
-                          <span className="inline-flex h-9 items-center gap-1.5 rounded-full bg-ink-900 px-4 text-[13px] font-semibold text-white transition-colors group-hover:bg-brand-600">
+                          <button className="inline-flex h-9 items-center gap-1.5 rounded-full bg-ink-900 px-4 text-[13px] font-semibold text-white transition-colors group-hover:bg-brand-600 cursor-pointer">
                             {t("book")}
                             <ArrowRight
                               size={14}
                               aria-hidden="true"
                               className="transition-transform group-hover:translate-x-0.5"
                             />
-                          </span>
+                          </button>
                         </div>
                       </div>
                     </button>
@@ -392,7 +403,7 @@ export default function BookCourtsClient({
           setError(null);
         }}
       >
-        <Modal.Content className="max-w-lg p-0!">
+        <Modal.Content className="max-w-lg border-0! p-0!">
           {selected && (
             <div className="relative h-20 w-full shrink-0 overflow-hidden">
               <CourtArt court={selected} />
@@ -597,7 +608,11 @@ export default function BookCourtsClient({
                     </p>
                   )}
                   {payMode === "either" && finalTotal > 0 ? (
-                    <div role="radiogroup" aria-label={tPay("book.how")} className="mt-3 grid grid-cols-2 gap-2">
+                    <div
+                      role="radiogroup"
+                      aria-label={tPay("book.how")}
+                      className="mt-3 grid grid-cols-2 gap-2"
+                    >
                       {[true, false].map((online) => (
                         <button
                           key={String(online)}
@@ -611,13 +626,17 @@ export default function BookCourtsClient({
                               : "border-ink-100 text-ink-600"
                           }`}
                         >
-                          {online ? tPay("book.payNow") : tPay("book.payAtClub")}
+                          {online
+                            ? tPay("book.payNow")
+                            : tPay("book.payAtClub")}
                         </button>
                       ))}
                     </div>
                   ) : null}
                   <p className="mt-1 text-xs text-ink-400">
-                    {paysNow ? tPay("book.onlineNote", { min: 30 }) : t("payAtClub")}
+                    {paysNow
+                      ? tPay("book.onlineNote", { min: 30 })
+                      : t("payAtClub")}
                   </p>
                 </div>
               )}
