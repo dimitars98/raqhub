@@ -1,7 +1,8 @@
 import type { Sport, Surface } from "@/types/database";
 
 // The colour a court really is (courts.color, 20261027b_court_colors.sql).
-// A club picks it per court; without one, the surface's usual colour is used.
+// A club picks it per court; without one, the usual colour for its sport and
+// surface is used (padel: blue).
 
 export const COURT_COLORS = ["blue", "blue_green", "green", "terracotta", "red", "purple", "grey"] as const;
 export type CourtColor = (typeof COURT_COLORS)[number];

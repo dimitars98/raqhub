@@ -471,10 +471,10 @@ export default function BookingsClient({
         </div>
       )}
 
-      {/* Phones: one card per booking. */}
-      <div className="md:hidden space-y-3">
+      {/* Phones: one card per booking; two side by side once there's room. */}
+      <div className="grid gap-3 sm:grid-cols-2 md:hidden">
         {!filtered.length ? (
-          <div className="bg-white border border-[#e8ede4] rounded-2xl px-6 py-12 text-center">
+          <div className="sm:col-span-2 bg-white border border-[#e8ede4] rounded-2xl px-6 py-12 text-center">
             {emptyState}
           </div>
         ) : (

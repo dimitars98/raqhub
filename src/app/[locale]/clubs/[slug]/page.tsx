@@ -477,7 +477,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
                 </Link>
               )}
             </div>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {openMatches.slice(0, 4).map((m) => (
                 <MatchCard
                   key={m.id}

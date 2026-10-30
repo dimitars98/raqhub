@@ -288,10 +288,10 @@ export default function CoachesClient({ coaches: initial, clubId }: Props) {
         </div>
       )}
 
-      {/* Phones: one card per coach. */}
-      <div className="md:hidden space-y-3">
+      {/* Phones: one card per coach; two side by side once there's room. */}
+      <div className="grid gap-3 sm:grid-cols-2 md:hidden">
         {!coaches.length ? (
-          <div className="bg-white border border-ink-100 rounded-2xl text-center py-12 text-ink-400 text-sm">
+          <div className="sm:col-span-2 bg-white border border-ink-100 rounded-2xl text-center py-12 text-ink-400 text-sm">
             {t("noCoaches")}
           </div>
         ) : (

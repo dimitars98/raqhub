@@ -17,7 +17,7 @@ import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
 import { Power } from "lucide-react";
 import { ActionButton, EditButton } from "@/components/ui/ActionButton";
-import { SURFACE_DEFAULT_COLOR, colorsFor, courtColor, swatchStyle, type CourtColor } from "@/lib/courtColors";
+import { defaultColor, colorsFor, courtColor, swatchStyle, type CourtColor } from "@/lib/courtColors";
 
 const TH =
   "text-left px-5 py-3 text-xs font-medium text-ink-400 whitespace-nowrap";
@@ -103,7 +103,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       ...f,
       sport,
       surface: SURFACES_BY_SPORT[sport][0],
-      color: SURFACE_DEFAULT_COLOR[SURFACES_BY_SPORT[sport][0]],
+      color: defaultColor(sport, SURFACES_BY_SPORT[sport][0]),
     }));
   };
 
@@ -274,10 +274,10 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
         ))}
       </div>
 
-      {/* Phones: one card per court. */}
-      <div className="md:hidden space-y-3">
+      {/* Phones: one card per court; two side by side once there's room. */}
+      <div className="grid gap-3 sm:grid-cols-2 md:hidden">
         {!filtered.length ? (
-          <div className="bg-white border border-ink-100 rounded-2xl text-center py-12 text-ink-400 text-sm">
+          <div className="sm:col-span-2 bg-white border border-ink-100 rounded-2xl text-center py-12 text-ink-400 text-sm">
             {t("noCourts")}
           </div>
         ) : (
@@ -473,7 +473,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                   ariaLabel={t("surface")}
                   value={form.surface}
                   onChange={(v) =>
-                    setForm((f) => ({ ...f, surface: v as Surface, color: SURFACE_DEFAULT_COLOR[v as Surface] }))
+                    setForm((f) => ({ ...f, surface: v as Surface, color: defaultColor(f.sport, v as Surface) }))
                   }
                   options={SURFACES_BY_SPORT[form.sport].map((s) => ({ value: s, label: labels.surface(s) }))}
                 />

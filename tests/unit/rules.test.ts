@@ -1,11 +1,12 @@
 // Small rules the app relies on: safe redirects, CSV export, payment mode,
-// booking rules and the club's plan (trial, grace, read-only).
+// booking rules, the club's plan (trial, grace, read-only) and court colours.
 import { describe, expect, it } from "vitest";
 import { getSafeRedirect } from "@/lib/safeRedirect";
 import { toCsv } from "@/lib/csv";
 import { payModeOf } from "@/lib/paymentMode";
 import { DEFAULT_RULES, canCancel, normalizeRules, validateRules } from "@/lib/bookingRules";
 import { GRACE_DAYS, clubAccess } from "@/lib/plans";
+import { courtColor, defaultColor } from "@/lib/courtColors";
 
 describe("getSafeRedirect", () => {
   it("follows paths inside the site", () => {
@@ -91,5 +92,17 @@ describe("clubAccess", () => {
   it("counts a paid date as paid through the end of that day", () => {
     const a = clubAccess({ plan: "club", trial_ends_at: days(-40), paid_until: "2026-10-28" }, now);
     expect(a.status).toBe("active");
+  });
+});
+
+describe("court colours", () => {
+  it("draws padel courts blue unless the club picked a colour", () => {
+    expect(courtColor({ sport: "padel", surface: "artificial_grass" })).toBe("blue");
+    expect(courtColor({ sport: "padel", surface: "artificial_grass", color: "green" })).toBe("green");
+  });
+  it("uses the surface's usual colour for other sports", () => {
+    expect(courtColor({ sport: "tennis", surface: "clay" })).toBe("terracotta");
+    expect(courtColor({ surface: "grass" })).toBe("green");
+    expect(defaultColor("pickleball", "hard")).toBe("blue_green");
   });
 });
