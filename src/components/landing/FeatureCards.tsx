@@ -8,9 +8,9 @@ import { dateLocale } from "@/lib/dateLocale";
 // rows above don't cover. Each card shows a small piece of the real app
 // instead of an icon. The club and people in it are a made-up example.
 
-const CLUB = "Riverside Tennis Club";
-const CLUB_SLUG = "riverside-tennis";
-const STAFF_EMAIL = "desk@riversidetc.com";
+const CLUB = "Larkspur Tennis Club";
+const CLUB_SLUG = "larkspur-tennis";
+const STAFF_EMAIL = "desk@larkspurtc.com";
 
 /** Card title, in the site's display face. */
 function Title({ children, big = false }: { children: React.ReactNode; big?: boolean }) {

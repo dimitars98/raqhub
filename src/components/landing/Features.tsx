@@ -11,7 +11,7 @@ import { makeLabels, SPORT_EMOJI } from "@/lib/labels";
 // Game. Each panel copies a real screen in the app — same texts, colours and
 // layout, only smaller. The club and people in them are a made-up example.
 
-const CLUB = "Riverside Tennis Club";
+const CLUB = "Larkspur Tennis Club";
 
 const rows = [
   { id: "bookings", score: "15" },
