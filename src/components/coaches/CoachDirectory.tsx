@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import { MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import CoachFilters from "@/components/coaches/CoachFilters";
 import Avatar from "@/components/ui/Avatar";
@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLabels } from "@/lib/getLabels";
 import { BADGE, levelTone } from "@/lib/badges";
 import type { Coach } from "@/types/database";
+import ArrowButton from "../ui/ArrowButton";
 
 export type CoachWithJoins = Coach & {
   profile?: { full_name: string | null; avatar_url: string | null } | null;
@@ -36,7 +37,9 @@ export default async function CoachDirectory({
 
   let query = supabase
     .from("coaches")
-    .select("*, profile:profiles(full_name, avatar_url), club:clubs(name, city)")
+    .select(
+      "*, profile:profiles(full_name, avatar_url), club:clubs(name, city)",
+    )
     .eq("is_active", true)
     .order("price_per_hour");
   if (level !== "all") query = query.contains("levels", [level]);
@@ -56,7 +59,9 @@ export default async function CoachDirectory({
         >
           {t("title")}
         </h1>
-        <p className={roomy ? "text-base text-ink-600" : "text-sm text-ink-600"}>
+        <p
+          className={roomy ? "text-base text-ink-600" : "text-sm text-ink-600"}
+        >
           {t("count", { n: coaches.length })}
         </p>
       </div>
@@ -67,25 +72,31 @@ export default async function CoachDirectory({
 
       {!coaches.length ? (
         <div className={`card px-6 text-center ${roomy ? "py-20" : "py-16"}`}>
-          <p className="mb-1 text-base font-semibold text-ink-900">{t("empty")}</p>
+          <p className="mb-1 text-base font-semibold text-ink-900">
+            {t("empty")}
+          </p>
           <p className="text-sm text-ink-600">{t("emptyHint")}</p>
         </div>
       ) : (
         <div
           className={`grid grid-cols-1 ${
-            roomy ? "gap-5 sm:grid-cols-2 lg:grid-cols-3" : "gap-4 md:grid-cols-2 xl:grid-cols-3"
+            roomy
+              ? "gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              : "gap-4 md:grid-cols-2 xl:grid-cols-3"
           }`}
         >
           {coaches.map((coach) => (
             <Link
               key={coach.id}
               href={`/coaches/${coach.id}`}
-              className={`card group flex flex-col transition-all duration-150 hover:-translate-y-0.5 hover:border-ink-900 hover:shadow-lg hover:shadow-ink-900/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 ${
+              className={`card group flex flex-col transition-all duration-150 hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-lg hover:shadow-ink-900/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 ${
                 roomy ? "p-6" : "p-5"
               }`}
             >
               {/* Photo and name */}
-              <div className={`flex items-center ${roomy ? "mb-5 gap-4" : "mb-4 gap-3.5"}`}>
+              <div
+                className={`flex items-center ${roomy ? "mb-5 gap-4" : "mb-4 gap-3.5"}`}
+              >
                 <Avatar
                   id={coach.id}
                   name={coach.profile?.full_name}
@@ -103,7 +114,11 @@ export default async function CoachDirectory({
                   </div>
                   <div className="mt-0.5 flex items-center gap-1.5 text-sm text-ink-600">
                     {coach.club?.city && (
-                      <MapPin size={14} className="shrink-0 text-ink-400" aria-hidden="true" />
+                      <MapPin
+                        size={14}
+                        className="shrink-0 text-ink-400"
+                        aria-hidden="true"
+                      />
                     )}
                     <span className="truncate">
                       {coach.club?.name ?? t("independent")}
@@ -114,11 +129,15 @@ export default async function CoachDirectory({
               </div>
 
               {coach.bio && (
-                <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-ink-600">{coach.bio}</p>
+                <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-ink-600">
+                  {coach.bio}
+                </p>
               )}
 
               {coach.levels?.length > 0 && (
-                <div className={`flex flex-wrap gap-1.5 ${roomy ? "mb-5" : "mb-4"}`}>
+                <div
+                  className={`flex flex-wrap gap-1.5 ${roomy ? "mb-5" : "mb-4"}`}
+                >
                   {coach.levels.map((l) => (
                     <span key={l} className={`${BADGE} py-1 ${levelTone(l)}`}>
                       {labels.level(l)}
@@ -138,15 +157,7 @@ export default async function CoachDirectory({
                     {t("perHour")}
                   </span>
                 </span>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-ink-900">
-                  {t("viewProfile")}
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform duration-150 group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </span>
+                <ArrowButton>{t("viewProfile")}</ArrowButton>
               </div>
             </Link>
           ))}

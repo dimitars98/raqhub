@@ -28,6 +28,7 @@ import { normalizeRules } from "@/lib/bookingRules";
 import { Link } from "@/i18n/navigation";
 import { useLabels } from "@/hooks/useLabels";
 import { payModeOf } from "@/lib/paymentMode";
+import ArrowButton from "../ui/ArrowButton";
 
 export type CourtWithClub = Court & {
   club?: {
@@ -345,7 +346,7 @@ export default function BookCourtsClient({
                         setSelected(court);
                         setError(null);
                       }}
-                      className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white text-left transition-all hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_12px_28px_-14px_rgba(17,28,10,0.35)] focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:outline-none"
+                      className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white text-left transition-all hover:-translate-y-0.5 hover:border-ink-200 hover:shadow-[0_12px_28px_-14px_rgba(17,28,10,0.35)] focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:outline-none cursor-pointer"
                     >
                       <div className="relative h-24 w-full overflow-hidden">
                         <CourtArt court={court} />
@@ -376,14 +377,7 @@ export default function BookCourtsClient({
                               {t("perHour")}
                             </span>
                           </p>
-                          <button className="inline-flex h-9 items-center gap-1.5 rounded-full bg-ink-900 px-4 text-[13px] font-semibold text-white transition-colors group-hover:bg-brand-600 cursor-pointer">
-                            {t("book")}
-                            <ArrowRight
-                              size={14}
-                              aria-hidden="true"
-                              className="transition-transform group-hover:translate-x-0.5"
-                            />
-                          </button>
+                          <ArrowButton>{t("book")}</ArrowButton>
                         </div>
                       </div>
                     </button>

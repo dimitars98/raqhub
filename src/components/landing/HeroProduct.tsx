@@ -26,10 +26,38 @@ import type { Sport, Surface } from "@/types/database";
 // in src/app/[locale]/page.tsx.
 
 /** The phone's courts, as cards on the booking page. Made-up example club. */
-const COURTS: { name: string; n: number; sport: Sport; surface: Surface; indoor: boolean; price: number }[] = [
-  { name: "court", n: 1, sport: "tennis", surface: "clay", indoor: false, price: 16 },
-  { name: "padel", n: 1, sport: "padel", surface: "artificial_grass", indoor: true, price: 20 },
-  { name: "court", n: 3, sport: "tennis", surface: "hard", indoor: true, price: 18 },
+const COURTS: {
+  name: string;
+  n: number;
+  sport: Sport;
+  surface: Surface;
+  indoor: boolean;
+  price: number;
+}[] = [
+  {
+    name: "court",
+    n: 1,
+    sport: "tennis",
+    surface: "clay",
+    indoor: false,
+    price: 16,
+  },
+  {
+    name: "padel",
+    n: 1,
+    sport: "padel",
+    surface: "artificial_grass",
+    indoor: true,
+    price: 20,
+  },
+  {
+    name: "court",
+    n: 3,
+    sport: "tennis",
+    surface: "hard",
+    indoor: true,
+    price: 18,
+  },
 ];
 
 /** The booking sheet's times: one taken, one picked (19:00). */
@@ -56,7 +84,9 @@ export default function HeroProduct() {
   const locale = useLocale();
   const dfLocale = dateLocale(locale);
   const courtName = (c: (typeof COURTS)[number]) =>
-    c.name === "padel" ? `${labels.sport("padel")} ${c.n}` : t("phone.court", { n: c.n });
+    c.name === "padel"
+      ? `${labels.sport("padel")} ${c.n}`
+      : t("phone.court", { n: c.n });
 
   // The next four days, with the second one picked, like a player booking.
   const days = Array.from({ length: 4 }, (_, i) => addDays(new Date(), i));
@@ -152,7 +182,7 @@ export default function HeroProduct() {
             <div className="flex flex-wrap items-center gap-5">
               <Link
                 href="/signup?role=admin"
-                className="inline-flex min-h-14 items-center gap-3 rounded-full bg-brand-400 px-7 text-base font-semibold text-[#0e1a07] transition-colors hover:bg-brand-200"
+                className="inline-flex min-h-14 items-center gap-3 rounded-full bg-brand-400 px-7 text-base font-semibold text-[#0e1a07] transition-colors hover:bg-brand-500"
               >
                 {t("start")}
                 <ArrowRight size={18} aria-hidden="true" />
@@ -176,12 +206,17 @@ export default function HeroProduct() {
                 {/* Left, behind the phone: the booking sheet for Padel 1 */}
                 <div className="absolute -left-[4px] sm:-left-[40px] top-[112px] flex w-[236px] -rotate-[11deg] flex-col overflow-hidden rounded-[26px] bg-white shadow-[0_30px_60px_-30px_rgba(17,28,10,0.35)]">
                   <div className="relative h-[64px] w-full shrink-0 overflow-hidden">
-                    <CourtArt court={{ sport: "padel", surface: "artificial_grass" }} />
+                    <CourtArt
+                      court={{ sport: "padel", surface: "artificial_grass" }}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
                     <div className="absolute bottom-2 left-4 text-white">
-                      <p className="text-[13px] font-bold leading-tight">{courtName(COURTS[1])}</p>
+                      <p className="text-[13px] font-bold leading-tight">
+                        {courtName(COURTS[1])}
+                      </p>
                       <p className="text-[10px] text-white/85">
-                        {labels.surface("artificial_grass")} · {labels.inOut(true)}
+                        {labels.surface("artificial_grass")} ·{" "}
+                        {labels.inOut(true)}
                       </p>
                     </div>
                   </div>
@@ -193,19 +228,29 @@ export default function HeroProduct() {
                           <span
                             key={i}
                             className={`flex flex-1 flex-col items-center rounded-lg border py-1 ${
-                              on ? "border-ink-900 bg-ink-900 text-white" : "border-ink-100 bg-white text-ink-900"
+                              on
+                                ? "border-ink-900 bg-ink-900 text-white"
+                                : "border-ink-100 bg-white text-ink-900"
                             }`}
                           >
-                            <span className={`text-[8px] font-medium uppercase ${on ? "text-white/70" : "text-ink-400"}`}>
-                              {i === 0 ? tb("today") : format(d, "EEE", { locale: dfLocale })}
+                            <span
+                              className={`text-[8px] font-medium uppercase ${on ? "text-white/70" : "text-ink-400"}`}
+                            >
+                              {i === 0
+                                ? tb("today")
+                                : format(d, "EEE", { locale: dfLocale })}
                             </span>
-                            <span className="text-[13px] font-bold leading-tight">{format(d, "d")}</span>
+                            <span className="text-[13px] font-bold leading-tight">
+                              {format(d, "d")}
+                            </span>
                           </span>
                         );
                       })}
                     </div>
                     <div>
-                      <p className="mb-1.5 text-[10px] font-semibold text-ink-600">{tb("startTime")}</p>
+                      <p className="mb-1.5 text-[10px] font-semibold text-ink-600">
+                        {tb("startTime")}
+                      </p>
                       <div className="grid grid-cols-3 gap-1.5">
                         {TIMES.map((x) => (
                           <span
@@ -219,9 +264,12 @@ export default function HeroProduct() {
                     </div>
                     <div className="flex items-center justify-between rounded-lg border border-ink-100 bg-[#f8f9f7] px-3 py-2 text-[11px]">
                       <span className="text-ink-600">
-                        {format(days[1], "EEE d MMM", { locale: dfLocale })}, 19:00–20:00
+                        {format(days[1], "EEE d MMM", { locale: dfLocale })},
+                        19:00–20:00
                       </span>
-                      <span className="text-[13px] font-extrabold text-ink-900">€20</span>
+                      <span className="text-[13px] font-extrabold text-ink-900">
+                        €20
+                      </span>
                     </div>
                     <span className="block rounded-full bg-ink-900 py-2 text-center text-[11px] font-semibold text-white">
                       {tb("confirm", { price: "20" })}
@@ -231,35 +279,51 @@ export default function HeroProduct() {
 
                 {/* Right, behind the phone: the player's next booking and its reminder */}
                 <div className="absolute -right-[12px] sm:-right-[52px] top-[150px] flex w-[230px] rotate-[10deg] flex-col gap-3 rounded-[26px] bg-white p-5 shadow-[0_30px_60px_-30px_rgba(17,28,10,0.35)]">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-400">{tm("nextUp")}</span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-400">
+                    {tm("nextUp")}
+                  </span>
                   <div className="flex flex-wrap gap-1.5">
-                    <span className="badge-brand px-2 py-0.5 text-[10px]">{labels.bookingStatus("confirmed")}</span>
+                    <span className="badge-brand px-2 py-0.5 text-[10px]">
+                      {labels.bookingStatus("confirmed")}
+                    </span>
                     <span className="badge bg-ink-50 px-2 py-0.5 text-[10px] text-ink-800">
                       <Repeat size={10} aria-hidden="true" />
                       {t("weeklyCard.label")}
                     </span>
                   </div>
                   <div>
-                    <p className="text-[17px] font-bold leading-tight text-ink-900">{t("weeklyCard.when", { day: pickedDay })}</p>
+                    <p className="text-[17px] font-bold leading-tight text-ink-900">
+                      {t("weeklyCard.when", { day: pickedDay })}
+                    </p>
                     <p className="mt-1 text-[11px] text-ink-600">
-                      {courtName(COURTS[1])} · {tb("minutes", { n: 60 })} · Emma L.
+                      {courtName(COURTS[1])} · {tb("minutes", { n: 60 })} · Emma
+                      L.
                     </p>
                   </div>
                   <div>
                     <span className="flex gap-1">
                       {Array.from({ length: 12 }, (_, i) => (
-                        <span key={i} className={`h-1.5 flex-1 rounded-full ${i < 3 ? "bg-brand-400" : "bg-ink-100"}`} />
+                        <span
+                          key={i}
+                          className={`h-1.5 flex-1 rounded-full ${i < 3 ? "bg-brand-400" : "bg-ink-100"}`}
+                        />
                       ))}
                     </span>
-                    <span className="mt-1.5 block text-[10px] text-ink-600">{t("weeklyCard.progress", { week: 3, weeks: 12 })}</span>
+                    <span className="mt-1.5 block text-[10px] text-ink-600">
+                      {t("weeklyCard.progress", { week: 3, weeks: 12 })}
+                    </span>
                   </div>
                   <div className="flex items-start gap-2.5 rounded-xl border border-ink-100 bg-[#f8f9f7] p-2.5">
                     <span className="grid size-7 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-800">
                       <Bell size={13} strokeWidth={2.2} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[11px] font-semibold leading-tight text-ink-900">{t("reminderCard.title")}</span>
-                      <span className="mt-0.5 block text-[10px] text-ink-600">{t("reminderCard.sent")}</span>
+                      <span className="block text-[11px] font-semibold leading-tight text-ink-900">
+                        {t("reminderCard.title")}
+                      </span>
+                      <span className="mt-0.5 block text-[10px] text-ink-600">
+                        {t("reminderCard.sent")}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -268,18 +332,26 @@ export default function HeroProduct() {
                 <div className="absolute left-[145px] top-0 h-[560px] w-[270px] -rotate-3 rounded-[42px] bg-ink-900 p-2.5 shadow-[0_50px_80px_-30px_rgba(11,26,5,0.5)]">
                   <div className="flex h-full w-full flex-col overflow-hidden rounded-[33px] bg-[#f8f9f7]">
                     <div className="px-4 pb-2 pt-7">
-                      <p className="text-[19px] font-extrabold tracking-tight text-ink-900">{tb("title")}</p>
+                      <p className="text-[19px] font-extrabold tracking-tight text-ink-900">
+                        {tb("title")}
+                      </p>
                       <p className="mt-0.5 flex items-center gap-1 text-[11px] text-ink-600">
                         <MapPin size={11} className="shrink-0 text-ink-400" />
                         <span className="truncate">{t("phone.club")}</span>
                       </p>
                     </div>
                     <div className="flex gap-1.5 px-4 pb-3 pt-1">
-                      {[tb("allSports"), labels.sport("tennis"), labels.sport("padel")].map((label, i) => (
+                      {[
+                        tb("allSports"),
+                        labels.sport("tennis"),
+                        labels.sport("padel"),
+                      ].map((label, i) => (
                         <span
                           key={label}
                           className={`rounded-full border px-3 py-1 text-[10px] font-medium ${
-                            i === 0 ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-600"
+                            i === 0
+                              ? "border-ink-900 bg-ink-900 text-white"
+                              : "border-ink-200 bg-white text-ink-600"
                           }`}
                         >
                           {label}
@@ -288,9 +360,14 @@ export default function HeroProduct() {
                     </div>
                     <div className="flex flex-col gap-2.5 px-3.5">
                       {COURTS.map((c) => (
-                        <div key={`${c.name}${c.n}`} className="overflow-hidden rounded-2xl border border-ink-100 bg-white">
+                        <div
+                          key={`${c.name}${c.n}`}
+                          className="overflow-hidden rounded-2xl border border-ink-100 bg-white"
+                        >
                           <div className="relative h-[70px] w-full overflow-hidden">
-                            <CourtArt court={{ sport: c.sport, surface: c.surface }} />
+                            <CourtArt
+                              court={{ sport: c.sport, surface: c.surface }}
+                            />
                             <span className="absolute left-2 top-2 rounded-full bg-black/35 px-2 py-0.5 text-[9px] font-semibold text-white">
                               {labels.sport(c.sport)}
                             </span>
@@ -300,13 +377,26 @@ export default function HeroProduct() {
                           </div>
                           <div className="flex items-end justify-between gap-2 px-3 py-2.5">
                             <div className="min-w-0">
-                              <p className="truncate text-[12px] font-bold text-ink-900">{courtName(c)}</p>
+                              <p className="truncate text-[12px] font-bold text-ink-900">
+                                {courtName(c)}
+                              </p>
                               <p className="truncate text-[10px] text-ink-600">
-                                {labels.surface(c.surface)} · {labels.courtColor(courtColor({ sport: c.sport, surface: c.surface }))}
+                                {labels.surface(c.surface)} ·{" "}
+                                {labels.courtColor(
+                                  courtColor({
+                                    sport: c.sport,
+                                    surface: c.surface,
+                                  }),
+                                )}
                               </p>
                               <p className="mt-1 text-ink-900">
-                                <span className="text-[13px] font-extrabold">€{c.price}</span>
-                                <span className="text-[10px] text-ink-600"> {tb("perHour")}</span>
+                                <span className="text-[13px] font-extrabold">
+                                  €{c.price}
+                                </span>
+                                <span className="text-[10px] text-ink-600">
+                                  {" "}
+                                  {tb("perHour")}
+                                </span>
                               </p>
                             </div>
                             <span className="inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-ink-900 px-3 text-[10px] font-semibold text-white">
@@ -328,7 +418,11 @@ export default function HeroProduct() {
                 </span>
                 <span className="absolute right-[40px] top-[60px] grid size-16 place-items-center rounded-full bg-white shadow-[0_16px_34px_-14px_rgba(17,28,10,0.35)]">
                   <span className="grid size-11 place-items-center rounded-full bg-ink-900">
-                    <Check size={20} strokeWidth={2.6} className="text-brand-400" />
+                    <Check
+                      size={20}
+                      strokeWidth={2.6}
+                      className="text-brand-400"
+                    />
                   </span>
                 </span>
               </div>
