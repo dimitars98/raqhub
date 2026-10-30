@@ -130,6 +130,19 @@
      "E-mails de confirmation et de rappel"
     ]
    },
+   "compete": {
+    "label": "Jouer et compétitions",
+    "pre": "Des soirées et des ligues qui ",
+    "mark": "remplissent vos terrains",
+    "post": "",
+    "body": "Organisez des soirées Americano et Mexicano, des ligues par poules et des tournois à élimination directe, en simple ou en double. Les joueurs s'inscrivent sur la page de votre club, les tours et les tableaux se font tout seuls, et chaque résultat fait évoluer leur niveau.",
+    "points": [
+     "Americano et Mexicano avec classement en direct",
+     "Ligues par poules avec montées et descentes",
+     "Tournois en simple ou en double",
+     "Matchs ouverts, avec des niveaux qui suivent les résultats"
+    ]
+   },
    "analytics": {
     "label": "Statistiques",
     "pre": "Connaissez vos ",
@@ -150,7 +163,9 @@
    "gold": "Gold",
    "juniors": "Juniors",
    "specServe": "Service",
-   "specFootwork": "Jeu de jambes"
+   "specFootwork": "Jeu de jambes",
+   "competeEvent": "Americano du vendredi",
+   "competeLevel": "Niveau {level}"
   }
  },
  "plans": {
@@ -1061,7 +1076,7 @@
   },
   "tournament": {
    "title": "Un tournoi, tirage compris",
-   "body": "Les joueurs s’inscrivent sur la page du club. Un clic fait un tirage à élimination équitable, et chaque résultat fait avancer le gagnant.",
+   "body": "Les joueurs s'inscrivent sur la page de votre club, seuls ou en binôme. Un clic crée un tableau équitable, et chaque résultat qualifie le gagnant pour le tour suivant.",
    "semis": "Demi-finales",
    "final": "Finale · {day} 16:00",
    "size": "{players} joueurs · {rounds} tours"
@@ -1123,10 +1138,11 @@
   "everyPlan": {
    "title": "Inclus dans toutes les formules",
    "items": [
-    "Votre page de réservation et affiche QR",
-    "Réservations hebdomadaires et limite d’absences",
-    "Tournois avec tirage automatique",
-    "Matchs ouverts avec niveaux des joueurs",
+    "Votre page de réservation et une affiche QR",
+    "Réservations hebdomadaires et limite d'absences",
+    "Tournois en simple ou en double, tableau automatique",
+    "Ligues par poules et soirées Americano / Mexicano",
+    "Matchs ouverts, avec des niveaux qui suivent les résultats",
     "Export de vos données vers Excel"
    ]
   }
@@ -1152,6 +1168,10 @@
    "sports": {
     "q": "Quels sports et terrains sont pris en charge ?",
     "a": "Tennis, padel et pickleball. Chaque terrain a son sport, sa surface, son statut couvert ou extérieur et son prix horaire : un club avec des terrains variés gère tout au même endroit."
+   },
+   "compete": {
+    "q": "Peut-on organiser des ligues, des tournois et des soirées conviviales ?",
+    "a": "Oui, dans toutes les offres. Organisez des soirées Americano et Mexicano avec classement en direct, des ligues par poules avec montées et descentes à chaque tour, et des tournois à élimination directe en simple ou en double. Les joueurs s'inscrivent sur la page de votre club, et les tours et les tableaux se font tout seuls. Les joueurs peuvent aussi ouvrir un match et trouver des partenaires de leur niveau, et chaque résultat de ligue ou d'Americano fait légèrement monter ou descendre leur niveau."
    },
    "payOnline": {
     "q": "Les joueurs peuvent-ils payer en ligne ?",

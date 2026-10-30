@@ -130,6 +130,19 @@
      "Potvrde i podsetnici e-poštom"
     ]
    },
+   "compete": {
+    "label": "Igra i takmičenja",
+    "pre": "Večeri i lige koje ",
+    "mark": "pune vaše terene",
+    "post": "",
+    "body": "Organizujte Americano i Mexicano večeri, lige po grupama i turnire na ispadanje, pojedinačno ili u parovima. Igrači se prijavljuju na stranici kluba, kola i žreb se prave sami, a svaki rezultat pomera njihov nivo.",
+    "points": [
+     "Americano i Mexicano sa tabelom uživo",
+     "Lige po grupama sa ulaskom i ispadanjem",
+     "Turniri za pojedince ili parove",
+     "Otvoreni mečevi sa nivoima koji prate rezultate"
+    ]
+   },
    "analytics": {
     "label": "Analitika",
     "pre": "Znajte svoje ",
@@ -150,7 +163,9 @@
    "gold": "Gold",
    "juniors": "Juniori",
    "specServe": "Servis",
-   "specFootwork": "Rad nogu"
+   "specFootwork": "Rad nogu",
+   "competeEvent": "Americano petkom",
+   "competeLevel": "Nivo {level}"
   }
  },
  "plans": {
@@ -1061,7 +1076,7 @@
   },
   "tournament": {
    "title": "Organizujte turnir, sa žrebom",
-   "body": "Igrači se prijavljuju na stranici kluba. Jedan klik pravi pošten žreb na ispadanje, a svaki rezultat pomera pobednika dalje.",
+   "body": "Igrači se prijavljuju na stranici kluba, sami ili u paru. Jedan klik pravi pošten žreb na ispadanje, a svaki rezultat pomera pobednika dalje.",
    "semis": "Polufinale",
    "final": "Finale · {day} 16:00",
    "size": "{players} igrača · {rounds} kola"
@@ -1125,8 +1140,9 @@
    "items": [
     "Vaša stranica za rezervacije i QR poster",
     "Nedeljne rezervacije i ograničenje nedolazaka",
-    "Turniri sa automatskim žrebom",
-    "Otvoreni mečevi sa nivoima igrača",
+    "Turniri za pojedince ili parove, sa automatskim žrebom",
+    "Lige po grupama i Americano / Mexicano večeri",
+    "Otvoreni mečevi, sa nivoima koji prate rezultate",
     "Izvoz vaših podataka u Excel"
    ]
   }
@@ -1152,6 +1168,10 @@
    "sports": {
     "q": "Koje sportove i terene podržava?",
     "a": "Tenis, padel i pikleball. Svaki teren ima svoj sport, podlogu, oznaku hala ili otvoreno i cenu po satu, pa klub sa različitim terenima može da ih vodi sve sa jednog mesta."
+   },
+   "compete": {
+    "q": "Možemo li da organizujemo lige, turnire i druženja?",
+    "a": "Da, u svakom paketu. Organizujte Americano i Mexicano večeri sa tabelom uživo, lige po grupama sa ulaskom i ispadanjem posle svakog kola i turnire na ispadanje za pojedince ili parove. Igrači se prijavljuju na stranici kluba, a kola i žreb se prave sami. Igrači mogu i da otvore meč i nađu partnere na svom nivou, a svaki rezultat iz lige ili Americano malo podigne ili spusti njihov nivo."
    },
    "payOnline": {
     "q": "Mogu li igrači da plate onlajn?",

@@ -1,5 +1,5 @@
 import { addDays, format } from "date-fns";
-import { ArrowUpRight, MapPin, Plus } from "lucide-react";
+import { ArrowUpRight, MapPin, Plus, TrendingUp } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import Avatar from "@/components/ui/Avatar";
@@ -7,8 +7,8 @@ import { BADGE, memberStatusTone } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
 import { makeLabels, SPORT_EMOJI } from "@/lib/labels";
 
-// The four big feature rows, numbered like a tennis game: 15 → 30 → 40 →
-// Game. Each panel copies a real screen in the app — same texts, colours and
+// The five big feature rows, numbered like a tennis game: 15 → 30 → 40 →
+// Ad → Game. Each panel copies a real screen in the app — same texts, colours and
 // layout, only smaller. The club and people in them are a made-up example.
 
 const CLUB = "Larkspur Tennis Club";
@@ -17,6 +17,7 @@ const rows = [
   { id: "bookings", score: "15" },
   { id: "membership", score: "30" },
   { id: "coaching", score: "40" },
+  { id: "compete", score: "Ad" },
   { id: "analytics", score: "Game" },
 ] as const;
 
@@ -354,6 +355,90 @@ function CoachPanel() {
   );
 }
 
+/* ── Ad · Play & compete — an Americano evening, live ─────────────────────── */
+
+// Round 3 of a Friday Americano: the game on court 1 and the table so far.
+const GAME = { a: ["Ana", "Marko"], b: ["Elena", "Bojan"], scoreA: 15, scoreB: 9 };
+const TABLE = [
+  { name: "Ana", played: 3, won: 3, points: 52 },
+  { name: "Marko", played: 3, won: 2, points: 47, you: true },
+  { name: "Sara", played: 3, won: 2, points: 44 },
+  { name: "Elena", played: 3, won: 1, points: 38 },
+];
+
+function CompetePanel() {
+  const t = useTranslations("features.mock");
+  const ta = useTranslations("americano");
+  const labels = makeLabels(useTranslations("labels"));
+  const side = (names: string[], score: number, won: boolean) => (
+    <div className="flex items-center justify-between gap-3">
+      <span className={`min-w-0 truncate text-[14px] ${won ? "font-bold text-[#111c0a]" : "text-[#1e3010]"}`}>
+        {names.join(" & ")}
+      </span>
+      <span className={`text-xl font-extrabold tabular-nums ${won ? "text-[#111c0a]" : "text-[#6e7f65]"}`}>{score}</span>
+    </div>
+  );
+
+  return (
+    <div className="flex min-w-0 flex-col gap-3 rounded-3xl border border-[#e3eed3] bg-[#f3f8ec] p-3 sm:p-5">
+      <div className="card p-4 sm:p-5">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="min-w-0">
+            <div className="truncate text-[15px] font-semibold text-[#111c0a]">{t("competeEvent")}</div>
+            <div className="mt-0.5 text-[12px] text-[#6e7f65]">
+              {ta("formats.americano")} · {SPORT_EMOJI.padel} {labels.sport("padel")} · {ta("pointsEach", { n: 24 })}
+            </div>
+          </div>
+          <span className="badge-brand">{ta("roundTitle", { n: 3 })}</span>
+        </div>
+        <div className="rounded-2xl border border-ink-100 p-4">
+          <div className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-[#6e7f65]">{ta("court", { n: 1 })}</div>
+          <div className="flex flex-col gap-2">
+            {side(GAME.a, GAME.scoreA, true)}
+            <div className="border-t border-dashed border-ink-100" />
+            {side(GAME.b, GAME.scoreB, false)}
+          </div>
+        </div>
+      </div>
+
+      <div className="card overflow-hidden">
+        <div className="flex items-center justify-between border-b border-ink-100 px-4 py-3 sm:px-5">
+          <span className="text-[14px] font-bold text-[#111c0a]">{ta("table")}</span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#f3fbde] px-2.5 py-1 text-[11px] font-semibold text-[#4d7a08]">
+            <TrendingUp size={12} aria-hidden />
+            {t("competeLevel", { level: "3.62" })}
+          </span>
+        </div>
+        <table className="w-full text-[13px]">
+          <thead>
+            <tr className="text-[10px] uppercase tracking-wider text-[#6e7f65]">
+              <th className="w-9 py-2 pl-4 text-left font-medium sm:pl-5">#</th>
+              <th className="py-2 text-left font-medium">{ta("player")}</th>
+              <th className="w-9 py-2 text-center font-medium">{ta("played")}</th>
+              <th className="w-9 py-2 text-center font-medium">{ta("won")}</th>
+              <th className="w-14 py-2 pr-4 text-right font-medium sm:pr-5">{ta("points")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {TABLE.map((r, i) => (
+              <tr key={r.name} className={`border-t border-ink-50 ${r.you ? "bg-brand-50" : ""}`}>
+                <td className="py-2 pl-4 tabular-nums text-[#6e7f65] sm:pl-5">{i + 1}</td>
+                <td className="py-2 font-medium text-[#111c0a]">
+                  {r.name}
+                  {r.you && <span className="ml-1.5 text-[11px] font-normal text-brand-700">{ta("you")}</span>}
+                </td>
+                <td className="py-2 text-center tabular-nums text-[#3d4f35]">{r.played}</td>
+                <td className="py-2 text-center tabular-nums text-[#3d4f35]">{r.won}</td>
+                <td className="py-2 pr-4 text-right font-bold tabular-nums text-[#111c0a] sm:pr-5">{r.points}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 /* ── Game · Analytics — peak hours and revenue by sport ───────────────────── */
 
 // Example bookings per hour, Mon → Sun, 07:00 → 21:00 (the real heatmap's range).
@@ -503,13 +588,18 @@ export default function Features() {
           <CoachPanel />
         </div>
 
-        <div className={ROW}>
+        <div className={`${ROW} border-b border-[#e8ede4]`}>
           <div className="order-last lg:order-none">
-            <AnalyticsPanel />
+            <CompetePanel />
           </div>
+          <FeatureCopy id="compete" />
+        </div>
+
+        <div className={ROW}>
           <FeatureCopy id="analytics">
             <StartLink href={`/${locale}/signup?role=admin`} label={t("cta")} />
           </FeatureCopy>
+          <AnalyticsPanel />
         </div>
       </div>
     </section>

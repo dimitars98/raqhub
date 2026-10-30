@@ -6,75 +6,61 @@ import {
   CalendarCheck,
   Check,
   Globe,
+  MapPin,
   Percent,
   Repeat,
   Trophy,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import CourtArt from "@/components/courts/CourtArt";
 import { dateLocale } from "@/lib/dateLocale";
+import { makeLabels } from "@/lib/labels";
+import { courtColor } from "@/lib/courtColors";
+import type { Sport, Surface } from "@/types/database";
 
-// The landing-page hero with the product in it: the real booking screen on a
-// phone, two cards fanned out behind it (a weekly booking and a reminder
-// email), green paper waves along the bottom and the stats bar floating over
-// the bottom edge. It replaces Hero.tsx on the home page; Hero.tsx is kept, so
-// switching back is one line in src/app/[locale]/page.tsx.
+// The landing-page hero with the product in it. The three screens copy the
+// real app, with its own texts, court drawings and colours: the players'
+// "Book a court" page on a phone, the booking sheet that opens when they tap a
+// court (left), and their next booking with its reminder (right). It replaces
+// Hero.tsx on the home page; Hero.tsx is kept, so switching back is one line
+// in src/app/[locale]/page.tsx.
 
-/** Free (open), already booked (taken) or the slot being booked (picked). */
-type Slot = { time: string; state: "open" | "taken" | "picked" };
-
-const SLOT_STYLE: Record<Slot["state"], string> = {
-  open: "border border-brand-200 bg-brand-50 text-brand-900",
-  taken: "bg-ink-50 text-[#9aa892] line-through",
-  picked: "bg-brand-400 font-semibold text-ink-900",
-};
-
-/** The phone's court list. Names and times are an illustration. */
-const COURTS: {
-  n: number;
-  kind: "clay" | "padel" | "indoor";
-  slots: Slot[];
-}[] = [
-  {
-    n: 1,
-    kind: "clay",
-    slots: [
-      { time: "17:00", state: "taken" },
-      { time: "18:00", state: "open" },
-      { time: "20:00", state: "open" },
-    ],
-  },
-  {
-    n: 2,
-    kind: "padel",
-    slots: [
-      { time: "17:00", state: "open" },
-      { time: "19:00", state: "picked" },
-      { time: "20:30", state: "taken" },
-    ],
-  },
-  {
-    n: 3,
-    kind: "indoor",
-    slots: [
-      { time: "16:00", state: "open" },
-      { time: "18:30", state: "taken" },
-      { time: "21:00", state: "open" },
-    ],
-  },
+/** The phone's courts, as cards on the booking page. Made-up example club. */
+const COURTS: { name: string; n: number; sport: Sport; surface: Surface; indoor: boolean; price: number }[] = [
+  { name: "court", n: 1, sport: "tennis", surface: "clay", indoor: false, price: 16 },
+  { name: "padel", n: 1, sport: "padel", surface: "artificial_grass", indoor: true, price: 20 },
+  { name: "court", n: 3, sport: "tennis", surface: "hard", indoor: true, price: 18 },
 ];
 
-const BLUE = "#2f5fe0";
+/** The booking sheet's times: one taken, one picked (19:00). */
+const TIMES: { h: number; state: "open" | "taken" | "picked" }[] = [
+  { h: 17, state: "open" },
+  { h: 18, state: "taken" },
+  { h: 19, state: "picked" },
+  { h: 20, state: "open" },
+  { h: 21, state: "open" },
+  { h: 22, state: "taken" },
+];
+const TIME_STYLE = {
+  open: "border-ink-100 bg-white text-ink-900",
+  taken: "border-transparent bg-ink-50 text-ink-400 line-through",
+  picked: "border-brand-600 bg-brand-600 text-white",
+} as const;
 
 export default function HeroProduct() {
   const t = useTranslations("heroProduct");
   const ts = useTranslations("hero");
+  const tb = useTranslations("bookCourts");
+  const tm = useTranslations("myBookings");
+  const labels = makeLabels(useTranslations("labels"));
   const locale = useLocale();
   const dfLocale = dateLocale(locale);
+  const courtName = (c: (typeof COURTS)[number]) =>
+    c.name === "padel" ? `${labels.sport("padel")} ${c.n}` : t("phone.court", { n: c.n });
 
   // The next four days, with the second one picked, like a player booking.
   const days = Array.from({ length: 4 }, (_, i) => addDays(new Date(), i));
   const pickedDay = format(days[1], "EEEE", { locale: dfLocale });
-  const nextDay = format(days[2], "EEE", { locale: dfLocale });
 
   // Facts about the product, not made-up usage numbers (same as Hero.tsx).
   const stats = [
@@ -187,118 +173,149 @@ export default function HeroProduct() {
                 aria-hidden="true"
                 className="relative h-[620px] w-[560px] origin-top-left scale-[0.607] sm:scale-100"
               >
-                {/* Behind the phone: a weekly booking … */}
-                <div className="absolute left-[10px] top-[120px] flex h-[300px] w-[230px] -rotate-[11deg] flex-col gap-2.5 rounded-[26px] bg-white p-[22px] shadow-[0_30px_60px_-30px_rgba(17,28,10,0.35)]">
-                  <span className="flex items-center gap-2 text-xs text-ink-600">
-                    <Repeat
-                      size={14}
-                      strokeWidth={2.4}
-                      className="text-brand-800"
-                    />
-                    {t("weeklyCard.label")}
-                  </span>
-                  <span className="text-xl font-semibold leading-tight text-ink-900">
-                    {t("weeklyCard.when", { day: pickedDay })}
-                  </span>
-                  <span className="text-xs text-ink-600">
-                    {t("weeklyCard.who")}
-                  </span>
-                  <span className="mt-1.5 flex gap-1">
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <span
-                        key={i}
-                        className={`h-1.5 flex-1 rounded-full ${i < 3 ? "bg-brand-400" : "bg-ink-100"}`}
-                      />
-                    ))}
-                  </span>
-                  <span className="text-[11px] text-ink-600">
-                    {t("weeklyCard.progress", { week: 3, weeks: 12 })}
-                  </span>
-                </div>
-
-                {/* … and a reminder email */}
-                <div className="absolute right-0 top-[150px] flex h-[290px] w-[230px] rotate-[10deg] flex-col gap-2.5 rounded-[26px] bg-white p-[22px] shadow-[0_30px_60px_-30px_rgba(23,50,127,0.4)]">
-                  <span className="flex items-center gap-2 text-xs text-ink-600">
-                    <Bell size={14} strokeWidth={2.2} style={{ color: BLUE }} />
-                    {t("reminderCard.label")}
-                  </span>
-                  <span className="text-xl font-semibold leading-tight text-ink-900">
-                    {t("reminderCard.title")}
-                  </span>
-                  <span className="text-xs text-ink-600">
-                    {t("phone.court", { n: 3 })} · {nextDay} 10:00 · 90 min
-                  </span>
-                  <span className="mt-auto self-start rounded-full bg-[#e1eaff] px-3 py-1.5 text-[11px] font-semibold text-[#17327f]">
-                    {t("reminderCard.sent")}
-                  </span>
-                </div>
-
-                {/* Phone */}
-                <div className="absolute left-[145px] top-0 h-[560px] w-[270px] -rotate-3 rounded-[42px] bg-ink-900 p-2.5 shadow-[0_50px_80px_-30px_rgba(11,26,5,0.5)]">
-                  <div className="flex h-full w-full flex-col overflow-hidden rounded-[33px] bg-white">
-                    <div
-                      className="flex flex-col gap-0.5 px-[18px] pb-3.5 pt-6 text-white"
-                      style={{ background: BLUE }}
-                    >
-                      <span className="text-[11px] opacity-85">
-                        {t("phone.club")}
-                      </span>
-                      <span className="text-lg font-semibold">
-                        {t("phone.title")}
-                      </span>
+                {/* Left, behind the phone: the booking sheet for Padel 1 */}
+                <div className="absolute -left-[4px] sm:-left-[40px] top-[112px] flex w-[236px] -rotate-[11deg] flex-col overflow-hidden rounded-[26px] bg-white shadow-[0_30px_60px_-30px_rgba(17,28,10,0.35)]">
+                  <div className="relative h-[64px] w-full shrink-0 overflow-hidden">
+                    <CourtArt court={{ sport: "padel", surface: "artificial_grass" }} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+                    <div className="absolute bottom-2 left-4 text-white">
+                      <p className="text-[13px] font-bold leading-tight">{courtName(COURTS[1])}</p>
+                      <p className="text-[10px] text-white/85">
+                        {labels.surface("artificial_grass")} · {labels.inOut(true)}
+                      </p>
                     </div>
-                    <div className="flex gap-1.5 px-3.5 pb-1.5 pt-3.5">
-                      {days.map((d, i) => (
+                  </div>
+                  <div className="flex flex-col gap-3 p-4">
+                    <div className="flex gap-1.5">
+                      {days.map((d, i) => {
+                        const on = i === 1;
+                        return (
+                          <span
+                            key={i}
+                            className={`flex flex-1 flex-col items-center rounded-lg border py-1 ${
+                              on ? "border-ink-900 bg-ink-900 text-white" : "border-ink-100 bg-white text-ink-900"
+                            }`}
+                          >
+                            <span className={`text-[8px] font-medium uppercase ${on ? "text-white/70" : "text-ink-400"}`}>
+                              {i === 0 ? tb("today") : format(d, "EEE", { locale: dfLocale })}
+                            </span>
+                            <span className="text-[13px] font-bold leading-tight">{format(d, "d")}</span>
+                          </span>
+                        );
+                      })}
+                    </div>
+                    <div>
+                      <p className="mb-1.5 text-[10px] font-semibold text-ink-600">{tb("startTime")}</p>
+                      <div className="grid grid-cols-3 gap-1.5">
+                        {TIMES.map((x) => (
+                          <span
+                            key={x.h}
+                            className={`rounded-md border py-1.5 text-center text-[11px] font-semibold tabular-nums ${TIME_STYLE[x.state]}`}
+                          >
+                            {x.h}:00
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between rounded-lg border border-ink-100 bg-[#f8f9f7] px-3 py-2 text-[11px]">
+                      <span className="text-ink-600">
+                        {format(days[1], "EEE d MMM", { locale: dfLocale })}, 19:00–20:00
+                      </span>
+                      <span className="text-[13px] font-extrabold text-ink-900">€20</span>
+                    </div>
+                    <span className="block rounded-full bg-ink-900 py-2 text-center text-[11px] font-semibold text-white">
+                      {tb("confirm", { price: "20" })}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right, behind the phone: the player's next booking and its reminder */}
+                <div className="absolute -right-[12px] sm:-right-[52px] top-[150px] flex w-[230px] rotate-[10deg] flex-col gap-3 rounded-[26px] bg-white p-5 shadow-[0_30px_60px_-30px_rgba(17,28,10,0.35)]">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-400">{tm("nextUp")}</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    <span className="badge-brand px-2 py-0.5 text-[10px]">{labels.bookingStatus("confirmed")}</span>
+                    <span className="badge bg-ink-50 px-2 py-0.5 text-[10px] text-ink-800">
+                      <Repeat size={10} aria-hidden="true" />
+                      {t("weeklyCard.label")}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-[17px] font-bold leading-tight text-ink-900">{t("weeklyCard.when", { day: pickedDay })}</p>
+                    <p className="mt-1 text-[11px] text-ink-600">
+                      {courtName(COURTS[1])} · {tb("minutes", { n: 60 })} · Emma L.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="flex gap-1">
+                      {Array.from({ length: 12 }, (_, i) => (
+                        <span key={i} className={`h-1.5 flex-1 rounded-full ${i < 3 ? "bg-brand-400" : "bg-ink-100"}`} />
+                      ))}
+                    </span>
+                    <span className="mt-1.5 block text-[10px] text-ink-600">{t("weeklyCard.progress", { week: 3, weeks: 12 })}</span>
+                  </div>
+                  <div className="flex items-start gap-2.5 rounded-xl border border-ink-100 bg-[#f8f9f7] p-2.5">
+                    <span className="grid size-7 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-800">
+                      <Bell size={13} strokeWidth={2.2} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-[11px] font-semibold leading-tight text-ink-900">{t("reminderCard.title")}</span>
+                      <span className="mt-0.5 block text-[10px] text-ink-600">{t("reminderCard.sent")}</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Phone: the players' "Book a court" page */}
+                <div className="absolute left-[145px] top-0 h-[560px] w-[270px] -rotate-3 rounded-[42px] bg-ink-900 p-2.5 shadow-[0_50px_80px_-30px_rgba(11,26,5,0.5)]">
+                  <div className="flex h-full w-full flex-col overflow-hidden rounded-[33px] bg-[#f8f9f7]">
+                    <div className="px-4 pb-2 pt-7">
+                      <p className="text-[19px] font-extrabold tracking-tight text-ink-900">{tb("title")}</p>
+                      <p className="mt-0.5 flex items-center gap-1 text-[11px] text-ink-600">
+                        <MapPin size={11} className="shrink-0 text-ink-400" />
+                        <span className="truncate">{t("phone.club")}</span>
+                      </p>
+                    </div>
+                    <div className="flex gap-1.5 px-4 pb-3 pt-1">
+                      {[tb("allSports"), labels.sport("tennis"), labels.sport("padel")].map((label, i) => (
                         <span
-                          key={i}
-                          className={`flex-1 rounded-[10px] py-[7px] text-center text-[10px] leading-[1.3] ${
-                            i === 1
-                              ? "bg-ink-900 text-ink-200"
-                              : "bg-ink-50 text-ink-600"
+                          key={label}
+                          className={`rounded-full border px-3 py-1 text-[10px] font-medium ${
+                            i === 0 ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-600"
                           }`}
                         >
-                          {format(d, "EEE", { locale: dfLocale })}
-                          <br />
-                          <strong
-                            className={`text-[13px] ${i === 1 ? "text-white" : "text-ink-900"}`}
-                          >
-                            {format(d, "d")}
-                          </strong>
+                          {label}
                         </span>
                       ))}
                     </div>
-                    <div className="flex flex-col gap-3 px-3.5 py-2.5">
-                      {COURTS.map((court) => (
-                        <div key={court.n} className="flex flex-col gap-[7px]">
-                          <span className="text-xs font-semibold text-ink-900">
-                            {t("phone.court", { n: court.n })} ·{" "}
-                            {t(`phone.${court.kind}`)}
-                          </span>
-                          <div className="grid grid-cols-3 gap-[5px] text-center text-[11px]">
-                            {court.slots.map((s) => (
-                              <span
-                                key={s.time}
-                                className={`rounded-lg py-[7px] ${SLOT_STYLE[s.state]}`}
-                              >
-                                {s.time}
-                              </span>
-                            ))}
+                    <div className="flex flex-col gap-2.5 px-3.5">
+                      {COURTS.map((c) => (
+                        <div key={`${c.name}${c.n}`} className="overflow-hidden rounded-2xl border border-ink-100 bg-white">
+                          <div className="relative h-[70px] w-full overflow-hidden">
+                            <CourtArt court={{ sport: c.sport, surface: c.surface }} />
+                            <span className="absolute left-2 top-2 rounded-full bg-black/35 px-2 py-0.5 text-[9px] font-semibold text-white">
+                              {labels.sport(c.sport)}
+                            </span>
+                            <span className="absolute right-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[9px] font-semibold text-ink-900">
+                              {labels.inOut(c.indoor)}
+                            </span>
+                          </div>
+                          <div className="flex items-end justify-between gap-2 px-3 py-2.5">
+                            <div className="min-w-0">
+                              <p className="truncate text-[12px] font-bold text-ink-900">{courtName(c)}</p>
+                              <p className="truncate text-[10px] text-ink-600">
+                                {labels.surface(c.surface)} · {labels.courtColor(courtColor({ sport: c.sport, surface: c.surface }))}
+                              </p>
+                              <p className="mt-1 text-ink-900">
+                                <span className="text-[13px] font-extrabold">€{c.price}</span>
+                                <span className="text-[10px] text-ink-600"> {tb("perHour")}</span>
+                              </p>
+                            </div>
+                            <span className="inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-ink-900 px-3 text-[10px] font-semibold text-white">
+                              {tb("book")}
+                              <ArrowRight size={10} />
+                            </span>
                           </div>
                         </div>
                       ))}
-                    </div>
-                    <div className="mt-auto flex flex-col gap-2.5 border-t border-ink-100 p-3.5">
-                      <div className="flex justify-between text-xs">
-                        <span className="text-ink-600">
-                          {t("phone.court", { n: 2 })} ·{" "}
-                          {format(days[1], "EEE", { locale: dfLocale })} 19:00 ·
-                          60 min
-                        </span>
-                        <strong>€12</strong>
-                      </div>
-                      <span className="block rounded-full bg-ink-900 py-[11px] text-center text-xs font-semibold text-white">
-                        {t("phone.confirm")}
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -310,11 +327,8 @@ export default function HeroProduct() {
                   </span>
                 </span>
                 <span className="absolute right-[40px] top-[60px] grid size-16 place-items-center rounded-full bg-white shadow-[0_16px_34px_-14px_rgba(17,28,10,0.35)]">
-                  <span
-                    className="grid size-11 place-items-center rounded-full"
-                    style={{ background: BLUE }}
-                  >
-                    <Check size={20} strokeWidth={2.6} className="text-white" />
+                  <span className="grid size-11 place-items-center rounded-full bg-ink-900">
+                    <Check size={20} strokeWidth={2.6} className="text-brand-400" />
                   </span>
                 </span>
               </div>

@@ -130,6 +130,19 @@
      "Email di conferma e promemoria"
     ]
    },
+   "compete": {
+    "label": "Gioco e competizioni",
+    "pre": "Serate e leghe che ",
+    "mark": "riempiono i campi",
+    "post": "",
+    "body": "Organizza serate Americano e Mexicano, leghe a gironi e tornei a eliminazione diretta, singolo o doppio. I giocatori si iscrivono dalla pagina del club, turni e tabelloni si creano da soli e ogni risultato fa muovere il loro livello.",
+    "points": [
+     "Americano e Mexicano con classifica in diretta",
+     "Leghe a gironi con promozioni e retrocessioni",
+     "Tornei di singolo o doppio",
+     "Partite aperte con livelli che seguono i risultati"
+    ]
+   },
    "analytics": {
     "label": "Statistiche",
     "pre": "Scoprite le ",
@@ -150,7 +163,9 @@
    "gold": "Gold",
    "juniors": "Juniores",
    "specServe": "Servizio",
-   "specFootwork": "Gioco di gambe"
+   "specFootwork": "Gioco di gambe",
+   "competeEvent": "Americano del venerdì",
+   "competeLevel": "Livello {level}"
   }
  },
  "plans": {
@@ -1061,7 +1076,7 @@
   },
   "tournament": {
    "title": "Un torneo, sorteggio incluso",
-   "body": "I giocatori si iscrivono sulla pagina del club. Un clic crea un sorteggio a eliminazione equo, e ogni risultato fa avanzare il vincitore.",
+   "body": "I giocatori si iscrivono dalla pagina del club, da soli o in coppia. Un clic crea un tabellone equo e ogni risultato porta avanti il vincitore.",
    "semis": "Semifinali",
    "final": "Finale · {day} 16:00",
    "size": "{players} giocatori · {rounds} turni"
@@ -1123,10 +1138,11 @@
   "everyPlan": {
    "title": "Incluso in ogni piano",
    "items": [
-    "La vostra pagina di prenotazione e poster QR",
+    "La tua pagina di prenotazione e il poster QR",
     "Prenotazioni settimanali e limite di assenze",
-    "Tornei con sorteggio automatico",
-    "Partite aperte con livelli dei giocatori",
+    "Tornei di singolo o doppio, con tabellone automatico",
+    "Leghe a gironi e serate Americano / Mexicano",
+    "Partite aperte, con livelli che seguono i risultati",
     "Esportazione dei dati in Excel"
    ]
   }
@@ -1152,6 +1168,10 @@
    "sports": {
     "q": "Quali sport e campi supporta?",
     "a": "Tennis, padel e pickleball. Ogni campo ha il suo sport, superficie, indoor o outdoor e prezzo orario, così un club con campi diversi li gestisce tutti da un unico posto."
+   },
+   "compete": {
+    "q": "Possiamo organizzare leghe, tornei e serate sociali?",
+    "a": "Sì, in ogni piano. Organizza serate Americano e Mexicano con classifica in diretta, leghe a gironi con promozioni e retrocessioni a ogni turno e tornei a eliminazione diretta di singolo o doppio. I giocatori si iscrivono dalla pagina del club e turni e tabelloni si creano da soli. I giocatori possono anche aprire una partita e trovare compagni del loro livello, e ogni risultato di lega o di Americano alza o abbassa un po' il loro livello."
    },
    "payOnline": {
     "q": "I giocatori possono pagare online?",

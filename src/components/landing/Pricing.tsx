@@ -169,7 +169,7 @@ export default function Pricing() {
           <div className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-[#4d7a08]">
             {t("everyPlan.title")}
           </div>
-          <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {(t.raw("everyPlan.items") as string[]).map((item) => (
               <li key={item} className="flex items-center gap-3 text-[14px] text-ink-800">
                 <span className="grid size-5 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-900">

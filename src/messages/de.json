@@ -130,6 +130,19 @@
      "Bestätigungs- und Erinnerungs-E-Mails"
     ]
    },
+   "compete": {
+    "label": "Spielen & Wettkampf",
+    "pre": "Abende und Ligen, die ",
+    "mark": "Ihre Plätze füllen",
+    "post": "",
+    "body": "Veranstalten Sie Americano- und Mexicano-Abende, Box-Ligen und K.-o.-Turniere, im Einzel oder Doppel. Spieler melden sich auf Ihrer Clubseite an, Runden und Auslosungen entstehen automatisch, und jedes Ergebnis bewegt ihr Niveau.",
+    "points": [
+     "Americano und Mexicano mit Live-Tabelle",
+     "Box-Ligen mit Auf- und Abstieg",
+     "Turniere im Einzel oder Doppel",
+     "Offene Matches mit Niveaus, die Ergebnissen folgen"
+    ]
+   },
    "analytics": {
     "label": "Auswertungen",
     "pre": "Kennen Sie Ihre ",
@@ -150,7 +163,9 @@
    "gold": "Gold",
    "juniors": "Junioren",
    "specServe": "Aufschlag",
-   "specFootwork": "Beinarbeit"
+   "specFootwork": "Beinarbeit",
+   "competeEvent": "Americano am Freitag",
+   "competeLevel": "Niveau {level}"
   }
  },
  "plans": {
@@ -1061,7 +1076,7 @@
   },
   "tournament": {
    "title": "Turniere, mit Auslosung",
-   "body": "Spieler melden sich auf Ihrer Clubseite an. Ein Klick erstellt eine faire K.-o.-Auslosung, und jedes Ergebnis bringt den Sieger weiter.",
+   "body": "Spieler melden sich auf Ihrer Clubseite an, allein oder als Paar. Ein Klick erstellt eine faire K.-o.-Auslosung, und jedes Ergebnis bringt den Sieger weiter.",
    "semis": "Halbfinale",
    "final": "Finale · {day} 16:00",
    "size": "{players} Spieler · {rounds} Runden"
@@ -1125,8 +1140,9 @@
    "items": [
     "Eigene Buchungsseite und QR-Poster",
     "Wöchentliche Buchungen und No-Show-Limit",
-    "Turniere mit automatischer Auslosung",
-    "Offene Matches mit Spielerniveaus",
+    "Turniere im Einzel oder Doppel, mit automatischer Auslosung",
+    "Box-Ligen und Americano-/Mexicano-Abende",
+    "Offene Matches, mit Niveaus, die Ergebnissen folgen",
     "Datenexport nach Excel"
    ]
   }
@@ -1152,6 +1168,10 @@
    "sports": {
     "q": "Welche Sportarten und Plätze werden unterstützt?",
     "a": "Tennis, Padel und Pickleball. Jeder Platz hat eigene Sportart, Belag, Halle oder Freiplatz und Stundenpreis – ein Club mit gemischten Plätzen verwaltet alles an einem Ort."
+   },
+   "compete": {
+    "q": "Können wir Ligen, Turniere und gesellige Abende veranstalten?",
+    "a": "Ja, in jedem Tarif. Veranstalten Sie Americano- und Mexicano-Abende mit Live-Tabelle, Box-Ligen mit Auf- und Abstieg nach jeder Runde und K.-o.-Turniere im Einzel oder Doppel. Spieler melden sich auf Ihrer Clubseite an, Runden und Auslosungen entstehen automatisch. Spieler können außerdem ein offenes Match anlegen und Partner auf ihrem Niveau finden, und jedes Liga- oder Americano-Ergebnis hebt oder senkt ihr Niveau ein wenig."
    },
    "payOnline": {
     "q": "Können Spieler online bezahlen?",

@@ -11,6 +11,7 @@ const FAQ_IDS = [
   "app",
   "phone",
   "sports",
+  "compete",
   "payOnline",
   "languages",
   "data",

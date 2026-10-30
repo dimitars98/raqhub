@@ -130,6 +130,19 @@
      "Confirmation and reminder emails"
     ]
    },
+   "compete": {
+    "label": "Play & compete",
+    "pre": "Nights and leagues that ",
+    "mark": "fill your courts",
+    "post": "",
+    "body": "Run Americano and Mexicano evenings, box leagues and knockout tournaments, singles or pairs. Players sign up on your club page, the rounds and draws are made for you, and every result moves their level.",
+    "points": [
+     "Americano and Mexicano with a live table",
+     "Box leagues with promotion and relegation",
+     "Tournaments for singles or pairs",
+     "Open matches with levels that follow results"
+    ]
+   },
    "analytics": {
     "label": "Analytics",
     "pre": "Know your ",
@@ -150,7 +163,9 @@
    "gold": "Gold",
    "juniors": "Juniors",
    "specServe": "Serve",
-   "specFootwork": "Footwork"
+   "specFootwork": "Footwork",
+   "competeEvent": "Friday Americano",
+   "competeLevel": "Level {level}"
   }
  },
  "plans": {
@@ -1061,7 +1076,7 @@
   },
   "tournament": {
    "title": "Run a tournament, draw included",
-   "body": "Players sign up on your club page. One click makes a fair knockout draw, and every result moves the winner on.",
+   "body": "Players sign up on your club page, alone or as a pair. One click makes a fair knockout draw, and every result moves the winner on.",
    "semis": "Semi-finals",
    "final": "Final · {day} 16:00",
    "size": "{players} players · {rounds} rounds"
@@ -1125,8 +1140,9 @@
    "items": [
     "Your booking page and QR poster",
     "Weekly bookings and no-show limits",
-    "Tournaments with automatic draws",
-    "Open matches with player levels",
+    "Tournaments for singles or pairs, with automatic draws",
+    "Box leagues and Americano / Mexicano evenings",
+    "Open matches, with levels that follow results",
     "Export your data to Excel"
    ]
   }
@@ -1152,6 +1168,10 @@
    "sports": {
     "q": "Which sports and courts does it support?",
     "a": "Tennis, padel and pickleball. Each court has its own sport, surface, indoor or outdoor setting and hourly price, so a club with mixed courts can run them all from one place."
+   },
+   "compete": {
+    "q": "Can we run leagues, tournaments and social evenings?",
+    "a": "Yes, in every plan. Run Americano and Mexicano evenings with a live table, box leagues with promotion and relegation each round, and knockout tournaments for singles or pairs. Players sign up on your club page, and the rounds and draws are made for you. Players can also open a match and find partners at their level, and every league or Americano result nudges their level up or down."
    },
    "payOnline": {
     "q": "Can players pay online?",

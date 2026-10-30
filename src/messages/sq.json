@@ -130,6 +130,19 @@
      "Email konfirmimi dhe kujtese"
     ]
    },
+   "compete": {
+    "label": "Lojë dhe gara",
+    "pre": "Mbrëmje dhe liga që ",
+    "mark": "mbushin fushat",
+    "post": "",
+    "body": "Organizoni mbrëmje Americano dhe Mexicano, liga në grupe dhe turne me eliminim, teke ose në çifte. Lojtarët regjistrohen në faqen e klubit, raundet dhe shorti bëhen vetë, dhe çdo rezultat lëviz nivelin e tyre.",
+    "points": [
+     "Americano dhe Mexicano me tabelë live",
+     "Liga në grupe me ngjitje dhe zbritje",
+     "Turne për teke ose çifte",
+     "Ndeshje të hapura me nivele që ndjekin rezultatet"
+    ]
+   },
    "analytics": {
     "label": "Analitika",
     "pre": "Njihni ",
@@ -150,7 +163,9 @@
    "gold": "Gold",
    "juniors": "Të rinjtë",
    "specServe": "Shërbimi",
-   "specFootwork": "Lëvizja e këmbëve"
+   "specFootwork": "Lëvizja e këmbëve",
+   "competeEvent": "Americano e së premtes",
+   "competeLevel": "Niveli {level}"
   }
  },
  "plans": {
@@ -1061,7 +1076,7 @@
   },
   "tournament": {
    "title": "Organizoni një turne, me short",
-   "body": "Lojtarët regjistrohen në faqen e klubit. Një klikim bën një short të drejtë me eliminim, dhe çdo rezultat e çon fituesin përpara.",
+   "body": "Lojtarët regjistrohen në faqen e klubit, vetëm ose në çift. Një klik bën një short të drejtë me eliminim, dhe çdo rezultat e çon fituesin më tej.",
    "semis": "Gjysmëfinale",
    "final": "Finale · {day} 16:00",
    "size": "{players} lojtarë · {rounds} raunde"
@@ -1125,9 +1140,10 @@
    "items": [
     "Faqja juaj e rezervimeve dhe posteri QR",
     "Rezervime javore dhe kufi për mosparaqitjet",
-    "Turne me short automatik",
-    "Ndeshje të hapura me nivele lojtarësh",
-    "Eksportoni të dhënat në Excel"
+    "Turne për teke ose çifte, me short automatik",
+    "Liga në grupe dhe mbrëmje Americano / Mexicano",
+    "Ndeshje të hapura, me nivele që ndjekin rezultatet",
+    "Eksport i të dhënave në Excel"
    ]
   }
  },
@@ -1152,6 +1168,10 @@
    "sports": {
     "q": "Cilat sporte dhe fusha mbështet?",
     "a": "Tenis, padel dhe pickleball. Çdo fushë ka sportin, sipërfaqen, ambientin e mbyllur ose të hapur dhe çmimin për orë, kështu që një klub me fusha të ndryshme i menaxhon të gjitha nga një vend."
+   },
+   "compete": {
+    "q": "A mund të organizojmë liga, turne dhe mbrëmje shoqërore?",
+    "a": "Po, në çdo plan. Organizoni mbrëmje Americano dhe Mexicano me tabelë live, liga në grupe me ngjitje dhe zbritje në çdo raund dhe turne me eliminim për teke ose çifte. Lojtarët regjistrohen në faqen e klubit, ndërsa raundet dhe shorti bëhen vetë. Lojtarët mund të hapin edhe një ndeshje dhe të gjejnë partnerë në nivelin e tyre, dhe çdo rezultat lige ose Americano e ngre ose e ul pak nivelin e tyre."
    },
    "payOnline": {
     "q": "A mund të paguajnë lojtarët online?",
