@@ -25,7 +25,7 @@ export default function AuthShell({ tone = "lime", children }: AuthShellProps) {
         >
           {/* <LogoMark className="size-8" /> */}
           <Image src="/logo2_dark.png" alt="logo" width={40} height={40} />
-          Kortello
+          Korto
         </Link>
 
         <div className="flex flex-1 items-center justify-center py-12">

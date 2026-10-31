@@ -98,7 +98,7 @@ export default function Navbar() {
         >
           {/* <LogoMark className="size-7" /> */}
           <Image src="/logo2_dark.png" alt="logo" width={40} height={40} />
-          Kortello
+          Korto
         </Link>
 
         {/* Center links — share the row with logo and buttons, so longer

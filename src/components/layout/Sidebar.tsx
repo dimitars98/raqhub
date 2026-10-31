@@ -152,7 +152,7 @@ function SidebarContent({
 
             {!collapsed && (
               <span>
-                Kort<span className="text-[#a8d832]">ello</span>
+                {/* Kort<span className="text-[#a8d832]">ello</span> */}Korto
               </span>
             )}
           </Link>
