@@ -12,6 +12,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 import LocaleSwitcher, { LOCALES } from "@/components/ui/LocaleSwitcher";
 import { LogoMark } from "@/components/ui/Logo";
+import Image from "next/image";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -95,7 +96,8 @@ export default function Navbar() {
           }}
           className="inline-flex shrink-0 items-center gap-2 text-lg font-semibold text-brand-900 tracking-tight cursor-pointer"
         >
-          <LogoMark className="size-7" />
+          {/* <LogoMark className="size-7" /> */}
+          <Image src="/logo2_dark.png" alt="logo" width={40} height={40} />
           Kortello
         </Link>
 

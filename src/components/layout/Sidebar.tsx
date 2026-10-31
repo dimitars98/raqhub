@@ -38,6 +38,7 @@ import { useSidebar } from "./SidebarContext";
 import type { AreaRole } from "@/types/tones";
 import { LogoMark } from "@/components/ui/Logo";
 import { initials } from "@/lib/avatar";
+import Image from "next/image";
 
 interface NavItem {
   label: string;
@@ -146,7 +147,9 @@ function SidebarContent({
             aria-label="Kortello"
             className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-white"
           >
-            <LogoMark className="size-7" />
+            {/* <LogoMark className="size-7" /> */}
+            <Image src="/logo2.png" alt="logo" width={40} height={40} />
+
             {!collapsed && (
               <span>
                 Kort<span className="text-[#a8d832]">ello</span>

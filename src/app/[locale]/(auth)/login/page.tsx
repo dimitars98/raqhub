@@ -10,6 +10,7 @@ import { LogoMark } from "@/components/ui/Logo";
 import { getSafeRedirect } from "@/lib/safeRedirect";
 import { homeFor } from "@/lib/roles";
 import PasswordInput from "@/components/ui/PasswordInput";
+import Image from "next/image";
 
 type LoginValues = {
   email: string;
@@ -87,7 +88,8 @@ export default function LoginPage() {
           href={`/${locale}`}
           className="inline-flex w-fit items-center gap-2 text-xl font-semibold tracking-tight text-brand-900"
         >
-          <LogoMark className="size-8" />
+          {/* <LogoMark className="size-8" /> */}
+          <Image src="/logo2_dark.png" alt="logo" width={40} height={40} />
           Kortello
         </Link>
 
@@ -207,14 +209,15 @@ export default function LoginPage() {
               </div>
 
               {/* Google sign-in came back without a session (see api/auth/callback) */}
-              {!errors.root && params.get("error") === "auth_callback_failed" && (
-                <p
-                  role="alert"
-                  className="rounded-2xl bg-red-50 px-5 py-3.5 text-sm text-red-700"
-                >
-                  {t("callbackFailed")}
-                </p>
-              )}
+              {!errors.root &&
+                params.get("error") === "auth_callback_failed" && (
+                  <p
+                    role="alert"
+                    className="rounded-2xl bg-red-50 px-5 py-3.5 text-sm text-red-700"
+                  >
+                    {t("callbackFailed")}
+                  </p>
+                )}
               {errors.root && (
                 <p
                   role="alert"

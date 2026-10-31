@@ -24,7 +24,9 @@ export default async function ProfilePage() {
   const t = await getTranslations("profilePage");
   const locale = await getLocale();
   const fmt = (value: string, options: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat(intlLocale(locale), options).format(new Date(value));
+    new Intl.DateTimeFormat(intlLocale(locale), options).format(
+      new Date(value),
+    );
   const labels = await getLabels();
 
   const [{ data: profileData }, { data: memberData }, { data: bookingsData }] =
@@ -69,7 +71,6 @@ export default async function ProfilePage() {
       (b.status === "confirmed" || b.status === "pending"),
   ).length;
 
-
   return (
     <div className="max-w-2xl mx-auto">
       {/* Header */}
@@ -88,9 +89,9 @@ export default async function ProfilePage() {
           <p className="text-base font-medium text-brand-900 truncate">
             {profile?.full_name ?? t("yourName")}
           </p>
-          <p className="text-sm text-brand-400 truncate">{user.email}</p>
+          <p className="text-sm text-brand-600 truncate">{user.email}</p>
           {profile?.phone && (
-            <p className="text-xs text-brand-400 mt-0.5">{profile.phone}</p>
+            <p className="text-xs text-brand-600 mt-0.5">{profile.phone}</p>
           )}
         </div>
       </div>
@@ -101,7 +102,7 @@ export default async function ProfilePage() {
           <span className="text-lg font-medium text-brand-900">
             {totalSessions}
           </span>
-          <span className="text-[10px] text-brand-400 text-center">
+          <span className="text-[10px] text-brand-600 text-center">
             {t("sessions")}
           </span>
         </div>
@@ -109,13 +110,15 @@ export default async function ProfilePage() {
           <span className="text-lg font-medium text-brand-900">
             {totalHours}h
           </span>
-          <span className="text-[10px] text-brand-400 text-center">{t("played")}</span>
+          <span className="text-[10px] text-brand-600 text-center">
+            {t("played")}
+          </span>
         </div>
         <div className="flex flex-col items-center gap-0.5 px-3">
           <span className="text-lg font-medium text-brand-900">
             {upcomingCount}
           </span>
-          <span className="text-[10px] text-brand-400 text-center">
+          <span className="text-[10px] text-brand-600 text-center">
             {t("upcoming")}
           </span>
         </div>
@@ -123,13 +126,15 @@ export default async function ProfilePage() {
           <span className="text-lg font-medium text-brand-900">
             €{totalSpent.toFixed(0)}
           </span>
-          <span className="text-[10px] text-brand-400 text-center">{t("spent")}</span>
+          <span className="text-[10px] text-brand-600 text-center">
+            {t("spent")}
+          </span>
         </div>
       </div>
 
       {/* Membership card */}
       <section className="mb-4">
-        <h2 className="text-xs font-medium text-brand-400 uppercase tracking-widest mb-3">
+        <h2 className="text-xs font-medium text-brand-600 uppercase tracking-widest mb-3">
           {t("membership")}
         </h2>
         {member ? (
@@ -140,7 +145,7 @@ export default async function ProfilePage() {
                   {member.plan?.name ?? t("member")}
                 </p>
                 {member.plan && (
-                  <p className="text-xs text-brand-400 mt-0.5">
+                  <p className="text-xs text-brand-600 mt-0.5">
                     €{member.plan.price}{" "}
                     {labels.billingPeriod(member.plan.billing_period)}
                     {member.plan.discount_pct > 0 && (
@@ -156,17 +161,21 @@ export default async function ProfilePage() {
               </span>
             </div>
             <div className="border-t border-brand-100 pt-3 flex items-center justify-between">
-              <span className="text-xs text-brand-400">
+              <span className="text-xs text-brand-600">
                 {t("memberSince")}{" "}
                 <span className="text-brand-600 font-medium">
                   {fmt(member.starts_at, { month: "short", year: "numeric" })}
                 </span>
               </span>
               {member.ends_at && (
-                <span className="text-xs text-brand-400">
+                <span className="text-xs text-brand-600">
                   {t("renews")}{" "}
                   <span className="text-brand-600 font-medium">
-                    {fmt(member.ends_at, { day: "numeric", month: "short", year: "numeric" })}
+                    {fmt(member.ends_at, {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
                   </span>
                 </span>
               )}
@@ -174,17 +183,15 @@ export default async function ProfilePage() {
           </div>
         ) : (
           <div className="card px-5 py-4 text-center">
-            <p className="text-sm text-brand-400 mb-1">{t("noMembership")}</p>
-            <p className="text-xs text-brand-300">
-              {t("noMembershipHint")}
-            </p>
+            <p className="text-sm text-brand-600 mb-1">{t("noMembership")}</p>
+            <p className="text-xs text-brand-300">{t("noMembershipHint")}</p>
           </div>
         )}
       </section>
 
       {/* Edit profile */}
       <section className="mb-4">
-        <h2 className="text-xs font-medium text-brand-400 uppercase tracking-widest mb-3">
+        <h2 className="text-xs font-medium text-brand-600 uppercase tracking-widest mb-3">
           {t("personalDetails")}
         </h2>
         <div className="card px-5 py-5">
@@ -200,19 +207,19 @@ export default async function ProfilePage() {
 
       {/* Account */}
       <section>
-        <h2 className="text-xs font-medium text-brand-400 uppercase tracking-widest mb-3">
+        <h2 className="text-xs font-medium text-brand-600 uppercase tracking-widest mb-3">
           {t("account")}
         </h2>
         <div className="card divide-y divide-brand-100 overflow-hidden">
           <div className="px-5 py-3.5 flex items-center justify-between">
             <span className="text-sm text-brand-700">{t("email")}</span>
-            <span className="text-sm text-brand-400 truncate max-w-[200px]">
+            <span className="text-sm text-brand-600 truncate max-w-[200px]">
               {user.email}
             </span>
           </div>
           <div className="px-5 py-3.5 flex items-center justify-between">
             <span className="text-sm text-brand-700">{t("accountSince")}</span>
-            <span className="text-sm text-brand-400">
+            <span className="text-sm text-brand-600">
               {fmt(user.created_at, { month: "long", year: "numeric" })}
             </span>
           </div>
