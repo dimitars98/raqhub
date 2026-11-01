@@ -57,7 +57,7 @@ export async function connectStripe(): Promise<Result> {
           email: club.email ?? user.email ?? undefined,
           business_profile: { name: club.name, url: `${origin}/${locale}/clubs/${club.slug}` },
           // The club's own full Stripe account: it pays Stripe's fees and
-          // handles its refunds and disputes; Kortello only starts payments.
+          // handles its refunds and disputes; RaqHub only starts payments.
           controller: {
             stripe_dashboard: { type: "full" },
             fees: { payer: "account" },

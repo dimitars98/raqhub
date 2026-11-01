@@ -9,7 +9,7 @@ import { clubAccess } from "@/lib/plans";
 import type { Period } from "@/lib/ownerBilling";
 import type { PlanId } from "@/lib/plans";
 
-// A club paying for its Kortello plan by card, through Polar. Only the
+// A club paying for its RaqHub plan by card, through Polar. Only the
 // owner. The webhook (src/app/api/polar/webhook) records the result.
 
 type Result = { url?: string; error?: "notConfigured" | "notOwner" | "failed" };
@@ -64,7 +64,7 @@ export async function startSubscription(plan: PlanId, period: Period): Promise<R
       ...(trialDays > 0 ? { allow_trial: true, trial_interval: "day" as const, trial_interval_count: trialDays } : {}),
       success_url: `${settings}?subscribed=1`,
       return_url: settings,
-      // Polar's checkout speaks fewer languages than Kortello.
+      // Polar's checkout speaks fewer languages than RaqHub.
       ...(["en", "de", "fr", "it"].includes(locale) ? { locale } : {}),
     });
     return { url: checkout.url };

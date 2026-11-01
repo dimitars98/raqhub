@@ -61,7 +61,7 @@
     "forgotIntro": "Geben Sie die E-Mail-Adresse ein, mit der Sie sich anmelden. Wir schicken Ihnen einen Link, um ein neues Passwort zu wählen.",
     "sendLink": "Link senden",
     "sendingLink": "Wird gesendet…",
-    "resetSent": "Falls <b>{email}</b> ein SpinSync-Konto hat, ist ein Link zum Zurücksetzen unterwegs.",
+    "resetSent": "Falls <b>{email}</b> ein RaqHub-Konto hat, ist ein Link zum Zurücksetzen unterwegs.",
     "resetSentHint": "Nach ein paar Minuten noch nichts da? Sehen Sie im Spam-Ordner nach oder versuchen Sie es erneut.",
     "resetExpired": "Dieser Link ist abgelaufen oder wurde schon benutzt. Fordern Sie unten einen neuen an.",
     "tooManyRequests": "Zu viele Versuche. Bitte warten Sie ein paar Minuten und versuchen Sie es erneut.",
@@ -109,7 +109,7 @@
         "pre": "Mitglieder, die ",
         "mark": "verlängern",
         "post": "",
-        "body": "Verkaufen Sie eigene Mitgliedschaften, geben Sie Mitgliedern Rabatt auf jede Buchung und lassen Sie SpinSync vor dem Ablauf erinnern.",
+        "body": "Verkaufen Sie eigene Mitgliedschaften, geben Sie Mitgliedern Rabatt auf jede Buchung und lassen Sie RaqHub vor dem Ablauf erinnern.",
         "points": [
           "Eigene Monats-, Jahres- oder Einmaltarife",
           "Buchungsrabatt für Mitglieder",
@@ -398,7 +398,7 @@
       "matches": "Offene Matches"
     },
     "share": "Teilen",
-    "ownerGroup": "SpinSync",
+    "ownerGroup": "RaqHub",
     "ownerPage": "Clubs & Zahlungen",
     "tournaments": "Turniere",
     "staff": "Mitarbeiter",
@@ -531,7 +531,7 @@
     "selectProfile": "Benutzer auswählen",
     "alreadyCoach": "Diese Person ist bereits Trainer in deinem Club.",
     "coachEmail": "E-Mail des Trainers",
-    "coachEmailHint": "Der Trainer braucht ein SpinSync-Konto mit dieser E-Mail.",
+    "coachEmailHint": "Der Trainer braucht ein RaqHub-Konto mit dieser E-Mail.",
     "coachEmailPlaceholder": "trainer@beispiel.de"
   },
   "clubPage": {
@@ -551,7 +551,7 @@
     "website": "Website",
     "ctaTitle": "Lust, bei {club} zu spielen?",
     "ctaText": "Erstelle ein kostenloses Konto, sieh freie Zeiten und buche in Sekunden.",
-    "metaDescription": "Plätze, Trainer und Mitgliedschaften bei {club}. Online buchen mit SpinSync.",
+    "metaDescription": "Plätze, Trainer und Mitgliedschaften bei {club}. Online buchen mit RaqHub.",
     "bookThisCourt": "Buchen"
   },
   "myBookings": {
@@ -728,20 +728,20 @@
       "noneExpiring": "Keine",
       "openDashboard": "Dashboard öffnen"
     },
-    "footerPlayer": "Gesendet von SpinSync im Namen von {club}.",
-    "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf SpinSync führst.",
+    "footerPlayer": "Gesendet von RaqHub im Namen von {club}.",
+    "footerOwner": "Du erhältst diese Wochenübersicht, weil du einen Club auf RaqHub führst.",
     "trial": {
-      "endingSubject": "Ihre SpinSync-Testphase für {club} endet am {date}",
+      "endingSubject": "Ihre RaqHub-Testphase für {club} endet am {date}",
       "endingIntro": "Ihr kostenloser Monat für {club} endet am {date}. Drei Tage später wird das Konto schreibgeschützt: Sie können weiterhin alles ansehen und exportieren, aber nichts Neues hinzufügen, und Online-Buchungen werden pausiert. Es wird nie automatisch etwas berechnet. Um weiterzumachen, antworten Sie auf diese E-Mail, und wir schicken Ihnen eine Rechnung.",
-      "endedSubject": "Ihre SpinSync-Testphase für {club} ist abgelaufen",
+      "endedSubject": "Ihre RaqHub-Testphase für {club} ist abgelaufen",
       "endedIntro": "Ihr kostenloser Monat für {club} ist vorbei. In drei Tagen wird das Konto schreibgeschützt, und Online-Buchungen werden pausiert. Ihre Daten bleiben sicher, und es wird nichts berechnet. Um weiter Buchungen anzunehmen, antworten Sie auf diese E-Mail, und wir schicken Ihnen eine Rechnung.",
       "price": "{monthly} € pro Monat oder {yearly} € pro Jahr",
       "trialEnds": "Kostenlos bis",
       "seePlan": "Tarif ansehen",
-      "footer": "Sie erhalten diese E-Mail, weil Sie einen Club auf SpinSync führen."
+      "footer": "Sie erhalten diese E-Mail, weil Sie einen Club auf RaqHub führen."
     },
     "staff": {
-      "subject": "Sie sind eingeladen, bei {club} auf SpinSync mitzuhelfen",
+      "subject": "Sie sind eingeladen, bei {club} auf RaqHub mitzuhelfen",
       "heading": "Willkommen im Team von {club}",
       "intro": "{owner} hat Sie eingeladen, bei {club} die Buchungen mitzuverwalten.",
       "introNoName": "Sie sind eingeladen, bei {club} die Buchungen mitzuverwalten.",
@@ -749,8 +749,8 @@
       "signInWith": "Anmelden mit",
       "youCan": "Sie können",
       "screens": "Den Belegungsplan sehen, Buchungen und Mitglieder verwalten",
-      "button": "SpinSync öffnen",
-      "footer": "Sie erhalten diese E-Mail, weil {club} diese Adresse bei SpinSync als Mitarbeiter eingetragen hat. Wenn Sie den Club nicht kennen, können Sie sie ignorieren."
+      "button": "RaqHub öffnen",
+      "footer": "Sie erhalten diese E-Mail, weil {club} diese Adresse bei RaqHub als Mitarbeiter eingetragen hat. Wenn Sie den Club nicht kennen, können Sie sie ignorieren."
     },
     "groups": {
       "group": "Gruppe",
@@ -759,16 +759,16 @@
       "schedule": "Wann",
       "answerBy": "Antwort bis",
       "month": "Monat",
-      "open": "SpinSync öffnen",
+      "open": "RaqHub öffnen",
       "cancelledSubject": "Abgesagt: {group}, {date}",
       "cancelledIntro": "Die Einheit von {group} am {date} fällt aus. Die anderen Einheiten finden wie gewohnt statt.",
       "offerSubject": "Ein Platz ist frei in {group}",
       "offerIntro": "Gute Nachrichten: In {group} bei {club} ist ein Platz für {name} frei geworden. Er wird 48 Stunden freigehalten.",
       "offerButton": "Auf das Angebot antworten",
-      "offerFooter": "Sie erhalten diese E-Mail, weil Sie bei SpinSync auf der Warteliste von {club} stehen.",
+      "offerFooter": "Sie erhalten diese E-Mail, weil Sie bei RaqHub auf der Warteliste von {club} stehen.",
       "feeSubject": "{group}: Beitrag für {month}",
       "feeIntro": "Eine freundliche Erinnerung: Der Beitrag von {name} für {month} in {group} ist noch nicht als bezahlt markiert.",
-      "feeFooter": "Von SpinSync im Auftrag von {club} gesendet. Schon bezahlt? Dann ist nichts zu tun: Der Club trägt es ein."
+      "feeFooter": "Von RaqHub im Auftrag von {club} gesendet. Schon bezahlt? Dann ist nichts zu tun: Der Club trägt es ein."
     },
     "closed": {
       "subject": "Storniert: {what}, {date}. Der Platz ist gesperrt",
@@ -801,7 +801,7 @@
     "lockedBody": "Schreiben Sie uns, und wir stellen Ihren Club auf den Plan {plan} um.",
     "courtsUsed": "{used} von {max} aktiven Plätzen",
     "courtLimit": "Ihr Plan erlaubt {max} aktive Plätze. Deaktivieren Sie einen Platz oder wechseln Sie den Plan.",
-    "cardTitle": "Ihr SpinSync-Plan",
+    "cardTitle": "Ihr RaqHub-Plan",
     "trialUntil": "Kostenlos testen bis {date}",
     "paidUntil": "Bezahlt bis {date}",
     "unpaid": "Noch nicht bezahlt",
@@ -842,7 +842,7 @@
     },
     "card": {
       "title": "Per Karte zahlen",
-      "intro": "Bezahlen Sie SpinSync per Karte, monatlich oder jährlich. Verlängert sich automatisch; jederzeit kündbar.",
+      "intro": "Bezahlen Sie RaqHub per Karte, monatlich oder jährlich. Verlängert sich automatisch; jederzeit kündbar.",
       "plan": "Tarif",
       "period": "Abrechnung",
       "periods": {
@@ -956,12 +956,12 @@
     },
     "title1": "Füllen Sie Ihre Plätze.",
     "title2": "Lassen Sie Ihren Club wachsen.",
-    "subtitle": "SpinSync gibt Tennis-, Padel- und Pickleball-Clubs und ihren Trainern die Werkzeuge, um Plätze, Zeitpläne und Buchungen zu verwalten – alles an einem Ort. Weniger Verwaltung, mehr Zeit auf dem Platz.",
+    "subtitle": "RaqHub gibt Tennis-, Padel- und Pickleball-Clubs und ihren Trainern die Werkzeuge, um Plätze, Zeitpläne und Buchungen zu verwalten – alles an einem Ort. Weniger Verwaltung, mehr Zeit auf dem Platz.",
     "getStarted": "Jetzt starten",
     "seeHow": "So funktioniert es"
   },
   "announcement": {
-    "free": "SpinSync {days} Tage kostenlos testen.",
+    "free": "RaqHub {days} Tage kostenlos testen.",
     "noCard": "Keine Karte nötig.",
     "link": "Tarife ansehen →"
   },
@@ -995,7 +995,7 @@
   },
   "testimonials": {
     "label": "Das sagen Clubs",
-    "title": "Von Clubs, die SpinSync nutzen"
+    "title": "Von Clubs, die RaqHub nutzen"
   },
   "howItWorks": {
     "label": "Einfache Einrichtung",
@@ -1035,7 +1035,7 @@
     },
     "learnMore": "Mehr erfahren",
     "eyebrow": "Jeder Platz",
-    "intro": "Tennis, Padel oder Pickleball – SpinSync verwaltet alles. Richten Sie jeden Platz so ein, wie Ihr Club spielt, und verwalten Sie alle Buchungen, Mitglieder und Stunden in einem Dashboard."
+    "intro": "Tennis, Padel oder Pickleball – RaqHub verwaltet alles. Richten Sie jeden Platz so ein, wie Ihr Club spielt, und verwalten Sie alle Buchungen, Mitglieder und Stunden in einem Dashboard."
   },
   "featureCards": {
     "label": "Für Clubs gemacht",
@@ -1159,7 +1159,7 @@
       },
       "app": {
         "q": "Müssen meine Spieler eine App herunterladen?",
-        "a": "Nein. SpinSync läuft im Browser auf jedem Handy, Tablet oder Computer. Spieler öffnen den Buchungslink Ihres Clubs, registrieren sich per E-Mail oder Google-Konto und buchen einen Platz."
+        "a": "Nein. RaqHub läuft im Browser auf jedem Handy, Tablet oder Computer. Spieler öffnen den Buchungslink Ihres Clubs, registrieren sich per E-Mail oder Google-Konto und buchen einen Platz."
       },
       "phone": {
         "q": "Kann ich weiterhin telefonische oder persönliche Buchungen annehmen?",
@@ -1175,14 +1175,14 @@
       },
       "payOnline": {
         "q": "Können Spieler online bezahlen?",
-        "a": "Noch nicht. Online-Zahlung ist in Entwicklung. Bis dahin zahlen Spieler wie gewohnt im Club, und SpinSync erfasst den Preis jeder Buchung, damit Sie sehen, was jeder Platz einbringt."
+        "a": "Noch nicht. Online-Zahlung ist in Entwicklung. Bis dahin zahlen Spieler wie gewohnt im Club, und RaqHub erfasst den Preis jeder Buchung, damit Sie sehen, was jeder Platz einbringt."
       },
       "languages": {
         "q": "In welchen Sprachen ist es verfügbar?",
         "a": "Englisch, Mazedonisch, Serbisch, Albanisch, Deutsch, Französisch und Italienisch. Jede Person wählt ihre eigene Sprache, Personal und Spieler können also unterschiedliche nutzen."
       },
       "data": {
-        "q": "Was passiert mit unseren Daten, wenn wir SpinSync nicht mehr nutzen?",
+        "q": "Was passiert mit unseren Daten, wenn wir RaqHub nicht mehr nutzen?",
         "a": "Die Daten Ihres Clubs gehören Ihnen. Wenn Sie gehen möchten, sagen Sie uns Bescheid und wir löschen Ihren Club, Ihre Mitglieder und Buchungen."
       }
     },
@@ -1468,13 +1468,13 @@
     "contactTitle": "Kontakt",
     "privacy": {
       "title": "Datenschutzerklärung",
-      "intro": "Diese Erklärung beschreibt, welche personenbezogenen Daten SpinSync erhebt, warum wir das tun und welche Rechte Sie haben. SpinSync ist ein Online-Buchungssystem für Sportclubs: Clubs verwalten damit ihre Plätze, Mitglieder und Trainer, Spieler buchen darüber.",
+      "intro": "Diese Erklärung beschreibt, welche personenbezogenen Daten RaqHub erhebt, warum wir das tun und welche Rechte Sie haben. RaqHub ist ein Online-Buchungssystem für Sportclubs: Clubs verwalten damit ihre Plätze, Mitglieder und Trainer, Spieler buchen darüber.",
       "sections": [
         {
           "title": "Wer verantwortlich ist",
           "body": [
-            "Für Ihr SpinSync-Konto und die Nutzung der Website entscheidet SpinSync, wie Ihre Daten verwendet werden, und ist dafür verantwortlich („Verantwortlicher“). Unsere Kontaktdaten finden Sie am Ende dieser Seite.",
-            "Wenn ein Club Angaben zu seinen Mitgliedern, Gastspielern oder Buchungen erfasst, entscheidet der Club, was er erfasst, und ist für diese Daten verantwortlich. SpinSync speichert und verarbeitet sie im Auftrag des Clubs („Auftragsverarbeiter“). Bei Fragen zu diesen Daten wenden Sie sich bitte an den Club; wir helfen dem Club, Ihnen zu antworten."
+            "Für Ihr RaqHub-Konto und die Nutzung der Website entscheidet RaqHub, wie Ihre Daten verwendet werden, und ist dafür verantwortlich („Verantwortlicher“). Unsere Kontaktdaten finden Sie am Ende dieser Seite.",
+            "Wenn ein Club Angaben zu seinen Mitgliedern, Gastspielern oder Buchungen erfasst, entscheidet der Club, was er erfasst, und ist für diese Daten verantwortlich. RaqHub speichert und verarbeitet sie im Auftrag des Clubs („Auftragsverarbeiter“). Bei Fragen zu diesen Daten wenden Sie sich bitte an den Club; wir helfen dem Club, Ihnen zu antworten."
           ]
         },
         {
@@ -1510,7 +1510,7 @@
             [
               "<b>Der Club, bei dem Sie buchen,</b> sieht Ihren Namen, Ihre Kontaktdaten und Ihre Buchungen in diesem Club, einschließlich Nichterscheinen.",
               "<b>Alle</b> können Clubseiten, Plätze, Öffnungszeiten und Trainerprofile sehen.",
-              "<b>Dienstleister,</b> die Teile von SpinSync für uns betreiben: Supabase (Datenbank, Anmeldung und Dateispeicher), unser E-Mail-Anbieter (Resend oder ein üblicher Mail-Dienst) und unser Webhosting-Anbieter. Sie dürfen die Daten nur nutzen, um ihren Dienst für uns zu erbringen.",
+              "<b>Dienstleister,</b> die Teile von RaqHub für uns betreiben: Supabase (Datenbank, Anmeldung und Dateispeicher), unser E-Mail-Anbieter (Resend oder ein üblicher Mail-Dienst) und unser Webhosting-Anbieter. Sie dürfen die Daten nur nutzen, um ihren Dienst für uns zu erbringen.",
               "<b>Behörden,</b> wenn wir gesetzlich zur Weitergabe verpflichtet sind."
             ],
             "Einige dieser Anbieter haben ihren Sitz in anderen Ländern oder nutzen dort Server, auch in den USA. Wenn Daten Nordmazedonien oder die Europäische Union verlassen, stützen wir uns auf die gesetzlich vorgesehenen Garantien, etwa die Standardvertragsklauseln der Europäischen Kommission."
@@ -1522,7 +1522,7 @@
             [
               "<b>Konto- und Profildaten:</b> solange Ihr Konto besteht. Wenn Sie die Löschung Ihres Kontos verlangen, löschen oder anonymisieren wir Ihre Daten innerhalb von 30 Tagen.",
               "<b>Buchungen:</b> solange das Konto des Clubs besteht, da der Club seinen Buchungsverlauf braucht. Nichterscheinen zählt nur 90 Tage lang für die Buchungslimits eines Clubs.",
-              "<b>Clubdaten:</b> solange der Club SpinSync nutzt und 90 Tage darüber hinaus, damit er ohne Datenverlust zurückkehren kann. Rechnungen und Buchhaltungsunterlagen bewahren wir so lange auf, wie es das Steuerrecht verlangt.",
+              "<b>Clubdaten:</b> solange der Club RaqHub nutzt und 90 Tage darüber hinaus, damit er ohne Datenverlust zurückkehren kann. Rechnungen und Buchhaltungsunterlagen bewahren wir so lange auf, wie es das Steuerrecht verlangt.",
               "<b>Server-Logs:</b> für kurze Zeit, wie von unseren Hosting-Anbietern festgelegt."
             ]
           ]
@@ -1530,7 +1530,7 @@
         {
           "title": "Cookies",
           "body": [
-            "SpinSync verwendet nur Cookies, die für den Betrieb der Website nötig sind:",
+            "RaqHub verwendet nur Cookies, die für den Betrieb der Website nötig sind:",
             [
               "<b>Anmelde-Cookies</b> von Supabase, die Sie angemeldet halten.",
               "<b>Ein Sprach-Cookie</b> (NEXT_LOCALE), das sich die gewählte Sprache merkt."
@@ -1563,7 +1563,7 @@
         {
           "title": "Kinder",
           "body": [
-            "SpinSync ist nicht dafür gedacht, dass Kinder unter 14 Jahren es selbstständig nutzen. Ein Elternteil oder Erziehungsberechtigter kann ein Konto anlegen und für das Kind buchen."
+            "RaqHub ist nicht dafür gedacht, dass Kinder unter 14 Jahren es selbstständig nutzen. Ein Elternteil oder Erziehungsberechtigter kann ein Konto anlegen und für das Kind buchen."
           ]
         },
         {
@@ -1577,12 +1577,12 @@
     },
     "terms": {
       "title": "Nutzungsbedingungen",
-      "intro": "Diese Bedingungen gelten für alle, die SpinSync nutzen: Clubs, die damit ihre Plätze verwalten, und Spieler, die darüber buchen. Mit dem Erstellen eines Kontos oder der Nutzung der Website akzeptieren Sie diese Bedingungen.",
+      "intro": "Diese Bedingungen gelten für alle, die RaqHub nutzen: Clubs, die damit ihre Plätze verwalten, und Spieler, die darüber buchen. Mit dem Erstellen eines Kontos oder der Nutzung der Website akzeptieren Sie diese Bedingungen.",
       "sections": [
         {
           "title": "Der Dienst",
           "body": [
-            "SpinSync ist Online-Software für Sportclubs. Clubs veröffentlichen ihre Plätze, Öffnungszeiten, Preise, Trainer und Mitgliedschaften, und Spieler buchen Plätze und Trainerstunden online. SpinSync stellt nur die Software bereit: Wir betreiben keine Clubs, besitzen keine Plätze und beschäftigen keine Trainer."
+            "RaqHub ist Online-Software für Sportclubs. Clubs veröffentlichen ihre Plätze, Öffnungszeiten, Preise, Trainer und Mitgliedschaften, und Spieler buchen Plätze und Trainerstunden online. RaqHub stellt nur die Software bereit: Wir betreiben keine Clubs, besitzen keine Plätze und beschäftigen keine Trainer."
           ]
         },
         {
@@ -1600,7 +1600,7 @@
           "body": [
             [
               "Eine Buchung ist eine Vereinbarung zwischen Ihnen und dem Club. Der Club legt Preise, Öffnungszeiten und Buchungsregeln fest und ist für den Platz, die Trainerstunde und jede Zahlung verantwortlich, die er einnimmt.",
-              "Sie bezahlen Buchungen beim Club, so wie der Club es vorsieht. SpinSync nimmt keine Zahlungen für Buchungen entgegen.",
+              "Sie bezahlen Buchungen beim Club, so wie der Club es vorsieht. RaqHub nimmt keine Zahlungen für Buchungen entgegen.",
               "Jeder Club kann Regeln festlegen, etwa wie lang eine Buchung sein darf, wie weit im Voraus Sie buchen können, wie viele Buchungen pro Tag möglich sind und bis wann Sie online stornieren können. Danach wenden Sie sich zum Stornieren an den Club.",
               "Wenn Sie zu einer Buchung nicht erscheinen, kann der Club sie als Nichterscheinen markieren. Ein Club kann die Online-Buchung für Spieler mit zu vielen Nichterscheinen in den letzten 90 Tagen pausieren. Der Club kann trotzdem direkt für Sie buchen.",
               "Fragen zu einer Buchung, Erstattung oder ausgefallenen Stunde klären Sie mit dem Club, wir helfen aber gern, wo wir können."
@@ -1624,16 +1624,16 @@
           "title": "Wofür Clubs verantwortlich sind",
           "body": [
             [
-              "Clubs sind für die Informationen verantwortlich, die sie veröffentlichen, und für die Daten, die sie über ihre Mitglieder und Spieler eingeben. Sie brauchen dafür eine rechtliche Grundlage und müssen ihre Mitglieder darüber informieren, dass sie SpinSync nutzen.",
-              "Für diese Daten ist der Club Verantwortlicher und SpinSync sein Auftragsverarbeiter, wie in der Datenschutzerklärung beschrieben. Wir verarbeiten sie nur, um dem Club den Dienst bereitzustellen.",
-              "Clubs müssen über SpinSync gebuchte Termine nach ihren eigenen Regeln einhalten oder den Spieler kontaktieren, wenn eine Buchung nicht stattfinden kann."
+              "Clubs sind für die Informationen verantwortlich, die sie veröffentlichen, und für die Daten, die sie über ihre Mitglieder und Spieler eingeben. Sie brauchen dafür eine rechtliche Grundlage und müssen ihre Mitglieder darüber informieren, dass sie RaqHub nutzen.",
+              "Für diese Daten ist der Club Verantwortlicher und RaqHub sein Auftragsverarbeiter, wie in der Datenschutzerklärung beschrieben. Wir verarbeiten sie nur, um dem Club den Dienst bereitzustellen.",
+              "Clubs müssen über RaqHub gebuchte Termine nach ihren eigenen Regeln einhalten oder den Spieler kontaktieren, wenn eine Buchung nicht stattfinden kann."
             ]
           ]
         },
         {
           "title": "Zulässige Nutzung",
           "body": [
-            "Nutzen Sie SpinSync nicht, um:",
+            "Nutzen Sie RaqHub nicht, um:",
             [
               "etwas Rechtswidriges zu tun;",
               "Scheinbuchungen vorzunehmen oder Plätze zu blockieren, die Sie nicht nutzen wollen;",
@@ -1646,15 +1646,15 @@
         {
           "title": "Ihre Inhalte",
           "body": [
-            "Die Rechte an hochgeladenen Inhalten wie Logos, Fotos und Beschreibungen bleiben bei Ihnen. Sie erlauben uns, sie zu speichern und anzuzeigen, soweit es für den Betrieb des Dienstes nötig ist, zum Beispiel das Logo eines Clubs auf seiner öffentlichen Seite. Der Name SpinSync, die Software und das Design gehören uns."
+            "Die Rechte an hochgeladenen Inhalten wie Logos, Fotos und Beschreibungen bleiben bei Ihnen. Sie erlauben uns, sie zu speichern und anzuzeigen, soweit es für den Betrieb des Dienstes nötig ist, zum Beispiel das Logo eines Clubs auf seiner öffentlichen Seite. Der Name RaqHub, die Software und das Design gehören uns."
           ]
         },
         {
           "title": "Verfügbarkeit und Haftung",
           "body": [
             [
-              "Wir arbeiten daran, dass SpinSync verfügbar und korrekt ist, können aber nicht garantieren, dass es immer ohne Unterbrechungen oder Fehler läuft. Für Wartungsarbeiten können wir es kurz pausieren.",
-              "SpinSync haftet nicht für Vorgänge im Club, für Entscheidungen des Clubs oder für Schäden durch ein Buchungsproblem, das wir vernünftigerweise nicht verhindern konnten.",
+              "Wir arbeiten daran, dass RaqHub verfügbar und korrekt ist, können aber nicht garantieren, dass es immer ohne Unterbrechungen oder Fehler läuft. Für Wartungsarbeiten können wir es kurz pausieren.",
+              "RaqHub haftet nicht für Vorgänge im Club, für Entscheidungen des Clubs oder für Schäden durch ein Buchungsproblem, das wir vernünftigerweise nicht verhindern konnten.",
               "Soweit gesetzlich zulässig, ist unsere Gesamthaftung gegenüber einem Club auf die Beträge begrenzt, die der Club uns in den 12 Monaten vor dem Anspruch gezahlt hat.",
               "Nichts in diesen Bedingungen beschränkt eine Haftung, die gesetzlich nicht beschränkt werden darf, oder Ihre Rechte als Verbraucher."
             ]
@@ -1664,7 +1664,7 @@
           "title": "Beendigung der Nutzung",
           "body": [
             [
-              "Sie können SpinSync jederzeit nicht mehr nutzen und die Löschung Ihres Kontos verlangen.",
+              "Sie können RaqHub jederzeit nicht mehr nutzen und die Löschung Ihres Kontos verlangen.",
               "Wir können ein Konto, das gegen diese Bedingungen verstößt, sperren oder schließen, wo angemessen nach vorheriger Warnung."
             ]
           ]
@@ -1672,7 +1672,7 @@
         {
           "title": "Änderungen dieser Bedingungen",
           "body": [
-            "Wir können diese Bedingungen ändern. Das Datum oben zeigt die letzte Änderung, und über wichtige Änderungen informieren wir die Nutzer, bevor sie gelten. Wenn Sie SpinSync danach weiter nutzen, gelten die neuen Bedingungen."
+            "Wir können diese Bedingungen ändern. Das Datum oben zeigt die letzte Änderung, und über wichtige Änderungen informieren wir die Nutzer, bevor sie gelten. Wenn Sie RaqHub danach weiter nutzen, gelten die neuen Bedingungen."
           ]
         },
         {
@@ -1954,14 +1954,14 @@
       "Mitglieder anlegen und ihre Daten ändern"
     ],
     "ownerOnlyTitle": "Nur Sie können",
-    "ownerOnly": "Einstellungen, Plätze, Trainer, Tarife und Turniere ändern, die Auswertungen sehen, Ihren SpinSync-Tarif verwalten und Mitarbeiter einladen oder entfernen.",
+    "ownerOnly": "Einstellungen, Plätze, Trainer, Tarife und Turniere ändern, die Auswertungen sehen, Ihren RaqHub-Tarif verwalten und Mitarbeiter einladen oder entfernen.",
     "inviteTitle": "Jemanden einladen",
     "inviteHint": "Wir schicken einen Link per E-Mail. Mit dieser Adresse anmelden oder ein Konto erstellen, und Ihr Club ist sofort da.",
     "emailPlaceholder": "name@beispiel.de",
     "invite": "Einladung senden",
     "sending": "Wird gesendet…",
     "invited": "Einladung an {email} gesendet.",
-    "invitedNoEmail": "{email} ist eingeladen. Die E-Mail konnte nicht gesendet werden. Bitten Sie die Person, sich mit dieser Adresse bei SpinSync anzumelden.",
+    "invitedNoEmail": "{email} ist eingeladen. Die E-Mail konnte nicht gesendet werden. Bitten Sie die Person, sich mit dieser Adresse bei RaqHub anzumelden.",
     "empty": "Noch keine Mitarbeiter",
     "emptyHint": "Laden Sie oben Ihr erstes Teammitglied ein.",
     "active": "Aktiv",
@@ -2011,7 +2011,7 @@
     "title": "Gruppen",
     "new": "Neue Gruppe",
     "empty": "Noch keine Gruppen",
-    "emptyHint": "Legen Sie die wöchentlichen Gruppen Ihrer Trainer an: Kinder, Jugendliche und Erwachsene. SpinSync hält den Platz für jede Einheit frei, führt die Anwesenheitsliste und behält die Monatsbeiträge im Blick.",
+    "emptyHint": "Legen Sie die wöchentlichen Gruppen Ihrer Trainer an: Kinder, Jugendliche und Erwachsene. RaqHub hält den Platz für jede Einheit frei, führt die Anwesenheitsliste und behält die Monatsbeiträge im Blick.",
     "noMatch": "Keine Gruppe passt zu diesen Filtern.",
     "stats": {
       "sessions": "Einheiten diese Woche",
@@ -2122,7 +2122,7 @@
       "memberPrice": "Preis für Mitglieder mit Tarif",
       "memberPlan": "Mitgliedschaft",
       "optional": "Optional",
-      "paySeason": "Spieler zahlen direkt an den Club, bar oder per Überweisung. Sie haken jeden Monat als bezahlt ab, und SpinSync erinnert alle, die bis zum 10. nicht bezahlt haben.",
+      "paySeason": "Spieler zahlen direkt an den Club, bar oder per Überweisung. Sie haken jeden Monat als bezahlt ab, und RaqHub erinnert alle, die bis zum 10. nicht bezahlt haben.",
       "payDropin": "Spieler zahlen beim Training. Der Trainer hakt in der Anwesenheitsliste ab, wer bezahlt hat.",
       "summary": "Übersicht",
       "pickDays": "Wählen Sie die Tage, um die Einheiten zu sehen.",
@@ -2228,7 +2228,7 @@
       "unpaidMark": "Offen · {amount} als bezahlt markieren",
       "month": "Monat",
       "noFees": "Für diesen Monat steht niemand auf der Liste.",
-      "feesHint": "Beiträge werden bar oder per Überweisung an den Club gezahlt. SpinSync führt nur Buch.",
+      "feesHint": "Beiträge werden bar oder per Überweisung an den Club gezahlt. RaqHub führt nur Buch.",
       "leftGroup": "(ausgetreten)",
       "waitingTitle": "Warteliste",
       "waitingHint": "Wird ein Platz frei, bekommt die nächste Person eine E-Mail und 48 Stunden zum Annehmen.",
@@ -2324,7 +2324,7 @@
       "contactPlaceholder": "z. B. Claire Martin (leer für Erwachsene)",
       "email": "E-Mail",
       "phone": "Telefon",
-      "emailHint": "Mit einer E-Mail bekommen die Eltern Absagen und Zahlungserinnerungen und sehen die Gruppe, wenn sie sich damit bei SpinSync anmelden.",
+      "emailHint": "Mit einer E-Mail bekommen die Eltern Absagen und Zahlungserinnerungen und sehen die Gruppe, wenn sie sich damit bei RaqHub anmelden.",
       "price": "Monatspreis",
       "priceHint": "Leer lassen für den Gruppenpreis. Nutzen Sie es für Geschwister- oder Mitgliederrabatt.",
       "notes": "Notizen für den Trainer",
@@ -2370,7 +2370,7 @@
       "addDropin": "Jemanden hinzufügen, der ohne Buchung kam",
       "note": "Notiz zu dieser Einheit",
       "notePlaceholder": "Woran Sie gearbeitet haben, für die Eltern",
-      "noteHint": "Eltern sehen die letzte Notiz in SpinSync.",
+      "noteHint": "Eltern sehen die letzte Notiz in RaqHub.",
       "cancelToday": "Heutige Einheit absagen",
       "cancelThis": "Diese Einheit absagen",
       "save": "Anwesenheit speichern",
@@ -2549,7 +2549,7 @@
       "alwaysOn": "Immer an",
       "saveFailed": "Konnte nicht gespeichert werden. Bitte erneut versuchen.",
       "plan": {
-        "title": "Ihr SpinSync-Tarif",
+        "title": "Ihr RaqHub-Tarif",
         "desc": "Erinnerungen zu Testphase und Zahlung"
       },
       "admin": {
@@ -2965,7 +2965,7 @@
       "releaseOption": "{hours} Stunden vor Beginn",
       "releaseHint": "Der Organisator wird ein paar Stunden früher gefragt. Behält er ihn nicht, ist der Platz wieder buchbar.",
       "who": "Wer mitspielen kann",
-      "anyone": "Alle mit einem SpinSync-Konto",
+      "anyone": "Alle mit einem RaqHub-Konto",
       "membersOnly": "Nur Clubmitglieder",
       "save": "Speichern",
       "saving": "Wird gespeichert…",
@@ -3075,7 +3075,7 @@
       },
       "mb_add": {
         "q": "Wie trage ich meine bisherigen Mitglieder ein?",
-        "a": "Tippen Sie auf Mitglied hinzufügen und tragen Sie Name, Plan und Enddatum ein. Fügen Sie auch die E-Mail hinzu: Meldet sich das Mitglied mit dieser E-Mail bei SpinSync an, werden Mitgliedschaft und Rabatt automatisch verknüpft."
+        "a": "Tippen Sie auf Mitglied hinzufügen und tragen Sie Name, Plan und Enddatum ein. Fügen Sie auch die E-Mail hinzu: Meldet sich das Mitglied mit dieser E-Mail bei RaqHub an, werden Mitgliedschaft und Rabatt automatisch verknüpft."
       },
       "mb_discount": {
         "q": "Warum bekommt ein Mitglied keinen Rabatt?",
@@ -3095,15 +3095,15 @@
       },
       "co_add": {
         "q": "Wie füge ich einen Trainer hinzu?",
-        "a": "Der Trainer meldet sich zuerst als Spieler bei SpinSync an. Tippen Sie dann auf Trainer hinzufügen und tragen Sie E-Mail, Stundenpreis und Niveaus ein. Danach können Spieler Stunden bei ihm buchen."
+        "a": "Der Trainer meldet sich zuerst als Spieler bei RaqHub an. Tippen Sie dann auf Trainer hinzufügen und tragen Sie E-Mail, Stundenpreis und Niveaus ein. Danach können Spieler Stunden bei ihm buchen."
       },
       "co_lessons": {
         "q": "Belegt eine Trainerstunde einen Platz?",
-        "a": "Ja. Bucht ein Spieler eine Stunde, gibt SpinSync ihr einen freien Platz der Sportart des Trainers, sodass niemand sonst ihn buchen kann."
+        "a": "Ja. Bucht ein Spieler eine Stunde, gibt RaqHub ihr einen freien Platz der Sportart des Trainers, sodass niemand sonst ihn buchen kann."
       },
       "gr_create": {
         "q": "Wie richte ich eine Trainingsgruppe ein?",
-        "a": "Tippen Sie auf Neue Gruppe und wählen Sie Trainer, Platz, Tage, Uhrzeiten und Saison. SpinSync belegt den Platz für jeden Termin und trägt sie in den Belegungsplan ein. Ferien überspringen Sie mit Pausen."
+        "a": "Tippen Sie auf Neue Gruppe und wählen Sie Trainer, Platz, Tage, Uhrzeiten und Saison. RaqHub belegt den Platz für jeden Termin und trägt sie in den Belegungsplan ein. Ferien überspringen Sie mit Pausen."
       },
       "gr_register": {
         "q": "Wie führt der Trainer die Anwesenheit?",
@@ -3131,7 +3131,7 @@
       },
       "ct_add": {
         "q": "Wie füge ich mehrere Plätze auf einmal hinzu?",
-        "a": "Stellen Sie unter Platz hinzufügen die Anzahl ein. SpinSync legt sie mit Nummern an, etwa Sandplatz 1 bis 4, alle mit gleicher Sportart, gleichem Belag und Preis."
+        "a": "Stellen Sie unter Platz hinzufügen die Anzahl ein. RaqHub legt sie mit Nummern an, etwa Sandplatz 1 bis 4, alle mit gleicher Sportart, gleichem Belag und Preis."
       },
       "ct_off": {
         "q": "Wie schließe ich einen Platz vorübergehend?",
@@ -3171,14 +3171,14 @@
       },
       "sf_can": {
         "q": "Was dürfen Mitarbeiter?",
-        "a": "Den Belegungsplan sehen, Buchungen anlegen, ändern und stornieren, und Mitglieder und Gruppen verwalten. Nur Sie ändern Einstellungen, Plätze, Trainer, Pläne und Ihren SpinSync-Plan."
+        "a": "Den Belegungsplan sehen, Buchungen anlegen, ändern und stornieren, und Mitglieder und Gruppen verwalten. Nur Sie ändern Einstellungen, Plätze, Trainer, Pläne und Ihren RaqHub-Plan."
       },
       "sh_link": {
         "q": "Wie bringe ich Spieler am besten zum Online-Buchen?",
         "a": "Schicken Sie die fertige Nachricht in die Viber- oder WhatsApp-Gruppe Ihres Clubs und hängen Sie das QR-Plakat an der Rezeption und bei den Plätzen auf. Die meisten Clubs bekommen die erste Online-Buchung innerhalb eines Tages."
       },
       "ga_plan": {
-        "q": "Wie bezahle ich SpinSync?",
+        "q": "Wie bezahle ich RaqHub?",
         "a": "Der erste Monat ist kostenlos. Um weiterzumachen, schreiben Sie uns, und wir schicken Ihnen eine Rechnung für Ihren Plan. Plan und Bezahlt-bis-Datum sehen Sie in den Einstellungen."
       },
       "ga_language": {
@@ -3571,7 +3571,7 @@
     "saving": "Wird gespeichert…",
     "back": "Alle Abende",
     "empty": "Noch keine Abende.",
-    "emptyHint": "Legen Sie einen an, teilen Sie den Link, und Spieler melden sich an. Am Abend erstellt SpinSync jede Runde und führt die Tabelle.",
+    "emptyHint": "Legen Sie einen an, teilen Sie den Link, und Spieler melden sich an. Am Abend erstellt RaqHub jede Runde und führt die Tabelle.",
     "copyLink": "Link kopieren",
     "copied": "Kopiert",
     "publicPage": "Öffentliche Seite",

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, usePathname } from "@/i18n/navigation";
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import type { ElementType } from "react";
 
 export type MobileNavItem = {
@@ -15,6 +15,8 @@ export type MobileNavItem = {
 type MobileBottomNavProps = {
   items: MobileNavItem[];
   moreItems: MobileNavItem[];
+  onSignOut: () => void | Promise<void>;
+  signOutLabel: string;
 };
 
 const isActive = (pathname: string, href: string) =>
@@ -23,9 +25,12 @@ const isActive = (pathname: string, href: string) =>
 export default function MobileBottomNav({
   items,
   moreItems,
+  onSignOut,
+  signOutLabel,
 }: MobileBottomNavProps) {
   const pathname = usePathname();
   const [moreOpen, setMoreOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -55,6 +60,8 @@ export default function MobileBottomNav({
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
 
+      if (!first || !last) return;
+
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
@@ -72,6 +79,19 @@ export default function MobileBottomNav({
       moreButtonRef.current?.focus();
     };
   }, [moreOpen]);
+
+  async function handleMobileSignOut() {
+    if (signingOut) return;
+
+    setSigningOut(true);
+
+    try {
+      await onSignOut();
+      setMoreOpen(false);
+    } catch {
+      setSigningOut(false);
+    }
+  }
 
   return (
     <>
@@ -102,6 +122,7 @@ export default function MobileBottomNav({
                     aria-hidden="true"
                   />
                 </span>
+
                 <span
                   className={`max-w-full truncate px-1 text-[10px] ${
                     active
@@ -115,41 +136,40 @@ export default function MobileBottomNav({
             );
           })}
 
-          {moreItems.length > 0 && (
-            <button
-              ref={moreButtonRef}
-              type="button"
-              aria-label="More navigation options"
-              aria-haspopup="dialog"
-              aria-expanded={moreOpen}
-              onClick={() => setMoreOpen(true)}
-              className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl py-1 focus-visible:outline-2 focus-visible:outline-[#a8d832]"
+          <button
+            ref={moreButtonRef}
+            type="button"
+            aria-label="More navigation options"
+            aria-haspopup="dialog"
+            aria-expanded={moreOpen}
+            onClick={() => setMoreOpen(true)}
+            className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl py-1 focus-visible:outline-2 focus-visible:outline-[#a8d832]"
+          >
+            <span
+              className={`flex h-9 w-14 items-center justify-center rounded-2xl ${
+                moreActive || moreOpen ? "bg-[#a8d832]/15" : ""
+              }`}
             >
-              <span
-                className={`flex h-9 w-14 items-center justify-center rounded-2xl ${
-                  moreActive || moreOpen ? "bg-[#a8d832]/15" : ""
-                }`}
-              >
-                <Menu
-                  size={21}
-                  strokeWidth={moreActive || moreOpen ? 2.5 : 1.8}
-                  className={
-                    moreActive || moreOpen ? "text-[#a8d832]" : "text-white/65"
-                  }
-                  aria-hidden="true"
-                />
-              </span>
-              <span
-                className={`text-[10px] ${
-                  moreActive || moreOpen
-                    ? "font-semibold text-[#a8d832]"
-                    : "font-medium text-white/65"
-                }`}
-              >
-                More
-              </span>
-            </button>
-          )}
+              <Menu
+                size={21}
+                strokeWidth={moreActive || moreOpen ? 2.5 : 1.8}
+                className={
+                  moreActive || moreOpen ? "text-[#a8d832]" : "text-white/65"
+                }
+                aria-hidden="true"
+              />
+            </span>
+
+            <span
+              className={`text-[10px] ${
+                moreActive || moreOpen
+                  ? "font-semibold text-[#a8d832]"
+                  : "font-medium text-white/65"
+              }`}
+            >
+              More
+            </span>
+          </button>
         </div>
       </nav>
 
@@ -185,6 +205,7 @@ export default function MobileBottomNav({
 
               <div className="flex items-center justify-between px-6 py-5">
                 <h2 className="text-xl font-bold text-[#111c0a]">More</h2>
+
                 <button
                   type="button"
                   aria-label="Close menu"
@@ -218,13 +239,30 @@ export default function MobileBottomNav({
                             active ? "text-[#557b16]" : "text-gray-500"
                           }
                         />
+
                         <span className="flex-1 text-sm font-semibold">
                           {label}
                         </span>
+
                         <span className="text-gray-400">›</span>
                       </Link>
                     );
                   })}
+                </div>
+
+                <div className="mt-5 border-t border-gray-200 pt-4">
+                  <button
+                    type="button"
+                    onClick={handleMobileSignOut}
+                    disabled={signingOut}
+                    className="flex min-h-14 w-full items-center gap-4 rounded-2xl px-4 text-left text-red-600 transition-colors hover:bg-red-50 disabled:cursor-wait disabled:opacity-60"
+                  >
+                    <LogOut size={20} strokeWidth={1.8} aria-hidden="true" />
+
+                    <span className="flex-1 text-sm font-semibold">
+                      {signingOut ? "Signing out..." : signOutLabel}
+                    </span>
+                  </button>
                 </div>
               </div>
             </motion.div>

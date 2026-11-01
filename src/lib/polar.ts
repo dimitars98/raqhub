@@ -2,7 +2,7 @@ import { createPolar } from "@polar-sh/sdk/2026-10";
 import type { Period } from "@/lib/ownerBilling";
 import type { PlanId } from "@/lib/plans";
 
-// Polar sells the Kortello plans to clubs as card subscriptions
+// Polar sells the RaqHub plans to clubs as card subscriptions
 // (supabase/migrations/20261029b_polar_subscriptions.sql). Server only.
 //
 //   POLAR_ACCESS_TOKEN        organization access token (Settings → Developers)

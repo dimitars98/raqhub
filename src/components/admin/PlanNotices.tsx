@@ -125,7 +125,7 @@ export async function UpgradeNotice({ feature }: { feature: Feature }) {
   );
 }
 
-/** "Your Kortello plan" box on the settings page. */
+/** "Your RaqHub plan" box on the settings page. */
 export async function PlanCard({
   club,
   access,

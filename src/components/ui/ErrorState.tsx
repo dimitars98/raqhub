@@ -10,10 +10,12 @@ type Props = {
   reference?: string | null;
   /** "page" fills the screen; "panel" sits inside the dashboard. */
   variant?: "page" | "panel";
+  /** An address to write to if the problem keeps happening. */
+  contactEmail?: string;
 };
 
 // The one look for "something went wrong" and "page not found".
-export default function ErrorState({ title, body, actions, reference, variant = "page" }: Props) {
+export default function ErrorState({ title, body, actions, reference, variant = "page", contactEmail }: Props) {
   return (
     <div
       className={
@@ -28,6 +30,14 @@ export default function ErrorState({ title, body, actions, reference, variant = 
         <p className="mx-auto mt-3 max-w-sm text-[15px] leading-relaxed text-ink-600">{body}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-2.5 sm:flex-row">{actions}</div>
         {reference && <p className="mt-8 font-mono text-xs text-ink-400">{reference}</p>}
+        {contactEmail && (
+          <a
+            href={`mailto:${contactEmail}${reference ? `?subject=${encodeURIComponent(reference)}` : ""}`}
+            className={`${reference ? "mt-2" : "mt-8"} inline-block text-xs text-ink-400 underline-offset-2 hover:text-ink-900 hover:underline`}
+          >
+            {contactEmail}
+          </a>
+        )}
       </div>
     </div>
   );

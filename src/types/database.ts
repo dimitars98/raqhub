@@ -97,7 +97,7 @@ export interface Club {
   stripe_charges_enabled?: boolean;
   is_active: boolean;
   owner_id: string | null;
-  /** Kortello plan: starter / club / academy. Only changed by you. */
+  /** RaqHub plan: starter / club / academy. Only changed by you. */
   plan: "starter" | "club" | "academy";
   /** End of the free trial. */
   trial_ends_at: string | null;

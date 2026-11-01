@@ -72,19 +72,15 @@ export default function NotificationBell({
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label={t("bell", { n: unread })}
-        className={`relative grid size-9 place-items-center rounded-lg transition-colors ${
+        className={`relative grid size-9 place-items-center rounded-lg transition-colors cursor-pointer ${
           open ? "bg-[#f3fbde] text-ink-900" : "text-ink-400 hover:bg-ink-50"
         }`}
       >
-        <Bell
-          className="size-[18px] fill-ink-400"
-          strokeWidth={1.75}
-          aria-hidden="true"
-        />
+        <Bell className="size-5" strokeWidth={1.75} aria-hidden="true" />
         {unread > 0 && (
           <span
             aria-hidden="true"
-            className="absolute -right-1 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full border-2 border-white bg-[#111c0a] px-1 text-[10px] font-bold leading-none text-[#a8d832]"
+            className="absolute -right-1 -top-1 grid h-[18px] min-w-[18px] place-items-center rounded-full border-2 border-white bg-brand-600 px-1 text-[10px] font-bold leading-none text-white"
           >
             {unread > 99 ? "99+" : unread}
           </span>

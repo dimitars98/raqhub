@@ -61,7 +61,7 @@
     "forgotIntro": "Unesite e-poštu kojom se prijavljujete i poslaćemo vam link da izaberete novu lozinku.",
     "sendLink": "Pošalji link",
     "sendingLink": "Šalje se…",
-    "resetSent": "Ako <b>{email}</b> ima SpinSync nalog, link za resetovanje lozinke je na putu.",
+    "resetSent": "Ako <b>{email}</b> ima RaqHub nalog, link za resetovanje lozinke je na putu.",
     "resetSentHint": "Ništa posle nekoliko minuta? Proverite spam, ili pokušajte ponovo.",
     "resetExpired": "Ovaj link je istekao ili je već iskorišćen. Zatražite novi ispod.",
     "tooManyRequests": "Previše pokušaja. Sačekajte nekoliko minuta i pokušajte ponovo.",
@@ -109,7 +109,7 @@
         "pre": "Članovi koji ",
         "mark": "obnavljaju",
         "post": "",
-        "body": "Prodajte svoje članarine, dajte članovima popust na svaku rezervaciju i pustite SpinSync da ih podseti pre isteka.",
+        "body": "Prodajte svoje članarine, dajte članovima popust na svaku rezervaciju i pustite RaqHub da ih podseti pre isteka.",
         "points": [
           "Vaši mesečni, godišnji ili jednokratni paketi",
           "Popust na rezervacije za članove",
@@ -398,7 +398,7 @@
       "matches": "Otvoreni mečevi"
     },
     "share": "Podeli",
-    "ownerGroup": "SpinSync",
+    "ownerGroup": "RaqHub",
     "ownerPage": "Klubovi i uplate",
     "tournaments": "Turniri",
     "staff": "Osoblje",
@@ -531,7 +531,7 @@
     "selectProfile": "Izaberite korisnika",
     "coachEmail": "E-pošta trenera",
     "coachEmailPlaceholder": "trener@example.com",
-    "coachEmailHint": "Trener mora imati SpinSync nalog sa ovom e-poštom.",
+    "coachEmailHint": "Trener mora imati RaqHub nalog sa ovom e-poštom.",
     "alreadyCoach": "Ova osoba je već trener u vašem klubu."
   },
   "clubPage": {
@@ -551,7 +551,7 @@
     "website": "Sajt",
     "ctaTitle": "Spremni za igru u klubu {club}?",
     "ctaText": "Napravite besplatan nalog da vidite slobodne termine i rezervišete za nekoliko sekundi.",
-    "metaDescription": "Tereni, treneri i članarine u klubu {club}. Rezervišite onlajn uz SpinSync.",
+    "metaDescription": "Tereni, treneri i članarine u klubu {club}. Rezervišite onlajn uz RaqHub.",
     "bookThisCourt": "Rezerviši"
   },
   "myBookings": {
@@ -728,29 +728,29 @@
       "noneExpiring": "Nema",
       "openDashboard": "Otvori kontrolnu tablu"
     },
-    "footerPlayer": "Šalje SpinSync u ime kluba {club}.",
-    "footerOwner": "Ovaj nedeljni pregled dobijate jer vodite klub na SpinSyncu.",
+    "footerPlayer": "Šalje RaqHub u ime kluba {club}.",
+    "footerOwner": "Ovaj nedeljni pregled dobijate jer vodite klub na RaqHubu.",
     "trial": {
-      "endingSubject": "Vaša SpinSync proba za {club} ističe {date}",
+      "endingSubject": "Vaša RaqHub proba za {club} ističe {date}",
       "endingIntro": "Vaš besplatni mesec za {club} ističe {date}. Tri dana kasnije nalog postaje samo za čitanje: i dalje ćete moći da pregledate i izvezete sve, ali ništa novo neće moći da se doda i onlajn rezervacije se pauziraju. Ništa se nikada ne naplaćuje automatski. Da biste nastavili, odgovorite na ovu poruku i poslaćemo vam račun.",
-      "endedSubject": "Vaša SpinSync proba za {club} je istekla",
+      "endedSubject": "Vaša RaqHub proba za {club} je istekla",
       "endedIntro": "Vaš besplatni mesec za {club} je istekao. Za tri dana nalog postaje samo za čitanje i onlajn rezervacije se pauziraju. Vaši podaci ostaju bezbedni i ništa se ne naplaćuje. Da biste nastavili da primate rezervacije, odgovorite na ovu poruku i poslaćemo vam račun.",
       "price": "€{monthly} / mesečno ili €{yearly} / godišnje",
       "trialEnds": "Besplatna proba do",
       "seePlan": "Pogledajte paket",
-      "footer": "Ovu poruku dobijate jer vodite klub na SpinSyncu."
+      "footer": "Ovu poruku dobijate jer vodite klub na RaqHubu."
     },
     "staff": {
-      "subject": "Pozvani ste da pomognete u vođenju kluba {club} na SpinSyncu",
-      "heading": "Pridružite se klubu {club} na SpinSyncu",
+      "subject": "Pozvani ste da pomognete u vođenju kluba {club} na RaqHubu",
+      "heading": "Pridružite se klubu {club} na RaqHubu",
       "intro": "{owner} vas je pozvao da pomognete u upravljanju rezervacijama u klubu {club}.",
       "introNoName": "Pozvani ste da pomognete u upravljanju rezervacijama u klubu {club}.",
       "club": "Klub",
       "signInWith": "Prijavite se sa",
       "youCan": "Možete",
       "screens": "Da vidite raspored, upravljate rezervacijama i članovima",
-      "button": "Otvori SpinSync",
-      "footer": "Ovu poruku dobijate jer je {club} dodao ovu adresu u svoje osoblje na SpinSyncu. Ako ih ne poznajete, možete je zanemariti."
+      "button": "Otvori RaqHub",
+      "footer": "Ovu poruku dobijate jer je {club} dodao ovu adresu u svoje osoblje na RaqHubu. Ako ih ne poznajete, možete je zanemariti."
     },
     "groups": {
       "group": "Grupa",
@@ -759,16 +759,16 @@
       "schedule": "Kada",
       "answerBy": "Odgovor do",
       "month": "Mesec",
-      "open": "Otvori SpinSync",
+      "open": "Otvori RaqHub",
       "cancelledSubject": "Otkazano: {group}, {date}",
       "cancelledIntro": "Trening grupe {group} zakazan za {date} je otkazan. Ostali treninzi se održavaju kao i obično.",
       "offerSubject": "Oslobodilo se mesto u grupi {group}",
       "offerIntro": "Dobre vesti: oslobodilo se mesto za {name} u grupi {group} u klubu {club}. Čuva se 48 sati.",
       "offerButton": "Odgovorite na ponudu",
-      "offerFooter": "Ovu poruku dobijate jer ste na listi čekanja kluba {club} na SpinSyncu.",
+      "offerFooter": "Ovu poruku dobijate jer ste na listi čekanja kluba {club} na RaqHubu.",
       "feeSubject": "{group}: članarina za {month}",
       "feeIntro": "Podsetnik: članarina za {month} za {name} u grupi {group} još nije evidentirana kao plaćena.",
-      "feeFooter": "Poslao SpinSync u ime kluba {club}. Već ste platili? Onda ne morate ništa da radite, klub će to označiti."
+      "feeFooter": "Poslao RaqHub u ime kluba {club}. Već ste platili? Onda ne morate ništa da radite, klub će to označiti."
     },
     "closed": {
       "subject": "Otkazano: {what}, {date}. Teren je zatvoren",
@@ -801,7 +801,7 @@
     "lockedBody": "Pišite nam i prebacićemo vaš klub na paket {plan}.",
     "courtsUsed": "{used} od {max} aktivnih terena",
     "courtLimit": "Vaš paket dozvoljava {max} aktivnih terena. Isključite jedan ili pređite na veći paket.",
-    "cardTitle": "Vaš SpinSync paket",
+    "cardTitle": "Vaš RaqHub paket",
     "trialUntil": "Besplatna proba do {date}",
     "paidUntil": "Plaćeno do {date}",
     "unpaid": "Još nije plaćeno",
@@ -842,7 +842,7 @@
     },
     "card": {
       "title": "Plaćanje karticom",
-      "intro": "Platite SpinSync karticom, mesečno ili godišnje. Obnavlja se samo; otkažite kad god želite.",
+      "intro": "Platite RaqHub karticom, mesečno ili godišnje. Obnavlja se samo; otkažite kad god želite.",
       "plan": "Paket",
       "period": "Naplata",
       "periods": {
@@ -956,12 +956,12 @@
     },
     "title1": "Popunite terene.",
     "title2": "Razvijajte klub.",
-    "subtitle": "SpinSync daje klubovima za tenis, padel i pikleball i njihovim trenerima alate za terene, raspored i rezervacije — sve na jednom mestu. Manje administracije, više vremena na terenu.",
+    "subtitle": "RaqHub daje klubovima za tenis, padel i pikleball i njihovim trenerima alate za terene, raspored i rezervacije — sve na jednom mestu. Manje administracije, više vremena na terenu.",
     "getStarted": "Započnite",
     "seeHow": "Pogledajte kako radi"
   },
   "announcement": {
-    "free": "Isprobajte SpinSync besplatno {days} dana.",
+    "free": "Isprobajte RaqHub besplatno {days} dana.",
     "noCard": "Kartica nije potrebna.",
     "link": "Pogledajte pakete →"
   },
@@ -995,7 +995,7 @@
   },
   "testimonials": {
     "label": "Šta kažu klubovi",
-    "title": "Od klubova koji koriste SpinSync"
+    "title": "Od klubova koji koriste RaqHub"
   },
   "howItWorks": {
     "label": "Lako podešavanje",
@@ -1035,7 +1035,7 @@
     },
     "learnMore": "Saznajte više",
     "eyebrow": "Svaki teren",
-    "intro": "Tenis, padel ili pikleball — SpinSync vodi sve. Podesite svaki teren onako kako ga vaš klub koristi i upravljajte svakom rezervacijom, članom i časom sa jedne kontrolne table."
+    "intro": "Tenis, padel ili pikleball — RaqHub vodi sve. Podesite svaki teren onako kako ga vaš klub koristi i upravljajte svakom rezervacijom, članom i časom sa jedne kontrolne table."
   },
   "featureCards": {
     "label": "Napravljeno za klubove",
@@ -1159,7 +1159,7 @@
       },
       "app": {
         "q": "Da li igrači moraju da preuzmu aplikaciju?",
-        "a": "Ne. SpinSync radi u pregledaču na svakom telefonu, tabletu ili računaru. Igrači otvore link vašeg kluba, registruju se e-poštom ili Google nalogom i rezervišu teren."
+        "a": "Ne. RaqHub radi u pregledaču na svakom telefonu, tabletu ili računaru. Igrači otvore link vašeg kluba, registruju se e-poštom ili Google nalogom i rezervišu teren."
       },
       "phone": {
         "q": "Da li i dalje mogu da primam rezervacije telefonom ili uživo?",
@@ -1175,14 +1175,14 @@
       },
       "payOnline": {
         "q": "Mogu li igrači da plate onlajn?",
-        "a": "Još ne. Onlajn plaćanje je u razvoju. Za sada igrači plaćaju u klubu kao i do sada, a SpinSync beleži cenu svake rezervacije, pa vidite koliko donosi svaki teren."
+        "a": "Još ne. Onlajn plaćanje je u razvoju. Za sada igrači plaćaju u klubu kao i do sada, a RaqHub beleži cenu svake rezervacije, pa vidite koliko donosi svaki teren."
       },
       "languages": {
         "q": "Na kojim jezicima je dostupan?",
         "a": "Engleski, makedonski, srpski, albanski, nemački, francuski i italijanski. Svako bira svoj jezik, pa osoblje i igrači mogu da koriste različite."
       },
       "data": {
-        "q": "Šta se dešava sa našim podacima ako prestanemo da koristimo SpinSync?",
+        "q": "Šta se dešava sa našim podacima ako prestanemo da koristimo RaqHub?",
         "a": "Podaci vašeg kluba pripadaju vama. Ako odlučite da odete, javite nam i obrisaćemo vaš klub, članove i rezervacije."
       }
     },
@@ -1468,13 +1468,13 @@
     "contactTitle": "Kontakt",
     "privacy": {
       "title": "Politika privatnosti",
-      "intro": "Ova politika objašnjava koje lične podatke SpinSync prikuplja, zašto ih prikupljamo i šta vi možete da uradite povodom toga. SpinSync je onlajn sistem za rezervacije za sportske klubove: klubovi ga koriste za upravljanje terenima, članovima i trenerima, a igrači preko njega rezervišu.",
+      "intro": "Ova politika objašnjava koje lične podatke RaqHub prikuplja, zašto ih prikupljamo i šta vi možete da uradite povodom toga. RaqHub je onlajn sistem za rezervacije za sportske klubove: klubovi ga koriste za upravljanje terenima, članovima i trenerima, a igrači preko njega rezervišu.",
       "sections": [
         {
           "title": "Ko je odgovoran",
           "body": [
-            "Za vaš SpinSync nalog i korišćenje sajta, SpinSync odlučuje kako se vaši podaci koriste i odgovoran je za njih („rukovalac”). Naši kontakt podaci nalaze se na kraju ove stranice.",
-            "Kada klub beleži podatke o svojim članovima, igračima bez naloga ili rezervacijama, klub odlučuje šta će beležiti i odgovoran je za te podatke. SpinSync ih čuva i obrađuje u ime kluba (kao „obrađivač”). Za pitanja o tim podacima obratite se klubu; mi ćemo pomoći klubu da vam odgovori."
+            "Za vaš RaqHub nalog i korišćenje sajta, RaqHub odlučuje kako se vaši podaci koriste i odgovoran je za njih („rukovalac”). Naši kontakt podaci nalaze se na kraju ove stranice.",
+            "Kada klub beleži podatke o svojim članovima, igračima bez naloga ili rezervacijama, klub odlučuje šta će beležiti i odgovoran je za te podatke. RaqHub ih čuva i obrađuje u ime kluba (kao „obrađivač”). Za pitanja o tim podacima obratite se klubu; mi ćemo pomoći klubu da vam odgovori."
           ]
         },
         {
@@ -1522,7 +1522,7 @@
             [
               "<b>Podaci o nalogu i profilu:</b> dok god vaš nalog postoji. Kada zatražite brisanje naloga, vaše podatke brišemo ili anonimizujemo u roku od 30 dana.",
               "<b>Rezervacije:</b> dok god postoji nalog kluba, jer je klubu potrebna istorija rezervacija. Nedolasci se računaju u ograničenja rezervisanja kluba samo 90 dana.",
-              "<b>Podaci o klubu:</b> dok god klub koristi SpinSync i još 90 dana nakon što prestane, kako bi mogao da se vrati bez gubitka podataka. Fakture i računovodstvena evidencija čuvaju se onoliko dugo koliko zahteva poreski zakon.",
+              "<b>Podaci o klubu:</b> dok god klub koristi RaqHub i još 90 dana nakon što prestane, kako bi mogao da se vrati bez gubitka podataka. Fakture i računovodstvena evidencija čuvaju se onoliko dugo koliko zahteva poreski zakon.",
               "<b>Serverski logovi:</b> kratko vreme, kako odrede naši pružaoci hostinga."
             ]
           ]
@@ -1530,7 +1530,7 @@
         {
           "title": "Kolačići",
           "body": [
-            "SpinSync koristi samo kolačiće koji su sajtu potrebni da bi radio:",
+            "RaqHub koristi samo kolačiće koji su sajtu potrebni da bi radio:",
             [
               "<b>Kolačići za prijavu</b> koje postavlja Supabase i koji vas drže prijavljenim.",
               "<b>Kolačić za jezik</b> (NEXT_LOCALE), koji pamti jezik koji ste izabrali."
@@ -1563,7 +1563,7 @@
         {
           "title": "Deca",
           "body": [
-            "SpinSync nije namenjen deci mlađoj od 14 godina za samostalno korišćenje. Roditelj ili staratelj može da napravi nalog i rezerviše za dete."
+            "RaqHub nije namenjen deci mlađoj od 14 godina za samostalno korišćenje. Roditelj ili staratelj može da napravi nalog i rezerviše za dete."
           ]
         },
         {
@@ -1577,12 +1577,12 @@
     },
     "terms": {
       "title": "Uslovi korišćenja",
-      "intro": "Ovi uslovi važe za sve koji koriste SpinSync: klubove koji preko njega upravljaju terenima i igrače koji preko njega rezervišu. Kreiranjem naloga ili korišćenjem sajta prihvatate ove uslove.",
+      "intro": "Ovi uslovi važe za sve koji koriste RaqHub: klubove koji preko njega upravljaju terenima i igrače koji preko njega rezervišu. Kreiranjem naloga ili korišćenjem sajta prihvatate ove uslove.",
       "sections": [
         {
           "title": "Usluga",
           "body": [
-            "SpinSync je onlajn softver za sportske klubove. Klubovi objavljuju svoje terene, radno vreme, cene, trenere i članstva, a igrači onlajn rezervišu terene i časove. SpinSync pruža samo softver: ne vodimo klubove, ne posedujemo terene i ne zapošljavamo trenere."
+            "RaqHub je onlajn softver za sportske klubove. Klubovi objavljuju svoje terene, radno vreme, cene, trenere i članstva, a igrači onlajn rezervišu terene i časove. RaqHub pruža samo softver: ne vodimo klubove, ne posedujemo terene i ne zapošljavamo trenere."
           ]
         },
         {
@@ -1600,7 +1600,7 @@
           "body": [
             [
               "Rezervacija je dogovor između vas i kluba. Klub određuje cene, radno vreme i pravila rezervisanja i odgovoran je za teren, čas i svako plaćanje koje naplati.",
-              "Rezervacije plaćate klubu, na način koji klub odredi. SpinSync ne prima uplate za rezervacije.",
+              "Rezervacije plaćate klubu, na način koji klub odredi. RaqHub ne prima uplate za rezervacije.",
               "Svaki klub može da postavi pravila, na primer koliko dugo rezervacija može da traje, koliko unapred možete da rezervišete, koliko rezervacija dnevno možete da napravite i do kada još možete da otkažete onlajn. Posle tog roka, za otkazivanje se obratite klubu.",
               "Ako ne dođete na rezervaciju, klub može da je označi kao nedolazak. Klub može da pauzira onlajn rezervisanje igračima sa previše nedolazaka u poslednjih 90 dana. Klub i dalje može direktno da rezerviše za vas.",
               "Pitanja o rezervaciji, povraćaju novca ili otkazanom terminu rešavaju se između vas i kluba, ali rado ćemo pomoći gde možemo."
@@ -1624,8 +1624,8 @@
           "title": "Za šta su klubovi odgovorni",
           "body": [
             [
-              "Klubovi su odgovorni za informacije koje objavljuju i za podatke koje unose o svojim članovima i igračima. Moraju imati zakonit osnov za njihovo beleženje i moraju obavestiti članove da koriste SpinSync.",
-              "Za te podatke klub je rukovalac, a SpinSync njegov obrađivač, kako je opisano u Politici privatnosti. Obrađujemo ih samo da bismo klubu pružili uslugu.",
+              "Klubovi su odgovorni za informacije koje objavljuju i za podatke koje unose o svojim članovima i igračima. Moraju imati zakonit osnov za njihovo beleženje i moraju obavestiti članove da koriste RaqHub.",
+              "Za te podatke klub je rukovalac, a RaqHub njegov obrađivač, kako je opisano u Politici privatnosti. Obrađujemo ih samo da bismo klubu pružili uslugu.",
               "Klubovi moraju da poštuju rezervacije napravljene preko Kortella u skladu sa pravilima koja su postavili ili da kontaktiraju igrača ako rezervacija ne može da se realizuje."
             ]
           ]
@@ -1633,7 +1633,7 @@
         {
           "title": "Prihvatljivo korišćenje",
           "body": [
-            "Ne koristite SpinSync da biste:",
+            "Ne koristite RaqHub da biste:",
             [
               "radili bilo šta nezakonito;",
               "pravili lažne rezervacije ili zauzimali terene koje ne nameravate da koristite;",
@@ -1646,15 +1646,15 @@
         {
           "title": "Vaš sadržaj",
           "body": [
-            "Zadržavate prava na ono što otpremite, kao što su logoi, fotografije i opisi. Dozvoljavate nam da ih čuvamo i prikazujemo koliko je potrebno za rad usluge, na primer logo kluba na njegovoj javnoj stranici. Naziv SpinSync, softver i dizajn pripadaju nama."
+            "Zadržavate prava na ono što otpremite, kao što su logoi, fotografije i opisi. Dozvoljavate nam da ih čuvamo i prikazujemo koliko je potrebno za rad usluge, na primer logo kluba na njegovoj javnoj stranici. Naziv RaqHub, softver i dizajn pripadaju nama."
           ]
         },
         {
           "title": "Dostupnost i odgovornost",
           "body": [
             [
-              "Trudimo se da SpinSync bude dostupan i tačan, ali ne možemo da obećamo da će uvek raditi bez prekida ili grešaka. Možemo ga kratko pauzirati radi održavanja.",
-              "SpinSync nije odgovoran za ono što se dešava u klubu, za odluke kluba niti za gubitke izazvane problemom sa rezervacijom koji razumno nismo mogli da sprečimo.",
+              "Trudimo se da RaqHub bude dostupan i tačan, ali ne možemo da obećamo da će uvek raditi bez prekida ili grešaka. Možemo ga kratko pauzirati radi održavanja.",
+              "RaqHub nije odgovoran za ono što se dešava u klubu, za odluke kluba niti za gubitke izazvane problemom sa rezervacijom koji razumno nismo mogli da sprečimo.",
               "U meri u kojoj zakon dozvoljava, naša ukupna odgovornost prema klubu ograničena je na iznose koje nam je klub platio u 12 meseci pre zahteva.",
               "Ništa u ovim uslovima ne ograničava odgovornost koju zakon ne dozvoljava da se ograniči, niti vaša prava kao potrošača."
             ]
@@ -1664,7 +1664,7 @@
           "title": "Prestanak korišćenja",
           "body": [
             [
-              "Možete u bilo kom trenutku da prestanete da koristite SpinSync i zatražite brisanje naloga.",
+              "Možete u bilo kom trenutku da prestanete da koristite RaqHub i zatražite brisanje naloga.",
               "Možemo da suspendujemo ili zatvorimo nalog koji krši ove uslove, nakon upozorenja kada je to razumno."
             ]
           ]
@@ -1672,7 +1672,7 @@
         {
           "title": "Izmene ovih uslova",
           "body": [
-            "Možemo da menjamo ove uslove. Datum na vrhu pokazuje kada su poslednji put izmenjeni, a o važnim izmenama obavestićemo korisnike pre nego što stupe na snagu. Ako i posle toga nastavite da koristite SpinSync, važe novi uslovi."
+            "Možemo da menjamo ove uslove. Datum na vrhu pokazuje kada su poslednji put izmenjeni, a o važnim izmenama obavestićemo korisnike pre nego što stupe na snagu. Ako i posle toga nastavite da koristite RaqHub, važe novi uslovi."
           ]
         },
         {
@@ -1954,14 +1954,14 @@
       "Da dodaje članove i menja njihove podatke"
     ],
     "ownerOnlyTitle": "Samo vi možete",
-    "ownerOnly": "Da menjate podešavanja, terene, trenere, pakete i turnire, vidite analitiku, upravljate SpinSync paketom i pozivate ili uklanjate osoblje.",
+    "ownerOnly": "Da menjate podešavanja, terene, trenere, pakete i turnire, vidite analitiku, upravljate RaqHub paketom i pozivate ili uklanjate osoblje.",
     "inviteTitle": "Pozovite nekoga",
     "inviteHint": "Šaljemo im link e-poštom. Prijave se ili naprave nalog sa ovom adresom i vaš klub ih odmah čeka.",
     "emailPlaceholder": "ime@example.com",
     "invite": "Pošalji poziv",
     "sending": "Slanje…",
     "invited": "Poziv je poslat na {email}.",
-    "invitedNoEmail": "{email} je pozvan. Nismo uspeli da pošaljemo e-poštu, pa zamolite osobu da se prijavi na SpinSync sa ovom adresom.",
+    "invitedNoEmail": "{email} je pozvan. Nismo uspeli da pošaljemo e-poštu, pa zamolite osobu da se prijavi na RaqHub sa ovom adresom.",
     "empty": "Još nema osoblja",
     "emptyHint": "Pozovite prvog člana tima iznad.",
     "active": "Aktivan",
@@ -2011,7 +2011,7 @@
     "title": "Grupe",
     "new": "Nova grupa",
     "empty": "Još nema grupa",
-    "emptyHint": "Napravite nedeljne grupe vaših trenera za decu, juniore i odrasle. SpinSync drži teren za svaki trening, vodi evidenciju dolazaka i prati mesečne članarine.",
+    "emptyHint": "Napravite nedeljne grupe vaših trenera za decu, juniore i odrasle. RaqHub drži teren za svaki trening, vodi evidenciju dolazaka i prati mesečne članarine.",
     "noMatch": "Nijedna grupa ne odgovara ovim filterima.",
     "stats": {
       "sessions": "Treninga ove nedelje",
@@ -2122,7 +2122,7 @@
       "memberPrice": "Cena za članove sa paketom",
       "memberPlan": "Članski paket",
       "optional": "Nije obavezno",
-      "paySeason": "Igrači plaćaju klubu direktno, gotovinom ili uplatom na račun. Vi označite svaki mesec kao plaćen, a SpinSync do 10. podseti one koji nisu platili.",
+      "paySeason": "Igrači plaćaju klubu direktno, gotovinom ili uplatom na račun. Vi označite svaki mesec kao plaćen, a RaqHub do 10. podseti one koji nisu platili.",
       "payDropin": "Igrači plaćaju na treningu. Trener u evidenciji označi ko je platio.",
       "summary": "Pregled",
       "pickDays": "Izaberite dane da vidite treninge.",
@@ -2228,7 +2228,7 @@
       "unpaidMark": "Neplaćeno · označi {amount} kao plaćeno",
       "month": "Mesec",
       "noFees": "Za ovaj mesec niko nije na spisku.",
-      "feesHint": "Članarine se plaćaju klubu gotovinom ili uplatom. SpinSync samo vodi evidenciju.",
+      "feesHint": "Članarine se plaćaju klubu gotovinom ili uplatom. RaqHub samo vodi evidenciju.",
       "leftGroup": "(napustio)",
       "waitingTitle": "Lista čekanja",
       "waitingHint": "Kada se mesto oslobodi, sledeći na listi dobija e-poštu i ima 48 sati da prihvati.",
@@ -2324,7 +2324,7 @@
       "contactPlaceholder": "npr. Claire Martin (prazno za odrasle)",
       "email": "E-pošta",
       "phone": "Telefon",
-      "emailHint": "Sa e-poštom roditelj dobija otkazivanja i podsetnike za plaćanje, i vidi grupu kada se prijavi u SpinSync sa tom adresom.",
+      "emailHint": "Sa e-poštom roditelj dobija otkazivanja i podsetnike za plaćanje, i vidi grupu kada se prijavi u RaqHub sa tom adresom.",
       "price": "Mesečna cena",
       "priceHint": "Ostavite prazno za cenu grupe. Korisno za popust za braću i sestre ili za članove.",
       "notes": "Beleške za trenera",
@@ -2370,7 +2370,7 @@
       "addDropin": "Dodaj nekoga ko je došao bez prijave",
       "note": "Beleška o treningu",
       "notePlaceholder": "Na čemu ste radili, za roditelje",
-      "noteHint": "Roditelji vide poslednju belešku u SpinSyncu.",
+      "noteHint": "Roditelji vide poslednju belešku u RaqHubu.",
       "cancelToday": "Otkaži današnji trening",
       "cancelThis": "Otkaži ovaj trening",
       "save": "Sačuvaj evidenciju",
@@ -2549,7 +2549,7 @@
       "alwaysOn": "Uvek uključeno",
       "saveFailed": "Čuvanje nije uspelo. Pokušajte ponovo.",
       "plan": {
-        "title": "Vaš SpinSync paket",
+        "title": "Vaš RaqHub paket",
         "desc": "Podsetnici za probu i plaćanje"
       },
       "admin": {
@@ -2965,7 +2965,7 @@
       "releaseOption": "{hours} sati pre početka",
       "releaseHint": "Organizator se pita nekoliko sati ranije. Ako ga ne zadrži, teren se ponovo prodaje.",
       "who": "Ko može da se pridruži",
-      "anyone": "Svako sa SpinSync nalogom",
+      "anyone": "Svako sa RaqHub nalogom",
       "membersOnly": "Samo članovi kluba",
       "save": "Sačuvaj",
       "saving": "Čuva se…",
@@ -3075,7 +3075,7 @@
       },
       "mb_add": {
         "q": "Kako da dodam postojeće članove?",
-        "a": "Dodirnite Dodaj člana i unesite ime, plan i datum isteka. Dodajte i e-poštu: kad se član prijavi na SpinSync tom e-poštom, članstvo i popust se povezuju automatski."
+        "a": "Dodirnite Dodaj člana i unesite ime, plan i datum isteka. Dodajte i e-poštu: kad se član prijavi na RaqHub tom e-poštom, članstvo i popust se povezuju automatski."
       },
       "mb_discount": {
         "q": "Zašto član ne dobija popust?",
@@ -3095,15 +3095,15 @@
       },
       "co_add": {
         "q": "Kako da dodam trenera?",
-        "a": "Trener se prvo prijavi na SpinSync kao igrač. Zatim dodirnite Dodaj trenera i unesite njegovu e-poštu, cenu po satu i nivoe. Od tada igrači mogu da rezervišu časove kod njega."
+        "a": "Trener se prvo prijavi na RaqHub kao igrač. Zatim dodirnite Dodaj trenera i unesite njegovu e-poštu, cenu po satu i nivoe. Od tada igrači mogu da rezervišu časove kod njega."
       },
       "co_lessons": {
         "q": "Da li čas zauzima teren?",
-        "a": "Da. Kad igrač rezerviše čas, SpinSync mu dodeli slobodan teren za sport trenera, da ga niko drugi ne uzme."
+        "a": "Da. Kad igrač rezerviše čas, RaqHub mu dodeli slobodan teren za sport trenera, da ga niko drugi ne uzme."
       },
       "gr_create": {
         "q": "Kako da napravim grupu za treninge?",
-        "a": "Dodirnite Nova grupa i izaberite trenera, teren, dane, vreme i sezonu. SpinSync rezerviše teren za svaki termin i stavlja ih u raspored. Praznike preskočite pauzama."
+        "a": "Dodirnite Nova grupa i izaberite trenera, teren, dane, vreme i sezonu. RaqHub rezerviše teren za svaki termin i stavlja ih u raspored. Praznike preskočite pauzama."
       },
       "gr_register": {
         "q": "Kako trener vodi evidenciju dolazaka?",
@@ -3131,7 +3131,7 @@
       },
       "ct_add": {
         "q": "Kako da dodam više terena odjednom?",
-        "a": "U Dodaj teren podesite Koliko. SpinSync ih pravi numerisane, npr. Šljaka 1–4, sa istim sportom, podlogom i cenom."
+        "a": "U Dodaj teren podesite Koliko. RaqHub ih pravi numerisane, npr. Šljaka 1–4, sa istim sportom, podlogom i cenom."
       },
       "ct_off": {
         "q": "Kako da privremeno zatvorim teren?",
@@ -3171,14 +3171,14 @@
       },
       "sf_can": {
         "q": "Šta osoblje može da radi?",
-        "a": "Da vidi raspored, dodaje, menja i otkazuje rezervacije, i upravlja članovima i grupama. Samo vi menjate podešavanja, terene, trenere, planove i svoj SpinSync plan."
+        "a": "Da vidi raspored, dodaje, menja i otkazuje rezervacije, i upravlja članovima i grupama. Samo vi menjate podešavanja, terene, trenere, planove i svoj RaqHub plan."
       },
       "sh_link": {
         "q": "Kako da navedem igrače da rezervišu onlajn?",
         "a": "Pošaljite gotovu poruku u Viber ili WhatsApp grupu kluba i okačite QR poster na recepciji i kod terena. Većina klubova dobije prvu onlajn rezervaciju u roku od jednog dana."
       },
       "ga_plan": {
-        "q": "Kako se plaća SpinSync?",
+        "q": "Kako se plaća RaqHub?",
         "a": "Prvi mesec je besplatan. Da nastavite, pišite nam i poslaćemo vam fakturu za vaš plan. Plan i datum do kog je plaćen su u Podešavanjima."
       },
       "ga_language": {
@@ -3571,7 +3571,7 @@
     "saving": "Čuvanje…",
     "back": "Sve večeri",
     "empty": "Još nema večeri.",
-    "emptyHint": "Napravite jedno, podelite link i igrači se prijavljuju. Te večeri SpinSync pravi svako kolo i vodi tabelu.",
+    "emptyHint": "Napravite jedno, podelite link i igrači se prijavljuju. Te večeri RaqHub pravi svako kolo i vodi tabelu.",
     "copyLink": "Kopiraj link",
     "copied": "Kopirano",
     "publicPage": "Javna stranica",

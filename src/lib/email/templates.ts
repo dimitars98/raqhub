@@ -7,7 +7,7 @@ import fr from "@/messages/fr.json";
 import it from "@/messages/it.json";
 import sr from "@/messages/sr.json";
 import type { Locale } from "./locale";
-import { PLANS, type PlanId } from "@/lib/plans";
+import { PLANS, SUPPORT_EMAIL, type PlanId } from "@/lib/plans";
 import { intlLocale } from "@/lib/dateLocale";
 import type { ClosureReason } from "@/lib/closures";
 
@@ -66,6 +66,8 @@ function layout(opts: {
   extraHtml?: string;
   button?: { label: string; url: string };
   footer: string;
+  /** Adds RaqHub's support address under the footer (emails to club owners and staff). */
+  support?: boolean;
 }) {
   const rows = (opts.rows ?? [])
     .map(
@@ -89,7 +91,7 @@ function layout(opts: {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f2;padding:24px 12px">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px">
-        <tr><td style="padding:0 4px 16px;font-size:20px;font-weight:700;color:#111c0a">Kort<span style="color:#7aad12">ello</span></td></tr>
+        <tr><td style="padding:0 4px 16px;font-size:20px;font-weight:700;color:#111c0a">Raq<span style="color:#7aad12">Hub</span></td></tr>
         <tr><td style="background:#ffffff;border:1px solid #e8ede4;border-radius:16px;padding:28px">
           <h1 style="margin:0 0 10px;font-size:20px;line-height:1.3;color:#111c0a">${esc(opts.heading)}</h1>
           <p style="margin:0 0 18px;font-size:15px;line-height:1.55;color:#3d4f35">${esc(opts.intro)}</p>
@@ -97,7 +99,11 @@ function layout(opts: {
           ${opts.extraHtml ?? ""}
           ${button}
         </td></tr>
-        <tr><td style="padding:16px 4px;font-size:12px;line-height:1.5;color:#6e7f65">${esc(opts.footer)}</td></tr>
+        <tr><td style="padding:16px 4px;font-size:12px;line-height:1.5;color:#6e7f65">${esc(opts.footer)}${
+          opts.support
+            ? `<br><a href="mailto:${SUPPORT_EMAIL}" style="color:#6e7f65">${SUPPORT_EMAIL}</a>`
+            : ""
+        }</td></tr>
       </table>
     </td></tr>
   </table>
@@ -290,13 +296,13 @@ export function weeklyReportEmail(r: WeeklyReportData): Rendered {
 
   return {
     subject: t("report.subject", { club: r.clubName, week }),
-    html: layout({ heading, intro, rows, extraHtml, button: { label: t("report.openDashboard"), url }, footer }),
+    html: layout({ heading, intro, rows, extraHtml, button: { label: t("report.openDashboard"), url }, footer, support: true }),
     text: plainText(
       heading,
       intro,
       [...rows, [t("report.expiring"), expiringList.join(", ")]],
       url,
-      footer,
+      `${footer}\n${SUPPORT_EMAIL}`,
     ),
   };
 }
@@ -338,8 +344,8 @@ export function trialEmail(d: TrialEmailData): Rendered {
 
   return {
     subject: t(`trial.${d.kind}Subject`, { club: d.clubName, date }),
-    html: layout({ heading, intro, rows, button: { label: t("trial.seePlan"), url }, footer }),
-    text: plainText(heading, intro, rows, url, footer),
+    html: layout({ heading, intro, rows, button: { label: t("trial.seePlan"), url }, footer, support: true }),
+    text: plainText(heading, intro, rows, url, `${footer}\n${SUPPORT_EMAIL}`),
   };
 }
 
@@ -363,7 +369,7 @@ export function newClubEmail(d: NewClubEmailData): Rendered {
   const f = formatters("en");
   const where = [d.city, d.country].filter(Boolean).join(", ");
   const heading = `New club: ${d.clubName}`;
-  const intro = `${d.clubName}${where ? ` (${where})` : ""} just signed up. That makes ${d.totalClubs} ${d.totalClubs === 1 ? "club" : "clubs"} on Kortello.`;
+  const intro = `${d.clubName}${where ? ` (${where})` : ""} just signed up. That makes ${d.totalClubs} ${d.totalClubs === 1 ? "club" : "clubs"} on RaqHub.`;
   const rows: [string, string][] = [
     ["Club", d.clubName],
     ["Where", where || "–"],
@@ -372,10 +378,10 @@ export function newClubEmail(d: NewClubEmailData): Rendered {
     ["Plan", d.plan.charAt(0).toUpperCase() + d.plan.slice(1)],
     ["Trial ends", d.trialEndsAt ? f.day(d.trialEndsAt) : "–"],
   ];
-  const footer = "Sent to ADMIN_EMAIL because a club signed up on Kortello.";
+  const footer = "Sent to ADMIN_EMAIL because a club signed up on RaqHub.";
 
   return {
-    subject: `New club on Kortello: ${d.clubName}${d.city ? ` (${d.city})` : ""}`,
+    subject: `New club on RaqHub: ${d.clubName}${d.city ? ` (${d.city})` : ""}`,
     html: layout({ heading, intro, rows, button: { label: "Open the club page", url: d.clubUrl }, footer }),
     text: plainText(heading, intro, rows, d.clubUrl, footer),
   };
@@ -410,8 +416,8 @@ export function staffInviteEmail(d: StaffInviteEmailData): Rendered {
 
   return {
     subject: t("staff.subject", { club: d.clubName }),
-    html: layout({ heading, intro, rows, button: { label: t("staff.button"), url }, footer }),
-    text: plainText(heading, intro, rows, url, footer),
+    html: layout({ heading, intro, rows, button: { label: t("staff.button"), url }, footer, support: true }),
+    text: plainText(heading, intro, rows, url, `${footer}\n${SUPPORT_EMAIL}`),
   };
 }
 

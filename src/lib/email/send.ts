@@ -14,12 +14,12 @@ export type Email = {
  *
  *   Resend (free up to 3,000 emails a month, 100 a day; needs your own
  *   verified domain to email other people):
- *     RESEND_API_KEY, EMAIL_FROM="Kortello <hello@yourdomain.com>"
+ *     RESEND_API_KEY, EMAIL_FROM="RaqHub <hello@yourdomain.com>"
  *
  *   Any SMTP mailbox, e.g. a free Gmail account with an app password
  *   (Gmail allows about 500 recipients a day):
  *     SMTP_HOST=smtp.gmail.com, SMTP_PORT=465, SMTP_USER, SMTP_PASS,
- *     EMAIL_FROM="Kortello <you@gmail.com>" (optional)
+ *     EMAIL_FROM="RaqHub <you@gmail.com>" (optional)
  *
  * With neither set, emails are only logged, so local development works.
  */
@@ -70,7 +70,7 @@ export async function sendEmail(email: Email): Promise<boolean> {
 
     if (provider === "smtp") {
       await smtpTransport().sendMail({
-        from: process.env.EMAIL_FROM || `Kortello <${process.env.SMTP_USER}>`,
+        from: process.env.EMAIL_FROM || `RaqHub <${process.env.SMTP_USER}>`,
         to: email.to,
         subject: email.subject,
         html: email.html,

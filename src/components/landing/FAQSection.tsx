@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Plus, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { PLANS } from "@/lib/plans";
+import { PLANS, SUPPORT_EMAIL } from "@/lib/plans";
 
 const FAQ_IDS = [
   "setup",
@@ -26,7 +26,7 @@ function SupportBlock({ className = "" }: { className?: string }) {
       </p>
       <p className="mt-1 text-sm text-ink-600">{t("writeUs")}</p>
       <a
-        href="mailto:support@kortello.com"
+        href={`mailto:${SUPPORT_EMAIL}`}
         className="btn-primary mt-4 h-12 px-6 text-sm font-semibold"
       >
         <Mail size={16} className="text-brand-400" aria-hidden="true" />

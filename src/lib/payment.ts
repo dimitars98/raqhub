@@ -1,6 +1,6 @@
 import { SALES_EMAIL } from "@/lib/plans";
 
-// How clubs pay for their Kortello plan, shown on the plan card in Settings.
+// How clubs pay for their RaqHub plan, shown on the plan card in Settings.
 //
 // Fill in your bank details before going live. While `iban` is empty, clubs
 // are asked to write to you for the details instead. Lines left as null are

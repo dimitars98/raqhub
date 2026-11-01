@@ -3,7 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import OfferClient, { type OfferInfo } from "@/components/groups/OfferClient";
 
 // A place offered from a waiting list. The link in the email is the key, so
-// it works for parents without a Kortello account.
+// it works for parents without a RaqHub account.
 export default async function GroupOfferPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
   const supabase = await createClient();

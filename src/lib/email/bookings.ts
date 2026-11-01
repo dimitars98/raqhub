@@ -30,7 +30,7 @@ export function appUrl() {
   );
 }
 
-/** The club's email, so a player's reply goes to the club, not to Kortello. */
+/** The club's email, so a player's reply goes to the club, not to RaqHub. */
 export const clubEmailOf = (row: BookingEmailRow) =>
   row.court?.club?.email ?? row.coach?.club?.email ?? null;
 
@@ -44,7 +44,7 @@ export function bookingEmailData(
     name: name?.trim() || null,
     courtName: row.court?.name ?? null,
     coachName: row.coach?.profile?.full_name ?? null,
-    clubName: row.court?.club?.name ?? row.coach?.club?.name ?? "SpinSync",
+    clubName: row.court?.club?.name ?? row.coach?.club?.name ?? "RaqHub",
     startsAt: row.starts_at,
     endsAt: row.ends_at,
     durationMin: row.duration_min,

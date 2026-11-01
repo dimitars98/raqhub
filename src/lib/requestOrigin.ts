@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { appUrl } from "@/lib/email/bookings";
 
 /**
- * The address the admin has the app open at (https://kortello.com, or
+ * The address the admin has the app open at (https://raqhub.com, or
  * http://localhost:3000 while developing), for links they copy and share.
  * Falls back to NEXT_PUBLIC_APP_URL when there's no request to go by.
  */

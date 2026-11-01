@@ -1,4 +1,4 @@
-# SpinSync 🎾
+# RaqHub 🎾
 
 Tennis court & coach booking platform. Built with Next.js 14 App Router, Supabase, and Tailwind CSS.
 
@@ -87,7 +87,7 @@ npx supabase gen types typescript --project-id <your-project-id> \
 
 ## Plans and billing
 
-Clubs pay Kortello; players never do. Every new club gets **1 month free with
+Clubs pay RaqHub; players never do. Every new club gets **1 month free with
 everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts`):
 
 | Plan    | Price            | Courts    | Adds                                                      |
@@ -111,7 +111,7 @@ everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts
 ## Open matches
 
 Players book a court and open it to others at their level ("we need two more
-for padel at 19:00"). Everyone pays their share at the club; Kortello takes
+for padel at 19:00"). Everyone pays their share at the club; RaqHub takes
 nothing. Included in every plan.
 
 - **Database:** run `supabase/migrations/20261026_open_matches.sql` once in the
@@ -153,8 +153,8 @@ once; courts without a colour use their surface's usual one.
 
 Players can pay for a court when they book. Each club connects **its own**
 Stripe account (Stripe Connect, "direct charges"): the money goes straight to
-the club, and refunds, disputes and Stripe's fees are the club's. Kortello can
-take a cut with `KORTELLO_FEE_PERCENT` (none by default).
+the club, and refunds, disputes and Stripe's fees are the club's. RaqHub can
+take a cut with `RAQHUB_FEE_PERCENT` (none by default).
 
 - **Database:** run `supabase/migrations/20261029_online_payments.sql` once,
   after the leagues file.
@@ -164,7 +164,7 @@ take a cut with `KORTELLO_FEE_PERCENT` (none by default).
   ```env
   STRIPE_SECRET_KEY=sk_test_...          # Stripe → Developers → API keys
   STRIPE_WEBHOOK_SECRET=whsec_...        # from the webhook below
-  # KORTELLO_FEE_PERCENT=0               # optional: your cut of each payment
+  # RAQHUB_FEE_PERCENT=0               # optional: your cut of each payment
   ```
 
 - **Webhook:** Stripe → Developers → Webhooks → Add destination → **Connected
@@ -188,12 +188,12 @@ take a cut with `KORTELLO_FEE_PERCENT` (none by default).
   player, the club, or a court closure) refunds it automatically. Lessons,
   group sessions and bookings the club makes are still paid at the club.
 - **Countries:** a club's Stripe account has to be in a country Stripe supports
-  (stripe.com/global); North Macedonia isn't one yet. Your own Kortello Stripe
+  (stripe.com/global); North Macedonia isn't one yet. Your own RaqHub Stripe
   account (the platform) also needs a supported country, e.g. a US company.
 
-## Clubs paying for Kortello by card (Polar)
+## Clubs paying for RaqHub by card (Polar)
 
-Clubs can pay for their Kortello plan by card, monthly or yearly, in
+Clubs can pay for their RaqHub plan by card, monthly or yearly, in
 Settings → "Pay by card". Polar is the merchant of record: it charges the card,
 handles VAT, sends invoices, and pays out to you (North Macedonia included).
 Bank transfers and cash still work, recorded on the owner page as before.
@@ -316,7 +316,7 @@ where conrelid = 'public.bookings'::regclass and contype = 'x';
 - [ ] Coach detail + booking page
 - [ ] Email confirmations via Resend
 - [ ] Club admin dashboard (manage courts, view bookings)
-- [x] Online payments with Stripe Connect (test mode until Kortello has a Stripe-supported company)
+- [x] Online payments with Stripe Connect (test mode until RaqHub has a Stripe-supported company)
 - [ ] Availability rules per court/coach
 - [ ] Real-time availability via Supabase Realtime
 - [ ] Vercel deployment

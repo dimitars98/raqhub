@@ -78,7 +78,7 @@ export default function DashboardTopbar({
     .reverse()
     .map((segment) => TITLE_KEYS[segment])
     .find(Boolean);
-  const title = titleKey ? t(titleKey) : "SpinSync";
+  const title = titleKey ? t(titleKey) : "RaqHub";
 
   return (
     <header className="flex h-[60px] shrink-0 items-center justify-between border-b border-ink-100 bg-white px-4 lg:px-6">
@@ -93,8 +93,8 @@ export default function DashboardTopbar({
           <PanelLeft className="size-5" strokeWidth={1.75} aria-hidden="true" />
         </button>
         <Image
-          src="/spinsyncdark.png"
-          alt="logo"
+          src="/raqhub.png"
+          alt="RaqHub"
           width={40}
           height={40}
           className="md:hidden"
@@ -107,6 +107,7 @@ export default function DashboardTopbar({
       <div className="flex items-center gap-2">
         <LocaleSwitcher size="sm" />
         <NotificationBell userId={userId} area={area} />
+
         <Help area={area} />
       </div>
     </header>

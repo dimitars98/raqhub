@@ -32,7 +32,12 @@ export default function GlobalError({
         <div role="alert" style={{ maxWidth: 420, textAlign: "center" }}>
           <h1 style={{ fontSize: 24, margin: "0 0 12px" }}>Something went wrong</h1>
           <p style={{ color: "#3d4f35", lineHeight: 1.6, margin: "0 0 24px" }}>
-            Kortello couldn&apos;t load. Please try again in a moment.
+            RaqHub couldn&apos;t load. Please try again in a moment. If it keeps
+            happening, email{" "}
+            <a href="mailto:support@raqhub.com" style={{ color: "#111c0a" }}>
+              support@raqhub.com
+            </a>
+            .
           </p>
           <button
             type="button"

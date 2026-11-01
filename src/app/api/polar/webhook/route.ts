@@ -3,7 +3,7 @@ import { webhooks } from "@polar-sh/sdk/2026-10";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { planOfProduct } from "@/lib/polar";
 
-// Polar's messages about the clubs' card subscriptions to Kortello
+// Polar's messages about the clubs' card subscriptions to RaqHub
 // (supabase/migrations/20261029b_polar_subscriptions.sql). Set up in Polar:
 // Settings → Webhooks → this address, with the subscription.* and
 // order.paid events; its secret goes in POLAR_WEBHOOK_SECRET.

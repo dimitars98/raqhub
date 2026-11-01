@@ -67,7 +67,7 @@ function calendarLink(b: BookingWithJoins, title: string) {
     action: "TEMPLATE",
     text: title,
     dates: `${stamp(b.starts_at)}/${stamp(b.ends_at)}`,
-    details: `Kortello · ${b.reference}`,
+    details: `RaqHub · ${b.reference}`,
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }

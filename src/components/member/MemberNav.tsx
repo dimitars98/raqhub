@@ -33,7 +33,7 @@ export default function MemberNav({ userName }: { userName: string }) {
           href={`/${locale}/book`}
           className="text-[15px] font-medium text-orange-900 tracking-tight"
         >
-          Kortello
+          RaqHub
         </Link>
 
         {/* Desktop */}

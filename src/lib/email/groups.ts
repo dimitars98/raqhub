@@ -5,7 +5,7 @@ import { localeForCountry } from "@/lib/email/locale";
 import { scheduleText } from "@/lib/groups";
 import type { Group } from "@/types/database";
 
-// Emails about coaching groups. Parents usually have no Kortello account, so
+// Emails about coaching groups. Parents usually have no RaqHub account, so
 // these go to the contact email on the coach's list, in the club's language.
 
 export type GroupClub = {

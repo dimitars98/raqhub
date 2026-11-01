@@ -98,11 +98,11 @@ export async function generateMetadata({
     .eq("is_active", true)
     .maybeSingle();
 
-  if (!data) return { title: "Kortello" };
+  if (!data) return { title: "RaqHub" };
 
   const t = await getTranslations("clubPage");
   return {
-    title: `${data.name} · Kortello`,
+    title: `${data.name} · RaqHub`,
     description: data.description ?? t("metaDescription", { club: data.name }),
   };
 }
@@ -249,7 +249,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
             className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-brand-900"
           >
             <LogoMark className="size-7" />
-            Kortello
+            RaqHub
           </Link>
           <div className="flex items-center gap-2">
             <LocaleSwitcher size="sm" />

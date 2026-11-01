@@ -15,7 +15,7 @@ interface DashboardShellProps {
   clubSlug?: string;
   /** Shown above the page content (e.g. the free-trial banner). */
   notice?: React.ReactNode;
-  /** You, the person who runs Kortello: gets the super admin screens. */
+  /** You, the person who runs RaqHub: gets the super admin screens. */
   isSuperAdmin?: boolean;
   /** Staff of a club: only the screens staff can use. */
   isStaff?: boolean;

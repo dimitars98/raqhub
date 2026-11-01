@@ -9,7 +9,7 @@ import { useReadOnly } from "@/components/admin/ReadOnly";
 import type { PayMode } from "@/lib/paymentMode";
 
 export type PaymentsInfo = {
-  /** Kortello has Stripe keys. */
+  /** RaqHub has Stripe keys. */
   configured: boolean;
   testMode: boolean;
   /** The club has a Stripe account (maybe not finished). */

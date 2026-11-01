@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 
-// Kortello's Stripe account (the "platform"). Clubs connect their own Stripe
+// RaqHub's Stripe account (the "platform"). Clubs connect their own Stripe
 // accounts to it, and players pay the club directly ("direct charges"):
 // see supabase/migrations/20261029_online_payments.sql.
 //
@@ -8,7 +8,7 @@ import Stripe from "stripe";
 //
 //   STRIPE_SECRET_KEY        sk_test_… while testing, sk_live_… when live
 //   STRIPE_WEBHOOK_SECRET    whsec_… of the Connect webhook (see README)
-//   KORTELLO_FEE_PERCENT     optional: Kortello's cut of each payment (0 = none)
+//   RAQHUB_FEE_PERCENT       optional: RaqHub's cut of each payment (0 = none)
 
 let client: Stripe | null = null;
 
@@ -19,7 +19,7 @@ export function stripeConfigured() {
 export function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) throw new Error("STRIPE_SECRET_KEY is not set");
-  client ??= new Stripe(key, { appInfo: { name: "Kortello" } });
+  client ??= new Stripe(key, { appInfo: { name: "RaqHub" } });
   return client;
 }
 
@@ -30,9 +30,9 @@ export const CURRENCY = "eur";
 
 export const toCents = (amount: number) => Math.round(amount * 100);
 
-/** Kortello's cut of a payment, in cents (none unless KORTELLO_FEE_PERCENT is set). */
+/** RaqHub's cut of a payment, in cents (none unless RAQHUB_FEE_PERCENT is set). */
 export function platformFee(cents: number) {
-  const pct = Number(process.env.KORTELLO_FEE_PERCENT ?? 0);
+  const pct = Number(process.env.RAQHUB_FEE_PERCENT ?? process.env.KORTELLO_FEE_PERCENT ?? 0);
   if (!Number.isFinite(pct) || pct <= 0) return 0;
   return Math.min(cents, Math.round((cents * pct) / 100));
 }

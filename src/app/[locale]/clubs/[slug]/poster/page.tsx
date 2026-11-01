@@ -73,7 +73,7 @@ export default async function ClubPosterPage({ params }: PageProps) {
           </ol>
           <p className="text-xs text-ink-400">{t("orVisit")}</p>
           <p className="mt-1 break-all font-mono text-sm text-ink-800">{link}</p>
-          <p className="mt-6 text-xs text-ink-400">Kortello</p>
+          <p className="mt-6 text-xs text-ink-400">RaqHub</p>
         </footer>
       </article>
     </main>

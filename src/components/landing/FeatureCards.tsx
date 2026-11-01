@@ -4,7 +4,7 @@ import { Download, Link2, Plus } from "lucide-react";
 import { appUrl } from "@/lib/email/bookings";
 import { dateLocale } from "@/lib/dateLocale";
 
-// "Built for clubs": what Kortello does around a booking that the Features
+// "Built for clubs": what RaqHub does around a booking that the Features
 // rows above don't cover. Each card shows a small piece of the real app
 // instead of an icon. The club and people in it are a made-up example.
 
@@ -151,7 +151,7 @@ export default function FeatureCards() {
           <div className="mt-auto overflow-hidden rounded-2xl border border-[#e8ede4]">
             <div className="flex justify-between gap-3 border-b border-[#e8ede4] bg-[#f8f9f7] px-3.5 py-3 text-[12px] text-[#55664c]">
               <span className="min-w-0 truncate">
-                <strong className="font-semibold text-[#111c0a]">{CLUB}</strong> · Kortello
+                <strong className="font-semibold text-[#111c0a]">{CLUB}</strong> · RaqHub
               </span>
               <span className="shrink-0">09:00</span>
             </div>

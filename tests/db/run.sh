@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# Runs the database tests: builds the Kortello database from scratch on a
+# Runs the database tests: builds the RaqHub database from scratch on a
 # plain Postgres (16+), then runs every tests/db/*.test.sql file on its own
 # fresh copy.
 #
@@ -14,7 +14,7 @@ set -uo pipefail
 cd "$(dirname "$0")/../.."
 
 PSQL=(psql -X -q -v ON_ERROR_STOP=1)
-BASE=kortello_test_base
+BASE=raqhub_test_base
 FAILED=0
 PASSED=0
 
@@ -27,9 +27,9 @@ load() {
   local file=$1
   # pg_cron and pg_net only exist on Supabase (setup/supabase.sql fakes pg_cron).
   if ! sed -E 's/create extension if not exists (pg_cron|pg_net)[^;]*;//I' "$file" \
-      | run -d "$BASE" -f - >/tmp/kortello-load.log 2>&1; then
+      | run -d "$BASE" -f - >/tmp/raqhub-load.log 2>&1; then
     echo "FAILED to load $file:"
-    grep -iE "error|line" /tmp/kortello-load.log | head -5
+    grep -iE "error|line" /tmp/raqhub-load.log | head -5
     exit 1
   fi
 }
@@ -47,7 +47,7 @@ echo
 
 for test in $(ls tests/db/*.test.sql | LC_ALL=C sort); do
   name=$(basename "$test" .test.sql)
-  db="kortello_test_$name"
+  db="raqhub_test_$name"
   run -d postgres -c "drop database if exists $db" -c "create database $db template $BASE" >/dev/null 2>&1
   out=$(run -d "$db" -f "$test" 2>&1)
   status=$?

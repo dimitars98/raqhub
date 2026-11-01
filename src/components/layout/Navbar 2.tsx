@@ -28,7 +28,7 @@ export default function Navbar() {
           onClick={() => scrollToTop()}
           className="text-[15px] font-medium text-orange-900 tracking-tight cursor-pointer"
         >
-          ServeTime
+          RaqHub
         </Link>
         <div>
           {user ? (

@@ -1,4 +1,4 @@
-// Kortello's own plans for clubs (not the membership plans a club sells).
+// RaqHub's own plans for clubs (not the membership plans a club sells).
 //
 // Keep the court limits in step with club_max_courts() in
 // supabase/migrations/20261013_plans_trial.sql: the database enforces them,
@@ -118,4 +118,6 @@ export function readOnlyFrom(club: ClubBilling): string {
 
 export const BILLING_COLUMNS = "plan, trial_ends_at, paid_until";
 
-export const SALES_EMAIL = "support@kortello.com";
+/** Where clubs and players write to RaqHub: help, plans, invoices, legal questions. */
+export const SUPPORT_EMAIL = "support@raqhub.com";
+export const SALES_EMAIL = SUPPORT_EMAIL;

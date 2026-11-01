@@ -1,5 +1,5 @@
 -- ============================================
--- Kortello — Supabase Schema
+-- RaqHub — Supabase Schema
 -- Run this in Supabase SQL Editor
 -- ============================================
 

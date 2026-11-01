@@ -44,7 +44,7 @@ function rich(text: string): ReactNode[] {
 
 export async function legalTitle(kind: LegalKind) {
   const t = await getTranslations(`legal.${kind}`);
-  return `${t("title")} · Kortello`;
+  return `${t("title")} · RaqHub`;
 }
 
 export default async function LegalPage({ kind }: { kind: LegalKind }) {

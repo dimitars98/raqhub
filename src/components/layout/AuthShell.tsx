@@ -24,8 +24,8 @@ export default function AuthShell({ tone = "lime", children }: AuthShellProps) {
           className="inline-flex w-fit items-center gap-2 text-xl font-semibold tracking-tight text-brand-900"
         >
           {/* <LogoMark className="size-8" /> */}
-          <Image src="/spinsyncdark.png" alt="logo" width={40} height={40} />
-          SpinSync
+          <Image src="/raqhub.png" alt="RaqHub" width={40} height={40} />
+          RaqHub
         </Link>
 
         <div className="flex flex-1 items-center justify-center py-12">

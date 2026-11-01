@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       }
 
       case "charge.refunded": {
-        // A refund made in Stripe (by Kortello or by the club in its dashboard).
+        // A refund made in Stripe (by RaqHub or by the club in its dashboard).
         const charge = event.data.object;
         const intent = typeof charge.payment_intent === "string" ? charge.payment_intent : charge.payment_intent?.id;
         if (intent && charge.refunded) {

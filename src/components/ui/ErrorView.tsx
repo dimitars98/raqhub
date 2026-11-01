@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { RotateCw } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import ErrorState from "@/components/ui/ErrorState";
+import { SUPPORT_EMAIL } from "@/lib/plans";
 
 type Props = {
   error: Error & { digest?: string };
@@ -38,6 +39,7 @@ export default function ErrorView({ error, reset, variant = "page" }: Props) {
       title={t("title")}
       body={t("body")}
       reference={error.digest ? t("reference", { code: error.digest }) : null}
+      contactEmail={SUPPORT_EMAIL}
       actions={
         <>
           <button

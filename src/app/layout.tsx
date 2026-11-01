@@ -3,7 +3,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: { default: "SpinSync", template: "%s | SpinSync" },
+  title: { default: "RaqHub", template: "%s | RaqHub" },
   description: "Book tennis, padel and pickleball courts and coaches near you.",
 };
 

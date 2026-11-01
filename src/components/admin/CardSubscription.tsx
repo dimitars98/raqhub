@@ -24,7 +24,7 @@ export type CardSubscriptionInfo = {
   sandbox: boolean;
 };
 
-/** Pay for the Kortello plan by card (Polar), or manage the card subscription. */
+/** Pay for the RaqHub plan by card (Polar), or manage the card subscription. */
 export default function CardSubscription({ info }: { info: CardSubscriptionInfo }) {
   const t = useTranslations("billing.card");
   const tPlan = useTranslations("billing.planNames");

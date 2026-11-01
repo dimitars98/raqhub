@@ -1,5 +1,5 @@
 // The three kinds of signed-in people:
-//   super_admin: you, the person who runs Kortello (sees every club)
+//   super_admin: you, the person who runs RaqHub (sees every club)
 //   club_admin:  someone who signed their club up and owns it
 //   player:      someone who books courts (and may be staff of a club)
 

@@ -145,15 +145,15 @@ function SidebarContent({
           <Link
             href={homeHref}
             onClick={onNavClick}
-            aria-label="SpinSync"
+            aria-label="RaqHub"
             className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-white"
           >
             {/* <LogoMark className="size-7" /> */}
-            <Image src="/spinsync.png" alt="logo" width={40} height={40} />
+            <Image src="/raqhub.png" alt="RaqHub" width={40} height={40} />
 
             {!collapsed && (
               <span>
-                {/* Kort<span className="text-[#a8d832]">ello</span> */}SpinSync
+                RaqHub
               </span>
             )}
           </Link>
@@ -368,7 +368,7 @@ interface SidebarProps {
   /** Used for the link to the club's public page. */
   clubSlug?: string;
   /**
-   * You, the person who runs Korto. Gets the Korto screens, plus the
+   * You, the person who runs RaqHub. Gets the RaqHub screens, plus the
    * club screens only if this account also has a club of its own.
    */
   isSuperAdmin?: boolean;
@@ -392,7 +392,7 @@ export default function Sidebar({
   const router = useRouter();
   const t = useTranslations("dashboard");
 
-  // Super admin: the screens for running Korto itself.
+  // Super admin: the screens for running RaqHub itself.
   const SUPER_ADMIN_NAV: NavGroup[] = [
     {
       group: t("ownerGroup"),
@@ -600,7 +600,12 @@ export default function Sidebar({
   return (
     // reducedMotion="user": people who turned off animations in their system get none.
     <MotionConfig reducedMotion="user">
-      <MobileBottomNav items={mobileItems} moreItems={moreItems} />
+      <MobileBottomNav
+        items={mobileItems}
+        moreItems={moreItems}
+        onSignOut={handleSignOut}
+        signOutLabel={t("signOut")}
+      />{" "}
       {/* Desktop sidebar */}
       <div className="hidden shrink-0 lg:flex">
         <SidebarContent
@@ -609,7 +614,6 @@ export default function Sidebar({
           layoutGroupId="sidebar-desktop"
         />
       </div>
-
       {/* Phone / tablet drawer */}
       <MobileDrawer open={mobileOpen} onClose={closeMobile}>
         <SidebarContent

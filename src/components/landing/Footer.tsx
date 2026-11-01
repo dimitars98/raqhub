@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { SUPPORT_EMAIL } from "@/lib/plans";
 
 export default async function Footer() {
   const locale = await getLocale();
@@ -73,8 +74,14 @@ export default async function Footer() {
           </nav>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-6 text-sm text-white/40">
-          © {new Date().getFullYear()} SpinSync. All rights reserved
+        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} RaqHub. All rights reserved</span>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="w-fit transition-colors hover:text-brand-400"
+          >
+            {SUPPORT_EMAIL}
+          </a>
         </div>
 
         {/* Oversized wordmark, cropped by the bottom edge */}
@@ -82,7 +89,7 @@ export default async function Footer() {
           aria-hidden="true"
           className="mt-10 -mb-[0.14em] select-none whitespace-nowrap font-extrabold leading-[0.8] tracking-tighter text-brand-400 text-[length:min(15vw,190px)]"
         >
-          Kortello
+          RaqHub
         </div> */}
       </div>
     </footer>

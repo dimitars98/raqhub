@@ -100,7 +100,7 @@ select test.is(test.count($$select * from public.bookings b join public.courts c
 select test.allowed($$update public.courts set price_per_hour = 18 where id = test.id('court1')$$,
   'the owner can change their court''s price');
 
--- Clubs can't change what they pay Kortello, or their payment account
+-- Clubs can't change what they pay RaqHub, or their payment account
 select test.try($$update public.clubs set stripe_account_id = 'acct_hack', stripe_charges_enabled = true,
   paid_until = '2030-01-01', subscription_status = 'active' where id = test.id('riverside')$$);
 select test.logout();
