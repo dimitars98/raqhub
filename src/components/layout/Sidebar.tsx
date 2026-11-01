@@ -149,7 +149,7 @@ function SidebarContent({
             className="inline-flex items-center gap-2 font-display text-[17px] font-extrabold tracking-tight text-white"
           >
             {/* <LogoMark className="size-7" /> */}
-            <Image src="/logo2.png" alt="logo" width={40} height={40} />
+            <Image src="/spinsync.png" alt="logo" width={40} height={40} />
 
             {!collapsed && (
               <span>

@@ -8,6 +8,7 @@ import { useSidebar } from "./SidebarContext";
 import NotificationBell from "../notifications/NotificationBell";
 import type { Area } from "@/lib/notifications";
 import Help from "./Help";
+import Image from "next/image";
 
 type TitleKey =
   | "dashboard"
@@ -91,7 +92,14 @@ export default function DashboardTopbar({
         >
           <PanelLeft className="size-5" strokeWidth={1.75} aria-hidden="true" />
         </button>
-        <h1 className="truncate font-display text-base font-bold text-ink-900">
+        <Image
+          src="/spinsyncdark.png"
+          alt="logo"
+          width={40}
+          height={40}
+          className="md:hidden"
+        />
+        <h1 className="hidden truncate font-display text-base font-bold text-ink-900">
           {title}
         </h1>
       </div>
