@@ -97,8 +97,8 @@ export default function Navbar() {
           className="inline-flex shrink-0 items-center gap-2 text-lg font-semibold text-brand-900 tracking-tight cursor-pointer"
         >
           {/* <LogoMark className="size-7" /> */}
-          <Image src="/logo2_dark.png" alt="logo" width={40} height={40} />
-          Korto
+          <Image src="/spinsyncdark.png" alt="logo" width={40} height={40} />
+          SpinSync
         </Link>
 
         {/* Center links — share the row with logo and buttons, so longer

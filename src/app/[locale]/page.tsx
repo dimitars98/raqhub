@@ -42,9 +42,14 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white font-sans">
       {/* ANNOUNCEMENT BAR */}
       <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 bg-[#111c0a] px-4 py-2.5 text-center text-[13px] text-white">
-        <strong className="text-white">{ta("free", { days: TRIAL_DAYS })}</strong>
+        <strong className="text-white">
+          {ta("free", { days: TRIAL_DAYS })}
+        </strong>
         <span className="text-white/75">{ta("noCard")}</span>
-        <a href="#pricing" className="ml-1 font-medium text-[#a8d832] hover:underline">
+        <a
+          href="#pricing"
+          className="ml-1 font-medium text-[#a8d832] hover:underline"
+        >
           {ta("link")}
         </a>
       </div>
@@ -65,7 +70,7 @@ export default async function HomePage() {
             the <span className="text-[#7aad12]">right way.</span>
           </h1>
           <p className="text-[17px] text-[#6e7f65] leading-[1.75] font-light max-w-[420px] mb-9">
-            Kortello powers everything from reservations and memberships to
+            SpinSync powers everything from reservations and memberships to
             coaching and payments — the complete platform built for tennis
             clubs.
           </p>

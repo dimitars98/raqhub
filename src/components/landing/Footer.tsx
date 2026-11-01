@@ -74,7 +74,7 @@ export default async function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-6 text-sm text-white/40">
-          © {new Date().getFullYear()} Korto. All rights reserved
+          © {new Date().getFullYear()} SpinSync. All rights reserved
         </div>
 
         {/* Oversized wordmark, cropped by the bottom edge */}

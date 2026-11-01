@@ -1,18 +1,18 @@
-# Kortello 🎾
+# SpinSync 🎾
 
 Tennis court & coach booking platform. Built with Next.js 14 App Router, Supabase, and Tailwind CSS.
 
 ## Stack
 
-| Layer    | Tech                                        |
-|----------|---------------------------------------------|
-| Frontend | Next.js 14 (App Router) + TypeScript        |
-| Styling  | Tailwind CSS · DM Sans / DM Serif Display   |
-| Database | Supabase (PostgreSQL + RLS)                 |
-| Auth     | Supabase Auth (email + Google OAuth)        |
-| Email    | Resend (wire up next)                       |
-| Payments | Stripe-ready (add when needed)              |
-| Deploy   | Vercel + Supabase                           |
+| Layer    | Tech                                      |
+| -------- | ----------------------------------------- |
+| Frontend | Next.js 14 (App Router) + TypeScript      |
+| Styling  | Tailwind CSS · DM Sans / DM Serif Display |
+| Database | Supabase (PostgreSQL + RLS)               |
+| Auth     | Supabase Auth (email + Google OAuth)      |
+| Email    | Resend (wire up next)                     |
+| Payments | Stripe-ready (add when needed)            |
+| Deploy   | Vercel + Supabase                         |
 
 ## Project structure
 
@@ -90,11 +90,11 @@ npx supabase gen types typescript --project-id <your-project-id> \
 Clubs pay Kortello; players never do. Every new club gets **1 month free with
 everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts`):
 
-| Plan    | Price            | Courts    | Adds                                                   |
-|---------|------------------|-----------|--------------------------------------------------------|
-| Starter | €9/mo · €90/yr   | up to 3   | bookings, unlimited members, confirmation emails       |
+| Plan    | Price            | Courts    | Adds                                                      |
+| ------- | ---------------- | --------- | --------------------------------------------------------- |
+| Starter | €9/mo · €90/yr   | up to 3   | bookings, unlimited members, confirmation emails          |
 | Club    | €19/mo · €190/yr | up to 8   | membership plans, coaches, reminder emails, weekly report |
-| Academy | €45/mo · €450/yr | unlimited | analytics (multiple admins coming)                     |
+| Academy | €45/mo · €450/yr | unlimited | analytics (multiple admins coming)                        |
 
 - The court limit is enforced by the database (`supabase/migrations/20261013_plans_trial.sql`).
   Keep its numbers in step with `src/lib/plans.ts`.
@@ -104,6 +104,7 @@ everything unlocked**, then one of these plans (prices live in `src/lib/plans.ts
   ```sql
   update public.clubs set plan = 'club', paid_until = '2026-12-31' where slug = 'their-slug';
   ```
+
 - When the trial ends unpaid nothing is switched off: the club drops to its plan's
   limits and sees a "trial has ended" banner until `paid_until` is set.
 
@@ -181,7 +182,7 @@ take a cut with `KORTELLO_FEE_PERCENT` (none by default).
   "Online, when booking" or "Player chooses". Pay with the card
   `4242 4242 4242 4242`.
 - **How it works:** booking at a club that takes payment online holds the court
-  for 31 minutes (status *pending*) and sends the player to Stripe's checkout.
+  for 31 minutes (status _pending_) and sends the player to Stripe's checkout.
   Paying confirms it and tells the club; not paying frees the court (webhook,
   "Back" on Stripe's page, or the hourly job). Cancelling a paid booking (the
   player, the club, or a court closure) refunds it automatically. Lessons,

@@ -61,7 +61,7 @@
     "forgotIntro": "Inserisci l’e-mail con cui accedi e ti mandiamo un link per scegliere una nuova password.",
     "sendLink": "Invia link",
     "sendingLink": "Invio…",
-    "resetSent": "Se <b>{email}</b> ha un account Korto, il link per reimpostare la password è in arrivo.",
+    "resetSent": "Se <b>{email}</b> ha un account SpinSync, il link per reimpostare la password è in arrivo.",
     "resetSentHint": "Niente dopo qualche minuto? Controlla lo spam, o riprova.",
     "resetExpired": "Questo link è scaduto o è già stato usato. Chiedine uno nuovo qui sotto.",
     "tooManyRequests": "Troppi tentativi. Aspetta qualche minuto e riprova.",
@@ -109,7 +109,7 @@
         "pre": "Soci che ",
         "mark": "rinnovano",
         "post": "",
-        "body": "Vendete i vostri abbonamenti, date ai soci uno sconto su ogni prenotazione e lasciate che Korto li avvisi prima della scadenza.",
+        "body": "Vendete i vostri abbonamenti, date ai soci uno sconto su ogni prenotazione e lasciate che SpinSync li avvisi prima della scadenza.",
         "points": [
           "Piani mensili, annuali o una tantum",
           "Uno sconto sulle prenotazioni per i soci",
@@ -398,7 +398,7 @@
       "matches": "Partite aperte"
     },
     "share": "Condividi",
-    "ownerGroup": "Korto",
+    "ownerGroup": "SpinSync",
     "ownerPage": "Club e pagamenti",
     "tournaments": "Tornei",
     "staff": "Staff",
@@ -531,7 +531,7 @@
     "selectProfile": "Seleziona un utente",
     "alreadyCoach": "Questa persona è già un allenatore del tuo club.",
     "coachEmail": "Email dell’allenatore",
-    "coachEmailHint": "L’allenatore deve avere un account Korto con questa email.",
+    "coachEmailHint": "L’allenatore deve avere un account SpinSync con questa email.",
     "coachEmailPlaceholder": "allenatore@esempio.it"
   },
   "clubPage": {
@@ -551,7 +551,7 @@
     "website": "Sito web",
     "ctaTitle": "Vuoi giocare al {club}?",
     "ctaText": "Crea un account gratuito, guarda gli orari liberi e prenota in pochi secondi.",
-    "metaDescription": "Campi, allenatori e abbonamenti al {club}. Prenota online con Korto.",
+    "metaDescription": "Campi, allenatori e abbonamenti al {club}. Prenota online con SpinSync.",
     "bookThisCourt": "Prenota"
   },
   "myBookings": {
@@ -728,29 +728,29 @@
       "noneExpiring": "Nessuno",
       "openDashboard": "Apri la dashboard"
     },
-    "footerPlayer": "Inviato da Korto per conto di {club}.",
-    "footerOwner": "Ricevi questo riepilogo settimanale perché gestisci un club su Korto.",
+    "footerPlayer": "Inviato da SpinSync per conto di {club}.",
+    "footerOwner": "Ricevi questo riepilogo settimanale perché gestisci un club su SpinSync.",
     "trial": {
-      "endingSubject": "La tua prova di Korto per {club} termina il {date}",
+      "endingSubject": "La tua prova di SpinSync per {club} termina il {date}",
       "endingIntro": "Il tuo mese gratuito per {club} termina il {date}. Tre giorni dopo l’account passa in sola lettura: potrai ancora vedere ed esportare tutto, ma non si potrà aggiungere nulla di nuovo e le prenotazioni online saranno sospese. Non viene mai addebitato nulla in automatico. Per continuare, rispondi a questa email e ti invieremo la fattura.",
-      "endedSubject": "La tua prova di Korto per {club} è terminata",
+      "endedSubject": "La tua prova di SpinSync per {club} è terminata",
       "endedIntro": "Il tuo mese gratuito per {club} è terminato. Tra tre giorni l’account passa in sola lettura e le prenotazioni online vengono sospese. I tuoi dati restano al sicuro e non viene addebitato nulla. Per continuare a ricevere prenotazioni, rispondi a questa email e ti invieremo la fattura.",
       "price": "€{monthly} al mese o €{yearly} all’anno",
       "trialEnds": "Gratis fino al",
       "seePlan": "Vedi il tuo piano",
-      "footer": "Ricevi questa email perché gestisci un club su Korto."
+      "footer": "Ricevi questa email perché gestisci un club su SpinSync."
     },
     "staff": {
-      "subject": "Siete invitati ad aiutare {club} su Korto",
-      "heading": "Entrate nel team di {club} su Korto",
+      "subject": "Siete invitati ad aiutare {club} su SpinSync",
+      "heading": "Entrate nel team di {club} su SpinSync",
       "intro": "{owner} vi ha invitato a gestire le prenotazioni di {club}.",
       "introNoName": "Siete invitati a gestire le prenotazioni di {club}.",
       "club": "Club",
       "signInWith": "Entrate con",
       "youCan": "Potrete",
       "screens": "Vedere il calendario, gestire prenotazioni e soci",
-      "button": "Apri Korto",
-      "footer": "Ricevete questa e-mail perché {club} ha aggiunto questo indirizzo al suo staff su Korto. Se non li conoscete, potete ignorarla."
+      "button": "Apri SpinSync",
+      "footer": "Ricevete questa e-mail perché {club} ha aggiunto questo indirizzo al suo staff su SpinSync. Se non li conoscete, potete ignorarla."
     },
     "groups": {
       "group": "Gruppo",
@@ -759,16 +759,16 @@
       "schedule": "Quando",
       "answerBy": "Risposta entro",
       "month": "Mese",
-      "open": "Apri Korto",
+      "open": "Apri SpinSync",
       "cancelledSubject": "Cancellata: {group}, {date}",
       "cancelledIntro": "La lezione di {group} di {date} è cancellata. Le altre lezioni si svolgono come sempre.",
       "offerSubject": "C'è un posto libero in {group}",
       "offerIntro": "Bella notizia: si è liberato un posto per {name} in {group} da {club}. Resta riservato per 48 ore.",
       "offerButton": "Rispondi all'offerta",
-      "offerFooter": "Ricevi questa email perché sei nella lista d'attesa di {club} su Korto.",
+      "offerFooter": "Ricevi questa email perché sei nella lista d'attesa di {club} su SpinSync.",
       "feeSubject": "{group}: quota di {month}",
       "feeIntro": "Un promemoria: la quota di {month} di {name} per {group} non risulta ancora pagata.",
-      "feeFooter": "Inviata da Korto per conto di {club}. Hai già pagato? Allora non devi fare nulla: il club lo segnerà."
+      "feeFooter": "Inviata da SpinSync per conto di {club}. Hai già pagato? Allora non devi fare nulla: il club lo segnerà."
     },
     "closed": {
       "subject": "Annullata: {what}, {date}. Il campo è chiuso",
@@ -801,7 +801,7 @@
     "lockedBody": "Scrivici e passeremo il tuo club al piano {plan}.",
     "courtsUsed": "{used} di {max} campi attivi",
     "courtLimit": "Il tuo piano consente {max} campi attivi. Disattivane uno o cambia piano.",
-    "cardTitle": "Il tuo piano Korto",
+    "cardTitle": "Il tuo piano SpinSync",
     "trialUntil": "Prova gratuita fino al {date}",
     "paidUntil": "Pagato fino al {date}",
     "unpaid": "Non ancora pagato",
@@ -842,7 +842,7 @@
     },
     "card": {
       "title": "Paga con carta",
-      "intro": "Paga Korto con carta, al mese o all’anno. Si rinnova da solo; puoi disdire quando vuoi.",
+      "intro": "Paga SpinSync con carta, al mese o all’anno. Si rinnova da solo; puoi disdire quando vuoi.",
       "plan": "Piano",
       "period": "Fatturazione",
       "periods": {
@@ -956,12 +956,12 @@
     },
     "title1": "Riempi i tuoi campi.",
     "title2": "Fai crescere il tuo club.",
-    "subtitle": "Korto offre ai circoli di tennis, padel e pickleball e ai loro maestri gli strumenti per gestire campi, orari e prenotazioni – tutto in un unico posto. Meno burocrazia, più tempo in campo.",
+    "subtitle": "SpinSync offre ai circoli di tennis, padel e pickleball e ai loro maestri gli strumenti per gestire campi, orari e prenotazioni – tutto in un unico posto. Meno burocrazia, più tempo in campo.",
     "getStarted": "Inizia ora",
     "seeHow": "Scopri come funziona"
   },
   "announcement": {
-    "free": "Provate Korto gratis per {days} giorni.",
+    "free": "Provate SpinSync gratis per {days} giorni.",
     "noCard": "Senza carta.",
     "link": "Vedi i piani →"
   },
@@ -995,7 +995,7 @@
   },
   "testimonials": {
     "label": "Cosa dicono i club",
-    "title": "Dai club che usano Korto"
+    "title": "Dai club che usano SpinSync"
   },
   "howItWorks": {
     "label": "Configurazione semplice",
@@ -1035,7 +1035,7 @@
     },
     "learnMore": "Scopri di più",
     "eyebrow": "Ogni campo",
-    "intro": "Tennis, padel o pickleball – Korto li gestisce tutti. Configura ogni campo come lo gioca il tuo club e gestisci prenotazioni, soci e lezioni da un’unica dashboard."
+    "intro": "Tennis, padel o pickleball – SpinSync li gestisce tutti. Configura ogni campo come lo gioca il tuo club e gestisci prenotazioni, soci e lezioni da un’unica dashboard."
   },
   "featureCards": {
     "label": "Pensato per i club",
@@ -1159,7 +1159,7 @@
       },
       "app": {
         "q": "I miei giocatori devono scaricare un’app?",
-        "a": "No. Korto funziona nel browser su telefono, tablet o computer. I giocatori aprono il link di prenotazione del club, si registrano con email o account Google e prenotano un campo."
+        "a": "No. SpinSync funziona nel browser su telefono, tablet o computer. I giocatori aprono il link di prenotazione del club, si registrano con email o account Google e prenotano un campo."
       },
       "phone": {
         "q": "Posso ancora prendere prenotazioni al telefono o di persona?",
@@ -1175,14 +1175,14 @@
       },
       "payOnline": {
         "q": "I giocatori possono pagare online?",
-        "a": "Non ancora. Il pagamento online è in sviluppo. Per ora i giocatori pagano al club come sempre, e Korto registra il prezzo di ogni prenotazione così vedi quanto rende ogni campo."
+        "a": "Non ancora. Il pagamento online è in sviluppo. Per ora i giocatori pagano al club come sempre, e SpinSync registra il prezzo di ogni prenotazione così vedi quanto rende ogni campo."
       },
       "languages": {
         "q": "In quali lingue è disponibile?",
         "a": "Inglese, macedone, serbo, albanese, tedesco, francese e italiano. Ognuno sceglie la propria lingua, quindi staff e giocatori possono usarne di diverse."
       },
       "data": {
-        "q": "Cosa succede ai nostri dati se smettiamo di usare Korto?",
+        "q": "Cosa succede ai nostri dati se smettiamo di usare SpinSync?",
         "a": "I dati del tuo club sono tuoi. Se decidi di andartene, avvisaci e cancelleremo club, soci e prenotazioni."
       }
     },
@@ -1468,13 +1468,13 @@
     "contactTitle": "Contatti",
     "privacy": {
       "title": "Informativa sulla privacy",
-      "intro": "Questa informativa spiega quali dati personali raccoglie Korto, perché li raccogliamo e cosa puoi fare al riguardo. Korto è un sistema di prenotazione online per club sportivi: i club lo usano per gestire campi, soci e maestri, i giocatori per prenotare.",
+      "intro": "Questa informativa spiega quali dati personali raccoglie SpinSync, perché li raccogliamo e cosa puoi fare al riguardo. SpinSync è un sistema di prenotazione online per club sportivi: i club lo usano per gestire campi, soci e maestri, i giocatori per prenotare.",
       "sections": [
         {
           "title": "Chi è responsabile",
           "body": [
-            "Per il tuo account Korto e l’uso del sito, Korto decide come vengono usati i tuoi dati e ne è responsabile (il “titolare del trattamento”). I nostri contatti si trovano in fondo a questa pagina.",
-            "Quando un club registra informazioni sui propri soci, sui giocatori occasionali o sulle prenotazioni, è il club a decidere cosa registrare ed è responsabile di quei dati. Korto li conserva e li tratta per conto del club (come “responsabile del trattamento”). Per domande su quei dati contatta il club; noi aiuteremo il club a risponderti."
+            "Per il tuo account SpinSync e l’uso del sito, SpinSync decide come vengono usati i tuoi dati e ne è responsabile (il “titolare del trattamento”). I nostri contatti si trovano in fondo a questa pagina.",
+            "Quando un club registra informazioni sui propri soci, sui giocatori occasionali o sulle prenotazioni, è il club a decidere cosa registrare ed è responsabile di quei dati. SpinSync li conserva e li tratta per conto del club (come “responsabile del trattamento”). Per domande su quei dati contatta il club; noi aiuteremo il club a risponderti."
           ]
         },
         {
@@ -1510,7 +1510,7 @@
             [
               "<b>Il club presso cui prenoti</b> vede il tuo nome, i tuoi contatti e le tue prenotazioni in quel club, incluse le assenze.",
               "<b>Chiunque</b> può vedere le pagine dei club, i campi, gli orari di apertura e i profili dei maestri.",
-              "<b>I fornitori di servizi</b> che gestiscono parti di Korto per noi: Supabase (database, accesso e archiviazione dei file), il nostro fornitore di email (Resend o un normale servizio di posta) e il nostro fornitore di hosting. Possono usare i dati solo per fornirci il loro servizio.",
+              "<b>I fornitori di servizi</b> che gestiscono parti di SpinSync per noi: Supabase (database, accesso e archiviazione dei file), il nostro fornitore di email (Resend o un normale servizio di posta) e il nostro fornitore di hosting. Possono usare i dati solo per fornirci il loro servizio.",
               "<b>Le autorità</b>, quando la legge ci obbliga a comunicarli."
             ],
             "Alcuni di questi fornitori hanno sede in altri paesi o vi usano server, compresi gli Stati Uniti. Quando i dati escono dalla Macedonia del Nord o dall’Unione europea, ci basiamo sulle garanzie previste dalla legge, come le clausole contrattuali standard della Commissione europea."
@@ -1522,7 +1522,7 @@
             [
               "<b>Dati dell’account e del profilo:</b> finché esiste il tuo account. Quando chiedi di eliminare l’account, cancelliamo o rendiamo anonimi i tuoi dati entro 30 giorni.",
               "<b>Prenotazioni:</b> finché esiste l’account del club, perché il club ha bisogno dello storico delle prenotazioni. Le assenze contano per i limiti di un club solo per 90 giorni.",
-              "<b>Dati del club:</b> finché il club usa Korto e per 90 giorni dopo, così può tornare senza perdere nulla. Fatture e documenti contabili sono conservati per il tempo richiesto dalla normativa fiscale.",
+              "<b>Dati del club:</b> finché il club usa SpinSync e per 90 giorni dopo, così può tornare senza perdere nulla. Fatture e documenti contabili sono conservati per il tempo richiesto dalla normativa fiscale.",
               "<b>Log del server:</b> per un breve periodo, secondo le impostazioni dei nostri fornitori di hosting."
             ]
           ]
@@ -1530,7 +1530,7 @@
         {
           "title": "Cookie",
           "body": [
-            "Korto usa solo i cookie necessari al funzionamento del sito:",
+            "SpinSync usa solo i cookie necessari al funzionamento del sito:",
             [
               "<b>Cookie di accesso</b> impostati da Supabase, che ti mantengono collegato.",
               "<b>Un cookie della lingua</b> (NEXT_LOCALE), che ricorda la lingua che hai scelto."
@@ -1563,7 +1563,7 @@
         {
           "title": "Minori",
           "body": [
-            "Korto non è pensato per essere usato da solo da bambini sotto i 14 anni. Un genitore o tutore può creare un account e prenotare per il bambino."
+            "SpinSync non è pensato per essere usato da solo da bambini sotto i 14 anni. Un genitore o tutore può creare un account e prenotare per il bambino."
           ]
         },
         {
@@ -1577,12 +1577,12 @@
     },
     "terms": {
       "title": "Termini di servizio",
-      "intro": "Questi termini valgono per chiunque usi Korto: i club che gestiscono i propri campi con esso e i giocatori che prenotano tramite esso. Creando un account o usando il sito, accetti questi termini.",
+      "intro": "Questi termini valgono per chiunque usi SpinSync: i club che gestiscono i propri campi con esso e i giocatori che prenotano tramite esso. Creando un account o usando il sito, accetti questi termini.",
       "sections": [
         {
           "title": "Il servizio",
           "body": [
-            "Korto è un software online per club sportivi. I club pubblicano campi, orari, prezzi, maestri e iscrizioni, e i giocatori prenotano campi e lezioni online. Korto fornisce solo il software: non gestiamo club, non possediamo campi e non impieghiamo maestri."
+            "SpinSync è un software online per club sportivi. I club pubblicano campi, orari, prezzi, maestri e iscrizioni, e i giocatori prenotano campi e lezioni online. SpinSync fornisce solo il software: non gestiamo club, non possediamo campi e non impieghiamo maestri."
           ]
         },
         {
@@ -1600,7 +1600,7 @@
           "body": [
             [
               "Una prenotazione è un accordo tra te e il club. Il club stabilisce prezzi, orari e regole di prenotazione ed è responsabile del campo, della lezione e di qualsiasi pagamento che incassa.",
-              "Paghi le prenotazioni al club, nel modo stabilito dal club. Korto non riceve pagamenti per le prenotazioni.",
+              "Paghi le prenotazioni al club, nel modo stabilito dal club. SpinSync non riceve pagamenti per le prenotazioni.",
               "Ogni club può stabilire regole, ad esempio quanto può durare una prenotazione, con quanti giorni di anticipo puoi prenotare, quante prenotazioni puoi fare al giorno ed entro quando puoi annullare online. Dopo quel termine, contatta il club per annullare.",
               "Se non ti presenti a una prenotazione, il club può segnarla come assenza. Un club può sospendere la prenotazione online per i giocatori con troppe assenze negli ultimi 90 giorni. Il club può comunque prenotare direttamente per te.",
               "Le questioni su una prenotazione, un rimborso o una lezione annullata si risolvono tra te e il club, ma siamo felici di aiutare dove possibile."
@@ -1624,16 +1624,16 @@
           "title": "Di cosa sono responsabili i club",
           "body": [
             [
-              "I club sono responsabili delle informazioni che pubblicano e dei dati che inseriscono su soci e giocatori. Devono avere una base giuridica per registrarli e devono informare i soci che usano Korto.",
-              "Per quei dati il club è titolare del trattamento e Korto è il suo responsabile del trattamento, come descritto nell’Informativa sulla privacy. Li trattiamo solo per fornire il servizio al club.",
-              "I club devono rispettare le prenotazioni fatte tramite Korto secondo le regole che hanno stabilito, oppure contattare il giocatore se una prenotazione non può avere luogo."
+              "I club sono responsabili delle informazioni che pubblicano e dei dati che inseriscono su soci e giocatori. Devono avere una base giuridica per registrarli e devono informare i soci che usano SpinSync.",
+              "Per quei dati il club è titolare del trattamento e SpinSync è il suo responsabile del trattamento, come descritto nell’Informativa sulla privacy. Li trattiamo solo per fornire il servizio al club.",
+              "I club devono rispettare le prenotazioni fatte tramite SpinSync secondo le regole che hanno stabilito, oppure contattare il giocatore se una prenotazione non può avere luogo."
             ]
           ]
         },
         {
           "title": "Uso consentito",
           "body": [
-            "Non usare Korto per:",
+            "Non usare SpinSync per:",
             [
               "fare qualcosa di illegale;",
               "fare prenotazioni false o bloccare campi che non intendi usare;",
@@ -1646,15 +1646,15 @@
         {
           "title": "I tuoi contenuti",
           "body": [
-            "Mantieni i diritti su ciò che carichi, come loghi, foto e descrizioni. Ci autorizzi a conservarli e mostrarli nella misura necessaria al funzionamento del servizio, ad esempio il logo di un club sulla sua pagina pubblica. Il nome Korto, il software e il design appartengono a noi."
+            "Mantieni i diritti su ciò che carichi, come loghi, foto e descrizioni. Ci autorizzi a conservarli e mostrarli nella misura necessaria al funzionamento del servizio, ad esempio il logo di un club sulla sua pagina pubblica. Il nome SpinSync, il software e il design appartengono a noi."
           ]
         },
         {
           "title": "Disponibilità e responsabilità",
           "body": [
             [
-              "Ci impegniamo affinché Korto sia disponibile e corretto, ma non possiamo garantire che funzioni sempre senza interruzioni o errori. Possiamo sospenderlo brevemente per manutenzione.",
-              "Korto non è responsabile di ciò che accade al club, delle decisioni del club o di danni causati da un problema di prenotazione che non potevamo ragionevolmente evitare.",
+              "Ci impegniamo affinché SpinSync sia disponibile e corretto, ma non possiamo garantire che funzioni sempre senza interruzioni o errori. Possiamo sospenderlo brevemente per manutenzione.",
+              "SpinSync non è responsabile di ciò che accade al club, delle decisioni del club o di danni causati da un problema di prenotazione che non potevamo ragionevolmente evitare.",
               "Nei limiti consentiti dalla legge, la nostra responsabilità complessiva verso un club è limitata agli importi che il club ci ha pagato nei 12 mesi precedenti la richiesta.",
               "Nulla in questi termini limita una responsabilità che la legge non consente di limitare, né i tuoi diritti di consumatore."
             ]
@@ -1664,7 +1664,7 @@
           "title": "Fine dell’utilizzo",
           "body": [
             [
-              "Puoi smettere di usare Korto e chiedere la cancellazione del tuo account in qualsiasi momento.",
+              "Puoi smettere di usare SpinSync e chiedere la cancellazione del tuo account in qualsiasi momento.",
               "Possiamo sospendere o chiudere un account che viola questi termini, dopo un avvertimento quando è ragionevole."
             ]
           ]
@@ -1672,7 +1672,7 @@
         {
           "title": "Modifiche a questi termini",
           "body": [
-            "Possiamo modificare questi termini. La data in alto indica l’ultima modifica e avviseremo gli utenti delle modifiche importanti prima che entrino in vigore. Se continui a usare Korto dopo, si applicano i nuovi termini."
+            "Possiamo modificare questi termini. La data in alto indica l’ultima modifica e avviseremo gli utenti delle modifiche importanti prima che entrino in vigore. Se continui a usare SpinSync dopo, si applicano i nuovi termini."
           ]
         },
         {
@@ -1954,14 +1954,14 @@
       "Aggiungere soci e modificarne i dati"
     ],
     "ownerOnlyTitle": "Solo voi potete",
-    "ownerOnly": "Modificare impostazioni, campi, maestri, piani e tornei, vedere le statistiche, gestire il piano Korto e invitare o rimuovere lo staff.",
+    "ownerOnly": "Modificare impostazioni, campi, maestri, piani e tornei, vedere le statistiche, gestire il piano SpinSync e invitare o rimuovere lo staff.",
     "inviteTitle": "Invita qualcuno",
     "inviteHint": "Gli inviamo un link via e-mail. Entra o crea un account con questo indirizzo e il club è subito lì.",
     "emailPlaceholder": "nome@esempio.it",
     "invite": "Invia invito",
     "sending": "Invio…",
     "invited": "Invito inviato a {email}.",
-    "invitedNoEmail": "{email} è stato invitato. Non siamo riusciti a inviare l’e-mail: chiedetegli di entrare in Korto con questo indirizzo.",
+    "invitedNoEmail": "{email} è stato invitato. Non siamo riusciti a inviare l’e-mail: chiedetegli di entrare in SpinSync con questo indirizzo.",
     "empty": "Ancora nessuno nello staff",
     "emptyHint": "Invitate qui sopra il primo membro del team.",
     "active": "Attivo",
@@ -2011,7 +2011,7 @@
     "title": "Gruppi",
     "new": "Nuovo gruppo",
     "empty": "Ancora nessun gruppo",
-    "emptyHint": "Crea i gruppi settimanali dei tuoi maestri per bambini, ragazzi e adulti. Korto tiene il campo per ogni lezione, gestisce il registro presenze e segue le quote mensili.",
+    "emptyHint": "Crea i gruppi settimanali dei tuoi maestri per bambini, ragazzi e adulti. SpinSync tiene il campo per ogni lezione, gestisce il registro presenze e segue le quote mensili.",
     "noMatch": "Nessun gruppo corrisponde a questi filtri.",
     "stats": {
       "sessions": "Lezioni questa settimana",
@@ -2122,7 +2122,7 @@
       "memberPrice": "Prezzo per i soci con un piano",
       "memberPlan": "Piano soci",
       "optional": "Facoltativo",
-      "paySeason": "I giocatori pagano direttamente il club, in contanti o con bonifico. Tu segni ogni mese come pagato e Korto ricorda a chi non ha pagato entro il 10.",
+      "paySeason": "I giocatori pagano direttamente il club, in contanti o con bonifico. Tu segni ogni mese come pagato e SpinSync ricorda a chi non ha pagato entro il 10.",
       "payDropin": "I giocatori pagano alla lezione. Il maestro segna nel registro chi ha pagato.",
       "summary": "Riepilogo",
       "pickDays": "Scegli i giorni per vedere le lezioni.",
@@ -2228,7 +2228,7 @@
       "unpaidMark": "Non pagato · segna {amount} pagato",
       "month": "Mese",
       "noFees": "Nessuno in lista per questo mese.",
-      "feesHint": "Le quote si pagano al club in contanti o con bonifico. Korto tiene solo il conto.",
+      "feesHint": "Le quote si pagano al club in contanti o con bonifico. SpinSync tiene solo il conto.",
       "leftGroup": "(uscito)",
       "waitingTitle": "Lista d'attesa",
       "waitingHint": "Quando si libera un posto, il prossimo riceve un'email e ha 48 ore per accettare.",
@@ -2324,7 +2324,7 @@
       "contactPlaceholder": "es. Claire Martin (vuoto per gli adulti)",
       "email": "Email",
       "phone": "Telefono",
-      "emailHint": "Con un'email, il genitore riceve cancellazioni e promemoria di pagamento, e vede il gruppo se accede a Korto con quell'indirizzo.",
+      "emailHint": "Con un'email, il genitore riceve cancellazioni e promemoria di pagamento, e vede il gruppo se accede a SpinSync con quell'indirizzo.",
       "price": "Prezzo mensile",
       "priceHint": "Lascia vuoto per il prezzo del gruppo. Utile per uno sconto fratelli o soci.",
       "notes": "Note per il maestro",
@@ -2370,7 +2370,7 @@
       "addDropin": "Aggiungi chi è venuto senza prenotare",
       "note": "Nota sulla lezione",
       "notePlaceholder": "Su cosa avete lavorato, per i genitori",
-      "noteHint": "I genitori vedono l'ultima nota in Korto.",
+      "noteHint": "I genitori vedono l'ultima nota in SpinSync.",
       "cancelToday": "Cancella la lezione di oggi",
       "cancelThis": "Cancella questa lezione",
       "save": "Salva registro",
@@ -2549,7 +2549,7 @@
       "alwaysOn": "Sempre attivo",
       "saveFailed": "Impossibile salvare. Riprova.",
       "plan": {
-        "title": "Il tuo piano Korto",
+        "title": "Il tuo piano SpinSync",
         "desc": "Promemoria su prova e pagamento"
       },
       "admin": {
@@ -2965,7 +2965,7 @@
       "releaseOption": "{hours} ore prima dell'inizio",
       "releaseHint": "L'organizzatore viene avvisato qualche ora prima. Se non lo tiene, il campo torna prenotabile.",
       "who": "Chi può partecipare",
-      "anyone": "Chiunque abbia un account Korto",
+      "anyone": "Chiunque abbia un account SpinSync",
       "membersOnly": "Solo i soci del circolo",
       "save": "Salva",
       "saving": "Salvataggio…",
@@ -3075,7 +3075,7 @@
       },
       "mb_add": {
         "q": "Come aggiungo i soci che ho già?",
-        "a": "Tocca Aggiungi socio e inserisci nome, piano e data di scadenza. Aggiungi anche l’e-mail: quando il socio accede a Korto con quell’e-mail, iscrizione e sconto si collegano da soli."
+        "a": "Tocca Aggiungi socio e inserisci nome, piano e data di scadenza. Aggiungi anche l’e-mail: quando il socio accede a SpinSync con quell’e-mail, iscrizione e sconto si collegano da soli."
       },
       "mb_discount": {
         "q": "Perché un socio non ha lo sconto?",
@@ -3095,15 +3095,15 @@
       },
       "co_add": {
         "q": "Come aggiungo un coach?",
-        "a": "Il coach accede prima a Korto come giocatore. Poi tocca Aggiungi coach e inserisci la sua e-mail, la tariffa oraria e i livelli. Da lì i giocatori possono prenotare lezioni con lui."
+        "a": "Il coach accede prima a SpinSync come giocatore. Poi tocca Aggiungi coach e inserisci la sua e-mail, la tariffa oraria e i livelli. Da lì i giocatori possono prenotare lezioni con lui."
       },
       "co_lessons": {
         "q": "Una lezione occupa un campo?",
-        "a": "Sì. Quando un giocatore prenota una lezione, Korto le assegna un campo libero dello sport del coach, così nessun altro può prenderlo."
+        "a": "Sì. Quando un giocatore prenota una lezione, SpinSync le assegna un campo libero dello sport del coach, così nessun altro può prenderlo."
       },
       "gr_create": {
         "q": "Come creo un gruppo di allenamento?",
-        "a": "Tocca Nuovo gruppo e scegli coach, campo, giorni, orari e stagione. Korto prenota il campo per ogni sessione e le mette nel calendario. Salta le vacanze con le pause."
+        "a": "Tocca Nuovo gruppo e scegli coach, campo, giorni, orari e stagione. SpinSync prenota il campo per ogni sessione e le mette nel calendario. Salta le vacanze con le pause."
       },
       "gr_register": {
         "q": "Come fa il coach l’appello?",
@@ -3131,7 +3131,7 @@
       },
       "ct_add": {
         "q": "Come aggiungo più campi insieme?",
-        "a": "In Aggiungi campo, imposta Quanti. Korto li crea numerati, per esempio Terra 1–4, con stesso sport, superficie e prezzo."
+        "a": "In Aggiungi campo, imposta Quanti. SpinSync li crea numerati, per esempio Terra 1–4, con stesso sport, superficie e prezzo."
       },
       "ct_off": {
         "q": "Come chiudo un campo per un periodo?",
@@ -3171,14 +3171,14 @@
       },
       "sf_can": {
         "q": "Cosa può fare lo staff?",
-        "a": "Vedere il calendario, aggiungere, modificare e annullare prenotazioni, e gestire soci e gruppi. Solo tu modifichi impostazioni, campi, coach, piani e il tuo abbonamento Korto."
+        "a": "Vedere il calendario, aggiungere, modificare e annullare prenotazioni, e gestire soci e gruppi. Solo tu modifichi impostazioni, campi, coach, piani e il tuo abbonamento SpinSync."
       },
       "sh_link": {
         "q": "Come porto i giocatori a prenotare online?",
         "a": "Manda il messaggio pronto nel gruppo Viber o WhatsApp del club e appendi il poster QR alla reception e vicino ai campi. Quasi tutti i club ricevono la prima prenotazione online entro un giorno."
       },
       "ga_plan": {
-        "q": "Come pago Korto?",
+        "q": "Come pago SpinSync?",
         "a": "Il primo mese è gratis. Per continuare scrivici e ti mandiamo una fattura per il tuo piano. Piano e data fino a cui è pagato sono in Impostazioni."
       },
       "ga_language": {
@@ -3571,7 +3571,7 @@
     "saving": "Salvataggio…",
     "back": "Tutte le serate",
     "empty": "Ancora nessuna serata.",
-    "emptyHint": "Creane una, condividi il link e i giocatori si iscrivono. La sera stessa Korto prepara ogni turno e tiene la classifica.",
+    "emptyHint": "Creane una, condividi il link e i giocatori si iscrivono. La sera stessa SpinSync prepara ogni turno e tiene la classifica.",
     "copyLink": "Copia link",
     "copied": "Copiato",
     "publicPage": "Pagina pubblica",

@@ -77,7 +77,7 @@ export default function DashboardTopbar({
     .reverse()
     .map((segment) => TITLE_KEYS[segment])
     .find(Boolean);
-  const title = titleKey ? t(titleKey) : "Kortello";
+  const title = titleKey ? t(titleKey) : "SpinSync";
 
   return (
     <header className="flex h-[60px] shrink-0 items-center justify-between border-b border-ink-100 bg-white px-4 lg:px-6">
@@ -87,7 +87,7 @@ export default function DashboardTopbar({
           onClick={toggle}
           aria-label={tc("toggleSidebar")}
           title={tc("toggleSidebarHint")}
-          className={iconButton}
+          className={`${iconButton} hidden lg:grid`}
         >
           <PanelLeft className="size-5" strokeWidth={1.75} aria-hidden="true" />
         </button>

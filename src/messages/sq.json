@@ -61,7 +61,7 @@
     "forgotIntro": "Shkruani email-in me të cilin hyni dhe do t'ju dërgojmë një lidhje për të zgjedhur një fjalëkalim të ri.",
     "sendLink": "Dërgo lidhjen",
     "sendingLink": "Po dërgohet…",
-    "resetSent": "Nëse <b>{email}</b> ka llogari në Korto, lidhja për rivendosjen e fjalëkalimit është rrugës.",
+    "resetSent": "Nëse <b>{email}</b> ka llogari në SpinSync, lidhja për rivendosjen e fjalëkalimit është rrugës.",
     "resetSentHint": "Asgjë pas disa minutash? Kontrolloni dosjen spam, ose provoni përsëri.",
     "resetExpired": "Kjo lidhje ka skaduar ose është përdorur tashmë. Kërkoni një të re më poshtë.",
     "tooManyRequests": "Shumë përpjekje. Prisni disa minuta dhe provoni përsëri.",
@@ -109,7 +109,7 @@
         "pre": "Anëtarë që ",
         "mark": "rinovojnë",
         "post": "",
-        "body": "Shisni anëtarësimet tuaja, u jepni anëtarëve zbritje për çdo rezervim dhe lëreni Korto t’ua kujtojë para se të skadojë.",
+        "body": "Shisni anëtarësimet tuaja, u jepni anëtarëve zbritje për çdo rezervim dhe lëreni SpinSync t’ua kujtojë para se të skadojë.",
         "points": [
           "Planet tuaja mujore, vjetore ose një herë",
           "Zbritje në rezervime për anëtarët",
@@ -398,7 +398,7 @@
       "matches": "Ndeshje të hapura"
     },
     "share": "Ndaj",
-    "ownerGroup": "Korto",
+    "ownerGroup": "SpinSync",
     "ownerPage": "Klubet dhe pagesat",
     "tournaments": "Turnetë",
     "staff": "Stafi",
@@ -531,7 +531,7 @@
     "selectProfile": "Zgjidhni një përdorues",
     "alreadyCoach": "Ky person është tashmë trajner në klubin tuaj.",
     "coachEmail": "Email-i i trajnerit",
-    "coachEmailHint": "Trajneri duhet të ketë një llogari Korto me këtë email.",
+    "coachEmailHint": "Trajneri duhet të ketë një llogari SpinSync me këtë email.",
     "coachEmailPlaceholder": "trajner@shembull.al"
   },
   "clubPage": {
@@ -551,7 +551,7 @@
     "website": "Faqja e internetit",
     "ctaTitle": "Gati për të luajtur te {club}?",
     "ctaText": "Krijo një llogari falas, shiko oraret e lira dhe rezervo në pak sekonda.",
-    "metaDescription": "Fusha, trajnerë dhe anëtarësime te {club}. Rezervo online me Korto.",
+    "metaDescription": "Fusha, trajnerë dhe anëtarësime te {club}. Rezervo online me SpinSync.",
     "bookThisCourt": "Rezervo"
   },
   "myBookings": {
@@ -728,29 +728,29 @@
       "noneExpiring": "Asnjë",
       "openDashboard": "Hap panelin"
     },
-    "footerPlayer": "Dërguar nga Korto në emër të {club}.",
-    "footerOwner": "E merrni këtë përmbledhje javore sepse drejtoni një klub në Korto.",
+    "footerPlayer": "Dërguar nga SpinSync në emër të {club}.",
+    "footerOwner": "E merrni këtë përmbledhje javore sepse drejtoni një klub në SpinSync.",
     "trial": {
-      "endingSubject": "Prova juaj në Korto për {club} mbaron më {date}",
+      "endingSubject": "Prova juaj në SpinSync për {club} mbaron më {date}",
       "endingIntro": "Muaji falas për {club} mbaron më {date}. Tri ditë më pas llogaria bëhet vetëm për lexim: mund të shihni dhe eksportoni gjithçka, por nuk mund të shtohet asgjë e re dhe rezervimet online pezullohen. Asgjë nuk tarifohet automatikisht. Për të vazhduar, përgjigjuni këtij email-i dhe do t’ju dërgojmë faturën.",
-      "endedSubject": "Prova në Korto për {club} ka mbaruar",
+      "endedSubject": "Prova në SpinSync për {club} ka mbaruar",
       "endedIntro": "Muaji falas për {club} ka mbaruar. Pas tri ditësh llogaria bëhet vetëm për lexim dhe rezervimet online pezullohen. Të dhënat tuaja mbeten të sigurta dhe nuk tarifohet asgjë. Për të vazhduar të merrni rezervime, përgjigjuni këtij email-i dhe do t’ju dërgojmë faturën.",
       "price": "€{monthly} në muaj ose €{yearly} në vit",
       "trialEnds": "Falas deri më",
       "seePlan": "Shikoni paketën",
-      "footer": "E merrni këtë email sepse drejtoni një klub në Korto."
+      "footer": "E merrni këtë email sepse drejtoni një klub në SpinSync."
     },
     "staff": {
-      "subject": "Jeni ftuar të ndihmoni në {club} në Korto",
-      "heading": "Bashkohuni me {club} në Korto",
+      "subject": "Jeni ftuar të ndihmoni në {club} në SpinSync",
+      "heading": "Bashkohuni me {club} në SpinSync",
       "intro": "{owner} ju ftoi të ndihmoni me rezervimet në {club}.",
       "introNoName": "Jeni ftuar të ndihmoni me rezervimet në {club}.",
       "club": "Klubi",
       "signInWith": "Hyni me",
       "youCan": "Mund të",
       "screens": "Shihni orarin, menaxhoni rezervimet dhe anëtarët",
-      "button": "Hap Korto",
-      "footer": "E merrni këtë email sepse {club} e shtoi këtë adresë te stafi i tyre në Korto. Nëse nuk i njihni, mund ta injoroni."
+      "button": "Hap SpinSync",
+      "footer": "E merrni këtë email sepse {club} e shtoi këtë adresë te stafi i tyre në SpinSync. Nëse nuk i njihni, mund ta injoroni."
     },
     "groups": {
       "group": "Grupi",
@@ -759,16 +759,16 @@
       "schedule": "Kur",
       "answerBy": "Përgjigju deri më",
       "month": "Muaji",
-      "open": "Hap Korto",
+      "open": "Hap SpinSync",
       "cancelledSubject": "Anuluar: {group}, {date}",
       "cancelledIntro": "Seanca e {group} më {date} u anulua. Seancat e tjera vazhdojnë si zakonisht.",
       "offerSubject": "Ka një vend të lirë në {group}",
       "offerIntro": "Lajm i mirë: u lirua një vend për {name} në {group} te {club}. Mbahet për 48 orë.",
       "offerButton": "Përgjigju ofertës",
-      "offerFooter": "E merrni këtë email sepse jeni në listën e pritjes së {club} në Korto.",
+      "offerFooter": "E merrni këtë email sepse jeni në listën e pritjes së {club} në SpinSync.",
       "feeSubject": "{group}: pagesa për {month}",
       "feeIntro": "Një kujtesë miqësore: pagesa e {name} për {month} për {group} ende nuk është shënuar si e paguar.",
-      "feeFooter": "Dërguar nga Korto në emër të {club}. E keni paguar tashmë? Atëherë nuk keni asgjë për të bërë: klubi do ta shënojë."
+      "feeFooter": "Dërguar nga SpinSync në emër të {club}. E keni paguar tashmë? Atëherë nuk keni asgjë për të bërë: klubi do ta shënojë."
     },
     "closed": {
       "subject": "Anuluar: {what}, {date}. Fusha është e mbyllur",
@@ -801,7 +801,7 @@
     "lockedBody": "Na shkruani dhe do ta kalojmë klubin tuaj në paketën {plan}.",
     "courtsUsed": "{used} nga {max} fusha aktive",
     "courtLimit": "Paketa juaj lejon {max} fusha aktive. Çaktivizoni një ose kaloni në paketë më të madhe.",
-    "cardTitle": "Paketa juaj Korto",
+    "cardTitle": "Paketa juaj SpinSync",
     "trialUntil": "Provë falas deri më {date}",
     "paidUntil": "Paguar deri më {date}",
     "unpaid": "Ende e papaguar",
@@ -842,7 +842,7 @@
     },
     "card": {
       "title": "Paguani me kartë",
-      "intro": "Paguani Korto me kartë, çdo muaj ose çdo vit. Rinovohet vetë; anuloni kur të doni.",
+      "intro": "Paguani SpinSync me kartë, çdo muaj ose çdo vit. Rinovohet vetë; anuloni kur të doni.",
       "plan": "Plani",
       "period": "Faturimi",
       "periods": {
@@ -956,12 +956,12 @@
     },
     "title1": "Mbushni fushat tuaja.",
     "title2": "Rritni klubin tuaj.",
-    "subtitle": "Korto u jep klubeve të tenisit, padelit dhe pickleball-it dhe trajnerëve të tyre mjetet për të menaxhuar fushat, oraret dhe rezervimet – gjithçka në një vend. Më pak administratë, më shumë kohë në fushë.",
+    "subtitle": "SpinSync u jep klubeve të tenisit, padelit dhe pickleball-it dhe trajnerëve të tyre mjetet për të menaxhuar fushat, oraret dhe rezervimet – gjithçka në një vend. Më pak administratë, më shumë kohë në fushë.",
     "getStarted": "Filloni",
     "seeHow": "Shihni si funksionon"
   },
   "announcement": {
-    "free": "Provoni Korto falas për {days} ditë.",
+    "free": "Provoni SpinSync falas për {days} ditë.",
     "noCard": "Pa kartë.",
     "link": "Shihni planet →"
   },
@@ -995,7 +995,7 @@
   },
   "testimonials": {
     "label": "Çfarë thonë klubet",
-    "title": "Nga klubet që përdorin Korto"
+    "title": "Nga klubet që përdorin SpinSync"
   },
   "howItWorks": {
     "label": "Konfigurim i thjeshtë",
@@ -1035,7 +1035,7 @@
     },
     "learnMore": "Mësoni më shumë",
     "eyebrow": "Çdo fushë",
-    "intro": "Tenis, padel apo pickleball – Korto i drejton të gjitha. Konfiguroni çdo fushë ashtu si luan klubi juaj dhe menaxhoni rezervimet, anëtarët dhe mësimet nga një panel i vetëm."
+    "intro": "Tenis, padel apo pickleball – SpinSync i drejton të gjitha. Konfiguroni çdo fushë ashtu si luan klubi juaj dhe menaxhoni rezervimet, anëtarët dhe mësimet nga një panel i vetëm."
   },
   "featureCards": {
     "label": "Ndërtuar për klubet",
@@ -1159,7 +1159,7 @@
       },
       "app": {
         "q": "A duhet lojtarët të shkarkojnë aplikacion?",
-        "a": "Jo. Korto punon në shfletues në çdo telefon, tablet ose kompjuter. Lojtarët hapin lidhjen e rezervimeve të klubit, regjistrohen me email ose llogari Google dhe rezervojnë një fushë."
+        "a": "Jo. SpinSync punon në shfletues në çdo telefon, tablet ose kompjuter. Lojtarët hapin lidhjen e rezervimeve të klubit, regjistrohen me email ose llogari Google dhe rezervojnë një fushë."
       },
       "phone": {
         "q": "A mund të pranoj ende rezervime me telefon ose personalisht?",
@@ -1175,14 +1175,14 @@
       },
       "payOnline": {
         "q": "A mund të paguajnë lojtarët online?",
-        "a": "Ende jo. Pagesa online është në zhvillim. Tani për tani lojtarët paguajnë në klub si zakonisht, dhe Korto regjistron çmimin e çdo rezervimi që të shihni sa sjell çdo fushë."
+        "a": "Ende jo. Pagesa online është në zhvillim. Tani për tani lojtarët paguajnë në klub si zakonisht, dhe SpinSync regjistron çmimin e çdo rezervimi që të shihni sa sjell çdo fushë."
       },
       "languages": {
         "q": "Në cilat gjuhë është i disponueshëm?",
         "a": "Anglisht, maqedonisht, serbisht, shqip, gjermanisht, frëngjisht dhe italisht. Secili zgjedh gjuhën e vet, kështu që stafi dhe lojtarët mund të përdorin gjuhë të ndryshme."
       },
       "data": {
-        "q": "Çfarë ndodh me të dhënat tona nëse ndalojmë së përdoruri Korto?",
+        "q": "Çfarë ndodh me të dhënat tona nëse ndalojmë së përdoruri SpinSync?",
         "a": "Të dhënat e klubit janë tuajat. Nëse vendosni të largoheni, na tregoni dhe do të fshijmë klubin, anëtarët dhe rezervimet."
       }
     },
@@ -1468,13 +1468,13 @@
     "contactTitle": "Kontakti",
     "privacy": {
       "title": "Politika e privatësisë",
-      "intro": "Kjo politikë shpjegon cilat të dhëna personale mbledh Korto, pse i mbledhim dhe çfarë mund të bëni ju për to. Korto është një sistem rezervimesh online për klubet sportive: klubet e përdorin për të menaxhuar fushat, anëtarët dhe trajnerët e tyre, ndërsa lojtarët e përdorin për të rezervuar.",
+      "intro": "Kjo politikë shpjegon cilat të dhëna personale mbledh SpinSync, pse i mbledhim dhe çfarë mund të bëni ju për to. SpinSync është një sistem rezervimesh online për klubet sportive: klubet e përdorin për të menaxhuar fushat, anëtarët dhe trajnerët e tyre, ndërsa lojtarët e përdorin për të rezervuar.",
       "sections": [
         {
           "title": "Kush është përgjegjës",
           "body": [
-            "Për llogarinë tuaj në Korto dhe për përdorimin e faqes, Korto vendos si përdoren të dhënat tuaja dhe është përgjegjës për to („kontrollues“). Të dhënat tona të kontaktit janë në fund të kësaj faqeje.",
-            "Kur një klub regjistron të dhëna për anëtarët e vet, lojtarët pa llogari ose rezervimet, klubi vendos çfarë të regjistrojë dhe është përgjegjës për ato të dhëna. Korto i ruan dhe i përpunon ato në emër të klubit (si „përpunues“). Për pyetje rreth atyre të dhënave, kontaktoni klubin; ne do ta ndihmojmë klubin t’ju përgjigjet."
+            "Për llogarinë tuaj në SpinSync dhe për përdorimin e faqes, SpinSync vendos si përdoren të dhënat tuaja dhe është përgjegjës për to („kontrollues“). Të dhënat tona të kontaktit janë në fund të kësaj faqeje.",
+            "Kur një klub regjistron të dhëna për anëtarët e vet, lojtarët pa llogari ose rezervimet, klubi vendos çfarë të regjistrojë dhe është përgjegjës për ato të dhëna. SpinSync i ruan dhe i përpunon ato në emër të klubit (si „përpunues“). Për pyetje rreth atyre të dhënave, kontaktoni klubin; ne do ta ndihmojmë klubin t’ju përgjigjet."
           ]
         },
         {
@@ -1510,7 +1510,7 @@
             [
               "<b>Klubi ku rezervoni</b> sheh emrin, të dhënat e kontaktit dhe rezervimet tuaja në atë klub, përfshirë mosparaqitjet.",
               "<b>Të gjithë</b> mund të shohin faqet e klubeve, fushat, oraret e punës dhe profilet e trajnerëve.",
-              "<b>Ofruesit e shërbimeve</b> që drejtojnë pjesë të Korto për ne: Supabase (baza e të dhënave, hyrja dhe ruajtja e skedarëve), ofruesi ynë i email-it (Resend ose një shërbim standard poste) dhe ofruesi ynë i hostingut. Ata mund t’i përdorin të dhënat vetëm për të na ofruar shërbimin e tyre.",
+              "<b>Ofruesit e shërbimeve</b> që drejtojnë pjesë të SpinSync për ne: Supabase (baza e të dhënave, hyrja dhe ruajtja e skedarëve), ofruesi ynë i email-it (Resend ose një shërbim standard poste) dhe ofruesi ynë i hostingut. Ata mund t’i përdorin të dhënat vetëm për të na ofruar shërbimin e tyre.",
               "<b>Autoritetet</b>, kur ligji na detyron t’i ndajmë."
             ],
             "Disa nga këta ofrues kanë seli ose përdorin serverë në vende të tjera, përfshirë Shtetet e Bashkuara. Kur të dhënat dalin jashtë Maqedonisë së Veriut ose Bashkimit Evropian, mbështetemi në masat mbrojtëse që kërkon ligji, si Klauzolat Standarde Kontraktuale të Komisionit Evropian."
@@ -1522,7 +1522,7 @@
             [
               "<b>Të dhënat e llogarisë dhe profilit:</b> për sa kohë ekziston llogaria juaj. Kur kërkoni fshirjen e llogarisë, i fshijmë ose i anonimizojmë të dhënat tuaja brenda 30 ditëve.",
               "<b>Rezervimet:</b> për sa kohë ekziston llogaria e klubit, sepse klubi ka nevojë për historikun e rezervimeve. Mosparaqitjet llogariten në kufijtë e klubit vetëm për 90 ditë.",
-              "<b>Të dhënat e klubit:</b> për sa kohë klubi përdor Korto dhe 90 ditë pasi ndalon, që të mund të kthehet pa humbur asgjë. Faturat dhe regjistrat kontabël ruhen për aq kohë sa kërkon ligji tatimor.",
+              "<b>Të dhënat e klubit:</b> për sa kohë klubi përdor SpinSync dhe 90 ditë pasi ndalon, që të mund të kthehet pa humbur asgjë. Faturat dhe regjistrat kontabël ruhen për aq kohë sa kërkon ligji tatimor.",
               "<b>Regjistrat e serverit:</b> për një kohë të shkurtër, sipas cilësimeve të ofruesve tanë të hostingut."
             ]
           ]
@@ -1530,7 +1530,7 @@
         {
           "title": "Cookies",
           "body": [
-            "Korto përdor vetëm cookies që i nevojiten faqes për të funksionuar:",
+            "SpinSync përdor vetëm cookies që i nevojiten faqes për të funksionuar:",
             [
               "<b>Cookies të hyrjes</b> nga Supabase, që ju mbajnë të identifikuar.",
               "<b>Një cookie gjuhe</b> (NEXT_LOCALE), që mban mend gjuhën që keni zgjedhur."
@@ -1563,7 +1563,7 @@
         {
           "title": "Fëmijët",
           "body": [
-            "Korto nuk është menduar që fëmijët nën 14 vjeç ta përdorin vetë. Një prind ose kujdestar mund të krijojë një llogari dhe të bëjë rezervime për fëmijën."
+            "SpinSync nuk është menduar që fëmijët nën 14 vjeç ta përdorin vetë. Një prind ose kujdestar mund të krijojë një llogari dhe të bëjë rezervime për fëmijën."
           ]
         },
         {
@@ -1577,12 +1577,12 @@
     },
     "terms": {
       "title": "Kushtet e përdorimit",
-      "intro": "Këto kushte vlejnë për këdo që përdor Korto: klubet që menaxhojnë fushat e tyre me të dhe lojtarët që rezervojnë përmes tij. Duke krijuar një llogari ose duke përdorur faqen, ju i pranoni këto kushte.",
+      "intro": "Këto kushte vlejnë për këdo që përdor SpinSync: klubet që menaxhojnë fushat e tyre me të dhe lojtarët që rezervojnë përmes tij. Duke krijuar një llogari ose duke përdorur faqen, ju i pranoni këto kushte.",
       "sections": [
         {
           "title": "Shërbimi",
           "body": [
-            "Korto është softuer online për klubet sportive. Klubet publikojnë fushat, oraret e punës, çmimet, trajnerët dhe anëtarësimet e tyre, ndërsa lojtarët rezervojnë fusha dhe orë stërvitjeje online. Korto ofron vetëm softuerin: ne nuk drejtojmë klube, nuk zotërojmë fusha dhe nuk punësojmë trajnerë."
+            "SpinSync është softuer online për klubet sportive. Klubet publikojnë fushat, oraret e punës, çmimet, trajnerët dhe anëtarësimet e tyre, ndërsa lojtarët rezervojnë fusha dhe orë stërvitjeje online. SpinSync ofron vetëm softuerin: ne nuk drejtojmë klube, nuk zotërojmë fusha dhe nuk punësojmë trajnerë."
           ]
         },
         {
@@ -1600,7 +1600,7 @@
           "body": [
             [
               "Një rezervim është marrëveshje mes jush dhe klubit. Klubi cakton çmimet, orarin e punës dhe rregullat e rezervimit dhe është përgjegjës për fushën, stërvitjen dhe çdo pagesë që mbledh.",
-              "Rezervimet i paguani te klubi, në mënyrën që cakton klubi. Korto nuk merr pagesa për rezervime.",
+              "Rezervimet i paguani te klubi, në mënyrën që cakton klubi. SpinSync nuk merr pagesa për rezervime.",
               "Çdo klub mund të vendosë rregulla, si sa mund të zgjasë një rezervim, sa ditë përpara mund të rezervoni, sa rezervime mund të bëni në ditë dhe deri kur mund të anuloni online. Pas atij afati, kontaktoni klubin për anulim.",
               "Nëse nuk paraqiteni në një rezervim, klubi mund ta shënojë si mosparaqitje. Një klub mund ta pezullojë rezervimin online për lojtarët me shumë mosparaqitje në 90 ditët e fundit. Klubi gjithsesi mund të rezervojë drejtpërdrejt për ju.",
               "Pyetjet për një rezervim, rimbursim ose seancë të anuluar zgjidhen mes jush dhe klubit, por me kënaqësi ndihmojmë aty ku mundemi."
@@ -1624,16 +1624,16 @@
           "title": "Për çfarë janë përgjegjëse klubet",
           "body": [
             [
-              "Klubet janë përgjegjëse për informacionin që publikojnë dhe për të dhënat që fusin për anëtarët dhe lojtarët e tyre. Duhet të kenë një bazë ligjore për t’i regjistruar dhe duhet t’i njoftojnë anëtarët se përdorin Korto.",
-              "Për ato të dhëna, klubi është kontrollues dhe Korto është përpunuesi i tij, siç përshkruhet në Politikën e privatësisë. I përpunojmë vetëm për t’i ofruar shërbimin klubit.",
-              "Klubet duhet t’i respektojnë rezervimet e bëra përmes Korto sipas rregullave që vetë kanë vendosur, ose ta kontaktojnë lojtarin nëse një rezervim nuk mund të realizohet."
+              "Klubet janë përgjegjëse për informacionin që publikojnë dhe për të dhënat që fusin për anëtarët dhe lojtarët e tyre. Duhet të kenë një bazë ligjore për t’i regjistruar dhe duhet t’i njoftojnë anëtarët se përdorin SpinSync.",
+              "Për ato të dhëna, klubi është kontrollues dhe SpinSync është përpunuesi i tij, siç përshkruhet në Politikën e privatësisë. I përpunojmë vetëm për t’i ofruar shërbimin klubit.",
+              "Klubet duhet t’i respektojnë rezervimet e bëra përmes SpinSync sipas rregullave që vetë kanë vendosur, ose ta kontaktojnë lojtarin nëse një rezervim nuk mund të realizohet."
             ]
           ]
         },
         {
           "title": "Përdorimi i lejuar",
           "body": [
-            "Mos e përdorni Korto për të:",
+            "Mos e përdorni SpinSync për të:",
             [
               "bërë diçka të paligjshme;",
               "bërë rezervime të rreme ose mbajtur fusha që nuk keni ndër mend t’i përdorni;",
@@ -1646,15 +1646,15 @@
         {
           "title": "Përmbajtja juaj",
           "body": [
-            "Ju i mbani të drejtat për atë që ngarkoni, si logot, fotot dhe përshkrimet. Na lejoni ta ruajmë dhe ta shfaqim aq sa nevojitet për funksionimin e shërbimit, për shembull logon e klubit në faqen e tij publike. Emri Korto, softueri dhe dizajni janë pronë e jona."
+            "Ju i mbani të drejtat për atë që ngarkoni, si logot, fotot dhe përshkrimet. Na lejoni ta ruajmë dhe ta shfaqim aq sa nevojitet për funksionimin e shërbimit, për shembull logon e klubit në faqen e tij publike. Emri SpinSync, softueri dhe dizajni janë pronë e jona."
           ]
         },
         {
           "title": "Disponueshmëria dhe përgjegjësia",
           "body": [
             [
-              "Përpiqemi që Korto të jetë i disponueshëm dhe i saktë, por nuk mund të garantojmë që do të funksionojë gjithmonë pa ndërprerje ose gabime. Mund ta ndalojmë shkurtimisht për mirëmbajtje.",
-              "Korto nuk është përgjegjës për atë që ndodh në klub, për vendimet e klubit ose për dëme të shkaktuara nga një problem me rezervimin që nuk mund ta parandalonim në mënyrë të arsyeshme.",
+              "Përpiqemi që SpinSync të jetë i disponueshëm dhe i saktë, por nuk mund të garantojmë që do të funksionojë gjithmonë pa ndërprerje ose gabime. Mund ta ndalojmë shkurtimisht për mirëmbajtje.",
+              "SpinSync nuk është përgjegjës për atë që ndodh në klub, për vendimet e klubit ose për dëme të shkaktuara nga një problem me rezervimin që nuk mund ta parandalonim në mënyrë të arsyeshme.",
               "Për aq sa e lejon ligji, përgjegjësia jonë totale ndaj një klubi kufizohet në shumën që klubi na ka paguar në 12 muajt para kërkesës.",
               "Asgjë në këto kushte nuk kufizon përgjegjësinë që ligji nuk lejon të kufizohet, as të drejtat tuaja si konsumator."
             ]
@@ -1664,7 +1664,7 @@
           "title": "Ndërprerja e përdorimit",
           "body": [
             [
-              "Mund të ndaloni së përdoruri Korto dhe të kërkoni fshirjen e llogarisë në çdo kohë.",
+              "Mund të ndaloni së përdoruri SpinSync dhe të kërkoni fshirjen e llogarisë në çdo kohë.",
               "Mund të pezullojmë ose mbyllim një llogari që shkel këto kushte, pas një paralajmërimi kur kjo është e arsyeshme."
             ]
           ]
@@ -1672,7 +1672,7 @@
         {
           "title": "Ndryshimet në këto kushte",
           "body": [
-            "Mund t’i ndryshojmë këto kushte. Data në krye tregon kur janë ndryshuar së fundi dhe për ndryshimet e rëndësishme do t’i njoftojmë përdoruesit përpara se të hyjnë në fuqi. Nëse vazhdoni të përdorni Korto pas kësaj, vlejnë kushtet e reja."
+            "Mund t’i ndryshojmë këto kushte. Data në krye tregon kur janë ndryshuar së fundi dhe për ndryshimet e rëndësishme do t’i njoftojmë përdoruesit përpara se të hyjnë në fuqi. Nëse vazhdoni të përdorni SpinSync pas kësaj, vlejnë kushtet e reja."
           ]
         },
         {
@@ -1954,14 +1954,14 @@
       "Të shtojë anëtarë dhe të ndryshojë të dhënat e tyre"
     ],
     "ownerOnlyTitle": "Vetëm ju mund",
-    "ownerOnly": "Të ndryshoni cilësimet, fushat, trajnerët, planet dhe turnet, të shihni statistikat, të menaxhoni planin Korto dhe të ftoni ose hiqni stafin.",
+    "ownerOnly": "Të ndryshoni cilësimet, fushat, trajnerët, planet dhe turnet, të shihni statistikat, të menaxhoni planin SpinSync dhe të ftoni ose hiqni stafin.",
     "inviteTitle": "Ftoni dikë",
     "inviteHint": "I dërgojmë një lidhje me email. Hyn ose krijon llogari me këtë email dhe klubi është menjëherë aty për të.",
     "emailPlaceholder": "emri@shembull.com",
     "invite": "Dërgo ftesën",
     "sending": "Po dërgohet…",
     "invited": "Ftesa u dërgua te {email}.",
-    "invitedNoEmail": "{email} është ftuar. Nuk arritëm ta dërgojmë email-in, ndaj kërkojini të hyjë në Korto me këtë adresë.",
+    "invitedNoEmail": "{email} është ftuar. Nuk arritëm ta dërgojmë email-in, ndaj kërkojini të hyjë në SpinSync me këtë adresë.",
     "empty": "Ende pa staf",
     "emptyHint": "Ftoni anëtarin e parë të ekipit më lart.",
     "active": "Aktiv",
@@ -2011,7 +2011,7 @@
     "title": "Grupet",
     "new": "Grup i ri",
     "empty": "Ende nuk ka grupe",
-    "emptyHint": "Shtoni grupet javore të trajnerëve tuaj për fëmijë, të rinj dhe të rritur. Korto e mban fushën për çdo seancë, mban regjistrin e pjesëmarrjes dhe ndjek pagesat mujore.",
+    "emptyHint": "Shtoni grupet javore të trajnerëve tuaj për fëmijë, të rinj dhe të rritur. SpinSync e mban fushën për çdo seancë, mban regjistrin e pjesëmarrjes dhe ndjek pagesat mujore.",
     "noMatch": "Asnjë grup nuk përputhet me këto filtra.",
     "stats": {
       "sessions": "Seanca këtë javë",
@@ -2122,7 +2122,7 @@
       "memberPrice": "Çmimi për anëtarët me paketë",
       "memberPlan": "Anëtarësimi",
       "optional": "Opsionale",
-      "paySeason": "Lojtarët i paguajnë drejtpërdrejt klubit, në para në dorë ose me transfertë bankare. Ju e shënoni çdo muaj si të paguar dhe Korto u kujton atyre që nuk kanë paguar deri më 10.",
+      "paySeason": "Lojtarët i paguajnë drejtpërdrejt klubit, në para në dorë ose me transfertë bankare. Ju e shënoni çdo muaj si të paguar dhe SpinSync u kujton atyre që nuk kanë paguar deri më 10.",
       "payDropin": "Lojtarët paguajnë në seancë. Trajneri shënon në regjistër kush ka paguar.",
       "summary": "Përmbledhje",
       "pickDays": "Zgjidhni ditët për të parë seancat.",
@@ -2228,7 +2228,7 @@
       "unpaidMark": "Pa paguar · shëno {amount} të paguar",
       "month": "Muaji",
       "noFees": "Askush në listë për këtë muaj.",
-      "feesHint": "Pagesat i bëhen klubit në para në dorë ose me transfertë bankare. Korto vetëm i mban shënim.",
+      "feesHint": "Pagesat i bëhen klubit në para në dorë ose me transfertë bankare. SpinSync vetëm i mban shënim.",
       "leftGroup": "(u largua)",
       "waitingTitle": "Lista e pritjes",
       "waitingHint": "Kur lirohet një vend, i radhës merr një email dhe 48 orë për ta pranuar.",
@@ -2324,7 +2324,7 @@
       "contactPlaceholder": "p.sh. Claire Martin (bosh për të rriturit)",
       "email": "Email",
       "phone": "Telefoni",
-      "emailHint": "Me email, prindi merr njoftime për anulime dhe kujtesa për pagesë, dhe e sheh grupin nëse hyn në Korto me të.",
+      "emailHint": "Me email, prindi merr njoftime për anulime dhe kujtesa për pagesë, dhe e sheh grupin nëse hyn në SpinSync me të.",
       "price": "Çmimi mujor",
       "priceHint": "Lëreni bosh për çmimin e grupit. Përdoreni për zbritje për vëllezër/motra ose anëtarë.",
       "notes": "Shënime për trajnerin",
@@ -2370,7 +2370,7 @@
       "addDropin": "Shto dikë që erdhi pa rezervim",
       "note": "Shënim për këtë seancë",
       "notePlaceholder": "Mbi çfarë punuat, për prindërit",
-      "noteHint": "Prindërit shohin shënimin e fundit në Korto.",
+      "noteHint": "Prindërit shohin shënimin e fundit në SpinSync.",
       "cancelToday": "Anulo seancën e sotme",
       "cancelThis": "Anulo këtë seancë",
       "save": "Ruaj regjistrin",
@@ -2549,7 +2549,7 @@
       "alwaysOn": "Gjithmonë aktiv",
       "saveFailed": "Nuk u ruajt. Provoni përsëri.",
       "plan": {
-        "title": "Plani juaj Korto",
+        "title": "Plani juaj SpinSync",
         "desc": "Kujtesa për provën dhe pagesën"
       },
       "admin": {
@@ -2965,7 +2965,7 @@
       "releaseOption": "{hours} orë para fillimit",
       "releaseHint": "Organizatori pyetet disa orë më herët. Nëse nuk e mban, fusha del sërish në shitje.",
       "who": "Kush mund të bashkohet",
-      "anyone": "Kushdo me llogari Korto",
+      "anyone": "Kushdo me llogari SpinSync",
       "membersOnly": "Vetëm anëtarët e klubit",
       "save": "Ruaj",
       "saving": "Duke ruajtur…",
@@ -3075,7 +3075,7 @@
       },
       "mb_add": {
         "q": "Si t'i shtoj anëtarët ekzistues?",
-        "a": "Prekni Shto anëtar dhe plotësoni emrin, planin dhe datën e skadimit. Shtoni edhe emailin: kur ata regjistrohen në Korto me atë email, anëtarësimi dhe zbritja lidhen automatikisht."
+        "a": "Prekni Shto anëtar dhe plotësoni emrin, planin dhe datën e skadimit. Shtoni edhe emailin: kur ata regjistrohen në SpinSync me atë email, anëtarësimi dhe zbritja lidhen automatikisht."
       },
       "mb_discount": {
         "q": "Pse një anëtar nuk e merr zbritjen?",
@@ -3095,15 +3095,15 @@
       },
       "co_add": {
         "q": "Si të shtoj një trajner?",
-        "a": "Trajneri fillimisht regjistrohet në Korto si lojtar. Pastaj prekni Shto trajner, vendosni emailin, çmimin për orë dhe nivelet. Atëherë lojtarët mund të rezervojnë orë me të."
+        "a": "Trajneri fillimisht regjistrohet në SpinSync si lojtar. Pastaj prekni Shto trajner, vendosni emailin, çmimin për orë dhe nivelet. Atëherë lojtarët mund të rezervojnë orë me të."
       },
       "co_lessons": {
         "q": "A e zë një orë stërvitjeje fushën?",
-        "a": "Po. Kur një lojtar rezervon një orë, Korto i jep një fushë të lirë të sportit të trajnerit, ndaj askush tjetër nuk mund ta rezervojë."
+        "a": "Po. Kur një lojtar rezervon një orë, SpinSync i jep një fushë të lirë të sportit të trajnerit, ndaj askush tjetër nuk mund ta rezervojë."
       },
       "gr_create": {
         "q": "Si të krijoj një grup stërvitjeje?",
-        "a": "Prekni Grup i ri dhe zgjidhni trajnerin, fushën, ditët, oraret dhe sezonin. Korto e zë fushën për çdo seancë dhe i vendos në orar. Pushimet kapërcejini me pauza."
+        "a": "Prekni Grup i ri dhe zgjidhni trajnerin, fushën, ditët, oraret dhe sezonin. SpinSync e zë fushën për çdo seancë dhe i vendos në orar. Pushimet kapërcejini me pauza."
       },
       "gr_register": {
         "q": "Si e mban trajneri regjistrin?",
@@ -3131,7 +3131,7 @@
       },
       "ct_add": {
         "q": "Si të shtoj disa fusha njëherësh?",
-        "a": "Te Shto fushë, vendosni Sa. Korto i shton me emra të numëruar, si Fushë balte 1 deri në 4, të gjitha me të njëjtin sport, sipërfaqe dhe çmim."
+        "a": "Te Shto fushë, vendosni Sa. SpinSync i shton me emra të numëruar, si Fushë balte 1 deri në 4, të gjitha me të njëjtin sport, sipërfaqe dhe çmim."
       },
       "ct_off": {
         "q": "Si ta mbyll një fushë për pak kohë?",
@@ -3171,14 +3171,14 @@
       },
       "sf_can": {
         "q": "Çfarë mund të bëjë stafi?",
-        "a": "Të shohë orarin, të shtojë, ndryshojë dhe anulojë rezervime, dhe të menaxhojë anëtarët dhe grupet. Vetëm ju mund të ndryshoni cilësimet, fushat, trajnerët, planet dhe planin tuaj Korto."
+        "a": "Të shohë orarin, të shtojë, ndryshojë dhe anulojë rezervime, dhe të menaxhojë anëtarët dhe grupet. Vetëm ju mund të ndryshoni cilësimet, fushat, trajnerët, planet dhe planin tuaj SpinSync."
       },
       "sh_link": {
         "q": "Cila është mënyra më e mirë që lojtarët të fillojnë të rezervojnë?",
         "a": "Dërgoni mesazhin e gatshëm në grupin Viber ose WhatsApp të klubit, dhe varni posterin QR në recepsion dhe pranë fushave. Shumica e klubeve marrin rezervimin e parë online brenda një dite."
       },
       "ga_plan": {
-        "q": "Si ta paguaj Korto?",
+        "q": "Si ta paguaj SpinSync?",
         "a": "Muaji i parë është falas. Për të vazhduar, na shkruani dhe do t'ju dërgojmë faturë për planin tuaj. Planin dhe datën deri kur është paguar i shihni te Cilësime."
       },
       "ga_language": {
@@ -3571,7 +3571,7 @@
     "saving": "Duke ruajtur…",
     "back": "Të gjitha mbrëmjet",
     "empty": "Ende nuk ka mbrëmje.",
-    "emptyHint": "Krijoni një, ndani lidhjen dhe lojtarët regjistrohen. Atë mbrëmje Korto bën çdo raund dhe mban tabelën.",
+    "emptyHint": "Krijoni një, ndani lidhjen dhe lojtarët regjistrohen. Atë mbrëmje SpinSync bën çdo raund dhe mban tabelën.",
     "copyLink": "Kopjo lidhjen",
     "copied": "U kopjua",
     "publicPage": "Faqja publike",

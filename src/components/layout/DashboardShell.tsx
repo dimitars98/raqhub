@@ -52,8 +52,11 @@ export default async function DashboardShell({
           staffLink={staffLink}
         />
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-          <DashboardTopbar userId={userId} area={role === "admin" ? "admin" : "member"} />
-          <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+          <DashboardTopbar
+            userId={userId}
+            area={role === "admin" ? "admin" : "member"}
+          />
+          <main className="flex-1 overflow-y-auto p-4 pb-[calc(96px+env(safe-area-inset-bottom))] lg:p-6">
             <div className="max-w-[1100px] mx-auto">
               {notice}
               {children}

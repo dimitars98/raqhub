@@ -13,7 +13,10 @@ export type BookingEmailRow = {
   duration_min: number;
   total_price: number;
   locale: string | null;
-  court: { name: string; club: { name: string; email: string | null } | null } | null;
+  court: {
+    name: string;
+    club: { name: string; email: string | null } | null;
+  } | null;
   coach: {
     profile: { full_name: string | null } | null;
     club: { name: string; email: string | null } | null;
@@ -21,7 +24,10 @@ export type BookingEmailRow = {
 };
 
 export function appUrl() {
-  return (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  return (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(
+    /\/$/,
+    "",
+  );
 }
 
 /** The club's email, so a player's reply goes to the club, not to Kortello. */
@@ -38,7 +44,7 @@ export function bookingEmailData(
     name: name?.trim() || null,
     courtName: row.court?.name ?? null,
     coachName: row.coach?.profile?.full_name ?? null,
-    clubName: row.court?.club?.name ?? row.coach?.club?.name ?? "Kortello",
+    clubName: row.court?.club?.name ?? row.coach?.club?.name ?? "SpinSync",
     startsAt: row.starts_at,
     endsAt: row.ends_at,
     durationMin: row.duration_min,
