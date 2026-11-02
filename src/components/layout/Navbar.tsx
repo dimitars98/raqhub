@@ -11,6 +11,8 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 import LocaleSwitcher, { LOCALES } from "@/components/ui/LocaleSwitcher";
+import { createClient } from "@/lib/supabase/client";
+import { homeFor } from "@/lib/roles";
 import { LogoMark } from "@/components/ui/Logo";
 import Image from "next/image";
 
@@ -20,6 +22,9 @@ export default function Navbar() {
   // while the announcement strip above it is still on screen.
   const [menuTop, setMenuTop] = useState(0);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  // Signed in: where their app starts (dashboard, bookings). Signed out: null.
+  // Undefined while it's being checked, so neither set of buttons flashes.
+  const [home, setHome] = useState<string | null | undefined>(undefined);
   const navRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -28,6 +33,25 @@ export default function Navbar() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        if (!cancelled) setHome(null);
+        return;
+      }
+      const { data } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+      if (!cancelled) setHome(homeFor((data as { role: string } | null)?.role));
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const links = [
     { label: t("features"), href: `/${locale}#features` },
@@ -137,26 +161,34 @@ export default function Navbar() {
         <div className="hidden lg:flex shrink-0 items-center gap-2 whitespace-nowrap">
           <LocaleSwitcher />
 
-          <Link
-            href="/login"
-            className="btn-ghost btn-lg text-sm font-semibold"
-          >
-            {t("signIn")}
-          </Link>
+          {home ? (
+            <Link href={home} className="btn-primary btn-lg text-sm font-semibold">
+              {t("openApp")}
+            </Link>
+          ) : home === null ? (
+            <>
+              <Link
+                href="/login"
+                className="btn-ghost btn-lg text-sm font-semibold"
+              >
+                {t("signIn")}
+              </Link>
 
-          <Link
-            href="/signup?role=player"
-            className="btn-ghost btn-lg text-sm font-semibold"
-          >
-            {t("imPlayer")}
-          </Link>
+              <Link
+                href="/signup?role=player"
+                className="btn-ghost btn-lg text-sm font-semibold"
+              >
+                {t("imPlayer")}
+              </Link>
 
-          <Link
-            href="/signup?role=admin"
-            className="btn-primary btn-lg text-sm font-semibold"
-          >
-            {t("forClubs")}
-          </Link>
+              <Link
+                href="/signup?role=admin"
+                className="btn-primary btn-lg text-sm font-semibold"
+              >
+                {t("forClubs")}
+              </Link>
+            </>
+          ) : null}
         </div>
 
         {/* Mobile menu button */}
@@ -265,6 +297,16 @@ export default function Navbar() {
 
               {/* Accounts, kept at the bottom within thumb reach */}
               <div className="mt-auto flex flex-col gap-2.5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4">
+                {home ? (
+                  <Link
+                    href={home}
+                    onClick={close}
+                    className="btn-primary h-12 w-full justify-center text-[15px] font-semibold"
+                  >
+                    {t("openApp")}
+                  </Link>
+                ) : (
+                <>
                 <Link
                   href="/signup?role=admin"
                   onClick={close}
@@ -286,6 +328,8 @@ export default function Navbar() {
                 >
                   {t("imPlayer")}
                 </Link>
+                </>
+                )}
               </div>
             </div>
           </motion.div>

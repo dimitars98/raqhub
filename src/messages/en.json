@@ -1,4 +1,20 @@
 {
+  "eventPage": {
+    "organizedBy": "Organized by",
+    "factDate": "Date",
+    "factDates": "Dates",
+    "factLocation": "Location",
+    "factEntry": "Entry fee",
+    "factSpots": "Spots",
+    "entryFree": "Free",
+    "tabOverview": "Overview",
+    "tabResults": "Results",
+    "pairs": "Pairs",
+    "singles": "Singles",
+    "aboutLeague": "About this league",
+    "aboutTournament": "About this tournament",
+    "aboutEvening": "About this evening"
+  },
   "sharePreview": {
     "kind": {
       "league": "League",
@@ -58,6 +74,7 @@
     "notFoundBody": "This page doesn't exist or has moved. Check the address, or start again from the home page."
   },
   "nav": {
+    "openApp": "Open RaqHub",
     "features": "Features",
     "pricing": "Pricing",
     "signIn": "Sign in",

@@ -1,4 +1,20 @@
 {
+  "eventPage": {
+    "organizedBy": "Organizzato da",
+    "factDate": "Data",
+    "factDates": "Date",
+    "factLocation": "Luogo",
+    "factEntry": "Quota di iscrizione",
+    "factSpots": "Posti",
+    "entryFree": "Gratis",
+    "tabOverview": "Panoramica",
+    "tabResults": "Risultati",
+    "pairs": "Doppio",
+    "singles": "Singolo",
+    "aboutLeague": "Informazioni sulla lega",
+    "aboutTournament": "Informazioni sul torneo",
+    "aboutEvening": "Informazioni sulla serata"
+  },
   "sharePreview": {
     "kind": {
       "league": "Lega",
@@ -58,6 +74,7 @@
     "notFoundBody": "Questa pagina non esiste o è stata spostata. Controlla l’indirizzo o riparti dalla home."
   },
   "nav": {
+    "openApp": "Apri RaqHub",
     "features": "Funzionalità",
     "pricing": "Prezzi",
     "signIn": "Accedi",

@@ -1,4 +1,20 @@
 {
+  "eventPage": {
+    "organizedBy": "Организира",
+    "factDate": "Датум",
+    "factDates": "Датуми",
+    "factLocation": "Локација",
+    "factEntry": "Котизација",
+    "factSpots": "Места",
+    "entryFree": "Бесплатно",
+    "tabOverview": "Преглед",
+    "tabResults": "Резултати",
+    "pairs": "Парови",
+    "singles": "Поединечно",
+    "aboutLeague": "За лигата",
+    "aboutTournament": "За турнирот",
+    "aboutEvening": "За вечерта"
+  },
   "sharePreview": {
     "kind": {
       "league": "Лига",
@@ -58,6 +74,7 @@
     "notFoundBody": "Оваа страница не постои или е преместена. Проверете ја адресата или почнете од почетната страница."
   },
   "nav": {
+    "openApp": "Отвори RaqHub",
     "features": "Функционалности",
     "pricing": "Цени",
     "signIn": "Најава",

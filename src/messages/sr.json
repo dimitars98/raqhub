@@ -1,4 +1,20 @@
 {
+  "eventPage": {
+    "organizedBy": "Organizuje",
+    "factDate": "Datum",
+    "factDates": "Datumi",
+    "factLocation": "Lokacija",
+    "factEntry": "Kotizacija",
+    "factSpots": "Mesta",
+    "entryFree": "Besplatno",
+    "tabOverview": "Pregled",
+    "tabResults": "Rezultati",
+    "pairs": "Parovi",
+    "singles": "Pojedinačno",
+    "aboutLeague": "O ovoj ligi",
+    "aboutTournament": "O ovom turniru",
+    "aboutEvening": "O ovoj večeri"
+  },
   "sharePreview": {
     "kind": {
       "league": "Liga",
@@ -58,6 +74,7 @@
     "notFoundBody": "Ova stranica ne postoji ili je premeštena. Proverite adresu ili počnite od početne stranice."
   },
   "nav": {
+    "openApp": "Otvori RaqHub",
     "features": "Mogućnosti",
     "pricing": "Cene",
     "signIn": "Prijava",

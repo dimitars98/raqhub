@@ -1,4 +1,20 @@
 {
+  "eventPage": {
+    "organizedBy": "Organizuar nga",
+    "factDate": "Data",
+    "factDates": "Datat",
+    "factLocation": "Vendndodhja",
+    "factEntry": "Tarifa e pjesëmarrjes",
+    "factSpots": "Vende",
+    "entryFree": "Falas",
+    "tabOverview": "Përmbledhje",
+    "tabResults": "Rezultatet",
+    "pairs": "Çifte",
+    "singles": "Teke",
+    "aboutLeague": "Rreth kësaj lige",
+    "aboutTournament": "Rreth këtij turneu",
+    "aboutEvening": "Rreth kësaj mbrëmjeje"
+  },
   "sharePreview": {
     "kind": {
       "league": "Liga",
@@ -58,6 +74,7 @@
     "notFoundBody": "Kjo faqe nuk ekziston ose është zhvendosur. Kontrolloni adresën ose filloni nga faqja kryesore."
   },
   "nav": {
+    "openApp": "Hap RaqHub",
     "features": "Veçoritë",
     "pricing": "Çmimet",
     "signIn": "Hyr",
