@@ -99,6 +99,16 @@ export default function LoginPage() {
               {t("signIn")}
             </h1>
 
+            {/* Sent here by src/components/admin/IdleSignOut.tsx */}
+            {params.get("reason") === "idle" && (
+              <p
+                role="status"
+                className="mb-6 rounded-2xl bg-ink-50 px-5 py-3.5 text-sm text-ink-800"
+              >
+                {t("signedOutIdle")}
+              </p>
+            )}
+
             <button
               type="button"
               onClick={handleGoogle}

@@ -25,6 +25,7 @@
     "language": "Gjuha"
   },
   "auth": {
+    "signedOutIdle": "Për siguri, u shkëputët pas 12 orësh pa aktivitet. Hyni sërish për të vazhduar.",
     "callbackFailed": "Hyrja me Google nuk funksionoi. Provoni përsëri ose hyni me email dhe fjalëkalim.",
     "signIn": "Hyni në llogarinë tuaj",
     "continueGoogle": "Vazhdoni me Google",

@@ -25,6 +25,7 @@
     "language": "Sprache"
   },
   "auth": {
+    "signedOutIdle": "Aus Sicherheitsgründen wurdest du nach 12 Stunden ohne Aktivität abgemeldet. Melde dich erneut an, um fortzufahren.",
     "callbackFailed": "Die Anmeldung mit Google hat nicht geklappt. Bitte versuche es erneut oder melde dich mit E-Mail und Passwort an.",
     "signIn": "Bei Ihrem Konto anmelden",
     "continueGoogle": "Mit Google fortfahren",

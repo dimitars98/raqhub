@@ -25,6 +25,7 @@
     "language": "Langue"
   },
   "auth": {
+    "signedOutIdle": "Par sécurité, vous avez été déconnecté après 12 heures d’inactivité. Reconnectez-vous pour continuer.",
     "callbackFailed": "La connexion avec Google n’a pas fonctionné. Veuillez réessayer ou vous connecter avec votre e-mail et votre mot de passe.",
     "signIn": "Connectez-vous à votre compte",
     "continueGoogle": "Continuer avec Google",

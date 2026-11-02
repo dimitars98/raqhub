@@ -25,6 +25,7 @@
     "language": "Jezik"
   },
   "auth": {
+    "signedOutIdle": "Iz bezbednosnih razloga, odjavljeni ste posle 12 sati bez aktivnosti. Prijavite se ponovo da biste nastavili.",
     "callbackFailed": "Prijava preko Google-a nije uspela. Pokušajte ponovo ili se prijavite e-poštom i lozinkom.",
     "signIn": "Prijavite se na svoj nalog",
     "continueGoogle": "Nastavite sa Google nalogom",

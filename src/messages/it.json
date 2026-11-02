@@ -25,6 +25,7 @@
     "language": "Lingua"
   },
   "auth": {
+    "signedOutIdle": "Per sicurezza, sei stato disconnesso dopo 12 ore di inattività. Accedi di nuovo per continuare.",
     "callbackFailed": "L’accesso con Google non è riuscito. Riprova o accedi con email e password.",
     "signIn": "Accedi al tuo account",
     "continueGoogle": "Continua con Google",

@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 import DashboardShell from "@/components/layout/DashboardShell";
 import { PlanBanner, UpgradeNotice } from "@/components/admin/PlanNotices";
 import { ReadOnlyProvider } from "@/components/admin/ReadOnly";
+import IdleSignOut from "@/components/admin/IdleSignOut";
 import { acceptStaffInvites } from "@/lib/myClub";
 import { BILLING_COLUMNS, clubAccess, type ClubBilling } from "@/lib/plans";
 import type { Club, Profile } from "@/types/database";
@@ -99,6 +100,8 @@ export default async function AdminLayout({
         ) : undefined
       }
     >
+      {/* Signs admins and staff out after 12 hours without activity */}
+      <IdleSignOut lastSignInAt={user.last_sign_in_at ?? null} />
       <ReadOnlyProvider value={readOnly}>
         {staffLocked ? <UpgradeNotice feature="staff" /> : children}
       </ReadOnlyProvider>

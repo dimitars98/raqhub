@@ -25,6 +25,7 @@
     "language": "Language"
   },
   "auth": {
+    "signedOutIdle": "For security, you were signed out after 12 hours without activity. Sign in again to continue.",
     "callbackFailed": "Signing in with Google didn't work. Please try again, or sign in with your email and password.",
     "signIn": "Sign in to your account",
     "continueGoogle": "Continue with Google",
