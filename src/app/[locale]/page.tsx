@@ -16,6 +16,7 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
 import { TRIAL_DAYS } from "@/lib/plans";
 import { homeFor } from "@/lib/roles";
+import Reveal from "@/components/ui/Reveal";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -223,22 +224,39 @@ export default async function HomePage() {
         </div>
       </section> */}
 
+      {/* Each section below slides up as it scrolls into view (Reveal). */}
       {/* STATS STRIP — floating overlap */}
-      <TeamSection />
+      <Reveal>
+        <TeamSection />
+      </Reveal>
       {/* FEATURE SHOWCASE — alternating sections */}
-      <Features />
+      <Reveal>
+        <Features />
+      </Reveal>
       {/* HOW IT WORKS */}
-      <HowItWorks />
+      <Reveal>
+        <HowItWorks />
+      </Reveal>
       {/* TESTIMONIALS */}
-      <Testimonials />
+      <Reveal>
+        <Testimonials />
+      </Reveal>
       {/* FEATURE CARDS GRID */}
-      <FeatureCards />
+      <Reveal>
+        <FeatureCards />
+      </Reveal>
       {/* PRICING */}
-      <Pricing />
-      <FAQSection />
+      <Reveal>
+        <Pricing />
+      </Reveal>
+      <Reveal>
+        <FAQSection />
+      </Reveal>
 
       {/* CTA */}
-      <CTA />
+      <Reveal>
+        <CTA />
+      </Reveal>
       {/* FOOTER */}
       <Footer />
     </div>
