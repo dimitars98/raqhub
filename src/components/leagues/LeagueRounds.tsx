@@ -51,7 +51,7 @@ export default function LeagueRounds({
                 aria-pressed={r.id === shown.id}
                 onClick={() => setShownId(r.id)}
                 className={`h-8 min-w-8 rounded-full border px-3 text-xs font-medium ${
-                  r.id === shown.id ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-600"
+                  r.id === shown.id ? "border-brand-900 bg-brand-900 text-white" : "border-ink-200 bg-white text-ink-600"
                 }`}
               >
                 {r.number}

@@ -157,7 +157,7 @@ export default function OwnerClient({
             type="button"
             onClick={() => setFilter(f)}
             className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
-              filter === f ? "bg-ink-900 text-white" : "bg-white text-ink-600 hover:bg-ink-50"
+              filter === f ? "bg-brand-900 text-white" : "bg-white text-ink-600 hover:bg-ink-50"
             }`}
           >
             {t(`filters.${f}`)}

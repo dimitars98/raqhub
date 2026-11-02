@@ -55,7 +55,7 @@ export default function SocialBoard({
                       aria-pressed={r === round}
                       onClick={() => setShown(r)}
                       className={`h-8 min-w-8 rounded-full border px-3 text-xs font-medium ${
-                        r === round ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-600"
+                        r === round ? "border-brand-900 bg-brand-900 text-white" : "border-ink-200 bg-white text-ink-600"
                       }`}
                     >
                       {r}

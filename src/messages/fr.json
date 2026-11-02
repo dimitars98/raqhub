@@ -223,6 +223,14 @@
     "cancelBooking": "Annuler"
   },
   "adminBookings": {
+    "sort": {
+      "label": "Trier",
+      "newest": "Plus récentes d’abord",
+      "oldest": "Plus anciennes d’abord",
+      "upcoming": "À venir d’abord",
+      "priceHigh": "Prix décroissant",
+      "priceLow": "Prix croissant"
+    },
     "statusFailed": "Impossible de modifier la réservation. Veuillez réessayer.",
     "title": "Réservations",
     "total": "total",
@@ -412,6 +420,12 @@
     "americano": "Americano"
   },
   "members": {
+    "sort": {
+      "label": "Trier",
+      "name": "Nom A–Z",
+      "recent": "Inscrits récemment",
+      "ending": "Expirent bientôt"
+    },
     "errors": {
       "duplicateEmail": "Un membre avec cet e-mail existe déjà.",
       "duplicatePhone": "Un membre avec ce numéro de téléphone existe déjà.",

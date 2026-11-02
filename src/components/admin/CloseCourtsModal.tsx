@@ -145,7 +145,7 @@ function Form({
 
   const chip = (on: boolean) =>
     `inline-flex h-9 items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-medium transition-colors ${
-      on ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-600 hover:border-ink-400"
+      on ? "border-brand-900 bg-brand-900 text-white" : "border-ink-200 bg-white text-ink-600 hover:border-ink-400"
     }`;
 
   return (

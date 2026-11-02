@@ -223,6 +223,14 @@
     "cancelBooking": "Annulla"
   },
   "adminBookings": {
+    "sort": {
+      "label": "Ordina",
+      "newest": "Più recenti prima",
+      "oldest": "Meno recenti prima",
+      "upcoming": "Prossime prima",
+      "priceHigh": "Prezzo: decrescente",
+      "priceLow": "Prezzo: crescente"
+    },
     "statusFailed": "Impossibile modificare la prenotazione. Riprova.",
     "title": "Prenotazioni",
     "total": "totale",
@@ -412,6 +420,12 @@
     "americano": "Americano"
   },
   "members": {
+    "sort": {
+      "label": "Ordina",
+      "name": "Nome A–Z",
+      "recent": "Iscritti di recente",
+      "ending": "In scadenza prima"
+    },
     "errors": {
       "duplicateEmail": "Esiste già un socio con questa email.",
       "duplicatePhone": "Esiste già un socio con questo numero di telefono.",

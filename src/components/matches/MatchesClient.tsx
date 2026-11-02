@@ -65,7 +65,7 @@ export default function MatchesClient({
 
   const chip = (active: boolean) =>
     `rounded-full border px-3.5 py-2 text-[13px] whitespace-nowrap transition-colors ${
-      active ? "border-ink-900 bg-ink-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600 hover:border-ink-200"
+      active ? "border-brand-900 bg-brand-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600 hover:border-ink-200"
     }`;
 
   return (

@@ -263,10 +263,10 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
           <button
             key={s}
             onClick={() => setSportFilter(s)}
-            className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
               sportFilter === s
-                ? "bg-brand-600 text-white"
-                : "bg-white border border-ink-100 text-ink-600 hover:bg-ink-50"
+                ? "border-brand-900 bg-brand-900 text-white"
+                : "border-ink-100 bg-white text-ink-600 hover:bg-ink-50"
             }`}
           >
             {s === "all" ? t("allSports") : labels.sport(s)}

@@ -223,6 +223,14 @@
     "cancelBooking": "Anulo"
   },
   "adminBookings": {
+    "sort": {
+      "label": "Rendit",
+      "newest": "Më të rejat së pari",
+      "oldest": "Më të vjetrat së pari",
+      "upcoming": "Të ardhshmet së pari",
+      "priceHigh": "Çmimi: nga më i larti",
+      "priceLow": "Çmimi: nga më i ulëti"
+    },
     "statusFailed": "Rezervimi nuk u ndryshua. Provoni përsëri.",
     "title": "Rezervimet",
     "total": "gjithsej",
@@ -412,6 +420,12 @@
     "americano": "Americano"
   },
   "members": {
+    "sort": {
+      "label": "Rendit",
+      "name": "Emri A–Zh",
+      "recent": "Anëtarësuar së fundi",
+      "ending": "Skadojnë së shpejti"
+    },
     "errors": {
       "duplicateEmail": "Ekziston tashmë një anëtar me këtë email.",
       "duplicatePhone": "Ekziston tashmë një anëtar me këtë numër telefoni.",

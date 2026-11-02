@@ -682,7 +682,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
                 aria-pressed={sport === s}
                 onClick={() => setSport(s)}
                 className={`h-8 rounded-full border px-3.5 text-xs font-medium ${
-                  sport === s ? "border-[#111c0a] bg-[#111c0a] text-white" : "border-[#d0d9c9] bg-white text-[#3d4f35]"
+                  sport === s ? "border-brand-900 bg-brand-900 text-white" : "border-[#d0d9c9] bg-white text-[#3d4f35]"
                 }`}
               >
                 {s === "all" ? t("allCourts") : labels.sport(s)}

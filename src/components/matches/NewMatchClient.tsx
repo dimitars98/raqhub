@@ -279,7 +279,7 @@ export default function NewMatchClient({
                         setPick(null);
                       }}
                       className={`rounded-full border px-3.5 py-2 text-[13px] ${
-                        d === duration ? "border-ink-900 bg-ink-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600"
+                        d === duration ? "border-brand-900 bg-brand-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600"
                       }`}
                     >
                       {t("minutes", { n: d })}

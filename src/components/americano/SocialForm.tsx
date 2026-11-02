@@ -171,7 +171,7 @@ export default function SocialForm({
                       aria-pressed={on}
                       onClick={() => toggleCourt(c.id)}
                       className={`h-9 rounded-full border px-3.5 text-[13px] font-medium ${
-                        on ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-600"
+                        on ? "border-brand-900 bg-brand-900 text-white" : "border-ink-200 bg-white text-ink-600"
                       }`}
                     >
                       {c.name}

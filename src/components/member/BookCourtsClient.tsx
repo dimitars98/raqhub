@@ -217,7 +217,7 @@ export default function BookCourtsClient({
   const pill = (on: boolean) =>
     `h-9 shrink-0 rounded-full border px-4 text-[13px] font-medium transition-colors ${
       on
-        ? "border-ink-900 bg-ink-900 text-white"
+        ? "border-brand-900 bg-brand-900 text-white"
         : "border-ink-200 bg-white text-ink-600 hover:border-ink-400 hover:text-ink-900"
     }`;
 

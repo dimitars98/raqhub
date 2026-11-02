@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
 import { addMonths, differenceInCalendarDays, format, parseISO, startOfDay } from "date-fns";
-import { ChevronDown, Download, Mail, RotateCw, Search, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown, Download, Mail, RotateCw, Search, X } from "lucide-react";
 import type { Member, MembershipPlan, MemberStatus } from "@/types/database";
 import Modal from "@/components/ui/Modal";
 import FilterSelect from "@/components/ui/FilterSelect";
@@ -42,6 +42,9 @@ interface Props {
 
 type Tab = "all" | "active" | "ending" | "expired" | "cancelled";
 const TABS: Tab[] = ["all", "active", "ending", "expired", "cancelled"];
+
+const SORTS = ["recent", "name", "ending"] as const;
+type SortKey = (typeof SORTS)[number];
 const PER_PAGE = [25, 50, 100];
 const EXTEND_MONTHS = [1, 3, 12];
 /** Within this many days the end date shows in amber and counts as "ending soon". */
@@ -120,6 +123,8 @@ export default function MembersClient({
     TABS.includes(initialTab as Tab) ? (initialTab as Tab) : "all",
   );
   const [planFilter, setPlanFilter] = useState("all");
+  // Not picked yet: "Ending soon" is a to-do list (soonest first), the rest newest first.
+  const [sortPick, setSortPick] = useState<SortKey | null>(null);
   const [endsWithin, setEndsWithin] = useState(0);
   const [perPage, setPerPage] = useState(25);
   const [page, setPage] = useState(0);
@@ -189,8 +194,31 @@ export default function MembersClient({
         m.email?.toLowerCase().includes(q) ||
         m.phone?.replace(/\s/g, "").includes(q.replace(/\s/g, "")),
     );
-  // "Ending soon" is a to-do list: soonest first.
-  if (tab === "ending") filtered.sort((a, b) => (daysLeft(a) ?? 0) - (daysLeft(b) ?? 0));
+  const sort: SortKey = sortPick ?? (tab === "ending" ? "ending" : "recent");
+  const SORTERS: Record<SortKey, (a: MemberWithPlan, b: MemberWithPlan) => number> = {
+    recent: (a, b) => b.created_at.localeCompare(a.created_at),
+    name: (a, b) => a.full_name.localeCompare(b.full_name, undefined, { sensitivity: "base" }),
+    // No end date (or already ended long ago) goes last.
+    ending: (a, b) => (daysLeft(a) ?? Infinity) - (daysLeft(b) ?? Infinity),
+  };
+  filtered.sort(SORTERS[sort]);
+
+  /** A table header that sorts by its column. */
+  const sortHeader = (label: string, key: SortKey) => {
+    const on = sort === key;
+    return (
+      <th className="px-3 py-3 font-medium" aria-sort={on ? "ascending" : "none"}>
+        <button
+          type="button"
+          onClick={() => refilter(setSortPick)(key)}
+          className={`-mx-1 inline-flex items-center gap-1 rounded-full px-1 transition-colors hover:text-[#111c0a] ${on ? "text-[#111c0a]" : ""}`}
+        >
+          {label}
+          {on ? <ArrowUp size={12} aria-hidden="true" /> : <ArrowDown size={12} aria-hidden="true" className="opacity-40" />}
+        </button>
+      </th>
+    );
+  };
 
   const pages = Math.max(1, Math.ceil(filtered.length / perPage));
   const current = Math.min(page, pages - 1);
@@ -682,6 +710,12 @@ export default function MembersClient({
             ]}
           />
           <FilterSelect
+            label={t("sort.label")}
+            value={sort}
+            onChange={(v) => refilter(setSortPick)(v as SortKey)}
+            options={SORTS.map((k) => ({ value: k, label: t(`sort.${k}`) }))}
+          />
+          <FilterSelect
             label={t("filters.show")}
             value={String(perPage)}
             onChange={(v) => refilter(setPerPage)(Number(v))}
@@ -743,10 +777,10 @@ export default function MembersClient({
                         className="size-[18px] accent-[#7aad12]"
                       />
                     </th>
-                    <th className="px-3 py-3 font-medium">{t("columns.member")}</th>
+                    {sortHeader(t("columns.member"), "name")}
                     <th className="px-3 py-3 font-medium">{t("columns.plan")}</th>
                     <th className="px-3 py-3 font-medium">{t("columns.status")}</th>
-                    <th className="px-3 py-3 font-medium">{t("columns.expires")}</th>
+                    {sortHeader(t("columns.expires"), "ending")}
                     <th className="py-3 pr-5" />
                   </tr>
                 </thead>

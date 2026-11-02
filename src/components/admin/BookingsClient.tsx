@@ -25,9 +25,10 @@ import { useLabels } from "@/hooks/useLabels";
 import { BADGE, bookingStatusTone } from "@/lib/badges";
 import { DAY_HOURS } from "@/lib/openingHours";
 import { REPEAT_CHOICES, weeklyStarts } from "@/lib/recurring";
-import { Repeat, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Repeat, X } from "lucide-react";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
+import FilterSelect from "@/components/ui/FilterSelect";
 import { bookingName } from "@/lib/bookingName";
 import PaymentTag from "@/components/admin/PaymentTag";
 import { settleClubRefunds } from "@/app/[locale]/admin/settings/payments";
@@ -56,6 +57,9 @@ type FormValues = {
 type SeriesNotice = { added: number; skipped: Date[] };
 
 const DURATIONS = [60, 90, 120];
+
+const SORTS = ["newest", "upcoming", "oldest", "priceHigh", "priceLow"] as const;
+type SortKey = (typeof SORTS)[number];
 
 const TH = "text-left px-5 py-3 text-xs font-semibold text-[#6e7f65] whitespace-nowrap";
 
@@ -95,6 +99,9 @@ export default function BookingsClient({
   /** A weekly booking the admin is about to cancel: just it, or later weeks too? */
   const [cancelling, setCancelling] = useState<BookingWithJoins | null>(null);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState<SortKey>("newest");
+  // Fixed when the page opens, so "upcoming" doesn't reshuffle while you look.
+  const [now] = useState(() => Date.now());
   const router = useRouter();
   const supabase = createClient();
   const t = useTranslations("adminBookings");
@@ -321,6 +328,41 @@ export default function BookingsClient({
       );
     });
 
+  const time = (b: BookingWithJoins) => new Date(b.starts_at).getTime();
+  const price = (b: BookingWithJoins) => Number(b.total_price ?? 0);
+  const SORTERS: Record<SortKey, (a: BookingWithJoins, b: BookingWithJoins) => number> = {
+    newest: (a, b) => time(b) - time(a),
+    oldest: (a, b) => time(a) - time(b),
+    // Still to come, soonest first, then the past, most recent first.
+    upcoming: (a, b) => {
+      const fa = time(a) >= now;
+      const fb = time(b) >= now;
+      if (fa !== fb) return fa ? -1 : 1;
+      return fa ? time(a) - time(b) : time(b) - time(a);
+    },
+    priceHigh: (a, b) => price(b) - price(a) || time(b) - time(a),
+    priceLow: (a, b) => price(a) - price(b) || time(b) - time(a),
+  };
+  filtered.sort(SORTERS[sort]);
+
+  /** A table header that sorts by its column; click again to flip. */
+  const sortHeader = (label: string, desc: SortKey, asc: SortKey) => {
+    const on = sort === desc || sort === asc;
+    const Icon = !on ? ArrowUpDown : sort === asc ? ArrowUp : ArrowDown;
+    return (
+      <th className={TH} aria-sort={on ? (sort === asc ? "ascending" : "descending") : "none"}>
+        <button
+          type="button"
+          onClick={() => setSort(sort === desc ? asc : desc)}
+          className={`-mx-1 inline-flex items-center gap-1 rounded-full px-1 transition-colors hover:text-[#111c0a] ${on ? "text-[#111c0a]" : ""}`}
+        >
+          {label}
+          <Icon size={12} aria-hidden="true" className={on ? "" : "opacity-50"} />
+        </button>
+      </th>
+    );
+  };
+
   // Pieces shared by the phone cards and the table.
   const courtLabel = (b: BookingWithJoins) =>
     b.court?.name ??
@@ -421,7 +463,7 @@ export default function BookingsClient({
               onClick={() => setFilter(s)}
               className={`text-xs px-4 py-2 rounded-full border transition-colors ${
                 filter === s
-                  ? "bg-[#111c0a] text-white border-[#111c0a]"
+                  ? "border-brand-900 bg-brand-900 text-white"
                   : "border-[#e8ede4] text-[#6e7f65] hover:bg-[#f8f9f7]"
               }`}
             >
@@ -429,6 +471,14 @@ export default function BookingsClient({
             </button>
           ))}
         </div>
+        <FilterSelect
+          label={t("sort.label")}
+          value={sort}
+          onChange={(v) => setSort(v as SortKey)}
+          options={SORTS.map((k) => ({ value: k, label: t(`sort.${k}`) }))}
+          align="end"
+          className="lg:ml-auto"
+        />
       </div>
 
       {rowError && (
@@ -536,11 +586,11 @@ export default function BookingsClient({
               <th className={`${TH} hidden lg:table-cell`}>{t("ref")}</th>
               <th className={TH}>{t("player")}</th>
               <th className={TH}>{t("court")}</th>
-              <th className={TH}>{t("dateTime")}</th>
+              {sortHeader(t("dateTime"), "newest", "oldest")}
               <th className={`${TH} hidden lg:table-cell`}>
                 {t("duration")}
               </th>
-              <th className={TH}>{t("price")}</th>
+              {sortHeader(t("price"), "priceHigh", "priceLow")}
               <th className={TH}>{t("status")}</th>
               <th className="px-5 py-3" />
             </tr>
@@ -657,7 +707,7 @@ export default function BookingsClient({
                           onClick={() => field.onChange(type)}
                           className={`text-xs px-4 py-1.5 rounded-full border transition-colors ${
                             field.value === type
-                              ? "bg-[#111c0a] text-white border-[#111c0a]"
+                              ? "border-brand-900 bg-brand-900 text-white"
                               : "border-[#e8ede4] text-[#6e7f65] hover:bg-[#f8f9f7]"
                           }`}
                         >

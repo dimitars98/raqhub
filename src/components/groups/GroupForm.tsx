@@ -827,7 +827,7 @@ function Pills<T extends string>({
           onClick={() => onChange(o.value)}
           className={`rounded-full border px-3 py-2 text-[13px] transition-colors ${
             value === o.value
-              ? "border-ink-900 bg-ink-900 font-semibold text-white"
+              ? "border-brand-900 bg-brand-900 font-semibold text-white"
               : "border-ink-200 bg-white text-ink-600 hover:border-ink-400"
           }`}
         >
@@ -875,7 +875,7 @@ function ChoiceButton({ on, onClick, children }: { on: boolean; onClick: () => v
       aria-checked={on}
       onClick={onClick}
       className={`rounded-full border px-2.5 py-1.5 text-xs transition-colors ${
-        on ? "border-ink-900 bg-ink-900 font-semibold text-white" : "border-ink-200 bg-white text-ink-600"
+        on ? "border-brand-900 bg-brand-900 font-semibold text-white" : "border-ink-200 bg-white text-ink-600"
       }`}
     >
       {children}

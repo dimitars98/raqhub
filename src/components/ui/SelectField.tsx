@@ -31,7 +31,7 @@ const fromRadix = (v: string) => (v === EMPTY ? "" : v);
 const SIZES = {
   md: "h-11 rounded-xl pl-4 pr-3 text-sm",
   sm: "h-9 rounded-xl pl-3 pr-2.5 text-sm",
-  xs: "h-8 rounded-lg pl-2.5 pr-2 text-xs",
+  xs: "h-8 rounded-full pl-3 pr-2 text-xs",
 };
 
 // A form field that opens a styled list: the field-sized sibling of

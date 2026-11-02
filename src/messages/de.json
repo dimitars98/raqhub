@@ -223,6 +223,14 @@
     "cancelBooking": "Abbrechen"
   },
   "adminBookings": {
+    "sort": {
+      "label": "Sortieren",
+      "newest": "Neueste zuerst",
+      "oldest": "Älteste zuerst",
+      "upcoming": "Anstehende zuerst",
+      "priceHigh": "Preis: absteigend",
+      "priceLow": "Preis: aufsteigend"
+    },
     "statusFailed": "Die Buchung konnte nicht geändert werden. Bitte versuchen Sie es erneut.",
     "title": "Buchungen",
     "total": "gesamt",
@@ -412,6 +420,12 @@
     "americano": "Americano"
   },
   "members": {
+    "sort": {
+      "label": "Sortieren",
+      "name": "Name A–Z",
+      "recent": "Zuletzt beigetreten",
+      "ending": "Läuft bald ab"
+    },
     "errors": {
       "duplicateEmail": "Es gibt bereits ein Mitglied mit dieser E-Mail-Adresse.",
       "duplicatePhone": "Es gibt bereits ein Mitglied mit dieser Telefonnummer.",

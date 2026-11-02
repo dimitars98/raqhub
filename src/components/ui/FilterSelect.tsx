@@ -23,7 +23,7 @@ export default function FilterSelect({ label, value, options, onChange, classNam
     <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger
         aria-label={`${label}: ${current?.label ?? ""}`}
-        className={`group inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl border border-ink-200 bg-white pl-3 pr-2.5 text-[13px] text-[#55664c] outline-none transition-colors hover:border-ink-400 focus-visible:border-ink-900 focus-visible:ring-2 focus-visible:ring-ink-900/10 data-[state=open]:border-ink-900 ${className}`}
+        className={`group inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border border-ink-200 bg-white pl-3 pr-2.5 text-[13px] text-[#55664c] outline-none transition-colors hover:border-ink-400 focus-visible:border-ink-900 focus-visible:ring-2 focus-visible:ring-ink-900/10 data-[state=open]:border-ink-900 ${className}`}
       >
         <span>{label}</span>
         <span className="max-w-[160px] truncate font-medium text-ink-900">

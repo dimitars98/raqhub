@@ -223,6 +223,14 @@
     "cancelBooking": "Otkaži"
   },
   "adminBookings": {
+    "sort": {
+      "label": "Sortiraj",
+      "newest": "Najnovije prvo",
+      "oldest": "Najstarije prvo",
+      "upcoming": "Predstojeće prvo",
+      "priceHigh": "Cena: od najviše",
+      "priceLow": "Cena: od najniže"
+    },
     "statusFailed": "Rezervacija nije mogla da se promeni. Pokušajte ponovo.",
     "title": "Rezervacije",
     "total": "ukupno",
@@ -412,6 +420,12 @@
     "americano": "Americano"
   },
   "members": {
+    "sort": {
+      "label": "Sortiraj",
+      "name": "Ime A–Ž",
+      "recent": "Nedavno učlanjeni",
+      "ending": "Uskoro ističu"
+    },
     "errors": {
       "duplicateEmail": "Već postoji član sa ovom e-poštom.",
       "duplicatePhone": "Već postoji član sa ovim brojem telefona.",
