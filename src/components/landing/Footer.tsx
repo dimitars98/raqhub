@@ -35,6 +35,7 @@ export default async function Footer() {
                   [t("links.features"), `/${locale}#features`],
                   [t("links.how"), `/${locale}#how`],
                   [t("links.pricing"), `/${locale}#pricing`],
+                  [t("links.findCourts"), `/${locale}/courts`],
                 ],
               },
               {

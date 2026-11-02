@@ -1,0 +1,83 @@
+# Nightly copy of the RaqHub database, kept for 30 days.
+#
+# Supabase's free plan has no automatic backups, so this makes one every
+# night: the club data (public), the user accounts (auth) and the list of
+# uploaded files (storage; the photos themselves stay in Supabase Storage).
+# The copy is encrypted, so only someone with BACKUP_PASSPHRASE can open it.
+#
+# Setup (once), in GitHub → the repo → Settings → Secrets and variables → Actions:
+#   SUPABASE_DB_URL    Supabase → Connect → "Session pooler" connection string,
+#                      with the database password filled in. (The direct
+#                      connection doesn't work from GitHub: it's IPv6 only.)
+#   BACKUP_PASSPHRASE  A long random password. Keep it in your password
+#                      manager: without it a backup can't be opened.
+#
+# Run it by hand: Actions → "Nightly database backup" → Run workflow.
+# Download a backup: open a run → Artifacts at the bottom.
+#
+# Restore (only if something went really wrong; try it on a new project first):
+#   gpg -d raqhub-YYYY-MM-DD.dump.gpg > raqhub.dump
+#   pg_restore --no-owner --no-privileges -d "<connection string>" raqhub.dump
+
+name: Nightly database backup
+
+on:
+  schedule:
+    - cron: "17 2 * * *" # every night at 02:17 UTC (03:17 in Skopje)
+  workflow_dispatch:
+
+concurrency:
+  group: backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check the secrets are set
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          PASS: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          if [ -z "$DB_URL" ] || [ -z "$PASS" ]; then
+            echo "::error::Add SUPABASE_DB_URL and BACKUP_PASSPHRASE under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - name: Dump the database
+        env:
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          set -euo pipefail
+          # pg_dump 17 reads databases of Postgres 15 and 17 alike.
+          docker run --rm -e DB_URL postgres:17 \
+            pg_dump "$DB_URL" --format=custom --no-owner --no-privileges \
+              --schema=public --schema=auth --schema=storage \
+            > raqhub.dump
+          size=$(stat -c %s raqhub.dump)
+          echo "Dump size: $size bytes"
+          # A real dump is far bigger than this; a tiny file means it failed.
+          if [ "$size" -lt 10000 ]; then
+            echo "::error::The backup is suspiciously small ($size bytes)."
+            exit 1
+          fi
+
+      - name: Encrypt it
+        env:
+          PASS: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          name="raqhub-$(date -u +%F).dump.gpg"
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$PASS" \
+            --symmetric --cipher-algo AES256 --output "$name" raqhub.dump
+          rm raqhub.dump
+          echo "BACKUP_FILE=$name" >> "$GITHUB_ENV"
+
+      - name: Keep it for 30 days
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BACKUP_FILE }}
+          path: ${{ env.BACKUP_FILE }}
+          retention-days: 30
+          if-no-files-found: error

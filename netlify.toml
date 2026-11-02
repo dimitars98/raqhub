@@ -1,0 +1,8 @@
+# Netlify hosting. Netlify recognises Next.js by itself (its OpenNext
+# adapter); this only pins the build so it's the same on every deploy.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
