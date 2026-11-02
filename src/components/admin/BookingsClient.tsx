@@ -477,6 +477,7 @@ export default function BookingsClient({
           onChange={(v) => setSort(v as SortKey)}
           options={SORTS.map((k) => ({ value: k, label: t(`sort.${k}`) }))}
           align="end"
+          labelInMenu
           className="lg:ml-auto"
         />
       </div>

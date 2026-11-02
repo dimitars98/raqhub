@@ -713,6 +713,7 @@ export default function MembersClient({
             label={t("sort.label")}
             value={sort}
             onChange={(v) => refilter(setSortPick)(v as SortKey)}
+            labelInMenu
             options={SORTS.map((k) => ({ value: k, label: t(`sort.${k}`) }))}
           />
           <FilterSelect
