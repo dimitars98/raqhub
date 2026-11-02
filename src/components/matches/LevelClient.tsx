@@ -85,7 +85,7 @@ export default function LevelClient({
         <p className="mt-1 text-sm leading-relaxed text-ink-600">{t("levelIntro")}</p>
       </div>
 
-      <div role="tablist" aria-label={t("sport")} className="grid grid-cols-3 gap-1 rounded-[14px] border border-ink-100 bg-white p-1">
+      <div role="tablist" aria-label={t("sport")} className="grid grid-cols-3 gap-1 rounded-full border border-ink-100 bg-white p-1">
         {MATCH_SPORTS.map((s) => {
           const l = levels.find((x) => x.sport === s);
           return (
@@ -98,8 +98,8 @@ export default function LevelClient({
                 setSport(s);
                 setSaved(false);
               }}
-              className={`flex h-12 flex-col items-center justify-center rounded-[10px] text-[13px] ${
-                sport === s ? "bg-ink-900 font-semibold text-white" : "text-ink-600 hover:bg-ink-50"
+              className={`flex h-12 flex-col items-center justify-center rounded-full text-[13px] ${
+                sport === s ? "bg-brand-900 font-semibold text-white" : "text-ink-600 hover:bg-ink-50"
               }`}
             >
               {labels.sport(s)}

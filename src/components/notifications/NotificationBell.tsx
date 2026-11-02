@@ -119,7 +119,7 @@ export default function NotificationBell({
                 onClick={() => setUnreadOnly(only)}
                 className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                   unreadOnly === only
-                    ? "border-[#111c0a] bg-[#111c0a] font-semibold text-white"
+                    ? "border-brand-900 bg-brand-900 font-semibold text-white"
                     : "border-[#e8ede4] text-[#3d4f35] hover:border-[#d0d9c9]"
                 }`}
               >

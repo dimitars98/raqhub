@@ -840,7 +840,7 @@ export default function TimetableClient({ courts, bookings, closures = [], openi
                   aria-selected={on}
                   onClick={() => setMobileCourt(c.id)}
                   className={`inline-flex h-10 shrink-0 items-center gap-2 rounded-full border px-3.5 text-[13px] font-semibold ${
-                    on ? "border-[#111c0a] bg-[#111c0a] text-white" : "border-[#d0d9c9] bg-white text-[#3d4f35]"
+                    on ? "border-brand-900 bg-brand-900 text-white" : "border-[#d0d9c9] bg-white text-[#3d4f35]"
                   }`}
                 >
                   <span aria-hidden="true" className="size-3 rounded" style={swatchStyle(courtColor(c))} />

@@ -300,7 +300,7 @@ export default function GroupClient({
       )}
 
       {/* Tabs */}
-      <div role="tablist" aria-label={group.name} className="mb-5 flex gap-1 overflow-x-auto border-b border-ink-100">
+      <div role="tablist" aria-label={group.name} className="-mx-4 mb-5 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:px-0">
         {tabs.map((x) => (
           <button
             key={x.key}
@@ -308,13 +308,13 @@ export default function GroupClient({
             role="tab"
             aria-selected={tab === x.key}
             onClick={() => setTab(x.key)}
-            className={`-mb-px shrink-0 whitespace-nowrap border-b-2 px-3.5 py-2.5 text-sm transition-colors ${
-              tab === x.key ? "border-ink-900 font-semibold text-ink-900" : "border-transparent text-ink-600 hover:text-ink-900"
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-2 text-[13px] transition-colors ${
+              tab === x.key ? "border-brand-900 bg-brand-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600 hover:border-ink-200"
             }`}
           >
             {x.label}{" "}
             {x.count !== undefined && (
-              <span className={x.accent ? "font-semibold text-court-600" : "text-ink-400"}>{x.count}</span>
+              <span className={tab === x.key ? "opacity-70" : x.accent ? "font-semibold text-court-600" : "text-ink-400"}>{x.count}</span>
             )}
           </button>
         ))}
@@ -1050,7 +1050,7 @@ function Sessions({
               setShown(12);
             }}
             className={`rounded-full border px-3.5 py-2 text-[13px] ${
-              which === k ? "border-ink-900 bg-ink-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600"
+              which === k ? "border-brand-900 bg-brand-900 font-semibold text-white" : "border-ink-100 bg-white text-ink-600"
             }`}
           >
             {td(k)}

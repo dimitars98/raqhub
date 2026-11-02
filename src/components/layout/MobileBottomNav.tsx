@@ -108,10 +108,10 @@ export default function MobileBottomNav({
                 key={href}
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl py-1 focus-visible:outline-2 focus-visible:outline-[#a8d832]"
+                className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-full py-1 focus-visible:outline-2 focus-visible:outline-[#a8d832]"
               >
                 <span
-                  className={`flex h-9 w-14 items-center justify-center rounded-2xl transition-colors duration-200 ${
+                  className={`flex h-9 w-14 items-center justify-center rounded-full transition-colors duration-200 ${
                     active ? "bg-[#a8d832]/15" : ""
                   }`}
                 >
@@ -143,10 +143,10 @@ export default function MobileBottomNav({
             aria-haspopup="dialog"
             aria-expanded={moreOpen}
             onClick={() => setMoreOpen(true)}
-            className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl py-1 focus-visible:outline-2 focus-visible:outline-[#a8d832]"
+            className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-full py-1 focus-visible:outline-2 focus-visible:outline-[#a8d832]"
           >
             <span
-              className={`flex h-9 w-14 items-center justify-center rounded-2xl ${
+              className={`flex h-9 w-14 items-center justify-center rounded-full ${
                 moreActive || moreOpen ? "bg-[#a8d832]/15" : ""
               }`}
             >
@@ -227,7 +227,7 @@ export default function MobileBottomNav({
                         href={href}
                         onClick={() => setMoreOpen(false)}
                         aria-current={active ? "page" : undefined}
-                        className={`flex min-h-14 items-center gap-4 rounded-2xl border px-4 transition-colors ${
+                        className={`flex min-h-14 items-center gap-4 rounded-full border px-4 transition-colors ${
                           active
                             ? "border-[#a8d832]/40 bg-[#a8d832]/10 text-[#111c0a]"
                             : "border-gray-200/70 bg-white text-gray-700 hover:bg-gray-50"
@@ -255,7 +255,7 @@ export default function MobileBottomNav({
                     type="button"
                     onClick={handleMobileSignOut}
                     disabled={signingOut}
-                    className="flex min-h-14 w-full items-center gap-4 rounded-2xl px-4 text-left text-red-600 transition-colors hover:bg-red-50 disabled:cursor-wait disabled:opacity-60"
+                    className="flex min-h-14 w-full items-center gap-4 rounded-full px-4 text-left text-red-600 transition-colors hover:bg-red-50 disabled:cursor-wait disabled:opacity-60"
                   >
                     <LogOut size={20} strokeWidth={1.8} aria-hidden="true" />
 

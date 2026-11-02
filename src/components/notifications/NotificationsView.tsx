@@ -67,7 +67,7 @@ export default function NotificationsView({
               onClick={() => setFilter(tab)}
               className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-2 text-[13px] transition-colors ${
                 filter === tab
-                  ? "border-[#111c0a] bg-[#111c0a] font-semibold text-white"
+                  ? "border-brand-900 bg-brand-900 font-semibold text-white"
                   : "border-[#e8ede4] bg-white text-[#3d4f35] hover:border-[#d0d9c9]"
               }`}
             >

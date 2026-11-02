@@ -97,7 +97,7 @@ export default function MatchesClient({
       <div
         role="tablist"
         aria-label={t("sport")}
-        className="grid grid-cols-4 gap-1 rounded-[14px] border border-ink-100 bg-white p-1"
+        className="grid grid-cols-4 gap-1 rounded-full border border-ink-100 bg-white p-1"
       >
         {(["all", ...MATCH_SPORTS] as const).map((s) => (
           <button
@@ -106,8 +106,8 @@ export default function MatchesClient({
             role="tab"
             aria-selected={sport === s}
             onClick={() => setSport(s)}
-            className={`h-10 rounded-[10px] text-[13px] transition-colors ${
-              sport === s ? "bg-ink-900 font-semibold text-white" : "text-ink-600 hover:bg-ink-50"
+            className={`h-10 rounded-full text-[13px] transition-colors ${
+              sport === s ? "bg-brand-900 font-semibold text-white" : "text-ink-600 hover:bg-ink-50"
             }`}
           >
             {s === "all" ? t("allSports") : labels.sport(s)}

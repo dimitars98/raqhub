@@ -164,7 +164,7 @@ export default function GroupsClient({
                     onClick={() => setTab(k)}
                     className={`rounded-full border px-3.5 py-2 text-[13px] transition-colors ${
                       tab === k
-                        ? "border-ink-900 bg-ink-900 font-semibold text-white"
+                        ? "border-brand-900 bg-brand-900 font-semibold text-white"
                         : "border-ink-100 bg-white text-ink-600 hover:border-ink-200"
                     }`}
                   >
