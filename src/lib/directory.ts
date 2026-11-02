@@ -66,8 +66,22 @@ function visitorClient() {
   );
 }
 
-/** Active, bookable clubs with a city and at least one active court. */
+/**
+ * Active, bookable clubs with a city and at least one active court.
+ * Never throws: if the database can't be reached (e.g. while building without
+ * its address), the directory is just empty.
+ */
 export async function loadDirectory(): Promise<DirectoryClub[]> {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return [];
+  try {
+    return await readDirectory();
+  } catch (error) {
+    console.error("loadDirectory failed:", error);
+    return [];
+  }
+}
+
+async function readDirectory(): Promise<DirectoryClub[]> {
   const db = visitorClient();
   const { data: clubs } = await db
     .from("clubs")
