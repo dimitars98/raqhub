@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { eventMetadata, loadEventCard } from "@/lib/sharePreview";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { format } from "date-fns";
@@ -23,11 +24,14 @@ async function load(id: string) {
   return { supabase, view: data as unknown as LeagueView | null };
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params;
-  const { view } = await load(id);
-  if (!view) return {};
-  return { title: `${view.league.name} · ${view.club.name}` };
+// Title, description and the picture shown when the link is shared.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; id: string }>;
+}): Promise<Metadata> {
+  const { locale, id } = await params;
+  return eventMetadata(await loadEventCard("league", id), locale);
 }
 
 /** A league's public page: details, sign-up, players, boxes and results. */

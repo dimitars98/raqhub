@@ -1,4 +1,20 @@
 {
+  "sharePreview": {
+    "kind": {
+      "league": "Ligue",
+      "tournament": "Tournoi",
+      "americano": "Americano",
+      "mexicano": "Mexicano"
+    },
+    "status": {
+      "open": "Inscriptions ouvertes",
+      "closed": "Inscriptions fermées",
+      "started": "En cours",
+      "running": "En cours",
+      "finished": "Terminé"
+    },
+    "description": "{kind} · {sport} · {place}. {when}. Voyez les joueurs, le tableau et les résultats, et inscrivez-vous sur RaqHub."
+  },
   "directory": {
     "signIn": "Se connecter",
     "breadcrumb": "Fil d’Ariane",

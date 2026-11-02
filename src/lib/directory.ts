@@ -58,7 +58,8 @@ export function citySlug(city: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-function visitorClient() {
+/** Reads the database as a visitor who isn't signed in. */
+export function visitorClient() {
   return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

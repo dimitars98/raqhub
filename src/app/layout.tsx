@@ -3,6 +3,9 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
+  // The site's address, so shared-link pictures (opengraph-image) get a full
+  // https://raqhub.com/... URL instead of a localhost one.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://raqhub.com"),
   title: { default: "RaqHub", template: "%s | RaqHub" },
   description: "Book tennis, padel and pickleball courts and coaches near you.",
 };

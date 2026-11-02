@@ -1,4 +1,20 @@
 {
+  "sharePreview": {
+    "kind": {
+      "league": "Liga",
+      "tournament": "Turne",
+      "americano": "Americano",
+      "mexicano": "Mexicano"
+    },
+    "status": {
+      "open": "Regjistrimet hapur",
+      "closed": "Regjistrimet mbyllur",
+      "started": "Në zhvillim",
+      "running": "Në zhvillim",
+      "finished": "Përfunduar"
+    },
+    "description": "{kind} · {sport} · {place}. {when}. Shih lojtarët, shortin dhe rezultatet dhe regjistrohu në RaqHub."
+  },
   "directory": {
     "signIn": "Hyr",
     "breadcrumb": "Navigimi",

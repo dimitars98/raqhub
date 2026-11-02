@@ -1,4 +1,20 @@
 {
+  "sharePreview": {
+    "kind": {
+      "league": "Лига",
+      "tournament": "Турнир",
+      "americano": "Американо",
+      "mexicano": "Мексикано"
+    },
+    "status": {
+      "open": "Пријавите се отворени",
+      "closed": "Пријавите се затворени",
+      "started": "Во тек",
+      "running": "Во тек",
+      "finished": "Завршено"
+    },
+    "description": "{kind} · {sport} · {place}. {when}. Погледни ги играчите, жребот и резултатите и пријави се на RaqHub."
+  },
   "directory": {
     "signIn": "Најава",
     "breadcrumb": "Навигација",

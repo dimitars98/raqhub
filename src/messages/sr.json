@@ -1,4 +1,20 @@
 {
+  "sharePreview": {
+    "kind": {
+      "league": "Liga",
+      "tournament": "Turnir",
+      "americano": "Americano",
+      "mexicano": "Mexicano"
+    },
+    "status": {
+      "open": "Prijave otvorene",
+      "closed": "Prijave zatvorene",
+      "started": "U toku",
+      "running": "U toku",
+      "finished": "Završeno"
+    },
+    "description": "{kind} · {sport} · {place}. {when}. Pogledaj igrače, žreb i rezultate i prijavi se na RaqHub."
+  },
   "directory": {
     "signIn": "Prijava",
     "breadcrumb": "Navigacija",

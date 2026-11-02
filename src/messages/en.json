@@ -1,4 +1,20 @@
 {
+  "sharePreview": {
+    "kind": {
+      "league": "League",
+      "tournament": "Tournament",
+      "americano": "Americano",
+      "mexicano": "Mexicano"
+    },
+    "status": {
+      "open": "Sign-ups open",
+      "closed": "Sign-ups closed",
+      "started": "In progress",
+      "running": "In progress",
+      "finished": "Finished"
+    },
+    "description": "{kind} · {sport} · {place}. {when}. See the players, draw and results, and sign up on RaqHub."
+  },
   "directory": {
     "signIn": "Sign in",
     "breadcrumb": "Breadcrumb",

@@ -1,4 +1,20 @@
 {
+  "sharePreview": {
+    "kind": {
+      "league": "Lega",
+      "tournament": "Torneo",
+      "americano": "Americano",
+      "mexicano": "Mexicano"
+    },
+    "status": {
+      "open": "Iscrizioni aperte",
+      "closed": "Iscrizioni chiuse",
+      "started": "In corso",
+      "running": "In corso",
+      "finished": "Concluso"
+    },
+    "description": "{kind} · {sport} · {place}. {when}. Guarda giocatori, tabellone e risultati e iscriviti su RaqHub."
+  },
   "directory": {
     "signIn": "Accedi",
     "breadcrumb": "Percorso",
