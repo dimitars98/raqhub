@@ -7,15 +7,19 @@ import Modal from "@/components/ui/Modal";
 import { useRouter } from "@/i18n/navigation";
 import {
   createCourts,
+  removeCourtImage,
   toggleCourt,
   updateCourt,
+  uploadCourtImage,
 } from "@/app/[locale]/admin/courts/actions";
 import { MAX_COURTS_AT_ONCE } from "@/lib/plans";
 import { SPORTS, SURFACES_BY_SPORT } from "@/lib/labels";
 import { useLabels } from "@/hooks/useLabels";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import SelectField from "@/components/ui/SelectField";
-import { Power } from "lucide-react";
+import { ImagePlus, Power, Trash2 } from "lucide-react";
+import CourtArt from "@/components/courts/CourtArt";
+import { resizeImage } from "@/lib/resizeImage";
 import { ActionButton, EditButton } from "@/components/ui/ActionButton";
 import { defaultColor, colorsFor, courtColor, swatchStyle, type CourtColor } from "@/lib/courtColors";
 
@@ -34,6 +38,12 @@ const EMPTY_FORM = {
   /** How many identical courts to add (new courts only). */
   count: "1",
 };
+
+/** A photo picked in the form, uploaded when the court is saved. */
+type Photo = { file: Blob | null; preview: string | null; remove: boolean };
+const NO_PHOTO: Photo = { file: null, preview: null, remove: false };
+/** After the browser has shrunk it, as the server action allows. */
+const MAX_PHOTO_BYTES = 1024 * 1024;
 
 interface Props {
   courts: Court[];
@@ -55,6 +65,11 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
   const [editing, setEditing] = useState<Court | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [loading, setLoading] = useState(false);
+  const [photo, setPhoto] = useState<Photo>(NO_PHOTO);
+  const [photoBusy, setPhotoBusy] = useState(false);
+  const [photoError, setPhotoError] = useState<"notImage" | "tooBig" | null>(null);
+  // The court saved but its photo didn't upload.
+  const [photoFailed, setPhotoFailed] = useState(false);
   const router = useRouter();
 
   const labels = useLabels();
@@ -75,10 +90,52 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       ? courts
       : courts.filter((c) => c.sport === sportFilter);
 
+  const resetPhoto = () => {
+    if (photo.preview) URL.revokeObjectURL(photo.preview);
+    setPhoto(NO_PHOTO);
+    setPhotoError(null);
+  };
+
   const openAdd = () => {
     setEditing(null);
     setForm(EMPTY_FORM);
+    resetPhoto();
     setShowModal(true);
+  };
+
+  const pickPhoto = async (file: File | undefined) => {
+    if (!file) return;
+    setPhotoError(null);
+    if (!file.type.startsWith("image/")) return setPhotoError("notImage");
+    setPhotoBusy(true);
+    try {
+      const small = await resizeImage(file);
+      if (small.size > MAX_PHOTO_BYTES) return setPhotoError("tooBig");
+      if (photo.preview) URL.revokeObjectURL(photo.preview);
+      setPhoto({ file: small, preview: URL.createObjectURL(small), remove: false });
+    } catch {
+      // A format the browser can't open (e.g. some HEIC photos).
+      setPhotoError("notImage");
+    } finally {
+      setPhotoBusy(false);
+    }
+  };
+
+  /** Uploads or removes the photo of the courts just saved. False if it failed. */
+  const savePhoto = async (ids: string[]) => {
+    if (photo.file) {
+      const fd = new FormData();
+      fd.append("image", photo.file, "court.jpg");
+      fd.append("courtIds", ids.join(","));
+      const result = await uploadCourtImage(fd);
+      if (!result.ok) return false;
+      setCourts((prev) => prev.map((c) => (ids.includes(c.id) ? { ...c, image_url: result.url } : c)));
+    } else if (photo.remove && ids.length === 1) {
+      const result = await removeCourtImage(ids[0]);
+      if (!result.ok) return false;
+      setCourts((prev) => prev.map((c) => (c.id === ids[0] ? { ...c, image_url: null } : c)));
+    }
+    return true;
   };
 
   const openEdit = (c: Court) => {
@@ -94,6 +151,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       color: courtColor(c),
       count: "1",
     });
+    resetPhoto();
     setShowModal(true);
   };
 
@@ -111,6 +169,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
     setLoading(true);
     setSaveError(false);
     setLimitError(false);
+    setPhotoFailed(false);
 
     const payload = {
       name: form.name,
@@ -123,6 +182,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
       color: form.color,
     };
 
+    let ids: string[] = [];
     try {
       const current = editing;
       if (current) {
@@ -134,6 +194,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
         }
         const saved = result.data;
         setCourts((prev) => prev.map((c) => (c.id === current.id ? saved : c)));
+        ids = [saved.id];
       } else {
         const result = await createCourts(payload, count);
         if (!result.ok) {
@@ -143,7 +204,11 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
         }
         const saved = result.data;
         setCourts((prev) => [...saved, ...prev]);
+        ids = saved.map((c) => c.id);
       }
+      // The court is saved either way; a failed photo is said on the page.
+      if (!(await savePhoto(ids))) setPhotoFailed(true);
+      resetPhoto();
       setShowModal(false);
     } catch {
       setSaveError(true);
@@ -257,6 +322,12 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
         </p>
       )}
 
+      {photoFailed && (
+        <p role="alert" className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          {t("photoError")}
+        </p>
+      )}
+
       {/* Sport filter tabs */}
       <div className="flex gap-2 mb-4 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 [scrollbar-width:none]">
         {(["all", ...SPORTS] as const).map((s) => (
@@ -290,54 +361,54 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") openCourt(c);
               }}
-              className={`bg-white border border-ink-100 rounded-2xl p-4 shadow-[0_1px_2px_rgba(17,28,10,0.04)] cursor-pointer active:bg-ink-50 transition-colors ${
+              className={`overflow-hidden bg-white border border-ink-100 rounded-2xl shadow-[0_1px_2px_rgba(17,28,10,0.04)] cursor-pointer active:bg-ink-50 transition-colors ${
                 c.is_active ? "" : "opacity-75"
               }`}
             >
-              <div className="flex items-start gap-3">
-                <span
-                  aria-hidden="true"
-                  className="size-11 shrink-0 rounded-xl ring-1 ring-black/10"
-                  style={swatchStyle(courtColor(c))}
-                />
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="font-semibold text-ink-900 truncate">
-                      {c.name}
+              {/* The club's photo, or the court drawn in its colour */}
+              <div className="relative h-24 w-full overflow-hidden">
+                <CourtArt court={c} />
+                <span className="absolute top-2.5 left-2.5 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+                  {labels.sport(c.sport)}
+                </span>
+                <span className="absolute top-2.5 right-2.5 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-ink-900">
+                  {labels.inOut(c.is_indoor)}
+                </span>
+              </div>
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="font-semibold text-ink-900 truncate">
+                    {c.name}
+                  </div>
+                  <div className="shrink-0">{statusBadge(c)}</div>
+                </div>
+
+                {c.description && (
+                  <div className="mt-2 text-xs text-ink-400 line-clamp-2">
+                    {c.description}
+                  </div>
+                )}
+
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <div className="rounded-xl bg-ink-50 px-3 py-2">
+                    <div className="text-[11px] text-ink-400">
+                      {t("pricePerHour")}
                     </div>
-                    <div className="shrink-0">{statusBadge(c)}</div>
+                    <div className="text-base font-semibold text-ink-900">
+                      €{c.price_per_hour}
+                    </div>
                   </div>
-                  <div className="text-xs text-ink-400 mt-0.5">
-                    {labels.sport(c.sport)} · {labels.inOut(c.is_indoor)}
+                  <div className="rounded-xl bg-ink-50 px-3 py-2 min-w-0">
+                    <div className="text-[11px] text-ink-400">{t("surface")}</div>
+                    <div className="text-sm text-ink-900 truncate">
+                      {labels.surface(c.surface)} ·{" "}
+                      {labels.courtColor(courtColor(c))}
+                    </div>
                   </div>
                 </div>
+
+                <div className="mt-4">{actions(c, "card")}</div>
               </div>
-
-              {c.description && (
-                <div className="mt-2 text-xs text-ink-400 line-clamp-2">
-                  {c.description}
-                </div>
-              )}
-
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                <div className="rounded-xl bg-ink-50 px-3 py-2">
-                  <div className="text-[11px] text-ink-400">
-                    {t("pricePerHour")}
-                  </div>
-                  <div className="text-base font-semibold text-ink-900">
-                    €{c.price_per_hour}
-                  </div>
-                </div>
-                <div className="rounded-xl bg-ink-50 px-3 py-2 min-w-0">
-                  <div className="text-[11px] text-ink-400">{t("surface")}</div>
-                  <div className="text-sm text-ink-900 truncate">
-                    {labels.surface(c.surface)} ·{" "}
-                    {labels.courtColor(courtColor(c))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4">{actions(c, "card")}</div>
             </div>
           ))
         )}
@@ -377,14 +448,21 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                   }`}
                 >
                   <td className="px-5 py-3.5">
-                    <div className="font-medium text-ink-900 whitespace-nowrap">
-                      {c.name}
-                    </div>
-                    {c.description && (
-                      <div className="text-xs text-ink-400 mt-0.5 truncate max-w-[180px]">
-                        {c.description}
+                    <div className="flex items-center gap-3">
+                      <span aria-hidden="true" className="h-9 w-14 shrink-0 overflow-hidden rounded-lg ring-1 ring-black/5">
+                        <CourtArt court={c} />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="font-medium text-ink-900 whitespace-nowrap">
+                          {c.name}
+                        </div>
+                        {c.description && (
+                          <div className="text-xs text-ink-400 mt-0.5 truncate max-w-[180px]">
+                            {c.description}
+                          </div>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </td>
                   <td className="px-5 py-3.5 text-ink-600 whitespace-nowrap">
                     {labels.sport(c.sport)}
@@ -507,6 +585,64 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
                 })}
               </div>
             </fieldset>
+            {/* Photo: optional; without one the drawing above is shown */}
+            <fieldset className="flex flex-col gap-2">
+              <legend className="mb-1 block text-xs text-ink-400">{t("photo")}</legend>
+              <div className="relative h-32 w-full overflow-hidden rounded-xl ring-1 ring-black/5">
+                <CourtArt
+                  court={{
+                    sport: form.sport,
+                    surface: form.surface,
+                    color: form.color,
+                    image_url: photo.preview ?? (photo.remove ? null : editing?.image_url),
+                  }}
+                />
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <label
+                  className={`inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3.5 text-[13px] font-medium text-ink-900 transition-colors hover:border-ink-400 focus-within:ring-2 focus-within:ring-brand-400 ${
+                    photoBusy ? "pointer-events-none opacity-50" : ""
+                  }`}
+                >
+                  <ImagePlus size={15} aria-hidden="true" />
+                  {photoBusy
+                    ? t("photoReading")
+                    : photo.preview || (!photo.remove && editing?.image_url)
+                      ? t("changePhoto")
+                      : t("uploadPhoto")}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="sr-only"
+                    disabled={photoBusy}
+                    onChange={(e) => {
+                      pickPhoto(e.target.files?.[0]);
+                      e.target.value = "";
+                    }}
+                  />
+                </label>
+                {(photo.preview || (!photo.remove && editing?.image_url)) && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (photo.preview) URL.revokeObjectURL(photo.preview);
+                      setPhoto({ file: null, preview: null, remove: true });
+                    }}
+                    className="inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-red-600 transition-colors hover:bg-red-50"
+                  >
+                    <Trash2 size={14} aria-hidden="true" />
+                    {t("removePhoto")}
+                  </button>
+                )}
+              </div>
+              <p role={photoError ? "alert" : undefined} className={`text-xs ${photoError ? "text-red-600" : "text-ink-400"}`}>
+                {photoError === "notImage"
+                  ? t("photoNotImage")
+                  : photoError === "tooBig"
+                    ? t("photoTooBig")
+                    : t("photoHint")}
+              </p>
+            </fieldset>
             <Modal.Grid>
               <Modal.Field label={t("pricePerHour")}>
                 <input
@@ -583,7 +719,7 @@ export default function CourtsClient({ courts: initial, maxCourts }: Props) {
             </button>
             <button
               onClick={handleSave}
-              disabled={!form.name || !form.price_per_hour || loading}
+              disabled={!form.name || !form.price_per_hour || loading || photoBusy}
               className="btn-primary flex-1 disabled:opacity-40"
             >
               {loading

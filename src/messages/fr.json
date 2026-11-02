@@ -296,6 +296,15 @@
     "bookingFailed": "Échec de la réservation"
   },
   "adminCourts": {
+    "photo": "Photo",
+    "uploadPhoto": "Ajouter une photo",
+    "changePhoto": "Changer la photo",
+    "removePhoto": "Supprimer la photo",
+    "photoReading": "Préparation de la photo…",
+    "photoHint": "Facultatif. Sans photo, les joueurs voient le dessin du terrain.",
+    "photoNotImage": "Ce fichier ne peut pas être ouvert comme photo. Choisissez un JPG ou un PNG.",
+    "photoTooBig": "Cette photo est trop lourde. Essayez-en une plus petite.",
+    "photoError": "Le terrain a été enregistré, mais la photo n'a pas été envoyée. Réessayez depuis Modifier.",
     "title": "Courts",
     "total": "total",
     "addCourt": "Ajouter un court",

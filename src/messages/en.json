@@ -296,6 +296,15 @@
     "bookingFailed": "Booking failed"
   },
   "adminCourts": {
+    "photo": "Photo",
+    "uploadPhoto": "Upload photo",
+    "changePhoto": "Change photo",
+    "removePhoto": "Remove photo",
+    "photoReading": "Preparing photo…",
+    "photoHint": "Optional. Without a photo, players see the court drawing.",
+    "photoNotImage": "That file isn't a photo we can open. Choose a JPG or PNG.",
+    "photoTooBig": "That photo is too large. Try a smaller one.",
+    "photoError": "The court was saved, but its photo didn't upload. Try again from Edit.",
     "title": "Courts",
     "total": "total",
     "addCourt": "Add court",

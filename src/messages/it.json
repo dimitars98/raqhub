@@ -296,6 +296,15 @@
     "bookingFailed": "Prenotazione fallita"
   },
   "adminCourts": {
+    "photo": "Foto",
+    "uploadPhoto": "Carica foto",
+    "changePhoto": "Cambia foto",
+    "removePhoto": "Rimuovi foto",
+    "photoReading": "Preparazione della foto…",
+    "photoHint": "Facoltativa. Senza foto, i giocatori vedono il disegno del campo.",
+    "photoNotImage": "Questo file non si apre come foto. Scegli un JPG o un PNG.",
+    "photoTooBig": "La foto è troppo grande. Provane una più piccola.",
+    "photoError": "Il campo è stato salvato, ma la foto non è stata caricata. Riprova da Modifica.",
     "title": "Campi",
     "total": "totale",
     "addCourt": "Aggiungi campo",

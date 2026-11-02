@@ -296,6 +296,15 @@
     "bookingFailed": "Rezervimi dështoi"
   },
   "adminCourts": {
+    "photo": "Foto",
+    "uploadPhoto": "Ngarko foto",
+    "changePhoto": "Ndrysho foton",
+    "removePhoto": "Hiq foton",
+    "photoReading": "Duke përgatitur foton…",
+    "photoHint": "Opsionale. Pa foto, lojtarët shohin vizatimin e fushës.",
+    "photoNotImage": "Ky skedar nuk hapet dot si foto. Zgjidh një JPG ose PNG.",
+    "photoTooBig": "Fotoja është shumë e madhe. Provo një më të vogël.",
+    "photoError": "Fusha u ruajt, por fotoja nuk u ngarkua. Provo sërish nga Ndrysho.",
     "title": "Fushat",
     "total": "gjithsej",
     "addCourt": "Shto fushë",

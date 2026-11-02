@@ -134,7 +134,7 @@ export default async function ClubPublicPage({ params }: PageProps) {
   ] = await Promise.all([
     supabase
       .from("courts")
-      .select("id, name, sport, surface, is_indoor, price_per_hour, color")
+      .select("id, name, sport, surface, is_indoor, price_per_hour, color, image_url")
       .eq("club_id", club.id)
       .eq("is_active", true)
       .order("name"),

@@ -296,6 +296,15 @@
     "bookingFailed": "Rezervacija nije uspela"
   },
   "adminCourts": {
+    "photo": "Fotografija",
+    "uploadPhoto": "Dodaj fotografiju",
+    "changePhoto": "Promeni fotografiju",
+    "removePhoto": "Ukloni fotografiju",
+    "photoReading": "Priprema fotografije…",
+    "photoHint": "Opciono. Bez fotografije, igrači vide crtež terena.",
+    "photoNotImage": "Ova datoteka ne može da se otvori kao fotografija. Izaberi JPG ili PNG.",
+    "photoTooBig": "Fotografija je prevelika. Probaj manju.",
+    "photoError": "Teren je sačuvan, ali fotografija nije otpremljena. Pokušaj ponovo preko Izmeni.",
     "title": "Tereni",
     "total": "ukupno",
     "addCourt": "Dodaj teren",

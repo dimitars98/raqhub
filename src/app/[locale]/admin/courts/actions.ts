@@ -24,6 +24,13 @@ export type ActionResult<T> =
   | { ok: true; data: T }
   | { ok: false; reason?: "limit" };
 
+/** A court photo, after the browser has shrunk it (src/lib/resizeImage.ts). */
+const MAX_IMAGE_BYTES = 1024 * 1024;
+
+export type ImageResult =
+  | { ok: true; url: string | null }
+  | { ok: false; reason?: "notImage" | "tooBig" };
+
 /** The database refuses a court over the plan's limit (see migrations). */
 const isCourtLimit = (error: { message?: string } | null) =>
   !!error?.message?.includes("court limit");
@@ -142,4 +149,68 @@ export async function toggleCourt(
     return { ok: false };
   }
   return { ok: true, data: null };
+}
+
+/**
+ * Sets the photo of one court, or of several added together (they share it).
+ * Stored in the uploader's own folder of the public avatars bucket.
+ */
+export async function uploadCourtImage(formData: FormData): Promise<ImageResult> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const clubId = await getOwnedClubId(supabase);
+  const ids = String(formData.get("courtIds") ?? "")
+    .split(",")
+    .filter(Boolean);
+  const file = formData.get("image");
+  if (!user || !clubId || !ids.length || ids.length > MAX_COURTS_AT_ONCE) return { ok: false };
+  if (!(file instanceof Blob) || file.size === 0) return { ok: false };
+  if (!file.type.startsWith("image/")) return { ok: false, reason: "notImage" };
+  if (file.size > MAX_IMAGE_BYTES) return { ok: false, reason: "tooBig" };
+
+  // A new name each time, so browsers don't keep showing the old photo.
+  const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
+  const path = `${user.id}/court-${Date.now()}.${ext}`;
+  const { error: uploadError } = await supabase.storage
+    .from("avatars")
+    .upload(path, file, { contentType: file.type });
+  if (uploadError) {
+    console.error("uploadCourtImage failed:", uploadError);
+    return { ok: false };
+  }
+
+  const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+  const { data, error } = await supabase
+    .from("courts")
+    .update({ image_url: pub.publicUrl })
+    .in("id", ids)
+    .eq("club_id", clubId)
+    .select("id");
+  if (error || !data?.length) {
+    console.error("uploadCourtImage failed:", error);
+    return { ok: false };
+  }
+  return { ok: true, url: pub.publicUrl };
+}
+
+/** Removes a court's photo; the court is drawn again. */
+export async function removeCourtImage(id: string): Promise<ImageResult> {
+  const supabase = await createClient();
+  const clubId = await getOwnedClubId(supabase);
+  if (!clubId) return { ok: false };
+
+  const { data, error } = await supabase
+    .from("courts")
+    .update({ image_url: null })
+    .eq("id", id)
+    .eq("club_id", clubId)
+    .select("id")
+    .maybeSingle();
+  if (error || !data) {
+    console.error("removeCourtImage failed:", error);
+    return { ok: false };
+  }
+  return { ok: true, url: null };
 }

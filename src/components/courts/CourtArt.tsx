@@ -1,8 +1,21 @@
 import type { Sport, Surface } from "@/types/database";
 import { COURT_COLOR_HEX, courtColor } from "@/lib/courtColors";
 
-/** A court seen from above, in its real colour (or its surface's usual one). */
-export default function CourtArt({ court }: { court: { color?: string | null; surface: Surface; sport: Sport } }) {
+/**
+ * The club's photo of the court, or else the court seen from above, in its
+ * real colour (or its surface's usual one).
+ */
+export default function CourtArt({
+  court,
+}: {
+  court: { color?: string | null; surface: Surface; sport: Sport; image_url?: string | null };
+}) {
+  if (court.image_url) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={court.image_url} alt="" loading="lazy" className="h-full w-full object-cover" />
+    );
+  }
   const c = COURT_COLOR_HEX[courtColor(court)];
   const sport = court.sport;
   // Padel and pickleball courts are shorter; the drawing follows.

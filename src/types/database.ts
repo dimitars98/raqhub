@@ -118,6 +118,8 @@ export interface Court {
   description: string | null;
   /** The real colour (src/lib/courtColors.ts). Null: the surface's usual one. */
   color?: string | null;
+  /** A photo of the court. Null: the app draws it (CourtArt). */
+  image_url?: string | null;
   created_at: string;
   updated_at: string;
   club?: Club;

@@ -296,6 +296,15 @@
     "bookingFailed": "Buchung fehlgeschlagen"
   },
   "adminCourts": {
+    "photo": "Foto",
+    "uploadPhoto": "Foto hochladen",
+    "changePhoto": "Foto ändern",
+    "removePhoto": "Foto entfernen",
+    "photoReading": "Foto wird vorbereitet…",
+    "photoHint": "Optional. Ohne Foto sehen Spieler die Platz-Zeichnung.",
+    "photoNotImage": "Diese Datei lässt sich nicht als Foto öffnen. Wähle ein JPG oder PNG.",
+    "photoTooBig": "Das Foto ist zu groß. Versuch ein kleineres.",
+    "photoError": "Der Platz wurde gespeichert, aber das Foto wurde nicht hochgeladen. Versuch es erneut über Bearbeiten.",
     "title": "Plätze",
     "total": "gesamt",
     "addCourt": "Platz hinzufügen",
