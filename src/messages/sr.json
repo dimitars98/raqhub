@@ -1,5 +1,14 @@
 {
   "eventPage": {
+    "coverTitle": "Poster",
+    "coverHint": "Opciono. Prikazuje se na javnoj stranici i kada se link deli na WhatsApp-u ili Instagramu. Najbolje izgleda poster u portret formatu.",
+    "coverUpload": "Dodaj poster",
+    "coverChange": "Promeni poster",
+    "coverUploading": "Otpremanje…",
+    "coverRemove": "Ukloni",
+    "coverError": "Poster nije otpremljen. Pokušaj ponovo.",
+    "coverNotImage": "Ova datoteka ne može da se otvori kao slika. Izaberi JPG ili PNG.",
+    "coverTooBig": "Slika je prevelika. Probaj manju.",
     "organizedBy": "Organizuje",
     "factDate": "Datum",
     "factDates": "Datumi",

@@ -19,6 +19,7 @@ export function EventHero({
   name,
   club,
   logo,
+  cover,
   organizedBy,
   children,
 }: {
@@ -28,6 +29,8 @@ export function EventHero({
   name: string;
   club: { name: string; slug: string };
   logo: string | null;
+  /** The club's poster for the event; without one, the sport's court. */
+  cover?: string | null;
   /** "Organized by" in the page's language. */
   organizedBy: string;
   /** The <Fact> cards. */
@@ -37,13 +40,23 @@ export function EventHero({
     <section className="border-b border-ink-100 bg-[#f4f6f2]">
       <div className="mx-auto max-w-5xl px-6 pt-10 pb-8 lg:pt-14">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-          <div className="relative size-28 shrink-0 overflow-hidden rounded-3xl shadow-[0_18px_40px_-18px_rgba(17,28,10,0.45)] ring-1 ring-black/5 sm:size-36">
-            <CourtArt court={{ sport, surface: SURFACES_BY_SPORT[sport][0] }} />
-            <span className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-1.5 bg-[#111c0a]/80 py-1.5 text-[11px] font-semibold text-white">
-              <Trophy size={12} className="text-[#a8d832]" aria-hidden="true" />
-              {sportLabel}
-            </span>
-          </div>
+          {cover ? (
+            // A poster is usually portrait, like a printed one.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={cover}
+              alt=""
+              className="h-40 w-30 shrink-0 rounded-2xl object-cover shadow-[0_18px_40px_-18px_rgba(17,28,10,0.45)] ring-1 ring-black/5 sm:h-52 sm:w-39"
+            />
+          ) : (
+            <div className="relative size-28 shrink-0 overflow-hidden rounded-3xl shadow-[0_18px_40px_-18px_rgba(17,28,10,0.45)] ring-1 ring-black/5 sm:size-36">
+              <CourtArt court={{ sport, surface: SURFACES_BY_SPORT[sport][0] }} />
+              <span className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-1.5 bg-[#111c0a]/80 py-1.5 text-[11px] font-semibold text-white">
+                <Trophy size={12} className="text-[#a8d832]" aria-hidden="true" />
+                {sportLabel}
+              </span>
+            </div>
+          )}
           <div className="min-w-0">
             <span className={`${BADGE} ${status.tone}`}>{status.label}</span>
             <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-ink-900 text-balance sm:text-5xl">{name}</h1>

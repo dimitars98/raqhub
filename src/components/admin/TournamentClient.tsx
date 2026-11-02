@@ -26,6 +26,7 @@ import { dateLocale } from "@/lib/dateLocale";
 import type { Tournament, TournamentEntry, TournamentMatch } from "@/types/database";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import { DeleteButton } from "@/components/ui/ActionButton";
+import EventCoverPicker from "@/components/events/EventCoverPicker";
 
 export default function TournamentClient({
   tournament,
@@ -115,6 +116,9 @@ const { readOnly, hint } = useReadOnly();
           </button>
         </div>
       </div>
+
+      {/* Poster for the public page and shared links */}
+      <EventCoverPicker kind="tournament" id={tournament.id} url={tournament.cover_url ?? null} />
 
       {error && (
         <div role="alert" className="mb-4 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">

@@ -1,5 +1,14 @@
 {
   "eventPage": {
+    "coverTitle": "Locandina",
+    "coverHint": "Facoltativa. Appare nella pagina pubblica e quando il link viene condiviso su WhatsApp o Instagram. Una locandina verticale rende meglio.",
+    "coverUpload": "Carica locandina",
+    "coverChange": "Cambia locandina",
+    "coverUploading": "Caricamento…",
+    "coverRemove": "Rimuovi",
+    "coverError": "La locandina non è stata caricata. Riprova.",
+    "coverNotImage": "Questo file non si apre come immagine. Scegli un JPG o un PNG.",
+    "coverTooBig": "L’immagine è troppo grande. Provane una più piccola.",
     "organizedBy": "Organizzato da",
     "factDate": "Data",
     "factDates": "Date",

@@ -1,5 +1,14 @@
 {
   "eventPage": {
+    "coverTitle": "Poster",
+    "coverHint": "Opsionale. Shfaqet në faqen publike dhe kur linku ndahet në WhatsApp ose Instagram. Një poster vertikal duket më mirë.",
+    "coverUpload": "Ngarko poster",
+    "coverChange": "Ndrysho posterin",
+    "coverUploading": "Duke ngarkuar…",
+    "coverRemove": "Hiq",
+    "coverError": "Posteri nuk u ngarkua. Provo sërish.",
+    "coverNotImage": "Ky skedar nuk hapet dot si foto. Zgjidh një JPG ose PNG.",
+    "coverTooBig": "Fotoja është shumë e madhe. Provo një më të vogël.",
     "organizedBy": "Organizuar nga",
     "factDate": "Data",
     "factDates": "Datat",

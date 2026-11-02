@@ -1,5 +1,14 @@
 {
   "eventPage": {
+    "coverTitle": "Poster",
+    "coverHint": "Optional. Erscheint auf der öffentlichen Seite und wenn der Link in WhatsApp oder Instagram geteilt wird. Ein Poster im Hochformat sieht am besten aus.",
+    "coverUpload": "Poster hochladen",
+    "coverChange": "Poster ändern",
+    "coverUploading": "Wird hochgeladen…",
+    "coverRemove": "Entfernen",
+    "coverError": "Das Poster wurde nicht hochgeladen. Versuch es erneut.",
+    "coverNotImage": "Diese Datei lässt sich nicht als Bild öffnen. Wähle ein JPG oder PNG.",
+    "coverTooBig": "Das Bild ist zu groß. Versuch ein kleineres.",
     "organizedBy": "Veranstaltet von",
     "factDate": "Datum",
     "factDates": "Termine",

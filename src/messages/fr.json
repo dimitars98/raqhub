@@ -1,5 +1,14 @@
 {
   "eventPage": {
+    "coverTitle": "Affiche",
+    "coverHint": "Facultatif. Affichée sur la page publique et quand le lien est partagé sur WhatsApp ou Instagram. Une affiche au format portrait rend le mieux.",
+    "coverUpload": "Ajouter une affiche",
+    "coverChange": "Changer l’affiche",
+    "coverUploading": "Envoi…",
+    "coverRemove": "Supprimer",
+    "coverError": "L’affiche n’a pas été envoyée. Réessayez.",
+    "coverNotImage": "Ce fichier ne peut pas être ouvert comme image. Choisissez un JPG ou un PNG.",
+    "coverTooBig": "Cette image est trop lourde. Essayez-en une plus petite.",
     "organizedBy": "Organisé par",
     "factDate": "Date",
     "factDates": "Dates",

@@ -109,6 +109,7 @@ export default async function TournamentPage({
         name={tournament.name}
         club={tournament.club ?? { name: "RaqHub", slug: "" }}
         logo={(clubRow as { logo_url: string | null } | null)?.logo_url ?? null}
+        cover={tournament.cover_url ?? null}
         organizedBy={tp("organizedBy")}
       >
         <Fact icon={<CalendarDays size={18} />} label={tp("factDate")} value={date} />

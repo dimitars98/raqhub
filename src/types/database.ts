@@ -216,6 +216,8 @@ export type Database = {
 
 export interface Tournament {
   id: string;
+  /** The club's poster for it (20261103_event_posters.sql). */
+  cover_url?: string | null;
   club_id: string;
   name: string;
   sport: Sport;

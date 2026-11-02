@@ -98,6 +98,7 @@ export default async function LeaguePage({
         name={league.name}
         club={club}
         logo={(clubRow as { logo_url: string | null } | null)?.logo_url ?? null}
+        cover={league.cover_url ?? null}
         organizedBy={tp("organizedBy")}
       >
         <Fact

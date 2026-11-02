@@ -27,6 +27,8 @@ export type EventCard = {
   end?: string;
   club: string;
   city: string | null;
+  /** The club's poster for it, if it uploaded one. */
+  cover: string | null;
 };
 
 const PATH: Record<EventKind, string> = {
@@ -46,7 +48,8 @@ export async function loadEventCard(kind: EventKind, id: string): Promise<EventC
     if (kind === "americano") {
       const { data } = await db
         .from("social_events")
-        .select("name, sport, status, format, starts_at, ends_at, club:clubs(name, city)")
+        // "*": also works before the poster column exists (event_posters.sql).
+        .select("*, club:clubs(name, city)")
         .eq("id", id)
         .maybeSingle();
       if (!data) return null;
@@ -54,11 +57,12 @@ export async function loadEventCard(kind: EventKind, id: string): Promise<EventC
       return {
         kind, id, name: data.name, sport: data.sport, status: data.status, format: data.format,
         start: data.starts_at, end: data.ends_at, club: club?.name ?? "", city: club?.city ?? null,
+        cover: (data as { cover_url?: string | null }).cover_url ?? null,
       };
     }
     const { data } = await db
       .from(kind === "league" ? "leagues" : "tournaments")
-      .select("name, sport, status, starts_on, club:clubs(name, city)")
+      .select("*, club:clubs(name, city)")
       .eq("id", id)
       .maybeSingle();
     if (!data) return null;
@@ -66,6 +70,7 @@ export async function loadEventCard(kind: EventKind, id: string): Promise<EventC
     return {
       kind, id, name: data.name, sport: data.sport, status: data.status,
       start: data.starts_on, club: club?.name ?? "", city: club?.city ?? null,
+      cover: (data as { cover_url?: string | null }).cover_url ?? null,
     };
   } catch (error) {
     console.error("loadEventCard failed:", error);
@@ -148,6 +153,7 @@ export async function eventImage(card: EventCard | null, locale: string) {
   const place = info?.place ?? "";
   const when = info?.when ?? "";
   const status = info?.status ?? "";
+  const cover = card?.cover ?? null;
   const all = `RaqHub${top}${title}${place}${when}${status}`;
   const [regular, bold] = await Promise.all([loadFont(all, 500), loadFont(all, 800)]);
   const fonts = [
@@ -162,15 +168,16 @@ export async function eventImage(card: EventCard | null, locale: string) {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 56,
           background: "#111c0a",
           color: "#ffffff",
-          padding: "64px 72px",
+          padding: "56px 64px",
           // Only set when the font loaded: an undefined style breaks the picture.
           ...(fonts.length ? { fontFamily: "Noto Sans" } : {}),
         }}
       >
+        <div style={{ display: "flex", flex: 1, height: "100%", flexDirection: "column", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", fontSize: 30, fontWeight: 800, letterSpacing: -0.5 }}>
             <span>Raq</span>
@@ -197,7 +204,7 @@ export async function eventImage(card: EventCard | null, locale: string) {
           <div style={{ display: "flex", fontSize: 30, fontWeight: 500, color: "#d6f09a", textTransform: "uppercase", letterSpacing: 2 }}>
             {top}
           </div>
-          <div style={{ display: "flex", fontSize: title.length > 40 ? 64 : 80, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
+          <div style={{ display: "flex", fontSize: cover ? (title.length > 30 ? 52 : 64) : title.length > 40 ? 64 : 80, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
             {title}
           </div>
         </div>
@@ -206,6 +213,17 @@ export async function eventImage(card: EventCard | null, locale: string) {
           {place && <div style={{ display: "flex" }}>{place}</div>}
           {when && <div style={{ display: "flex" }}>{when}</div>}
         </div>
+        </div>
+        {cover && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={cover}
+            alt=""
+            width={372}
+            height={518}
+            style={{ width: 372, height: 518, objectFit: "cover", borderRadius: 24 }}
+          />
+        )}
       </div>
     ),
     // No fonts at all would break the picture; then the built-in one is used.

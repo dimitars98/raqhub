@@ -99,6 +99,7 @@ export default async function SocialPage({
         name={event.name}
         club={club}
         logo={(clubRow as { logo_url: string | null } | null)?.logo_url ?? null}
+        cover={event.cover_url ?? null}
         organizedBy={tp("organizedBy")}
       >
         <Fact icon={<CalendarDays size={18} />} label={tp("factDate")} value={when} />

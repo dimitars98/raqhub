@@ -26,6 +26,7 @@ import { roundShape, suggestedRounds, type SocialView } from "@/lib/americano";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import { DeleteButton } from "@/components/ui/ActionButton";
 import SelectField from "@/components/ui/SelectField";
+import EventCoverPicker from "@/components/events/EventCoverPicker";
 
 export default function SocialClient({
   view,
@@ -109,6 +110,9 @@ export default function SocialClient({
           </button>
         </div>
       </div>
+
+      {/* Poster for the public page and shared links */}
+      <EventCoverPicker kind="americano" id={event.id} url={event.cover_url ?? null} />
 
       {error && (
         <div role="alert" className="mb-4 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">

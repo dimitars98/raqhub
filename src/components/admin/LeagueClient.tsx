@@ -26,6 +26,7 @@ import { entryName, LEVELS, type LeagueView } from "@/lib/leagues";
 import { useReadOnly } from "@/components/admin/ReadOnly";
 import { DeleteButton } from "@/components/ui/ActionButton";
 import SelectField from "@/components/ui/SelectField";
+import EventCoverPicker from "@/components/events/EventCoverPicker";
 
 export default function LeagueClient({ view, publicUrl }: { view: LeagueView; publicUrl: string }) {
   const t = useTranslations("leagues");
@@ -114,6 +115,9 @@ export default function LeagueClient({ view, publicUrl }: { view: LeagueView; pu
           </button>
         </div>
       </div>
+
+      {/* Poster for the public page and shared links */}
+      <EventCoverPicker kind="league" id={league.id} url={league.cover_url ?? null} />
 
       {error && (
         <div role="alert" className="mb-4 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">

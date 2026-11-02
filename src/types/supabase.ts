@@ -1079,6 +1079,7 @@ export type Database = {
           sport: string
           starts_on: string
           description: string | null
+          cover_url: string | null
           max_entries: number
           entry_fee: number | null
           status: string
@@ -1092,6 +1093,7 @@ export type Database = {
           sport?: string
           starts_on: string
           description?: string | null
+          cover_url?: string | null
           max_entries?: number
           entry_fee?: number | null
           status?: string
@@ -1105,6 +1107,7 @@ export type Database = {
           sport?: string
           starts_on?: string
           description?: string | null
+          cover_url?: string | null
           max_entries?: number
           entry_fee?: number | null
           status?: string
@@ -1326,6 +1329,7 @@ export type Database = {
           level_min: number | null
           level_max: number | null
           description: string | null
+          cover_url: string | null
           status: string
           created_at: string
         }
@@ -1344,6 +1348,7 @@ export type Database = {
           level_min?: number | null
           level_max?: number | null
           description?: string | null
+          cover_url?: string | null
           status?: string
           created_at?: string
         }
@@ -1362,6 +1367,7 @@ export type Database = {
           level_min?: number | null
           level_max?: number | null
           description?: string | null
+          cover_url?: string | null
           status?: string
           created_at?: string
         }
@@ -1435,6 +1441,7 @@ export type Database = {
           level_min: number | null
           level_max: number | null
           description: string | null
+          cover_url: string | null
           status: string
           booking_ids: string[]
           created_at: string
@@ -1454,6 +1461,7 @@ export type Database = {
           level_min?: number | null
           level_max?: number | null
           description?: string | null
+          cover_url?: string | null
           status?: string
           booking_ids?: string[]
           created_at?: string
@@ -1473,6 +1481,7 @@ export type Database = {
           level_min?: number | null
           level_max?: number | null
           description?: string | null
+          cover_url?: string | null
           status?: string
           booking_ids?: string[]
           created_at?: string

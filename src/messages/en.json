@@ -1,5 +1,14 @@
 {
   "eventPage": {
+    "coverTitle": "Poster",
+    "coverHint": "Optional. Shown on the public page and when the link is shared in WhatsApp or Instagram. A portrait poster works best.",
+    "coverUpload": "Upload poster",
+    "coverChange": "Change poster",
+    "coverUploading": "Uploading…",
+    "coverRemove": "Remove",
+    "coverError": "The poster didn't upload. Try again.",
+    "coverNotImage": "That file isn't a picture we can open. Choose a JPG or PNG.",
+    "coverTooBig": "That picture is too large. Try a smaller one.",
     "organizedBy": "Organized by",
     "factDate": "Date",
     "factDates": "Dates",
