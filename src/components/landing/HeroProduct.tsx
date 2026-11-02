@@ -4,12 +4,18 @@ import {
   ArrowRight,
   Bell,
   CalendarCheck,
+  CalendarDays,
+  CalendarRange,
   Check,
   Globe,
+  LayoutDashboard,
   MapPin,
+  Menu,
+  Pencil,
   Percent,
   Repeat,
   Trophy,
+  Users,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import CourtArt from "@/components/courts/CourtArt";
@@ -80,6 +86,8 @@ export default function HeroProduct() {
   const ts = useTranslations("hero");
   const tb = useTranslations("bookCourts");
   const tm = useTranslations("myBookings");
+  const td = useTranslations("dashboard");
+  const tc = useTranslations("adminCourts");
   const labels = makeLabels(useTranslations("labels"));
   const locale = useLocale();
   const dfLocale = dateLocale(locale);
@@ -328,12 +336,12 @@ export default function HeroProduct() {
                   </div>
                 </div>
 
-                {/* Phone: the players' "Book a court" page */}
+                {/* Phone: the club's Courts page, as the admin sees it */}
                 <div className="absolute left-[145px] top-0 h-[560px] w-[270px] -rotate-3 rounded-[42px] bg-ink-900 p-2.5 shadow-[0_50px_80px_-30px_rgba(11,26,5,0.5)]">
                   <div className="flex h-full w-full flex-col overflow-hidden rounded-[33px] bg-[#f8f9f7]">
                     <div className="px-4 pb-2 pt-7">
                       <p className="text-[19px] font-extrabold tracking-tight text-ink-900">
-                        {tb("title")}
+                        {tc("title")}
                       </p>
                       <p className="mt-0.5 flex items-center gap-1 text-[11px] text-ink-600">
                         <MapPin size={11} className="shrink-0 text-ink-400" />
@@ -342,7 +350,7 @@ export default function HeroProduct() {
                     </div>
                     <div className="flex gap-1.5 px-4 pb-3 pt-1">
                       {[
-                        tb("allSports"),
+                        tc("allSports"),
                         labels.sport("tennis"),
                         labels.sport("padel"),
                       ].map((label, i) => (
@@ -350,7 +358,7 @@ export default function HeroProduct() {
                           key={label}
                           className={`rounded-full border px-3 py-1 text-[10px] font-medium ${
                             i === 0
-                              ? "border-ink-900 bg-ink-900 text-white"
+                              ? "border-brand-900 bg-brand-900 text-white"
                               : "border-ink-200 bg-white text-ink-600"
                           }`}
                         >
@@ -358,11 +366,13 @@ export default function HeroProduct() {
                         </span>
                       ))}
                     </div>
-                    <div className="flex flex-col gap-2.5 px-3.5">
+                    <div className="flex min-h-0 flex-1 flex-col gap-2.5 overflow-hidden px-3.5 pb-2.5">
                       {COURTS.map((c) => (
                         <div
                           key={`${c.name}${c.n}`}
-                          className="overflow-hidden rounded-2xl border border-ink-100 bg-white"
+                          // shrink-0: the list is cut off at the bottom bar, the
+                          // cards themselves keep their full height.
+                          className="shrink-0 overflow-hidden rounded-2xl border border-ink-100 bg-white"
                         >
                           <div className="relative h-[70px] w-full overflow-hidden">
                             <CourtArt
@@ -375,7 +385,7 @@ export default function HeroProduct() {
                               {labels.inOut(c.indoor)}
                             </span>
                           </div>
-                          <div className="flex items-end justify-between gap-2 px-3 py-2.5">
+                          <div className="flex items-end justify-between gap-2 px-3 pb-3.5 pt-2.5">
                             <div className="min-w-0">
                               <p className="truncate text-[12px] font-bold text-ink-900">
                                 {courtName(c)}
@@ -400,11 +410,43 @@ export default function HeroProduct() {
                               </p>
                             </div>
                             <span className="inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-ink-900 px-3 text-[10px] font-semibold text-white">
-                              {tb("book")}
-                              <ArrowRight size={10} />
+                              <Pencil size={10} />
+                              {tc("edit")}
                             </span>
                           </div>
                         </div>
+                      ))}
+                    </div>
+                    {/* The admin's bottom bar, as in MobileBottomNav.tsx: Courts is
+                        under "More", so that tab is the lit one */}
+                    <div className="flex h-[54px] shrink-0 items-center justify-around rounded-t-[18px] bg-[#111c0a] px-1">
+                      {[
+                        { label: td("timetable"), icon: CalendarRange },
+                        { label: td("bookings"), icon: CalendarDays },
+                        { label: td("members"), icon: Users },
+                        { label: td("dashboard"), icon: LayoutDashboard },
+                        { label: "More", icon: Menu, on: true },
+                      ].map(({ label, icon: Icon, on }) => (
+                        <span key={label} className="flex min-w-0 flex-1 flex-col items-center gap-0.5">
+                          <span
+                            className={`flex h-6 w-9 items-center justify-center rounded-full ${
+                              on ? "bg-[#a8d832]/15" : ""
+                            }`}
+                          >
+                            <Icon
+                              size={14}
+                              strokeWidth={on ? 2.5 : 1.8}
+                              className={on ? "text-[#a8d832]" : "text-white/65"}
+                            />
+                          </span>
+                          <span
+                            className={`max-w-full truncate px-0.5 text-[7.5px] ${
+                              on ? "font-semibold text-[#a8d832]" : "font-medium text-white/65"
+                            }`}
+                          >
+                            {label}
+                          </span>
+                        </span>
                       ))}
                     </div>
                   </div>
