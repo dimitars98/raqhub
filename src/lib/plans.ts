@@ -24,20 +24,20 @@ export const PLANS: Record<
   { priceMonthly: number; priceYearly: number; maxCourts: number | null; features: Feature[] }
 > = {
   starter: {
-    priceMonthly: 9,
-    priceYearly: 90,
+    priceMonthly: 19,
+    priceYearly: 190,
     maxCourts: 3,
     features: [],
   },
   club: {
-    priceMonthly: 19,
-    priceYearly: 190,
+    priceMonthly: 39,
+    priceYearly: 390,
     maxCourts: 8,
     features: ["membershipPlans", "coaches", "groups", "reminders", "weeklyReport"],
   },
   academy: {
-    priceMonthly: 45,
-    priceYearly: 450,
+    priceMonthly: 79,
+    priceYearly: 790,
     maxCourts: null,
     features: ["membershipPlans", "coaches", "groups", "reminders", "weeklyReport", "analytics", "staff"],
   },
