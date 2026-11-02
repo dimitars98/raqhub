@@ -26,9 +26,12 @@ export default function Reveal({
       className={className}
       initial={{ opacity: 0, y: 64 }}
       whileInView={{ opacity: 1, y: 0 }}
-      // Starts when the top of the section is a bit above the bottom of the
-      // screen, and only once: scrolling back up doesn't replay it.
-      viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}
+      // Starts as soon as the top of the section is 10% above the bottom of
+      // the screen, and only once: scrolling back up doesn't replay it.
+      // "amount: 0" matters: a share of the section's height (e.g. 12%) can
+      // be taller than a phone screen for long sections, and they'd never
+      // appear.
+      viewport={{ once: true, amount: 0, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
