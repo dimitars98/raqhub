@@ -1,11 +1,13 @@
 import { addDays, format } from "date-fns";
-import { ArrowUpRight, MapPin, Plus, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Ban, Check, Download, MapPin, Plus, Search, TrendingUp } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import Avatar from "@/components/ui/Avatar";
 import { BADGE, memberStatusTone } from "@/lib/badges";
 import { dateLocale } from "@/lib/dateLocale";
-import { makeLabels, SPORT_EMOJI } from "@/lib/labels";
+import { makeLabels } from "@/lib/labels";
+import SportIcon from "@/components/ui/SportIcon";
+import { courtColor, swatchStyle } from "@/lib/courtColors";
 
 // The five big feature rows, numbered like a tennis game: 15 → 30 → 40 →
 // Ad → Game. Each panel copies a real screen in the app — same texts, colours and
@@ -67,114 +69,223 @@ function FeatureCopy({ id, children }: { id: RowId; children?: React.ReactNode }
 
 /* ── 15 · Timetable — the admin day view, courts side by side ─────────────── */
 
-// Same colours as the real timetable: bookings are coloured by status.
-type Status = "confirmed" | "completed" | "pending" | "cancelled";
-const STATUS: Record<Status, { wrap: string; dot: string; name: string; time: string }> = {
-  confirmed: { wrap: "bg-[#e4f7b8] border-l-[#7aad12]", dot: "bg-[#7aad12]", name: "text-[#2e4d03]", time: "text-[#4d7a08]" },
-  completed: { wrap: "bg-[#e8ede4] border-l-[#3d4f35]", dot: "bg-[#3d4f35]", name: "text-[#111c0a]", time: "text-[#1e3010]" },
-  pending: { wrap: "bg-[#e8f4fd] border-l-[#378add]", dot: "bg-[#378add]", name: "text-[#0c4478]", time: "text-[#1a5ea8]" },
-  cancelled: { wrap: "bg-[#f4f6f2] border-l-[#6e7f65]", dot: "bg-[#6e7f65]", name: "text-[#3d4f35]", time: "text-[#6e7f65]" },
+// Same colours as the real timetable (TimetableClient's TONES): bookings are
+// coloured by what they are, pending ones get a dashed border.
+type Kind = "booking" | "lesson" | "group" | "match";
+const TONES: Record<Kind, { bg: string; bar: string; name: string; meta: string; av: string; avText: string }> = {
+  booking: { bg: "#f1f9dc", bar: "#a8d832", name: "#1e3010", meta: "#4d7a08", av: "#d6f09a", avText: "#2e4d03" },
+  lesson: { bg: "#eaf4fd", bar: "#378add", name: "#0c4478", meta: "#1a5ea8", av: "#c0ddf7", avText: "#0c4478" },
+  group: { bg: "#111c0a", bar: "#a8d832", name: "#ffffff", meta: "#d6f09a", av: "#2e4d03", avText: "#d6f09a" },
+  match: { bg: "#fdf5df", bar: "#e0a400", name: "#5c4000", meta: "#7a5600", av: "#f7e2a6", avText: "#5c4000" },
+};
+const CLOSED_BG = {
+  backgroundColor: "#f3f5f0",
+  backgroundImage: "repeating-linear-gradient(135deg, rgba(110,127,101,0.16) 0 6px, transparent 6px 12px)",
 };
 
-const SLOT_PX = 30; // one half hour
+const HOUR_PX = 56;
 const FIRST_HOUR = 17;
-const HALF_SLOTS = [17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5];
+const LAST_HOUR = 21;
 const hhmm = (h: number) => `${String(Math.floor(h)).padStart(2, "0")}:${h % 1 ? "30" : "00"}`;
+const initialsOf = (name: string) =>
+  name
+    .split(" ")
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
 
-type Block = { col: number; start: number; end: number; status: Status; who: string; coach?: string };
+type Block = { col: number; start: number; end: number; kind: Kind; who: string; tag: "member" | "online" | "pending" | "lesson" | "group" | "match" };
 const BLOCKS: Block[] = [
-  { col: 0, start: 17, end: 18, status: "confirmed", who: "Emma Lewis" },
-  { col: 0, start: 18.5, end: 19.5, status: "confirmed", who: "Tom" },
-  { col: 1, start: 18, end: 19.5, status: "confirmed", who: "Mia Schmidt", coach: "Daniel Weber" },
-  { col: 1, start: 20, end: 21, status: "pending", who: "Lucas Martin" },
-  { col: 2, start: 18, end: 20, status: "confirmed", who: "Sofia Rossi" },
+  { col: 0, start: 17, end: 18, kind: "booking", who: "Emma Lewis", tag: "member" },
+  { col: 0, start: 18.5, end: 20, kind: "group", who: "Juniors", tag: "group" },
+  { col: 1, start: 17, end: 18.5, kind: "match", who: "Marko Petrov", tag: "match" },
+  { col: 1, start: 19, end: 20, kind: "booking", who: "Lucas Martin", tag: "pending" },
+  { col: 2, start: 18, end: 19, kind: "lesson", who: "Mia Schmidt", tag: "lesson" },
 ];
+/** Court 3 is closed for repairs from 19:00. */
+const CLOSED = { col: 2, start: 19, end: 21 };
 
 function TimetablePanel() {
   const t = useTranslations("features.mock");
   const tt = useTranslations("timetable");
+  const tcl = useTranslations("closures");
   const labels = makeLabels(useTranslations("labels"));
   const df = dateLocale(useLocale());
-  const today = format(new Date(), "EEEE, d MMMM yyyy", { locale: df });
+  const now = new Date();
+  const week = Array.from({ length: 7 }, (_, i) => addDays(now, i - 1));
+  const weekPct = [64, 48, 71, 55, 88, 92, 40];
+  const coach = "Daniel Weber";
 
   const courts = [
-    { name: t("court", { n: 1 }), sub: [labels.sport("tennis"), labels.surface("clay"), labels.inOut(false)] },
-    { name: t("court", { n: 2 }), sub: [labels.sport("padel"), labels.surface("artificial_grass"), labels.inOut(false)] },
-    { name: t("court", { n: 3 }), sub: [labels.sport("tennis"), labels.surface("hard"), labels.inOut(true)] },
+    { name: t("court", { n: 1 }), sport: "tennis", surface: "clay", indoor: false, pct: 63 },
+    { name: `${labels.sport("padel")} 1`, sport: "padel", surface: "artificial_grass", indoor: false, pct: 50 },
+    { name: t("court", { n: 3 }), sport: "tennis", surface: "hard", indoor: true, pct: 25 },
+  ] as const;
+
+  const tagOf = (b: Block) =>
+    b.tag === "member"
+      ? tt("tags.member")
+      : b.tag === "online"
+        ? tt("tags.online")
+        : b.tag === "pending"
+          ? tt("tags.pending")
+          : b.tag === "lesson"
+            ? tt("lessonWith", { coach })
+            : b.tag === "group"
+              ? `${tt("group")} · ${tt("groupWith", { coach })}`
+              : tt("tags.match", { taken: 3, max: 4 });
+
+  const legend: [string, React.CSSProperties][] = [
+    [tt("legend.booking"), { background: TONES.booking.bar }],
+    [tt("legend.lesson"), { background: TONES.lesson.bar }],
+    [tt("group"), { background: "#111c0a" }],
+    [tt("legend.match"), { background: TONES.match.bar }],
+    [tt("tags.pending"), { border: "1.5px dashed #6e7f65" }],
+    [tcl("closed"), { ...CLOSED_BG, border: "1px solid #c9d2c2" }],
   ];
-  const cols = "grid-cols-[50px_repeat(3,minmax(0,1fr))] sm:grid-cols-[58px_repeat(3,minmax(0,1fr))]";
+  const cols = { gridTemplateColumns: "44px repeat(3, minmax(0, 1fr))" };
 
   return (
-    <div className="min-w-0 rounded-3xl border border-[#e8ede4] bg-[#f8f9f7] p-3 shadow-[0_30px_60px_-40px_rgba(17,28,10,0.35)] sm:p-5">
-      <div className="mb-4 flex items-center justify-between gap-3 px-1">
+    <div aria-hidden className="flex min-w-0 flex-col gap-3.5 rounded-3xl border border-[#e8ede4] bg-[#f8f9f7] p-3 shadow-[0_30px_60px_-40px_rgba(17,28,10,0.35)] sm:p-5">
+      {/* Header */}
+      <div className="flex flex-wrap items-end justify-between gap-3 px-1">
         <div className="min-w-0">
-          <div className="text-[17px] font-semibold text-[#111c0a]">{tt("title")}</div>
-          <div className="truncate text-[12px] text-[#6e7f65] first-letter:uppercase">{today}</div>
+          <div className="text-[19px] font-extrabold tracking-tight text-[#111c0a] first-letter:uppercase">
+            {format(now, "EEEE, d MMMM", { locale: df })}
+          </div>
+          <div className="mt-0.5 text-[12px] text-[#3d4f35]">{tt("summary", { n: 5, pct: 46, revenue: "€124" })}</div>
         </div>
-        <div aria-hidden className="flex shrink-0 items-center gap-1.5">
-          <span className="rounded-lg bg-[#7aad12] px-3 py-1.5 text-[12px] font-medium text-white">{tt("today")}</span>
-          <span className="grid size-[30px] place-items-center rounded-lg border border-[#d0d9c9] bg-white text-[16px] text-[#3d4f35]">‹</span>
-          <span className="grid size-[30px] place-items-center rounded-lg border border-[#d0d9c9] bg-white text-[16px] text-[#3d4f35]">›</span>
+        <div className="flex shrink-0 items-center gap-1.5">
+          <span className="hidden h-8 items-center gap-1 rounded-[10px] border border-[#d0d9c9] bg-white px-2.5 text-[12px] font-medium text-[#3d4f35] sm:inline-flex">
+            <Ban size={12} />
+            {tcl("button")}
+          </span>
+          <span className="inline-flex h-8 items-center gap-1 rounded-full bg-[#111c0a] px-3 text-[12px] font-semibold text-white">
+            <Plus size={13} />
+            {tt("addBooking")}
+          </span>
         </div>
       </div>
 
-      <div className="mb-3 flex flex-wrap gap-x-4 gap-y-1.5 px-1">
-        {(Object.keys(STATUS) as Status[]).map((s) => (
-          <span key={s} className="flex items-center gap-1.5 text-[11px] text-[#3d4f35]">
-            <span className={`size-2.5 rounded-[3px] opacity-80 ${STATUS[s].dot}`} />
-            {labels.bookingStatus(s)}
+      {/* Week strip */}
+      <div className="flex gap-1.5">
+        {week.map((d, i) => {
+          const on = i === 1;
+          return (
+            <div
+              key={i}
+              className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl border px-1 py-1.5 ${
+                i > 4 ? "hidden sm:flex" : ""
+              } ${on ? "border-[#111c0a] bg-[#111c0a] text-white" : "border-[#e8ede4] bg-white text-[#111c0a]"}`}
+            >
+              <span className={`max-w-full truncate text-[9px] font-semibold uppercase tracking-wider ${on ? "text-white/70" : "text-[#6e7f65]"}`}>
+                {on ? tt("today") : format(d, "EEE", { locale: df })}
+              </span>
+              <span className="text-[15px] font-bold leading-tight">{format(d, "d")}</span>
+              <span className={`block h-1 w-7 overflow-hidden rounded-full ${on ? "bg-white/20" : "bg-[#eef1ea]"}`}>
+                <span
+                  className="block h-full rounded-full"
+                  style={{ width: `${weekPct[i]}%`, background: weekPct[i] > 85 ? "#e0a400" : "#a8d832" }}
+                />
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-x-3.5 gap-y-1.5 px-1 text-[11px] text-[#3d4f35]">
+        {legend.map(([label, style]) => (
+          <span key={label} className="inline-flex items-center gap-1.5">
+            <span className="size-2.5 rounded-[3px]" style={style} />
+            {label}
           </span>
         ))}
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-[#e8ede4] bg-white">
-        <div className={`grid border-b border-[#e8ede4] ${cols}`}>
-          <div className="bg-[#f4f6f2]" />
+      {/* Grid */}
+      <div className="overflow-hidden rounded-[18px] border border-[#e8ede4] bg-white">
+        <div className="grid border-b border-[#e8ede4]" style={cols}>
+          <div />
           {courts.map((c) => (
-            <div key={c.name} className="min-w-0 border-l border-[#e8ede4] px-1.5 py-3 text-center">
-              <div className="truncate text-[14px] font-semibold text-[#1a5ea8]">{c.name}</div>
-              <div className="mt-0.5 truncate text-[11px] text-[#6e7f65]">{c.sub.join(" · ")}</div>
+            <div key={c.name} className="flex min-w-0 items-center gap-2 border-l border-[#f0f3ec] px-2 py-2.5">
+              <span
+                className="size-5 shrink-0 rounded-md ring-2 ring-inset ring-white/50"
+                style={swatchStyle(courtColor({ sport: c.sport, surface: c.surface }))}
+              />
+              <span className="flex min-w-0 flex-col">
+                <span className="truncate text-[12px] font-bold text-[#111c0a]">{c.name}</span>
+                <span className="truncate text-[10px] text-[#6e7f65]">
+                  {labels.surface(c.surface)} · {labels.inOut(c.indoor)}
+                </span>
+              </span>
             </div>
           ))}
         </div>
 
-        <div className={`relative grid ${cols}`}>
-          <div className="border-r border-[#e8ede4] bg-[#f4f6f2]">
-            {HALF_SLOTS.map((h) => (
-              <div
-                key={h}
-                className={`box-border border-b border-[#e8ede4] px-2 pt-1 text-[11px] last:border-0 sm:px-2.5 ${
-                  h % 1 ? "text-[#6e7f65]" : "font-medium text-[#3d4f35]"
-                }`}
-                style={{ height: SLOT_PX }}
+        <div className="relative grid" style={cols}>
+          <div className="relative" style={{ height: (LAST_HOUR - FIRST_HOUR) * HOUR_PX }}>
+            {Array.from({ length: LAST_HOUR - FIRST_HOUR }, (_, i) => (
+              <span
+                key={i}
+                className="absolute right-1.5 bg-white px-0.5 text-[10px] font-medium text-[#6e7f65]"
+                style={{ top: i === 0 ? 4 : i * HOUR_PX - 7 }}
               >
-                {hhmm(h)}
-              </div>
+                {hhmm(FIRST_HOUR + i)}
+              </span>
             ))}
           </div>
           {courts.map((c, col) => (
             <div
               key={c.name}
-              className="relative min-w-0 border-l border-[#e8ede4] bg-[repeating-linear-gradient(to_bottom,transparent_0_29px,#e8ede4_29px_30px)]"
-              style={{ height: HALF_SLOTS.length * SLOT_PX }}
+              className="relative min-w-0 border-l border-[#f0f3ec]"
+              style={{
+                height: (LAST_HOUR - FIRST_HOUR) * HOUR_PX,
+                backgroundImage: "linear-gradient(#eef1ea 1px, transparent 1px), linear-gradient(#f6f8f3 1px, transparent 1px)",
+                backgroundSize: `100% ${HOUR_PX}px, 100% ${HOUR_PX / 2}px`,
+              }}
             >
+              {CLOSED.col === col && (
+                <div
+                  className="absolute inset-x-0 flex justify-center pt-3"
+                  style={{ top: (CLOSED.start - FIRST_HOUR) * HOUR_PX, height: (CLOSED.end - CLOSED.start) * HOUR_PX, ...CLOSED_BG }}
+                >
+                  <span className="h-fit max-w-[92%] truncate rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-semibold text-[#3d4f35] shadow-sm">
+                    {tcl("closed")} · {tcl("reasons.maintenance")}
+                  </span>
+                </div>
+              )}
               {BLOCKS.filter((b) => b.col === col).map((b) => {
-                const s = STATUS[b.status];
-                const height = (b.end - b.start) * 2 * SLOT_PX - 4;
+                const tone = TONES[b.kind];
+                const height = (b.end - b.start) * HOUR_PX - 6;
                 return (
                   <div
                     key={b.who}
-                    className={`absolute inset-x-1 overflow-hidden rounded-lg border-l-4 px-2 py-1.5 sm:px-2.5 ${s.wrap}`}
-                    style={{ top: (b.start - FIRST_HOUR) * 2 * SLOT_PX + 2, height }}
+                    className="absolute inset-x-1 flex flex-col gap-0.5 overflow-hidden rounded-[10px] px-2 py-1.5"
+                    style={{
+                      top: (b.start - FIRST_HOUR) * HOUR_PX + 3,
+                      height,
+                      background: tone.bg,
+                      border: b.tag === "pending" ? "1.5px dashed #6e7f65" : "0",
+                      boxShadow: `inset 4px 0 0 ${tone.bar}`,
+                    }}
                   >
-                    <div className={`truncate text-[12px] font-semibold sm:text-[13px] ${s.name}`}>{b.who}</div>
-                    {b.coach && (
-                      <div className={`truncate text-[11px] font-medium ${s.time}`}>{tt("lessonWith", { coach: b.coach })}</div>
-                    )}
-                    {height > (b.coach ? 56 : 36) && (
-                      <div className={`mt-[3px] truncate text-[11px] ${s.time}`}>
-                        {hhmm(b.start)} – {hhmm(b.end)}
-                      </div>
+                    <span className="flex min-w-0 items-center gap-1">
+                      <span
+                        className="grid size-4 shrink-0 place-items-center rounded-full text-[7px] font-bold"
+                        style={{ background: tone.av, color: tone.avText }}
+                      >
+                        {b.kind === "group" ? "GR" : initialsOf(b.who)}
+                      </span>
+                      <span className="min-w-0 truncate text-[11px] font-bold" style={{ color: tone.name }}>
+                        {b.who}
+                      </span>
+                    </span>
+                    {height >= 44 && (
+                      <span className="truncate text-[10px] font-medium" style={{ color: tone.meta }}>
+                        {hhmm(b.start)}–{hhmm(b.end)} · {tagOf(b)}
+                      </span>
                     )}
                   </div>
                 );
@@ -182,8 +293,8 @@ function TimetablePanel() {
             </div>
           ))}
           {/* Now line, as on the real timetable */}
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 h-0.5 bg-[#7aad12]" style={{ top: (17.75 - FIRST_HOUR) * 2 * SLOT_PX }}>
-            <span className="absolute -top-1 left-[45px] size-2.5 rounded-full bg-[#7aad12] sm:left-[53px]" />
+          <div className="pointer-events-none absolute inset-x-0 z-[3] border-t-2 border-[#7aad12]" style={{ top: (17.75 - FIRST_HOUR) * HOUR_PX }}>
+            <span className="absolute -top-[10px] left-1 rounded-full bg-[#7aad12] px-1 py-px text-[9px] font-bold text-white">17:45</span>
           </div>
         </div>
       </div>
@@ -206,54 +317,104 @@ function MembershipPanel() {
   const gold = { name: t("gold"), price: 300, period: "annual" };
   const juniors = { name: t("juniors"), price: 25, period: "monthly" };
   const members = [
-    { id: "olivia-reed", name: "Olivia Reed", plan: gold, status: "active", ends: addDays(now, 12) },
-    { id: "lucas-martin", name: "Lucas Martin", plan: juniors, status: "active", ends: addDays(now, 23) },
-    { id: "noah-klein", name: "Noah Klein", plan: gold, status: "expired", ends: addDays(now, -9) },
+    { id: "olivia-reed", name: "Olivia Reed", email: "olivia.reed@mail.com", plan: gold, status: "active", days: 12 },
+    { id: "lucas-martin", name: "Lucas Martin", email: "lucas.m@mail.com", plan: juniors, status: "active", days: 64 },
+    { id: "noah-klein", name: "Noah Klein", email: "noah.klein@mail.com", plan: gold, status: "expired", days: -9 },
   ] as const;
   const price = (p: { price: number; period: string }) => `€${p.price} ${labels.billingPeriod(p.period)}`;
-  const th = "px-3 py-2.5 text-left text-[11px] font-medium text-[#6e7f65] sm:px-4";
+  const tabs = [
+    { key: "all", n: 128 },
+    { key: "active", n: 112 },
+    { key: "ending", n: 6 },
+    { key: "expired", n: 10 },
+  ] as const;
+  const th = "px-3 py-2.5 text-left text-[11px] font-medium text-[#55664c]";
 
   return (
-    <div className="flex min-w-0 flex-col gap-4">
-      <div className="overflow-hidden rounded-3xl border border-[#e8ede4] bg-white shadow-[0_30px_60px_-40px_rgba(17,28,10,0.35)]">
-        <div className="flex items-center justify-between gap-3 px-4 py-4 sm:px-5">
-          <div>
-            <div className="text-[17px] font-semibold text-[#111c0a]">{tm("title")}</div>
-            <div className="text-[12px] text-[#6e7f65]">{tm("total", { count: members.length })}</div>
+    <div aria-hidden className="flex min-w-0 flex-col gap-4">
+      <div className="rounded-3xl border border-[#e8ede4] bg-[#f8f9f7] p-3 shadow-[0_30px_60px_-40px_rgba(17,28,10,0.35)] sm:p-5">
+        {/* Title and buttons */}
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-3 px-1">
+          <div className="font-display text-[20px] font-bold text-[#111c0a]">
+            {tm("title")} <span className="font-semibold text-[#6e7f65]">128</span>
           </div>
-          <span aria-hidden className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#111c0a] px-4 py-2 text-[12px] font-medium text-white">
-            <Plus size={14} />
-            {tm("addMember")}
-          </span>
+          <div className="flex gap-1.5">
+            <span className="hidden items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 text-[12px] font-medium text-ink-900 sm:inline-flex">
+              <Download size={12} /> {tm("export")}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#111c0a] px-3.5 py-1.5 text-[12px] font-medium text-white">
+              {tm("addMember")}
+            </span>
+          </div>
         </div>
-        <table className="w-full table-fixed border-t border-[#e8ede4] text-[13px]">
-          <thead className="bg-[#f8f9f7]">
-            <tr>
-              <th className={`${th} w-[38%]`}>{tm("columns.member")}</th>
-              <th className={`${th} hidden sm:table-cell`}>{tm("columns.plan")}</th>
-              <th className={th}>{tm("columns.status")}</th>
-              <th className={th}>{tm("columns.expires")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {members.map((m) => (
-              <tr key={m.id} className="border-t border-[#e8ede4]">
-                <td className="px-3 py-3 sm:px-4">
-                  <div className="truncate font-medium text-[#111c0a]">{m.name}</div>
-                  <div className="truncate text-[11px] text-[#6e7f65] sm:hidden">{m.plan.name}</div>
-                </td>
-                <td className="hidden px-3 py-3 sm:table-cell sm:px-4">
-                  <div className="truncate text-[#3d4f35]">{m.plan.name}</div>
-                  <div className="truncate text-[11px] text-[#6e7f65]">{price(m.plan)}</div>
-                </td>
-                <td className="px-3 py-3 sm:px-4">
-                  <span className={`${BADGE} ${memberStatusTone(m.status)}`}>{labels.memberStatus(m.status)}</span>
-                </td>
-                <td className="px-3 py-3 text-[12px] text-[#3d4f35] sm:px-4">{date(m.ends)}</td>
+
+        {/* Status tabs with counts */}
+        <div className="mb-3 flex gap-1.5 overflow-hidden">
+          {tabs.map((tb) => {
+            const on = tb.key === "all";
+            const soon = tb.key === "ending";
+            return (
+              <span
+                key={tb.key}
+                className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-[12px] ${
+                  on
+                    ? "border-brand-900 bg-brand-900 font-semibold text-white"
+                    : soon
+                      ? "border-[#fde68a] bg-[#fffbeb] text-[#92400e]"
+                      : "border-[#e8ede4] bg-white text-[#3d4f35]"
+                }`}
+              >
+                {tm(`tabs.${tb.key}`)}
+                <span className={`ml-1 ${on ? "opacity-70" : soon ? "font-bold" : "text-[#6e7f65]"}`}>{tb.n}</span>
+              </span>
+            );
+          })}
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border border-[#e8ede4] bg-white">
+          <div className="border-b border-[#e8ede4] bg-[#fbfcfa] px-3 py-2.5">
+            <span className="flex h-8 items-center gap-2 rounded-xl border border-[#d0d9c9] bg-white px-2.5 text-[12px] text-[#6e7f65]">
+              <Search size={13} className="shrink-0" />
+              <span className="truncate">{tm("searchPlaceholder")}</span>
+            </span>
+          </div>
+          <table className="w-full table-fixed text-[12px]">
+            <thead>
+              <tr>
+                <th className={`${th} w-[42%] pl-4 sm:w-[32%]`}>{tm("columns.member")}</th>
+                <th className={`${th} hidden w-[23%] sm:table-cell`}>{tm("columns.plan")}</th>
+                <th className={`${th} w-[24%] sm:w-[20%]`}>{tm("columns.status")}</th>
+                <th className={th}>{tm("columns.expires")}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {members.map((m) => {
+                const soon = m.status === "active" && m.days <= 30;
+                return (
+                  <tr key={m.id} className="border-t border-[#e8ede4]">
+                    <td className="py-2.5 pl-4 pr-3">
+                      <div className="truncate font-medium text-[#111c0a]">{m.name}</div>
+                      <div className="truncate text-[11px] text-[#55664c]">{m.email}</div>
+                    </td>
+                    <td className="hidden px-3 py-2.5 sm:table-cell">
+                      <div className="truncate text-[#3d4f35]">{m.plan.name}</div>
+                      <div className="truncate text-[11px] text-[#55664c]">{price(m.plan)}</div>
+                    </td>
+                    <td className="px-3 py-2.5">
+                      <span className={`${BADGE} ${memberStatusTone(m.status)}`}>{labels.memberStatus(m.status)}</span>
+                    </td>
+                    <td className="px-3 py-2.5">
+                      <div className="truncate text-[#3d4f35]">{date(addDays(now, m.days))}</div>
+                      <div className={`truncate text-[11px] ${soon ? "font-semibold text-[#b45309]" : "text-[#55664c]"}`}>
+                        {m.days < 0 ? tm("daysAgo", { n: -m.days }) : tm("inDays", { n: m.days })}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* What Olivia sees on her Membership page */}
@@ -268,8 +429,8 @@ function MembershipPanel() {
             <span className={`${BADGE} ${memberStatusTone("active")}`}>{labels.memberStatus("active")}</span>
           </div>
           <div className={`${BADGE} mb-3 bg-brand-100 text-brand-800`}>{tp("discountEvery", { pct: 20 })}</div>
-          <div className="border-t border-brand-100 pt-3 text-[12px] text-brand-800">
-            {tp("expires", { date: date(members[0].ends) })}
+          <div className="border-t border-brand-100 pt-3 text-[12px] text-brand-500">
+            {tp("expires", { date: format(addDays(now, members[0].days), "d MMM yyyy", { locale: df }) })}
           </div>
         </div>
       </div>
@@ -386,13 +547,18 @@ function CompetePanel() {
           <div className="min-w-0">
             <div className="truncate text-[15px] font-semibold text-[#111c0a]">{t("competeEvent")}</div>
             <div className="mt-0.5 text-[12px] text-[#6e7f65]">
-              {ta("formats.americano")} · {SPORT_EMOJI.padel} {labels.sport("padel")} · {ta("pointsEach", { n: 24 })}
+              {ta("formats.americano")} ·{" "}
+              <SportIcon sport="padel" size={13} className="-mt-0.5 align-middle" /> {labels.sport("padel")} ·{" "}
+              {ta("pointsEach", { n: 24 })}
             </div>
           </div>
           <span className="badge-brand">{ta("roundTitle", { n: 3 })}</span>
         </div>
         <div className="rounded-2xl border border-ink-100 p-4">
-          <div className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-[#6e7f65]">{ta("court", { n: 1 })}</div>
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#6e7f65]">{ta("court", { n: 1 })}</span>
+            <Check size={15} className="text-brand-600" aria-hidden />
+          </div>
           <div className="flex flex-col gap-2">
             {side(GAME.a, GAME.scoreA, true)}
             <div className="border-t border-dashed border-ink-100" />
@@ -515,8 +681,9 @@ function AnalyticsPanel() {
         <div className="flex flex-col gap-2.5">
           {SPORT_REVENUE.map((s) => (
             <div key={s.sport} className="flex items-center gap-3 text-[12px]">
-              <span className="w-[92px] shrink-0 truncate text-[#3d4f35]">
-                {SPORT_EMOJI[s.sport]} {labels.sport(s.sport)}
+              <span className="flex w-[100px] shrink-0 items-center gap-1.5 text-[#3d4f35]">
+                <SportIcon sport={s.sport} size={16} />
+                <span className="truncate">{labels.sport(s.sport)}</span>
               </span>
               <span className="h-5 flex-1">
                 <span
