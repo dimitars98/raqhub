@@ -19,11 +19,11 @@ import type {
   ActiveMember,
   CourtRow,
 } from "./page";
-import { SPORT_EMOJI } from "@/lib/labels";
+import SportIcon from "@/components/ui/SportIcon";
 import { useLabels } from "@/hooks/useLabels";
 import { BOOKING_STATUS_DOT, bookingStatusTone } from "@/lib/badges";
 import { initials } from "@/lib/avatar";
-import type { BookingStatus, Sport } from "@/types/database";
+import type { BookingStatus } from "@/types/database";
 import { bookingName } from "@/lib/bookingName";
 
 // ── Props ──────────────────────────────────────────────────────────────────
@@ -231,7 +231,14 @@ export default function DashboardClient({
         <StatCard
           label={t("stats.activeCourts")}
           value={courts.length}
-          sub={`${[...new Set(courts.map((c) => c.sport))].map((s) => SPORT_EMOJI[s as Sport] ?? s).join(" ")} ${t("stats.available")}`}
+          sub={
+            <span className="inline-flex flex-wrap items-center gap-1">
+              {[...new Set(courts.map((c) => c.sport))].map((s) => (
+                <SportIcon key={s} sport={s} size={14} />
+              ))}
+              <span className="ml-0.5">{t("stats.available")}</span>
+            </span>
+          }
           icon={Grid3x3}
           accent="bg-[#e8ede4] text-[#3d4f35]"
           href="/admin/courts"
@@ -470,9 +477,7 @@ export default function DashboardClient({
               ) : (
                 courts.slice(0, 4).map((c) => (
                   <div key={c.id} className="flex items-center gap-2">
-                    <span className="text-base">
-                      {SPORT_EMOJI[c.sport as Sport] ?? "🎾"}
-                    </span>
+                    <SportIcon sport={c.sport} size={18} title={labels.sport(c.sport)} />
                     <span className="text-[13px] text-[#111c0a] flex-1 truncate">
                       {c.name}
                     </span>

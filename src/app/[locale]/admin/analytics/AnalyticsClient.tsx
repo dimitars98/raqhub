@@ -26,7 +26,7 @@ import {
   BarChart,
   Bar,
 } from "recharts";
-import { SPORT_EMOJI } from "@/lib/labels";
+import SportIcon from "@/components/ui/SportIcon";
 import { useLabels } from "@/hooks/useLabels";
 import type { BookingStatus, Sport } from "@/types/database";
 import { BOOKING_STATUS_HEX } from "@/lib/badges";
@@ -142,6 +142,22 @@ function SectionCard({
   );
 }
 
+/** A row label of the revenue-by-sport chart: the sport's icon, then its name. */
+function SportTick({ x, y, label, sport }: { x: number; y: number; label: string; sport?: string }) {
+  return (
+    <g transform={`translate(${x},${y})`}>
+      {sport && (
+        <foreignObject x={-94} y={-8} width={16} height={16}>
+          <SportIcon sport={sport} size={16} />
+        </foreignObject>
+      )}
+      <text x={-74} y={0} dy={4} fontSize={11} fill="#3d4f35">
+        {label}
+      </text>
+    </g>
+  );
+}
+
 function PeakHeatmap({ peakHours }: { peakHours: number[][] }) {
   const t = useTranslations("analytics");
   const maxVal = Math.max(...peakHours.flat(), 1);
@@ -253,7 +269,8 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
     () =>
       Object.entries(revenueBySport)
         .map(([name, revenue]) => ({
-          name: `${SPORT_EMOJI[name as Sport] ?? ""} ${labels.sport(name)}`,
+          name: labels.sport(name),
+          sport: name,
           revenue,
           color: SPORT_COLORS[name as Sport] ?? "#7aad12",
         }))
@@ -502,10 +519,17 @@ export default function AnalyticsClient({ data }: { data: AnalyticsData }) {
                 <YAxis
                   type="category"
                   dataKey="name"
-                  tick={{ fontSize: 11, fill: "#3d4f35" }}
+                  tick={({ x, y, payload }) => (
+                    <SportTick
+                      x={Number(x)}
+                      y={Number(y)}
+                      label={String(payload?.value ?? "")}
+                      sport={sportData.find((s) => s.name === payload?.value)?.sport}
+                    />
+                  )}
                   axisLine={false}
                   tickLine={false}
-                  width={90}
+                  width={100}
                 />
                 <Tooltip
                   formatter={(v) => {
