@@ -57,7 +57,7 @@ export default function CourtBackdrop() {
 
       {/* A ball flying across: dotted path, then the ball and its shadow */}
       <path
-        d="M 110 1060 C 360 560, 820 220, 1250 205"
+        d="M 110 1060 C 370 620, 820 340, 1255 355"
         fill="none"
         stroke="#a8d832"
         strokeOpacity="0.55"
@@ -65,8 +65,8 @@ export default function CourtBackdrop() {
         strokeLinecap="round"
         strokeDasharray="2 22"
       />
-      <ellipse cx="1300" cy="300" rx="34" ry="9" fill="#000000" fillOpacity="0.35" />
-      <g transform="translate(1284 212)">
+      <ellipse cx="1305" cy="455" rx="34" ry="9" fill="#000000" fillOpacity="0.35" />
+      <g transform="translate(1290 362)">
         <circle r="30" fill="url(#cb-ball)" />
         <path d="M -21 -21 C -6 -8, -6 8, -21 21" fill="none" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="3" />
         <path d="M 21 -21 C 6 -8, 6 8, 21 21" fill="none" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="3" />
