@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import CourtBackdrop from "./CourtBackdrop";
 
 const sports = [
   {
@@ -27,15 +28,9 @@ const sports = [
 export default function TeamSection() {
   const t = useTranslations("sports");
   return (
-    <section className="relative py-16 lg:flex lg:min-h-[1200px] lg:items-center lg:py-24">
-      <Image
-        src="https://images.unsplash.com/photo-1520641147456-f78b3e1d83b6?q=80&w=1748&auto=format&fit=crop"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-black/50" />
+    <section className="relative overflow-hidden bg-[#111c0a] py-16 lg:flex lg:min-h-[1200px] lg:items-center lg:py-24">
+      {/* Our own drawing (court lines, a ball in flight) instead of a stock photo */}
+      <CourtBackdrop />
 
       <div className="relative z-10 w-full px-6 lg:px-10">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
