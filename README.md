@@ -1,6 +1,6 @@
 # RaqHub 🎾
 
-Tennis court & coach booking platform. Built with Next.js 14 App Router, Supabase, and Tailwind CSS.
+Tennis court & coach booking platform. Built with Next.js 16 App Router, Supabase, and Tailwind CSS.
 
 ## Stack
 
